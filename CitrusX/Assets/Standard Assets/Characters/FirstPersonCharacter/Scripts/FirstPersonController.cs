@@ -236,17 +236,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            //Vector3 lookVec = new Vector3(CrossPlatformInputManager.GetAxisRaw("HorizontalCamera"), CrossPlatformInputManager.GetAxisRaw("VerticalCamera"),0);
 
-            //if (lookVec.x != 0 && lookVec.y != 0)
-            //{
-            //    m_MouseLook.LookRotationController(transform, m_Camera.transform);
-            //}
-            //else
-            //{
                 m_MouseLook.LookRotation(transform, m_Camera.transform);
-            //}
-            }
+         }
 
 
         private void OnControllerColliderHit(ControllerColliderHit hit)

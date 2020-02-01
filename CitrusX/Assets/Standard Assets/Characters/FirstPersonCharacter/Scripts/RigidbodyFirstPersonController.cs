@@ -230,16 +230,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // get the rotation before it's changed
             float oldYRotation = transform.eulerAngles.y;
 
-            //Vector3 lookVec = new Vector3(CrossPlatformInputManager.GetAxisRaw("HorizontalCamera"), CrossPlatformInputManager.GetAxisRaw("VerticalCamera"), 0);
-
-            //if (lookVec.x != 0 && lookVec.y != 0)
-            //{
-            //    mouseLook.LookRotationController(transform, cam.transform);
-            //}
-            //else
-            //{
                 mouseLook.LookRotation(transform, cam.transform);
-            //}
             
 
             if (m_IsGrounded || advancedSettings.airControl)
