@@ -30,6 +30,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
+
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
             float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
 
@@ -54,7 +55,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             UpdateCursorLock();
         }
-
         public void SetCursorLock(bool value)
         {
             lockCursor = value;
