@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Interact : MonoBehaviour
+public class Interact_HR : MonoBehaviour
 {
     public int RayRange;
     RaycastHit Hit;
@@ -20,6 +20,7 @@ public class Interact : MonoBehaviour
         {
             if(Hit.transform.tag == "Object")
             {
+                Debug.Log("HI");
                 //TextBox.text = "Press E to pick up";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
