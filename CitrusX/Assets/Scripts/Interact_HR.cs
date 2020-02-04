@@ -1,6 +1,8 @@
 ﻿/* Hugo
  * 
- * What script does...
+ * What the script does...
+ * 
+ * This Script allows the player whenever he is in range of a pickable object to pick it up
  * 
  * Dominique (Changes) 04/02/2020
  * Specified Hit and UI as private for a consistent coding standard
@@ -15,6 +17,7 @@ using UnityEngine.UI;
 public class Interact_HR : MonoBehaviour
 {
     public int rayRange = 5;
+    public KeyCode pickUpKey = KeyCode.E;
 
     private RaycastHit hit;
     private Text notificationText;
@@ -26,17 +29,30 @@ public class Interact_HR : MonoBehaviour
 
     void Update()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
+
+        //RayCast Forward see if the player is in range of anything
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
-            if(hit.transform.tag == "Object")
+            //Is in looking at an object
+            if (hit.transform.tag == "Object")
             {
                 notificationText.text = "Press E to pick up";
-                if (Input.GetKeyDown(KeyCode.E))
+                //If he presses the key then pick up the object
+                if (Input.GetKeyDown(pickUpKey))
                 {
                     Destroy(hit.transform.gameObject);
                     notificationText.text = "";
                 }
             }
+            else
+            {
+                notificationText.text = "";
+            }
+        }
+        else
+        {
+            notificationText.text = "";
         }
     }
+
 }

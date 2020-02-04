@@ -9,6 +9,11 @@
  * ChangeTasks(new string[] { "Pineapple pie", "Rice" });
  * TickOffTask(0);
  * AreTasksComplete();
+ * 
+ * 
+ * Hugo (Changes) 04/02/2020'
+ * 
+ * Getcomponents and Gameobjects.Find moved to awake instead of start
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +35,7 @@ public class Journal_DR : MonoBehaviour
     //This is an underestimate so that more space would be given as opposed to less (since this would mean the player couldn't read the entry)
     private const float numberOfCharactersPerLine = 14;
 
-    private void Start()
+    private void Awake()
     {
         journal = GameObject.Find("JournalBackground");
         journalTaskList = GameObject.Find("JournalTasks");
@@ -47,6 +52,7 @@ public class Journal_DR : MonoBehaviour
     /*
      * Opening and closing the journal
      */
+
     private void Update()
     {
         if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey))
@@ -54,6 +60,7 @@ public class Journal_DR : MonoBehaviour
             journal.SetActive(true);
         } else if (journal.activeInHierarchy)
         {
+            //This foreach loop is an expensive loop maybe consider changing it to some if statments or a normal for loop running through a list as its 2.4 times faster than its counterpart
             foreach (KeyCode KC in journalCloseKeys)
             {
                 if(Input.GetKeyDown(KC))
