@@ -14,6 +14,11 @@
  * Hugo (Changes) 04/02/2020'
  * 
  * Getcomponents and Gameobjects.Find moved to awake instead of start
+ * 
+ * 
+ * Dominique (Changes) 05/02/2020
+ * 
+ * Changed foreach loops into for loops
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,10 +65,9 @@ public class Journal_DR : MonoBehaviour
             journal.SetActive(true);
         } else if (journal.activeInHierarchy)
         {
-            //This foreach loop is an expensive loop maybe consider changing it to some if statments or a normal for loop running through a list as its 2.4 times faster than its counterpart
-            foreach (KeyCode KC in journalCloseKeys)
+            for(int i = 0; i < journalCloseKeys.Length; i++)
             {
-                if(Input.GetKeyDown(KC))
+                if (Input.GetKeyDown(journalCloseKeys[i]))
                 {
                     journal.SetActive(false);
                 }
@@ -108,11 +112,11 @@ public class Journal_DR : MonoBehaviour
 
     public void TickOffTask(string task)
     {
-        foreach(Text T in journalTasks)
+        for(int i = 0; i < journalTasks.Length; i++)
         {
-            if(T.text.Equals(task))
+            if (task.Equals(journalTasks[i].text))
             {
-                T.text += " ✓";
+                journalTasks[i].text += " ✓";
             }
         }
     }
@@ -121,10 +125,10 @@ public class Journal_DR : MonoBehaviour
     {
         bool complete = true;
 
-        foreach (Text T in journalTasks)
+        for(int i = 0; i < journalTasks.Length; i++)
         {
             //Check that the last character on the task is a tick as long as its not an empty task
-            if (!T.text.Equals("") && !T.text[T.text.Length - 1].Equals('✓'))
+            if (!journalTasks[i].text.Equals("") && !journalTasks[i].text[journalTasks[i].text.Length - 1].Equals('✓'))
             {
                 complete = false;
                 break;
