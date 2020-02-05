@@ -320,13 +320,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 364
-    y: 20
-    width: 859
-    height: 432
+    x: 362.4
+    y: 73.6
+    width: 861
+    height: 435
   m_ViewDataDictionary: {fileID: 0}
   m_VSyncEnabled: 0
-  m_MaximizeOnPlay: 1
+  m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 06000000000000000000000002000000000000000000000000000000000000000000000000000000
@@ -466,14 +466,14 @@ MonoBehaviour:
   m_Gizmos: 1
   m_SceneIsLit: 1
   m_SceneLighting: 0
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -4.141558, y: 0.3334617, z: 4.3159084}
+    m_Target: {x: 512, y: 709.3334, z: 0}
     speed: 2
-    m_Value: {x: -4.141558, y: 0.3334617, z: 4.3159084}
+    m_Value: {x: 512, y: 709.3334, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -494,28 +494,28 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
-      speed: 2
-      m_Value: 1
-    zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
+    zGrid:
+      m_Target: 1
+      speed: 2
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: 0.026779937, y: 0.9548464, z: -0.0908012, w: 0.28161493}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: 0.026779931, y: 0.95484614, z: -0.09080118, w: 0.28161487}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.863568
+    m_Target: 707.51135
     speed: 2
-    m_Value: 4.863568
+    m_Value: 707.51135
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
-    m_Speed: 1
-    m_SpeedNormalized: 0.5
+    m_Speed: 0.8
+    m_SpeedNormalized: 0.38
     m_SpeedMin: 0.01
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -526,7 +526,7 @@ MonoBehaviour:
     m_DynamicClip: 1
     m_OcclusionCulling: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewRotation: {x: 0.094260454, y: -0.33283636, z: -0.0334574, w: -0.93766344}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -554,22 +554,22 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 315.2
+    x: 362.4
     y: 73.6
-    width: 384
-    height: 437
+    width: 861
+    height: 435
   m_ViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 9561
+    ID: 7424
     splitterInitialOffset: 0
     currentActiveSplitter: -1
-    realSizes: d2000000d3000000
+    realSizes: d1000000d2000000
     relativeSizes:
     - 0.5
     - 0.5
     minSizes: 6400000064000000
     maxSizes: 0000000000000000
-    lastTotalSize: 421
+    lastTotalSize: 419
     splitSize: 6
     xOffset: 0
   m_Recording: 1
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -3784
+  m_LastSelectedObjectID: 11722
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
