@@ -25,6 +25,8 @@ using UnityEngine.UI;
 
 public class Journal_DR : MonoBehaviour
 {
+    public static Journal_DR instance;
+
     public KeyCode journalOpenKey = KeyCode.J;
     public KeyCode[] journalCloseKeys = { KeyCode.J, KeyCode.Escape };
 
@@ -42,6 +44,8 @@ public class Journal_DR : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         journal = GameObject.Find("JournalBackground");
         journalTaskList = GameObject.Find("JournalTasks");
         journalTasks = journalTaskList.GetComponentsInChildren<Text>();
@@ -52,6 +56,8 @@ public class Journal_DR : MonoBehaviour
         journalLogText = journalLogGO.GetComponent<Text>();
 
         journal.SetActive(false);
+
+        ChangeTasks(new string[] { "Pick up block" }); //Test for prototype
     }
 
     /*

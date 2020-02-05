@@ -46,6 +46,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     Destroy(hit.transform.gameObject);
                     notificationText.text = "";
+                    Journal_DR.instance.TickOffTask(0); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
 
