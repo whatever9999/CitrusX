@@ -10,6 +10,9 @@
  * Renamed variable (and game object in hierarchy) to NotificationText
  * Set rayRange to 5 in script
  * Optimising after 'if(Input.GetKeyDown(KeyCode.E))' -> Unnecessary if statement that checked if the Vector3 mouse position equaled a Vector2 cast of itself
+ * 
+ * Dominique (Changes) 05/02/2020
+ * Made sure that if the table already has the items the text doesn't pop up anymore
  */
 using UnityEngine;
 using System.Collections;
@@ -52,23 +55,26 @@ public class Interact_HR : MonoBehaviour
 
             if (hit.transform.tag == "Table")
             {
-                if (journal.AreTasksComplete())
+                //Check if the table already has the items or not yet
+                PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
+                if (!putDownScript.getBeenUsed())
                 {
-                    notificationText.text = "Press E to put down your items";
-                    //If he presses the key then pick up the object
-                    if (Input.GetKeyDown(InteractKey))
+                    if (journal.AreTasksComplete())
                     {
-                        hit.transform.gameObject.GetComponent<PutDown_HR>().setItemsDown();
-                        notificationText.text = "";
+                        notificationText.text = "Press E to put down your items";
+                        //If he presses the key then pick up the object
+                        if (Input.GetKeyDown(InteractKey))
+                        {
+                            putDownScript.setItemsDown();
+                            notificationText.text = "";
+                        }
+                    }
+                    else
+                    {
+                        notificationText.text = "You don't have all the items";
                     }
                 }
-                else
-                {
-                    notificationText.text = "You don't have all the items";
-                }
-
-                
-            }
+            } 
 
         }
         else
