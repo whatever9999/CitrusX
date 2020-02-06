@@ -19,6 +19,8 @@
  * Dominique (Changes) 05/02/2020
  * 
  * Changed foreach loops into for loops
+ * Made new logs appear at the top of the journal instead of the bottom (easier to read new logs for player)
+ * Made sure that capitilisation doesn't matter on tasks put in as strings to be ticked off
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,7 +59,8 @@ public class Journal_DR : MonoBehaviour
 
         journal.SetActive(false);
 
-        ChangeTasks(new string[] { "Pick up block" }); //Test for prototype
+        ChangeTasks(new string[] { "Candles", "Book", "Bowl", "Water jug", "Coins" }); //Test for prototype
+        AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
     }
 
     /*
@@ -95,7 +98,7 @@ public class Journal_DR : MonoBehaviour
         journalLogContentBox.sizeDelta = journalLogSize;
 
         //Add the text to the text box
-        journalLogText.text += "\n\n" + text;
+        journalLogText.text = text + "\n\n" + journalLogText.text; ;
     }
 
     public void ChangeTasks(string[] newTasks)
@@ -118,9 +121,10 @@ public class Journal_DR : MonoBehaviour
 
     public void TickOffTask(string task)
     {
+        //Make sure both strings are lower case so capitilisation doesn't matter
         for(int i = 0; i < journalTasks.Length; i++)
         {
-            if (task.Equals(journalTasks[i].text))
+            if (task.ToLower().Equals(journalTasks[i].text.ToLower()))
             {
                 journalTasks[i].text += " ✓";
             }

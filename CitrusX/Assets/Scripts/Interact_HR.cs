@@ -13,6 +13,8 @@
  * 
  * Dominique (Changes) 05/02/2020
  * Made sure that if the table already has the items the text doesn't pop up anymore
+ * The name of an item is shown when you are looking at it after 'Press E to pick up the '
+ * If the player picks up an item it is ticked off on their checklist (by name)
  */
 using UnityEngine;
 using System.Collections;
@@ -22,7 +24,6 @@ public class Interact_HR : MonoBehaviour
 {
     public int rayRange = 5;
     public KeyCode InteractKey = KeyCode.E;
-    
 
     private RaycastHit hit;
     private Text notificationText;
@@ -43,13 +44,14 @@ public class Interact_HR : MonoBehaviour
             //Is in looking at an object
             if (hit.transform.tag == "Object")
             {
-                notificationText.text = "Press E to pick up";
+                GameObject item = hit.transform.gameObject;
+                notificationText.text = "Press E to pick up the " + item.name.ToLower();
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey))
                 {
                     Destroy(hit.transform.gameObject);
                     notificationText.text = "";
-                    Journal_DR.instance.TickOffTask(0); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
+                    Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
 
