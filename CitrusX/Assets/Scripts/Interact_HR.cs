@@ -15,6 +15,7 @@
  * Made sure that if the table already has the items the text doesn't pop up anymore
  * The name of an item is shown when you are looking at it after 'Press E to pick up the '
  * If the player picks up an item it is ticked off on their checklist (by name)
+ * Instead of destroying it the object is deactivated
  */
 using UnityEngine;
 using System.Collections;
@@ -49,7 +50,7 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey))
                 {
-                    Destroy(hit.transform.gameObject);
+                    hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
