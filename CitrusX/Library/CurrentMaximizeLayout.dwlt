@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 450}
   m_MaxSize: {x: 14000, y: 14022}
   vertical: 1
-  controlID: 3028
+  controlID: 244
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 450}
   m_MaxSize: {x: 14000, y: 14022}
   vertical: 0
-  controlID: 3029
+  controlID: 245
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_MinSize: {x: 304, y: 450}
   m_MaxSize: {x: 10000, y: 14022}
   vertical: 1
-  controlID: 3030
+  controlID: 246
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_MinSize: {x: 304, y: 200}
   m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 3031
+  controlID: 247
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -237,7 +237,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04f0ffff76fbffff562e0000fe2e0000
+      m_ExpandedIDs: 84fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -842,20 +842,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/2D
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 50
   m_LastFolders:
-  - Assets/Art/2D
+  - Assets/Scripts
   m_LastFoldersGridSize: 50
   m_LastProjectPath: C:\Users\Domin\OneDrive\Documents\GitHub\CitrusX\CitrusX
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e82c0000
-    m_LastClickedID: 11496
-    m_ExpandedIDs: 00000000002a00001c2a0000242b00001e2c0000622f000000ca9a3b
+    m_SelectedIDs: ca2c0000
+    m_LastClickedID: 11466
+    m_ExpandedIDs: 00000000fa290000162a00001e2b0000182c0000682f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -883,7 +883,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 14240000
     m_LastClickedID: 9236
-    m_ExpandedIDs: 00000000002a00001c2a0000242b00001e2c0000622f000000ca9a3b
+    m_ExpandedIDs: 00000000fa290000162a00001e2b0000182c0000682f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -908,8 +908,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 26f6ffff
-    m_LastClickedInstanceID: -2522
+    m_SelectedInstanceIDs: f22e0000
+    m_LastClickedInstanceID: 12018
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 46040000da210000dc210000e6210000f8210000e2210000e021000014220000a8270000a027000074430000422affff6e220000ec210000d26a00008022000016220000ea210000ac220000e821000030220000ce210000ea040000ba72fdff3e6afdff3632000014240000322600002c26000024160100b4340100002c00001a4f00002c2e0000a82c00007e2d0000fe2900001c2b0000642b0000a02b0000000000004a310000
     m_RenameOverlay:

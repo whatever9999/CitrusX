@@ -89,6 +89,8 @@ public class Interact_HR : MonoBehaviour
                     {
                         //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                         keypad.OpenKeypad(keypadItem);
+
+                        //Hide the notification text when the keypad is open
                         notificationText.text = "";
                     }
                 }
@@ -97,11 +99,6 @@ public class Interact_HR : MonoBehaviour
         else
         {
             notificationText.text = "";
-        }
-
-        if(keypad.gameObject.activeInHierarchy)
-        {
-            //TODO: Check if the player moves and disable the keypadUI if they do
         }
     }
 }

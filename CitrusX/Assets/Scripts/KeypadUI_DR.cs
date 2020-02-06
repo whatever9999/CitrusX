@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class KeypadUI_DR : MonoBehaviour
 {
@@ -7,12 +8,13 @@ public class KeypadUI_DR : MonoBehaviour
 
     private Text inputText;
     private KeypadItem_DR keypadItem;
+    private FirstPersonController firstPersonController;
 
     public void SetKeypadItem(KeypadItem_DR newKeypadItem) { keypadItem = newKeypadItem; }
 
     private void Awake()
     {
-
+        firstPersonController = GameObject.FindObjectOfType<FirstPersonController>().GetComponent<FirstPersonController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         inputText = GameObject.Find("InputText").GetComponent<Text>();
@@ -51,18 +53,32 @@ public class KeypadUI_DR : MonoBehaviour
 
     public void OpenKeypad(KeypadItem_DR newKeypadItem)
     {
+        keypadItem = newKeypadItem;
+
+        //Makes sure the notification text doesn't say to press E to use the keypad when the UI is open
+        keypadItem.tag = "Untagged";
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        keypadItem = newKeypadItem;
+        
         gameObject.SetActive(true);
+
+        firstPersonController.enabled = false;
     }
 
     public void CloseKeypad()
     {
+        //Make sure raycasts know the keypad item is a keypad again
+        keypadItem.tag = "Keypad";
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        input = "";
+        inputText.text = input;
+
         gameObject.SetActive(false);
+
+        firstPersonController.enabled = true;
     }
 }
