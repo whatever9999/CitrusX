@@ -5,14 +5,17 @@ public class KeypadUI_DR : MonoBehaviour
 {
     private string input;
 
-    private Text notificationText;
+    private Text inputText;
     private KeypadItem_DR keypadItem;
 
     public void SetKeypadItem(KeypadItem_DR newKeypadItem) { keypadItem = newKeypadItem; }
 
     private void Awake()
     {
-        notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        inputText = GameObject.Find("InputText").GetComponent<Text>();
         gameObject.SetActive(false);
     }
 
@@ -22,7 +25,7 @@ public class KeypadUI_DR : MonoBehaviour
         if(input.Length != keypadItem.password.Length)
         {
             input += number;
-            notificationText.text = input;
+            inputText.text = input;
         }
     }
 
@@ -38,7 +41,7 @@ public class KeypadUI_DR : MonoBehaviour
     public void ClearButton()
     {
         input = "";
-        notificationText.text = input;
+        inputText.text = input;
     }
 
     private void OnDisable()

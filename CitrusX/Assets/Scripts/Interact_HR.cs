@@ -98,5 +98,10 @@ public class Interact_HR : MonoBehaviour
         {
             notificationText.text = "";
         }
+
+        if(keypad.gameObject.activeInHierarchy)
+        {
+            //TODO: Check if the player moves and disable the keypadUI if they do
+        }
     }
 }
