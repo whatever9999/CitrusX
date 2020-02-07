@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Dominique
+ * 
+ * The door knows if it is unlocked or not and opens itself through an animation when told to Open()
+ */
+using UnityEngine;
 
 public class Door_DR : MonoBehaviour
 {

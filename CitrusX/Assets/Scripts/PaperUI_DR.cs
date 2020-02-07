@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * Dominique
+ * 
+ * While the UI is open it checks to see if the player presses escape to close it
+ */
 using UnityEngine;
 
 public class PaperUI_DR : MonoBehaviour

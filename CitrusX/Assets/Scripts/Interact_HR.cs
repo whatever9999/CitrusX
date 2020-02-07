@@ -16,6 +16,12 @@
  * The name of an item is shown when you are looking at it after 'Press E to pick up the '
  * If the player picks up an item it is ticked off on their checklist (by name)
  * Instead of destroying it the object is deactivated
+ * 
+ * Dominique (Changes) 07/02/2020
+ * Player can now interact with door, keypad and paper
+ * Door interaction will tell the player if they can or can't open it (and let them do so if they can)
+ * Keypad interaction enables the player to use the cursor to enter a keycode that is connected to a locked door
+ * Paper opens up with a specified background and text according to the paper object the player interacts with
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -112,7 +118,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         notificationText.text = "";
                         door.Open();
-                        //Player can't interact with door when it is open
+                        //Player can't interact with door when it is already open
                         door.tag = "Untagged";
                     }
                 } else
@@ -127,6 +133,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
                     notificationText.text = "";
+                    //Set paper text and background according to the object
                     paperText.text = paperItem.text;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);

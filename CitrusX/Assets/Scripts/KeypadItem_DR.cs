@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/* 
+ * Dominique
+ * 
+ * Keypad item holds the password for a specific keypad and what door it's connected to
+ */
+using UnityEngine;
 
 public class KeypadItem_DR : MonoBehaviour
 {
