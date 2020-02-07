@@ -29,9 +29,15 @@ public class Interact_HR : MonoBehaviour
     private Text notificationText;
     private Journal_DR journal;
     private KeypadUI_DR keypad;
+    private GameObject paper;
+    private Text paperText;
+    private Image paperBackground;
 
     private void Awake()
     {
+        paper = GameObject.Find("PaperUI");
+        paperText = paper.GetComponentInChildren<Text>();
+        paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
@@ -93,6 +99,37 @@ public class Interact_HR : MonoBehaviour
                         //Hide the notification text when the keypad is open
                         notificationText.text = "";
                     }
+                }
+            } else if (hit.transform.tag == "Door")
+            {
+                Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
+
+                if(door.GetUnlocked())
+                {
+                    notificationText.text = "Press E to open";
+
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        notificationText.text = "";
+                        door.Open();
+                        //Player can't interact with door when it is open
+                        door.tag = "Untagged";
+                    }
+                } else
+                {
+                    notificationText.text = "How can I unlock this?";
+                }
+            } else if (hit.transform.tag == "Paper")
+            {
+                notificationText.text = "Press E to read";
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
+                    notificationText.text = "";
+                    paperText.text = paperItem.text;
+                    paperBackground.sprite = paperItem.background;
+                    paper.SetActive(true);
                 }
             }
         }

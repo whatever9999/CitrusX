@@ -8,6 +8,7 @@ TagManager:
   - Table
   - Keypad
   - Door
+  - Paper
   layers:
   - Default
   - TransparentFX
