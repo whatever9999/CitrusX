@@ -9,6 +9,7 @@ TagManager:
   - Keypad
   - Door
   - Paper
+  - ChessPiece
   layers:
   - Default
   - TransparentFX
