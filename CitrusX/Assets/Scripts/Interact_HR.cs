@@ -26,7 +26,7 @@
  * Chase (Changes) 08/02/2020
  * When interacting with a door, it checks to see if the door needs a key and whether or not they have the key
  * If they can't open the door and the door requires a key it hints at the player to check their journal
- * Added fusebox
+ * 
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,7 +40,6 @@ public class Interact_HR : MonoBehaviour
     private Text notificationText;
     private Journal_DR journal;
     private KeypadUI_DR keypad;
-    private Fusebox_CW fusebox;
     private GameObject paper;
     private Text paperText;
     private Image paperBackground;
@@ -51,7 +50,6 @@ public class Interact_HR : MonoBehaviour
         paperText = paper.GetComponentInChildren<Text>();
         paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
-        fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
     }
@@ -147,7 +145,7 @@ public class Interact_HR : MonoBehaviour
                     else //if tasks arent complete hint at player to read their journal
                     {
                        
-                        notificationText.text = "It's locked. Maybe I should check my journal.";
+                        notificationText.text = "It's locked. I should check my journal.";
                     }
                 } else
                 {
@@ -167,22 +165,7 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                 }
-            } else if (hit.transform.tag == "Fusebox")
-            {
-                if (!fusebox.GetState())//!fusebox puzzle solved
-                {
-                    notificationText.text = "Press E to use the fusebox";
-
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
-                        fusebox.OpenFusebox();
-
-                        //Hide the notification text when the keypad is open
-                        notificationText.text = "";
-                    }
-                }
-            }
+           }
         }
         else
         {
