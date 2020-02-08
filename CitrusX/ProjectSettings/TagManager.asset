@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Object
   - Table
+  - Keypad
+  - Door
+  - Paper
   layers:
   - Default
   - TransparentFX
