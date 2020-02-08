@@ -9,7 +9,8 @@ TagManager:
   - Keypad
   - Door
   - Paper
-  - Lock
+  - Pipe
+  - Fusebox
   layers:
   - Default
   - TransparentFX
