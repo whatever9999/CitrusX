@@ -9,6 +9,7 @@ TagManager:
   - Keypad
   - Door
   - Paper
+  - Monitor
   layers:
   - Default
   - TransparentFX
