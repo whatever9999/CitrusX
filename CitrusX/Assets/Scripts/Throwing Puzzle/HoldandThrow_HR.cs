@@ -1,5 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Hugo
+ * 
+ * The player can hold an item in front of them for any period of time.
+ * They can also throw the item in the air.
+ * If the player gets to far from the object they let go of it
+ * Objects still colide with the enviorment
+ */
+
 using UnityEngine;
 
 public class HoldandThrow_HR : MonoBehaviour
@@ -20,18 +27,20 @@ public class HoldandThrow_HR : MonoBehaviour
     }
     void Update()
     {
+        //If the player gets to far from the object he is holding drop it
         distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
         if (distance >= 1f)
         {
             isHolding = false;
         }
-        //Check if isholding
+        //Check if is holding
         if (isHolding == true)
         {
             itemRB.velocity = Vector3.zero;
             itemRB.angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
+            //if right click them throw object
             if (Input.GetMouseButtonDown(1))
             {
                 itemRB.AddForce(tempParent.transform.forward * throwForce);
@@ -49,6 +58,7 @@ public class HoldandThrow_HR : MonoBehaviour
 
     void OnMouseDown()
     {
+        //if the player is near the object
         if (distance <= 1f)
         {
             isHolding = true;
@@ -58,6 +68,7 @@ public class HoldandThrow_HR : MonoBehaviour
     }
     void OnMouseUp()
     {
+        //release the object
         isHolding = false;
     }
 }
