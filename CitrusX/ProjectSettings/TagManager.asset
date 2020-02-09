@@ -9,7 +9,12 @@ TagManager:
   - Keypad
   - Door
   - Paper
+<<<<<<< HEAD
   - ChessPiece
+=======
+  - Pipe
+  - Fusebox
+>>>>>>> Chase
   layers:
   - Default
   - TransparentFX

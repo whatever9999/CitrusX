@@ -22,6 +22,11 @@
  * Door interaction will tell the player if they can or can't open it (and let them do so if they can)
  * Keypad interaction enables the player to use the cursor to enter a keycode that is connected to a locked door
  * Paper opens up with a specified background and text according to the paper object the player interacts with
+ * 
+ * Chase (Changes) 08/02/2020
+ * When interacting with a door, it checks to see if the door needs a key and whether or not they have the key
+ * If they can't open the door and the door requires a key it hints at the player to check their journal
+ * 
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,12 +41,14 @@ public class Interact_HR : MonoBehaviour
     private Journal_DR journal;
     private KeypadUI_DR keypad;
     private GameObject paper;
+    private GameObject fuseboxUI;
     private Text paperText;
     private Image paperBackground;
 
     private void Awake()
     {
         paper = GameObject.Find("PaperUI");
+        fuseboxUI = GameObject.Find("FuseboxUI");
         paperText = paper.GetComponentInChildren<Text>();
         paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
@@ -121,9 +128,31 @@ public class Interact_HR : MonoBehaviour
                         //Player can't interact with door when it is already open
                         door.tag = "Untagged";
                     }
+                } else if(door.requiresKey) 
+                {
+                    //if both key parts are found (in journal as it's for a colour matching puzzle)
+                    if(journal.AreTasksComplete())
+                    {
+                        notificationText.text = "Press E to open";
+                        door.SetUnlocked(true);
+
+                        if (Input.GetKeyDown(InteractKey))
+                        {
+                            notificationText.text = "";
+                            door.Open();
+                            door.tag = "Untagged";
+                        }
+                     
+                    }
+                    else //if tasks arent complete hint at player to read their journal
+                    {
+                       
+                        notificationText.text = "It's locked. I should check my journal.";
+                    }
                 } else
                 {
                     notificationText.text = "How can I unlock this?";
+                  
                 }
             } else if (hit.transform.tag == "Paper")
             {
@@ -137,6 +166,15 @@ public class Interact_HR : MonoBehaviour
                     paperText.text = paperItem.text;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
+                }
+           }
+            else if (hit.transform.tag == "Fusebox")
+            {
+                notificationText.text = "Press E to open the fuse box";
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                 }
             }
         }
