@@ -3133,6 +3133,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   journalOpenKey: 106
   journalCloseKeys: 6a0000001b000000
+--- !u!114 &953419469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953419462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57b6e71f5b7d7f4b9207eebfcd3743e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellphoneOpenKey: 99
+  cellphoneCloseKeys: 630000001b000000
 --- !u!1 &956736850
 GameObject:
   m_ObjectHideFlags: 0
@@ -6110,7 +6124,7 @@ GameObject:
   - component: {fileID: 1960254881}
   - component: {fileID: 1960254880}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Cellphone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -72,7 +72,8 @@ public class Journal_DR : MonoBehaviour
         if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey))
         {
             journal.SetActive(true);
-        } else if (journal.activeInHierarchy)
+        } 
+        else if (journal.activeInHierarchy)
         {
             for(int i = 0; i < journalCloseKeys.Length; i++)
             {
