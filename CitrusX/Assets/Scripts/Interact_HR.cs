@@ -27,7 +27,7 @@
  * When interacting with a door, it checks to see if the door needs a key and whether or not they have the key
  * If they can't open the door and the door requires a key it hints at the player to check their journal
  * 
- */
+
  
   Hugo (Changes) 08/02/2020
   Player can interact with the monitor

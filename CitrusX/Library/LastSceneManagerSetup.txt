@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/ChaseScene.unity
-=======
 - path: Assets/Scenes/Hugo Test.unity
->>>>>>> CCTV
   isLoaded: 1
   isActive: 1
   isSubScene: 0
