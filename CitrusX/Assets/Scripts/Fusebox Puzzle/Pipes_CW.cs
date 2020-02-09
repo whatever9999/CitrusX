@@ -1,5 +1,8 @@
-﻿//Chase Wilding
-//script for moving the individual pipe pieces into the correct position
+﻿/*Chase Wilding 09/02/2020
+* Script for moving the individual pipe pieces into the correct position, they can be rotated by 90 degrees but when they're in the
+* correct position they stop being moveable.
+* The current and desired position are set in the Inspector so they can be manipulated for different layouts.
+*/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -19,48 +22,55 @@ public class Pipes_CW : MonoBehaviour
     }
     public DIRECTIONS currentDirection;
     public DIRECTIONS desiredDirection;
-    private Sprite pipeSprite;
-
-    private void Awake()
-    {
-        pipeSprite = gameObject.GetComponent<Image>().sprite;
-        
-    }
+    private bool isInPosition = false;
+    public bool GetCompletionState() { return isInPosition; }
     public void Rotate()
     {
-        //check it isn't in the correct position
-        if(desiredDirection != currentDirection)
+        //if in the desired position set to true so it will not move
+        if(desiredDirection == currentDirection)
+        {
+            isInPosition = true;
+        }
+
+        //if not in correct position, rotate it
+        if (desiredDirection != currentDirection)
         {
             switch (currentDirection)
             {
                 case DIRECTIONS.HORIZONTAL:
-                    {
-                        gameObject.transform.Rotate(Vector3.left);
+                    { 
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.VERTICAL; 
                     }
                     break;
                 case DIRECTIONS.VERTICAL:
                     {
-                        gameObject.transform.Rotate(Vector3.left);
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.HORIZONTAL;
                     }
                     break;
                 case DIRECTIONS.RIGHT_DOWN_BEND:
                     {
-                        gameObject.transform.Rotate(Vector3.left);
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.LEFT_DOWN_BEND;
                     }
                     break;
                 case DIRECTIONS.LEFT_DOWN_BEND:
                     {
-                        gameObject.transform.Rotate(Vector3.left);
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.LEFT_UP_BEND;
                     }
                     break;
                 case DIRECTIONS.RIGHT_UP_BEND:
                     {
-                        gameObject.transform.Rotate(Vector3.left);
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.RIGHT_DOWN_BEND;
                     }
                     break;
                 case DIRECTIONS.LEFT_UP_BEND:
                     {
-                        gameObject.transform.Rotate(Vector3.left);
+                        gameObject.transform.Rotate(0, 0, 90);
+                        currentDirection = DIRECTIONS.RIGHT_UP_BEND;
                     }
                     break;
                 default:

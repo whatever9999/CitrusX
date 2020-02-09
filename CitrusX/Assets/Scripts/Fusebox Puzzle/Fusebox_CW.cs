@@ -13,14 +13,12 @@ public class Fusebox_CW : MonoBehaviour
     private bool isFuseboxSolved;
     internal bool GetState() { return isFuseboxSolved; }
 
-    void Awake()
+    void Start()
     {
-        //fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
-       
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-        //OpenFusebox();
-        // gameObject.SetActive(false);
+        fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameObject.SetActive(false);
     }
 
 
@@ -36,6 +34,22 @@ public class Fusebox_CW : MonoBehaviour
 
         //Stop the player from moving while using the fusebox
         fpsController.enabled = false;
+    }
+    public void GetAllPipesInScene()
+    {
+        GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
+        int completedPipes = 0;
+        if(completedPipes == pipes.Length)
+        {
+            isFuseboxSolved = true;
+        }
+        for(int i = 0;i<pipes.Length;i++)
+        {
+            if(pipes[i].GetComponent<Pipes_CW>().GetCompletionState())
+            {
+                completedPipes++;
+            }
+        }
     }
     public void CloseFusebox()
     {

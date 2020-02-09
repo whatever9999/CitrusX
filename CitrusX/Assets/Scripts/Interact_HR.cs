@@ -41,12 +41,14 @@ public class Interact_HR : MonoBehaviour
     private Journal_DR journal;
     private KeypadUI_DR keypad;
     private GameObject paper;
+    private GameObject fuseboxUI;
     private Text paperText;
     private Image paperBackground;
 
     private void Awake()
     {
         paper = GameObject.Find("PaperUI");
+        fuseboxUI = GameObject.Find("FuseboxUI");
         paperText = paper.GetComponentInChildren<Text>();
         paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
@@ -166,6 +168,15 @@ public class Interact_HR : MonoBehaviour
                     paper.SetActive(true);
                 }
            }
+            else if (hit.transform.tag == "Fusebox")
+            {
+                notificationText.text = "Press E to open the fuse box";
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
+                }
+            }
         }
         else
         {
