@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":0.7089999914169312,"y":-0.4620000123977661,"z":-3.4000000953674318},"rotation":{"x":0.14224329590797425,"y":0.8367162346839905,"z":-0.4617930054664612,"w":0.2577275037765503},"size":1.8740400075912476,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-0.41576719284057619,"y":-3.396976947784424,"z":1.7529468536376954},"rotation":{"x":-0.11191099137067795,"y":0.88790363073349,"z":-0.30592799186706545,"w":-0.3248153030872345},"size":12.053926467895508,"orthographic":false}
+>>>>>>> Adam
