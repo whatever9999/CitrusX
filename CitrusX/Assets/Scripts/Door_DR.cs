@@ -18,9 +18,6 @@ public class Door_DR : MonoBehaviour
 
     private Animator animator;
 
-    public bool GetUnlocked() { return unlocked; }
-    public void SetUnlocked(bool newUnlocked) { unlocked = newUnlocked; }
-
     private void Start()
     {
         animator = GetComponent<Animator>();

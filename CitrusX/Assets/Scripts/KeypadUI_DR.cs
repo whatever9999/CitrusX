@@ -40,7 +40,7 @@ public class KeypadUI_DR : MonoBehaviour
     {
         if (input == keypadItem.password)
         {
-            keypadItem.door.SetUnlocked(true);
+            keypadItem.door.unlocked = true;
             CloseKeypad();
         }
     }

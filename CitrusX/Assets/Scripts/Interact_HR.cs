@@ -111,7 +111,7 @@ public class Interact_HR : MonoBehaviour
                 //Get the keypad we're looking at
                 KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
                 //If the door isn't unlocked yet then open the keypad UI
-                if (!keypadItem.door.GetUnlocked())
+                if (!keypadItem.door.unlocked)
                 {
                     notificationText.text = "Press E to use the keypad";
 
@@ -128,7 +128,7 @@ public class Interact_HR : MonoBehaviour
             {
                 Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
 
-                if(door.GetUnlocked())
+                if(door.unlocked)
                 {
                     notificationText.text = "Press E to open";
 
@@ -145,7 +145,7 @@ public class Interact_HR : MonoBehaviour
                     if(journal.AreTasksComplete())
                     {
                         notificationText.text = "Press E to open";
-                        door.SetUnlocked(true);
+                        door.unlocked = true;
 
                         if (Input.GetKeyDown(InteractKey))
                         {
@@ -211,6 +211,15 @@ public class Interact_HR : MonoBehaviour
                     }
                 }
 
+            }
+            else if (hit.transform.tag == "ChessPiece")
+            {
+                notificationText.text = "Press E to rotate the " + hit.transform.name;
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    hit.transform.Rotate(0, 90, 0);
+                }
             }
             else
             {
