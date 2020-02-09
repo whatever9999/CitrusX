@@ -7,12 +7,17 @@ public class HoldandThrow_HR : MonoBehaviour
     private float throwForce = 600;
     private Vector3 objectPos;
     private float distance;
+    private Rigidbody itemRB;
 
     public bool canHold = true;
     public GameObject item;
     public GameObject tempParent;
     public bool isHolding = false;
 
+    void Awake()
+    {
+        itemRB = item.GetComponent<Rigidbody>();
+    }
     void Update()
     {
         distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
@@ -23,13 +28,13 @@ public class HoldandThrow_HR : MonoBehaviour
         //Check if isholding
         if (isHolding == true)
         {
-            item.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            itemRB.velocity = Vector3.zero;
+            itemRB.angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
             if (Input.GetMouseButtonDown(1))
             {
-                item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwForce);
+                itemRB.AddForce(tempParent.transform.forward * throwForce);
                 isHolding = false;
             }
         }
@@ -37,7 +42,7 @@ public class HoldandThrow_HR : MonoBehaviour
         {
             objectPos = item.transform.position;
             item.transform.SetParent(null);
-            item.GetComponent<Rigidbody>().useGravity = true;
+            itemRB.useGravity = true;
             item.transform.position = objectPos;
         }
     }
@@ -47,8 +52,8 @@ public class HoldandThrow_HR : MonoBehaviour
         if (distance <= 1f)
         {
             isHolding = true;
-            item.GetComponent<Rigidbody>().useGravity = false;
-            item.GetComponent<Rigidbody>().detectCollisions = true;
+            itemRB.useGravity = false;
+            itemRB.detectCollisions = true;
         }
     }
     void OnMouseUp()
