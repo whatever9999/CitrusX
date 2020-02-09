@@ -28,14 +28,24 @@
  * If they can't open the door and the door requires a key it hints at the player to check their journal
  * 
  */
+ 
+  Hugo (Changes) 08/02/2020
+  Player can interact with the monitor
+  This will allow the player to zoom in on the big screen to get a better view of the house
+  
+  
+  */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Interact_HR : MonoBehaviour
 {
+    public const int zoomedFOV = 20;
+    public const int defaultFOV = 60;
     public int rayRange = 5;
     public KeyCode InteractKey = KeyCode.E;
 
+    private bool zoomedIn = false;
     private RaycastHit hit;
     private Text notificationText;
     private Journal_DR journal;
@@ -44,6 +54,7 @@ public class Interact_HR : MonoBehaviour
     private GameObject fuseboxUI;
     private Text paperText;
     private Image paperBackground;
+    private Camera playerCamera;
 
     private void Awake()
     {
@@ -54,11 +65,11 @@ public class Interact_HR : MonoBehaviour
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        playerCamera = GetComponent<Camera>();
     }
 
     void Update()
     {
-
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
@@ -177,9 +188,38 @@ public class Interact_HR : MonoBehaviour
                     fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                 }
             }
+            else if (hit.transform.tag == "Monitor")
+            {
+                if (!zoomedIn)
+                {
+                    notificationText.text = "Press E to zoom in";
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        playerCamera.transform.LookAt(hit.transform);
+                        playerCamera.fieldOfView = zoomedFOV;
+                        zoomedIn = true;
+                    }
+                }
+                else
+                {
+                    notificationText.text = "Press E to zoom out";
+
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        zoomedIn = false;
+                        playerCamera.fieldOfView = defaultFOV;
+                    }
+                }
+
+            }
+            else
+            {
+                playerCamera.fieldOfView = defaultFOV;
+            }
         }
         else
         {
+            playerCamera.fieldOfView = defaultFOV;
             notificationText.text = "";
         }
     }

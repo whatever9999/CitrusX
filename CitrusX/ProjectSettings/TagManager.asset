@@ -15,6 +15,7 @@ TagManager:
   - Pipe
   - Fusebox
 >>>>>>> Chase
+  - Monitor
   layers:
   - Default
   - TransparentFX
@@ -49,6 +50,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Foreground
+    uniqueID: 1909293011
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
