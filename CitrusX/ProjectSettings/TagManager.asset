@@ -4,17 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Object
-  - Table
-  - Keypad
-  - Door
-  - Paper
-<<<<<<< HEAD
-  - ChessPiece
-=======
   - Pipe
-  - Fusebox
->>>>>>> Chase
   layers:
   - Default
   - TransparentFX
