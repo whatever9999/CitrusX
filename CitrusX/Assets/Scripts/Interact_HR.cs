@@ -27,13 +27,12 @@
  * When interacting with a door, it checks to see if the door needs a key and whether or not they have the key
  * If they can't open the door and the door requires a key it hints at the player to check their journal
  * 
-
- 
-  Hugo (Changes) 08/02/2020
-  Player can interact with the monitor
-  This will allow the player to zoom in on the big screen to get a better view of the house
-  
-  
+ * Hugo (Changes) 08/02/2020
+ * Player can interact with the monitor
+ * This will allow the player to zoom in on the big screen to get a better view of the house
+ * 
+ * Dominique (Changes) 10/02/2020
+ * Player can interact with chess pieces -> this makes them rotate (and then checks that if they have gone past 360 degrees this will be changed to 0 since the angles need to be checked as in position)
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -218,7 +217,13 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey))
                 {
+                    //Rotate 90 degrees in y axis
                     hit.transform.Rotate(0, 90, 0);
+                    //If angle is 360 degrees set it to 0 degrees
+                    if (hit.transform.rotation.eulerAngles.y == 360)
+                    {
+                        hit.transform.Rotate(0, -360, 0);
+                    }
                 }
             }
             else

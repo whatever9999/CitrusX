@@ -1,5 +1,5 @@
 ﻿/*
- * Dominique Russell
+ * Dominique
  * 
  * Spawns a SFX game object for the length of the audio clip or for a specified time (on loop)
  */
