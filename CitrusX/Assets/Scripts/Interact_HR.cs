@@ -34,6 +34,7 @@
  * 
  * Dominique (Changes) 10/02/2020
  * Player can interact with chess pieces -> this makes them rotate (and then checks that if they have gone past 360 degrees this will be changed to 0 since the angles need to be checked as in position)
+ * Player can interact with water bowl -> picks up a coin and resets the baron
  * 
  * Hugo (Changes) 10/02/2020
  * Fixed Raycasting bug
@@ -60,6 +61,7 @@ public class Interact_HR : MonoBehaviour
     private Text paperText;
     private Image paperBackground;
     private Camera playerCamera;
+    private int numberCoinsCollected;
 
     private void Awake()
     {
@@ -80,7 +82,7 @@ public class Interact_HR : MonoBehaviour
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
-            //Is in looking at an object
+            //Is in looking at an object?
             if (hit.transform.tag == "Object")
             {
                 GameObject item = hit.transform.gameObject;
@@ -227,6 +229,33 @@ public class Interact_HR : MonoBehaviour
                 {
                     //Rotate 90 degrees in y axis
                     hit.transform.Rotate(0, 0, 90);
+                }
+            } else if(hit.transform.tag == "WaterBowl")
+            {
+                notificationText.text = "Press E to take a coin";
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
+
+                    if(waterBowl.GetBaronActive())
+                    {
+                        if (waterBowl.RemoveCoin())
+                        {
+                            numberCoinsCollected++;
+                            waterBowl.ResetBaron();
+                            Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
+                        } else
+                        {
+                            Debug.Log("Player has lost by trying to take a coin when there weren't any in the bowl");
+                            //TODO: There wasn't a coin for the player to take so they lose the game
+                        }
+                    } else
+                    {
+                        Debug.Log("Player has lost by trying to take a coin when the baron wasn't present");
+                        //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                    }
+                    
                 }
             }
             else

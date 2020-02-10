@@ -8,6 +8,11 @@ TagManager:
   - Paper
   - Keypad
   - Door
+  - Object
+  - Monitor
+  - Table
+  - ChessPiece
+  - WaterBowl
   layers:
   - Default
   - TransparentFX
