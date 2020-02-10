@@ -37,6 +37,6 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public void InitiateHiddenMechanismPuzzle()
     {
         journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
-        journal.ChangeTasks(new string[] { "find mechanism" });
+        journal.ChangeTasks(new string[] { "open door", "book" });
     }
 }
