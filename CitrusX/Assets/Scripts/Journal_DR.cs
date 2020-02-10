@@ -21,6 +21,10 @@
  * Changed foreach loops into for loops
  * Made new logs appear at the top of the journal instead of the bottom (easier to read new logs for player)
  * Made sure that capitilisation doesn't matter on tasks put in as strings to be ticked off
+ * 
+ * Hugo (Changes) 10/02/2020'
+ * 
+ * Added controller functionality
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -69,7 +73,7 @@ public class Journal_DR : MonoBehaviour
 
     private void Update()
     {
-        if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey))
+        if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey) || Input.GetButtonDown("Journal"))
         {
             journal.SetActive(true);
         } 
@@ -77,7 +81,7 @@ public class Journal_DR : MonoBehaviour
         {
             for(int i = 0; i < journalCloseKeys.Length; i++)
             {
-                if (Input.GetKeyDown(journalCloseKeys[i]))
+                if (Input.GetKeyDown(journalCloseKeys[i]) || Input.GetButtonDown("Journal"))
                 {
                     journal.SetActive(false);
                 }

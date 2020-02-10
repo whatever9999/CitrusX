@@ -21,7 +21,7 @@ public class CellPhone_HR : MonoBehaviour
 
     void Update()
     {
-        if (!cellPhone.activeInHierarchy && Input.GetKeyDown(cellphoneOpenKey))
+        if (!cellPhone.activeInHierarchy && Input.GetKeyDown(cellphoneOpenKey) || Input.GetButtonDown("Phone"))
         {
             cellPhone.SetActive(true);
         }
@@ -29,7 +29,7 @@ public class CellPhone_HR : MonoBehaviour
         {
             for (int i = 0; i < cellphoneCloseKeys.Length; i++)
             {
-                if (Input.GetKeyDown(cellphoneCloseKeys[i]))
+                if (Input.GetKeyDown(cellphoneCloseKeys[i]) || Input.GetButtonDown("Phone"))
                 {
                     cellPhone.SetActive(false);
                 }
