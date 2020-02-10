@@ -27,15 +27,31 @@
  * When interacting with a door, it checks to see if the door needs a key and whether or not they have the key
  * If they can't open the door and the door requires a key it hints at the player to check their journal
  * 
- */
+ * Hugo (Changes) 08/02/2020
+ * Player can interact with the monitor
+ * This will allow the player to zoom in on the big screen to get a better view of the house
+ * zooms out if the player presses the key again or leaves the monitor
+ * 
+ * Dominique (Changes) 10/02/2020
+ * Player can interact with chess pieces -> this makes them rotate (and then checks that if they have gone past 360 degrees this will be changed to 0 since the angles need to be checked as in position)
+ * Player can interact with water bowl -> picks up a coin and resets the baron
+ * 
+ * Hugo (Changes) 10/02/2020
+ * Fixed Raycasting bug
+ * Fixed TextBox staying on screen
+ * Added controller functionality
+  */
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Interact_HR : MonoBehaviour
 {
-    public int rayRange = 5;
+    public const int zoomedFOV = 20;
+    public const int defaultFOV = 60;
+    public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
 
+    private bool zoomedIn = false;
     private RaycastHit hit;
     private Text notificationText;
     private Journal_DR journal;
@@ -44,6 +60,8 @@ public class Interact_HR : MonoBehaviour
     private GameObject fuseboxUI;
     private Text paperText;
     private Image paperBackground;
+    private Camera playerCamera;
+    private int numberCoinsCollected;
 
     private void Awake()
     {
@@ -54,21 +72,23 @@ public class Interact_HR : MonoBehaviour
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        playerCamera = GetComponent<Camera>();
     }
 
     void Update()
     {
-
+        //Reset text
+        notificationText.text = "";
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
-            //Is in looking at an object
+            //Is in looking at an object?
             if (hit.transform.tag == "Object")
             {
                 GameObject item = hit.transform.gameObject;
                 notificationText.text = "Press E to pick up the " + item.name.ToLower();
                 //If he presses the key then pick up the object
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
@@ -84,7 +104,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         notificationText.text = "Press E to put down your items";
                         //If he presses the key then pick up the object
-                        if (Input.GetKeyDown(InteractKey))
+                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
                             putDownScript.setItemsDown();
                             notificationText.text = "";
@@ -100,11 +120,11 @@ public class Interact_HR : MonoBehaviour
                 //Get the keypad we're looking at
                 KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
                 //If the door isn't unlocked yet then open the keypad UI
-                if (!keypadItem.door.GetUnlocked())
+                if (!keypadItem.door.unlocked)
                 {
                     notificationText.text = "Press E to use the keypad";
 
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                         keypad.OpenKeypad(keypadItem);
@@ -117,11 +137,11 @@ public class Interact_HR : MonoBehaviour
             {
                 Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
 
-                if(door.GetUnlocked())
+                if(door.unlocked)
                 {
                     notificationText.text = "Press E to open";
 
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         notificationText.text = "";
                         door.Open();
@@ -134,9 +154,9 @@ public class Interact_HR : MonoBehaviour
                     if(journal.AreTasksComplete())
                     {
                         notificationText.text = "Press E to open";
-                        door.SetUnlocked(true);
+                        door.unlocked = true;
 
-                        if (Input.GetKeyDown(InteractKey))
+                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
                             notificationText.text = "";
                             door.Open();
@@ -158,7 +178,7 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to read";
 
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
                     notificationText.text = "";
@@ -172,14 +192,80 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to open the fuse box";
 
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                 }
             }
+            else if (hit.transform.tag == "Monitor")
+            {
+                if (!zoomedIn)
+                {
+                    notificationText.text = "Press E to zoom in";
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    {
+                        playerCamera.transform.LookAt(hit.transform);
+                        playerCamera.fieldOfView = zoomedFOV;
+                        zoomedIn = true;
+                    }
+                }
+                else
+                {
+                    notificationText.text = "Press E to zoom out";
+
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    {
+                        zoomedIn = false;
+                        playerCamera.fieldOfView = defaultFOV;
+                    }
+                }
+
+            }
+            else if (hit.transform.tag == "ChessPiece")
+            {
+                notificationText.text = "Press E to rotate the " + hit.transform.name;
+
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                {
+                    //Rotate 90 degrees in y axis
+                    hit.transform.Rotate(0, 0, 90);
+                }
+            } else if(hit.transform.tag == "WaterBowl")
+            {
+                notificationText.text = "Press E to take a coin";
+
+                if (Input.GetKeyDown(InteractKey))
+                {
+                    WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
+
+                    if(waterBowl.GetBaronActive())
+                    {
+                        if (waterBowl.RemoveCoin())
+                        {
+                            numberCoinsCollected++;
+                            waterBowl.ResetBaron();
+                            Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
+                        } else
+                        {
+                            Debug.Log("Player has lost by trying to take a coin when there weren't any in the bowl");
+                            //TODO: There wasn't a coin for the player to take so they lose the game
+                        }
+                    } else
+                    {
+                        Debug.Log("Player has lost by trying to take a coin when the baron wasn't present");
+                        //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                    }
+                    
+                }
+            }
+            else
+            {
+                playerCamera.fieldOfView = defaultFOV;
+            }
         }
         else
         {
+            playerCamera.fieldOfView = defaultFOV;
             notificationText.text = "";
         }
     }

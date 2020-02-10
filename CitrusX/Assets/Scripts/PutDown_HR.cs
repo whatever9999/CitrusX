@@ -8,6 +8,9 @@
  * Dominique (Changes) 05/02/2020
  * Added a variable to check if the table has had the items put down on it or not yet
  * Got rid of unused namespace UnityEngine.UI
+ * 
+ * Dominique (Changes) 
+ * Changed it so that game objects are set active instead of mesh renderers being enabled
  */
 
 using UnityEngine;
@@ -23,7 +26,7 @@ public class PutDown_HR : MonoBehaviour
     {
         tableChildren = transform.childCount;
         for (int i = 0; i < tableChildren; ++i)
-            transform.GetChild(i).GetComponent<MeshRenderer>().enabled = true;
+            transform.GetChild(i).gameObject.SetActive(true);
         beenUsed = true;
     }
 

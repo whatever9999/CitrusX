@@ -1,5 +1,5 @@
 ﻿/*
- * Dominique Russell
+ * Dominique
  * 
  * Spawns a SFX game object for the length of the audio clip or for a specified time (on loop)
  */
@@ -88,8 +88,9 @@ public class SFXManager_DR : MonoBehaviour
 
 public enum SoundEffectNames
 {
-    //SFX identifier names go here
-    //E.g. BUTTON, CRASH, BANG
+    CORRECT,
+    INCORRECT,
+    BUTTON
 }
 
 [System.Serializable]

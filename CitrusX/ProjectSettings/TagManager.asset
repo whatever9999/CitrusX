@@ -4,13 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Object
-  - Table
+  - Pipe
+  - Paper
   - Keypad
   - Door
-  - Paper
-  - Pipe
-  - Fusebox
+  - Object
+  - Monitor
+  - Table
+  - ChessPiece
+  - WaterBowl
   layers:
   - Default
   - TransparentFX
