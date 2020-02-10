@@ -30,9 +30,15 @@
  * Hugo (Changes) 08/02/2020
  * Player can interact with the monitor
  * This will allow the player to zoom in on the big screen to get a better view of the house
+ * zooms out if the player presses the key again or leaves the monitor
  * 
  * Dominique (Changes) 10/02/2020
  * Player can interact with chess pieces -> this makes them rotate (and then checks that if they have gone past 360 degrees this will be changed to 0 since the angles need to be checked as in position)
+ * 
+ * Hugo (Changes) 10/02/2020
+ * Fixed Raycasting bug
+ * Fixed TextBox staying on screen
+ * Added controller functionality
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -69,6 +75,8 @@ public class Interact_HR : MonoBehaviour
 
     void Update()
     {
+        //Reset text
+        notificationText.text = "";
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
@@ -78,7 +86,7 @@ public class Interact_HR : MonoBehaviour
                 GameObject item = hit.transform.gameObject;
                 notificationText.text = "Press E to pick up the " + item.name.ToLower();
                 //If he presses the key then pick up the object
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
@@ -94,7 +102,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         notificationText.text = "Press E to put down your items";
                         //If he presses the key then pick up the object
-                        if (Input.GetKeyDown(InteractKey))
+                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
                             putDownScript.setItemsDown();
                             notificationText.text = "";
@@ -114,7 +122,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     notificationText.text = "Press E to use the keypad";
 
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                         keypad.OpenKeypad(keypadItem);
@@ -131,7 +139,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     notificationText.text = "Press E to open";
 
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         notificationText.text = "";
                         door.Open();
@@ -146,7 +154,7 @@ public class Interact_HR : MonoBehaviour
                         notificationText.text = "Press E to open";
                         door.unlocked = true;
 
-                        if (Input.GetKeyDown(InteractKey))
+                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
                             notificationText.text = "";
                             door.Open();
@@ -168,7 +176,7 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to read";
 
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
                     notificationText.text = "";
@@ -182,7 +190,7 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to open the fuse box";
 
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                 }
@@ -192,7 +200,7 @@ public class Interact_HR : MonoBehaviour
                 if (!zoomedIn)
                 {
                     notificationText.text = "Press E to zoom in";
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         playerCamera.transform.LookAt(hit.transform);
                         playerCamera.fieldOfView = zoomedFOV;
@@ -203,7 +211,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     notificationText.text = "Press E to zoom out";
 
-                    if (Input.GetKeyDown(InteractKey))
+                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                     {
                         zoomedIn = false;
                         playerCamera.fieldOfView = defaultFOV;
@@ -215,7 +223,7 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to rotate the " + hit.transform.name;
 
-                if (Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
                     //Rotate 90 degrees in y axis
                     hit.transform.Rotate(0, 90, 0);
