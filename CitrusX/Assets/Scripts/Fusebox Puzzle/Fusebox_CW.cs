@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class Fusebox_CW : MonoBehaviour
 {
+    #region VARIABLES
     private FirstPersonController fpsController;
     private bool isFuseboxSolved;
     private KeyCode closeFuseboxKey = KeyCode.Escape;
@@ -20,11 +21,15 @@ public class Fusebox_CW : MonoBehaviour
     public Pipes_CW[] pipes;
     public Pipes_CW[] wires;
     internal Color drawColour;
+    private Journal_DR journal;
+    #endregion
     internal bool GetState() { return isFuseboxSolved; }
 
     void Start()
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
+        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        journal.ChangeTasks(new string[] { "fix fusebox" });
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
@@ -50,12 +55,16 @@ public class Fusebox_CW : MonoBehaviour
     }
     public void GetAllPipesInScene()
     {
+        //set the pipes in the inspector
+        //set the wire ends into the wires array in the inspector also
         if(pipeCompletedCount == pipes.Length)
         {
             GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "pipes COMPLETE";
             if (wireCompletedCount == wires.Length)
             {
                 GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "COMPLETE";
+                journal.TickOffTask("fix fusebox");
+                
             }
         }
     }

@@ -31,11 +31,11 @@ public class Pipes_CW : MonoBehaviour
     public DIRECTIONS desiredDirection;
     public COLOURS wireEndColour;
     public bool isWireEnd;
-    public Button previousPipe;
-    public Button previousPipe2;
+    public Button previousWire;
+    public Button previousWire2;
     public Button matchingEnd;
     private bool isInPosition = false;
-    private bool isPipeConnected = false;
+    private bool isWireConnected = false;
     Color defaultBoxColour;
     private Fusebox_CW theFusebox;
     #endregion
@@ -53,7 +53,7 @@ public class Pipes_CW : MonoBehaviour
             GetComponent<Button>().image.color = defaultBoxColour;
             if(!isWireEnd)
             {
-                isPipeConnected = false;
+                isWireConnected = false;
             }
            
         }
@@ -120,7 +120,7 @@ public class Pipes_CW : MonoBehaviour
         if(isWireEnd)
         {
             //signify that it is already connected
-            isPipeConnected = true;
+            isWireConnected = true;
             //check for what colour it represents
             switch (wireEndColour)
             {
@@ -143,13 +143,13 @@ public class Pipes_CW : MonoBehaviour
                 default:
                     break;
             }
-            if (previousPipe.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousPipe2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+            if (previousWire.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousWire2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
             {
                 //if the previous tile is the same colour as the wire end, both the original and last pipe end will change colour to show
                 //completion
                 GetComponent<Button>().image.color = Color.yellow;
                 matchingEnd.image.color = Color.yellow;
-                previousPipe.GetComponent<Pipes_CW>().isPipeConnected = true;
+                previousWire.GetComponent<Pipes_CW>().isWireConnected = true;
                 theFusebox.wireCompletedCount += 2;
             }    
         }
@@ -159,7 +159,7 @@ public class Pipes_CW : MonoBehaviour
             if(GetComponent<Button>().image.color == defaultBoxColour)
             {
                 //check if the previous pipe has been used
-                if(previousPipe.GetComponent<Pipes_CW>().isPipeConnected || previousPipe2.GetComponent<Pipes_CW>().isPipeConnected)
+                if(previousWire.GetComponent<Pipes_CW>().isWireConnected || previousWire2.GetComponent<Pipes_CW>().isWireConnected)
                 {
                     //set the wireEndColour for the comparison for wireEnds
                     if (theFusebox.drawColour == Color.red)
@@ -175,11 +175,11 @@ public class Pipes_CW : MonoBehaviour
                         wireEndColour = COLOURS.BLUE;
                     }
                     //check for colour
-                    if (previousPipe.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+                    if (previousWire.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousWire2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
                     {
                         //draw the correct colour tile and signify as connected
                         GetComponent<Button>().image.color = theFusebox.drawColour;
-                        isPipeConnected = true;
+                        isWireConnected = true;
                     }
                     
                     

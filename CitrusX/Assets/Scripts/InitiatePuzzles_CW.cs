@@ -19,6 +19,11 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
         journal.ChangeTasks(new string[] { "Candles", "Book", "Bowl", "Water jug", "Coins" });
+        if(journal.AreTasksComplete())
+        {
+            journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
+            journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
+        }
     }
     public void InitiateFuseboxPuzzle()
     {
@@ -32,5 +37,6 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public void InitiateHiddenMechanismPuzzle()
     {
         journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
+        journal.ChangeTasks(new string[] { "find mechanism" });
     }
 }
