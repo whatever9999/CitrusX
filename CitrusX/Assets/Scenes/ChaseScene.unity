@@ -460,8 +460,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousPipe: {fileID: 1546455540}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 1546455540}
+  previousWire2: {fileID: 0}
   matchingEnd: {fileID: 0}
 --- !u!114 &275050976
 MonoBehaviour:
@@ -1275,8 +1275,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousPipe: {fileID: 648705709}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 648705709}
+  previousWire2: {fileID: 1405646687}
   matchingEnd: {fileID: 0}
 --- !u!114 &405299211
 MonoBehaviour:
@@ -1438,8 +1438,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousPipe: {fileID: 0}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 0}
+  previousWire2: {fileID: 0}
   matchingEnd: {fileID: 0}
 --- !u!114 &569304226
 MonoBehaviour:
@@ -1885,9 +1885,9 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousPipe: {fileID: 0}
-  previousPipe2: {fileID: 0}
-  matchingEnd: {fileID: 0}
+  previousWire: {fileID: 0}
+  previousWire2: {fileID: 0}
+  matchingEnd: {fileID: 569304226}
 --- !u!114 &648705709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3107,8 +3107,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 1
   isWireEnd: 1
-  previousPipe: {fileID: 1620548096}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 1620548096}
+  previousWire2: {fileID: 0}
   matchingEnd: {fileID: 883629745}
 --- !u!1 &1366471887
 GameObject:
@@ -4301,8 +4301,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousPipe: {fileID: 1405646687}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 1405646687}
+  previousWire2: {fileID: 0}
   matchingEnd: {fileID: 0}
 --- !u!114 &1546455540
 MonoBehaviour:
@@ -4661,8 +4661,8 @@ MonoBehaviour:
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousPipe: {fileID: 275050976}
-  previousPipe2: {fileID: 0}
+  previousWire: {fileID: 275050976}
+  previousWire2: {fileID: 0}
   matchingEnd: {fileID: 0}
 --- !u!114 &1620548096
 MonoBehaviour:
@@ -6571,6 +6571,16 @@ PrefabInstance:
     - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
         type: 3}
       propertyPath: previousPipe2
+      value: 
+      objectReference: {fileID: 405299211}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: previousWire
+      value: 
+      objectReference: {fileID: 883629745}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: previousWire2
       value: 
       objectReference: {fileID: 405299211}
     m_RemovedComponents: []
