@@ -5,12 +5,11 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class Fusebox_CW : MonoBehaviour
 {
-  
-
     private FirstPersonController fpsController;
-
-
     private bool isFuseboxSolved;
+    private KeyCode closeFuseboxKey = KeyCode.Escape;
+    internal KeyCode resetPipesKey = KeyCode.X;
+    internal Color drawColour;
     internal bool GetState() { return isFuseboxSolved; }
 
     void Start()
@@ -23,6 +22,7 @@ public class Fusebox_CW : MonoBehaviour
     private void Update()
     {
         GetAllPipesInScene();
+        CheckForClose();
     }
 
 
@@ -53,6 +53,13 @@ public class Fusebox_CW : MonoBehaviour
                 completedPipes++;
                 Debug.Log("Completed pipes:" + completedPipes);
             }
+        }
+    }
+    private void CheckForClose()
+    {
+        if (Input.GetKeyDown(closeFuseboxKey))
+        {
+            CloseFusebox();
         }
     }
     public void CloseFusebox()

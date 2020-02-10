@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class Pipes_CW : MonoBehaviour
 {
+    #region VARIABLES
     public enum DIRECTIONS
     {
         HORIZONTAL,
@@ -20,10 +21,33 @@ public class Pipes_CW : MonoBehaviour
         RIGHT_UP_BEND,
         LEFT_UP_BEND
     }
+    public enum COLOURS
+    {
+        RED,
+        BLUE,
+        GREEN
+    }
     public DIRECTIONS currentDirection;
     public DIRECTIONS desiredDirection;
+    public COLOURS wireEndColour;
+    public bool isWireEnd;
     private bool isInPosition = false;
+    Color defaultBoxColour;
+    private Fusebox_CW theFusebox;
+    #endregion
     public bool GetCompletionState() { return isInPosition; }
+    public void Awake()
+    {
+        theFusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
+        defaultBoxColour = GetComponent<Button>().image.color;
+    }
+    public void Update()
+    {
+        if(Input.GetKeyDown(theFusebox.resetPipesKey))
+        {
+            GetComponent<Button>().image.color = defaultBoxColour;
+        }
+    }
     public void Rotate()
     {
         //if in the desired position set to true so it will not move
@@ -79,5 +103,44 @@ public class Pipes_CW : MonoBehaviour
         }
        
     }
-
+    public void ConnectWires()
+    {
+        if(isWireEnd)
+        {
+            switch (wireEndColour)
+            {
+                case COLOURS.RED:
+                    {
+                        theFusebox.drawColour = Color.red;
+                    }
+                    break;
+                case COLOURS.BLUE:
+                    {
+                        theFusebox.drawColour = Color.blue;
+                    }
+                    break;
+                case COLOURS.GREEN:
+                    {
+                        theFusebox.drawColour = Color.green;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        if(!isWireEnd)
+        {
+            
+            if(GetComponent<Button>().image.color != defaultBoxColour)
+            {
+               
+            }
+            else if(GetComponent<Button>().image.color == defaultBoxColour)
+            {
+                GetComponent<Button>().image.color = theFusebox.drawColour;
+            }
+            
+        }
+    }
 }
