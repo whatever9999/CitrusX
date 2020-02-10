@@ -88,8 +88,9 @@ public class SFXManager_DR : MonoBehaviour
 
 public enum SoundEffectNames
 {
-    //SFX identifier names go here
-    //E.g. BUTTON, CRASH, BANG
+    CORRECT,
+    INCORRECT,
+    BUTTON
 }
 
 [System.Serializable]
