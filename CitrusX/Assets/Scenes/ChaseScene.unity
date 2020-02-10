@@ -1208,6 +1208,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338080853}
   m_CullTransparentMesh: 0
+--- !u!114 &361497296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+    type: 3}
+  m_PrefabInstance: {fileID: 1718079783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &453510816 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+    type: 3}
+  m_PrefabInstance: {fileID: 137744627504932325}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &581860446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,7 +2336,7 @@ GameObject:
   - component: {fileID: 992888181}
   - component: {fileID: 992888180}
   m_Layer: 5
-  m_Name: HowToCloseText
+  m_Name: Fusebox Message Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4757,6 +4781,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2287053b4257a2648a52d8ed3c39772b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pipes:
+  - {fileID: 453510816}
+  - {fileID: 1837976918}
+  - {fileID: 361497296}
+  wires:
+  - {fileID: 1328913566}
+  - {fileID: 648705708}
 --- !u!114 &1714463179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5191,6 +5222,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796669737}
   m_CullTransparentMesh: 0
+--- !u!114 &1837976918 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+    type: 3}
+  m_PrefabInstance: {fileID: 1156654415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1846248356
 PrefabInstance:
   m_ObjectHideFlags: 0

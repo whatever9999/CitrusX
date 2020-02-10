@@ -1,7 +1,7 @@
-﻿/*Chase Wilding 09/02/2020
-* Script for moving the individual pipe pieces into the correct position, they can be rotated by 90 degrees but when they're in the
-* correct position they stop being moveable.
-* The current and desired position are set in the Inspector so they can be manipulated for different layouts.
+﻿/*Chase Wilding Pipes script 09/02/2020
+* This script controls both parts of the fuse puzzle. It uses buttons and public variables which must be set in the inspector
+* depending on the layout chosen in the UI. It allows for easier manipulation when building the level.
+* It controls the rotation for the pipes and the connections of wires.
 */
 
 using System.Collections;
@@ -47,9 +47,15 @@ public class Pipes_CW : MonoBehaviour
     }
     public void Update()
     {
+        //if X, reset puzzle to default colours and state
         if(Input.GetKeyDown(theFusebox.resetPipesKey))
         {
             GetComponent<Button>().image.color = defaultBoxColour;
+            if(!isWireEnd)
+            {
+                isPipeConnected = false;
+            }
+           
         }
     }
     public void Rotate()
@@ -58,6 +64,7 @@ public class Pipes_CW : MonoBehaviour
         if(desiredDirection == currentDirection)
         {
             isInPosition = true;
+            theFusebox.pipeCompletedCount++;
         }
 
         //if not in correct position, rotate it
@@ -109,13 +116,17 @@ public class Pipes_CW : MonoBehaviour
     }
     public void ConnectWires()
     {
+        //check if it is a wireend (this is ticked in the inspector)
         if(isWireEnd)
         {
+            //signify that it is already connected
             isPipeConnected = true;
+            //check for what colour it represents
             switch (wireEndColour)
             {
                 case COLOURS.RED:
                     {
+                        //then set the drawcolour to the correct colour
                         theFusebox.drawColour = Color.red;
                     }
                     break;
@@ -134,30 +145,23 @@ public class Pipes_CW : MonoBehaviour
             }
             if (previousPipe.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousPipe2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
             {
+                //if the previous tile is the same colour as the wire end, both the original and last pipe end will change colour to show
+                //completion
                 GetComponent<Button>().image.color = Color.yellow;
                 matchingEnd.image.color = Color.yellow;
                 previousPipe.GetComponent<Pipes_CW>().isPipeConnected = true;
-            }
-            //if(GetComponentInChildren<Pipes_CW>().wireEndColour == wireEndColour)
-            //{
-            //    
-            //}
-           
-            
+                theFusebox.wireCompletedCount += 2;
+            }    
         }
         if(!isWireEnd)
         {
-            
-            if(GetComponent<Button>().image.color != defaultBoxColour)
+            //if the tile hasn't been manipulated
+            if(GetComponent<Button>().image.color == defaultBoxColour)
             {
-               
-            }
-            else if(GetComponent<Button>().image.color == defaultBoxColour)
-            {
+                //check if the previous pipe has been used
                 if(previousPipe.GetComponent<Pipes_CW>().isPipeConnected || previousPipe2.GetComponent<Pipes_CW>().isPipeConnected)
                 {
-                    GetComponent<Button>().image.color = theFusebox.drawColour;
-                    isPipeConnected = true;
+                    //set the wireEndColour for the comparison for wireEnds
                     if (theFusebox.drawColour == Color.red)
                     {
                         wireEndColour = COLOURS.RED;
@@ -170,6 +174,16 @@ public class Pipes_CW : MonoBehaviour
                     {
                         wireEndColour = COLOURS.BLUE;
                     }
+                    //check for colour
+                    if (previousPipe.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+                    {
+                        //draw the correct colour tile and signify as connected
+                        GetComponent<Button>().image.color = theFusebox.drawColour;
+                        isPipeConnected = true;
+                    }
+                    
+                    
+                   
                 }
                
 

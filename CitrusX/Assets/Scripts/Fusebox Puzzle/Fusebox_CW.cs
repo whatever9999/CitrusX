@@ -1,7 +1,13 @@
-﻿using System.Collections;
+﻿/*Chase Wilding Fuse script 10/02/2020
+ * This script opens/closes the fusebox and also registers whether they have been completed
+ * It also keeps track of which colour is set for 'drawing' the wires
+ * I have used some of Dominique's code from the keypad and manipulated it to open/close my fusebox for consistency
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.UI;
 
 public class Fusebox_CW : MonoBehaviour
 {
@@ -9,6 +15,10 @@ public class Fusebox_CW : MonoBehaviour
     private bool isFuseboxSolved;
     private KeyCode closeFuseboxKey = KeyCode.Escape;
     internal KeyCode resetPipesKey = KeyCode.X;
+    internal int pipeCompletedCount;
+    internal int wireCompletedCount;
+    public Pipes_CW[] pipes;
+    public Pipes_CW[] wires;
     internal Color drawColour;
     internal bool GetState() { return isFuseboxSolved; }
 
@@ -40,18 +50,12 @@ public class Fusebox_CW : MonoBehaviour
     }
     public void GetAllPipesInScene()
     {
-        GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
-        int completedPipes = 0;
-        if(completedPipes == pipes.Length)
+        if(pipeCompletedCount == pipes.Length)
         {
-            isFuseboxSolved = true;
-        }
-        for(int i = 0;i<pipes.Length;i++)
-        {
-            if(pipes[i].GetComponent<Pipes_CW>().GetCompletionState())
+            GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "pipes COMPLETE";
+            if (wireCompletedCount == wires.Length)
             {
-                completedPipes++;
-                Debug.Log("Completed pipes:" + completedPipes);
+                GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "COMPLETE";
             }
         }
     }
