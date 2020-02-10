@@ -31,7 +31,11 @@ public class Pipes_CW : MonoBehaviour
     public DIRECTIONS desiredDirection;
     public COLOURS wireEndColour;
     public bool isWireEnd;
+    public Button previousPipe;
+    public Button previousPipe2;
+    public Button matchingEnd;
     private bool isInPosition = false;
+    private bool isPipeConnected = false;
     Color defaultBoxColour;
     private Fusebox_CW theFusebox;
     #endregion
@@ -107,6 +111,7 @@ public class Pipes_CW : MonoBehaviour
     {
         if(isWireEnd)
         {
+            isPipeConnected = true;
             switch (wireEndColour)
             {
                 case COLOURS.RED:
@@ -127,6 +132,17 @@ public class Pipes_CW : MonoBehaviour
                 default:
                     break;
             }
+            if (previousPipe.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousPipe2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+            {
+                GetComponent<Button>().image.color = Color.yellow;
+                matchingEnd.image.color = Color.yellow;
+                previousPipe.GetComponent<Pipes_CW>().isPipeConnected = true;
+            }
+            //if(GetComponentInChildren<Pipes_CW>().wireEndColour == wireEndColour)
+            //{
+            //    
+            //}
+           
             
         }
         if(!isWireEnd)
@@ -138,7 +154,25 @@ public class Pipes_CW : MonoBehaviour
             }
             else if(GetComponent<Button>().image.color == defaultBoxColour)
             {
-                GetComponent<Button>().image.color = theFusebox.drawColour;
+                if(previousPipe.GetComponent<Pipes_CW>().isPipeConnected || previousPipe2.GetComponent<Pipes_CW>().isPipeConnected)
+                {
+                    GetComponent<Button>().image.color = theFusebox.drawColour;
+                    isPipeConnected = true;
+                    if (theFusebox.drawColour == Color.red)
+                    {
+                        wireEndColour = COLOURS.RED;
+                    }
+                    else if (theFusebox.drawColour == Color.green)
+                    {
+                        wireEndColour = COLOURS.GREEN;
+                    }
+                    else if (theFusebox.drawColour == Color.blue)
+                    {
+                        wireEndColour = COLOURS.BLUE;
+                    }
+                }
+               
+
             }
             
         }
