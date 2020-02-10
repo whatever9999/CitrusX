@@ -20,9 +20,12 @@ public class Fusebox_CW : MonoBehaviour
         Cursor.visible = false;
         gameObject.SetActive(false);
     }
+    private void Update()
+    {
+        GetAllPipesInScene();
+    }
 
 
-  
     //reused and tweaked some of Dominique's code to open/close the fusebox to lock the cursor etc as will only have one fusebox in game
     public void OpenFusebox()
     {
@@ -48,6 +51,7 @@ public class Fusebox_CW : MonoBehaviour
             if(pipes[i].GetComponent<Pipes_CW>().GetCompletionState())
             {
                 completedPipes++;
+                Debug.Log("Completed pipes:" + completedPipes);
             }
         }
     }
