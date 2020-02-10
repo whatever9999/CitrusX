@@ -5,6 +5,9 @@
  * Dominique (Changes) 10/02/2020
  * Added chess puzzle setup
  * Turned the class into a singleton so it can be called as an instance from anywhere
+ * 
+ * Chase (Changes) 10/02/2020
+ * Added the hidden mech puzzle
  */
 using UnityEngine;
 

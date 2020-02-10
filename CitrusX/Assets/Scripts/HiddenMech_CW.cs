@@ -8,5 +8,14 @@ using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
 {
-   
+    Journal_DR journal;
+
+    private void Awake()
+    {
+        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+    }
+    private void hiddenMechPuzzle()
+    {
+        
+    }
 }
