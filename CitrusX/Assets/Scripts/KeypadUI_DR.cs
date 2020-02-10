@@ -9,7 +9,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class KeypadUI_DR : MonoBehaviour
 {
-    private string input;
+    private string input = "";
 
     private Text inputText;
     private KeypadItem_DR keypadItem;

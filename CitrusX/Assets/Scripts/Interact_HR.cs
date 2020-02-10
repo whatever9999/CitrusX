@@ -32,7 +32,7 @@
  * This will allow the player to zoom in on the big screen to get a better view of the house
  * 
  * Dominique (Changes) 10/02/2020
- * Player can interact with chess pieces -> this makes them rotate (and then checks that if they have gone past 360 degrees this will be changed to 0 since the angles need to be checked as in position)
+ * Player can interact with chess pieces -> this makes them rotate
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +41,7 @@ public class Interact_HR : MonoBehaviour
 {
     public const int zoomedFOV = 20;
     public const int defaultFOV = 60;
-    public int rayRange = 5;
+    public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
 
     private bool zoomedIn = false;
@@ -218,12 +218,7 @@ public class Interact_HR : MonoBehaviour
                 if (Input.GetKeyDown(InteractKey))
                 {
                     //Rotate 90 degrees in y axis
-                    hit.transform.Rotate(0, 90, 0);
-                    //If angle is 360 degrees set it to 0 degrees
-                    if (hit.transform.rotation.eulerAngles.y == 360)
-                    {
-                        hit.transform.Rotate(0, -360, 0);
-                    }
+                    hit.transform.Rotate(0, 0, 90);
                 }
             }
             else

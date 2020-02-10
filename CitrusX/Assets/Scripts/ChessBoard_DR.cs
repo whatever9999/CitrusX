@@ -47,7 +47,7 @@ public class ChessBoard_DR : MonoBehaviour
         for(int i = 0; i < chessPieces.Length; i++)
         {
             //If the chess piece isn't in the right position or isn't active (isn't on the board yet) then the door cannot open
-            if(chessPieces[i].chessPieceTransform.rotation.eulerAngles != chessPieces[i].desiredPosition)
+            if(chessPieces[i].chessPieceTransform.localEulerAngles != chessPieces[i].desiredPosition)
             {
                 inPosition = false;
                 break;
