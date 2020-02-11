@@ -1,9 +1,11 @@
 ﻿/*Chase Wilding 11/2/2020
  * This script sees what type of table this is so that it can only take certain items and then lets the ritual script know
  * if they have items on, this works with the interaction script
+ * 
+ * Dominique (Changes) 11/02/2020
+ * Removed unused imports
+ * Changed start to awake for collection of SetUpRitual
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Table_CW : MonoBehaviour
@@ -14,7 +16,7 @@ public class Table_CW : MonoBehaviour
     private SetUpRitual_CW ritualSetUp;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ritualSetUp = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
     }
@@ -22,15 +24,17 @@ public class Table_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isRitualTable && hasBeenPlaced)
+        if(hasBeenPlaced)
         {
-            ritualSetUp.ritualSetUpPlaced = true;
-            hasBeenPlaced = false;
-        }
-        if(isGardenTable && hasBeenPlaced)
-        {
-            ritualSetUp.jewelleryPlaced = true;
-            hasBeenPlaced = false;
+            if (isRitualTable)
+            {
+                ritualSetUp.ritualSetUpPlaced = true;
+                hasBeenPlaced = false;
+            } else if (isGardenTable)
+            {
+                ritualSetUp.jewelleryPlaced = true;
+                hasBeenPlaced = false;
+            }
         }
     }
 }

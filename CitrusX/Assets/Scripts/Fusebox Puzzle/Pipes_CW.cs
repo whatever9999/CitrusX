@@ -2,10 +2,12 @@
 * This script controls both parts of the fuse puzzle. It uses buttons and public variables which must be set in the inspector
 * depending on the layout chosen in the UI. It allows for easier manipulation when building the level.
 * It controls the rotation for the pipes and the connections of wires.
+* 
+* Dominique (Changes) 11/02/2020
+* Removed unused package imports
+* Moved rotate in switch case to before (stops repetition)
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,41 +73,36 @@ public class Pipes_CW : MonoBehaviour
         //if not in correct position, rotate it
         if (desiredDirection != currentDirection)
         {
+            gameObject.transform.Rotate(0, 0, 90);
             switch (currentDirection)
             {
                 case DIRECTIONS.HORIZONTAL:
                     { 
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.VERTICAL; 
                     }
                     break;
                 case DIRECTIONS.VERTICAL:
                     {
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.HORIZONTAL;
                     }
                     break;
                 case DIRECTIONS.RIGHT_DOWN_BEND:
                     {
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.LEFT_DOWN_BEND;
                     }
                     break;
                 case DIRECTIONS.LEFT_DOWN_BEND:
                     {
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.LEFT_UP_BEND;
                     }
                     break;
                 case DIRECTIONS.RIGHT_UP_BEND:
                     {
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.RIGHT_DOWN_BEND;
                     }
                     break;
                 case DIRECTIONS.LEFT_UP_BEND:
                     {
-                        gameObject.transform.Rotate(0, 0, 90);
                         currentDirection = DIRECTIONS.RIGHT_UP_BEND;
                     }
                     break;
@@ -182,12 +179,8 @@ public class Pipes_CW : MonoBehaviour
                         GetComponent<Button>().image.color = theFusebox.drawColour;
                         isWireConnected = true;
                     }
-                    
-                    
                    
                 }
-               
-
             }
             
         }

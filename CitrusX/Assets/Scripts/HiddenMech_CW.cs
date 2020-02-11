@@ -1,9 +1,9 @@
 ﻿/*Chase Wilding - Hidden Mechanism Puzzle 10/02/2020
  * This puzzle sets off an animation when the correct book is picked up
+ * 
+ * Dominique (Changes) 11/02/2020
+ * Removed unused imports
  */
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
