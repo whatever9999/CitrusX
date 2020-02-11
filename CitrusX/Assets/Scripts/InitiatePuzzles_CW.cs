@@ -8,29 +8,31 @@
  * 
  * Chase (Changes) 10/02/2020
  * Added the hidden mech puzzle
+ * Chase (Changes) 11/02/2020
+ * Added the ritual puzzle set up
  */
 using UnityEngine;
 
 public class InitiatePuzzles_CW : MonoBehaviour
 {
     public static InitiatePuzzles_CW instance;
+    private SetUpRitual_CW ritualSetUp;
+    internal bool puzzle1Done = false;
 
     private Journal_DR journal;
 
     private void Awake()
     {
         instance = this;
-        journal = Journal_DR.instance;
+        journal = GetComponent<Journal_DR>();
+        ritualSetUp = GetComponent<SetUpRitual_CW>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
         journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
-        journal.ChangeTasks(new string[] { "Candles", "Book", "Bowl", "Water jug", "Coins" });
-        if(journal.AreTasksComplete())
-        {
-            journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
-            journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
-        }
+        journal.ChangeTasks(new string[] { "Candles", "Salt", "Bowl", "Water jug", "Coins" });
+        //this is here to stop the strings playing constantly as called from Game's update
+        ritualSetUp.SetActive = true;
     }
     public void InitiateFuseboxPuzzle()
     {

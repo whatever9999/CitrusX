@@ -40,6 +40,9 @@
  * Fixed Raycasting bug
  * Fixed TextBox staying on screen
  * Added controller functionality
+ * 
+ * Chase (Changes) 11/02/2020
+ * Added ritual and garden table interaction for the first puzzle as they progress the puzzles
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -100,13 +103,49 @@ public class Interact_HR : MonoBehaviour
                 PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
                 if (!putDownScript.getBeenUsed())
                 {
-                    if (journal.AreTasksComplete())
+                    //if its the ritual table...
+                    if (hit.transform.gameObject.GetComponent<Table_CW>().isRitualTable)
+                    {
+                        //check to see if its been set up
+                        if (GetComponent<SetUpRitual_CW>().ritualSetUpCollected)
+                        {
+                            notificationText.text = "Press E to put down your items";
+                            //If he presses the key then pick up the object
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            {
+                                putDownScript.setItemsDown();
+                                //let the table and journal know the items are put down
+                                hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
+                                Journal_DR.instance.TickOffTask("Place on table");
+                                notificationText.text = "";
+                            }
+                        }
+                    }
+                    else if(hit.transform.gameObject.GetComponent<Table_CW>().isGardenTable)
+                    {
+                        //check to see if its been set up
+                        if (GetComponent<SetUpRitual_CW>().jewelleryCollected)
+                        {
+                            notificationText.text = "Press E to put down your items";
+                            //If he presses the key then pick up the object
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            {
+                                putDownScript.setItemsDown();
+                                //let the table and journal know the items are put down
+                                hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
+                                Journal_DR.instance.TickOffTask("Place in garden");
+                                notificationText.text = "";
+                            }
+                        }
+                    }
+                    else if (journal.AreTasksComplete())
                     {
                         notificationText.text = "Press E to put down your items";
                         //If he presses the key then pick up the object
                         if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
                             putDownScript.setItemsDown();
+                            transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
                             notificationText.text = "";
                         }
                     }
