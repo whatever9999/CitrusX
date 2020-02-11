@@ -15,7 +15,7 @@ public class Baron_DR : MonoBehaviour
     private Transform waterBowl;
     private Rigidbody rigidbody;
 
-    private void Start()
+    private void Awake()
     {
         startPosition = transform.position;
         waterBowl = GameObject.FindObjectOfType<WaterBowl_DR>().transform;
