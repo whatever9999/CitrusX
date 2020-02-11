@@ -25,19 +25,50 @@ public class GameTesting_CW : MonoBehaviour
             InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle();
             
         }
-        if(arePuzzlesDone[0] && !setUpPuzzle[1])
+        else if(arePuzzlesDone[0] && !setUpPuzzle[1])
         {
             setUpPuzzle[1] = true;
             InitiatePuzzles_CW.instance.InitiateFuseboxPuzzle();
         }
-        if(arePuzzlesDone[1] && !setUpPuzzle[2])
+        else if(arePuzzlesDone[1] && !setUpPuzzle[2])
         {
-
+            setUpPuzzle[2] = true;
+            InitiatePuzzles_CW.instance.InitiateColourMatchingPuzzle();
         }
-        if(arePuzzlesDone[6] && !setUpPuzzle[7])
+        else if (arePuzzlesDone[2] && !setUpPuzzle[3])
+        {
+            setUpPuzzle[3] = true;
+        }
+        else if (arePuzzlesDone[3] && !setUpPuzzle[4])
+        {
+            setUpPuzzle[4] = true;
+        }
+        else if (arePuzzlesDone[4] && !setUpPuzzle[5])
+        {
+            setUpPuzzle[5] = true;
+           
+        }
+        else if (arePuzzlesDone[5] && !setUpPuzzle[6])
+        {
+            setUpPuzzle[6] = true;
+           
+        }
+        else if(arePuzzlesDone[6] && !setUpPuzzle[7])
         {
             setUpPuzzle[7] = true;
             InitiatePuzzles_CW.instance.InitiateHiddenMechanismPuzzle();
+        }
+        else if (arePuzzlesDone[7] && !setUpPuzzle[8])
+        {
+            setUpPuzzle[8] = true;
+        }
+        else if (arePuzzlesDone[8] && !setUpPuzzle[9])
+        {
+            setUpPuzzle[9] = true;
+        }
+        else if (arePuzzlesDone[9])
+        {
+           //DISTURBANCES DONE
         }
     }
 }

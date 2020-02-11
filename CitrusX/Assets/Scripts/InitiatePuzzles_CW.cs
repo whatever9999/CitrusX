@@ -20,6 +20,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private SetUpRitual_CW ritualSetUp;
     private HiddenMech_CW hiddenMechSetUp;
     private ColourMatchingPuzzle_CW colourMatch;
+    private Fusebox_CW fusebox;
     private Journal_DR journal;
     #endregion
 
@@ -30,6 +31,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMechSetUp = GetComponent<HiddenMech_CW>();
         colourMatch = GetComponent<ColourMatchingPuzzle_CW>();
+        fusebox = GetComponent<Fusebox_CW>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
@@ -41,6 +43,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public void InitiateFuseboxPuzzle()
     {
         journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+        journal.ChangeTasks(new string[] { "Fix fusebox" });
+        fusebox.SetActive(true);
     }
     public void InitiateColourMatchingPuzzle()
     {

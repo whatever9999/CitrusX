@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 89189949}
   - component: {fileID: 89189950}
   m_Layer: 5
-  m_Name: Wire Path (4)
+  m_Name: Wire 2-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,13 +330,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 275050976}
+  southWire: {fileID: 2013143408}
+  eastWire: {fileID: 1328913563}
+  westWire: {fileID: 868851046}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1546455540}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 1328913563}
+  - {fileID: 275050976}
+  - {fileID: 868851046}
+  - {fileID: 2013143408}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010101
 --- !u!114 &89189951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,7 +765,7 @@ GameObject:
   - component: {fileID: 275050976}
   - component: {fileID: 275050975}
   m_Layer: 5
-  m_Name: Wire Path (2)
+  m_Name: Wire 1-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -790,13 +802,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 89189949}
+  eastWire: {fileID: 825480757}
+  westWire: {fileID: 1546455540}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1546455540}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 825480757}
+  - {fileID: 1546455540}
+  - {fileID: 89189949}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00010101
 --- !u!114 &275050976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,7 +1695,7 @@ GameObject:
   - component: {fileID: 507322734}
   - component: {fileID: 507322733}
   m_Layer: 5
-  m_Name: Wire Path (9)
+  m_Name: Wire 3-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1709,13 +1732,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 868851046}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 2013143408}
+  westWire: {fileID: 585319301}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 585319301}
-  previousWire2: {fileID: 868851046}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 2013143408}
+  - {fileID: 585319301}
+  - {fileID: 868851046}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010001
 --- !u!114 &507322734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1929,7 +1963,7 @@ GameObject:
   - component: {fileID: 569304226}
   - component: {fileID: 569304225}
   m_Layer: 5
-  m_Name: Wire Start (3)
+  m_Name: Red Wire End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1966,13 +2000,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 2013143408}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousWire: {fileID: 2013143408}
-  previousWire2: {fileID: 0}
-  matchingEnd: {fileID: 0}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 2013143408}
+  matchingEnd: {fileID: 648705709}
+  wiresConnectedTo: 00000001
 --- !u!114 &569304226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2294,7 @@ GameObject:
   - component: {fileID: 585319301}
   - component: {fileID: 585319302}
   m_Layer: 5
-  m_Name: Wire Path (7)
+  m_Name: Wire 3-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2325,13 +2368,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 1603547937}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 507322734}
+  westWire: {fileID: 1155794428}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1603547937}
-  previousWire2: {fileID: 1155794428}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 1155794428}
+  - {fileID: 1603547937}
+  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010001
 --- !u!114 &585319303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2656,13 +2710,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 1155794428}
+  eastWire: {fileID: 1603547937}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousWire: {fileID: 1603547937}
-  previousWire2: {fileID: 1155794428}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 1155794428}
+  - {fileID: 1603547937}
   matchingEnd: {fileID: 569304226}
+  wiresConnectedTo: 00010100
 --- !u!114 &648705709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3033,7 +3097,7 @@ GameObject:
   - component: {fileID: 825480757}
   - component: {fileID: 825480756}
   m_Layer: 5
-  m_Name: Wire Path (3)
+  m_Name: Wire 1-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3070,13 +3134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 1328913563}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 275050976}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 275050976}
-  previousWire2: {fileID: 1328913563}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 1328913563}
+  - {fileID: 275050976}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000101
 --- !u!114 &825480757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3184,7 +3258,7 @@ GameObject:
   - component: {fileID: 868851046}
   - component: {fileID: 868851047}
   m_Layer: 5
-  m_Name: Wire Path (5)
+  m_Name: Wire 2-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3258,13 +3332,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 1546455540}
+  southWire: {fileID: 507322734}
+  eastWire: {fileID: 89189949}
+  westWire: {fileID: 1603547937}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1546455540}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 1546455540}
+  - {fileID: 1603547937}
+  - {fileID: 89189949}
+  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010101
 --- !u!114 &868851048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3984,7 +4070,7 @@ GameObject:
   - component: {fileID: 1155794428}
   - component: {fileID: 1155794429}
   m_Layer: 5
-  m_Name: Wire Path (8)
+  m_Name: Wire 3-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4058,13 +4144,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 648705709}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 585319301}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 648705709}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010000
 --- !u!114 &1155794430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4247,6 +4341,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentDirection
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+        type: 3}
+      propertyPath: isPipe
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7de13943496a847a113cffbd9b2f49, type: 3}
@@ -4768,13 +4867,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 825480757}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 89189949}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 1
   isWireEnd: 1
-  previousWire: {fileID: 825480757}
-  previousWire2: {fileID: 89189949}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 825480757}
+  - {fileID: 89189949}
   matchingEnd: {fileID: 883629745}
+  wiresConnectedTo: 01000001
 --- !u!1 &1366471887
 GameObject:
   m_ObjectHideFlags: 0
@@ -5925,7 +6034,7 @@ GameObject:
   - component: {fileID: 1546455540}
   - component: {fileID: 1546455539}
   m_Layer: 5
-  m_Name: Wire Path (1)
+  m_Name: Wire 1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5962,13 +6071,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 868851046}
+  eastWire: {fileID: 275050976}
+  westWire: {fileID: 1405646687}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1405646687}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 275050976}
+  - {fileID: 1405646687}
+  - {fileID: 868851046}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00010101
 --- !u!114 &1546455540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6076,7 +6196,7 @@ GameObject:
   - component: {fileID: 1603547937}
   - component: {fileID: 1603547938}
   m_Layer: 5
-  m_Name: Wire Path (6)
+  m_Name: Wire 2 - 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6150,13 +6270,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 1405646687}
+  southWire: {fileID: 585319301}
+  eastWire: {fileID: 868851046}
+  westWire: {fileID: 648705709}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1405646687}
-  previousWire2: {fileID: 648705709}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 648705709}
+  - {fileID: 1405646687}
+  - {fileID: 868851046}
+  - {fileID: 585319301}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010101
 --- !u!114 &1603547939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6740,6 +6872,11 @@ PrefabInstance:
         type: 3}
       propertyPath: desiredDirection
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+        type: 3}
+      propertyPath: isPipe
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7de13943496a847a113cffbd9b2f49, type: 3}
@@ -7632,7 +7769,7 @@ GameObject:
   - component: {fileID: 2013143408}
   - component: {fileID: 2013143407}
   m_Layer: 5
-  m_Name: Wire Path (10)
+  m_Name: Wire 3-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7669,13 +7806,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 507322734}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 569304226}
+  westWire: {fileID: 507322734}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 89189949}
-  previousWire2: {fileID: 569304226}
+  isPipe: 0
+  connectingWires:
+  - {fileID: 569304226}
+  - {fileID: 89189949}
+  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 01010001
 --- !u!114 &2013143408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8635,6 +8783,11 @@ PrefabInstance:
       propertyPath: desiredDirection
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 137744627088585512, guid: 8f7de13943496a847a113cffbd9b2f49,
+        type: 3}
+      propertyPath: isPipe
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7de13943496a847a113cffbd9b2f49, type: 3}
 --- !u!1001 &4529461964715235556
@@ -8647,7 +8800,7 @@ PrefabInstance:
     - target: {fileID: 4529461966044327865, guid: 7e74db0633db0d846b920a4fff63efde,
         type: 3}
       propertyPath: m_Name
-      value: Wire Path
+      value: Wire 1-1
       objectReference: {fileID: 0}
     - target: {fileID: 4529461966044327866, guid: 7e74db0633db0d846b920a4fff63efde,
         type: 3}
@@ -8756,6 +8909,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
         type: 3}
+      propertyPath: connectingWires.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
       propertyPath: previousPipe
       value: 
       objectReference: {fileID: 883629745}
@@ -8773,7 +8931,42 @@ PrefabInstance:
         type: 3}
       propertyPath: previousWire2
       value: 
+      objectReference: {fileID: 1603547937}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: connectingWires.Array.data[0]
+      value: 
+      objectReference: {fileID: 883629745}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: connectingWires.Array.data[1]
+      value: 
+      objectReference: {fileID: 1603547937}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: connectingWires.Array.data[2]
+      value: 
+      objectReference: {fileID: 1546455540}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: wiresConnectedTo.Array.data[1]
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: wiresConnectedTo.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: eastWire
+      value: 
+      objectReference: {fileID: 1546455540}
+    - target: {fileID: 4529461966044327814, guid: 7e74db0633db0d846b920a4fff63efde,
+        type: 3}
+      propertyPath: southWire
+      value: 
+      objectReference: {fileID: 1603547937}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e74db0633db0d846b920a4fff63efde, type: 3}
 --- !u!1001 &5332247927406430396
@@ -8855,7 +9048,7 @@ PrefabInstance:
     - target: {fileID: 6342304271721965753, guid: 9f97494cfd7c01f449a33f8c12872e16,
         type: 3}
       propertyPath: m_Name
-      value: Wire Start
+      value: Blue Wire Start
       objectReference: {fileID: 0}
     - target: {fileID: 6342304271721965734, guid: 9f97494cfd7c01f449a33f8c12872e16,
         type: 3}
@@ -8964,7 +9157,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
         type: 3}
+      propertyPath: connectingWires.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
       propertyPath: previousWire
+      value: 
+      objectReference: {fileID: 1405646687}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
+      propertyPath: previousWire2
+      value: 
+      objectReference: {fileID: 648705709}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
+      propertyPath: connectingWires.Array.data[0]
+      value: 
+      objectReference: {fileID: 1405646687}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
+      propertyPath: matchingEnd
+      value: 
+      objectReference: {fileID: 1328913563}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
+      propertyPath: wiresConnectedTo.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342304271721965730, guid: 9f97494cfd7c01f449a33f8c12872e16,
+        type: 3}
+      propertyPath: eastWire
       value: 
       objectReference: {fileID: 1405646687}
     m_RemovedComponents: []
