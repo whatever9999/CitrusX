@@ -61,7 +61,7 @@ public class SetUpRitual_CW : MonoBehaviour
             //if these final tasks are done
             if(journal.AreTasksComplete())
             {//tell the game the puzzle is complete
-                GameTesting_CW.instance.isPuzzle1Done = true;
+                GameTesting_CW.instance.arePuzzlesDone[0] = true;
             }
             
         }

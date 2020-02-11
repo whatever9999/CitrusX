@@ -9,11 +9,8 @@ using UnityEngine;
 public class GameTesting_CW : MonoBehaviour
 {
     public static GameTesting_CW instance;
-    internal bool isPuzzle1Done = false;
-    private bool setUpPuzzle1 = false;
-    private bool setUpPuzzle2 = false;
-    private bool isPuzzle2Done = false;
-    private bool isPuzzle3Done = false;
+    private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
+    internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false};
 
     private void Awake()
     {
@@ -22,16 +19,25 @@ public class GameTesting_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isPuzzle1Done && !setUpPuzzle1)
+        if(!arePuzzlesDone[0] && !setUpPuzzle[0])
         {
-            setUpPuzzle1 = true;
+            setUpPuzzle[0] = true;
             InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle();
             
         }
-        if(isPuzzle1Done && !setUpPuzzle2)
+        if(arePuzzlesDone[0] && !setUpPuzzle[1])
         {
-            setUpPuzzle2 = true;
+            setUpPuzzle[1] = true;
             InitiatePuzzles_CW.instance.InitiateFuseboxPuzzle();
+        }
+        if(arePuzzlesDone[1] && !setUpPuzzle[2])
+        {
+
+        }
+        if(arePuzzlesDone[6] && !setUpPuzzle[7])
+        {
+            setUpPuzzle[7] = true;
+            InitiatePuzzles_CW.instance.InitiateHiddenMechanismPuzzle();
         }
     }
 }

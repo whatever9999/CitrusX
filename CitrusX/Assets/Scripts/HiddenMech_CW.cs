@@ -8,25 +8,20 @@ using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
 {
-    Journal_DR journal;
     Door_DR door;
+    private bool isActive = false;
+    public void SetActive(bool value) { isActive = value; }
 
     private void Awake()
     {
-        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
-        door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>();
-       
-    }
-    private void Start()
-    {
-        //journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
-        //journal.ChangeTasks(new string[] {"book" });
+        door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>(); 
     }
     private void HiddenMechPuzzle()
     {
-        if(journal.AreTasksComplete())
+        if(Journal_DR.instance.AreTasksComplete())
         {
             door.Open();
+            GameTesting_CW.instance.arePuzzlesDone[7] = true;
         }
     }
 }

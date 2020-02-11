@@ -17,8 +17,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
 {
     public static InitiatePuzzles_CW instance;
     private SetUpRitual_CW ritualSetUp;
+    private HiddenMech_CW hiddenMechSetUp;
     internal bool puzzle1Done = false;
-
     private Journal_DR journal;
 
     private void Awake()
@@ -26,6 +26,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         instance = this;
         journal = GetComponent<Journal_DR>();
         ritualSetUp = GetComponent<SetUpRitual_CW>();
+        hiddenMechSetUp = GetComponent<HiddenMech_CW>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
