@@ -8420,8 +8420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5aa464ce6e41649ad6c08100c8d694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRitualTable: 0
-  isGardenTable: 1
+  currentTables: 1
 --- !u!114 &2119768707
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,8 @@
 ﻿/*Chase Wilding 11/2/2020
  * This puzzle sets up the ritual scene and allows for progression into the second puzzle
+ * 
+ * Chase Wilding (Changes) 11/2/2020
+ * Changed to else if statements based off Dominique's feedback
  */
 
 using System.Collections;
@@ -9,13 +12,15 @@ using UnityEngine;
 public class SetUpRitual_CW : MonoBehaviour
 {
     #region BOOLS
-    internal bool SetActive = false;
+    private bool isActive = false;
+
     internal bool jewelleryCollectionInitiated = false;
     internal bool ritualSetUpCollected = false;
     internal bool ritualSetUpPlaced = false;
     internal bool jewelleryCollected = false;
     internal bool jewelleryPlaced= false;
     #endregion
+    internal void SetActive(bool value) { isActive = value; }
     void Update()
     {
         //if nothing has been collected
@@ -32,7 +37,7 @@ public class SetUpRitual_CW : MonoBehaviour
             }
             
         }
-        if(ritualSetUpCollected && !ritualSetUpPlaced)
+        else if(ritualSetUpCollected && !ritualSetUpPlaced)
         {
             if (Journal_DR.instance.AreTasksComplete())
             {
@@ -41,7 +46,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 ritualSetUpPlaced = true;
             }
         }
-        if (ritualSetUpPlaced && !jewelleryCollected)
+        else if (ritualSetUpPlaced && !jewelleryCollected)
         {
             if (Journal_DR.instance.AreTasksComplete())
             {
@@ -50,16 +55,13 @@ public class SetUpRitual_CW : MonoBehaviour
                 jewelleryCollected = true;
             }
         }
-        if(jewelleryCollected && !jewelleryPlaced)
+        else if(jewelleryCollected && !jewelleryPlaced)
         {
             //if these final tasks are done
             if(Journal_DR.instance.AreTasksComplete())
             {//tell the game the puzzle is complete
                 GameTesting_CW.instance.arePuzzlesDone[0] = true;
             }
-            
         }
-
-
     }
 }

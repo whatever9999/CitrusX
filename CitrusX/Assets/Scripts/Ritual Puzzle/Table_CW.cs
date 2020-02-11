@@ -1,6 +1,9 @@
 ﻿/*Chase Wilding 11/2/2020
  * This script sees what type of table this is so that it can only take certain items and then lets the ritual script know
  * if they have items on, this works with the interaction script
+ * 
+ * Chase Wilding 11/2/2020
+ * Changed bools into enums based on Dominique's feedback
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -8,13 +11,17 @@ using UnityEngine;
 
 public class Table_CW : MonoBehaviour
 {
-    public bool isRitualTable;
-    public bool isGardenTable;
+    public enum TABLES
+    {
+        RITUAL_TABLE,
+        GARDEN_TABLE
+    };
+    public TABLES currentTables;
     internal bool hasBeenPlaced;
     private SetUpRitual_CW ritualSetUp;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ritualSetUp = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
     }
@@ -22,12 +29,12 @@ public class Table_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isRitualTable && hasBeenPlaced)
+        if( currentTables == TABLES.RITUAL_TABLE && hasBeenPlaced)
         {
             ritualSetUp.ritualSetUpPlaced = true;
             hasBeenPlaced = false;
         }
-        if(isGardenTable && hasBeenPlaced)
+        else if(currentTables == TABLES.GARDEN_TABLE && hasBeenPlaced)
         {
             ritualSetUp.jewelleryPlaced = true;
             hasBeenPlaced = false;

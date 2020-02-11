@@ -29,7 +29,6 @@ public class Fusebox_CW : MonoBehaviour
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
-        //journal.ChangeTasks(new string[] { "fix fusebox" });
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
