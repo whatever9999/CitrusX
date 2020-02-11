@@ -9,31 +9,34 @@
  * Chase (Changes) 10/02/2020
  * Added the hidden mech puzzle
  * Chase (Changes) 11/02/2020
- * Added the ritual puzzle set up
+ * Added the ritual puzzle and colour matching set up
  */
 using UnityEngine;
 
 public class InitiatePuzzles_CW : MonoBehaviour
 {
     public static InitiatePuzzles_CW instance;
+    #region PUZZLE_REFERENCES
     private SetUpRitual_CW ritualSetUp;
     private HiddenMech_CW hiddenMechSetUp;
-    internal bool puzzle1Done = false;
+    private ColourMatchingPuzzle_CW colourMatch;
     private Journal_DR journal;
+    #endregion
 
     private void Awake()
     {
         instance = this;
-        journal = GetComponent<Journal_DR>();
+        journal = Journal_DR.instance;
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMechSetUp = GetComponent<HiddenMech_CW>();
+        colourMatch = GetComponent<ColourMatchingPuzzle_CW>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
         journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
         journal.ChangeTasks(new string[] { "Candles", "Salt", "Bowl", "Water jug", "Coins" });
         //this is here to stop the strings playing constantly as called from Game's update
-        ritualSetUp.SetActive = true;
+        ritualSetUp.SetActive(true);
     }
     public void InitiateFuseboxPuzzle()
     {
@@ -43,6 +46,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
         journal.ChangeTasks(new string[] { "key part 1", "key part 2" });
+        colourMatch.SetActive(true);
     }
     public void InitiateHiddenMechanismPuzzle()
     {

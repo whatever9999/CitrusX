@@ -38,6 +38,7 @@ public class Pipes_CW : MonoBehaviour
     public Button matchingEnd;
     private bool isInPosition = false;
     private bool isWireConnected = false;
+    private const int degreesToMove = 90;
     Color defaultBoxColour;
     private Fusebox_CW theFusebox;
     #endregion
@@ -56,8 +57,7 @@ public class Pipes_CW : MonoBehaviour
             if(!isWireEnd)
             {
                 isWireConnected = false;
-            }
-           
+            }  
         }
     }
     public void Rotate()
@@ -78,16 +78,25 @@ public class Pipes_CW : MonoBehaviour
             {
                 case DIRECTIONS.HORIZONTAL:
                     { 
+
+                        gameObject.transform.Rotate(0, 0, degreesToMove);
+
                         currentDirection = DIRECTIONS.VERTICAL; 
                     }
                     break;
                 case DIRECTIONS.VERTICAL:
                     {
+
+                        gameObject.transform.Rotate(0, 0, degreesToMove);
+
                         currentDirection = DIRECTIONS.HORIZONTAL;
                     }
                     break;
                 case DIRECTIONS.RIGHT_DOWN_BEND:
                     {
+
+                        gameObject.transform.Rotate(0, 0, degreesToMove);
+
                         currentDirection = DIRECTIONS.LEFT_DOWN_BEND;
                     }
                     break;

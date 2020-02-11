@@ -104,7 +104,7 @@ public class Interact_HR : MonoBehaviour
                 if (!putDownScript.GetBeenUsed())
                 {
                     //if its the ritual table...
-                    if (hit.transform.gameObject.GetComponent<Table_CW>().isRitualTable)
+                    if (hit.transform.gameObject.GetComponent<Table_CW>().currentTables == Table_CW.TABLES.RITUAL_TABLE)
                     {
                         //check to see if its been set up
                         if (GetComponent<SetUpRitual_CW>().ritualSetUpCollected)
@@ -121,7 +121,7 @@ public class Interact_HR : MonoBehaviour
                             }
                         }
                     }
-                    else if(hit.transform.gameObject.GetComponent<Table_CW>().isGardenTable)
+                    else if(hit.transform.gameObject.GetComponent<Table_CW>().currentTables == Table_CW.TABLES.GARDEN_TABLE)
                     {
                         //check to see if its been set up
                         if (GetComponent<SetUpRitual_CW>().jewelleryCollected)

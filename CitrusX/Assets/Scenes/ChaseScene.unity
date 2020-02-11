@@ -2848,62 +2848,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &741779961 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1830412919665182244, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1846248356}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &741779962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741779961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0e949864fc9314e8183e826af9c146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &741779968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741779961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50dc0a8045d62a545870505ba8966521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayRange: 5
-  InteractKey: 101
---- !u!114 &741779971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741779961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18ec4965161df6442be8fd6d957b8b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &741779972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741779961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4508a44c6b8d4d4ab07db81243c1ae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &768874072
 GameObject:
   m_ObjectHideFlags: 0
@@ -8420,8 +8364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5aa464ce6e41649ad6c08100c8d694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRitualTable: 0
-  isGardenTable: 1
+  currentTables: 1
 --- !u!114 &2119768707
 MonoBehaviour:
   m_ObjectHideFlags: 0
