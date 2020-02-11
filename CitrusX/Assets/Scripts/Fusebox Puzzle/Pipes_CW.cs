@@ -64,6 +64,7 @@ public class Pipes_CW : MonoBehaviour
         if(desiredDirection == currentDirection)
         {
             isInPosition = true;
+            GetComponent<Button>().enabled = false;
             theFusebox.pipeCompletedCount++;
         }
 
