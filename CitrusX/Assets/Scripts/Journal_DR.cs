@@ -25,6 +25,9 @@
  * Hugo (Changes) 10/02/2020'
  * 
  * Added controller functionality
+ * 
+ * Chase (Changes) 11/2/2020
+ * Moved original journal tasks to initiate puzzles script
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,8 +66,6 @@ public class Journal_DR : MonoBehaviour
 
         journal.SetActive(false);
 
-        ChangeTasks(new string[] { "Candles", "Book", "Bowl", "Water jug", "Coins" }); //Test for prototype
-        AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
     }
 
     /*
