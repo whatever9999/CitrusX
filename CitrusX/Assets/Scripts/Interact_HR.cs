@@ -101,7 +101,7 @@ public class Interact_HR : MonoBehaviour
             {
                 //Check if the table already has the items or not yet
                 PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
-                if (!putDownScript.getBeenUsed())
+                if (!putDownScript.GetBeenUsed())
                 {
                     //if its the ritual table...
                     if (hit.transform.gameObject.GetComponent<Table_CW>().isRitualTable)
@@ -113,7 +113,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                putDownScript.setItemsDown();
+                                putDownScript.PutItemsDown();
                                 //let the table and journal know the items are put down
                                 hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place on table");
@@ -130,7 +130,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                putDownScript.setItemsDown();
+                                putDownScript.PutItemsDown();
                                 //let the table and journal know the items are put down
                                 hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place in garden");
@@ -144,7 +144,7 @@ public class Interact_HR : MonoBehaviour
                         //If he presses the key then pick up the object
                         if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                         {
-                            putDownScript.setItemsDown();
+                            putDownScript.PutItemsDown();
                             transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
                             notificationText.text = "";
                         }

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ChaseScene.unity
+- path: Assets/Scenes/Hugo Test.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
