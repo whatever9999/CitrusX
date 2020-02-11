@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1830412919662060868}
   - component: {fileID: 1830412919659126724}
   - component: {fileID: 6078699465674722076}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FPSController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,12 +317,16 @@ GameObject:
   - component: {fileID: 1830412919659550756}
   - component: {fileID: 1830412919654979170}
   - component: {fileID: 4588720262637024570}
+<<<<<<< Updated upstream
   - component: {fileID: 4557137202289843951}
   - component: {fileID: 1954880308480084819}
   - component: {fileID: 8547125021168813990}
   - component: {fileID: 785785992159210900}
   - component: {fileID: 514994394705049139}
   m_Layer: 0
+=======
+  m_Layer: 2
+>>>>>>> Stashed changes
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -488,7 +492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7289207247631433469}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HoldGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
