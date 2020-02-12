@@ -30,20 +30,8 @@ public class Table_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (hasBeenPlaced)
         {
-            if (isRitualTable)
-            {
-                ritualSetUp.ritualSetUpPlaced = true;
-                hasBeenPlaced = false;
-            }
-            else if (isGardenTable)
-            {
-                ritualSetUp.jewelleryPlaced = true;
-                hasBeenPlaced = false;
-            }
-
             if (currentTables == TABLES.RITUAL_TABLE && hasBeenPlaced)
             {
                 ritualSetUp.ritualSetUpPlaced = true;
@@ -53,7 +41,6 @@ public class Table_CW : MonoBehaviour
             {
                 ritualSetUp.jewelleryPlaced = true;
                 hasBeenPlaced = false;
-
             }
         }
     }

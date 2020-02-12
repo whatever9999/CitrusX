@@ -20,7 +20,7 @@ public class WeightScript_AG : MonoBehaviour
     [SerializeField] private WeightMass weightMass;
 
     // Determines if player can move weight
-    [SerializeField] private bool isMovable;
+    [SerializeField] private bool isMovable = true;
 
     // Mass for calculations
     private int massInGrammes;
@@ -32,7 +32,7 @@ public class WeightScript_AG : MonoBehaviour
     [SerializeField] bool playerHasFound;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scalesScript = Scales.GetComponent<ScalesPuzzleScript_AG>();
         switch (weightMass)
@@ -109,15 +109,16 @@ public class WeightScript_AG : MonoBehaviour
     /// </summary>
     public void MoveWeight()
     {
+
         // If weight is on the scales or hidden in the room
-        if ((isMovable) && (onScales || !playerHasFound))
+        if (onScales || !playerHasFound)
         {
             // Add it to the rack
             AddToRack();
         }
 
         // If on the rack
-        if (isMovable && playerHasFound && !onScales)
+        if (playerHasFound && !onScales)
         {
             // Add it to the scales
             AddToScales();
@@ -128,16 +129,21 @@ public class WeightScript_AG : MonoBehaviour
 
         //Update Scales
         scalesScript.ReviewWeight();
+
     }
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            MoveWeight();
+            if (isMovable)
+            {
+                MoveWeight();
+            }
         }
     }
 }
 
-// V0.1.0 - Last Update: 2020/02/09 @ 19:25 by AG
+// V0.1.0 - Last Update: 2020/02/09 @ 19:25 by AG Summary: Created script amd implemented
+// V0.1.01 - Last Update: 2020/02/12 @ 01:14 by AG Summary: Bug Fix (Changed Start() to Awake()), Moved "if(isMovable)" to a seperate check.
 

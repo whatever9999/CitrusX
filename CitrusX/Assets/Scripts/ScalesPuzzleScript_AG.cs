@@ -19,7 +19,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private Door_DR doorScript;
 
     // Puzzle State
-    private bool isComplete = false;
+    private bool isComplete;
 
     // Weights to compare
     private int leftMass;
@@ -83,4 +83,4 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     }
 }
 
-// V0.1.0 - Last Update: 2020/02/09 @ 19:25 by AG
+// V0.1.0 - Last Update: 2020/02/09 @ 19:25 by AG Summary: Created Script and Implemented.
