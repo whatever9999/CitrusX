@@ -194,6 +194,9 @@ public class Pipes_CW : MonoBehaviour
                 wireColour = Color.yellow;
                 matchingEnd.image.color = Color.yellow;
                 connectingWiresScripts[0].isWireConnected = true;
+                connectingWiresScripts[1].isWireConnected = true;
+                connectingWiresScripts[2].isWireConnected = true;
+                connectingWiresScripts[3].isWireConnected = true;
                 theFusebox.wireCompletedCount += 2;
             }    
         }
@@ -210,6 +213,7 @@ public class Pipes_CW : MonoBehaviour
                     if (theFusebox.drawColour == Color.red)
                     {
                         wireEndColour = COLOURS.RED;
+                        
                     }
                     else if (theFusebox.drawColour == Color.green)
                     {
@@ -220,10 +224,12 @@ public class Pipes_CW : MonoBehaviour
                         wireEndColour = COLOURS.BLUE;
                     }
                     //check for colour
-                    if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
+                    if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) 
+                        || (wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
                     {
                         //draw the correct colour tile and signify as connected
                         wireColour = theFusebox.drawColour;
+                        thisPipe.image.color = theFusebox.drawColour;
                         isWireConnected = true;
                     }
                    
