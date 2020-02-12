@@ -42,6 +42,17 @@ public class Table_CW : MonoBehaviour
                 ritualSetUp.jewelleryPlaced = true;
                 hasBeenPlaced = false;
             }
+
+        if( currentTables == TABLES.RITUAL_TABLE && hasBeenPlaced)
+        {
+            ritualSetUp.ritualSetUpPlaced = true;
+            hasBeenPlaced = false;
+        }
+        else if(currentTables == TABLES.GARDEN_TABLE && hasBeenPlaced)
+        {
+            ritualSetUp.jewelleryPlaced = true;
+            hasBeenPlaced = false;
+
         }
     }
 }
