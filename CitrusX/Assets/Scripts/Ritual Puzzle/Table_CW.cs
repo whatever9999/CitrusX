@@ -7,6 +7,9 @@
  * Changed start to awake for collection of SetUpRitual
  * Chase Wilding 11/2/2020
  * Changed bools into enums based on Dominique's feedback
+ * 
+ * Dominique (Changes) 12/02/2020
+ * Added a curly bracket and swapped some old bools around with enums to test after merge conflict (on fps controller)
  */
 using UnityEngine;
 
@@ -16,8 +19,8 @@ public class Table_CW : MonoBehaviour
     {
         RITUAL_TABLE,
         GARDEN_TABLE
-    };
-    public TABLES currentTables;
+    }
+    public TABLES currentTable;
     internal bool hasBeenPlaced;
     private SetUpRitual_CW ritualSetUp;
 
@@ -31,28 +34,30 @@ public class Table_CW : MonoBehaviour
     void Update()
     {
 
-        if(hasBeenPlaced)
+        if (hasBeenPlaced)
         {
-            if (isRitualTable)
+            if (currentTable == TABLES.RITUAL_TABLE)
             {
                 ritualSetUp.ritualSetUpPlaced = true;
                 hasBeenPlaced = false;
-            } else if (isGardenTable)
+            }
+            else if (currentTable == TABLES.GARDEN_TABLE)
             {
                 ritualSetUp.jewelleryPlaced = true;
                 hasBeenPlaced = false;
             }
 
-        if( currentTables == TABLES.RITUAL_TABLE && hasBeenPlaced)
-        {
-            ritualSetUp.ritualSetUpPlaced = true;
-            hasBeenPlaced = false;
-        }
-        else if(currentTables == TABLES.GARDEN_TABLE && hasBeenPlaced)
-        {
-            ritualSetUp.jewelleryPlaced = true;
-            hasBeenPlaced = false;
+            if (currentTable == TABLES.RITUAL_TABLE && hasBeenPlaced)
+            {
+                ritualSetUp.ritualSetUpPlaced = true;
+                hasBeenPlaced = false;
+            }
+            else if (currentTable == TABLES.GARDEN_TABLE && hasBeenPlaced)
+            {
+                ritualSetUp.jewelleryPlaced = true;
+                hasBeenPlaced = false;
 
+            }
         }
     }
 }
