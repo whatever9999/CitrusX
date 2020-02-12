@@ -2,11 +2,15 @@
  * This script sees what type of table this is so that it can only take certain items and then lets the ritual script know
  * if they have items on, this works with the interaction script
  * 
+ * Dominique (Changes) 11/02/2020
+ * Removed unused imports
+ * Changed start to awake for collection of SetUpRitual
  * Chase Wilding 11/2/2020
  * Changed bools into enums based on Dominique's feedback
+ * 
+ * Dominique (Changes) 12/02/2020
+ * Added a curly bracket and swapped some old bools around with enums to test after merge conflict (on fps controller)
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Table_CW : MonoBehaviour
@@ -15,8 +19,8 @@ public class Table_CW : MonoBehaviour
     {
         RITUAL_TABLE,
         GARDEN_TABLE
-    };
-    public TABLES currentTables;
+    }
+    public TABLES currentTable;
     internal bool hasBeenPlaced;
     private SetUpRitual_CW ritualSetUp;
 
@@ -29,15 +33,31 @@ public class Table_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if( currentTables == TABLES.RITUAL_TABLE && hasBeenPlaced)
+
+        if (hasBeenPlaced)
         {
-            ritualSetUp.ritualSetUpPlaced = true;
-            hasBeenPlaced = false;
-        }
-        else if(currentTables == TABLES.GARDEN_TABLE && hasBeenPlaced)
-        {
-            ritualSetUp.jewelleryPlaced = true;
-            hasBeenPlaced = false;
+            if (currentTable == TABLES.RITUAL_TABLE)
+            {
+                ritualSetUp.ritualSetUpPlaced = true;
+                hasBeenPlaced = false;
+            }
+            else if (currentTable == TABLES.GARDEN_TABLE)
+            {
+                ritualSetUp.jewelleryPlaced = true;
+                hasBeenPlaced = false;
+            }
+
+            if (currentTable == TABLES.RITUAL_TABLE && hasBeenPlaced)
+            {
+                ritualSetUp.ritualSetUpPlaced = true;
+                hasBeenPlaced = false;
+            }
+            else if (currentTable == TABLES.GARDEN_TABLE && hasBeenPlaced)
+            {
+                ritualSetUp.jewelleryPlaced = true;
+                hasBeenPlaced = false;
+
+            }
         }
     }
 }

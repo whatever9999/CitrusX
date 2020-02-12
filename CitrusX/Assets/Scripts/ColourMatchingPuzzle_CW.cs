@@ -3,9 +3,11 @@
  * This scripts main function 'Start colour Matching puzzle' can be called during game play to add it to the journal and start the process
  * when this puzzle begins
 
+ * 
+ * Dominique (Changes) 11/02/2020
+ * Removed unused package imports
+
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColourMatchingPuzzle_CW : MonoBehaviour

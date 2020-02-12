@@ -2,9 +2,11 @@
  * This script opens/closes the fusebox and also registers whether they have been completed
  * It also keeps track of which colour is set for 'drawing' the wires
  * I have used some of Dominique's code from the keypad and manipulated it to open/close my fusebox for consistency
+ * 
+ * Dominique (Changes) 11/02/2020
+ * Removed unused imported packages
+ * Moved variable initialisations to Awake instead of Start
 */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
@@ -26,8 +28,13 @@ public class Fusebox_CW : MonoBehaviour
     private Journal_DR journal;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
+
     internal void SetActive(bool value) { isActive = value; }
-    private void Awake()
+
+
+
+    void Awake()
+
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = Journal_DR.instance;
