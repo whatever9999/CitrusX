@@ -821,6 +821,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7593756591528016012, guid: f05ee06d51fd4f94399acba4e336207b,
+        type: 3}
+      propertyPath: m_Name
+      value: ChessDoor
+      objectReference: {fileID: 0}
     - target: {fileID: 7593756591528016001, guid: f05ee06d51fd4f94399acba4e336207b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -885,11 +890,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593756591528016012, guid: f05ee06d51fd4f94399acba4e336207b,
-        type: 3}
-      propertyPath: m_Name
-      value: ChessDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f05ee06d51fd4f94399acba4e336207b, type: 3}
@@ -3157,6 +3157,12 @@ PrefabInstance:
         the pawn hid behind his queen.</color> This could never end well and the country
         was doomed.
       objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173034, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3661639628750336703, guid: b11eee9e98757104287a4fe041ac6088,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b300a6fe9a23c364193fff0c4f1aa3bb, type: 3}
 --- !u!1 &1193623167
@@ -4746,16 +4752,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4588720262637024570, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
-        type: 3}
-      propertyPath: RayRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4588720262637024570, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
-        type: 3}
-      propertyPath: rayRange
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1830412919653905348, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
         type: 3}
       propertyPath: m_MouseLook.lockCursor
@@ -4765,6 +4761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588720262637024570, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+        type: 3}
+      propertyPath: RayRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588720262637024570, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+        type: 3}
+      propertyPath: rayRange
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef914bb9165fb324eb5e5dc8ed0a668d, type: 3}

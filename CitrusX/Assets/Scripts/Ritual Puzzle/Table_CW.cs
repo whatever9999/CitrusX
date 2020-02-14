@@ -18,7 +18,8 @@ public class Table_CW : MonoBehaviour
     public enum TABLES
     {
         RITUAL_TABLE,
-        GARDEN_TABLE
+        GARDEN_TABLE,
+        CHESS_BOARD
     }
     public TABLES currentTable;
     internal bool hasBeenPlaced;
@@ -27,7 +28,7 @@ public class Table_CW : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        ritualSetUp = GameObject.Find("FirstPersonController").GetComponent<SetUpRitual_CW>();
+        ritualSetUp = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
     }
 
     // Update is called once per frame
