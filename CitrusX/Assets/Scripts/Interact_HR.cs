@@ -103,8 +103,9 @@ public class Interact_HR : MonoBehaviour
                 PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
                 if (!putDownScript.GetBeenUsed())
                 {
+                    Table_CW table = hit.transform.gameObject.GetComponent<Table_CW>();
                     //if its the ritual table...
-                    if (hit.transform.gameObject.GetComponent<Table_CW>().currentTable == Table_CW.TABLES.RITUAL_TABLE)
+                    if (table.currentTable == Table_CW.TABLES.RITUAL_TABLE)
                     {
                         //check to see if its been set up
                         if (GetComponent<SetUpRitual_CW>().ritualSetUpCollected)
@@ -115,13 +116,13 @@ public class Interact_HR : MonoBehaviour
                             {
                                 putDownScript.PutItemsDown();
                                 //let the table and journal know the items are put down
-                                hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
+                                table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place on table");
                                 notificationText.text = "";
                             }
                         }
                     }
-                    else if(hit.transform.gameObject.GetComponent<Table_CW>().currentTable == Table_CW.TABLES.GARDEN_TABLE)
+                    else if(table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
                     {
                         //check to see if its been set up
                         if (GetComponent<SetUpRitual_CW>().jewelleryCollected)
@@ -132,24 +133,26 @@ public class Interact_HR : MonoBehaviour
                             {
                                 putDownScript.PutItemsDown();
                                 //let the table and journal know the items are put down
-                                hit.transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
+                                table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place in garden");
                                 notificationText.text = "";
                             }
                         }
-                    }
-                    else if (journal.AreTasksComplete())
+                    } else if(table.currentTable == Table_CW.TABLES.CHESS_BOARD) 
                     {
-                        notificationText.text = "Press E to put down your items";
-                        //If he presses the key then pick up the object
-                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                        if (Journal_DR.instance.AreTasksComplete())
                         {
-                            putDownScript.PutItemsDown();
-                            transform.gameObject.GetComponent<Table_CW>().hasBeenPlaced = true;
-                            notificationText.text = "";
+                            notificationText.text = "Press E to put down the pawn";
+                            //If he presses the key then pick up the object
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            {
+                                putDownScript.PutItemsDown();
+                                //let the table and journal know the items are put down
+                                table.hasBeenPlaced = true;
+                                notificationText.text = "";
+                            }
                         }
-                    }
-                    else
+                    } else
                     {
                         notificationText.text = "You don't have all the items";
                     }

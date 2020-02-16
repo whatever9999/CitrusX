@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/ChaseScene.unity
+=======
+- path: Assets/Scenes/Game.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
   isSubScene: 0
