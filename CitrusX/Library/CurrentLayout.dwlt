@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 494}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 1
-  controlID: 113
+  controlID: 116
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 494}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 114
+  controlID: 117
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 115
+  controlID: 118
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 222}
   m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 116
+  controlID: 119
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -946,23 +946,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: da370000
-      m_LastClickedID: 0
-      m_ExpandedIDs: 24b3feff88c9feff98c9fefff4c9feff14ecfeff24ecfeffcaedfeff70f1feffca16ffffd616ffffd816ffff2618ffffcc19ffffee1bffff1628ffff8629ffff9051ffff7057ffff0266ffff4869ffff8e71ffff727bffff8284ffffc286ffff888cffff868fffff4294ffff7a95ffff14a0ffffa8a2ffff2ea5ffffe6a5ffff52a7ffff3cb4ffff8cb5ffffe8cfffff2cd1ffff44f1ffffc2f1ffffa8f2ffffc8f7ffffda560000e25700000a5d0000428d0000b2930000749f00008ea00000eca4000096a60000a0a700004ea90000e6a90000bad3000092d50000c0d50000fcd5000050d60000
+      m_SelectedIDs: f2eeffff
+      m_LastClickedID: -4366
+      m_ExpandedIDs: 88f1ffffd0f1ffff76f7ffffc0faffff5e390000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: ScalesDoor
-        m_OriginalName: ScalesDoor
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -70938
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -1072,9 +1072,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.39, y: 1.14, z: 4.62}
+    m_Target: {x: 1.4819999, y: 1.168, z: 1.9219999}
     speed: 2
-    m_Value: {x: 2.39, y: 1.14, z: 4.62}
+    m_Value: {x: 1.4819992, y: 1.1679999, z: 1.9219999}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1107,9 +1107,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.63212645, y: 0.002543886, z: -0.0020779888, w: 0.77485836}
   m_Size:
-    m_Target: 2.6898563
+    m_Target: 0.7545955
     speed: 2
-    m_Value: 2.6898563
+    m_Value: 0.754596
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1127,7 +1127,7 @@ MonoBehaviour:
     m_DynamicClip: 1
     m_OcclusionCulling: 0
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: 0.30808824, y: 0.5826193, z: -0.25350097, w: 0.70807904}
+  m_LastSceneViewRotation: {x: 0.6321311, y: 0.0025439048, z: -0.0020780042, w: 0.7748641}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -1172,20 +1172,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Throwing Puzzle
   m_ViewMode: 1
   m_StartGridSize: 50
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Throwing Puzzle
   m_LastFoldersGridSize: 50
   m_LastProjectPath: C:\Users\Domin\OneDrive\Documents\GitHub\CitrusX\CitrusX
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7e300000
-    m_LastClickedID: 12414
-    m_ExpandedIDs: 00000000d82f0000f42f000024310000363200007a320000da330000d037000000ca9a3b
+    m_SelectedIDs: 882b0000
+    m_LastClickedID: 11144
+    m_ExpandedIDs: 00000000602a00007c2a0000062b0000ae2b0000062d0000902d00006e2e00008035000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 14240000
     m_LastClickedID: 9236
-    m_ExpandedIDs: 00000000d82f0000f42f00007e3000002431000036320000fe320000d0370000
+    m_ExpandedIDs: 00000000602a00007c2a0000ae2b0000062d00006e2e000080350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
