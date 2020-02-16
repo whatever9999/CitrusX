@@ -1,5 +1,7 @@
 ﻿/*Chase Wilding 11/2/2020
  * This puzzle calls the scripts and starts the next puzzle when one is completed
+ * Chase (Changes) 16/2/2020
+ * Set up the bool system for all puzzles so the game can be played in order
  */
 
 using System.Collections;
@@ -22,8 +24,7 @@ public class GameTesting_CW : MonoBehaviour
         if(!arePuzzlesDone[0] && !setUpPuzzle[0])
         {
             setUpPuzzle[0] = true;
-            InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle();
-            
+            InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle(); 
         }
         else if(arePuzzlesDone[0] && !setUpPuzzle[1])
         {
@@ -38,20 +39,22 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[2] && !setUpPuzzle[3])
         {
             setUpPuzzle[3] = true;
+            InitiatePuzzles_CW.instance.InitiateKeycodePuzzle();
         }
         else if (arePuzzlesDone[3] && !setUpPuzzle[4])
         {
             setUpPuzzle[4] = true;
+            InitiatePuzzles_CW.instance.InitiateBalancePuzzle();
         }
         else if (arePuzzlesDone[4] && !setUpPuzzle[5])
         {
             setUpPuzzle[5] = true;
-           
+            InitiatePuzzles_CW.instance.InitiateChessBoardPuzzle();
         }
         else if (arePuzzlesDone[5] && !setUpPuzzle[6])
         {
             setUpPuzzle[6] = true;
-           
+            InitiatePuzzles_CW.instance.InitiateThrowingPuzzle();
         }
         else if(arePuzzlesDone[6] && !setUpPuzzle[7])
         {
@@ -61,10 +64,12 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[7] && !setUpPuzzle[8])
         {
             setUpPuzzle[8] = true;
+            InitiatePuzzles_CW.instance.InitiateCorrectOrderPuzzle();
         }
         else if (arePuzzlesDone[8] && !setUpPuzzle[9])
         {
             setUpPuzzle[9] = true;
+            InitiatePuzzles_CW.instance.InitiateCoinCountPuzzle();
         }
         else if (arePuzzlesDone[9])
         {

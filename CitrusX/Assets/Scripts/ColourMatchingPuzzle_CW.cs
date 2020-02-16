@@ -14,16 +14,20 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
 {
     private Journal_DR journal;
     private bool isActive = false;
-    internal void SetActive(bool value) { isActive = false; }
+    internal void SetActive(bool value) { isActive = value; }
     public void Awake()
     {
         journal = Journal_DR.instance;
     }
     private void Update()
     {
-        if(journal.AreTasksComplete())
+        if(isActive)
         {
-            GameTesting_CW.instance.arePuzzlesDone[2] = true;
+            if (journal.AreTasksComplete())
+            {
+                GameTesting_CW.instance.arePuzzlesDone[2] = true;
+            }
         }
+       
     }
 }

@@ -48,7 +48,6 @@ public class Pipes_CW : MonoBehaviour
     public Button matchingEnd;
     private Button thisPipe;
     public bool[] wiresConnectedTo =  { false, false, false, false};
-    private Pipes_CW[] connectingWiresScripts;
     private bool isInPosition = false;
     private bool isWireConnected = false;
     private const int degreesToMove = 90;
@@ -193,10 +192,10 @@ public class Pipes_CW : MonoBehaviour
                 //completion
                 wireColour = Color.yellow;
                 matchingEnd.image.color = Color.yellow;
-                connectingWiresScripts[0].isWireConnected = true;
-                connectingWiresScripts[1].isWireConnected = true;
-                connectingWiresScripts[2].isWireConnected = true;
-                connectingWiresScripts[3].isWireConnected = true;
+                northWireScript.isWireConnected = true;
+                southWireScript.isWireConnected = true;
+                eastWireScript.isWireConnected = true;
+                westWireScript.isWireConnected = true;
                 theFusebox.wireCompletedCount += 2;
             }    
         }

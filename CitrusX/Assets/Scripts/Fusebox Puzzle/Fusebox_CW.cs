@@ -15,7 +15,7 @@ public class Fusebox_CW : MonoBehaviour
 {
     #region VARIABLES
     private FirstPersonController fpsController;
-    private bool isFuseboxSolved;
+    private bool isFuseboxSolved = false;
     private bool isActive = false;
     private KeyCode closeFuseboxKey = KeyCode.Escape;
     internal KeyCode resetPipesKey = KeyCode.X;
@@ -31,10 +31,7 @@ public class Fusebox_CW : MonoBehaviour
 
     internal void SetActive(bool value) { isActive = value; }
 
-
-
     void Awake()
-
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = Journal_DR.instance;
