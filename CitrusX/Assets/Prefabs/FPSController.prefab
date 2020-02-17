@@ -417,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayRange: 5
   InteractKey: 101
+  outlineMaterial: {fileID: 2100000, guid: c401544e2626a514d97cb93b29b29230, type: 2}
 --- !u!114 &4557137202289843951
 MonoBehaviour:
   m_ObjectHideFlags: 0

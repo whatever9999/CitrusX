@@ -44,6 +44,7 @@
  * Chase (Changes) 11/02/2020
  * Added ritual and garden table interaction for the first puzzle as they progress the puzzles
   */
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,7 +54,12 @@ public class Interact_HR : MonoBehaviour
     public const int defaultFOV = 60;
     public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
+    public Material outlineMaterial;
 
+    private bool newTarget = true;
+    private Material originalMaterial;
+    private MeshRenderer targetRenderer;
+    private MeshRenderer currRenderer;
     private bool zoomedIn = false;
     private RaycastHit hit;
     private Text notificationText;
@@ -85,6 +91,22 @@ public class Interact_HR : MonoBehaviour
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
+            currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+
+            if (targetRenderer && currRenderer.material != targetRenderer.material)
+            {
+                
+                targetRenderer.material = originalMaterial;
+                originalMaterial = currRenderer.material;
+                targetRenderer = currRenderer;
+                currRenderer.material = outlineMaterial;
+                
+            }
+            else
+            {
+                targetRenderer = currRenderer;
+            }
+
             //Is in looking at an object?
             if (hit.transform.tag == "Object")
             {
