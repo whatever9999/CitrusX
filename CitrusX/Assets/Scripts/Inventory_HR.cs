@@ -1,10 +1,21 @@
-﻿using UnityEngine.UI;
+﻿
+/*
+ * Hugo
+ * 
+ * Opens and closes the Inventory on the UI using keycodes
+ * From another script you can use the Inventory class to add,remove items or check if an item is in the inventory
+ * 
+ */
+using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
-using System;
+using System; // Parse / Try Parse for future
+
+
 
 public class Inventory_HR : MonoBehaviour
 {
+    // First aproach with enums
     public enum Names 
     {
       WaterJug
@@ -13,6 +24,7 @@ public class Inventory_HR : MonoBehaviour
     public KeyCode inventoryOpenKey = KeyCode.I;
     public KeyCode[] inventoryCloseKeys = { KeyCode.I, KeyCode.Escape };
 
+    //Can be changed to string 
     public List<Names> itemNames = new List<Names>();
     public List<Sprite> itemImages = new List<Sprite>();
     
@@ -25,12 +37,14 @@ public class Inventory_HR : MonoBehaviour
     {
         inventory = GameObject.Find("InventoryBg");
         int i = 0;
+        //Get all slots from inventory
         foreach (GameObject inventoryPanels in GameObject.FindGameObjectsWithTag("InventoryPanel"))
         {
             inventoryItems[i] = inventoryPanels;
             i++;
         }
 
+        //get all items loaded into the dicitionary
         for (i = 0; i < itemImages.Count; i++)
         {
             items.Add(itemNames[i], itemImages[i]);
@@ -61,8 +75,10 @@ public class Inventory_HR : MonoBehaviour
     {
         for (int i = 0; i < maxItems; i++)
         {
+            //If slot is empty
             if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == "")
             {
+                //Add image and text
                 inventoryItems[i].transform.GetChild(0).GetComponent<Image>().sprite = items[itemName];
                 inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text = itemName.ToString();
                 break;
@@ -72,6 +88,7 @@ public class Inventory_HR : MonoBehaviour
 
     public void RemoveItem(int slot) 
     {
+        //Remove item from slot
         inventoryItems[slot].transform.GetChild(0).GetComponent<Image>().sprite = null; 
         inventoryItems[slot].transform.GetChild(1).GetComponent<Text>().text = "";
     }
@@ -82,6 +99,7 @@ public class Inventory_HR : MonoBehaviour
 
         for (int i = 0; i < maxItems; i++)
         {
+            //If item is present in the inventory return the slot number
             if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == itemName)
             {
                 itemSlot = i;
