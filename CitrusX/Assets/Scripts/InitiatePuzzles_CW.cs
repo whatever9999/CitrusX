@@ -24,7 +24,11 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private ColourMatchingPuzzle_CW colourMatch;
     private Fusebox_CW fusebox;
     private ChessBoard_DR chessboard;
+    private KeypadUI_DR keypad;
+    private BallButtonLogic_HR throwing;
     private Journal_DR journal;
+    private ScalesPuzzleScript_AG scales;
+    internal int ballCounter = 0;
     #endregion
 
     private void Awake()
@@ -36,6 +40,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
         colourMatch = GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GetComponent<Fusebox_CW>();
         chessboard = GetComponent<ChessBoard_DR>();
+        throwing = GetComponent<BallButtonLogic_HR>();
+        keypad = GetComponent<KeypadUI_DR>(); //might need to edit this
+        scales = GetComponent<ScalesPuzzleScript_AG>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
@@ -67,21 +74,26 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         journal.AddJournalLog("I think that book might explain what I'm supposed to do with this board. A piece seems missing though.");
         journal.ChangeTasks(new string[] { "Pawn" });
+        chessboard.SetActive(true);
     }
     public void InitiateKeycodePuzzle()
     {
         journal.AddJournalLog("This safe needs a 4 digit code. Maybe something nearby can give me some clues.");
-        journal.ChangeTasks(new string[] { "first digit", "second digit", "third digit", "fourth digit" });
+        journal.ChangeTasks(new string[] { "first digit", "second digit", "third digit", "fourth digit", "unlock safe" });
+        keypad.SetActive(true);
     }
     public void InitiateBalancePuzzle()
     {
         journal.AddJournalLog("What could I use to balance this out?");
-        journal.ChangeTasks(new string[] { "balance the scales" });
+        journal.ChangeTasks(new string[] { "balance scales" });
+        scales.SetActive(true);
+
     }
     public void InitiateThrowingPuzzle()
     {
         journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
         journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
+        throwing.SetActive(true);
     }
     public void InitiateCorrectOrderPuzzle()
     {
