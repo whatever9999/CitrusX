@@ -13,6 +13,7 @@ TagManager:
   - Table
   - ChessPiece
   - WaterBowl
+  - InventoryPanel
   layers:
   - Default
   - TransparentFX

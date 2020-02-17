@@ -43,6 +43,10 @@
  * 
  * Chase (Changes) 11/02/2020
  * Added ritual and garden table interaction for the first puzzle as they progress the puzzles
+ * 
+ * 
+ * Hugo (Changes) 16/02/2020
+ * Added a glow effect onto interactable objects
   */
 using System.Collections;
 using UnityEngine;
@@ -56,7 +60,6 @@ public class Interact_HR : MonoBehaviour
     public KeyCode InteractKey = KeyCode.E;
     public Material outlineMaterial;
 
-    private bool newTarget = true;
     private Material originalMaterial;
     private MeshRenderer targetRenderer;
     private MeshRenderer currRenderer;
@@ -71,9 +74,11 @@ public class Interact_HR : MonoBehaviour
     private Image paperBackground;
     private Camera playerCamera;
     private int numberCoinsCollected;
+    private Inventory_HR inventoryManager;
 
     private void Awake()
     {
+        inventoryManager = GetComponent<Inventory_HR>();
         paper = GameObject.Find("PaperUI");
         fuseboxUI = GameObject.Find("FuseboxUI");
         paperText = paper.GetComponentInChildren<Text>();
@@ -91,8 +96,11 @@ public class Interact_HR : MonoBehaviour
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
+            //Get the current Renderer for the object
             currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
 
+            //If the object is not the same as the previous object then revert to the original material
+            //and change the new object to the outline material
             if (targetRenderer && currRenderer.material != targetRenderer.material)
             {
                 
@@ -115,6 +123,7 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
                 {
+                    inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
