@@ -28,7 +28,11 @@ public class Table_CW : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+        ritualSetUp = GameObject.Find("FirstPersonCharacter").GetComponent<SetUpRitual_CW>();
+
         ritualSetUp = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
+
     }
 
     // Update is called once per frame

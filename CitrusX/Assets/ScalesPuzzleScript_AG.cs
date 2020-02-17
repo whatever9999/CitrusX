@@ -5,6 +5,9 @@
  * 
  * Summary: Script used for the balance puzzle. Will assess the total weight placed on each pan of the scales.
  *          Once the target weight has been reached, will allow access to the reward.
+ *          
+ *  Chase (changes) 17/2/2020
+ *  Added journal and setActive and linked to game script.
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +28,10 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private int leftMass;
     private int rightMass;
 
+    private Journal_DR journal;
+    private bool isActive = false;
+    
+    public void SetActive(bool value) { isActive = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +58,9 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         {
             // if equal - puzzle complete
             isComplete = true;
+            journal.TickOffTask("balance scales");
+            GameTesting_CW.instance.arePuzzlesDone[4] = true;
+            
             doorScript.Open();
         }
     }

@@ -13,6 +13,16 @@ using UnityEngine.UI;
 
 public class Pipes_CW : MonoBehaviour
 {
+    #region CONNECTING_WIRES
+    public Button northWire;
+    public Button southWire;
+    public Button eastWire;
+    public Button westWire;
+    public Pipes_CW northWireScript;
+    public Pipes_CW southWireScript;
+    public Pipes_CW eastWireScript;
+    private Pipes_CW westWireScript;
+    #endregion
     #region VARIABLES
     public enum DIRECTIONS
     {
@@ -33,12 +43,15 @@ public class Pipes_CW : MonoBehaviour
     public DIRECTIONS desiredDirection;
     public COLOURS wireEndColour;
     public bool isWireEnd;
-    public Button previousWire;
-    public Button previousWire2;
+    public bool isPipe;
+    public Button[] connectingWires;
     public Button matchingEnd;
+    private Button thisPipe;
+    public bool[] wiresConnectedTo =  { false, false, false, false};
     private bool isInPosition = false;
     private bool isWireConnected = false;
     private const int degreesToMove = 90;
+    private Color wireColour;
     Color defaultBoxColour;
     private Fusebox_CW theFusebox;
     #endregion
@@ -47,13 +60,36 @@ public class Pipes_CW : MonoBehaviour
     {
         theFusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         defaultBoxColour = GetComponent<Button>().image.color;
+        wireColour = GetComponent<Button>().image.color;
+        thisPipe = GetComponent<Button>();
+    }
+    public void Start()
+    {
+        if(wiresConnectedTo[0])
+        {
+            northWireScript = northWire.GetComponent<Pipes_CW>(); 
+        }
+        if(wiresConnectedTo[1])
+        {
+            eastWireScript = eastWire.GetComponent<Pipes_CW>();
+        }
+        if(wiresConnectedTo[2])
+        {
+            southWireScript = southWire.GetComponent<Pipes_CW>();
+        }
+        if(wiresConnectedTo[3])
+        {
+            westWireScript = westWire.GetComponent<Pipes_CW>();
+        }
+       
+
     }
     public void Update()
     {
         //if X, reset puzzle to default colours and state
         if(Input.GetKeyDown(theFusebox.resetPipesKey))
         {
-            GetComponent<Button>().image.color = defaultBoxColour;
+            wireColour = defaultBoxColour;
             if(!isWireEnd)
             {
                 isWireConnected = false;
@@ -66,7 +102,7 @@ public class Pipes_CW : MonoBehaviour
         if(desiredDirection == currentDirection)
         {
             isInPosition = true;
-            GetComponent<Button>().enabled = false;
+            thisPipe.enabled = false;
             theFusebox.pipeCompletedCount++;
         }
 
@@ -150,28 +186,33 @@ public class Pipes_CW : MonoBehaviour
                 default:
                     break;
             }
-            if (previousWire.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousWire2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+            if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) ||(wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
             {
                 //if the previous tile is the same colour as the wire end, both the original and last pipe end will change colour to show
                 //completion
-                GetComponent<Button>().image.color = Color.yellow;
+                wireColour = Color.yellow;
                 matchingEnd.image.color = Color.yellow;
-                previousWire.GetComponent<Pipes_CW>().isWireConnected = true;
+                northWireScript.isWireConnected = true;
+                southWireScript.isWireConnected = true;
+                eastWireScript.isWireConnected = true;
+                westWireScript.isWireConnected = true;
                 theFusebox.wireCompletedCount += 2;
             }    
         }
         if(!isWireEnd)
         {
             //if the tile hasn't been manipulated
-            if(GetComponent<Button>().image.color == defaultBoxColour)
+            if(wireColour == defaultBoxColour)
             {
                 //check if the previous pipe has been used
-                if(previousWire.GetComponent<Pipes_CW>().isWireConnected || previousWire2.GetComponent<Pipes_CW>().isWireConnected)
+                if(( wiresConnectedTo[1] && eastWireScript.isWireConnected) || ( wiresConnectedTo[0] && northWireScript.isWireConnected) ||
+                    (wiresConnectedTo[2] && southWireScript.isWireConnected) || (wiresConnectedTo[3] && eastWireScript.isWireConnected))
                 {
                     //set the wireEndColour for the comparison for wireEnds
                     if (theFusebox.drawColour == Color.red)
                     {
                         wireEndColour = COLOURS.RED;
+                        
                     }
                     else if (theFusebox.drawColour == Color.green)
                     {
@@ -182,10 +223,12 @@ public class Pipes_CW : MonoBehaviour
                         wireEndColour = COLOURS.BLUE;
                     }
                     //check for colour
-                    if (previousWire.GetComponent<Pipes_CW>().wireEndColour == wireEndColour || previousWire2.GetComponent<Pipes_CW>().wireEndColour == wireEndColour)
+                    if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) 
+                        || (wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
                     {
                         //draw the correct colour tile and signify as connected
-                        GetComponent<Button>().image.color = theFusebox.drawColour;
+                        wireColour = theFusebox.drawColour;
+                        thisPipe.image.color = theFusebox.drawColour;
                         isWireConnected = true;
                     }
                    

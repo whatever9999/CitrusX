@@ -5,6 +5,9 @@
  * 
  * Dominique (Changes) 10/02/2020
  * Added SFX and negative/positive feedback according to passcode being incorrect/correct
+ * 
+ * Chase (Changes) 17/2/2020
+ * Added a SetActive Function and linked it to the GameTesting script, also added the journal for the tasks
  */
 using System.Collections;
 using UnityEngine;
@@ -18,8 +21,11 @@ public class KeypadUI_DR : MonoBehaviour
     private Text inputText;
     private KeypadItem_DR keypadItem;
     private FirstPersonController firstPersonController;
+    private bool isActive = false;
+    private Journal_DR journal;
 
     public void SetKeypadItem(KeypadItem_DR newKeypadItem) { keypadItem = newKeypadItem; }
+    public void SetActive(bool value) { isActive = value; }
 
     private void Awake()
     {
@@ -28,6 +34,7 @@ public class KeypadUI_DR : MonoBehaviour
         Cursor.visible = false;
         inputText = GameObject.Find("InputText").GetComponent<Text>();
         gameObject.SetActive(false);
+        journal = Journal_DR.instance;
     }
 
     public void NumberButton(int number)
@@ -47,6 +54,9 @@ public class KeypadUI_DR : MonoBehaviour
         {
             keypadItem.door.unlocked = true;
             SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
+            //finish journal tasks and let game know the puzzle is complete
+            journal.TickOffTask("unlock safe");
+            GameTesting_CW.instance.arePuzzlesDone[3] = true;
             CloseKeypad();
         } else
         {

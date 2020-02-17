@@ -2,6 +2,9 @@
  * Dominique
  * 
  * Checks if the pieces are in the correct position on an interval (every 1 second) if the door isn't unlocked yet
+ * 
+ * Chase (changes) 17/2/2020
+ * Removed start as this is now in initiate puzzles, added journal reference, set active function and linked to game script.
  */
 using UnityEngine;
 
@@ -12,10 +15,13 @@ public class ChessBoard_DR : MonoBehaviour
 
     private const float checkBoardInterval = 1;
     private float currentCheckBoardInterval;
+    private Journal_DR journal;
+    private bool isActive = false;
+    public void SetActive(bool value) { isActive = value; }
 
-    private void Start()
+    private void Awake()
     {
-        Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
+        journal = Journal_DR.instance;
     }
 
     private void Update()
@@ -30,6 +36,8 @@ public class ChessBoard_DR : MonoBehaviour
                 if (CheckPieces())
                 {
                     door.unlocked = true;
+                    journal.TickOffTask("solve chessboard");
+                    GameTesting_CW.instance.arePuzzlesDone[5] = true;
                 }
 
                 currentCheckBoardInterval = 0;
@@ -43,6 +51,10 @@ public class ChessBoard_DR : MonoBehaviour
 
     public bool CheckPieces()
     {
+        if(journal.AreTasksComplete())
+        {
+            journal.ChangeTasks(new string[] { "solve chessboar" });
+        }
         bool inPosition = true;
         for(int i = 0; i < chessPieces.Length; i++)
         {

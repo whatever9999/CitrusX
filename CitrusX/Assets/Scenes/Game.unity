@@ -779,13 +779,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 743279144}
-  previousWire2: {fileID: 2023727710}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &128867948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,13 +2259,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 2023727710}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &392012938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,13 +3110,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1611905413}
-  previousWire2: {fileID: 2083200988}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &540860513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8203,13 +8227,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 1746980179}
-  previousWire2: {fileID: 1596687376}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &988157353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9190,13 +9222,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 2007846543}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &1118809356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9807,6 +9847,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1342655056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1830412919665182246, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334654696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1342655057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342655056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113dada3c2bacd14997418fb7b5fe959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  chessPieces: []
 --- !u!1 &1344807411
 GameObject:
   m_ObjectHideFlags: 0
@@ -11677,13 +11737,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 1
   isWireEnd: 1
-  previousWire: {fileID: 988157353}
-  previousWire2: {fileID: 1611905413}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 1388877182}
+  wiresConnectedTo: 00000000
 --- !u!114 &1596687378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11864,13 +11932,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 2007846543}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &1611905415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12908,13 +12984,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 2007846543}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &1746980181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13353,13 +13437,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 2031615602}
-  previousWire2: {fileID: 1118809354}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &1856378937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14047,13 +14139,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 743279144}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &2007846545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14329,13 +14429,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousWire: {fileID: 128867946}
-  previousWire2: {fileID: 392012936}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 2083200988}
+  wiresConnectedTo: 00000000
 --- !u!114 &2023727712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14559,13 +14667,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 0
-  previousWire: {fileID: 128867946}
-  previousWire2: {fileID: 392012936}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &2031615604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14900,13 +15016,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c111d5988d85eda439978a05bbb109bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  northWire: {fileID: 0}
+  southWire: {fileID: 0}
+  eastWire: {fileID: 0}
+  westWire: {fileID: 0}
+  northWireScript: {fileID: 0}
+  southWireScript: {fileID: 0}
+  eastWireScript: {fileID: 0}
   currentDirection: 0
   desiredDirection: 0
   wireEndColour: 0
   isWireEnd: 1
-  previousWire: {fileID: 540860513}
-  previousWire2: {fileID: 0}
+  isPipe: 0
+  connectingWires: []
   matchingEnd: {fileID: 0}
+  wiresConnectedTo: 00000000
 --- !u!114 &2083200990
 MonoBehaviour:
   m_ObjectHideFlags: 0

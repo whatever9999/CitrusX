@@ -15,11 +15,13 @@ public class Fusebox_CW : MonoBehaviour
 {
     #region VARIABLES
     private FirstPersonController fpsController;
-    private bool isFuseboxSolved;
+    private bool isFuseboxSolved = false;
+    private bool isActive = false;
     private KeyCode closeFuseboxKey = KeyCode.Escape;
     internal KeyCode resetPipesKey = KeyCode.X;
     internal int pipeCompletedCount;
     internal int wireCompletedCount;
+    private Text fuseboxText;
     public Pipes_CW[] pipes;
     public Pipes_CW[] wires;
     internal Color drawColour;
@@ -27,10 +29,16 @@ public class Fusebox_CW : MonoBehaviour
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
 
+    internal void SetActive(bool value) { isActive = value; }
+
     void Awake()
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
-        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        journal = Journal_DR.instance;
+        fuseboxText = GameObject.Find("Fusebox Message Text").GetComponent<Text>();
+    }
+    void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
@@ -60,11 +68,11 @@ public class Fusebox_CW : MonoBehaviour
         //set the wire ends into the wires array in the inspector also
         if(pipeCompletedCount == pipes.Length)
         {
-            GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "pipes COMPLETE";
             if (wireCompletedCount == wires.Length)
             {
-                GameObject.Find("Fusebox Message Text").GetComponent<Text>().text = "COMPLETE";
-                journal.TickOffTask("fix fusebox");
+                fuseboxText.text = "COMPLETE";
+                journal.TickOffTask("Fix fusebox");
+                GameTesting_CW.instance.arePuzzlesDone[2] = true;
                 
             }
         }
