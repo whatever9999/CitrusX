@@ -31,10 +31,7 @@ public class CorrectOrder_CW : MonoBehaviour
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         closePCKey = KeyCode.Escape;
 
-        //sequenceImages[0] = GameObject.Find("Correct Order Image 1").GetComponent<Image>();
-        //sequenceImages[1] = GameObject.Find("Correct Order Image 2").GetComponent<Image>();
-        //sequenceImages[2] = GameObject.Find("Correct Order Image 3").GetComponent<Image>();
-        //sequenceImages[3] = GameObject.Find("Correct Order Image 4").GetComponent<Image>();
+    
 
         //passwordImages[0] = GameObject.Find("Password Image 1").GetComponent<Image>();
         //passwordImages[1] = GameObject.Find("Password Image 2").GetComponent<Image>();
@@ -48,9 +45,14 @@ public class CorrectOrder_CW : MonoBehaviour
     }
     private void Start()
     {
+        StartCoroutine(Round1());
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
+        sequenceImages[0] = GameObject.Find("Correct Order Image 1").GetComponent<Image>();
+        sequenceImages[1] = GameObject.Find("Correct Order Image 2").GetComponent<Image>();
+        sequenceImages[2] = GameObject.Find("Correct Order Image 3").GetComponent<Image>();
+        sequenceImages[3] = GameObject.Find("Correct Order Image 4").GetComponent<Image>();
     }
     public void OpenPC()
     {
@@ -83,5 +85,10 @@ public class CorrectOrder_CW : MonoBehaviour
 
         //Let the player move again
         fpsController.enabled = true;
+    }
+    IEnumerator Round1()
+    {
+        yield return new WaitForSeconds(1f);
+        sequenceImages[0].color = Color.red;
     }
 }
