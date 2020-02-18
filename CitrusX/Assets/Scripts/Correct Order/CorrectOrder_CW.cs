@@ -13,10 +13,7 @@ public class CorrectOrder_CW : MonoBehaviour
     #region VARIABLES
     private Journal_DR journal;
     private bool isActive = false;
-    private Image[] sequenceImages;
-    private Image[] passwordImages;
-    private Color[] passwordColours;
-    internal Color[] inputColours;
+    public Color[] boxes = {Color.white, Color.white, Color.white, Color.white, Color.white, Color.white, Color.white, Color.white};
     private FirstPersonController fpsController;
     private KeyCode closePCKey;
     public static CorrectOrder_CW instance;
@@ -30,29 +27,12 @@ public class CorrectOrder_CW : MonoBehaviour
         instance = this;
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         closePCKey = KeyCode.Escape;
-
-    
-
-        //passwordImages[0] = GameObject.Find("Password Image 1").GetComponent<Image>();
-        //passwordImages[1] = GameObject.Find("Password Image 2").GetComponent<Image>();
-        //passwordImages[2] = GameObject.Find("Password Image 3").GetComponent<Image>();
-        //passwordImages[3] = GameObject.Find("Password Image 4").GetComponent<Image>();
-
-        //passwordColours[0] = Color.green;
-        //passwordColours[1] = Color.red;
-        //passwordColours[2] = Color.yellow;
-        //passwordColours[3] = Color.cyan;
     }
     private void Start()
     {
-        StartCoroutine(Round1());
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false;   
         gameObject.SetActive(false);
-        sequenceImages[0] = GameObject.Find("Correct Order Image 1").GetComponent<Image>();
-        sequenceImages[1] = GameObject.Find("Correct Order Image 2").GetComponent<Image>();
-        sequenceImages[2] = GameObject.Find("Correct Order Image 3").GetComponent<Image>();
-        sequenceImages[3] = GameObject.Find("Correct Order Image 4").GetComponent<Image>();
     }
     public void OpenPC()
     {
@@ -62,7 +42,7 @@ public class CorrectOrder_CW : MonoBehaviour
 
         gameObject.SetActive(true);
 
-     
+
         fpsController.enabled = false;
     }
     private void CheckForClose()
@@ -74,7 +54,7 @@ public class CorrectOrder_CW : MonoBehaviour
     }
     public void ClosePC()
     {
-        
+
         gameObject.tag = "PC";
 
         //Make the cursor invisible again
@@ -86,9 +66,5 @@ public class CorrectOrder_CW : MonoBehaviour
         //Let the player move again
         fpsController.enabled = true;
     }
-    IEnumerator Round1()
-    {
-        yield return new WaitForSeconds(1f);
-        sequenceImages[0].color = Color.red;
-    }
 }
+
