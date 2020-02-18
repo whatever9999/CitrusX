@@ -855,7 +855,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 184628311}
+      - m_Target: {fileID: 872701067}
         m_MethodName: CheckForCompletion
         m_Mode: 1
         m_Arguments:

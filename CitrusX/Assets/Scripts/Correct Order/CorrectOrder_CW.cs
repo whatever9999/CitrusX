@@ -13,7 +13,7 @@ public class CorrectOrder_CW : MonoBehaviour
     #region VARIABLES
     private Journal_DR journal;
     private bool isActive = false;
-    public Color[] boxes = {Color.white, Color.white, Color.white, Color.white, Color.white, Color.white, Color.white, Color.white};
+    public Color[] boxes;
     private FirstPersonController fpsController;
     private KeyCode closePCKey;
     public static CorrectOrder_CW instance;
@@ -65,6 +65,26 @@ public class CorrectOrder_CW : MonoBehaviour
 
         //Let the player move again
         fpsController.enabled = true;
+    }
+    internal void AssignBoxColour(int box, Color colour)
+    {
+        //boxes[box] = colour;
+    }
+    public void CheckForCompletion()
+    {
+        if (boxes[0] == boxes[4])
+        {
+            if (boxes[1] == boxes[5])
+            {
+                if (boxes[2] == boxes[6])
+                {
+                    if (boxes[3] == boxes[7])
+                    {
+                        GameObject.Find("Correct Order Message Text").GetComponent<Text>().text = "COMPLETE";
+                    }
+                }
+            }
+        }
     }
 }
 

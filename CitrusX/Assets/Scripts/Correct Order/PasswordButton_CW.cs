@@ -14,7 +14,18 @@ public class PasswordButton_CW : MonoBehaviour
     public bool isPasswordBox = false;
     private float flashTimer = 0;
     private float flashNow;
-
+    private int GetBoxNumber()
+    {
+        if (isFirstBox && !isPasswordBox) { return 1; }
+        else if (isFirstBox && isPasswordBox) { return 5; }
+        else if (isSecondBox && !isPasswordBox) { return 2; }
+        else if (isSecondBox && isPasswordBox) { return 6; }
+        else if (isThirdBox && !isPasswordBox) { return 3; }
+        else if (isThirdBox && isPasswordBox) { return 7; }
+        else if (isFourthBox && !isPasswordBox) { return 4; }
+        else if (isFourthBox && isPasswordBox) { return 8; }
+        else { return 0; }
+    }
     private void Awake()
     {
         correctOrderPuzzle = CorrectOrder_CW.instance;
@@ -41,22 +52,22 @@ public class PasswordButton_CW : MonoBehaviour
        if(thisImage.color == Color.red)
        {
             thisImage.color = Color.green;
-            AssignBoxColour(Color.green);
-       }
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+        }
        else if (thisImage.color == Color.green)
        {
             thisImage.color = Color.yellow;
-            AssignBoxColour(Color.yellow);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
         }
        else if (thisImage.color == Color.yellow)
        {
             thisImage.color = Color.cyan;
-            AssignBoxColour(Color.cyan);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
         }
        else if (thisImage.color == Color.cyan)
        {
             thisImage.color = Color.red;
-            AssignBoxColour(Color.red);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(),Color.red);
         }
        else
        {
@@ -83,57 +94,24 @@ public class PasswordButton_CW : MonoBehaviour
         if(isFirstBox && !isPasswordBox)
         {
             thisImage.color = Color.red;
-            correctOrderPuzzle.boxes[0] = Color.red;
+           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
         }
         else if(isSecondBox && !isPasswordBox)
         {
             thisImage.color = Color.yellow;
-            correctOrderPuzzle.boxes[1] = Color.yellow;
+           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
         }
         else if(isThirdBox && !isPasswordBox)
         {
             thisImage.color = Color.green;
-            correctOrderPuzzle.boxes[2] = Color.green;
+           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
         }
         else if(isFourthBox && !isPasswordBox)
         {
             thisImage.color = Color.cyan;
-            correctOrderPuzzle.boxes[3] = Color.cyan;
+           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
         }
     }
-    public void CheckForCompletion()
-    {
-        if(correctOrderPuzzle.boxes[0] == correctOrderPuzzle.boxes[4])
-        {
-            if(correctOrderPuzzle.boxes[1] == correctOrderPuzzle.boxes[5])
-            {
-                if(correctOrderPuzzle.boxes[2] == correctOrderPuzzle.boxes[6])
-                {
-                    if(correctOrderPuzzle.boxes[3] == correctOrderPuzzle.boxes[7])
-                    {
-                        GameObject.Find("Correct Order Message Text").GetComponent<Text>().text = "COMPLETE"; 
-                    }
-                }
-            }
-        }
-    }
-    private void AssignBoxColour(Color colour)
-    {
-        if(isFirstBox && isPasswordBox)
-        {
-            correctOrderPuzzle.boxes[4] = colour;
-        }
-        else if(isSecondBox && isPasswordBox)
-        {
-            correctOrderPuzzle.boxes[5] = colour;
-        }
-        else if(isThirdBox && isPasswordBox)
-        {
-            correctOrderPuzzle.boxes[6] = colour;
-        }
-        else if(isFourthBox && isPasswordBox)
-        {
-            correctOrderPuzzle.boxes[7] = colour;
-        }
-    }
+  
+  
 }
