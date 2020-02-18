@@ -32,7 +32,7 @@ public class WeightScript_AG : MonoBehaviour
     [SerializeField] bool playerHasFound;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scalesScript = Scales.GetComponent<ScalesPuzzleScript_AG>();
         switch (weightMass)
@@ -140,4 +140,4 @@ public class WeightScript_AG : MonoBehaviour
 }
 
 // V0.1.0 - Last Update: 2020/02/09 @ 19:25 by AG
-
+// V0.1.0 - Last Update: 2020/02/18 @ 18:30 by AG - Summary: Replaced Start with Awake to solve issues when loading assets. Originally changed a week ago, but change seems to have been lost in version control.

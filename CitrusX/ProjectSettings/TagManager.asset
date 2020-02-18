@@ -13,6 +13,7 @@ TagManager:
   - Table
   - ChessPiece
   - WaterBowl
+  - MovableWeight
   layers:
   - Default
   - TransparentFX

@@ -1,2 +1,4 @@
-Base path: D:/Chase/2019.1.0f2/Editor/Data
+Base path: E:/Program Files/Unity/2019.12.0f2/Editor/Data
 Cmd: initializeCompiler
+Cmd: preprocess
+  insize=17313 outsize=5538 ok=1

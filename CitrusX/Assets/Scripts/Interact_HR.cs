@@ -43,6 +43,9 @@
  * 
  * Chase (Changes) 11/02/2020
  * Added ritual and garden table interaction for the first puzzle as they progress the puzzles
+ * 
+ * Adam (Changes) 18/02/2020
+ * Added moveable weights to list of interactable objects (seems to work fine, but unity didn't like it the first couple of times I looked at a weight... Now working fine, just a heads up)
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -298,6 +301,16 @@ public class Interact_HR : MonoBehaviour
                         //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
                     }
                     
+                }
+            }
+            else if(hit.transform.tag == "MovableWeight")
+            {
+                notificationText.text = "Press " + InteractKey.ToString() + " to use the weight";
+
+                if(Input.GetKeyDown(InteractKey))
+                {
+                    WeightScript_AG weight = hit.transform.GetComponent<WeightScript_AG>();
+                    weight.MoveWeight();
                 }
             }
             else
