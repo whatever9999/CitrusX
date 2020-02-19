@@ -16,19 +16,19 @@ public class PasswordButton_CW : MonoBehaviour
     private float flashNow;
     private int GetBoxNumber()
     {
-        if (isFirstBox && !isPasswordBox) { return 1; }
-        else if (isFirstBox && isPasswordBox) { return 5; }
-        else if (isSecondBox && !isPasswordBox) { return 2; }
-        else if (isSecondBox && isPasswordBox) { return 6; }
-        else if (isThirdBox && !isPasswordBox) { return 3; }
-        else if (isThirdBox && isPasswordBox) { return 7; }
-        else if (isFourthBox && !isPasswordBox) { return 4; }
-        else if (isFourthBox && isPasswordBox) { return 8; }
+        if (isFirstBox && !isPasswordBox) { return 0; }
+        else if (isFirstBox && isPasswordBox) { return 4; }
+        else if (isSecondBox && !isPasswordBox) { return 1; }
+        else if (isSecondBox && isPasswordBox) { return 5; }
+        else if (isThirdBox && !isPasswordBox) { return 2; }
+        else if (isThirdBox && isPasswordBox) { return 6; }
+        else if (isFourthBox && !isPasswordBox) { return 3; }
+        else if (isFourthBox && isPasswordBox) { return 7; }
         else { return 0; }
     }
     private void Awake()
     {
-        correctOrderPuzzle = CorrectOrder_CW.instance;
+        correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         thisImage = GetComponent<Image>();
         if(isFirstBox)
         {
@@ -94,22 +94,22 @@ public class PasswordButton_CW : MonoBehaviour
         if(isFirstBox && !isPasswordBox)
         {
             thisImage.color = Color.red;
-           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
         }
         else if(isSecondBox && !isPasswordBox)
         {
             thisImage.color = Color.yellow;
-           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
         }
         else if(isThirdBox && !isPasswordBox)
         {
             thisImage.color = Color.green;
-           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
         }
         else if(isFourthBox && !isPasswordBox)
         {
             thisImage.color = Color.cyan;
-           // correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
         }
     }
   

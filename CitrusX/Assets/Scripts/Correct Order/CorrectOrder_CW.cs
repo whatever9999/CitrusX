@@ -68,7 +68,7 @@ public class CorrectOrder_CW : MonoBehaviour
     }
     internal void AssignBoxColour(int box, Color colour)
     {
-        //boxes[box] = colour;
+        boxes[box] = colour;
     }
     public void CheckForCompletion()
     {
