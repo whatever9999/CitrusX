@@ -15,6 +15,7 @@ TagManager:
   - WaterBowl
   - Fusebox
   - PC
+  - InventoryPanel
   layers:
   - Default
   - TransparentFX
