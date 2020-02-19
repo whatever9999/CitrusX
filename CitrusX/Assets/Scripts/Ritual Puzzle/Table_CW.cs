@@ -22,17 +22,13 @@ public class Table_CW : MonoBehaviour
         CHESS_BOARD
     }
     public TABLES currentTable;
-    internal bool hasBeenPlaced;
+    internal bool hasBeenPlaced = false;
     private SetUpRitual_CW ritualSetUp;
 
     // Start is called before the first frame update
     void Awake()
     {
-
         ritualSetUp = GameObject.Find("FirstPersonCharacter").GetComponent<SetUpRitual_CW>();
-
-        ritualSetUp = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
-
     }
 
     // Update is called once per frame
@@ -41,25 +37,15 @@ public class Table_CW : MonoBehaviour
 
         if (hasBeenPlaced)
         {
-            if (currentTable == TABLES.RITUAL_TABLE)
-            {
-                ritualSetUp.ritualSetUpPlaced = true;
-                hasBeenPlaced = false;
-            }
-            else if (currentTable == TABLES.GARDEN_TABLE)
-            {
-                ritualSetUp.jewelleryPlaced = true;
-                hasBeenPlaced = false;
-            }
 
             if (currentTable == TABLES.RITUAL_TABLE && hasBeenPlaced)
             {
-                ritualSetUp.ritualSetUpPlaced = true;
+                ritualSetUp.ritualSetUpCollected = true;
                 hasBeenPlaced = false;
             }
             else if (currentTable == TABLES.GARDEN_TABLE && hasBeenPlaced)
             {
-                ritualSetUp.jewelleryPlaced = true;
+                ritualSetUp.jewelleryCollected = true;
                 hasBeenPlaced = false;
 
             }
