@@ -43,6 +43,9 @@
  * 
  * Chase (Changes) 11/02/2020
  * Added ritual and garden table interaction for the first puzzle as they progress the puzzles
+ * 
+ * Chase (Changes) 17/2/2020
+ * Added PC for correct order puzzle
   */
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,6 +68,8 @@ public class Interact_HR : MonoBehaviour
     private Image paperBackground;
     private Camera playerCamera;
     private int numberCoinsCollected;
+    private GameObject correctOrderUI;
+    
 
     private void Awake()
     {
@@ -76,6 +81,7 @@ public class Interact_HR : MonoBehaviour
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
         playerCamera = GetComponent<Camera>();
+        correctOrderUI = GameObject.Find("CorrectOrderUI");
     }
 
     void Update()
@@ -298,6 +304,15 @@ public class Interact_HR : MonoBehaviour
                         //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
                     }
                     
+                }
+            }
+            else if (hit.transform.tag == "PC")
+            {
+                notificationText.text = "Press E to open the PC";
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
             else
