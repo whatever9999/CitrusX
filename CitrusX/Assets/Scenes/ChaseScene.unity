@@ -342,11 +342,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 1328913563}
-  - {fileID: 275050976}
-  - {fileID: 868851046}
-  - {fileID: 2013143408}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010101
 --- !u!114 &89189951
@@ -1032,10 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 0
-  isThirdBox: 1
-  isFourthBox: 0
+  box: 6
   isPasswordBox: 1
 --- !u!1 &190798007
 GameObject:
@@ -1140,11 +1132,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 0
-  isThirdBox: 0
-  isFourthBox: 1
+  box: 3
   isPasswordBox: 0
+--- !u!1 &203386423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203386424}
+  - component: {fileID: 203386427}
+  - component: {fileID: 203386426}
+  - component: {fileID: 203386425}
+  m_Layer: 5
+  m_Name: Completion Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &203386424
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203386423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 872701063}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 19.9, y: 22}
+  m_SizeDelta: {x: 810.8, y: 89.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &203386425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203386423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: 3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &203386426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203386423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9593928, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 70
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 7
+    m_MaxSize: 70
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &203386427
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203386423}
+  m_CullTransparentMesh: 0
 --- !u!1 &213754372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,10 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 0
-  isThirdBox: 0
-  isFourthBox: 1
+  box: 7
   isPasswordBox: 1
 --- !u!1 &275050973
 GameObject:
@@ -1431,10 +1512,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 825480757}
-  - {fileID: 1546455540}
-  - {fileID: 89189949}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 00010101
 --- !u!114 &275050976
@@ -2297,10 +2374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 0
-  isThirdBox: 1
-  isFourthBox: 0
+  box: 2
   isPasswordBox: 0
 --- !u!114 &453510816 stripped
 MonoBehaviour:
@@ -2469,10 +2543,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 2013143408}
-  - {fileID: 585319301}
-  - {fileID: 868851046}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010001
 --- !u!114 &507322734
@@ -2737,8 +2807,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 1
   isPipe: 0
-  connectingWires:
-  - {fileID: 2013143408}
   matchingEnd: {fileID: 648705709}
   wiresConnectedTo: 00000001
 --- !u!114 &569304226
@@ -3105,10 +3173,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 1155794428}
-  - {fileID: 1603547937}
-  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010001
 --- !u!114 &585319303
@@ -3447,9 +3511,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 1
   isPipe: 0
-  connectingWires:
-  - {fileID: 1155794428}
-  - {fileID: 1603547937}
   matchingEnd: {fileID: 569304226}
   wiresConnectedTo: 00010100
 --- !u!114 &648705709
@@ -3871,9 +3932,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 1328913563}
-  - {fileID: 275050976}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 00000101
 --- !u!114 &825480757
@@ -4069,11 +4127,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 1546455540}
-  - {fileID: 1603547937}
-  - {fileID: 89189949}
-  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010101
 --- !u!114 &868851048
@@ -4173,6 +4226,7 @@ RectTransform:
   - {fileID: 411454259}
   - {fileID: 190798008}
   - {fileID: 184628310}
+  - {fileID: 203386424}
   m_Father: {fileID: 2006739782}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4239,6 +4293,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
+  closePCKey: 27
 --- !u!224 &883629744 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6342304271721965734, guid: 9f97494cfd7c01f449a33f8c12872e16,
@@ -5019,10 +5074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 1
-  isThirdBox: 0
-  isFourthBox: 0
+  box: 5
   isPasswordBox: 1
 --- !u!1 &1068326330
 GameObject:
@@ -5219,10 +5271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 1
-  isSecondBox: 0
-  isThirdBox: 0
-  isFourthBox: 0
+  box: 0
   isPasswordBox: 0
 --- !u!1 &1155794427
 GameObject:
@@ -5324,7 +5373,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires: []
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010000
 --- !u!114 &1155794430
@@ -5620,10 +5668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 0
-  isSecondBox: 1
-  isThirdBox: 0
-  isFourthBox: 0
+  box: 1
   isPasswordBox: 0
 --- !u!1 &1179634585
 GameObject:
@@ -6155,9 +6200,6 @@ MonoBehaviour:
   wireEndColour: 1
   isWireEnd: 1
   isPipe: 0
-  connectingWires:
-  - {fileID: 825480757}
-  - {fileID: 89189949}
   matchingEnd: {fileID: 883629745}
   wiresConnectedTo: 01000001
 --- !u!1 &1366471887
@@ -7359,10 +7401,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 275050976}
-  - {fileID: 1405646687}
-  - {fileID: 868851046}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 00010101
 --- !u!114 &1546455540
@@ -7558,11 +7596,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 648705709}
-  - {fileID: 1405646687}
-  - {fileID: 868851046}
-  - {fileID: 585319301}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010101
 --- !u!114 &1603547939
@@ -8472,10 +8505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c3759b40a73cf498740019a752a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirstBox: 1
-  isSecondBox: 0
-  isThirdBox: 0
-  isFourthBox: 0
+  box: 4
   isPasswordBox: 1
 --- !u!1 &1796669737
 GameObject:
@@ -9414,10 +9444,6 @@ MonoBehaviour:
   wireEndColour: 0
   isWireEnd: 0
   isPipe: 0
-  connectingWires:
-  - {fileID: 569304226}
-  - {fileID: 89189949}
-  - {fileID: 507322734}
   matchingEnd: {fileID: 0}
   wiresConnectedTo: 01010001
 --- !u!114 &2013143408

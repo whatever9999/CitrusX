@@ -8,10 +8,18 @@ public class PasswordButton_CW : MonoBehaviour
     #region VARIABLES
     private CorrectOrder_CW correctOrderPuzzle;
     private Image thisImage;
-    public bool isFirstBox = false;
-    public bool isSecondBox = false;
-    public bool isThirdBox = false;
-    public bool isFourthBox = false;
+    public enum WHICH_BOX
+    {
+        FIRST_BOX,
+        SECOND_BOX,
+        THIRD_BOX,
+        FOURTH_BOX,
+        PASSWORD_ONE,
+        PASSWORD_TWO,
+        PASSWORD_THREE,
+        PASSWORD_FOUR
+    };
+    public WHICH_BOX box;
     public bool isPasswordBox = false;
     private float flashTimer = 0;
     private float flashNow;
@@ -19,37 +27,77 @@ public class PasswordButton_CW : MonoBehaviour
     #region GET_BOX_NO
     private int GetBoxNumber()
     {
-        if (isFirstBox && !isPasswordBox) { return 0; }
-        else if (isFirstBox && isPasswordBox) { return 4; }
-        else if (isSecondBox && !isPasswordBox) { return 1; }
-        else if (isSecondBox && isPasswordBox) { return 5; }
-        else if (isThirdBox && !isPasswordBox) { return 2; }
-        else if (isThirdBox && isPasswordBox) { return 6; }
-        else if (isFourthBox && !isPasswordBox) { return 3; }
-        else if (isFourthBox && isPasswordBox) { return 7; }
-        else { return 0; }
+        switch (box)
+        {
+            case WHICH_BOX.FIRST_BOX:
+                {
+                    return 0;
+                }
+                break;
+            case WHICH_BOX.SECOND_BOX:
+                {
+                    return 1;
+                }
+                break;
+            case WHICH_BOX.THIRD_BOX:
+                {
+                    return 2;
+                }
+                break;
+            case WHICH_BOX.FOURTH_BOX:
+                {
+                    return 3;
+                }
+                break;
+            case WHICH_BOX.PASSWORD_ONE:
+                {
+                    return 4;
+                }
+                break;
+            case WHICH_BOX.PASSWORD_TWO:
+                {
+                    return 5;
+                }
+                break;
+            case WHICH_BOX.PASSWORD_THREE:
+                {
+                    return 6;
+                }
+                break;
+            case WHICH_BOX.PASSWORD_FOUR:
+                {
+                    return 7;
+                }
+                break;
+            default:
+                return 0;
+                break;
+        }
+       
     }
 #endregion
     private void Awake()
     {
         correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         thisImage = GetComponent<Image>();
-        if(isFirstBox)
+        switch (box)
         {
-            flashNow = 2f;
+            case WHICH_BOX.FIRST_BOX:
+                flashNow = 2f;
+                break;
+            case WHICH_BOX.SECOND_BOX:
+                flashNow = 4f;
+                break;
+            case WHICH_BOX.THIRD_BOX:
+                flashNow = 8f;
+                break;
+            case WHICH_BOX.FOURTH_BOX:
+                flashNow = 10f;
+                break;
+            default:
+                break;
         }
-        else if(isSecondBox)
-        {
-            flashNow = 4f;
-        }
-        else if(isThirdBox)
-        {
-            flashNow = 8f;
-        }
-        else if(isFourthBox)
-        {
-            flashNow = 10f;
-        }
+     
     }
     public void ChangeColour()
     {
@@ -95,27 +143,41 @@ public class PasswordButton_CW : MonoBehaviour
     }
     private void Flash()
     {
-        if(isFirstBox && !isPasswordBox)
+        switch (box)
         {
-            thisImage.color = Color.red;
-            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+            case WHICH_BOX.FIRST_BOX:
+                {
+                    thisImage.color = Color.red;
+                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+                }
+                break;
+            case WHICH_BOX.SECOND_BOX:
+                {
+                    thisImage.color = Color.yellow;
+                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
+                }
+                break;
+            case WHICH_BOX.THIRD_BOX:
+                {
+                    thisImage.color = Color.green;
+                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                }
+                break;
+            case WHICH_BOX.FOURTH_BOX:
+                {
+                    thisImage.color = Color.cyan;
+                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
+                }
+                break;
+            default:
+                break;
         }
-        else if(isSecondBox && !isPasswordBox)
-        {
-            thisImage.color = Color.yellow;
-            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
-        }
-        else if(isThirdBox && !isPasswordBox)
-        {
-            thisImage.color = Color.green;
-            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
-        }
-        else if(isFourthBox && !isPasswordBox)
-        {
-            thisImage.color = Color.cyan;
-            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
-        }
+        StartCoroutine(BackToWhite());
+    } 
+    IEnumerator BackToWhite()
+    {
+        yield return new WaitForSeconds(0.5f);
+        thisImage.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
     }
-  
-  
 }
