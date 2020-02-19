@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/DominiqueTest.unity
-=======
-- path: Assets/Scenes/ChaseScene.unity
->>>>>>> Chase
+- path: Assets/Scenes/Game.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

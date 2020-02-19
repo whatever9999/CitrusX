@@ -20,7 +20,7 @@ public class Fusebox_CW : MonoBehaviour
     private KeyCode closeFuseboxKey = KeyCode.Escape;
     internal KeyCode resetPipesKey = KeyCode.X;
     internal int pipeCompletedCount;
-    internal int wireCompletedCount;
+    //internal int wireCompletedCount;
     private Text fuseboxText;
     public Pipes_CW[] pipes;
     public Pipes_CW[] wires;
@@ -68,13 +68,15 @@ public class Fusebox_CW : MonoBehaviour
         //set the wire ends into the wires array in the inspector also
         if(pipeCompletedCount == pipes.Length)
         {
-            if (wireCompletedCount == wires.Length)
-            {
-                fuseboxText.text = "COMPLETE";
-                journal.TickOffTask("Fix fusebox");
-                GameTesting_CW.instance.arePuzzlesDone[2] = true;
+            fuseboxText.text = "COMPLETED";
+            journal.TickOffTask("Fix fusebox");
+            GameTesting_CW.instance.arePuzzlesDone[2] = true;
+            //if (wireCompletedCount >= wires.Length)
+            //{
+            //    fuseboxText.text = "COMPLETE";
+              
                 
-            }
+            //}
         }
     }
     private void CheckForClose()
