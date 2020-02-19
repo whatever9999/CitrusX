@@ -46,7 +46,10 @@
  * 
  * Adam (Changes) 18/02/2020
  * Added moveable weights to list of interactable objects (seems to work fine, but unity didn't like it the first couple of times I looked at a weight... Now working fine, just a heads up)
-  */
+ * 
+ * Adam (Changes) 19/02/2020
+ * Added Candles and bowl as interactable objects
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -319,25 +322,44 @@ public class Interact_HR : MonoBehaviour
 
                 if (candleScript.AreLit())
                 {
-                    candleScript.BlowOut();
+                    notificationText.text = "Press " + InteractKey.ToString() + " to extinguish";
+
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        candleScript.BlowOut();
+                    }
                 }
                 else if (!candleScript.AreLit())
                 {
-                    candleScript.LightCandles();
+                    notificationText.text = "Press " + InteractKey.ToString() + " to light";
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        candleScript.LightCandles();
+                    }
                 }
             }
             else if (hit.transform.tag == "DryBowl")
             {
                 CoinBowlScript_AG coinBowlScript = hit.transform.GetComponent<CoinBowlScript_AG>();
 
-                if(coinBowlScript.RemovingCoins())
+                if(coinBowlScript.CandlesLit())
                 {
-                    coinBowlScript.RemoveCoin();
+                    notificationText.text = "Press " + InteractKey.ToString() + " to remove a coin";
+
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        coinBowlScript.RemoveCoin();
+                    }
                 }
                 else
                 {
-                    coinBowlScript.AddCoin();
-                        //TODO - Needs a coin gameobject as a param. Originally had this, but will need re-doing.
+                    notificationText.text = "Press " + InteractKey.ToString() + " to place a coin";
+                    if (Input.GetKeyDown(InteractKey))
+                    {
+                        coinBowlScript.AddCoin();
+
+                    }
+                    //TODO - Needs a coin gameobject as a param. Originally had this, but will need re-doing.
                 }
             }
             else

@@ -17,7 +17,8 @@ public class CoinBowlScript_AG : MonoBehaviour
     private int coinsPlayerRemoved;
     private List<GameObject> containedCoins;
 
-    bool removingCoins = false;
+    bool candlesLit = false;
+    bool gameStarted = false;
 
     void Start()
     {
@@ -47,15 +48,16 @@ public class CoinBowlScript_AG : MonoBehaviour
     /// <summary>
     /// Puts a coin into the container and tracks amount of coins
     /// </summary>
-    public void AddCoin()
+    public void AddCoin(/*GameObject coin*/)
     {
-        //containedCoins.Add(coin);
+        //containedCoins.Add(coin); //TODO - Needs fully implementing
 
         coinsInContainer = containedCoins.ToArray().Length;
+        Debug.Log("Coin Added");
     }
 
     /// <summary>
-    /// Removes a coins from the container, if any are present
+    /// Removes a coins from the container, if any are present, and track
     /// </summary>
     public void RemoveCoin()
     {
@@ -63,6 +65,7 @@ public class CoinBowlScript_AG : MonoBehaviour
         {
             containedCoins.RemoveAt(0);
             coinsInContainer = containedCoins.ToArray().Length;
+            Debug.Log("Coin Removed");
         }
         else
         {
@@ -70,14 +73,30 @@ public class CoinBowlScript_AG : MonoBehaviour
         }
     }
     /// <summary>
-    /// Used to set an initial amount of coins for comparison at end
+    /// Used to set an initial amount of coins for comparison at end and begin the game
     /// </summary>
     /// <param name="startingCoins"></param>
     public void BeginTracking(int startingCoins)
     {
         startingCoinCount = startingCoins;
+        gameStarted = true;
     }
 
-    public bool RemovingCoins() { return removingCoins; }
-    
+    /// <summary>
+    /// Set state of "candlesLit"
+    /// </summary>
+    /// <param name="areTheyLit"></param>
+    public void CandlesLit(bool areTheyLit) { candlesLit = areTheyLit; }
+
+    /// <summary>
+    /// Get the value of the bool "candlesLit"
+    /// </summary>
+    /// <returns></returns>
+    public bool CandlesLit() { return candlesLit; }
+
+    /// <summary>
+    /// Return state of "gameStarted"
+    /// </summary>
+    /// <returns></returns>
+    public bool GameStarted() { return gameStarted; }
 }
