@@ -16,7 +16,7 @@ public class CorrectOrder_CW : MonoBehaviour
     public Color[] boxes;
     private FirstPersonController fpsController;
     private KeyCode closePCKey;
-    public static CorrectOrder_CW instance;
+    private Text correctOrderText;
     #endregion
 
     public void SetActive(bool value) { isActive = value; }
@@ -24,14 +24,15 @@ public class CorrectOrder_CW : MonoBehaviour
     private void Awake()
     {
         journal = Journal_DR.instance;
-        instance = this;
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         closePCKey = KeyCode.Escape;
+        correctOrderText = GameObject.Find("Correct Order Message Text").GetComponent<Text>();
+       
     }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;   
+        Cursor.visible = false;
         gameObject.SetActive(false);
     }
     public void OpenPC()
@@ -80,7 +81,7 @@ public class CorrectOrder_CW : MonoBehaviour
                 {
                     if (boxes[3] == boxes[7])
                     {
-                        GameObject.Find("Correct Order Message Text").GetComponent<Text>().text = "COMPLETE";
+                        correctOrderText.text = "COMPLETE";
                     }
                 }
             }

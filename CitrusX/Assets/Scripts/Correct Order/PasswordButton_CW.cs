@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PasswordButton_CW : MonoBehaviour
 {
+    #region VARIABLES
     private CorrectOrder_CW correctOrderPuzzle;
     private Image thisImage;
     public bool isFirstBox = false;
@@ -14,6 +15,8 @@ public class PasswordButton_CW : MonoBehaviour
     public bool isPasswordBox = false;
     private float flashTimer = 0;
     private float flashNow;
+    #endregion
+    #region GET_BOX_NO
     private int GetBoxNumber()
     {
         if (isFirstBox && !isPasswordBox) { return 0; }
@@ -26,6 +29,7 @@ public class PasswordButton_CW : MonoBehaviour
         else if (isFourthBox && isPasswordBox) { return 7; }
         else { return 0; }
     }
+#endregion
     private void Awake()
     {
         correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
