@@ -17,6 +17,8 @@ public class CoinBowlScript_AG : MonoBehaviour
     private int coinsPlayerRemoved;
     private List<GameObject> containedCoins;
 
+    bool removingCoins = false;
+
     void Start()
     {
         startingCoinCount = 0;
@@ -43,18 +45,39 @@ public class CoinBowlScript_AG : MonoBehaviour
     }
 
     /// <summary>
-    /// Puts a coin into the container and tracks amount of coins.
+    /// Puts a coin into the container and tracks amount of coins
     /// </summary>
-    /// <param name="coin"></param>
-    public void AddCoin(GameObject coin)
+    public void AddCoin()
     {
-        containedCoins.Add(coin);
+        //containedCoins.Add(coin);
 
         coinsInContainer = containedCoins.ToArray().Length;
     }
 
-    public void BeginTracking()
+    /// <summary>
+    /// Removes a coins from the container, if any are present
+    /// </summary>
+    public void RemoveCoin()
     {
-
+        if (coinsInContainer > 0)
+        {
+            containedCoins.RemoveAt(0);
+            coinsInContainer = containedCoins.ToArray().Length;
+        }
+        else
+        {
+            Debug.Log("There are no coins left in the container...");
+        }
     }
+    /// <summary>
+    /// Used to set an initial amount of coins for comparison at end
+    /// </summary>
+    /// <param name="startingCoins"></param>
+    public void BeginTracking(int startingCoins)
+    {
+        startingCoinCount = startingCoins;
+    }
+
+    public bool RemovingCoins() { return removingCoins; }
+    
 }

@@ -313,10 +313,38 @@ public class Interact_HR : MonoBehaviour
                     weight.MoveWeight();
                 }
             }
+            else if (hit.transform.tag == "Candles")
+            {
+                CandleScript_AG candleScript = hit.transform.GetComponent<CandleScript_AG>();
+
+                if (candleScript.AreLit())
+                {
+                    candleScript.BlowOut();
+                }
+                else if (!candleScript.AreLit())
+                {
+                    candleScript.LightCandles();
+                }
+            }
+            else if (hit.transform.tag == "DryBowl")
+            {
+                CoinBowlScript_AG coinBowlScript = hit.transform.GetComponent<CoinBowlScript_AG>();
+
+                if(coinBowlScript.RemovingCoins())
+                {
+                    coinBowlScript.RemoveCoin();
+                }
+                else
+                {
+                    coinBowlScript.AddCoin();
+                        //TODO - Needs a coin gameobject as a param. Originally had this, but will need re-doing.
+                }
+            }
             else
             {
                 playerCamera.fieldOfView = defaultFOV;
             }
+           
         }
         else
         {
