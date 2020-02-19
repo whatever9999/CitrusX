@@ -6,6 +6,8 @@
 * Dominique (Changes) 11/02/2020
 * Removed unused package imports
 * Moved rotate in switch case to before (stops repetition)
+* Chase (Changes) 19/2/2020
+* Commented out all wire code and stuck to just pipes for the time being
 */
 
 using UnityEngine;
@@ -44,7 +46,6 @@ public class Pipes_CW : MonoBehaviour
     public COLOURS wireEndColour;
     public bool isWireEnd;
     public bool isPipe;
-    public Button[] connectingWires;
     public Button matchingEnd;
     private Button thisPipe;
     public bool[] wiresConnectedTo =  { false, false, false, false};
@@ -109,30 +110,22 @@ public class Pipes_CW : MonoBehaviour
         //if not in correct position, rotate it
         if (desiredDirection != currentDirection)
         {
-            gameObject.transform.Rotate(0, 0, 90);
+            gameObject.transform.Rotate(0, 0, degreesToMove);
+
             switch (currentDirection)
             {
                 case DIRECTIONS.HORIZONTAL:
                     { 
-
-                        gameObject.transform.Rotate(0, 0, degreesToMove);
-
                         currentDirection = DIRECTIONS.VERTICAL; 
                     }
                     break;
                 case DIRECTIONS.VERTICAL:
                     {
-
-                        gameObject.transform.Rotate(0, 0, degreesToMove);
-
                         currentDirection = DIRECTIONS.HORIZONTAL;
                     }
                     break;
                 case DIRECTIONS.RIGHT_DOWN_BEND:
                     {
-
-                        gameObject.transform.Rotate(0, 0, degreesToMove);
-
                         currentDirection = DIRECTIONS.LEFT_DOWN_BEND;
                     }
                     break;
@@ -157,84 +150,84 @@ public class Pipes_CW : MonoBehaviour
         }
        
     }
-    public void ConnectWires()
-    {
-        //check if it is a wireend (this is ticked in the inspector)
-        if(isWireEnd)
-        {
-            //signify that it is already connected
-            isWireConnected = true;
-            //check for what colour it represents
-            switch (wireEndColour)
-            {
-                case COLOURS.RED:
-                    {
-                        //then set the drawcolour to the correct colour
-                        theFusebox.drawColour = Color.red;
-                    }
-                    break;
-                case COLOURS.BLUE:
-                    {
-                        theFusebox.drawColour = Color.blue;
-                    }
-                    break;
-                case COLOURS.GREEN:
-                    {
-                        theFusebox.drawColour = Color.green;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) ||(wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
-            {
-                //if the previous tile is the same colour as the wire end, both the original and last pipe end will change colour to show
-                //completion
-                wireColour = Color.yellow;
-                matchingEnd.image.color = Color.yellow;
-                northWireScript.isWireConnected = true;
-                southWireScript.isWireConnected = true;
-                eastWireScript.isWireConnected = true;
-                westWireScript.isWireConnected = true;
-                theFusebox.wireCompletedCount += 2;
-            }    
-        }
-        if(!isWireEnd)
-        {
-            //if the tile hasn't been manipulated
-            if(wireColour == defaultBoxColour)
-            {
-                //check if the previous pipe has been used
-                if(( wiresConnectedTo[1] && eastWireScript.isWireConnected) || ( wiresConnectedTo[0] && northWireScript.isWireConnected) ||
-                    (wiresConnectedTo[2] && southWireScript.isWireConnected) || (wiresConnectedTo[3] && eastWireScript.isWireConnected))
-                {
-                    //set the wireEndColour for the comparison for wireEnds
-                    if (theFusebox.drawColour == Color.red)
-                    {
-                        wireEndColour = COLOURS.RED;
+    //public void ConnectWires()
+    //{
+    //    //check if it is a wireend (this is ticked in the inspector)
+    //    if(isWireEnd)
+    //    {
+    //        //signify that it is already connected
+    //        isWireConnected = true;
+    //        //check for what colour it represents
+    //        switch (wireEndColour)
+    //        {
+    //            case COLOURS.RED:
+    //                {
+    //                    //then set the drawcolour to the correct colour
+    //                    theFusebox.drawColour = Color.red;
+    //                }
+    //                break;
+    //            case COLOURS.BLUE:
+    //                {
+    //                    theFusebox.drawColour = Color.blue;
+    //                }
+    //                break;
+    //            case COLOURS.GREEN:
+    //                {
+    //                    theFusebox.drawColour = Color.green;
+    //                }
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //        if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) ||(wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
+    //        {
+    //            //if the previous tile is the same colour as the wire end, both the original and last pipe end will change colour to show
+    //            //completion
+    //            wireColour = Color.yellow;
+    //            matchingEnd.image.color = Color.yellow;
+    //            northWireScript.isWireConnected = true;
+    //            southWireScript.isWireConnected = true;
+    //            eastWireScript.isWireConnected = true;
+    //            westWireScript.isWireConnected = true;
+    //            theFusebox.wireCompletedCount += 1;
+    //        }    
+    //    }
+    //    if(!isWireEnd)
+    //    {
+    //        //if the tile hasn't been manipulated
+    //        if(wireColour == defaultBoxColour)
+    //        {
+    //            //check if the previous pipe has been used
+    //            if(( wiresConnectedTo[1] && eastWireScript.isWireConnected) || ( wiresConnectedTo[0] && northWireScript.isWireConnected) ||
+    //                (wiresConnectedTo[2] && southWireScript.isWireConnected) || (wiresConnectedTo[3] && eastWireScript.isWireConnected))
+    //            {
+    //                //set the wireEndColour for the comparison for wireEnds
+    //                if (theFusebox.drawColour == Color.red)
+    //                {
+    //                    wireEndColour = COLOURS.RED;
                         
-                    }
-                    else if (theFusebox.drawColour == Color.green)
-                    {
-                        wireEndColour = COLOURS.GREEN;
-                    }
-                    else if (theFusebox.drawColour == Color.blue)
-                    {
-                        wireEndColour = COLOURS.BLUE;
-                    }
-                    //check for colour
-                    if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) 
-                        || (wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
-                    {
-                        //draw the correct colour tile and signify as connected
-                        wireColour = theFusebox.drawColour;
-                        thisPipe.image.color = theFusebox.drawColour;
-                        isWireConnected = true;
-                    }
+    //                }
+    //                else if (theFusebox.drawColour == Color.green)
+    //                {
+    //                    wireEndColour = COLOURS.GREEN;
+    //                }
+    //                else if (theFusebox.drawColour == Color.blue)
+    //                {
+    //                    wireEndColour = COLOURS.BLUE;
+    //                }
+    //                //check for colour
+    //                if ((wiresConnectedTo[0] && northWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[1] && eastWireScript.wireEndColour == wireEndColour) 
+    //                    || (wiresConnectedTo[2] && southWireScript.wireEndColour == wireEndColour) || (wiresConnectedTo[3] && westWireScript.wireEndColour == wireEndColour))
+    //                {
+    //                    //draw the correct colour tile and signify as connected
+    //                    wireColour = theFusebox.drawColour;
+    //                    thisPipe.image.color = theFusebox.drawColour;
+    //                    isWireConnected = true;
+    //                }
                    
-                }
-            }
+    //            }
+    //        }
             
-        }
-    }
+    //    }
+    //}
 }
