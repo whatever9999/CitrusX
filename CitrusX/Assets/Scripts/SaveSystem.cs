@@ -18,7 +18,7 @@ public class SaveSystem: MonoBehaviour
     public static SaveSystem instance;
 
     #region ObjectsToSave
-    public Transform player;
+    private Transform player;
     #endregion
 
     private void Awake()

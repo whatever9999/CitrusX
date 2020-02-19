@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SFXManager_DR : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class SFXManager_DR : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         instance = this;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /*

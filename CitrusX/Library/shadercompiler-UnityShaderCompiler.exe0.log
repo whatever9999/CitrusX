@@ -1,2 +1,5 @@
-Base path: D:/Chase/2019.1.0f2/Editor/Data
+Base path: C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data
 Cmd: initializeCompiler
+Cmd: preprocess
+  error: 1 plat 21 at (104): Both vertex and fragment programs must be present in a shader snippet. Excluding it from compilation.
+  insize=3014 outsize=3816 ok=1
