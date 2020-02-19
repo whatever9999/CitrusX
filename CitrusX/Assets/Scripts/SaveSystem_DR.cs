@@ -13,9 +13,9 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class SaveSystem: MonoBehaviour
+public class SaveSystem_DR: MonoBehaviour
 {
-    public static SaveSystem instance;
+    public static SaveSystem_DR instance;
 
     #region ObjectsToSave
     private Transform player;
