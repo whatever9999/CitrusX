@@ -49,7 +49,14 @@
  * 
  * Adam (Changes) 19/02/2020
  * Added Candles and bowl as interactable objects
- */
+ * 
+ * Chase (Changes) 17/2/2020
+ * Added PC for correct order puzzle
+ * 
+ * Hugo (Changes) 16/02/2020
+ * Added a glow effect onto interactable objects
+  */
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +66,11 @@ public class Interact_HR : MonoBehaviour
     public const int defaultFOV = 60;
     public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
+    public Material outlineMaterial;
 
+    private Material originalMaterial;
+    private MeshRenderer targetRenderer;
+    private MeshRenderer currRenderer;
     private bool zoomedIn = false;
     private RaycastHit hit;
     private Text notificationText;
@@ -71,9 +82,12 @@ public class Interact_HR : MonoBehaviour
     private Image paperBackground;
     private Camera playerCamera;
     private int numberCoinsCollected;
+    private GameObject correctOrderUI;
+    private Inventory_HR inventoryManager;
 
     private void Awake()
     {
+        inventoryManager = GetComponent<Inventory_HR>();
         paper = GameObject.Find("PaperUI");
         fuseboxUI = GameObject.Find("FuseboxUI");
         paperText = paper.GetComponentInChildren<Text>();
@@ -82,6 +96,7 @@ public class Interact_HR : MonoBehaviour
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
         playerCamera = GetComponent<Camera>();
+        correctOrderUI = GameObject.Find("CorrectOrderUI");
     }
 
     void Update()
@@ -91,19 +106,40 @@ public class Interact_HR : MonoBehaviour
         //RayCast Forward see if the player is in range of anything
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
+            //Get the current Renderer for the object
+            currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+
+            //If the object is not the same as the previous object then revert to the original material
+            //and change the new object to the outline material
+            if (targetRenderer && currRenderer.material != targetRenderer.material)
+            {
+                
+                targetRenderer.material = originalMaterial;
+                originalMaterial = currRenderer.material;
+                targetRenderer = currRenderer;
+                currRenderer.material = outlineMaterial;
+                
+            }
+            else
+            {
+                targetRenderer = currRenderer;
+            }
+
             //Is in looking at an object?
             if (hit.transform.tag == "Object")
             {
                 GameObject item = hit.transform.gameObject;
                 notificationText.text = "Press E to pick up the " + item.name.ToLower();
                 //If he presses the key then pick up the object
-                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
-            } else if (hit.transform.tag == "Table")
+            }
+            else if (hit.transform.tag == "Table")
             {
                 //Check if the table already has the items or not yet
                 PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
@@ -128,7 +164,7 @@ public class Interact_HR : MonoBehaviour
                             }
                         }
                     }
-                    else if(table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
+                    else if (table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
                     {
                         //check to see if its been set up
                         if (GetComponent<SetUpRitual_CW>().jewelleryCollected)
@@ -144,7 +180,8 @@ public class Interact_HR : MonoBehaviour
                                 notificationText.text = "";
                             }
                         }
-                    } else if(table.currentTable == Table_CW.TABLES.CHESS_BOARD) 
+                    }
+                    else if (table.currentTable == Table_CW.TABLES.CHESS_BOARD)
                     {
                         if (Journal_DR.instance.AreTasksComplete())
                         {
@@ -158,12 +195,14 @@ public class Interact_HR : MonoBehaviour
                                 notificationText.text = "";
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         notificationText.text = "You don't have all the items";
                     }
                 }
-            } else if (hit.transform.tag == "Keypad")
+            }
+            else if (hit.transform.tag == "Keypad")
             {
                 //Get the keypad we're looking at
                 KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
@@ -172,7 +211,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     notificationText.text = "Press E to use the keypad";
 
-                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                         keypad.OpenKeypad(keypadItem);
@@ -181,52 +220,56 @@ public class Interact_HR : MonoBehaviour
                         notificationText.text = "";
                     }
                 }
-            } else if (hit.transform.tag == "Door")
+            }
+            else if (hit.transform.tag == "Door")
             {
                 Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
 
-                if(door.unlocked)
+                if (door.unlocked)
                 {
                     notificationText.text = "Press E to open";
 
-                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         notificationText.text = "";
                         door.Open();
                         //Player can't interact with door when it is already open
                         door.tag = "Untagged";
                     }
-                } else if(door.requiresKey) 
+                }
+                else if (door.requiresKey)
                 {
                     //if both key parts are found (in journal as it's for a colour matching puzzle)
-                    if(journal.AreTasksComplete())
+                    if (journal.AreTasksComplete())
                     {
                         notificationText.text = "Press E to open";
                         door.unlocked = true;
 
-                        if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
                             notificationText.text = "";
                             door.Open();
                             door.tag = "Untagged";
                         }
-                     
+
                     }
                     else //if tasks arent complete hint at player to read their journal
                     {
-                       
+
                         notificationText.text = "It's locked. I should check my journal.";
                     }
-                } else
+                }
+                else
                 {
                     notificationText.text = "How can I unlock this?";
-                  
+
                 }
-            } else if (hit.transform.tag == "Paper")
+            }
+            else if (hit.transform.tag == "Paper")
             {
                 notificationText.text = "Press E to read";
 
-                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
                     notificationText.text = "";
@@ -235,12 +278,12 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                 }
-           }
+            }
             else if (hit.transform.tag == "Fusebox")
             {
                 notificationText.text = "Press E to open the fuse box";
 
-                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                 }
@@ -250,7 +293,7 @@ public class Interact_HR : MonoBehaviour
                 if (!zoomedIn)
                 {
                     notificationText.text = "Press E to zoom in";
-                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         playerCamera.transform.LookAt(hit.transform);
                         playerCamera.fieldOfView = zoomedFOV;
@@ -261,7 +304,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     notificationText.text = "Press E to zoom out";
 
-                    if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         zoomedIn = false;
                         playerCamera.fieldOfView = defaultFOV;
@@ -273,12 +316,13 @@ public class Interact_HR : MonoBehaviour
             {
                 notificationText.text = "Press E to rotate the " + hit.transform.name;
 
-                if (Input.GetKeyDown(InteractKey)||Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     //Rotate 90 degrees in y axis
                     hit.transform.Rotate(0, 0, 90);
                 }
-            } else if(hit.transform.tag == "WaterBowl")
+            }
+            else if (hit.transform.tag == "WaterBowl")
             {
                 notificationText.text = "Press E to take a coin";
 
@@ -286,31 +330,33 @@ public class Interact_HR : MonoBehaviour
                 {
                     WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
 
-                    if(waterBowl.GetBaronActive())
+                    if (waterBowl.GetBaronActive())
                     {
                         if (waterBowl.RemoveCoin())
                         {
                             numberCoinsCollected++;
                             waterBowl.ResetBaron();
                             Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
-                        } else
+                        }
+                        else
                         {
                             Debug.Log("Player has lost by trying to take a coin when there weren't any in the bowl");
                             //TODO: There wasn't a coin for the player to take so they lose the game
                         }
-                    } else
+                    }
+                    else
                     {
                         Debug.Log("Player has lost by trying to take a coin when the baron wasn't present");
                         //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
                     }
-                    
+
                 }
             }
-            else if(hit.transform.tag == "MovableWeight")
+            else if (hit.transform.tag == "MovableWeight")
             {
                 notificationText.text = "Press " + InteractKey.ToString() + " to use the weight";
 
-                if(Input.GetKeyDown(InteractKey))
+                if (Input.GetKeyDown(InteractKey))
                 {
                     WeightScript_AG weight = hit.transform.GetComponent<WeightScript_AG>();
                     weight.MoveWeight();
@@ -342,7 +388,7 @@ public class Interact_HR : MonoBehaviour
             {
                 CoinBowlScript_AG coinBowlScript = hit.transform.GetComponent<CoinBowlScript_AG>();
 
-                if(coinBowlScript.CandlesLit())
+                if (coinBowlScript.CandlesLit())
                 {
                     notificationText.text = "Press " + InteractKey.ToString() + " to remove a coin";
 
@@ -357,9 +403,17 @@ public class Interact_HR : MonoBehaviour
                     if (Input.GetKeyDown(InteractKey))
                     {
                         coinBowlScript.AddCoin();
-
                     }
                     //TODO - Needs a coin gameobject as a param. Originally had this, but will need re-doing.
+                }
+            }
+            else if (hit.transform.tag == "PC")
+            {
+                notificationText.text = "Press E to open the PC";
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
             else

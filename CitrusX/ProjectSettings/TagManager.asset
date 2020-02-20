@@ -16,6 +16,9 @@ TagManager:
   - MovableWeight
   - Candles
   - DryBowl
+  - Fusebox
+  - PC
+  - InventoryPanel
   layers:
   - Default
   - TransparentFX

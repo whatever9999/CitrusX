@@ -38,8 +38,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
         colourMatch = GetComponent<ColourMatchingPuzzle_CW>();
-        fusebox = GetComponent<Fusebox_CW>();
-        chessboard = GetComponent<ChessBoard_DR>();
+        fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
+        chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         throwing = GetComponent<BallButtonLogic_HR>();
         keypad = GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GetComponent<ScalesPuzzleScript_AG>();

@@ -51,25 +51,31 @@ public class ChessBoard_DR : MonoBehaviour
 
     public bool CheckPieces()
     {
-        if(journal.AreTasksComplete())
+        if(isActive == true)
         {
-            journal.ChangeTasks(new string[] { "solve chessboar" });
-        }
-        bool inPosition = true;
-        for(int i = 0; i < chessPieces.Length; i++)
-        {
-            //If the chess piece isn't in the right position or isn't active (isn't on the board yet) then the door cannot open
-            if(chessPieces[i].chessPieceTransform.localEulerAngles != chessPieces[i].desiredPosition)
+            if (journal.AreTasksComplete())
             {
-                inPosition = false;
-                break;
-            } else if (!chessPieces[i].chessPieceTransform.gameObject.activeInHierarchy)
-            {
-                inPosition = false;
-                break;
+                journal.ChangeTasks(new string[] { "solve chessboard" });
             }
+            bool inPosition = true;
+            for (int i = 0; i < chessPieces.Length; i++)
+            {
+                //If the chess piece isn't in the right position or isn't active (isn't on the board yet) then the door cannot open
+                if (chessPieces[i].chessPieceTransform.localEulerAngles != chessPieces[i].desiredPosition)
+                {
+                    inPosition = false;
+                    break;
+                }
+                else if (!chessPieces[i].chessPieceTransform.gameObject.activeInHierarchy)
+                {
+                    inPosition = false;
+                    break;
+                }
+            }
+            return inPosition;
         }
-        return inPosition;
+        return false;
+     
     }
 }
 
