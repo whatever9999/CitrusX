@@ -6,8 +6,10 @@
  * If he is disabled then he is moved back to his start position
  * 
  * Dominique (Changes) 20/02/2020
- * Changed the way the baron moves
+ * Changed the way the baron moves (change velocity instead of adding force)
+ * Added animation to the baron
  */
+using System.Collections;
 using UnityEngine;
 
 public class Baron_DR : MonoBehaviour
@@ -17,12 +19,14 @@ public class Baron_DR : MonoBehaviour
     private Vector3 startPosition;
     private Transform waterBowl;
     private Rigidbody rigidbody;
+    private Animator animator;
 
     private void Awake()
     {
         startPosition = transform.position;
         waterBowl = GameObject.FindObjectOfType<WaterBowl_DR>().transform;
         rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -51,9 +55,17 @@ public class Baron_DR : MonoBehaviour
         if (collision.gameObject.tag == "WaterBowl")
         {
             WaterBowl_DR waterBowl = collision.gameObject.GetComponent<WaterBowl_DR>();
-            waterBowl.RemoveCoin();
-            Debug.Log("The baron has taken a coin");
-            waterBowl.ResetBaron();
+            StartCoroutine(PickUpCoin(waterBowl));
         }
+    }
+
+    public IEnumerator PickUpCoin(WaterBowl_DR waterBowl)
+    {
+        //Play the reach animation and pick up a coin then disappear
+        animator.SetBool("ReachedBowl", true);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        waterBowl.RemoveCoin();
+        waterBowl.ResetBaron();
+        Debug.Log("The baron has taken a coin");
     }
 }

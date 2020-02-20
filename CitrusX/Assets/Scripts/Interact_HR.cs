@@ -118,7 +118,6 @@ public class Interact_HR : MonoBehaviour
             //and change the new object to the outline material
             if (targetRenderer && currRenderer.material != targetRenderer.material)
             {
-                
                 targetRenderer.material = originalMaterial;
                 originalMaterial = currRenderer.material;
                 targetRenderer = currRenderer;
