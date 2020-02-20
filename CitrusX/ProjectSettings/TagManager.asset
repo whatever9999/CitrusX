@@ -15,7 +15,6 @@ TagManager:
   - WaterBowl
   - MovableWeight
   - Candles
-  - DryBowl
   - Fusebox
   - PC
   - InventoryPanel

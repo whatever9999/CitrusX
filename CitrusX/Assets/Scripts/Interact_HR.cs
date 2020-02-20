@@ -55,6 +55,9 @@
  * 
  * Hugo (Changes) 16/02/2020
  * Added a glow effect onto interactable objects
+ * 
+ * Dominique (Changes) 20/02/2020
+ * Added a check to see if the player has won or lost the game
   */
 using System.Collections;
 using UnityEngine;
@@ -84,6 +87,7 @@ public class Interact_HR : MonoBehaviour
     private int numberCoinsCollected;
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
+    private WaterBowl_DR waterBowl;
 
     private void Awake()
     {
@@ -97,6 +101,7 @@ public class Interact_HR : MonoBehaviour
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
+        waterBowl = GameObject.Find("Water Bowl").GetComponent<WaterBowl_DR>();
     }
 
     void Update()
@@ -364,47 +369,11 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Candles")
             {
-                CandleScript_AG candleScript = hit.transform.GetComponent<CandleScript_AG>();
-
-                if (candleScript.AreLit())
+                notificationText.text = "Press " + InteractKey.ToString() + " to blow out";
+                if (Input.GetKeyDown(InteractKey))
                 {
-                    notificationText.text = "Press " + InteractKey.ToString() + " to extinguish";
-
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        candleScript.BlowOut();
-                    }
-                }
-                else if (!candleScript.AreLit())
-                {
-                    notificationText.text = "Press " + InteractKey.ToString() + " to light";
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        candleScript.LightCandles();
-                    }
-                }
-            }
-            else if (hit.transform.tag == "DryBowl")
-            {
-                CoinBowlScript_AG coinBowlScript = hit.transform.GetComponent<CoinBowlScript_AG>();
-
-                if (coinBowlScript.CandlesLit())
-                {
-                    notificationText.text = "Press " + InteractKey.ToString() + " to remove a coin";
-
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        coinBowlScript.RemoveCoin();
-                    }
-                }
-                else
-                {
-                    notificationText.text = "Press " + InteractKey.ToString() + " to place a coin";
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        coinBowlScript.AddCoin();
-                    }
-                    //TODO - Needs a coin gameobject as a param. Originally had this, but will need re-doing.
+                    CandleScript_AG candleScript = hit.transform.GetComponent<CandleScript_AG>();
+                    candleScript.BlowOut();
                 }
             }
             else if (hit.transform.tag == "PC")
@@ -426,6 +395,20 @@ public class Interact_HR : MonoBehaviour
         {
             playerCamera.fieldOfView = defaultFOV;
             notificationText.text = "";
+        }
+    }
+
+    /*
+     * Play the good or bad cinematic after the player blows the candles out according to if they've won or not
+     */
+    public void EndGameCheck()
+    {
+        if (numberCoinsCollected == waterBowl.numberOfCoins)
+        {
+            Debug.Log("Player has won");
+        } else
+        {
+            Debug.Log("Player has lost");
         }
     }
 }

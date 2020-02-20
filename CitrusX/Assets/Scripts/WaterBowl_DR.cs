@@ -2,6 +2,9 @@
  * Dominique
  * 
  * The water bowl handles the baron's appearances and the coins
+ * 
+ * Dominique (Changes) 20/02/2020
+ * Now coins are instantiated according to how many are asked for in the inspector
  */
 
 using System.Collections.Generic;
@@ -10,6 +13,8 @@ using UnityEngine;
 public class WaterBowl_DR : MonoBehaviour
 {
     public Vector2 baronAppearanceIntervalRange;
+    public int numberOfCoins;
+    public GameObject coinPrefab;
 
     private float currentBaronAppearanceInterval;
     private float baronAppearanceInterval;
@@ -18,7 +23,7 @@ public class WaterBowl_DR : MonoBehaviour
 
     public bool GetBaronActive() { return baron.activeInHierarchy; }
 
-    //Get the coins (that are children to the bowl) and set the current interval until the baron will appear
+    //Create the coins and set the current interval until the baron will appear
     private void Start()
     {
         baron = GameObject.Find("Baron");
@@ -28,9 +33,10 @@ public class WaterBowl_DR : MonoBehaviour
         baronAppearanceInterval = Random.Range(baronAppearanceIntervalRange[0], baronAppearanceIntervalRange[1]);
 
         coins = new List<GameObject>();
-        for(int i = 0; i < transform.childCount; i++)
+        for(int i = 0; i < numberOfCoins; i++)
         {
-            coins.Add(transform.GetChild(i).gameObject);
+            GameObject thisCoin = Instantiate(coinPrefab, transform);
+            coins.Add(thisCoin);
         }
     }
 

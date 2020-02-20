@@ -4,51 +4,26 @@
  * Created On: 18/02/2020
  * 
  * Summary: Used by the candles to light/blow out
+ * 
+ * Dominique Changes 20/02/20
+ * Candles only need to be blown out and then the good or bad cinematic will play according to if the player took all the coins or not
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CandleScript_AG : MonoBehaviour
 {
-    private CoinBowlScript_AG CoinBowlScript;
-    private bool areLit;
-    // Start is called before the first frame update
-    void Start()
+    private ParticleSystem flame;
+    private Interact_HR player;
+
+    private void Awake()
     {
-        areLit = false;
-        CoinBowlScript = GameObject.FindGameObjectWithTag("DryBowl").GetComponent<CoinBowlScript_AG>();
+        flame = GetComponentInChildren<ParticleSystem>();
+        player = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
     }
 
-    /// <summary>
-    /// Set "areLit" to true
-    /// </summary>
-    public void LightCandles()
-    {
-        if(!areLit)
-        {
-            areLit = true;
-            CoinBowlScript.CandlesLit(true);
-            Debug.Log("Candles have been lit");
-        }
-    }
-
-    /// <summary>
-    /// set "areLit" to false
-    /// </summary>
     public void BlowOut()
     {
-        if(areLit)
-        {
-            areLit = false;
-            CoinBowlScript.CandlesLit(false);
-            Debug.Log("Candles have been extinguished.");
-        }
+        flame.Stop();
+        player.EndGameCheck();
     }
-
-    /// <summary>
-    /// Return the value of "areLit"
-    /// </summary>
-    /// <returns></returns>
-    public bool AreLit() { return areLit; }
 }
