@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0058bdacf8714b64bae3e63254c30e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 1
 --- !u!54 &209283556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1098,7 +1098,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &209283557
 CapsuleCollider:
@@ -1110,10 +1110,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.4
+  m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.0000026226044, y: 1.0136979, z: 0.028996773}
 --- !u!23 &209283558
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1158,7 +1158,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209283554}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -371481341812892972, guid: 48a0bfbe0e80432489d36fc692330394, type: 3}
 --- !u!4 &209283560
 Transform:
   m_ObjectHideFlags: 0
@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209283554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.06, y: 0.925, z: -0.09}
+  m_LocalPosition: {x: -7.06, y: 0, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4635,7 +4635,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 806037003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d4cf09c43be314aa0c572071761425, type: 3}
+  m_Script: {fileID: 11500000, guid: 11ca5a01b062080408e2ff17525e1d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &806037005
@@ -11879,7 +11879,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 806037004}
+      - m_Target: {fileID: 0}
         m_MethodName: Save
         m_Mode: 1
         m_Arguments:
@@ -12254,7 +12254,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277546073}
   m_HandleRect: {fileID: 277546072}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13159,7 +13159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00077183486}
+  m_AnchoredPosition: {x: 0, y: -0.00007533793}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2140471265 stripped
@@ -13319,7 +13319,7 @@ PrefabInstance:
     - target: {fileID: 3602377584893267968, guid: dc6f64f7caf1eee4b846e3ef2c53eb0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.76
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3602377584893267968, guid: dc6f64f7caf1eee4b846e3ef2c53eb0c,
         type: 3}

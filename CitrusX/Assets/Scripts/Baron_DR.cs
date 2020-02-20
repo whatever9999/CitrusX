@@ -4,6 +4,9 @@
  * When the baron is active he moves towards the water bowl
  * If he collides with the bowl then he takes a coin
  * If he is disabled then he is moved back to his start position
+ * 
+ * Dominique (Changes) 20/02/2020
+ * Changed the way the baron moves
  */
 using UnityEngine;
 
@@ -24,9 +27,16 @@ public class Baron_DR : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Move towards water bowl
+        //Set target as water bowl
         transform.LookAt(waterBowl);
-        rigidbody.AddRelativeForce(Vector3.forward * speed, ForceMode.Force);
+        //Make sure that the baron doesn't rotate in the wrong axis
+        Vector3 rotation = transform.rotation.eulerAngles;
+        rotation.x = 0;
+        rotation.z = 0;
+        transform.rotation = Quaternion.Euler(rotation);
+        //Move towards water bowl
+        rigidbody.velocity = transform.forward * speed;
+
     }
 
     private void OnDisable()
