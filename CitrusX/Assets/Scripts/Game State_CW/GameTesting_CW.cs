@@ -13,6 +13,8 @@ public class GameTesting_CW : MonoBehaviour
     public static GameTesting_CW instance;
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false};
+    private bool[] cutscenes = { false, false, false};
+    private bool[] cutscenesDone = { false, false, false };
 
     private void Awake()
     {
@@ -21,7 +23,13 @@ public class GameTesting_CW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!arePuzzlesDone[0] && !setUpPuzzle[0])
+        //play start cutscene
+        if(!cutscenes[0])
+        {
+            //play start cutscene
+            cutscenes[0] = true;
+        }
+        else if(!arePuzzlesDone[0] && !setUpPuzzle[0])
         {
             setUpPuzzle[0] = true;
             InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle(); 
