@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 374703315}
   - component: {fileID: 374703314}
   m_Layer: 0
-  m_Name: key part 2
+  m_Name: Bathroom Key Part 2
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3730,7 +3730,7 @@ GameObject:
   - component: {fileID: 665850088}
   - component: {fileID: 665850087}
   m_Layer: 0
-  m_Name: key part 1
+  m_Name: Bathroom Key
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3819,7 +3819,7 @@ PrefabInstance:
     - target: {fileID: 7593756591528016012, guid: f05ee06d51fd4f94399acba4e336207b,
         type: 3}
       propertyPath: m_Name
-      value: KeyDoor
+      value: Colour Matching Door
       objectReference: {fileID: 0}
     - target: {fileID: 7593756591528016001, guid: f05ee06d51fd4f94399acba4e336207b,
         type: 3}
@@ -13414,6 +13414,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -3661639628750336703, guid: b11eee9e98757104287a4fe041ac6088,
         type: 3}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: text
+      value: 'First Digit: '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b300a6fe9a23c364193fff0c4f1aa3bb, type: 3}
 --- !u!1001 &2110240601

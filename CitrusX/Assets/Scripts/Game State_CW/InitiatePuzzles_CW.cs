@@ -30,7 +30,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private ScalesPuzzleScript_AG scales;
     internal int ballCounter = 0;
     #endregion
-
+    #region VOICEOVER_BOOLS
+    private bool[] voiceovers = { false, false, false, false, false};
+    #endregion
     private void Awake()
     {
         instance = this;
@@ -53,15 +55,28 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateFuseboxPuzzle()
     {
-        journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
-        journal.ChangeTasks(new string[] { "Fix fusebox" });
+        //player enters ritual room - trigger box? Game script?
+        //disturbance occurs (loud sound?)
+        if(!voiceovers[1])
+        {
+            //VOICEOVER 2-1
+            voiceovers[1] = true;
+        }
+       //if interact with monitor then
         fusebox.SetActive(true);
     }
     public void InitiateColourMatchingPuzzle()
     {
-        journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
-        journal.ChangeTasks(new string[] { "key part 1", "key part 2" });
+        //player in ritual room
+        //disturbance occurs
+        if(!voiceovers[2])
+        {
+            //VOICEOVER 3-1
+            voiceovers[2] = true;
+        }
+        //if player interacts with monitor then
         colourMatch.SetActive(true);
+       
     }
     public void InitiateHiddenMechanismPuzzle()
     {
@@ -78,15 +93,32 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateKeycodePuzzle()
     {
-        journal.AddJournalLog("This safe needs a 4 digit code. Maybe something nearby can give me some clues.");
-        journal.ChangeTasks(new string[] { "first digit", "second digit", "third digit", "fourth digit", "unlock safe" });
+        //this is triggered by being in room for a certain amount of time
+        if(!voiceovers[3])
+        {
+            //VOICEOVER 4-1
+            voiceovers[3] = true;
+        }
+        if(!voiceovers[4])
+        {
+            //VOICEOVER 4-2
+            voiceovers[4] = true;
+        }
+        //if player interacts with monitor
         keypad.SetActive(true);
     }
     public void InitiateBalancePuzzle()
     {
-        journal.AddJournalLog("What could I use to balance this out?");
-        journal.ChangeTasks(new string[] { "balance scales" });
-        scales.SetActive(true);
+        //in room, checks monitor
+        if(!voiceovers[5])
+        {
+            //VOICEOVER 5-1
+            voiceovers[5] = true;
+            scales.SetActive(true);
+            //journal for check out kitchen?
+        }
+        
+        
 
     }
     public void InitiateThrowingPuzzle()

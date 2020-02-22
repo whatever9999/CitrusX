@@ -28,49 +28,85 @@ public class SetUpRitual_CW : MonoBehaviour
         journal = Journal_DR.instance;
     }
 
+    private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
     internal void SetActive(bool value) { isActive = value; }
 
     void Update()
     {
         //if nothing has been collected
-        if(!ritualSetUpCollected)
+        if(isActive)
         {
-            //check until the tasks are done
-            if (journal.AreTasksComplete())
+            if(!voiceovers[0])
             {
-                //change tasks
-                journal.AddJournalLog("Now I need to place it on the table");
-                journal.ChangeTasks(new string[] { "Place on table"});
-                //mark step as complete
-                ritualSetUpCollected = true;
+                //VOICEOVER 1-1
+                voiceovers[0] = true;
             }
-            
-        }
-        else if(ritualSetUpCollected && !ritualSetUpPlaced)
-        {
-            if (journal.AreTasksComplete())
+            if (!ritualSetUpCollected)
             {
-                journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
-                journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
-                ritualSetUpPlaced = true;
+                //check until the tasks are done
+                if (journal.AreTasksComplete())
+                {
+                    if(!voiceovers[2])
+                    {
+                        //VOICEOVER 1-3
+                        voiceovers[2] = true;
+                    }
+                    //change tasks
+                    journal.AddJournalLog("Now I need to place it on the table");
+                    journal.ChangeTasks(new string[] { "Place on table" });
+                    //mark step as complete
+                    ritualSetUpCollected = true;
+                }
+
             }
-        }
-        else if (ritualSetUpPlaced && !jewelleryCollected)
-        {
-            if (journal.AreTasksComplete())
+            else if (ritualSetUpCollected && !ritualSetUpPlaced)
             {
-                journal.AddJournalLog("I should put this in the garden box");
-                journal.ChangeTasks(new string[] { "Place in garden" });
-                jewelleryCollected = true;
+                if (journal.AreTasksComplete())
+                {
+                    if(!voiceovers[3])
+                    {
+                        //VOICEOVER 1-4
+                        voiceovers[3] = true;
+                    }
+                    journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
+                    journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
+                    ritualSetUpPlaced = true;
+                }
             }
-        }
-        else if(jewelleryCollected && !jewelleryPlaced)
-        {
-            //if these final tasks are done
-            if(journal.AreTasksComplete())
-            {//tell the game the puzzle is complete
-                GameTesting_CW.instance.arePuzzlesDone[0] = true;
+            else if (ritualSetUpPlaced && !jewelleryCollected)
+            {
+                if (journal.AreTasksComplete())
+                {
+                    if (!voiceovers[4])
+                    {
+                        //VOICEOVER 1-5
+                        voiceovers[4] = true;
+                    }
+                    journal.AddJournalLog("I should put this in the garden box");
+                    journal.ChangeTasks(new string[] { "Place in garden" });
+                    jewelleryCollected = true;
+                }
+            }
+            else if (jewelleryCollected && !jewelleryPlaced)
+            {
+              
+                //if these final tasks are done
+                if (journal.AreTasksComplete())
+                {//tell the game the puzzle is complete
+                    if (!voiceovers[5])
+                    {
+                        //VOICEOVER 1-6
+                        voiceovers[5] = true;
+                    }
+                    if (!voiceovers[6])
+                    {
+                        //VOICEOVER 1-7
+                        voiceovers[6] = true;
+                    }
+                    GameTesting_CW.instance.arePuzzlesDone[0] = true;
+                }
             }
         }
     }
+        
 }

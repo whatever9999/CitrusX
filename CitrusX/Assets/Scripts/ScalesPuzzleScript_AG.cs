@@ -8,6 +8,10 @@
  *          
  *  Chase (changes) 17/2/2020
  *  Added journal and setActive and linked to game script.
+ *  Chase (changes) 22/2/2020
+ *  Changed serialized fields to private and found objects through get component. Added bools for voiceover.
+ *  Removed start and replaced with awake. Changed var to the relevant script.
+ *  
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +20,9 @@ using UnityEngine;
 public class ScalesPuzzleScript_AG : MonoBehaviour
 {
     // Each side of scales
-    [SerializeField] private GameObject leftPan;
-    [SerializeField] private GameObject rightPan;
-    [SerializeField] private GameObject puzzleDoor;
+    private GameObject leftPan;
+    private GameObject rightPan;
+    private GameObject puzzleDoor;
     private Door_DR doorScript;
 
     // Puzzle State
@@ -32,22 +36,27 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private bool isActive = false;
     
     public void SetActive(bool value) { isActive = value; }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        // Get Door script
-        doorScript = puzzleDoor.GetComponent<Door_DR>();
-
-        // get all weights in right pan (pre-set weights)
-        var seatedWeights = rightPan.GetComponentsInChildren<WeightScript_AG>();
-
-        // Iterate and combijne masses to find total needed
-        foreach (WeightScript_AG weightScript in seatedWeights)
-        {
-            rightMass += weightScript.GetMass();
-        }
+        leftPan = GameObject.Find("Left Pan");
+        rightPan = GameObject.Find("Right Pan");
+        journal = Journal_DR.instance;
+       // doorScript = puzzleDoor.GetComponent<Door_DR>();
+        WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
+        //foreach (WeightScript_AG weightScript in seatedWeights)
+        //{
+        //    rightMass += weightScript.GetMass();
+        //}
     }
 
+    private void Update()
+    {
+        if(isActive)
+        {
+            
+        }
+    }
     /// <summary>
     /// Compare the weight on each side to see if they match
     /// </summary>

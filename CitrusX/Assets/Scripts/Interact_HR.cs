@@ -58,6 +58,11 @@
  * 
  * Dominique (Changes) 20/02/2020
  * Added a check to see if the player has won or lost the game
+ * 
+ * Chase (Changes) 22/2/2020 added more to door section for colour
+ * matching puzzle as it relies on trying the lock for some voiceovers.
+ * Added section to paper for certain notes for game progression in keycode puzzle
+ * 
   */
 using System.Collections;
 using UnityEngine;
@@ -89,6 +94,10 @@ public class Interact_HR : MonoBehaviour
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
 
+    #region VARS_FOR_PUZZLES
+    private ColourMatchingPuzzle_CW colourMatch;
+    #endregion
+
     private void Awake()
     {
         inventoryManager = GetComponent<Inventory_HR>();
@@ -102,6 +111,7 @@ public class Interact_HR : MonoBehaviour
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("Water Bowl").GetComponent<WaterBowl_DR>();
+        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
     }
 
     void Update()
@@ -243,24 +253,26 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
-                    //if both key parts are found (in journal as it's for a colour matching puzzle)
-                    if (journal.AreTasksComplete())
+                    if(door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                        notificationText.text = "Press E to open";
-                        door.unlocked = true;
-
-                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                        {
-                            notificationText.text = "";
-                            door.Open();
-                            door.tag = "Untagged";
-                        }
-
-                    }
-                    else //if tasks arent complete hint at player to read their journal
-                    {
-
-                        notificationText.text = "It's locked. I should check my journal.";
+                            if(!colourMatch.isDoorInteractedWith[0])
+                            {
+                                colourMatch.isDoorInteractedWith[0] = true;
+                            notificationText.text = "It's locked. I should check my journal.";
+                            }
+                            if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            {
+                                colourMatch.isDoorInteractedWith[1] = true;
+                                notificationText.text = "Press E to open";
+                                door.unlocked = true;
+                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                 { 
+                                     notificationText.text = "";
+                                     door.Open();
+                                      door.tag = "Untagged";
+                                 }
+                            }
+                           
                     }
                 }
                 else
@@ -281,6 +293,11 @@ public class Interact_HR : MonoBehaviour
                     paperText.text = paperItem.text;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
+                    //if note is in the safe, let safe know
+                    if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT)
+                    {
+                        keypad.playerInteractsWithDoc = true;
+                    }
                 }
             }
             else if (hit.transform.tag == "Fusebox")

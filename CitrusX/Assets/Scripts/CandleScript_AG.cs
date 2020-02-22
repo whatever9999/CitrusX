@@ -7,6 +7,9 @@
  * 
  * Dominique Changes 20/02/20
  * Candles only need to be blown out and then the good or bad cinematic will play according to if the player took all the coins or not
+ * 
+ * Chase Changes 22/2/2020
+ * Added voiceover lines and bools for voiceovers
  */
 using UnityEngine;
 

@@ -6,28 +6,90 @@
  * 
  * Dominique (Changes) 11/02/2020
  * Removed unused package imports
+ * 
+ * Chase (Changes) 22/2/2020
+ * Added voiceover bools and comments, linked puzzle to door and fleshed
+ * out the entire puzzle
 
  */
 using UnityEngine;
 
 public class ColourMatchingPuzzle_CW : MonoBehaviour
 {
+    #region VARIABLES
     private Journal_DR journal;
     private bool isActive = false;
+    private bool[] voiceovers = { false, false, false, false, false };
+    internal bool[] isDoorInteractedWith = { false, false };
+    private bool hasKeyPart1 = false;
+    internal bool hasKeyPart2 = false;
+    private Door_DR door;
+    #endregion
     internal void SetActive(bool value) { isActive = value; }
     public void Awake()
     {
         journal = Journal_DR.instance;
+        door = GameObject.Find("Colour Matching Door").GetComponent<Door_DR>();
     }
     private void Update()
     {
-        if(isActive)
+        if (isActive)
         {
-            if (journal.AreTasksComplete())
+            if(!voiceovers[0])
             {
-                GameTesting_CW.instance.arePuzzlesDone[2] = true;
+                //VOICEOVER 3-2
+                voiceovers[0] = true;
             }
+            if(isDoorInteractedWith[0] && !voiceovers[1])
+            {
+                //VOICEOVER 3-3
+                voiceovers[1] = true;
+                journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
+                journal.ChangeTasks(new string[] { "Bathroom Key" });
+            }
+            if(!hasKeyPart1)
+            {
+                if (journal.AreTasksComplete())
+                {
+                    if(!voiceovers[2])
+                    {
+                        //VOICEOVER 3-4
+                        voiceovers[2] = true;
+                        journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
+                        hasKeyPart1 = true;
+                    }
+                }
+            }
+            if(!hasKeyPart2 && hasKeyPart1)
+            {
+                if (journal.AreTasksComplete())
+                {
+                    if (!voiceovers[3])
+                    {
+                        //VOICEOVER 3-5
+                        voiceovers[3] = true;
+                        hasKeyPart2 = true;
+                    }
+                }
+            }
+            if(hasKeyPart2)
+            {
+                if(isDoorInteractedWith[1])
+                {
+                    door.Open();
+                    if (!voiceovers[4])
+                    {
+                        //VOICEOVER 3-6
+                        voiceovers[4] = true;
+                        journal.AddJournalLog("Was that a ghost?! I better go back and see.");
+                        GameTesting_CW.instance.arePuzzlesDone[2] = true;
+                    }
+                }
+                
+            }
+           
         }
-       
+        
+
     }
 }
