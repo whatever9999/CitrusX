@@ -36,9 +36,11 @@ public class Subtiles_HR : MonoBehaviour
     private Dictionary<ID, string> subtitlesDictionary = new Dictionary<ID, string>();
     private Dictionary<ID, AudioClip> clipDictionary = new Dictionary<ID, AudioClip>();
     private Text subtitleText;
+    private AudioSource voiceSource;
     
     void Awake()
     {
+        voiceSource = GetComponent<AudioSource>();
         subtitleText = GameObject.Find("").GetComponent<Text>();
 
         //Load both subtitles and clips
@@ -56,7 +58,7 @@ public class Subtiles_HR : MonoBehaviour
     //THE BIG FUNCTION TO CALL CHASE
     public void PlayAudio(ID id) 
     {
-
+        voiceSource.Play(clipDictionary[id]);
         subtitleText.text = subtitlesDictionary[id];
     }
 }
