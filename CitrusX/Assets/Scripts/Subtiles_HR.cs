@@ -1,7 +1,7 @@
 ﻿/*
  * Hugo
  * 
- * 
+ * Other scripts can call the function with the id of the clip and subtitles they wanna show on screen
  * 
  */
 
@@ -13,6 +13,7 @@ using UnityEngine.UI;
 public class Subtiles_HR : MonoBehaviour
 {
 
+    //Change this chase
     public enum ID
     {
         START,
@@ -26,9 +27,10 @@ public class Subtiles_HR : MonoBehaviour
         EIGHTHPUZZLE,
         NINETHPUZZLE,
         TENTHPUZZLE,
-        End
+        END
     }
 
+    //With the same key (the enumerator) you can acess both subtitles and clips
     public List<ID> audioID = new List<ID>();
     public List<AudioClip> voiceClips = new List<AudioClip>();
     public List<string> subtitles = new List<string>();
@@ -41,7 +43,7 @@ public class Subtiles_HR : MonoBehaviour
     void Awake()
     {
         voiceSource = GetComponent<AudioSource>();
-        subtitleText = GameObject.Find("").GetComponent<Text>();
+        subtitleText = GameObject.Find("Subtitles").GetComponent<Text>();
 
         //Load both subtitles and clips
         for (int i = 0; i < voiceClips.Count; i++)
@@ -53,12 +55,25 @@ public class Subtiles_HR : MonoBehaviour
         {
             subtitlesDictionary.Add(audioID[i], subtitles[i]);
         }
+
+        subtitleText.text = "";
     }
 
     //THE BIG FUNCTION TO CALL CHASE
     public void PlayAudio(ID id) 
     {
-        voiceSource.Play(clipDictionary[id]);
+        voiceSource.clip = clipDictionary[id];
         subtitleText.text = subtitlesDictionary[id];
+        voiceSource.Play();
+        SubtitleReset(voiceSource.clip.length);
+       
+    }
+
+
+    //Wait for the clip to be over to remove text
+    IEnumerator SubtitleReset(float timeToWait) 
+    {
+        yield return new WaitForSeconds(timeToWait);
+        subtitleText.text = "";
     }
 }
