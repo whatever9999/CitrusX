@@ -911,6 +911,16 @@ PrefabInstance:
         the pawn hid behind his queen.</color> This could never end well and the country
         was doomed.
       objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: nameOfNote
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: textSize
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b300a6fe9a23c364193fff0c4f1aa3bb, type: 3}
 --- !u!4 &151309369 stripped
@@ -12639,7 +12649,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277546073}
   m_HandleRect: {fileID: 277546072}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13418,7 +13428,16 @@ PrefabInstance:
     - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
         type: 3}
       propertyPath: text
-      value: 'First Digit: '
+      value: 'KEYCODE PASSWORD:                     1st Digit: number of paintings
+        in the library                                     2nd Digit: number of rooms
+        upstairs                                            3rd Digit: number of balls
+        in the games room                                         4th Digit: number
+        of rooms downstairs '
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: textSize
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b300a6fe9a23c364193fff0c4f1aa3bb, type: 3}
@@ -13629,7 +13648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00007533793}
+  m_AnchoredPosition: {x: 0, y: -0.00002691998}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2140471265 stripped

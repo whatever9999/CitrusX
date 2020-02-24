@@ -291,6 +291,7 @@ public class Interact_HR : MonoBehaviour
                     notificationText.text = "";
                     //Set paper text and background according to the object
                     paperText.text = paperItem.text;
+                    paperText.fontSize = paperItem.textSize;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
