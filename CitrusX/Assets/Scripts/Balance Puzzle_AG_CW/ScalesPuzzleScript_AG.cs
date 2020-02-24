@@ -8,9 +8,14 @@
  *          
  *  Chase (changes) 17/2/2020
  *  Added journal and setActive and linked to game script.
+ *  
  *  Chase (changes) 22/2/2020
  *  Changed serialized fields to private and found objects through get component. Added bools for voiceover.
  *  Removed start and replaced with awake. Changed var to the relevant script.
+ *  
+ *  Chase (changes) 24/2/2020
+ *  Edited the puzzle to make it playable and linked it to interact
+ *  
  *  
  */
 using System.Collections;
