@@ -33,8 +33,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     }
     private void Update()
     {
-        if (isActive)
-        {
+        
             if(!voiceovers[0])
             {
                 //VOICEOVER 3-2
@@ -88,8 +87,8 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 
             }
            
-        }
+    }
         
 
-    }
+    
 }

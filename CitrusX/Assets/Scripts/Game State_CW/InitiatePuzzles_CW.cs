@@ -61,9 +61,13 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             //VOICEOVER 2-1
             voiceovers[1] = true;
+            Debug.Log("reached");
+            journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+            journal.ChangeTasks(new string[] { "Fix fusebox" });
+            fusebox.SetGameActive(true);
         }
        //if interact with monitor then
-        fusebox.SetActive(true);
+        
     }
     public void InitiateColourMatchingPuzzle()
     {
@@ -75,6 +79,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
             voiceovers[2] = true;
         }
         //if player interacts with monitor then
+
         colourMatch.SetActive(true);
        
     }
