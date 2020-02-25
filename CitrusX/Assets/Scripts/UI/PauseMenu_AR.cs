@@ -25,7 +25,7 @@ public class PauseMenu_AR : MonoBehaviour
         pauseMenu.SetActive(false);
 
         firstPersonController = gameObject.GetComponent<FirstPersonController>();
-        waterBowl = GameObject.Find("Water Bowl").GetComponent<WaterBowl_DR>();
+        waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
     }
     
     void Update()

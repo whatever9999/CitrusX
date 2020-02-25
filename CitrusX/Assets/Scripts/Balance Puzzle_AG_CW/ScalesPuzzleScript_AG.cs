@@ -47,8 +47,8 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         leftPan = GameObject.Find("Left Pan");
         rightPan = GameObject.Find("Right Pan");
         journal = Journal_DR.instance;
-       // doorScript = puzzleDoor.GetComponent<Door_DR>();
-        WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
+        // doorScript = puzzleDoor.GetComponent<Door_DR>();
+        //WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
         //foreach (WeightScript_AG weightScript in seatedWeights)
         //{
         //    rightMass += weightScript.GetMass();
@@ -75,7 +75,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
             journal.TickOffTask("balance scales");
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
             
-            doorScript.Open();
+            doorScript.ToggleOpen();
         }
     }
 

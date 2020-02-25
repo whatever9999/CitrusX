@@ -9,6 +9,9 @@
  * 
  * Chase (Changes) 22/2/2020
  * Added public enum to signify what kind of door it is
+ * 
+ * Dominique (Changes) 25/02/2020
+ * Door has a ToggleOpen instead of just open now - can open AND close
  */
  
 
@@ -18,6 +21,8 @@ public class Door_DR : MonoBehaviour
 {
     public bool unlocked;
     public bool requiresKey;
+    public bool isOpen = false;
+
     public enum DOOR_TYPE
     {
         COLOUR_MATCHING,
@@ -29,11 +34,12 @@ public class Door_DR : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
     }
 
-    public void Open()
+    public void ToggleOpen()
     {
-        animator.SetBool("Open", true);
+        isOpen = !isOpen;
+        animator.SetBool("Open", isOpen);
     }
 }

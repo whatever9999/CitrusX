@@ -63,6 +63,8 @@
  * matching puzzle as it relies on trying the lock for some voiceovers.
  * Added section to paper for certain notes for game progression in keycode puzzle
  * 
+ * Dominique (Changes) 25/02/2020
+ * Door now opens AND closes!
   */
 using System.Collections;
 using UnityEngine;
@@ -110,8 +112,8 @@ public class Interact_HR : MonoBehaviour
         journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
-        waterBowl = GameObject.Find("Water Bowl").GetComponent<WaterBowl_DR>();
-        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
+        waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
+        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
     }
 
     void Update()
@@ -147,9 +149,10 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+                    //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
+                    Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
@@ -241,14 +244,12 @@ public class Interact_HR : MonoBehaviour
 
                 if (door.unlocked)
                 {
-                    notificationText.text = "Press E to open";
+                    notificationText.text = "Press E to use";
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         notificationText.text = "";
-                        door.Open();
-                        //Player can't interact with door when it is already open
-                        door.tag = "Untagged";
+                        door.ToggleOpen();
                     }
                 }
                 else if (door.requiresKey)
@@ -263,13 +264,13 @@ public class Interact_HR : MonoBehaviour
                             if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
                                 colourMatch.isDoorInteractedWith[1] = true;
-                                notificationText.text = "Press E to open";
+                                notificationText.text = "Press E to use";
                                 door.unlocked = true;
                                  if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                  { 
                                      notificationText.text = "";
-                                     door.Open();
-                                      door.tag = "Untagged";
+                                     door.ToggleOpen();
+                                     door.tag = "Untagged";
                                  }
                             }
                            

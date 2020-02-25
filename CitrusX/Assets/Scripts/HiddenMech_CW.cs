@@ -14,13 +14,13 @@ public class HiddenMech_CW : MonoBehaviour
 
     private void Awake()
     {
-        door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>(); 
+        door = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>(); 
     }
     private void HiddenMechPuzzle()
     {
         if(Journal_DR.instance.AreTasksComplete())
         {
-            door.Open();
+            door.ToggleOpen();
             GameTesting_CW.instance.arePuzzlesDone[7] = true;
         }
     }

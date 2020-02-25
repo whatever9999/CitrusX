@@ -76,7 +76,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
             {
                 if(isDoorInteractedWith[1])
                 {
-                    door.Open();
+                    door.ToggleOpen();
                     if (!voiceovers[4])
                     {
                         //VOICEOVER 3-6
