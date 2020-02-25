@@ -86,9 +86,28 @@ public class CorrectOrder_CW : MonoBehaviour
                     if (boxes[3] == boxes[7])
                     {
                         completionText.text = "PASSWORD CORRECT";
+                        //VOICEOVER 9-5
+                        //close article
+                        //VOICEOVER 9-6
+                    }
+                    else
+                    {
+                        //VOICEOVER 9-4
                     }
                 }
+                else
+                {
+                    //VOICEOVER 9-4
+                }
             }
+            else
+            {
+                //VOICEOVER 9-4
+            }
+        }
+        else
+        {
+            //VOICEOVER 9-4
         }
     }
 }

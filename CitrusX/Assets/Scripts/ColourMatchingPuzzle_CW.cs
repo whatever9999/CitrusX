@@ -17,32 +17,35 @@ using UnityEngine;
 public class ColourMatchingPuzzle_CW : MonoBehaviour
 {
     #region VARIABLES
-    private Journal_DR journal;
     private bool isActive = false;
     private bool[] voiceovers = { false, false, false, false, false };
     internal bool[] isDoorInteractedWith = { false, false };
     private bool hasKeyPart1 = false;
     internal bool hasKeyPart2 = false;
+
+    private Journal_DR journal;
     private Door_DR door;
+    private Subtiles_HR subtitles;
     #endregion
     internal void SetActive(bool value) { isActive = value; }
     public void Awake()
     {
         journal = Journal_DR.instance;
         door = GameObject.Find("Colour Matching Door").GetComponent<Door_DR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     private void Update()
     {
         
             if(!voiceovers[0])
             {
-                //VOICEOVER 3-2
-                voiceovers[0] = true;
+                 subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+                 voiceovers[0] = true;
             }
             if(isDoorInteractedWith[0] && !voiceovers[1])
             {
-                //VOICEOVER 3-3
-                voiceovers[1] = true;
+            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3);
+            voiceovers[1] = true;
                 journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
             }
@@ -52,8 +55,8 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 {
                     if(!voiceovers[2])
                     {
-                        //VOICEOVER 3-4
-                        voiceovers[2] = true;
+                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
+                    voiceovers[2] = true;
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
                     }
@@ -65,8 +68,8 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 {
                     if (!voiceovers[3])
                     {
-                        //VOICEOVER 3-5
-                        voiceovers[3] = true;
+                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
+                    voiceovers[3] = true;
                         hasKeyPart2 = true;
                     }
                 }
@@ -78,8 +81,8 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                     door.Open();
                     if (!voiceovers[4])
                     {
-                        //VOICEOVER 3-6
-                        voiceovers[4] = true;
+                         subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
+                         voiceovers[4] = true;
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");
                         GameTesting_CW.instance.arePuzzlesDone[2] = true;
                     }

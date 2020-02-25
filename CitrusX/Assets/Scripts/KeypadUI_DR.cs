@@ -21,12 +21,14 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class KeypadUI_DR : MonoBehaviour
 {
     private string input = "";
-
     private Text inputText;
+    #region REFERENCES
     private KeypadItem_DR keypadItem;
     private FirstPersonController firstPersonController;
     private bool isActive = false;
     private Journal_DR journal;
+    private Subtiles_HR subtitles;
+    #endregion
     #region BOOLS
     internal bool interactedWithSafe = false; //needs to be set in interact
     private bool hasAlreadyInteractedWithSafe = false;
@@ -44,6 +46,7 @@ public class KeypadUI_DR : MonoBehaviour
         inputText = GameObject.Find("InputText").GetComponent<Text>();
         gameObject.SetActive(false);
         journal = Journal_DR.instance;
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
 
     private void Update()
@@ -52,14 +55,14 @@ public class KeypadUI_DR : MonoBehaviour
         {
             if(!voiceovers[0])
             {
-                //VOICEOVER 4-3
+                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
                 voiceovers[0] = true;
             }
             if(interactedWithSafe && !hasAlreadyInteractedWithSafe)
             {
                 if(!voiceovers[1])
                 {
-                    //VOICEOVER 4-4
+                    subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE4);
                     voiceovers[1] = true;
                     hasAlreadyInteractedWithSafe = true;
                 }
@@ -68,7 +71,7 @@ public class KeypadUI_DR : MonoBehaviour
             {
                 if(!voiceovers[2])
                 {
-                    //VOICEOVER 4-7
+                    subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
                     voiceovers[2] = true;
                     GameTesting_CW.instance.arePuzzlesDone[3] = true;
                 }
@@ -96,7 +99,7 @@ public class KeypadUI_DR : MonoBehaviour
             SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
-            //VOICEOVER 4-6
+            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE6);
             CloseKeypad();
         } else
         {
@@ -107,7 +110,7 @@ public class KeypadUI_DR : MonoBehaviour
                 if(input[0] != 'X')
                 {
                     StartCoroutine(ClearInput());
-                    //VOICEOVER 4-5
+                    subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE5);
                     SFXManager_DR.instance.PlayEffect(SoundEffectNames.INCORRECT);
                 }
             }

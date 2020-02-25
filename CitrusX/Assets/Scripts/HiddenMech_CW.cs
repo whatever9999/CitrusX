@@ -16,10 +16,21 @@ public class HiddenMech_CW : MonoBehaviour
     {
         door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>(); 
     }
+    private void Update()
+    {
+        //if interact painting
+        //VOICEOVER 8-5
+        
+    }
     private void HiddenMechPuzzle()
     {
         if(Journal_DR.instance.AreTasksComplete())
         {
+            //VOICEOVER 8-6
+            //read note
+            //VOICEOVER 8-7
+            //close note
+            //VOICEOVER 8-8
             door.Open();
             GameTesting_CW.instance.arePuzzlesDone[7] = true;
         }

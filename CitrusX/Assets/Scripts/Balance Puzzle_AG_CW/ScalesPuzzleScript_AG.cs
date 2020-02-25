@@ -59,7 +59,10 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     {
         if(isActive)
         {
-            
+            //if interact with scales
+            //VOICEOVER 5-2
+            //if complete
+            //VOICEOVER 5-3
         }
     }
     /// <summary>

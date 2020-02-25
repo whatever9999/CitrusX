@@ -257,8 +257,9 @@ public class Interact_HR : MonoBehaviour
                     {
                             if(!colourMatch.isDoorInteractedWith[0])
                             {
-                                colourMatch.isDoorInteractedWith[0] = true;
-                                notificationText.text = "It's locked. I should check my journal.";
+                            notificationText.text = "It's locked. I should check my journal.";
+                            colourMatch.isDoorInteractedWith[0] = true;
+                               
                             }
                             if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
