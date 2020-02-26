@@ -119,7 +119,7 @@ public class Interact_HR : MonoBehaviour
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
-        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtiles_HR>();
         //  scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
     }
