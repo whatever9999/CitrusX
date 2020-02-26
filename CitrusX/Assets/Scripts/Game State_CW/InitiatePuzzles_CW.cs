@@ -68,6 +68,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
             fusebox.SetGameActive(true);
             monitorInteractionsUsed[0] = true;
         }
+        if (monitorInteractions[1] && !monitorInteractionsUsed[1])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+            colourMatch.SetActive(true);
+            monitorInteractionsUsed[1] = true;
+        }
     }
     public void InitiateFuseboxPuzzle()
     {
@@ -86,18 +92,15 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         //player in ritual room
         //disturbance occurs
-        if(!voiceovers[2])
-        {
-            //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
-            voiceovers[2] = true;
-        }
+     
         if(monitorInteractions[1])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+            
+            colourMatch.SetActive(true);
         }
         //if player interacts with monitor then
 
-        colourMatch.SetActive(true);
+       
        
     }
     public void InitiateHiddenMechanismPuzzle()
@@ -105,7 +108,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //check monitor
         if(monitorInteractions[7])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
+            //subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
         }
         //enter library
         //door slams

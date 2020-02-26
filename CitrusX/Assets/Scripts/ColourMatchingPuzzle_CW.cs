@@ -96,10 +96,6 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
             
            
     }
-        
-    IEnumerator Pause()
-    {
-        yield return new WaitForSeconds(1.0f);
-    }
+       
     
 }

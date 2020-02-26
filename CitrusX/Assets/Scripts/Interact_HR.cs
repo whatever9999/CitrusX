@@ -334,11 +334,11 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
                         #region MONITOR_INTERACTION_IFS
-                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                        if(!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
                         }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
+                        else if(!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
                         }
