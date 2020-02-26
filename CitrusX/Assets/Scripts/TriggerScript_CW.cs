@@ -8,7 +8,8 @@ public class TriggerScript_CW : MonoBehaviour
     {
         GARDEN,
         RITUAL,
-        CHESSBOARD
+        CHESSBOARD,
+        THROWING
     };
     public TRIGGER_TYPE type;
     private Subtiles_HR subtitles;
@@ -53,6 +54,16 @@ public class TriggerScript_CW : MonoBehaviour
                 allowedToBeUsed = false;
             }
             
+        }
+        if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
+        {
+            if (GameTesting_CW.instance.arePuzzlesDone[5])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE2);
+                allowedToBeUsed = false;
+            }
+         
+
         }
     }
 }

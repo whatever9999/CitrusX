@@ -16,11 +16,13 @@ public class BallButtonLogic_HR : MonoBehaviour
     private bool isActive;
     private Journal_DR journal;
     private InitiatePuzzles_CW puzzleScript;
+    private Subtiles_HR subtitles;
     public void SetActive(bool value) { isActive = value; }
     private void Awake()
     {
         puzzleScript = InitiatePuzzles_CW.instance;
         journal = Journal_DR.instance;
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -32,7 +34,7 @@ public class BallButtonLogic_HR : MonoBehaviour
             if(puzzleScript.ballCounter == ballsRequired)
             {
                 journal.TickOffTask("press all buttons");
-                //VOICEOVER 7-4
+                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE4);
                 //Open box
                 //VOICEOVER 7-5
                 //box closes

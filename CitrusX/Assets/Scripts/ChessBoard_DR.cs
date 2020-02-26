@@ -42,7 +42,7 @@ public class ChessBoard_DR : MonoBehaviour
                     if (CheckPieces())
                     {
                         door.unlocked = true;
-                        journal.TickOffTask("solve chessboard");
+                        
                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE4);
                         chessTrigger.allowedToBeUsed = true;
                         GameTesting_CW.instance.arePuzzlesDone[5] = true;
@@ -63,10 +63,9 @@ public class ChessBoard_DR : MonoBehaviour
     {
         if (isActive == true)
         {
-            if (journal.AreTasksComplete())
-            {
-                journal.ChangeTasks(new string[] { "solve chessboard" });
-            }
+          
+           
+            
             bool inPosition = true;
             for (int i = 0; i < chessPieces.Length; i++)
             {

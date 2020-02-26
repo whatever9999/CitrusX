@@ -480,6 +480,15 @@ public class Interact_HR : MonoBehaviour
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
+            else if(hit.transform.tag == "Box")
+            {
+                notificationText.text = "Press E to open the Box";
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                }
+            }
             //else if (hit.transform.tag == "Weight")
             //{
             //    notificationText.text = "Press E to pick up and place the weight";

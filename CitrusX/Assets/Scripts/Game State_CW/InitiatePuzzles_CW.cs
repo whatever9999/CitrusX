@@ -91,8 +91,15 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[4] && !monitorInteractionsUsed[4])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE1);
+            journal.ChangeTasks(new string[] { "Pawn" });
             chessboard.SetActive(true);
             monitorInteractionsUsed[4] = true;
+        }
+        else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
+            throwing.SetActive(true);
+            monitorInteractionsUsed[5] = true;
         }
     }
     public void InitiateFuseboxPuzzle()
