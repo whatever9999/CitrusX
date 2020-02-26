@@ -26,6 +26,7 @@ public class CandleScript_AG : MonoBehaviour
 
     public void BlowOut()
     {
+        //VOICEOVER 10-3
         flame.Stop();
         player.EndGameCheck();
     }

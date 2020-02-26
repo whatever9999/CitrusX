@@ -18,6 +18,7 @@ using UnityEngine;
 public class InitiatePuzzles_CW : MonoBehaviour
 {
     public static InitiatePuzzles_CW instance;
+    private Subtiles_HR subtitles;
     #region PUZZLE_REFERENCES
     private SetUpRitual_CW ritualSetUp;
     private HiddenMech_CW hiddenMech;
@@ -45,6 +46,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         throwing = GetComponent<BallButtonLogic_HR>();
         keypad = GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GetComponent<ScalesPuzzleScript_AG>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     public void InitiateSetUpRitualPuzzle()
     {
@@ -59,11 +61,15 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //disturbance occurs (loud sound?)
         if(!voiceovers[1])
         {
-            //VOICEOVER 2-1
+            subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
             voiceovers[1] = true;
+            Debug.Log("reached");
+            journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+            journal.ChangeTasks(new string[] { "Fix fusebox" });
+            fusebox.SetGameActive(true);
         }
        //if interact with monitor then
-        fusebox.SetActive(true);
+        
     }
     public void InitiateColourMatchingPuzzle()
     {
@@ -71,15 +77,23 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //disturbance occurs
         if(!voiceovers[2])
         {
-            //VOICEOVER 3-1
+            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
             voiceovers[2] = true;
         }
         //if player interacts with monitor then
+
         colourMatch.SetActive(true);
        
     }
     public void InitiateHiddenMechanismPuzzle()
     {
+        //check monitor
+        //VOICEOVER 8-1
+        //enter library
+        //door slams
+        //VOICEOVER 8-2
+        //VOICEOVER 8-3
+
         journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
         journal.ChangeTasks(new string[] { "open door", "book" });
         hiddenMech.SetActive(true);
@@ -87,6 +101,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
 
     public void InitiateChessBoardPuzzle()
     {
+        //interact with monitor
+        //VOICEOVER 6-1
+        //enter room
+        //VOICEOVER 6-2
+        //interact with book
+        //VOICEOVER 6-3
         journal.AddJournalLog("I think that book might explain what I'm supposed to do with this board. A piece seems missing though.");
         journal.ChangeTasks(new string[] { "Pawn" });
         chessboard.SetActive(true);
@@ -96,12 +116,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //this is triggered by being in room for a certain amount of time
         if(!voiceovers[3])
         {
-            //VOICEOVER 4-1
+            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
             voiceovers[3] = true;
         }
         if(!voiceovers[4])
         {
-            //VOICEOVER 4-2
+            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE2);
             voiceovers[4] = true;
         }
         //if player interacts with monitor
@@ -112,7 +132,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //in room, checks monitor
         if(!voiceovers[5])
         {
-            //VOICEOVER 5-1
+            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
             voiceovers[5] = true;
             scales.SetActive(true);
             //journal for check out kitchen?
@@ -123,17 +143,33 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateThrowingPuzzle()
     {
+        //check monitor
+        //VOICEOVER 7-1
+        //enter game room
+        //VOICEOVER 7-2
+        //pick up ball
+        //VOICEOVER 7-3
         journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
         journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
         throwing.SetActive(true);
     }
     public void InitiateCorrectOrderPuzzle()
     {
+        //interact with monitor
+        //VOICEOVER 9-1
+        //enter room
+        //door shut
+        //VOICEOVER 9-2
+        //interact PC
+        //VOICEOVER 9-3
         journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
         journal.ChangeTasks(new string[] { "repeat the sequence" });
     }
     public void InitiateCoinCountPuzzle()
     {
+        //stand infront of ritual table
+        //VOICEOVER 10-1
+        //VOICEOVER 10-2
         journal.AddJournalLog("That should be it. Have I counted enough coins? I should blow out the candles if I have.");
         journal.ChangeTasks(new string[] { "blow out candles" });
     }

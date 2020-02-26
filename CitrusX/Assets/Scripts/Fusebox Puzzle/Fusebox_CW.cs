@@ -20,7 +20,7 @@ public class Fusebox_CW : MonoBehaviour
     private FirstPersonController fpsController;
     private bool isFuseboxSolved = false;
     private bool isActive = false;
-    private KeyCode closeFuseboxKey = KeyCode.Escape;
+    private KeyCode closeFuseboxKey = KeyCode.Z;
     internal KeyCode resetPipesKey = KeyCode.X;
     internal int pipeCompletedCount;
     //internal int wireCompletedCount;
@@ -30,16 +30,18 @@ public class Fusebox_CW : MonoBehaviour
     internal Color drawColour;
     private Journal_DR journal;
     private bool[] voiceovers = { false, false };
+    private Subtiles_HR subtitles;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
 
-    internal void SetActive(bool value) { isActive = value; }
+    internal void SetGameActive(bool value) { isActive = value; }
 
     void Awake()
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = Journal_DR.instance;
         fuseboxText = GameObject.Find("Fusebox Message Text").GetComponent<Text>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     void Start()
     {
@@ -49,19 +51,20 @@ public class Fusebox_CW : MonoBehaviour
     }
     private void Update()
     {
-        if(isActive)
+
+        
+
+        if (!voiceovers[0])
         {
-            if(!voiceovers[0])
-            {
-                //VOICEOVER 2-2
+                subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE2);
                 voiceovers[0] = true;
                 journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
                 journal.ChangeTasks(new string[] { "Fix fusebox" });
-            }
+        }
 
             GetAllPipesInScene();
             CheckForClose();
-        }
+        
      
     }
 
@@ -88,10 +91,10 @@ public class Fusebox_CW : MonoBehaviour
             journal.TickOffTask("Fix fusebox");
             if(!voiceovers[1])
             {
-                //VOICEOVER 2-3
+                subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE3);
                 voiceovers[1] = true;
             }
-            GameTesting_CW.instance.arePuzzlesDone[2] = true;
+            GameTesting_CW.instance.arePuzzlesDone[1] = true;
             //if (wireCompletedCount >= wires.Length)
             //{
             //    fuseboxText.text = "COMPLETE";

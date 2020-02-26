@@ -37,6 +37,13 @@ public class ChessBoard_DR : MonoBehaviour
                 {
                     door.unlocked = true;
                     journal.TickOffTask("solve chessboard");
+                    //VOICEOVER 6-4
+                    //exit room - trigger box
+                    //VOICEOVER 6-5
+                    //interact with note
+                    //VOICEOVER 6-6
+                    //close note
+                    //VOICEOVER 6-7
                     GameTesting_CW.instance.arePuzzlesDone[5] = true;
                 }
 

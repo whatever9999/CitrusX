@@ -45,6 +45,7 @@ public class Table_CW : MonoBehaviour
             }
             else if (currentTable == TABLES.GARDEN_TABLE && hasBeenPlaced)
             {
+                ritualSetUp.jewelleryPlaced = true;
                 ritualSetUp.jewelleryCollected = true;
                 hasBeenPlaced = false;
 

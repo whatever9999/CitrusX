@@ -32,6 +32,11 @@ public class BallButtonLogic_HR : MonoBehaviour
             if(puzzleScript.ballCounter == ballsRequired)
             {
                 journal.TickOffTask("press all buttons");
+                //VOICEOVER 7-4
+                //Open box
+                //VOICEOVER 7-5
+                //box closes
+                //VOICEOVER 7-6
                 GameTesting_CW.instance.arePuzzlesDone[6] = true;
             }
         }

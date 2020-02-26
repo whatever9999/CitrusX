@@ -149,7 +149,11 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
+                  //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
@@ -258,8 +262,9 @@ public class Interact_HR : MonoBehaviour
                     {
                             if(!colourMatch.isDoorInteractedWith[0])
                             {
-                                colourMatch.isDoorInteractedWith[0] = true;
                             notificationText.text = "It's locked. I should check my journal.";
+                            colourMatch.isDoorInteractedWith[0] = true;
+                               
                             }
                             if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {

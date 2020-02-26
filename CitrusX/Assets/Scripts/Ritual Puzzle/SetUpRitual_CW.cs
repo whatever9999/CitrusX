@@ -13,6 +13,7 @@ using UnityEngine;
 public class SetUpRitual_CW : MonoBehaviour
 {
     Journal_DR journal;
+    Subtiles_HR subtitles;
     #region BOOLS
     private bool isActive = false;
 
@@ -26,6 +27,7 @@ public class SetUpRitual_CW : MonoBehaviour
     private void Awake()
     {
         journal = Journal_DR.instance;
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
 
     private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
@@ -38,7 +40,7 @@ public class SetUpRitual_CW : MonoBehaviour
         {
             if(!voiceovers[0])
             {
-                //VOICEOVER 1-1
+                subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE1);
                 voiceovers[0] = true;
             }
             if (!ritualSetUpCollected)
@@ -48,7 +50,8 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if(!voiceovers[2])
                     {
-                        //VOICEOVER 1-3
+
+                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE3);
                         voiceovers[2] = true;
                     }
                     //change tasks
@@ -65,7 +68,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if(!voiceovers[3])
                     {
-                        //VOICEOVER 1-4
+                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE4);
                         voiceovers[3] = true;
                     }
                     journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
@@ -79,7 +82,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if (!voiceovers[4])
                     {
-                        //VOICEOVER 1-5
+                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE5);
                         voiceovers[4] = true;
                     }
                     journal.AddJournalLog("I should put this in the garden box");
@@ -87,7 +90,7 @@ public class SetUpRitual_CW : MonoBehaviour
                     jewelleryCollected = true;
                 }
             }
-            else if (jewelleryCollected && !jewelleryPlaced)
+            else if (jewelleryCollected && jewelleryPlaced)
             {
               
                 //if these final tasks are done
@@ -95,17 +98,21 @@ public class SetUpRitual_CW : MonoBehaviour
                 {//tell the game the puzzle is complete
                     if (!voiceovers[5])
                     {
-                        //VOICEOVER 1-6
+                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE6);
                         voiceovers[5] = true;
+                        if (!voiceovers[6])
+                        {
+                            subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE7);
+                            voiceovers[6] = true;
+                            journal.ChangeTasks(new string[] { "work plz" });
+                            GameTesting_CW.instance.arePuzzlesDone[0] = true;
+                        }
                     }
-                    if (!voiceovers[6])
-                    {
-                        //VOICEOVER 1-7
-                        voiceovers[6] = true;
-                    }
-                    GameTesting_CW.instance.arePuzzlesDone[0] = true;
+                   
+                    
                 }
             }
+         
         }
     }
         

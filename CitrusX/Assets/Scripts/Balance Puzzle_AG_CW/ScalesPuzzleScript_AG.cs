@@ -47,8 +47,10 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         leftPan = GameObject.Find("Left Pan");
         rightPan = GameObject.Find("Right Pan");
         journal = Journal_DR.instance;
+
         // doorScript = puzzleDoor.GetComponent<Door_DR>();
         //WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
+
         //foreach (WeightScript_AG weightScript in seatedWeights)
         //{
         //    rightMass += weightScript.GetMass();
@@ -59,7 +61,10 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     {
         if(isActive)
         {
-            
+            //if interact with scales
+            //VOICEOVER 5-2
+            //if complete
+            //VOICEOVER 5-3
         }
     }
     /// <summary>
