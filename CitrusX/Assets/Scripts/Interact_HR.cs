@@ -65,6 +65,9 @@
  * 
  * Dominique (Changes) 25/02/2020
  * Door now opens AND closes!
+ * 
+ * Chase(Changes) 26/2/2020
+ * Added monitor interaction ifs for voiceovers and edited colour-matching door segment
   */
 using System.Collections;
 using UnityEngine;
@@ -113,7 +116,7 @@ public class Interact_HR : MonoBehaviour
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
-        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
     }
 
     void Update()
@@ -156,7 +159,7 @@ public class Interact_HR : MonoBehaviour
 
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
-                    Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
+                    //Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
@@ -260,11 +263,15 @@ public class Interact_HR : MonoBehaviour
                 {
                     if(door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                            if(!colourMatch.isDoorInteractedWith[0])
+                            if(colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
-                            notificationText.text = "It's locked. I should check my journal.";
-                            colourMatch.isDoorInteractedWith[0] = true;
+                                 notificationText.text = "It's locked. I should check my journal.";
+                                 colourMatch.isDoorInteractedWith[0] = true;
                                
+                            }
+                            if(!colourMatch.hasKeyPart2)
+                            {
+                                notificationText.text = "It's locked. I should check my journal.";
                             }
                             if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
@@ -326,7 +333,46 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.transform.LookAt(hit.transform);
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
+                        #region MONITOR_INTERACTION_IFS
+                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[2] && GameTesting_CW.instance.arePuzzlesDone[2])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[2] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[3] && GameTesting_CW.instance.arePuzzlesDone[3])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[3] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[4] && GameTesting_CW.instance.arePuzzlesDone[4])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[4] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[5] && GameTesting_CW.instance.arePuzzlesDone[5])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[5] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[6] && GameTesting_CW.instance.arePuzzlesDone[6])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[6] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[7] && GameTesting_CW.instance.arePuzzlesDone[7])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[7] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[8] && GameTesting_CW.instance.arePuzzlesDone[8])
+                        {
+                            InitiatePuzzles_CW.instance.monitorInteractions[8] = true;
+                        }
+                        #endregion
                     }
+
                 }
                 else
                 {

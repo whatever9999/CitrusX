@@ -12,7 +12,7 @@ public class GameTesting_CW : MonoBehaviour
 {
     public static GameTesting_CW instance;
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
-    internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false};
+    internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false,false};
     private bool[] cutscenes = { false, false, false};
     private bool[] cutscenesDone = { false, false, false };
 

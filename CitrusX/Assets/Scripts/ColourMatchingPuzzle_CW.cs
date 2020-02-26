@@ -12,12 +12,14 @@
  * out the entire puzzle
 
  */
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ColourMatchingPuzzle_CW : MonoBehaviour
 {
     #region VARIABLES
-    private bool isActive = false;
+    internal bool isActive = false;
     private bool[] voiceovers = { false, false, false, false, false };
     internal bool[] isDoorInteractedWith = { false, false };
     private bool hasKeyPart1 = false;
@@ -31,67 +33,73 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     public void Awake()
     {
         journal = Journal_DR.instance;
-        door = GameObject.Find("Colour Matching Door").GetComponent<Door_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     private void Update()
     {
-        
-            if(!voiceovers[0])
+        journal = Journal_DR.instance;
+        if (isActive)
+        {
+            if (!voiceovers[0])
             {
-                 subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
-                 voiceovers[0] = true;
+                //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+                voiceovers[0] = true;
             }
-            if(isDoorInteractedWith[0] && !voiceovers[1])
+            else if (isDoorInteractedWith[0] && !voiceovers[1])
             {
-            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3);
-            voiceovers[1] = true;
+                subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3); 
                 journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
+                voiceovers[1] = true;
             }
-            if(!hasKeyPart1)
+            else if (isDoorInteractedWith[0] && !hasKeyPart1 && voiceovers[1])
             {
                 if (journal.AreTasksComplete())
                 {
-                    if(!voiceovers[2])
+                    if (!voiceovers[2])
                     {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
-                    voiceovers[2] = true;
+                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
+                        voiceovers[2] = true;
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
                     }
                 }
             }
-            if(!hasKeyPart2 && hasKeyPart1)
+            else if (!hasKeyPart2 && hasKeyPart1)
             {
                 if (journal.AreTasksComplete())
                 {
                     if (!voiceovers[3])
                     {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
-                    voiceovers[3] = true;
+                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
+                        voiceovers[3] = true;
                         hasKeyPart2 = true;
                     }
                 }
             }
-            if(hasKeyPart2)
+            else if (hasKeyPart2)
             {
-                if(isDoorInteractedWith[1])
+                if (isDoorInteractedWith[1])
                 {
-                    door.ToggleOpen();
                     if (!voiceovers[4])
                     {
-                         subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
-                         voiceovers[4] = true;
+                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
+                        voiceovers[4] = true;
+                       
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");
                         GameTesting_CW.instance.arePuzzlesDone[2] = true;
                     }
                 }
-                
+
             }
+        }
+            
            
     }
         
-
+    IEnumerator Pause()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
     
 }

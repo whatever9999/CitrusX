@@ -33,14 +33,17 @@ public class InitiatePuzzles_CW : MonoBehaviour
     #endregion
     #region VOICEOVER_BOOLS
     private bool[] voiceovers = { false, false, false, false, false};
+    internal bool[] monitorInteractions = { false, false, false, false, false, false, false,false,false };
+    internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion
+
     private void Awake()
     {
         instance = this;
         journal = Journal_DR.instance;
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
-        colourMatch = GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         throwing = GetComponent<BallButtonLogic_HR>();
@@ -55,19 +58,32 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //this is here to stop the strings playing constantly as called from Game's update
         ritualSetUp.SetActive(true);
     }
+    private void Update()
+    {
+        if (monitorInteractions[0] && !monitorInteractionsUsed[0])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE2);
+            journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+            journal.ChangeTasks(new string[] { "Fix fusebox" });
+            fusebox.SetGameActive(true);
+            monitorInteractionsUsed[0] = true;
+        }
+    }
     public void InitiateFuseboxPuzzle()
     {
         //player enters ritual room - trigger box? Game script?
         //disturbance occurs (loud sound?)
-        if(!voiceovers[1])
+        if(!voiceovers[1]  )
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
+            
             voiceovers[1] = true;
-            Debug.Log("reached");
-            journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
-            journal.ChangeTasks(new string[] { "Fix fusebox" });
+            
+        }
+        if(monitorInteractions[0])
+        {
             fusebox.SetGameActive(true);
         }
+      
        //if interact with monitor then
         
     }
@@ -77,7 +93,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //disturbance occurs
         if(!voiceovers[2])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
+            //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
             voiceovers[2] = true;
         }
         //if player interacts with monitor then
@@ -88,7 +104,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public void InitiateHiddenMechanismPuzzle()
     {
         //check monitor
-        //VOICEOVER 8-1
+        if(monitorInteractions[7])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
+        }
         //enter library
         //door slams
         //VOICEOVER 8-2
@@ -101,14 +120,16 @@ public class InitiatePuzzles_CW : MonoBehaviour
 
     public void InitiateChessBoardPuzzle()
     {
-        //interact with monitor
-        //VOICEOVER 6-1
+        if(monitorInteractions[5])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE1);
+        }
         //enter room
         //VOICEOVER 6-2
         //interact with book
         //VOICEOVER 6-3
-        journal.AddJournalLog("I think that book might explain what I'm supposed to do with this board. A piece seems missing though.");
-        journal.ChangeTasks(new string[] { "Pawn" });
+        //journal.AddJournalLog("I think that book might explain what I'm supposed to do with this board. A piece seems missing though.");
+        //journal.ChangeTasks(new string[] { "Pawn" });
         chessboard.SetActive(true);
     }
     public void InitiateKeycodePuzzle()
@@ -124,27 +145,32 @@ public class InitiatePuzzles_CW : MonoBehaviour
             subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE2);
             voiceovers[4] = true;
         }
-        //if player interacts with monitor
-        keypad.SetActive(true);
+        if(monitorInteractions[3])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
+            keypad.SetActive(true);
+        }
+        
     }
     public void InitiateBalancePuzzle()
     {
-        //in room, checks monitor
-        if(!voiceovers[5])
+        if(monitorInteractions[4])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
-            voiceovers[5] = true;
-            scales.SetActive(true);
-            //journal for check out kitchen?
+            if (!voiceovers[5])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
+                voiceovers[5] = true;
+                scales.SetActive(true);
+                //journal for check out kitchen?
+            }
         }
-        
-        
-
     }
     public void InitiateThrowingPuzzle()
     {
-        //check monitor
-        //VOICEOVER 7-1
+        if(monitorInteractions[6])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
+        }
         //enter game room
         //VOICEOVER 7-2
         //pick up ball
@@ -155,8 +181,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateCorrectOrderPuzzle()
     {
-        //interact with monitor
-        //VOICEOVER 9-1
+        if(monitorInteractions[8])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
+        }
         //enter room
         //door shut
         //VOICEOVER 9-2

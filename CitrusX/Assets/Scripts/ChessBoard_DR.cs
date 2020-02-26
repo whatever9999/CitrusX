@@ -25,35 +25,38 @@ public class ChessBoard_DR : MonoBehaviour
     }
 
     private void Update()
-    {
-        //If the door isn't unlocked
-        if(!door.unlocked)
+    {if(isActive)
         {
-            //Run a timer to see if we should check the position of the pieces
-            if (currentCheckBoardInterval >= checkBoardInterval)
+            //If the door isn't unlocked
+            if (!door.unlocked)
             {
-                //Unlock the door if the pieces are in position
-                if (CheckPieces())
+                //Run a timer to see if we should check the position of the pieces
+                if (currentCheckBoardInterval >= checkBoardInterval)
                 {
-                    door.unlocked = true;
-                    journal.TickOffTask("solve chessboard");
-                    //VOICEOVER 6-4
-                    //exit room - trigger box
-                    //VOICEOVER 6-5
-                    //interact with note
-                    //VOICEOVER 6-6
-                    //close note
-                    //VOICEOVER 6-7
-                    GameTesting_CW.instance.arePuzzlesDone[5] = true;
-                }
+                    //Unlock the door if the pieces are in position
+                    if (CheckPieces())
+                    {
+                        door.unlocked = true;
+                        journal.TickOffTask("solve chessboard");
+                        //VOICEOVER 6-4
+                        //exit room - trigger box
+                        //VOICEOVER 6-5
+                        //interact with note
+                        //VOICEOVER 6-6
+                        //close note
+                        //VOICEOVER 6-7
+                        GameTesting_CW.instance.arePuzzlesDone[5] = true;
+                    }
 
-                currentCheckBoardInterval = 0;
-            }
-            else
-            {
-                currentCheckBoardInterval += Time.deltaTime;
+                    currentCheckBoardInterval = 0;
+                }
+                else
+                {
+                    currentCheckBoardInterval += Time.deltaTime;
+                }
             }
         }
+       
     }
 
     public bool CheckPieces()
