@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PaperUI_DR : MonoBehaviour
 {
-    public KeyCode keyToClose = KeyCode.Z;
+    public KeyCode keyToClose = KeyCode.Escape;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PaperUI_DR : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(keyToClose))
-        { 
+        {
             gameObject.SetActive(false);
         }
     }
