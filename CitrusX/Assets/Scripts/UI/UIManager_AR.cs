@@ -4,6 +4,9 @@
  * 
  * Dominique
  * Added a quit function and changed the script to a UIManager
+ * 
+ * Alex 
+ * Added the SFX manager toggle that Dominique told me to add
  */
 
 
@@ -20,5 +23,10 @@ public class UIManager_AR : MonoBehaviour
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void SFXToggle()
+    {
+        SFXManager_DR.instance.ToggleSFX();
     }
 }
