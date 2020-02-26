@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PaperUI_DR : MonoBehaviour
 {
-    public KeyCode keyToClose = KeyCode.Escape;
+    public KeyCode keyToClose = KeyCode.Z;
 
     private void Start()
     {

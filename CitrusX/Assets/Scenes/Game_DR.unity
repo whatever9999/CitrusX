@@ -1921,9 +1921,15 @@ PrefabInstance:
     - target: {fileID: 1027657463796845059, guid: b6ac381b13e9f8e49a2d85b6230ae2c2,
         type: 3}
       propertyPath: m_Name
-      value: SafeDoor
+      value: Safe Door
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1027657463796845059, guid: b6ac381b13e9f8e49a2d85b6230ae2c2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Keypad
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1027657462910425096, guid: b6ac381b13e9f8e49a2d85b6230ae2c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b6ac381b13e9f8e49a2d85b6230ae2c2, type: 3}
 --- !u!1001 &355996343
 PrefabInstance:
@@ -2227,6 +2233,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401384588}
   m_CullTransparentMesh: 0
+--- !u!1001 &422556917
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4076670454365173047, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_Name
+      value: Key Pad Doc
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.73969066
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6729471
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -95.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173036, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: text
+      value: '*KEY PAD DOC*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: textSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173032, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: nameOfNote
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4076670454365173034, guid: b300a6fe9a23c364193fff0c4f1aa3bb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3661639628750336703, guid: b11eee9e98757104287a4fe041ac6088,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b300a6fe9a23c364193fff0c4f1aa3bb, type: 3}
 --- !u!1001 &435067673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4481,6 +4577,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3305882e52bcaf349b2d2e56e2e6e59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &744331762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1027657463796845059, guid: b6ac381b13e9f8e49a2d85b6230ae2c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 350861993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &744331764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744331762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f87f91ef06571c4faec46edf02bfc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  password: 1234
+  door: {fileID: 744331765}
+--- !u!114 &744331765 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1027657463796845058, guid: b6ac381b13e9f8e49a2d85b6230ae2c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 350861993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744331762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f61f66519336d94da83012cbc613462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &752269097

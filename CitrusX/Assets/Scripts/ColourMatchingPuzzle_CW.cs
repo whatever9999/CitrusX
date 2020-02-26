@@ -24,6 +24,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     internal bool[] isDoorInteractedWith = { false, false };
     private bool hasKeyPart1 = false;
     internal bool hasKeyPart2 = false;
+    private TriggerScript_CW ritualTrigger;
 
     private Journal_DR journal;
     private Door_DR door;
@@ -34,6 +35,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     {
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        ritualTrigger = GameObject.Find("Ritual Trigger").GetComponent<TriggerScript_CW>();
     }
     private void Update()
     {
@@ -87,6 +89,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                         voiceovers[4] = true;
                        
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");
+                        ritualTrigger.allowedToBeUsed = true;
                         GameTesting_CW.instance.arePuzzlesDone[2] = true;
                     }
                 }

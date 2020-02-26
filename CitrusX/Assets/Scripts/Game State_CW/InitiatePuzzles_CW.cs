@@ -47,7 +47,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         throwing = GetComponent<BallButtonLogic_HR>();
-        keypad = GetComponent<KeypadUI_DR>(); //might need to edit this
+        keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
@@ -68,11 +68,19 @@ public class InitiatePuzzles_CW : MonoBehaviour
             fusebox.SetGameActive(true);
             monitorInteractionsUsed[0] = true;
         }
-        if (monitorInteractions[1] && !monitorInteractionsUsed[1])
+        else if (monitorInteractions[1] && !monitorInteractionsUsed[1])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
             colourMatch.SetActive(true);
             monitorInteractionsUsed[1] = true;
+        }
+        else if(monitorInteractions[2] && !monitorInteractionsUsed[2])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
+            journal.AddJournalLog("That safe wasn't there before, I wonder what's in it...");
+            journal.ChangeTasks(new string[] { "unlock safe" });
+            keypad.SetActive(true);
+            monitorInteractionsUsed[2] = true;
         }
     }
     public void InitiateFuseboxPuzzle()
@@ -137,16 +145,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public void InitiateKeycodePuzzle()
     {
         //this is triggered by being in room for a certain amount of time
-        if(!voiceovers[3])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
-            voiceovers[3] = true;
-        }
-        if(!voiceovers[4])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE2);
-            voiceovers[4] = true;
-        }
+     
         if(monitorInteractions[3])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);

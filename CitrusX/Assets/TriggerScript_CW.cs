@@ -33,6 +33,11 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
+            if(GameTesting_CW.instance.arePuzzlesDone[2])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
+                allowedToBeUsed = false;
+            }
         }
     }
 }

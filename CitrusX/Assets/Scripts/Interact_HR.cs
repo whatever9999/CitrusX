@@ -98,6 +98,7 @@ public class Interact_HR : MonoBehaviour
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
+    private Subtiles_HR subtitles;
 
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -117,6 +118,7 @@ public class Interact_HR : MonoBehaviour
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
+        subtitles = GetComponent<Subtiles_HR>();
     }
 
     void Update()
@@ -131,7 +133,7 @@ public class Interact_HR : MonoBehaviour
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.material != targetRenderer.material)
+            if (targetRenderer && currRenderer.material != targetRenderer.material && hit.transform.tag != "Keypad")
             {
                 targetRenderer.material = originalMaterial;
                 originalMaterial = currRenderer.material;
@@ -159,7 +161,6 @@ public class Interact_HR : MonoBehaviour
 
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
-                    //Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
@@ -297,7 +298,7 @@ public class Interact_HR : MonoBehaviour
             else if (hit.transform.tag == "Paper")
             {
                 notificationText.text = "Press E to read";
-
+                
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
@@ -308,9 +309,10 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
-                    if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT)
+                    if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT&& !paperItem.hasBeenRead)
                     {
-                        keypad.playerInteractsWithDoc = true;
+                        subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
+                        paperItem.hasBeenRead = true;
                     }
                 }
             }
