@@ -17,11 +17,15 @@ public class ChessBoard_DR : MonoBehaviour
     private float currentCheckBoardInterval;
     private Journal_DR journal;
     private bool isActive = false;
+    private Subtiles_HR subtitles;
+    private TriggerScript_CW chessTrigger;
     public void SetActive(bool value) { isActive = value; }
 
     private void Awake()
     {
         journal = Journal_DR.instance;
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        chessTrigger = GameObject.Find("Chessboard Trigger").GetComponent<TriggerScript_CW>();
     }
 
     private void Update()
@@ -38,13 +42,8 @@ public class ChessBoard_DR : MonoBehaviour
                     {
                         door.unlocked = true;
                         journal.TickOffTask("solve chessboard");
-                        //VOICEOVER 6-4
-                        //exit room - trigger box
-                        //VOICEOVER 6-5
-                        //interact with note
-                        //VOICEOVER 6-6
-                        //close note
-                        //VOICEOVER 6-7
+                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE4);
+                        chessTrigger.allowedToBeUsed = true;
                         GameTesting_CW.instance.arePuzzlesDone[5] = true;
                     }
 

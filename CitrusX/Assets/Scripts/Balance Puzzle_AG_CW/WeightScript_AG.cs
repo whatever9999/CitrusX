@@ -139,7 +139,7 @@ public class WeightScript_AG : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             MoveWeight();
-            journal.TickOffTask("Balance scales");
+           // journal.TickOffTask("Balance scales");
             subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE3);
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
         }

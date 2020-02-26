@@ -60,7 +60,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     }
     private void Update()
     {
-        ReviewWeight();
+       // ReviewWeight();
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         {
             // if equal - puzzle complete
             isComplete = true;
-            journal.TickOffTask("Balance scales");
+          //  journal.TickOffTask("Balance scales");
             subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE3);
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
             

@@ -316,6 +316,16 @@ public class Interact_HR : MonoBehaviour
                         subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
                         paperItem.hasBeenRead = true;
                     }
+                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE3);
+                        paperItem.hasBeenRead = true;
+                    }
+                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE6);
+                        paperItem.hasBeenRead = true;
+                    }
                 }
             }
             else if (hit.transform.tag == "Fusebox")
@@ -438,7 +448,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE2);
                     interactedWith = true;
-                    journal.ChangeTasks(new string[] { "Balance Scales" });
+                   // journal.ChangeTasks(new string[] { "Balance Scales" });
 
                 }
             }

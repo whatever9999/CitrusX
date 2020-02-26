@@ -12,6 +12,7 @@ public class GameTesting_CW : MonoBehaviour
 {
     public static GameTesting_CW instance;
     private TriggerScript_CW ritualTrigger;
+    private TriggerScript_CW chessTrigger;
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false,false};
     private bool[] cutscenes = { false, false, false};
@@ -21,6 +22,7 @@ public class GameTesting_CW : MonoBehaviour
     {
         instance = this;
         ritualTrigger = GameObject.Find("Ritual Trigger").GetComponent<TriggerScript_CW>();
+        chessTrigger = GameObject.Find("Chessboard Trigger").GetComponent<TriggerScript_CW>();
     }
     // Update is called once per frame
     void Update()
@@ -60,6 +62,7 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[4] && !setUpPuzzle[5])
         {
             setUpPuzzle[5] = true;
+            chessTrigger.allowedToBeUsed = true;
             InitiatePuzzles_CW.instance.InitiateChessBoardPuzzle();
         }
         else if (arePuzzlesDone[5] && !setUpPuzzle[6])

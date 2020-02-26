@@ -7,7 +7,8 @@ public class TriggerScript_CW : MonoBehaviour
     public enum TRIGGER_TYPE
     {
         GARDEN,
-        RITUAL
+        RITUAL,
+        CHESSBOARD
     };
     public TRIGGER_TYPE type;
     private Subtiles_HR subtitles;
@@ -38,6 +39,20 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
                 allowedToBeUsed = false;
             }
+        }
+        if (type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
+        {
+            if(GameTesting_CW.instance.arePuzzlesDone[4])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE2);
+                allowedToBeUsed = false;
+            }
+            else if(GameTesting_CW.instance.arePuzzlesDone[5])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE5);
+                allowedToBeUsed = false;
+            }
+            
         }
     }
 }

@@ -17,7 +17,7 @@ public class PaperUI_DR : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(keyToClose))
-        {
+        { 
             gameObject.SetActive(false);
         }
     }
