@@ -8,6 +8,10 @@
  * 
  * Chase (Changes) 17/2/2020
  * Added a SetActive Function and linked it to the GameTesting script, also added the journal for the tasks
+ * 
+ * Chase (Changes) 22/2/2020
+ * Added voiceover comments and bools for them, added an update to use voiceovers
+ * and for interaction with the note for voiceovers
  */
 using System.Collections;
 using UnityEngine;
@@ -23,7 +27,12 @@ public class KeypadUI_DR : MonoBehaviour
     private FirstPersonController firstPersonController;
     private bool isActive = false;
     private Journal_DR journal;
-
+    #region BOOLS
+    internal bool interactedWithSafe = false; //needs to be set in interact
+    private bool hasAlreadyInteractedWithSafe = false;
+    internal bool playerInteractsWithDoc = false;
+    private bool[] voiceovers = { false, false, false, false, false, false, false };
+    #endregion
     public void SetKeypadItem(KeypadItem_DR newKeypadItem) { keypadItem = newKeypadItem; }
     public void SetActive(bool value) { isActive = value; }
 
@@ -35,6 +44,37 @@ public class KeypadUI_DR : MonoBehaviour
         inputText = GameObject.Find("InputText").GetComponent<Text>();
         gameObject.SetActive(false);
         journal = Journal_DR.instance;
+    }
+
+    private void Update()
+    {
+        if(isActive)
+        {
+            if(!voiceovers[0])
+            {
+                //VOICEOVER 4-3
+                voiceovers[0] = true;
+            }
+            if(interactedWithSafe && !hasAlreadyInteractedWithSafe)
+            {
+                if(!voiceovers[1])
+                {
+                    //VOICEOVER 4-4
+                    voiceovers[1] = true;
+                    hasAlreadyInteractedWithSafe = true;
+                }
+            }
+            if(playerInteractsWithDoc)
+            {
+                if(!voiceovers[2])
+                {
+                    //VOICEOVER 4-7
+                    voiceovers[2] = true;
+                    GameTesting_CW.instance.arePuzzlesDone[3] = true;
+                }
+
+            }
+        }
     }
 
     public void NumberButton(int number)
@@ -56,7 +96,7 @@ public class KeypadUI_DR : MonoBehaviour
             SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
-            GameTesting_CW.instance.arePuzzlesDone[3] = true;
+            //VOICEOVER 4-6
             CloseKeypad();
         } else
         {
@@ -67,6 +107,7 @@ public class KeypadUI_DR : MonoBehaviour
                 if(input[0] != 'X')
                 {
                     StartCoroutine(ClearInput());
+                    //VOICEOVER 4-5
                     SFXManager_DR.instance.PlayEffect(SoundEffectNames.INCORRECT);
                 }
             }

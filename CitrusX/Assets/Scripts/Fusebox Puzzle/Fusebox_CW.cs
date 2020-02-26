@@ -6,6 +6,9 @@
  * Dominique (Changes) 11/02/2020
  * Removed unused imported packages
  * Moved variable initialisations to Awake instead of Start
+ * 
+ * Chase (Changes) 22/2/2020
+ * Added voiceover comments and bools
 */
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
@@ -26,6 +29,7 @@ public class Fusebox_CW : MonoBehaviour
     public Pipes_CW[] wires;
     internal Color drawColour;
     private Journal_DR journal;
+    private bool[] voiceovers = { false, false };
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
 
@@ -45,8 +49,20 @@ public class Fusebox_CW : MonoBehaviour
     }
     private void Update()
     {
-        GetAllPipesInScene();
-        CheckForClose();
+        if(isActive)
+        {
+            if(!voiceovers[0])
+            {
+                //VOICEOVER 2-2
+                voiceovers[0] = true;
+                journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+                journal.ChangeTasks(new string[] { "Fix fusebox" });
+            }
+
+            GetAllPipesInScene();
+            CheckForClose();
+        }
+     
     }
 
 
@@ -70,6 +86,11 @@ public class Fusebox_CW : MonoBehaviour
         {
             fuseboxText.text = "COMPLETED";
             journal.TickOffTask("Fix fusebox");
+            if(!voiceovers[1])
+            {
+                //VOICEOVER 2-3
+                voiceovers[1] = true;
+            }
             GameTesting_CW.instance.arePuzzlesDone[2] = true;
             //if (wireCompletedCount >= wires.Length)
             //{
