@@ -8,6 +8,8 @@
  * Chase Wilding (Changes) 11/2/2020
  * Changed to else if statements based off Dominique's feedback
  */
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SetUpRitual_CW : MonoBehaviour
@@ -22,12 +24,14 @@ public class SetUpRitual_CW : MonoBehaviour
     internal bool ritualSetUpPlaced = false;
     internal bool jewelleryCollected = false;
     internal bool jewelleryPlaced = false;
+    private TriggerScript_CW gardenTrigger;
     #endregion
 
     private void Awake()
     {
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        gardenTrigger = GameObject.Find("Garden Trigger").GetComponent<TriggerScript_CW>();
     }
 
     private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
@@ -50,7 +54,6 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if(!voiceovers[2])
                     {
-
                         subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE3);
                         voiceovers[2] = true;
                     }
@@ -103,8 +106,7 @@ public class SetUpRitual_CW : MonoBehaviour
                         if (!voiceovers[6])
                         {
                             subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE7);
-                            voiceovers[6] = true;
-                            journal.ChangeTasks(new string[] { "work plz" });
+                            gardenTrigger.allowedToBeUsed = true;
                             GameTesting_CW.instance.arePuzzlesDone[0] = true;
                         }
                     }
@@ -115,5 +117,9 @@ public class SetUpRitual_CW : MonoBehaviour
          
         }
     }
-        
+    IEnumerator Pause()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
+       
 }

@@ -27,4 +27,5 @@ public class Paper_DR : MonoBehaviour
         RITUAL_ARTICLE
     };
     public NOTE_NAME nameOfNote;
+    public bool hasBeenRead = false;
 }
