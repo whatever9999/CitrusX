@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 211b13583d1e22445b3e805b28243cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baronAppearanceIntervalRange: {x: 120, y: 360}
+  baronAppearanceIntervalRange: {x: 60, y: 120}
   numberOfCoins: 10
   coinPrefab: {fileID: -927199367670048503, guid: 5e22e8964b9bca8449a2d293a0dc2b66,
     type: 3}

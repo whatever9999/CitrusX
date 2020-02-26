@@ -63,21 +63,6 @@ public class DisturbanceHandler_DR : MonoBehaviour
         #endregion
     }
 
-    private void Start()
-    {
-        Debug.LogError("Mwahahhahahaa");
-        //Tests
-        TriggerDisturbance(DisturbanceName.PAWNFALL);
-        TriggerDisturbance(DisturbanceName.BOXFALL);
-        TriggerDisturbance(DisturbanceName.BARONCLOSEUP);
-        TriggerDisturbance(DisturbanceName.BOOKTURNPAGE);
-        TriggerDisturbance(DisturbanceName.DOORCREAK);
-        TriggerDisturbance(DisturbanceName.BARONINROOM);
-        TriggerDisturbance(DisturbanceName.BOXMOVE);
-        TriggerDisturbance(DisturbanceName.BOOKFALL);
-        TriggerDisturbance(DisturbanceName.LAMPWOBBLE);
-    }
-
     public void TriggerDisturbance(DisturbanceName name)
     {
         switch (name)
