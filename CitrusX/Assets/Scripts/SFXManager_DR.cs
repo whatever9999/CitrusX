@@ -2,6 +2,9 @@
  * Dominique
  * 
  * Spawns a SFX game object for the length of the audio clip or for a specified time (on loop)
+ * 
+ * 26/02/2020 - Adam
+ * Added Enums for currently added sfx clips
  */
 
 using UnityEngine;
@@ -91,8 +94,33 @@ public class SFXManager_DR : MonoBehaviour
 public enum SoundEffectNames
 {
     CORRECT,
+    CORRECT_ALTERNATIVE,
     INCORRECT,
-    BUTTON
+    INCORRECT_ALTERNATIVE,
+    BUTTON,
+    BARON_BEHIND_YOU,
+    BARON_HERE,
+    BARON_SEE_YOU,
+    CANDLE_BLOW,
+    CANDLE_LIT,
+    COIN_DROP,
+    COIN_DROP_BAG,
+    DOOR_LOCKED,
+    DOOR_CLOSE,
+    DOOR_CLOSE_ALT,
+    DOOR_OPEN,
+    DOOR_OPEN_ALTERNATIVE,
+    INVENTORY_IN,
+    INVENTORY_OUT,
+    LIGHTER_SPARK,
+    LIGHTSWITCH,
+    UI_CLICK,
+    UI_SNAP,
+    WATER_DROP,
+    WATER_FILL,
+    WATER_SPILL,
+    AMBIENT_OUTDOORS,
+    WILHELM_SCREAM
 }
 
 [System.Serializable]
