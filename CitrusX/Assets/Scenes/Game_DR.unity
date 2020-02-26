@@ -3608,6 +3608,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeightMovable_AG
       objectReference: {fileID: 0}
+    - target: {fileID: 5304991614255898499, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weight
+      objectReference: {fileID: 0}
     - target: {fileID: 5304991614255898510, guid: 496160823f4baa840842cb48e355707d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3683,6 +3688,31 @@ PrefabInstance:
       propertyPath: WeightRack
       value: 
       objectReference: {fileID: 620661320}
+    - target: {fileID: 5304991614255898509, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_Height
+      value: 2.7935684
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304991614255898509, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.000000074505806
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304991614255898509, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.04431784
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304991614255898509, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.041999813
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304991614255898509, guid: 496160823f4baa840842cb48e355707d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7060384
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 496160823f4baa840842cb48e355707d, type: 3}
 --- !u!4 &618780420 stripped
@@ -3701,7 +3731,7 @@ PrefabInstance:
     - target: {fileID: 5797514961664284104, guid: 07f8a43297150944ca58508fe119f55e,
         type: 3}
       propertyPath: m_Name
-      value: WeightRack_AG
+      value: Weight Rack
       objectReference: {fileID: 0}
     - target: {fileID: 5797514961664284108, guid: 07f8a43297150944ca58508fe119f55e,
         type: 3}
@@ -14130,7 +14160,12 @@ PrefabInstance:
     - target: {fileID: 9166455128662889063, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
         type: 3}
       propertyPath: m_Name
-      value: ScalesBase_AG
+      value: Scales
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166455128662889063, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Scales
       objectReference: {fileID: 0}
     - target: {fileID: 9166455128662889058, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
         type: 3}
@@ -14196,6 +14231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: puzzleDoor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166455128232016381, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Left Pan
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166455129213802631, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Right Pan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d1cd50ce3bdae244b777e382b3ac5ce, type: 3}

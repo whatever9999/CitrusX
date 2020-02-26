@@ -48,7 +48,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         throwing = GetComponent<BallButtonLogic_HR>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
-        scales = GetComponent<ScalesPuzzleScript_AG>();
+        scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     public void InitiateSetUpRitualPuzzle()
@@ -81,6 +81,18 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.ChangeTasks(new string[] { "unlock safe" });
             keypad.SetActive(true);
             monitorInteractionsUsed[2] = true;
+        }
+        else if(monitorInteractions[3] && !monitorInteractionsUsed[3])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
+            scales.SetActive(true);
+            monitorInteractionsUsed[3] = true;
+        }
+        else if (monitorInteractions[4] && !monitorInteractionsUsed[4])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE1);
+            chessboard.SetActive(true);
+            monitorInteractionsUsed[4] = true;
         }
     }
     public void InitiateFuseboxPuzzle()
@@ -157,13 +169,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         if(monitorInteractions[4])
         {
-            if (!voiceovers[5])
-            {
-                subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
-                voiceovers[5] = true;
-                scales.SetActive(true);
-                //journal for check out kitchen?
-            }
+
+            scales.SetActive(true);
+            //journal for check out kitchen?
+
         }
     }
     public void InitiateThrowingPuzzle()

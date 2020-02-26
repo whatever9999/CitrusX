@@ -99,6 +99,7 @@ public class Interact_HR : MonoBehaviour
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
     private Subtiles_HR subtitles;
+    private ScalesPuzzleScript_AG scales;
 
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -119,6 +120,7 @@ public class Interact_HR : MonoBehaviour
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtiles_HR>();
+      //  scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
     }
 
     void Update()
@@ -157,7 +159,7 @@ public class Interact_HR : MonoBehaviour
 
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
-                  //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
@@ -262,31 +264,31 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
-                    if(door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
+                    if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                            if(colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                        if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
+                            colourMatch.isDoorInteractedWith[0] = true;
+
+                        }
+                        if (!colourMatch.hasKeyPart2)
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
+                        }
+                        if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                        {
+                            colourMatch.isDoorInteractedWith[1] = true;
+                            notificationText.text = "Press E to use";
+                            door.unlocked = true;
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                 notificationText.text = "It's locked. I should check my journal.";
-                                 colourMatch.isDoorInteractedWith[0] = true;
-                               
+                                notificationText.text = "";
+                                door.ToggleOpen();
+                                door.tag = "Untagged";
                             }
-                            if(!colourMatch.hasKeyPart2)
-                            {
-                                notificationText.text = "It's locked. I should check my journal.";
-                            }
-                            if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
-                            {
-                                colourMatch.isDoorInteractedWith[1] = true;
-                                notificationText.text = "Press E to use";
-                                door.unlocked = true;
-                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                                 { 
-                                     notificationText.text = "";
-                                     door.ToggleOpen();
-                                     door.tag = "Untagged";
-                                 }
-                            }
-                           
+                        }
+
                     }
                 }
                 else
@@ -298,7 +300,7 @@ public class Interact_HR : MonoBehaviour
             else if (hit.transform.tag == "Paper")
             {
                 notificationText.text = "Press E to read";
-                
+
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
@@ -309,7 +311,7 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
-                    if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT&& !paperItem.hasBeenRead)
+                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead)
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
                         paperItem.hasBeenRead = true;
@@ -336,11 +338,11 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
                         #region MONITOR_INTERACTION_IFS
-                        if(!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
                         }
-                        else if(!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
                         }
@@ -428,6 +430,18 @@ public class Interact_HR : MonoBehaviour
 
                 }
             }
+            else if (hit.transform.tag == "Scales")
+            {
+                bool interactedWith = false;
+                notificationText.text = "Press E to observe scales";
+                if (Input.GetKeyDown(InteractKey) && !interactedWith)
+                {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE2);
+                    interactedWith = true;
+                    journal.ChangeTasks(new string[] { "Balance Scales" });
+
+                }
+            }
             else if (hit.transform.tag == "MovableWeight")
             {
                 notificationText.text = "Press " + InteractKey.ToString() + " to use the weight";
@@ -456,6 +470,28 @@ public class Interact_HR : MonoBehaviour
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
+            //else if (hit.transform.tag == "Weight")
+            //{
+            //    notificationText.text = "Press E to pick up and place the weight";
+
+            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+            //    {
+            //        hit.transform.tag = "Weight Placed";
+            //        hit.transform.SetParent(scales.leftPan.transform);
+            //        hit.transform.position = hit.transform.parent.position;
+            //    }
+            //}
+            //else if (hit.transform.tag == "Weight Placed")
+            //{
+            //    notificationText.text = "Press E to remove the weight";
+
+            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+            //    {
+            //        hit.transform.tag = "Weight";
+            //        transform.SetParent(scales.weightRack.transform);
+            //        hit.transform.position = hit.transform.parent.position;
+            //    }
+            //}
             else
             {
                 playerCamera.fieldOfView = defaultFOV;
