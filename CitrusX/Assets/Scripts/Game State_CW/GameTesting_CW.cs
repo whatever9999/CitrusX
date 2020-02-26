@@ -11,6 +11,7 @@ using UnityEngine;
 public class GameTesting_CW : MonoBehaviour
 {
     public static GameTesting_CW instance;
+    private TriggerScript_CW ritualTrigger;
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false,false};
     private bool[] cutscenes = { false, false, false};
@@ -19,6 +20,7 @@ public class GameTesting_CW : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        ritualTrigger = GameObject.Find("Ritual Trigger").GetComponent<TriggerScript_CW>();
     }
     // Update is called once per frame
     void Update()
@@ -42,6 +44,7 @@ public class GameTesting_CW : MonoBehaviour
         else if(arePuzzlesDone[1] && !setUpPuzzle[2])
         {
             setUpPuzzle[2] = true;
+            ritualTrigger.allowedToBeUsed = true;
             InitiatePuzzles_CW.instance.InitiateColourMatchingPuzzle();
         }
         else if (arePuzzlesDone[2] && !setUpPuzzle[3])

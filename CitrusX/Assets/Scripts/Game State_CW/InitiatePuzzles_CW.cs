@@ -73,12 +73,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         //player enters ritual room - trigger box? Game script?
         //disturbance occurs (loud sound?)
-        if(!voiceovers[1]  )
-        {
-            
-            voiceovers[1] = true;
-            
-        }
+     
         if(monitorInteractions[0])
         {
             fusebox.SetGameActive(true);
@@ -95,6 +90,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
             voiceovers[2] = true;
+        }
+        if(monitorInteractions[1])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
         }
         //if player interacts with monitor then
 

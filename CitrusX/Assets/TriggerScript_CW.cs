@@ -6,7 +6,8 @@ public class TriggerScript_CW : MonoBehaviour
 {
     public enum TRIGGER_TYPE
     {
-        GARDEN
+        GARDEN,
+        RITUAL
     };
     public TRIGGER_TYPE type;
     private Subtiles_HR subtitles;
@@ -24,6 +25,14 @@ public class TriggerScript_CW : MonoBehaviour
         {
 
             subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
+        }
+        if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
+        {
+            if(GameTesting_CW.instance.arePuzzlesDone[1])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
+                allowedToBeUsed = false;
+            }
         }
     }
 }
