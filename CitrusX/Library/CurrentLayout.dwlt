@@ -47,7 +47,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 12
+  controlID: 74
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -67,8 +67,8 @@ MonoBehaviour:
     y: 0
     width: 389
     height: 947
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -93,8 +93,8 @@ MonoBehaviour:
     y: 0
     width: 379
     height: 573
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 13
+  controlID: 75
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 14
+  controlID: 76
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -363,20 +363,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Sounds/SFX/SFX_AG/ZapSplat License
   m_ViewMode: 1
-  m_StartGridSize: 64
+  m_StartGridSize: 78
   m_LastFolders:
-  - Assets/Prefabs
-  m_LastFoldersGridSize: -1
+  - Assets/Sounds/SFX/SFX_AG/ZapSplat License
+  m_LastFoldersGridSize: 78
   m_LastProjectPath: C:\Users\A\Documents\GitHub\CitrusX\CitrusX
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: f6350000
-    m_LastClickedID: 13814
-    m_ExpandedIDs: 00000000b62a00000e2b0000f42b0000de2d0000842e00008c300000cc3100003e3200009e340000ca350000743600007e3d000000ca9a3b
+    scrollPos: {x: 0, y: 401}
+    m_SelectedIDs: 2c310000
+    m_LastClickedID: 12588
+    m_ExpandedIDs: 00000000ba2a0000122b0000fc2b0000f22c0000ea2d0000902e00009a30000018310000dc3100004e3200002e340000b4340000e23500008e3600004c3d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -404,7 +404,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b62a00000e2b0000842e00008c300000cc3100009e340000ca350000743600007e3d0000
+    m_ExpandedIDs: 00000000ba2a0000122b0000fc2b0000ea2d0000902e00009a300000dc3100004e320000b4340000e23500008e3600004c3d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -457,7 +457,7 @@ MonoBehaviour:
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 64
+    m_GridSize: 78
   m_DirectoriesAreaWidth: 115
 --- !u!114 &15
 MonoBehaviour:
@@ -524,9 +524,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: e03f0000
+      m_SelectedIDs: 2a2d0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 161effff9a5cffff40f8ffff28f9ffff8efbffffdc380000
+      m_ExpandedIDs: 8efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -619,11 +619,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.024662701, y: 0.9659682, z: -0.23519923, w: 0.102466755}
     speed: 2
-    m_Value: {x: 0.0243157, y: 0.96635234, z: -0.23529233, w: 0.1010419}
+    m_Value: {x: 0.024668612, y: 0.96619964, z: -0.23525558, w: 0.102491304}
   m_Size:
     m_Target: 173.68547
     speed: 2
-    m_Value: 166.20619
+    m_Value: 173.68547
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -708,7 +708,7 @@ MonoBehaviour:
       y: 17
       width: 1150
       height: 537
-    m_Scale: {x: 1, y: 1}
+    m_Scale: {x: 1.25, y: 1.25}
     m_Translation: {x: 575, y: 268.5}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -716,10 +716,10 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -575
-      y: -268.5
-      width: 1150
-      height: 537
+      x: -460
+      y: -214.8
+      width: 920
+      height: 429.6
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
