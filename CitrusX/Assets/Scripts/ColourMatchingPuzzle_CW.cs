@@ -12,19 +12,16 @@
  * out the entire puzzle
 
  */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColourMatchingPuzzle_CW : MonoBehaviour
 {
     #region VARIABLES
-    internal bool isActive = false;
+    private bool isActive = false;
     private bool[] voiceovers = { false, false, false, false, false };
     internal bool[] isDoorInteractedWith = { false, false };
     private bool hasKeyPart1 = false;
     internal bool hasKeyPart2 = false;
-    private TriggerScript_CW ritualTrigger;
 
     private Journal_DR journal;
     private Door_DR door;
@@ -34,71 +31,67 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     public void Awake()
     {
         journal = Journal_DR.instance;
+        door = GameObject.Find("Colour Matching Door").GetComponent<Door_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
-        ritualTrigger = GameObject.Find("Ritual Trigger").GetComponent<TriggerScript_CW>();
     }
     private void Update()
     {
-        journal = Journal_DR.instance;
-        if (isActive)
-        {
-            if (!voiceovers[0])
+        
+            if(!voiceovers[0])
             {
-                //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
-                voiceovers[0] = true;
+                 subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+                 voiceovers[0] = true;
             }
-            else if (isDoorInteractedWith[0] && !voiceovers[1])
+            if(isDoorInteractedWith[0] && !voiceovers[1])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3); 
+            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3);
+            voiceovers[1] = true;
                 journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
-                voiceovers[1] = true;
             }
-            else if (isDoorInteractedWith[0] && !hasKeyPart1 && voiceovers[1])
+            if(!hasKeyPart1)
             {
                 if (journal.AreTasksComplete())
                 {
-                    if (!voiceovers[2])
+                    if(!voiceovers[2])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
-                        voiceovers[2] = true;
+                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
+                    voiceovers[2] = true;
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
                     }
                 }
             }
-            else if (!hasKeyPart2 && hasKeyPart1)
+            if(!hasKeyPart2 && hasKeyPart1)
             {
                 if (journal.AreTasksComplete())
                 {
                     if (!voiceovers[3])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
-                        voiceovers[3] = true;
+                    subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
+                    voiceovers[3] = true;
                         hasKeyPart2 = true;
                     }
                 }
             }
-            else if (hasKeyPart2)
+            if(hasKeyPart2)
             {
-                if (isDoorInteractedWith[1])
+                if(isDoorInteractedWith[1])
                 {
+                    door.ToggleOpen();
                     if (!voiceovers[4])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
-                        voiceovers[4] = true;
-                       
+                         subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
+                         voiceovers[4] = true;
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");
-                        ritualTrigger.allowedToBeUsed = true;
                         GameTesting_CW.instance.arePuzzlesDone[2] = true;
                     }
                 }
-
+                
             }
-        }
-            
            
     }
-       
+        
+
     
 }
