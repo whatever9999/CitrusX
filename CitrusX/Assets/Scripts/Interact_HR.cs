@@ -65,9 +65,6 @@
  * 
  * Dominique (Changes) 25/02/2020
  * Door now opens AND closes!
- * 
- * Chase(Changes) 26/2/2020
- * Added monitor interaction ifs for voiceovers and edited colour-matching door segment
   */
 using System.Collections;
 using UnityEngine;
@@ -98,8 +95,6 @@ public class Interact_HR : MonoBehaviour
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
-    private Subtiles_HR subtitles;
-    private ScalesPuzzleScript_AG scales;
 
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -118,9 +113,7 @@ public class Interact_HR : MonoBehaviour
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
-        colourMatch = GameObject.Find("Colour Matching Door").GetComponent<ColourMatchingPuzzle_CW>();
-        subtitles = GetComponent<Subtiles_HR>();
-      //  scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
     }
 
     void Update()
@@ -135,7 +128,7 @@ public class Interact_HR : MonoBehaviour
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.material != targetRenderer.material && hit.transform.tag != "Keypad")
+            if (targetRenderer && currRenderer.material != targetRenderer.material)
             {
                 targetRenderer.material = originalMaterial;
                 originalMaterial = currRenderer.material;
@@ -159,10 +152,11 @@ public class Interact_HR : MonoBehaviour
 
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
-                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+                  //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
+                    Journal_DR.instance.ChangeTasks(new string[] { "Pawn" });
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
@@ -264,31 +258,27 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
-                    if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
+                    if(door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                        if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
-                        {
+                            if(!colourMatch.isDoorInteractedWith[0])
+                            {
                             notificationText.text = "It's locked. I should check my journal.";
                             colourMatch.isDoorInteractedWith[0] = true;
-
-                        }
-                        if (!colourMatch.hasKeyPart2)
-                        {
-                            notificationText.text = "It's locked. I should check my journal.";
-                        }
-                        if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
-                        {
-                            colourMatch.isDoorInteractedWith[1] = true;
-                            notificationText.text = "Press E to use";
-                            door.unlocked = true;
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                            {
-                                notificationText.text = "";
-                                door.ToggleOpen();
-                                door.tag = "Untagged";
+                               
                             }
-                        }
-
+                            if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            {
+                                colourMatch.isDoorInteractedWith[1] = true;
+                                notificationText.text = "Press E to use";
+                                door.unlocked = true;
+                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                 { 
+                                     notificationText.text = "";
+                                     door.ToggleOpen();
+                                     door.tag = "Untagged";
+                                 }
+                            }
+                           
                     }
                 }
                 else
@@ -311,20 +301,9 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead)
+                    if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
-                        paperItem.hasBeenRead = true;
-                    }
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
-                    {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE3);
-                        paperItem.hasBeenRead = true;
-                    }
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
-                    {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE6);
-                        paperItem.hasBeenRead = true;
+                        keypad.playerInteractsWithDoc = true;
                     }
                 }
             }
@@ -347,46 +326,7 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.transform.LookAt(hit.transform);
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
-                        #region MONITOR_INTERACTION_IFS
-                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[2] && GameTesting_CW.instance.arePuzzlesDone[2])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[2] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[3] && GameTesting_CW.instance.arePuzzlesDone[3])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[3] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[4] && GameTesting_CW.instance.arePuzzlesDone[4])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[4] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[5] && GameTesting_CW.instance.arePuzzlesDone[5])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[5] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[6] && GameTesting_CW.instance.arePuzzlesDone[6])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[6] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[7] && GameTesting_CW.instance.arePuzzlesDone[7])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[7] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[8] && GameTesting_CW.instance.arePuzzlesDone[8])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[8] = true;
-                        }
-                        #endregion
                     }
-
                 }
                 else
                 {
@@ -440,18 +380,6 @@ public class Interact_HR : MonoBehaviour
 
                 }
             }
-            else if (hit.transform.tag == "Scales")
-            {
-                bool interactedWith = false;
-                notificationText.text = "Press E to observe scales";
-                if (Input.GetKeyDown(InteractKey) && !interactedWith)
-                {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE2);
-                    interactedWith = true;
-                   // journal.ChangeTasks(new string[] { "Balance Scales" });
-
-                }
-            }
             else if (hit.transform.tag == "MovableWeight")
             {
                 notificationText.text = "Press " + InteractKey.ToString() + " to use the weight";
@@ -480,28 +408,6 @@ public class Interact_HR : MonoBehaviour
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
-            //else if (hit.transform.tag == "Weight")
-            //{
-            //    notificationText.text = "Press E to pick up and place the weight";
-
-            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-            //    {
-            //        hit.transform.tag = "Weight Placed";
-            //        hit.transform.SetParent(scales.leftPan.transform);
-            //        hit.transform.position = hit.transform.parent.position;
-            //    }
-            //}
-            //else if (hit.transform.tag == "Weight Placed")
-            //{
-            //    notificationText.text = "Press E to remove the weight";
-
-            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-            //    {
-            //        hit.transform.tag = "Weight";
-            //        transform.SetParent(scales.weightRack.transform);
-            //        hit.transform.position = hit.transform.parent.position;
-            //    }
-            //}
             else
             {
                 playerCamera.fieldOfView = defaultFOV;

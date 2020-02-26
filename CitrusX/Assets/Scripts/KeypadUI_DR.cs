@@ -28,7 +28,6 @@ public class KeypadUI_DR : MonoBehaviour
     private bool isActive = false;
     private Journal_DR journal;
     private Subtiles_HR subtitles;
-    private Paper_DR keyPadDoc;
     #endregion
     #region BOOLS
     internal bool interactedWithSafe = false; //needs to be set in interact
@@ -48,16 +47,36 @@ public class KeypadUI_DR : MonoBehaviour
         gameObject.SetActive(false);
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
-        keyPadDoc = GameObject.Find("Key Pad Doc").GetComponent<Paper_DR>();
     }
 
     private void Update()
     {
         if(isActive)
         {
-            
-            voiceovers[2] = true;
-            GameTesting_CW.instance.arePuzzlesDone[3] = true;
+            if(!voiceovers[0])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
+                voiceovers[0] = true;
+            }
+            if(interactedWithSafe && !hasAlreadyInteractedWithSafe)
+            {
+                if(!voiceovers[1])
+                {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE4);
+                    voiceovers[1] = true;
+                    hasAlreadyInteractedWithSafe = true;
+                }
+            }
+            if(playerInteractsWithDoc)
+            {
+                if(!voiceovers[2])
+                {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
+                    voiceovers[2] = true;
+                    GameTesting_CW.instance.arePuzzlesDone[3] = true;
+                }
+
+            }
         }
     }
 
@@ -77,7 +96,6 @@ public class KeypadUI_DR : MonoBehaviour
         if (input == keypadItem.password)
         {
             keypadItem.door.unlocked = true;
-            keypadItem.door.ToggleOpen();
             SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
@@ -123,7 +141,6 @@ public class KeypadUI_DR : MonoBehaviour
 
     public void OpenKeypad(KeypadItem_DR newKeypadItem)
     {
-        subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE4);
         //Make sure the UI is for the keypad used (not another one in the scene)
         keypadItem = newKeypadItem;
 

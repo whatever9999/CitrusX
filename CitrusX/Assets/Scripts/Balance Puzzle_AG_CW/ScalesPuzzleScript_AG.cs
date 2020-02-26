@@ -29,14 +29,13 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private GameObject rightPan;
     private GameObject puzzleDoor;
     private Door_DR doorScript;
-    private Subtiles_HR subtitles;
 
     // Puzzle State
     private bool isComplete = false;
 
     // Weights to compare
-    public int leftMass;
-    public int rightMass;
+    private int leftMass;
+    private int rightMass;
 
     private Journal_DR journal;
     private bool isActive = false;
@@ -48,7 +47,6 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         leftPan = GameObject.Find("Left Pan");
         rightPan = GameObject.Find("Right Pan");
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
 
         // doorScript = puzzleDoor.GetComponent<Door_DR>();
         //WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
@@ -58,11 +56,17 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         //    rightMass += weightScript.GetMass();
         //}
     }
+
     private void Update()
     {
-       // ReviewWeight();
+        if(isActive)
+        {
+            //if interact with scales
+            //VOICEOVER 5-2
+            //if complete
+            //VOICEOVER 5-3
+        }
     }
-
     /// <summary>
     /// Compare the weight on each side to see if they match
     /// </summary>
@@ -73,8 +77,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         {
             // if equal - puzzle complete
             isComplete = true;
-          //  journal.TickOffTask("Balance scales");
-            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE3);
+            journal.TickOffTask("balance scales");
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
             
             doorScript.ToggleOpen();
@@ -87,7 +90,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private void CalculateLeftMass()
     {
         // Reset mass
-        //leftMass = 0;
+        leftMass = 0;
 
         // Get all weight scripts in left pan
         var addedWeights = leftPan.GetComponentsInChildren<WeightScript_AG>();

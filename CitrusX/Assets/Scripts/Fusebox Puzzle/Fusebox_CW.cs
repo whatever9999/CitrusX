@@ -52,6 +52,16 @@ public class Fusebox_CW : MonoBehaviour
     private void Update()
     {
 
+        
+
+        if (!voiceovers[0])
+        {
+                subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE2);
+                voiceovers[0] = true;
+                journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
+                journal.ChangeTasks(new string[] { "Fix fusebox" });
+        }
+
             GetAllPipesInScene();
             CheckForClose();
         
@@ -83,8 +93,14 @@ public class Fusebox_CW : MonoBehaviour
             {
                 subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE3);
                 voiceovers[1] = true;
-                GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
+            GameTesting_CW.instance.arePuzzlesDone[1] = true;
+            //if (wireCompletedCount >= wires.Length)
+            //{
+            //    fuseboxText.text = "COMPLETE";
+              
+                
+            //}
         }
     }
     private void CheckForClose()
