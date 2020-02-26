@@ -35,7 +35,7 @@ public class DisturbanceHandler_DR : MonoBehaviour
         PAWNFALL,
         BOXFALL,
         BARONCLOSEUP,
-        BOOKSLAM,
+        BOOKTURNPAGE,
         DOORCREAK,
         BARONINROOM,
         BOXMOVE,
@@ -50,7 +50,7 @@ public class DisturbanceHandler_DR : MonoBehaviour
 
         pawn = GameObject.Find("Pawn").GetComponent<Animator>();
         boxFall = GameObject.Find("BoxFall").GetComponent<Animator>();
-        slamBook = GameObject.Find("SlamBook").GetComponent<Animator>();
+        slamBook = GameObject.Find("TurnPageBook").GetComponent<Animator>();
         creakyDoor = GameObject.Find("CreakyDoor").GetComponentInChildren<Door_DR>();
         baron = GameObject.Find("Baron");
         baronAnimator = baron.GetComponent<Animator>();
@@ -70,7 +70,7 @@ public class DisturbanceHandler_DR : MonoBehaviour
         TriggerDisturbance(DisturbanceName.PAWNFALL);
         TriggerDisturbance(DisturbanceName.BOXFALL);
         TriggerDisturbance(DisturbanceName.BARONCLOSEUP);
-        TriggerDisturbance(DisturbanceName.BOOKSLAM);
+        TriggerDisturbance(DisturbanceName.BOOKTURNPAGE);
         TriggerDisturbance(DisturbanceName.DOORCREAK);
         TriggerDisturbance(DisturbanceName.BARONINROOM);
         TriggerDisturbance(DisturbanceName.BOXMOVE);
@@ -91,8 +91,8 @@ public class DisturbanceHandler_DR : MonoBehaviour
             case DisturbanceName.BARONCLOSEUP:
                 BaronPopup_DR.instance.SpoopyScare();
                 break;
-            case DisturbanceName.BOOKSLAM:
-                slamBook.SetTrigger("Slam");
+            case DisturbanceName.BOOKTURNPAGE:
+                slamBook.SetTrigger("TurnPage");
                 break;
             case DisturbanceName.DOORCREAK:
                 creakyDoor.ToggleOpen();
