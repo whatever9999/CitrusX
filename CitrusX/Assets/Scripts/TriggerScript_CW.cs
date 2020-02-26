@@ -40,7 +40,7 @@ public class TriggerScript_CW : MonoBehaviour
                 allowedToBeUsed = false;
             }
         }
-        if (type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
+        if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
         {
             if(GameTesting_CW.instance.arePuzzlesDone[4])
             {

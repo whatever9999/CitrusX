@@ -100,6 +100,7 @@ public class KeypadUI_DR : MonoBehaviour
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
             subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE6);
+            GameTesting_CW.instance.arePuzzlesDone[3] = true;
             CloseKeypad();
         } else
         {

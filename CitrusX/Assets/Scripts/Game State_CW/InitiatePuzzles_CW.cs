@@ -110,15 +110,14 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateColourMatchingPuzzle()
     {
-        //player in ritual room
-        //disturbance occurs
+
 
         if (monitorInteractions[1])
         {
 
             colourMatch.SetActive(true);
         }
-        //if player interacts with monitor then
+
 
 
 
@@ -150,8 +149,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //VOICEOVER 6-2
         //interact with book
         //VOICEOVER 6-3
-        //journal.AddJournalLog("I think that book might explain what I'm supposed to do with this board. A piece seems missing though.");
-        //journal.ChangeTasks(new string[] { "Pawn" });
+       
         chessboard.SetActive(true);
     }
     public void InitiateKeycodePuzzle()

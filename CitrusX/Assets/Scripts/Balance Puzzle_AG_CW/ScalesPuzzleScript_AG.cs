@@ -90,13 +90,13 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         //leftMass = 0;
 
         // Get all weight scripts in left pan
-        var addedWeights = leftPan.GetComponentsInChildren<WeightScript_AG>();
+        //var addedWeights = leftPan.GetComponentsInChildren<WeightScript_AG>();
 
-        // Add each weights mass to the leftMass var
-        foreach (WeightScript_AG weight in addedWeights)
-        {
-            leftMass += weight.GetMass();
-        }
+        //// Add each weights mass to the leftMass var
+        //foreach (WeightScript_AG weight in addedWeights)
+        //{
+        //    leftMass += weight.GetMass();
+        //}
     }
 
     /// <summary>

@@ -1998,6 +1998,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1313197059}
     m_Modifications:
+    - target: {fileID: 5332247927525525192, guid: 6bcd2666a16d8f4468483c0198f99501,
+        type: 3}
+      propertyPath: m_Name
+      value: Ritual Table
+      objectReference: {fileID: 0}
     - target: {fileID: 5332247927525525188, guid: 6bcd2666a16d8f4468483c0198f99501,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2062,11 +2067,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 3.5638466
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332247927525525192, guid: 6bcd2666a16d8f4468483c0198f99501,
-        type: 3}
-      propertyPath: m_Name
-      value: Ritual Table
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bcd2666a16d8f4468483c0198f99501, type: 3}
@@ -9957,6 +9957,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -3491872099148682982, guid: 48a0bfbe0e80432489d36fc692330394,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3084619840928114394, guid: 48a0bfbe0e80432489d36fc692330394,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -9073994814856593655, guid: 48a0bfbe0e80432489d36fc692330394,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -10417,11 +10427,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.98600453
       objectReference: {fileID: 0}
-    - target: {fileID: -3491872099148682982, guid: 48a0bfbe0e80432489d36fc692330394,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: -3265311125587442095, guid: 48a0bfbe0e80432489d36fc692330394,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -10881,11 +10886,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.99416494
-      objectReference: {fileID: 0}
-    - target: {fileID: 3084619840928114394, guid: 48a0bfbe0e80432489d36fc692330394,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3266670797994321630, guid: 48a0bfbe0e80432489d36fc692330394,
         type: 3}
@@ -15330,6 +15330,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scales
       objectReference: {fileID: 0}
+    - target: {fileID: 9166455128662889063, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Scales
+      objectReference: {fileID: 0}
     - target: {fileID: 9166455128662889058, guid: 0d1cd50ce3bdae244b777e382b3ac5ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17241,8 +17246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.6, y: -426.75}
-  m_SizeDelta: {x: 3159.3, y: 153.5}
+  m_AnchoredPosition: {x: 2.6, y: -359.5}
+  m_SizeDelta: {x: 3159.3, y: 257.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085394349
 MonoBehaviour:
