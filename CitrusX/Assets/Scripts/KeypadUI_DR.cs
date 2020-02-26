@@ -55,7 +55,7 @@ public class KeypadUI_DR : MonoBehaviour
         {
             if(!voiceovers[0])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
+                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE4);
                 voiceovers[0] = true;
             }
             if(interactedWithSafe && !hasAlreadyInteractedWithSafe)

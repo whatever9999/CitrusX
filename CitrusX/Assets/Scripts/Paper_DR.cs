@@ -1,11 +1,11 @@
 ﻿/*
- * Dominique 
- * 
+ * Dominique
+ *
  * Holds the text and background of the paper object so it can change the paper UI accordingly
  *
- * Chase (Changes) 22/2/2020
+ * Chase(Changes) 22/2/2020
  * Added enum for types of notes for interaction purposes
- * Chase (Changes) 24/2/2020
+ * Chase(Changes) 24/2/2020
  * Added text size for notes
  */
 using UnityEngine;
@@ -27,4 +27,5 @@ public class Paper_DR : MonoBehaviour
         RITUAL_ARTICLE
     };
     public NOTE_NAME nameOfNote;
+    public bool hasBeenRead = false;
 }

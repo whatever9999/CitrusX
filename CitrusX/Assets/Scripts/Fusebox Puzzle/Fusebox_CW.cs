@@ -2,12 +2,12 @@
  * This script opens/closes the fusebox and also registers whether they have been completed
  * It also keeps track of which colour is set for 'drawing' the wires
  * I have used some of Dominique's code from the keypad and manipulated it to open/close my fusebox for consistency
- * 
- * Dominique (Changes) 11/02/2020
+ *
+ * Dominique(Changes) 11/02/2020
  * Removed unused imported packages
  * Moved variable initialisations to Awake instead of Start
- * 
- * Chase (Changes) 22/2/2020
+ *
+ * Chase(Changes) 22/2/2020
  * Added voiceover comments and bools
 */
 using UnityEngine;
@@ -52,20 +52,10 @@ public class Fusebox_CW : MonoBehaviour
     private void Update()
     {
 
-        
+        GetAllPipesInScene();
+        CheckForClose();
 
-        if (!voiceovers[0])
-        {
-                subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE2);
-                voiceovers[0] = true;
-                journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
-                journal.ChangeTasks(new string[] { "Fix fusebox" });
-        }
 
-            GetAllPipesInScene();
-            CheckForClose();
-        
-     
     }
 
 
@@ -85,22 +75,16 @@ public class Fusebox_CW : MonoBehaviour
     {
         //set the pipes in the inspector
         //set the wire ends into the wires array in the inspector also
-        if(pipeCompletedCount == pipes.Length)
+        if (pipeCompletedCount == pipes.Length)
         {
             fuseboxText.text = "COMPLETED";
             journal.TickOffTask("Fix fusebox");
-            if(!voiceovers[1])
+            if (!voiceovers[1])
             {
                 subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE3);
                 voiceovers[1] = true;
+                GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
-            GameTesting_CW.instance.arePuzzlesDone[1] = true;
-            //if (wireCompletedCount >= wires.Length)
-            //{
-            //    fuseboxText.text = "COMPLETE";
-              
-                
-            //}
         }
     }
     private void CheckForClose()
@@ -125,3 +109,4 @@ public class Fusebox_CW : MonoBehaviour
         fpsController.enabled = true;
     }
 }
+

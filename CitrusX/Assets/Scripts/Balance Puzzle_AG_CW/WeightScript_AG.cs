@@ -24,6 +24,8 @@ public class WeightScript_AG : MonoBehaviour
 
     // Mass for calculations
     private int massInGrammes;
+    private Journal_DR journal;
+    private Subtiles_HR subtitles;
 
     // Is the weight on the scales
     private bool onScales;
@@ -34,6 +36,8 @@ public class WeightScript_AG : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        journal = Journal_DR.instance;
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
         scalesScript = Scales.GetComponent<ScalesPuzzleScript_AG>();
         switch (weightMass)
         {
@@ -132,9 +136,12 @@ public class WeightScript_AG : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             MoveWeight();
+            // journal.TickOffTask("Balance scales");
+            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE3);
+            GameTesting_CW.instance.arePuzzlesDone[4] = true;
         }
     }
 }
