@@ -337,6 +337,9 @@ GameObject:
   - component: {fileID: 785785992159210900}
   - component: {fileID: 514994394705049139}
   - component: {fileID: 6523859205729986602}
+  - component: {fileID: 5642845893309499700}
+  - component: {fileID: 5983181445660754941}
+  - component: {fileID: 4397068213095997787}
   m_Layer: 0
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -591,6 +594,347 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5642845893309499700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830412919665182246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57744762d9079934292f57896d8193e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 0
+  m_LookAt: {fileID: 0}
+--- !u!114 &5983181445660754941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830412919665182246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Cinemachine.CinemachineBrain+BrainEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &4397068213095997787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830412919665182246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebf1644377fd2b45b560b17b80230c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subtitles:
+  - id: 0
+    clip: {fileID: 8300000, guid: 069e7f26c0390394dac503a55bf0fd26, type: 3}
+    text: "Okay, so according to that website I need to go and gather salt, candles,
+      a container, a jug of water and some coins. They should be easily found in the
+      kitchen, but I\u2019ll make a note in my journal so I don\u2019t forget."
+  - id: 1
+    clip: {fileID: 8300000, guid: 3d4bbbf679eca6a40b4c2a94e28d35ed, type: 3}
+    text: "That\u2019s about half of the items, only a few more to go."
+  - id: 2
+    clip: {fileID: 8300000, guid: 98a679715f558ec47aaaec34420af8b0, type: 3}
+    text: "I\u2019ve got all the items now; I just need to put them on a table\u2026
+      that coffee table in the entrance should be perfect."
+  - id: 3
+    clip: {fileID: 8300000, guid: 578e508d38a8ecb469ec547b3794836d, type: 3}
+    text: According to that article I also need to remove all the valuable items from
+      inside the house that the baron might be interested in. I guess that means I
+      should go and collect the jewellery from the bedroom.
+  - id: 4
+    clip: {fileID: 8300000, guid: 2d2dbff38e9728c4b939a188a8e905c0, type: 3}
+    text: Right I need to go and put all this jewellery outside, it should be safe
+      there for now.
+  - id: 5
+    clip: {fileID: 8300000, guid: e5d90870748943749a43d34e6957fc64, type: 3}
+    text: "That\u2019s the ritual set up, now let\u2019s see if this is actually going
+      to work\u2026"
+  - id: 6
+    clip: {fileID: 8300000, guid: a782209aeb8262245807b35618283a6d, type: 3}
+    text: "All I have to do is move these coins to the container when the water ripples
+      right? I need to move 10 coins \u2013 this is going to be so easy."
+  - id: 7
+    clip: {fileID: 8300000, guid: 9f28dd00828bb2f42a9f83e37187a166, type: 3}
+    text: What was that sound? Let me just check the cameras to see what happened.
+  - id: 8
+    clip: {fileID: 8300000, guid: b54e917c9355c2446a867d02c691f6d9, type: 3}
+    text: "How did the camera go out? Let\u2019s not overthink things, this is just
+      an old building \u2013 electrics go funny all the time. I\u2019ll just go flip
+      the fuse box switches or something in the cloakroom."
+  - id: 9
+    clip: {fileID: 8300000, guid: 627d5e445b7e0d04eb7c4fc133482d5f, type: 3}
+    text: "Good, the fuses seem to be in order. Strange though, I can\u2019t see what
+      caused it\u2026I should just go back to the ritual table."
+  - id: 10
+    clip: {fileID: 8300000, guid: ed64b61e78c5f904ba95517584f6c4df, type: 3}
+    text: Not again, the electrics in this place must be terrible, lets see if all
+      the cameras went off again this time.
+  - id: 11
+    clip: {fileID: 8300000, guid: 47b2c565b2d66ea45b45dea7f1dc7f73, type: 3}
+    text: "The cameras are all fine \u2013 wait, that door wasn\u2019t closed before.
+      Or was it? No, it must\u2019ve been. It\u2019s the bathroom upstairs, I\u2019ll
+      just go open it it\u2019s fine."
+  - id: 12
+    clip: {fileID: 8300000, guid: 514e3e45a57f2944b8dd1650aaddf920, type: 3}
+    text: "Okay now THAT is weird. I definitely didn\u2019t lock the bathroom door.
+      Maybe if I can get in I can figure out why it did that \u2013 I\u2019m sure
+      there\u2019s some logical reason."
+  - id: 13
+    clip: {fileID: 8300000, guid: 190abe494b5fbbd4fb6cee8f770e0f8f, type: 3}
+    text: "This looks like it\u2019s missing a piece still. I need to hurry to find
+      it, this is starting to get really weird."
+  - id: 14
+    clip: {fileID: 8300000, guid: da997d3bb7ee8db409cec0d1408c04de, type: 3}
+    text: Okay now I should be able to unlock that door.
+  - id: 15
+    clip: {fileID: 8300000, guid: 55208ff0be5304348b27f51cad984938, type: 3}
+    text: "Wait was that I just saw on my phone\u2019s camera system?! Is that a ghost?!
+      I better hurry back to the ritual!"
+  - id: 16
+    clip: {fileID: 8300000, guid: c929387532b08ff4ca8b6baef1a972e2, type: 3}
+    text: "What was that? It appeared when the water started rippling. Could it be\u2026?"
+  - id: 17
+    clip: {fileID: 8300000, guid: c2c0cf032fe1f01428f302a20f619a94, type: 3}
+    text: "To be safe, when the water ripples I\u2019ll come back and move the coin
+      quick, just in case."
+  - id: 18
+    clip: {fileID: 8300000, guid: 18a03809342d1184dbfc86e67ad687c9, type: 3}
+    text: "That safe wasn\u2019t there before was it?"
+  - id: 19
+    clip: {fileID: 8300000, guid: eaa0b4509971709439c089dd7e257bba, type: 3}
+    text: "Of course there\u2019s a password. Maybe something around here can give
+      me some clues."
+  - id: 20
+    clip: {fileID: 8300000, guid: dc37fea48abf75943bb0c0fb60898745, type: 3}
+    text: Ugh, not correct.
+  - id: 21
+    clip: {fileID: 8300000, guid: dfdea2eb940a17047835f6d45a6d033f, type: 3}
+    text: "Ahh finally. What\u2019s in here?"
+  - id: 22
+    clip: {fileID: 8300000, guid: 9b2363847eb54db4fb08a86c653af88b, type: 3}
+    text: A document on some baron.
+  - id: 23
+    clip: {fileID: 8300000, guid: 54e6f052cdab7684f8cb5f6182e5b9a2, type: 3}
+    text: Were those scales like that before?
+  - id: 24
+    clip: {fileID: 8300000, guid: 5ddbea860ed03294580306302134f176, type: 3}
+    text: "There\u2019s some weird aura surrounding them, it\u2019s almost like they\u2019re
+      possessed. Maybe if I balance them this aura will go away."
+  - id: 25
+    clip: {fileID: 8300000, guid: 1e7edf1026cc47a4893edec9bf79abda, type: 3}
+    text: Why did I decide to do this ritual again? At least the kitchen seems back
+      to normal now.
+  - id: 26
+    clip: {fileID: 8300000, guid: 66935527e8adc4147a3e177b483b9a60, type: 3}
+    text: Oh some things have been blown off the table.
+  - id: 27
+    clip: {fileID: 8300000, guid: 1f2e763fdb74c0542b57c51714595a97, type: 3}
+    text: "The windows closed\u2026and there\u2019s an open book; I don\u2019t like
+      this anymore."
+  - id: 28
+    clip: {fileID: 8300000, guid: ab53004073017864cabd4da68db51253, type: 3}
+    text: The king and the pawn? What does this book even mean?
+  - id: 29
+    clip: {fileID: 8300000, guid: c3f7977aec045004dbdff5b7e7e45208, type: 3}
+    text: 'What was that clicking sound? '
+  - id: 30
+    clip: {fileID: 8300000, guid: 7beedf9efef8d084ab053ef1c3e75599, type: 3}
+    text: "That door definitely wasn\u2019t open before."
+  - id: 31
+    clip: {fileID: 8300000, guid: 03a082da0a1912b46911c77b851477b3, type: 3}
+    text: Are all of these documents real?
+  - id: 32
+    clip: {fileID: 8300000, guid: 12d95d33bc663394e9597264068ecb48, type: 3}
+    text: "I\u2019ll keep hold of it, but I should head back down."
+  - id: 33
+    clip: {fileID: 8300000, guid: e893120753944ab47b9687fc874cb2f5, type: 3}
+    text: Which room is that? And where did those balls come from?
+  - id: 34
+    clip: {fileID: 8300000, guid: e69ee458260021342bb7d2def523e8c3, type: 3}
+    text: "Those buttons have the same aura I was getting in the kitchen, I probably
+      shouldn\u2019t touch them. But how do I activate them?"
+  - id: 35
+    clip: {fileID: 8300000, guid: 1fbb7c89cf97ebb4fad1bf9ae5f611f0, type: 3}
+    text: "I should probably use a different ball for each button, I don\u2019t want
+      to touch them after they hit those buttons."
+  - id: 36
+    clip: {fileID: 8300000, guid: 56e8da2678cdb0c478d1ebd118552260, type: 3}
+    text: "There\u2019s a box here, what\u2019s inside?"
+  - id: 37
+    clip: {fileID: 8300000, guid: f639d47a7f7462b478acf8ae34a3a066, type: 3}
+    text: Some old jewels and some photographs. Could these have belonged to that
+      baron?
+  - id: 38
+    clip: {fileID: 8300000, guid: 0f0d28fb8b1cf7b4f80a44c4490e67ae, type: 3}
+    text: "Whoa! I can\u2019t open it anymore. I\u2019ve had enough of this but I
+      can\u2019t end it until I\u2019ve got all those coins out. Hurry up water!"
+  - id: 39
+    clip: {fileID: 8300000, guid: 34cab74a3d7a6c9459a5b036f5ee4997, type: 3}
+    text: How much more of this can I take? Something seems off in the library.
+  - id: 40
+    clip: {fileID: 8300000, guid: c8058397f0810c545b17a17c974d7cee, type: 3}
+    text: "I can\u2019t get out! The ritual didn\u2019t say anything about this happening,
+      what do I do? What do I do? I can\u2019t stay locked in here forever."
+  - id: 41
+    clip: {fileID: 8300000, guid: a6df1478965a2684fa9b161ef7864ff9, type: 3}
+    text: Calm down, there must be something in here that I can use.
+  - id: 42
+    clip: {fileID: 8300000, guid: 3df141461ac24fd409f0a63a0a422a7a, type: 3}
+    text: "Maybe there\u2019s a clue in here, there\u2019s a lot of books but not
+      much else\u2026"
+  - id: 43
+    clip: {fileID: 8300000, guid: dba9d4a540f0d84479b7163115fee785, type: 3}
+    text: This must be the baron and his accounting book by the looks of it.
+  - id: 44
+    clip: {fileID: 8300000, guid: e3da98501484b4d4193ca27e1ae294f3, type: 3}
+    text: "There\u2019s another note in here. Oh \u2013 and the doors opened! I\u2019ll
+      read this and get out of here asap."
+  - id: 45
+    clip: {fileID: 8300000, guid: df38bdc1cf88ba045a51515bff5979f8, type: 3}
+    text: A death certificate.
+  - id: 46
+    clip: {fileID: 8300000, guid: 5b2174ed74483a14494d54059144bd27, type: 3}
+    text: Seems this baron met a grizzly death, I better hurry and complete this ritual.
+  - id: 47
+    clip: {fileID: 8300000, guid: bebfdd92f99132c44ac7a72efcb55151, type: 3}
+    text: "What is going on in that bedroom? I can\u2019t remember the PC being turned
+      on in there?"
+  - id: 48
+    clip: {fileID: 8300000, guid: 63f05f32fb05c8c4091aae00ff9b4c77, type: 3}
+    text: Again?!
+  - id: 49
+    clip: {fileID: 8300000, guid: 4dbf11b2f11443849bfa51528d994817, type: 3}
+    text: "I\u2019ve never seen a password like this. There must be some pattern to
+      it\u2026"
+  - id: 50
+    clip: {fileID: 8300000, guid: 4890298565445da4091f63fc7b78d5f9, type: 3}
+    text: "There has to be some sort of pattern to it, come on\u2026"
+  - id: 51
+    clip: {fileID: 8300000, guid: 9c639e00c3592ea42b2429bb3ef640f0, type: 3}
+    text: "Finally. What\u2019s open on here?"
+  - id: 52
+    clip: {fileID: 8300000, guid: fad42947381434246bced3c25ba29c13, type: 3}
+    text: "Did the baron leave this for me? I can\u2019t do this any longer. Let\u2019s
+      go and end this ritual."
+  - id: 53
+    clip: {fileID: 8300000, guid: 3c66cb6e6dc69f64d86ae9448edb38d6, type: 3}
+    text: "All I need to do to end this ritual is blow out the candles when I\u2019ve
+      counted out the right amount of coins. But how many have I already counted?"
+  - id: 54
+    clip: {fileID: 8300000, guid: afa3bccbf13acc647a64672b1eef4d6d, type: 3}
+    text: The waters rippling hard, I could take more out right now if I need to.
+  - id: 55
+    clip: {fileID: 8300000, guid: 1ae1e451cac18094285c54235f62a121, type: 3}
+    text: Here goes nothing.
+  - id: 56
+    clip: {fileID: 8300000, guid: ec58ac713341d394793e7cf1991f144a, type: 3}
+    text: I need to get this done quick.
+  - id: 57
+    clip: {fileID: 8300000, guid: c09cd62d3ff9380418d345b6a39d0b34, type: 3}
+    text: Maybe I should check my notebook
+  - id: 58
+    clip: {fileID: 8300000, guid: 8f013773b4fb8a54eb9e7fe4ee329cc4, type: 3}
+    text: Why did I do this to myself again?
+  - id: 59
+    clip: {fileID: 8300000, guid: ca198b923db1f62409e30891e5232540, type: 3}
+    text: That was weird. Maybe the cameras will show me if something has happened.
+  - id: 60
+    clip: {fileID: 8300000, guid: 0ee03b29c0cf55940bb4abe92913eee1, type: 3}
+    text: "I\u2019ll go back to the ritual table before things get any weirder."
+  - id: 61
+    clip: {fileID: 8300000, guid: 3b95eff819fa3214e956bff665bfefa0, type: 3}
+    text: "Can\u2019t believe we actually won that competition to stay here. Proper
+      fancy place isn\u2019t it?"
+  - id: 62
+    clip: {fileID: 8300000, guid: d0c5b6985ce3e354fa54b4b8d012bef8, type: 3}
+    text: "It is a lovely place, although it does give me slightly creepy vibes because
+      it\u2019s so old."
+  - id: 63
+    clip: {fileID: 8300000, guid: 1c31981bf87ce97459cfc734fbbeba3d, type: 3}
+    text: Did you hear that this place was owned by some baron once upon a time?
+  - id: 64
+    clip: {fileID: 8300000, guid: ac3a2b9f0a1e9834aaae34bc40b83c3a, type: 3}
+    text: A baron? Like those rich medieval men?
+  - id: 65
+    clip: {fileID: 8300000, guid: 53e79b8aebc66a949957d0434eb3d463, type: 3}
+    text: "(Tauntingly, like telling an old ghost story): Yeah, he was a greedy man
+      who destroyed people\u2019s lives for his own gain. Apparently, he still haunts
+      this place, but who believes in old wives\u2019 tales? "
+  - id: 66
+    clip: {fileID: 8300000, guid: 6a1039fbf3e147449b0cbef275cc460c, type: 3}
+    text: "Anyway, I\u2019m heading out now, don\u2019t let him get you whilst I\u2019m
+      gone hahaha."
+  - id: 67
+    clip: {fileID: 8300000, guid: ccf196682c5e6ae4db64280cdc292065, type: 3}
+    text: Haha very funny, have a good night.
+  - id: 68
+    clip: {fileID: 8300000, guid: fe29b42ca178f68419cfc543292b185a, type: 3}
+    text: "A greedy baron? Who even believes in those stories\u2026"
+  - id: 69
+    clip: {fileID: 8300000, guid: 2ca180c06574495439bafe3c6c2d1b10, type: 3}
+    text: "A ritual? Well I guess I have nothing else to do, let\u2019s prove that
+      these silly ghost stories are just that, I\u2019ll even record it."
+  - id: 75
+    clip: {fileID: 8300000, guid: 83b5691ea2356724b89537893f25390c, type: 3}
+    text: "Let me count\u20261, 2\u2026 oh no. There\u2019s not 10. The Baron\u2019s
+      won."
+  - id: 76
+    clip: {fileID: 8300000, guid: acc2963823146f847b3cb5a63205b56f, type: 3}
+    text: "Oh god, I thought it was over \u2013"
+  - id: 78
+    clip: {fileID: 8300000, guid: 20370503483a6cf4fb55091c263d8123, type: 3}
+    text: '* gasp *'
+  - id: 70
+    clip: {fileID: 8300000, guid: 32111421268130e46a0dc285dd36e696, type: 3}
+    text: "Let\u2019s see\u2026 10 coins. Thank god. I won."
+  - id: 71
+    clip: {fileID: 8300000, guid: e9e4683ead508b8419bb1dfcb1432f4b, type: 3}
+    text: "I\u2019m never doing anything like that again. Wait the cameras! I got
+      it all on record!"
+  - id: 72
+    clip: {fileID: 8300000, guid: e2a98021d046eac40963695535b3a295, type: 3}
+    text: "Did I not press record? That\u2019s strange."
+  - id: 73
+    clip: {fileID: 8300000, guid: 617aa686a6ca6e3429ddef99b8443f1e, type: 3}
+    text: Oh god I thought it was ov-
+  - id: 74
+    clip: {fileID: 8300000, guid: 0c347581d66e86641932776e5af2021b, type: 3}
+    text: "Hey I\u2019m back! Erm, why\u2019s there salt everywhere?"
+  - id: 77
+    clip: {fileID: 8300000, guid: ac33f91d970c3c6419d30ff9c353679f, type: 3}
+    text: '* sigh of relief *'
 --- !u!1 &7109585378451152245
 GameObject:
   m_ObjectHideFlags: 0
