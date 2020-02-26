@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*Chase 26/2/2020
+ * - A script to hold trigger information, to set them and to see what they are, handy for voiceovers
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +23,7 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
- 
+ //get type, see if active, play relevant audio if so
     private void OnTriggerEnter(Collider other)
     {
         if (type == TRIGGER_TYPE.GARDEN && !activated && allowedToBeUsed)

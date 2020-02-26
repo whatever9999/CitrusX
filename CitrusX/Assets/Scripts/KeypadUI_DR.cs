@@ -12,6 +12,9 @@
  * Chase (Changes) 22/2/2020
  * Added voiceover comments and bools for them, added an update to use voiceovers
  * and for interaction with the note for voiceovers
+ * 
+ * Chase(Changes) 26/2/2020
+ * Added voiceover functionality
  */
 using System.Collections;
 using UnityEngine;

@@ -7,6 +7,9 @@
  * 
  * Chase Wilding (Changes) 11/2/2020
  * Changed to else if statements based off Dominique's feedback
+ * 
+ * Chase Wilding (Changes) 26/2/2020
+ * added reference to trigger box, added bools and subtitles for a continous game state
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -106,6 +109,7 @@ public class SetUpRitual_CW : MonoBehaviour
                         if (!voiceovers[6])
                         {
                             subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE7);
+                            //allow ritual trigger to be active
                             gardenTrigger.allowedToBeUsed = true;
                             GameTesting_CW.instance.arePuzzlesDone[0] = true;
                         }

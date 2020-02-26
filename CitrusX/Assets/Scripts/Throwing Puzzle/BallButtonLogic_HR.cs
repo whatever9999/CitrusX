@@ -6,6 +6,9 @@
  * Chase (changes) 17/2/2020
  * Added a setactive function and linked it to the games puzzle. Also added the counter made in initiate puzzles to see if all
  * buttons have been pressed. Also added journal.
+ * Chase(Changes) 26/2/2020
+ * Began adding subtitle functionality
+ * 
  */
 using UnityEngine;
 

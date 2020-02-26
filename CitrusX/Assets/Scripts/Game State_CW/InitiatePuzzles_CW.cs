@@ -12,6 +12,9 @@
  * Added the ritual puzzle and colour matching set up
  * Chase (Changes) 16/02/2020
  * Added journal entries and basic checklists for each puzzle
+ * Chase (Changes) 26/2/2020
+ * Added an update for monitor interaction text as it was not getting accessed otherwise. Also changed the ways in which they were called for easier
+ * transitions with voiceovers.
  */
 using UnityEngine;
 

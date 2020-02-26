@@ -2,6 +2,8 @@
  * This puzzle calls the scripts and starts the next puzzle when one is completed
  * Chase (Changes) 16/2/2020
  * Set up the bool system for all puzzles so the game can be played in order
+ * Chase (Changes) 26/2/2020
+ * Set up trigger references, as these can be activated from here to activate triggers for events such as subtitles
  */
 
 using System.Collections;

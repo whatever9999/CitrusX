@@ -14,7 +14,7 @@
  *  Removed start and replaced with awake. Changed var to the relevant script.
  *  
  *  Chase (changes) 24/2/2020
- *  Edited the puzzle to make it playable and linked it to interact
+ *  Edited the puzzle to make it playable and linked it to interact for the mean time by manipulating the weights
  *  
  *  
  */

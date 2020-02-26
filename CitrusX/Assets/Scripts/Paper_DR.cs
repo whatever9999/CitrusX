@@ -7,6 +7,8 @@
  * Added enum for types of notes for interaction purposes
  * Chase(Changes) 24/2/2020
  * Added text size for notes
+ * Chase(Changes) 26/2/2020
+ * Added more to the enum and added a bool for whether it had been read or not
  */
 using UnityEngine;
 

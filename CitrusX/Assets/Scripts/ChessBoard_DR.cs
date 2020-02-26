@@ -5,6 +5,8 @@
  * 
  * Chase (changes) 17/2/2020
  * Removed start as this is now in initiate puzzles, added journal reference, set active function and linked to game script.
+ * Chase(Changes) 26/2/2020
+ * Added subtitle functionality
  */
 using UnityEngine;
 

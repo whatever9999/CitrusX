@@ -67,7 +67,8 @@
  * Door now opens AND closes!
  * 
  * Chase(Changes) 26/2/2020
- * Added monitor interaction ifs for voiceovers and edited colour-matching door segment
+ * Added monitor interaction ifs for voiceovers and edited colour-matching door segment, added segments for PC, scales and indepth paper interaction for
+ * voiceovers
   */
 using System.Collections;
 using UnityEngine;
