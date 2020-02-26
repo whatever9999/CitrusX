@@ -18,6 +18,9 @@ TagManager:
   - PC
   - InventoryPanel
   - Keypad
+  - Weight
+  - Weight Placed
+  - Scales
   layers:
   - Default
   - TransparentFX
