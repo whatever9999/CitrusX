@@ -51,10 +51,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -1630,4 +1628,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Game/MainMenu_AR.unity
   - Assets/Scenes/Game/OptionsMenu_AR.unity
   - Assets/Scenes/Game/Game_DR.unity
-  playerPath: F:/Uni/SEG/Week5/VerticalSlice/CitrusX.exe
+  playerPath: C:/Users/Domin/Downloads/Build/CitrusX.exe
