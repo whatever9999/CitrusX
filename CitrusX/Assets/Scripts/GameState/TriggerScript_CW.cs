@@ -1,5 +1,9 @@
 ﻿/*Chase 26/2/2020
  * - A script to hold trigger information, to set them and to see what they are, handy for voiceovers
+ * 
+ * Chase (Changes) 1/2/2020
+ * Added to the enum for the later puzzles
+ * Added ifs for hidden mech and correct order and added an else if for ritual
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -12,16 +16,20 @@ public class TriggerScript_CW : MonoBehaviour
         GARDEN,
         RITUAL,
         CHESSBOARD,
-        THROWING
+        THROWING,
+        HIDDEN_MECH,
+        CORRECT_ORDER
     };
     public TRIGGER_TYPE type;
     private Subtiles_HR subtitles;
     public bool allowedToBeUsed;
     public bool activated;
+    private Journal_DR journal;
 
     private void Awake()
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        journal = Journal_DR.instance;
     }
  //get type, see if active, play relevant audio if so
     private void OnTriggerEnter(Collider other)
@@ -38,10 +46,16 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
-            if(GameTesting_CW.instance.arePuzzlesDone[2])
+            else if(GameTesting_CW.instance.arePuzzlesDone[2])
             {
                 subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
                 allowedToBeUsed = false;
+            }
+            else if(GameTesting_CW.instance.arePuzzlesDone[9])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
+                journal.AddJournalLog("That should be it. Have I counted enough coins? I should blow out the candles if I have.");
+                journal.ChangeTasks(new string[] { "Blow out candles" });
             }
         }
         if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
@@ -65,8 +79,16 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE2);
                 allowedToBeUsed = false;
             }
-         
-
+        }
+        if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
+        {
+            journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
+            journal.ChangeTasks(new string[] { "open door", "book" });
+        }
+        if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
+        {
+            journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
+            journal.ChangeTasks(new string[] { "repeat the sequence" });
         }
     }
 }
