@@ -5,6 +5,9 @@
  * They can also throw the item in the air.
  * If the player gets to far from the object they let go of it
  * Objects still colide with the enviorment
+ * 
+ * Chase (Changes)
+ * Added a bool to register first pick up for subtitles, also added subtitle functionality
  */
 
 using UnityEngine;
@@ -20,10 +23,13 @@ public class HoldandThrow_HR : MonoBehaviour
     public GameObject item;
     public GameObject tempParent;
     public bool isHolding = false;
+    private bool isFirstTime = false;
+    private Subtiles_HR subtitles;
 
     void Awake()
     {
         itemRB = item.GetComponent<Rigidbody>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     void Update()
     {
@@ -61,6 +67,11 @@ public class HoldandThrow_HR : MonoBehaviour
         //if the player is near the object
         if (distance <= 1f)
         {
+            if(!isFirstTime)
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE3);
+                isFirstTime = true;
+            }
             isHolding = true;
             itemRB.useGravity = false;
             itemRB.detectCollisions = true;

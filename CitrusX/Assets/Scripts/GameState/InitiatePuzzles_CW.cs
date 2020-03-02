@@ -115,9 +115,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
-            hiddenMech.SetActive(true);
+            correctOrder.SetActive(true);
             monitorInteractionsUsed[7] = true;
         }
+      
     }
     public void InitiateFuseboxPuzzle()
     {

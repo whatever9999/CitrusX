@@ -51,7 +51,7 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
                 allowedToBeUsed = false;
             }
-            else if(GameTesting_CW.instance.arePuzzlesDone[9])
+            else if(GameTesting_CW.instance.arePuzzlesDone[8])
             {
                 subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
                 journal.AddJournalLog("That should be it. Have I counted enough coins? I should blow out the candles if I have.");
@@ -65,12 +65,7 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }
-            else if(GameTesting_CW.instance.arePuzzlesDone[5])
-            {
-                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE5);
-                allowedToBeUsed = false;
-            }
-            
+  
         }
         if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
         {
@@ -82,13 +77,29 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
+            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE2);
             journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
             journal.ChangeTasks(new string[] { "open door", "book" });
+            allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
+            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
             journal.ChangeTasks(new string[] { "repeat the sequence" });
+            allowedToBeUsed = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
+        {
+            if (GameTesting_CW.instance.arePuzzlesDone[5])
+            {
+                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE5);
+                allowedToBeUsed = false;
+            }
         }
     }
 }
