@@ -40,10 +40,15 @@ public class InitiatePuzzles_CW : MonoBehaviour
     internal bool[] monitorInteractions = { false, false, false, false, false, false, false, false, false };
     internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion
+    #region TRIGGER_REFS
+    TriggerScript_CW correctOrderTrigger;
+    TriggerScript_CW hiddenMechTrigger;
+    #endregion
 
     private void Awake()
     {
         instance = this;
+        #region INITIALISATION
         journal = Journal_DR.instance;
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
@@ -55,6 +60,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
         correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
+        correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
+        hiddenMechTrigger = GameObject.Find("Hidden Mech Trigger").GetComponent<TriggerScript_CW>();
+        #endregion
     }
     public void InitiateSetUpRitualPuzzle()
     {
@@ -109,12 +117,14 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
+            hiddenMechTrigger.allowedToBeUsed = true;
             hiddenMech.SetActive(true);
             monitorInteractionsUsed[6] = true;
         }
         else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
+            correctOrderTrigger.allowedToBeUsed = true;
             correctOrder.SetActive(true);
             monitorInteractionsUsed[7] = true;
         }

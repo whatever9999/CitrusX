@@ -4,6 +4,9 @@
  * Set up the bool system for all puzzles so the game can be played in order
  * Chase (Changes) 26/2/2020
  * Set up trigger references, as these can be activated from here to activate triggers for events such as subtitles
+ * 
+ * Chase (Changes) 2/3/2020
+ * Added disturbances, changed initiate to a reference instead of calling the instance every time
  */
 
 using System.Collections;
@@ -20,10 +23,14 @@ public class GameTesting_CW : MonoBehaviour
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false, false };
     private bool[] cutscenes = { false, false, false };
     private bool[] cutscenesDone = { false, false, false };
+    private DisturbanceHandler_DR disturbance;
+    private InitiatePuzzles_CW initiate;
 
     private void Awake()
     {
         instance = this;
+        disturbance = DisturbanceHandler_DR.instance;
+        initiate = InitiatePuzzles_CW.instance;
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
@@ -40,55 +47,61 @@ public class GameTesting_CW : MonoBehaviour
         else if (!arePuzzlesDone[0] && !setUpPuzzle[0])
         {
             setUpPuzzle[0] = true;
-            InitiatePuzzles_CW.instance.InitiateSetUpRitualPuzzle();
+            initiate.InitiateSetUpRitualPuzzle();
         }
         else if (arePuzzlesDone[0] && !setUpPuzzle[1])
         {
             setUpPuzzle[1] = true;
-            InitiatePuzzles_CW.instance.InitiateFuseboxPuzzle();
+            initiate.InitiateFuseboxPuzzle();
         }
         else if (arePuzzlesDone[1] && !setUpPuzzle[2])
         {
             setUpPuzzle[2] = true;
             ritualTrigger.allowedToBeUsed = true;
-            InitiatePuzzles_CW.instance.InitiateColourMatchingPuzzle();
+            initiate.InitiateColourMatchingPuzzle();
         }
         else if (arePuzzlesDone[2] && !setUpPuzzle[3])
         {
             setUpPuzzle[3] = true;
-            InitiatePuzzles_CW.instance.InitiateKeycodePuzzle();
+            initiate.InitiateKeycodePuzzle();
         }
         else if (arePuzzlesDone[3] && !setUpPuzzle[4])
         {
             setUpPuzzle[4] = true;
-            InitiatePuzzles_CW.instance.InitiateBalancePuzzle();
+            initiate.InitiateBalancePuzzle();
         }
         else if (arePuzzlesDone[4] && !setUpPuzzle[5])
         {
             setUpPuzzle[5] = true;
             chessTrigger.allowedToBeUsed = true;
-            InitiatePuzzles_CW.instance.InitiateChessBoardPuzzle();
+            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL); //might move to monitor interaction
+            initiate.InitiateChessBoardPuzzle();
         }
         else if (arePuzzlesDone[5] && !setUpPuzzle[6])
         {
             setUpPuzzle[6] = true;
+            chessTrigger.allowedToBeUsed = true;
+            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             throwingTrigger.allowedToBeUsed = true;
-            InitiatePuzzles_CW.instance.InitiateThrowingPuzzle();
+            initiate.InitiateThrowingPuzzle();
         }
         else if (arePuzzlesDone[6] && !setUpPuzzle[7])
         {
             setUpPuzzle[7] = true;
-            InitiatePuzzles_CW.instance.InitiateHiddenMechanismPuzzle();
+            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
+            initiate.InitiateHiddenMechanismPuzzle();
         }
         else if (arePuzzlesDone[7] && !setUpPuzzle[8])
         {
             setUpPuzzle[8] = true;
-            InitiatePuzzles_CW.instance.InitiateCorrectOrderPuzzle();
+            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
+            initiate.InitiateCorrectOrderPuzzle();
         }
         else if (arePuzzlesDone[8] && !setUpPuzzle[9])
         {
+            ritualTrigger.allowedToBeUsed = true;
             setUpPuzzle[9] = true;
-            InitiatePuzzles_CW.instance.InitiateCoinCountPuzzle();
+            initiate.InitiateCoinCountPuzzle();
         }
         else if (arePuzzlesDone[9])
         {

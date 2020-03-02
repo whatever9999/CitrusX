@@ -640,7 +640,7 @@ PrefabInstance:
     - target: {fileID: 5653538125231349070, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
       propertyPath: m_Name
-      value: CreakyDoor
+      value: Correct Order Door
       objectReference: {fileID: 0}
     - target: {fileID: 5653538125231349070, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
@@ -14255,11 +14255,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2172069527439377862, guid: 5877066bd19f844418a4d3bd108dbc5d,
-        type: 3}
-      propertyPath: requiresKey
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8573018994753448971, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14269,6 +14264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172069527439377862, guid: 5877066bd19f844418a4d3bd108dbc5d,
+        type: 3}
+      propertyPath: requiresKey
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5877066bd19f844418a4d3bd108dbc5d, type: 3}
@@ -18508,7 +18508,7 @@ PrefabInstance:
     - target: {fileID: 5653538125231349070, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
       propertyPath: m_Name
-      value: HiddenMechDoor
+      value: Hidden Mech Door
       objectReference: {fileID: 0}
     - target: {fileID: 5653538125231349070, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
@@ -18578,6 +18578,16 @@ PrefabInstance:
     - target: {fileID: 5703873803808616940, guid: 5877066bd19f844418a4d3bd108dbc5d,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172069527439377862, guid: 5877066bd19f844418a4d3bd108dbc5d,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172069527439377862, guid: 5877066bd19f844418a4d3bd108dbc5d,
+        type: 3}
+      propertyPath: requiresKey
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

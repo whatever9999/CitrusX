@@ -25,18 +25,22 @@ public class TriggerScript_CW : MonoBehaviour
     public bool allowedToBeUsed;
     public bool activated;
     private Journal_DR journal;
+    private Door_DR hiddenMechDoor;
+    private Door_DR correctOrderDoor;
 
     private void Awake()
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
         journal = Journal_DR.instance;
+        hiddenMechDoor = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>();
+        correctOrderDoor = GameObject.Find("Correct Order Door").GetComponent<Door_DR>();
     }
  //get type, see if active, play relevant audio if so
     private void OnTriggerEnter(Collider other)
     {
         if (type == TRIGGER_TYPE.GARDEN && !activated && allowedToBeUsed)
         {
-
+            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
             subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
         }
         if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
@@ -62,6 +66,7 @@ public class TriggerScript_CW : MonoBehaviour
         {
             if(GameTesting_CW.instance.arePuzzlesDone[4])
             {
+                DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
                 subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }
@@ -77,6 +82,10 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
+            hiddenMechDoor.ToggleOpen();
+            hiddenMechDoor.unlocked = false;
+            hiddenMechDoor.requiresKey = true;
+
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE2);
             journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
             journal.ChangeTasks(new string[] { "open door", "book" });
@@ -84,6 +93,10 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
+            correctOrderDoor.ToggleOpen();
+            correctOrderDoor.unlocked = false;
+            correctOrderDoor.requiresKey = true;
+
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
             journal.ChangeTasks(new string[] { "repeat the sequence" });
