@@ -414,6 +414,19 @@ MonoBehaviour:
   requiresKey: 0
   isOpen: 0
   type: 2
+--- !u!65 &13775343
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13775339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9447083, y: 1.1397161, z: 1}
+  m_Center: {x: 0.007628352, y: 0.02987051, z: 7.707869e-12}
 --- !u!1 &43889513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,6 +5739,11 @@ PrefabInstance:
       propertyPath: tempParent
       value: 
       objectReference: {fileID: 2140471265}
+    - target: {fileID: 5614092635612249125, guid: 033e743af2a4b2e44ad2694025f113a1,
+        type: 3}
+      propertyPath: minDistanceToPickup
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033e743af2a4b2e44ad2694025f113a1, type: 3}
 --- !u!4 &698705999 stripped
@@ -9962,6 +9980,11 @@ PrefabInstance:
       propertyPath: tempParent
       value: 
       objectReference: {fileID: 2140471265}
+    - target: {fileID: 5614092635612249125, guid: 033e743af2a4b2e44ad2694025f113a1,
+        type: 3}
+      propertyPath: minDistanceToPickup
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033e743af2a4b2e44ad2694025f113a1, type: 3}
 --- !u!4 &969153330 stripped
@@ -15013,6 +15036,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7289207247631433469, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.545
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289207247631433469, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.217
+      objectReference: {fileID: 0}
+    - target: {fileID: 7289207247631433469, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.43
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef914bb9165fb324eb5e5dc8ed0a668d, type: 3}
 --- !u!1 &1334654697 stripped
@@ -17921,6 +17959,11 @@ PrefabInstance:
       propertyPath: tempParent
       value: 
       objectReference: {fileID: 2140471265}
+    - target: {fileID: 5614092635612249125, guid: 033e743af2a4b2e44ad2694025f113a1,
+        type: 3}
+      propertyPath: minDistanceToPickup
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 033e743af2a4b2e44ad2694025f113a1, type: 3}
 --- !u!4 &1580129780 stripped

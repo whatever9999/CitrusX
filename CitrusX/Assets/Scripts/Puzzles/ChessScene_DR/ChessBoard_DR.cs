@@ -50,7 +50,7 @@ public class ChessBoard_DR : MonoBehaviour
                     }
                     else if(CheckPieces() == false)
                     {
-                         Debug.Log("oh no");
+                         //Debug.Log("oh no");
                     }
 
                     currentCheckBoardInterval = 0;

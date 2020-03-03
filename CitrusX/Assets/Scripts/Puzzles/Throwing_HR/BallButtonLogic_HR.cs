@@ -23,10 +23,16 @@ public class BallButtonLogic_HR : MonoBehaviour
     public void SetActive(bool value) { isActive = value; }
     private void Awake()
     {
-        puzzleScript = InitiatePuzzles_CW.instance;
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
+
+    //Initiate puzzle script in start to ensure that the instance is initialised
+    private void Start()
+    {
+        puzzleScript = InitiatePuzzles_CW.instance;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         //check if the mass of the ball is the required to push the button
