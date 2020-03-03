@@ -125,7 +125,7 @@ public class Interact_HR : MonoBehaviour
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtiles_HR>();
-        //  scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
     }
 
     void Update()
@@ -457,14 +457,13 @@ public class Interact_HR : MonoBehaviour
 
                 }
             }
-            else if (hit.transform.tag == "MovableWeight")
+            else if (hit.transform.tag == "Weight")
             {
-                notificationText.text = "Press " + InteractKey.ToString() + " to use the weight";
+                notificationText.text = "Press " + InteractKey.ToString() + " to put the weight on the pan";
 
                 if (Input.GetKeyDown(InteractKey))
                 {
-                    WeightScript_AG weight = hit.transform.GetComponent<WeightScript_AG>();
-                    weight.MoveWeight();
+                    scales.MoveWeight(hit.transform);
                 }
             }
             else if (hit.transform.tag == "Candles")

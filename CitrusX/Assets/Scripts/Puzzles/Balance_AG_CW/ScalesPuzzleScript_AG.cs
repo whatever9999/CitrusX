@@ -15,8 +15,6 @@
  *  
  *  Chase (changes) 24/2/2020
  *  Edited the puzzle to make it playable and linked it to interact for the mean time by manipulating the weights
- *  
- *  
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -24,11 +22,12 @@ using UnityEngine;
 
 public class ScalesPuzzleScript_AG : MonoBehaviour
 {
+    public Vector2[] whereToPutWeightsAccordingToPan;
+
     // Each side of scales
-    private GameObject leftPan;
-    private GameObject rightPan;
-    private GameObject puzzleDoor;
-    private Door_DR doorScript;
+    private Transform leftPan;
+    private Transform rightPan;
+    private Door_DR door;
     private Subtiles_HR subtitles;
 
     // Puzzle State
@@ -40,72 +39,53 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
 
     private Journal_DR journal;
     private bool isActive = false;
+    private float zPosOfWeights;
 
     public void SetActive(bool value) { isActive = value; }
 
     private void Awake()
     {
-        leftPan = GameObject.Find("Left Pan");
-        rightPan = GameObject.Find("Right Pan");
+        leftPan = GameObject.Find("LeftPan").transform;
+        rightPan = GameObject.Find("RightPan").transform;
+        door = GameObject.Find("ScalesDoor").GetComponent<Door_DR>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
 
-        // doorScript = puzzleDoor.GetComponent<Door_DR>();
-        //WeightScript_AG seatedWeights = rightPan.GetComponentInChildren<WeightScript_AG>();
-
-        //foreach (WeightScript_AG weightScript in seatedWeights)
-        //{
-        //    rightMass += weightScript.GetMass();
-        //}
-    }
-    private void Update()
-    {
-        // ReviewWeight();
+        zPosOfWeights = GameObject.Find("WeightToGetZPosition").transform.localPosition.z;
     }
 
-    /// <summary>
-    /// Compare the weight on each side to see if they match
-    /// </summary>
-    private void CompareSides()
+    public void MoveWeight(Transform weight)
     {
-        // Compare
-        if (leftMass == rightMass)
+        weight.parent = leftPan;
+
+        //Get a random position for the weight to be in, making sure that it doesn't collide with any others
+        Vector3 newPosition = Vector3.zero;
+        newPosition.z = zPosOfWeights;
+        newPosition.y = whereToPutWeightsAccordingToPan[leftPan.childCount - 1].y;
+        newPosition.x = whereToPutWeightsAccordingToPan[leftPan.childCount - 1].x;
+
+        weight.localPosition = newPosition;
+
+        //You can't move the weight anymore
+        weight.tag = "Untagged";
+        weight.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+
+        ComparePans();
+    }
+
+    public void ComparePans()
+    {
+        if (rightPan.childCount == leftPan.childCount)
         {
+            print("COMPLETE");
             // if equal - puzzle complete
             isComplete = true;
             //  journal.TickOffTask("Balance scales");
             subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE3);
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
 
-            doorScript.ToggleOpen();
+            door.ToggleOpen();
         }
-    }
-
-    /// <summary>
-    /// Combine the mass of all weights in the left pan
-    /// </summary>
-    private void CalculateLeftMass()
-    {
-        // Reset mass
-        //leftMass = 0;
-
-        // Get all weight scripts in left pan
-        //var addedWeights = leftPan.GetComponentsInChildren<WeightScript_AG>();
-
-        //// Add each weights mass to the leftMass var
-        //foreach (WeightScript_AG weight in addedWeights)
-        //{
-        //    leftMass += weight.GetMass();
-        //}
-    }
-
-    /// <summary>
-    /// Calculate and compare weight when a weight is added (Called Externally)
-    /// </summary>
-    public void ReviewWeight()
-    {
-        CalculateLeftMass();
-        CompareSides();
     }
 }
 

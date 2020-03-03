@@ -12,7 +12,6 @@ TagManager:
   - Table
   - ChessPiece
   - WaterBowl
-  - MovableWeight
   - Candles
   - Fusebox
   - PC
@@ -20,6 +19,7 @@ TagManager:
   - Keypad
   - Trigger
   - Scales
+  - Weight
   layers:
   - Default
   - TransparentFX
