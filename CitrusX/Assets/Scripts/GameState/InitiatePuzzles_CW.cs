@@ -32,6 +32,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private BallButtonLogic_HR throwing;
     private Journal_DR journal;
     private ScalesPuzzleScript_AG scales;
+    private CorrectOrder_CW correctOrder;
     internal int ballCounter = 0;
     #endregion
     #region VOICEOVER_BOOLS
@@ -39,20 +40,28 @@ public class InitiatePuzzles_CW : MonoBehaviour
     internal bool[] monitorInteractions = { false, false, false, false, false, false, false, false, false };
     internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion
+    #region TRIGGER_REFS
+    TriggerScript_CW correctOrderTrigger;
+    TriggerScript_CW hiddenMechTrigger;
+    #endregion
 
     private void Awake()
     {
         instance = this;
+        #region INITIALISATION
         journal = Journal_DR.instance;
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
-        throwing = GetComponent<BallButtonLogic_HR>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+      //  correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
+      //  correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
+      //  hiddenMechTrigger = GameObject.Find("Hidden Mech Trigger").GetComponent<TriggerScript_CW>();
+        #endregion
     }
     public void InitiateSetUpRitualPuzzle()
     {
@@ -101,36 +110,39 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
-            throwing.SetActive(true);
+            //throwing.SetActive(true);
             monitorInteractionsUsed[5] = true;
         }
+        else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
+            hiddenMechTrigger.allowedToBeUsed = true;
+            hiddenMech.SetActive(true);
+            monitorInteractionsUsed[6] = true;
+        }
+        else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
+            correctOrderTrigger.allowedToBeUsed = true;
+            correctOrder.SetActive(true);
+            monitorInteractionsUsed[7] = true;
+        }
+      
     }
     public void InitiateFuseboxPuzzle()
     {
-        //player enters ritual room - trigger box? Game script?
-        //disturbance occurs (loud sound?)
-
         if (monitorInteractions[0])
         {
             fusebox.SetGameActive(true);
         }
-
-        //if interact with monitor then
-
     }
     public void InitiateColourMatchingPuzzle()
     {
-
-
         if (monitorInteractions[1])
         {
 
             colourMatch.SetActive(true);
         }
-
-
-
-
     }
     public void InitiateHiddenMechanismPuzzle()
     {
@@ -139,13 +151,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             //subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
         }
-        //enter library
-        //door slams
-        //VOICEOVER 8-2
-        //VOICEOVER 8-3
 
-        journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
-        journal.ChangeTasks(new string[] { "open door", "book" });
+       
         hiddenMech.SetActive(true);
     }
 
@@ -195,7 +202,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //VOICEOVER 7-3
         journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
         journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
-        throwing.SetActive(true);
+      //  throwing.SetActive(true);
     }
     public void InitiateCorrectOrderPuzzle()
     {
@@ -203,21 +210,11 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
         }
-        //enter room
-        //door shut
-        //VOICEOVER 9-2
-        //interact PC
-        //VOICEOVER 9-3
-        journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
-        journal.ChangeTasks(new string[] { "repeat the sequence" });
+
     }
     public void InitiateCoinCountPuzzle()
     {
-        //stand infront of ritual table
-        //VOICEOVER 10-1
-        //VOICEOVER 10-2
-        journal.AddJournalLog("That should be it. Have I counted enough coins? I should blow out the candles if I have.");
-        journal.ChangeTasks(new string[] { "blow out candles" });
+        
     }
 
 }

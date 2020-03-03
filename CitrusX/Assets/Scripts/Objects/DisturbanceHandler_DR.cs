@@ -51,7 +51,7 @@ public class DisturbanceHandler_DR : MonoBehaviour
         pawn = GameObject.Find("Pawn").GetComponent<Animator>();
         boxFall = GameObject.Find("BoxFall").GetComponent<Animator>();
         slamBook = GameObject.Find("TurnPageBook").GetComponent<Animator>();
-        creakyDoor = GameObject.Find("CreakyDoor").GetComponentInChildren<Door_DR>();
+      //  creakyDoor = GameObject.Find("CreakyDoor").GetComponentInChildren<Door_DR>();
         baron = GameObject.Find("Baron");
         baronAnimator = baron.GetComponent<Animator>();
         baronAI = baron.GetComponent<Baron_DR>();

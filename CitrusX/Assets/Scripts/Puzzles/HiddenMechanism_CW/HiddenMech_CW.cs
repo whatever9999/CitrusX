@@ -14,14 +14,9 @@ public class HiddenMech_CW : MonoBehaviour
 
     private void Awake()
     {
-        door = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>(); 
+        door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>(); 
     }
-    private void Update()
-    {
-        //if interact painting
-        //VOICEOVER 8-5
-        
-    }
+ 
     private void HiddenMechPuzzle()
     {
         if(Journal_DR.instance.AreTasksComplete())

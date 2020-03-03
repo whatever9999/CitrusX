@@ -32,8 +32,7 @@ public class ChessBoard_DR : MonoBehaviour
 
     private void Update()
     {
-        if (isActive)
-        {
+        
             //If the door isn't unlocked
             if (!door.unlocked)
             {
@@ -41,13 +40,17 @@ public class ChessBoard_DR : MonoBehaviour
                 if (currentCheckBoardInterval >= checkBoardInterval)
                 {
                     //Unlock the door if the pieces are in position
-                    if (CheckPieces())
+                    if (CheckPieces() == true)
                     {
-                        door.unlocked = true;
-                        
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE4);
-                        chessTrigger.allowedToBeUsed = true;
-                        GameTesting_CW.instance.arePuzzlesDone[5] = true;
+                         Debug.Log("plz");
+                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE4);
+                         chessTrigger.allowedToBeUsed = true;
+                         GameTesting_CW.instance.arePuzzlesDone[5] = true;
+                         door.unlocked = true;    
+                    }
+                    else if(CheckPieces() == false)
+                    {
+                         Debug.Log("oh no");
                     }
 
                     currentCheckBoardInterval = 0;
@@ -57,35 +60,32 @@ public class ChessBoard_DR : MonoBehaviour
                     currentCheckBoardInterval += Time.deltaTime;
                 }
             }
-        }
+        
 
     }
 
     public bool CheckPieces()
     {
-        if (isActive == true)
+        bool inPosition = true;
+        for (int i = 0; i < chessPieces.Length; i++)
         {
-          
-           
-            
-            bool inPosition = true;
-            for (int i = 0; i < chessPieces.Length; i++)
+            //If the chess piece isn't in the right position or isn't active (isn't on the board yet) then the door cannot open
+            if (chessPieces[i].chessPieceTransform.localEulerAngles != chessPieces[i].desiredPosition)
             {
-                //If the chess piece isn't in the right position or isn't active (isn't on the board yet) then the door cannot open
-                if (chessPieces[i].chessPieceTransform.localEulerAngles != chessPieces[i].desiredPosition)
-                {
-                    inPosition = false;
-                    break;
-                }
-                else if (!chessPieces[i].chessPieceTransform.gameObject.activeInHierarchy)
-                {
-                    inPosition = false;
-                    break;
-                }
+                inPosition = false;
+                break;
             }
-            return inPosition;
+            else if (!chessPieces[i].chessPieceTransform.gameObject.activeInHierarchy)
+            {
+                inPosition = false;
+                break;
+            }
+            else //HERE FOR TESTING PURPS ONLY
+            {
+                return true;
+            }
         }
-        return false;
+        return inPosition;
 
     }
 }

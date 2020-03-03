@@ -10,6 +10,9 @@
  * 
  * Chase Changes 22/2/2020
  * Added voiceover lines and bools for voiceovers
+ * 
+ * Chase (Changes) 1/3/2020
+ * Added voiceover for final line, added connection to subtitles script
  */
 using UnityEngine;
 
@@ -17,16 +20,18 @@ public class CandleScript_AG : MonoBehaviour
 {
     private ParticleSystem flame;
     private Interact_HR player;
+    private Subtiles_HR subtitles;
 
     private void Awake()
     {
         flame = GetComponentInChildren<ParticleSystem>();
         player = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
 
     public void BlowOut()
     {
-        //VOICEOVER 10-3
+        subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE3);
         flame.Stop();
         player.EndGameCheck();
     }
