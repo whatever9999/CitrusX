@@ -81,7 +81,7 @@ public class GameTesting_CW : MonoBehaviour
         {
             setUpPuzzle[6] = true;
             chessTrigger.allowedToBeUsed = true;
-            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
+          //  disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             throwingTrigger.allowedToBeUsed = true;
             initiate.InitiateThrowingPuzzle();
         }

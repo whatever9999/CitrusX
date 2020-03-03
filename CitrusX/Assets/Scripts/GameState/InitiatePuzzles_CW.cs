@@ -55,13 +55,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
-        throwing = GetComponent<BallButtonLogic_HR>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
-        correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
-        correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
-        hiddenMechTrigger = GameObject.Find("Hidden Mech Trigger").GetComponent<TriggerScript_CW>();
+      //  correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
+      //  correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
+      //  hiddenMechTrigger = GameObject.Find("Hidden Mech Trigger").GetComponent<TriggerScript_CW>();
         #endregion
     }
     public void InitiateSetUpRitualPuzzle()
@@ -111,7 +110,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
-            throwing.SetActive(true);
+            //throwing.SetActive(true);
             monitorInteractionsUsed[5] = true;
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
@@ -203,7 +202,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //VOICEOVER 7-3
         journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
         journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
-        throwing.SetActive(true);
+      //  throwing.SetActive(true);
     }
     public void InitiateCorrectOrderPuzzle()
     {
