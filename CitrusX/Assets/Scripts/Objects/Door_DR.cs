@@ -26,7 +26,8 @@ public class Door_DR : MonoBehaviour
     public enum DOOR_TYPE
     {
         COLOUR_MATCHING,
-        HIDDEN_MECH
+        HIDDEN_MECH,
+        SAFE
     };
     public DOOR_TYPE type;
 

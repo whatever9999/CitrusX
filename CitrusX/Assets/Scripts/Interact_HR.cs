@@ -69,6 +69,10 @@
  * Chase(Changes) 26/2/2020
  * Added monitor interaction ifs for voiceovers and edited colour-matching door segment, added segments for PC, scales and indepth paper interaction for
  * voiceovers
+ * 
+ * Dominique (Changes) 03/02/2020
+ * Table items being put down now make a call to the animation manager
+ * Candles script is gotten as the parent of the candle selected as there are multiple candles now
   */
 using System.Collections;
 using UnityEngine;
@@ -184,7 +188,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                putDownScript.PutItemsDown();
+                                AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place on table");
@@ -201,7 +205,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                putDownScript.PutItemsDown();
+                                AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place in garden");
@@ -468,8 +472,7 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press " + InteractKey.ToString() + " to blow out";
                 if (Input.GetKeyDown(InteractKey))
                 {
-                    CandleScript_AG candleScript = hit.transform.GetComponent<CandleScript_AG>();
-                    candleScript.BlowOut();
+                    hit.transform.parent.GetComponent<CandleScript_AG>().BlowOut();
                 }
             }
             else if (hit.transform.tag == "PC")

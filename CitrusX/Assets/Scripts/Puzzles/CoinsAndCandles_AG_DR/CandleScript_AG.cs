@@ -15,19 +15,22 @@ using UnityEngine;
 
 public class CandleScript_AG : MonoBehaviour
 {
-    private ParticleSystem flame;
+    private ParticleSystem[] flames;
     private Interact_HR player;
 
     private void Awake()
     {
-        flame = GetComponentInChildren<ParticleSystem>();
+        flames = GetComponentsInChildren<ParticleSystem>();
         player = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
     }
 
     public void BlowOut()
     {
         //VOICEOVER 10-3
-        flame.Stop();
+        for(int i = 0; i < flames.Length; i++)
+        {
+            flames[i].Stop();
+        }
         player.EndGameCheck();
     }
 }

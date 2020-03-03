@@ -103,7 +103,7 @@ public class KeypadUI_DR : MonoBehaviour
     {
         if (input == keypadItem.password)
         {
-            keypadItem.door.unlocked = true;
+            keypadItem.door.ToggleOpen();
             SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
