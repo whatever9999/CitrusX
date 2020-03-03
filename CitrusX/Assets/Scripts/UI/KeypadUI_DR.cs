@@ -90,7 +90,7 @@ public class KeypadUI_DR : MonoBehaviour
 
     public void NumberButton(int number)
     {
-        SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
+       // SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
         //The player can't enter more digits than the length of the password
         if (input.Length != keypadItem.password.Length)
         {
@@ -104,7 +104,7 @@ public class KeypadUI_DR : MonoBehaviour
         if (input == keypadItem.password)
         {
             keypadItem.door.ToggleOpen();
-            SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
+            //SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("unlock safe");
             subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE6);

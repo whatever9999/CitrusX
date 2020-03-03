@@ -70,9 +70,12 @@
  * Added monitor interaction ifs for voiceovers and edited colour-matching door segment, added segments for PC, scales and indepth paper interaction for
  * voiceovers
  * 
- * Dominique (Changes) 03/02/2020
+ * Dominique (Changes) 03/03/2020
  * Table items being put down now make a call to the animation manager
  * Candles script is gotten as the parent of the candle selected as there are multiple candles now
+ * 
+ * Chase (Changes) 2/3/2020
+ * Added interaction for paintings, box and added a bool for paper closure
   */
 using System.Collections;
 using UnityEngine;
@@ -80,6 +83,7 @@ using UnityEngine.UI;
 
 public class Interact_HR : MonoBehaviour
 {
+    #region ESEENTIAL_VARS
     public const int zoomedFOV = 20;
     public const int defaultFOV = 60;
     public int rayRange = 6;
@@ -92,6 +96,8 @@ public class Interact_HR : MonoBehaviour
     private bool zoomedIn = false;
     private RaycastHit hit;
     private Text notificationText;
+    #endregion
+    #region REFERENCES_TO_OBJS
     private Journal_DR journal;
     private KeypadUI_DR keypad;
     private GameObject paper;
@@ -105,7 +111,8 @@ public class Interact_HR : MonoBehaviour
     private WaterBowl_DR waterBowl;
     private Subtiles_HR subtitles;
     private ScalesPuzzleScript_AG scales;
-
+    internal bool paperIsClosed = false;
+    #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
     #endregion
@@ -140,7 +147,7 @@ public class Interact_HR : MonoBehaviour
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.material != targetRenderer.material && hit.transform.tag != "Keypad" )
+            if (targetRenderer && currRenderer.material != targetRenderer.material && hit.transform.tag != "Keypad")
             {
                 targetRenderer.material = originalMaterial;
                 originalMaterial = currRenderer.material;
@@ -269,30 +276,35 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
+
                     if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                        if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
-                            notificationText.text = "It's locked. I should check my journal.";
-                            colourMatch.isDoorInteractedWith[0] = true;
-
-                        }
-                        if (!colourMatch.hasKeyPart2)
-                        {
-                            notificationText.text = "It's locked. I should check my journal.";
-                        }
-                        if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
-                        {
-                            colourMatch.isDoorInteractedWith[1] = true;
-                            notificationText.text = "Press E to use";
-                            door.unlocked = true;
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
-                                notificationText.text = "";
-                                door.ToggleOpen();
-                                door.tag = "Untagged";
+                                notificationText.text = "It's locked. I should check my journal.";
+                                colourMatch.isDoorInteractedWith[0] = true;
+                            }
+
+                            if (!colourMatch.hasKeyPart2)
+                            {
+                                notificationText.text = "It's locked. I should check my journal.";
+                            }
+                            if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            {
+                                colourMatch.isDoorInteractedWith[1] = true;
+                                notificationText.text = "Press E to use";
+                                door.unlocked = true;
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    notificationText.text = "";
+                                    door.ToggleOpen();
+                                    door.tag = "Untagged";
+                                }
                             }
                         }
+                      
 
                     }
                 }
@@ -316,21 +328,42 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead)
+                    #region PAPER_TYPES_VOICEOVERS
+                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
                         paperItem.hasBeenRead = true;
                     }
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE3);
                         paperItem.hasBeenRead = true;
                     }
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE6);
                         paperItem.hasBeenRead = true;
                     }
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead && !paperIsClosed)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        paperItem.hasBeenRead = true;
+                    }
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead &&!paperIsClosed)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE7);
+                        GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                        paperItem.hasBeenRead = true;
+                    }
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && paperIsClosed)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE8);
+                    }
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && paperIsClosed)
+                    {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE7);
+                    }
+                    #endregion
                 }
             }
             else if (hit.transform.tag == "Fusebox")
@@ -418,6 +451,10 @@ public class Interact_HR : MonoBehaviour
             else if (hit.transform.tag == "WaterBowl")
             {
                 notificationText.text = "Press E to take a coin";
+                if(GameTesting_CW.instance.arePuzzlesDone[8])
+                {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
+                }
 
                 if (Input.GetKeyDown(InteractKey))
                 {
@@ -480,56 +517,80 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE3);
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
-            else if(hit.transform.tag == "Box")
+            else if (hit.transform.tag == "Box")
             {
                 notificationText.text = "Press E to open the Box";
+                bool hasBeenOpened = false;
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                    if (!hasBeenOpened)
+                    {
+                        //play box anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        hasBeenOpened = true;
+                    }
+                    else if (hasBeenOpened)
+                    {
+                        //box slam anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE6);
+                    }
+
+                }
+
+            }
+            else if (hit.transform.tag == "Painting")
+            {
+                notificationText.text = "Press E to look at the Painting";
+                bool hasBeenInteracted = false;
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    if (!hasBeenInteracted)
+                    {
+                        //play box anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE5);
+                        hasBeenInteracted = true;
+                    }
                 }
             }
-            //else if (hit.transform.tag == "Weight")
-            //{
-            //    notificationText.text = "Press E to pick up and place the weight";
+            else if (hit.transform.tag == "Book")
+            {
+                notificationText.text = "Press E to interact with the book";
+                Book_CW book = hit.transform.GetComponent<Book_CW>();
 
-            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-            //    {
-            //        hit.transform.tag = "Weight Placed";
-            //        hit.transform.SetParent(scales.leftPan.transform);
-            //        hit.transform.position = hit.transform.parent.position;
-            //    }
-            //}
-            //else if (hit.transform.tag == "Weight Placed")
-            //{
-            //    notificationText.text = "Press E to remove the weight";
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
+                    {
+                        //door opens
+                        //note flies out
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);
+                    }
 
-            //    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-            //    {
-            //        hit.transform.tag = "Weight";
-            //        transform.SetParent(scales.weightRack.transform);
-            //        hit.transform.position = hit.transform.parent.position;
-            //    }
-            //}
+                }
+                else
+                {
+                    playerCamera.fieldOfView = defaultFOV;
+                }
+
+            }
             else
             {
                 playerCamera.fieldOfView = defaultFOV;
+                notificationText.text = "";
             }
+        }
 
-        }
-        else
-        {
-            playerCamera.fieldOfView = defaultFOV;
-            notificationText.text = "";
-        }
+        /*
+         * Play the good or bad cinematic after the player blows the candles out according to if they've won or not
+         */
+       
     }
-
-    /*
-     * Play the good or bad cinematic after the player blows the candles out according to if they've won or not
-     */
     public void EndGameCheck()
     {
         if (numberCoinsCollected == waterBowl.numberOfCoins)

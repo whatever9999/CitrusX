@@ -18,6 +18,8 @@ public class CorrectOrder_CW : MonoBehaviour
     public KeyCode closePCKey = KeyCode.Escape;
     private Text correctOrderText;
     private Text completionText;
+    private Subtiles_HR subtitles;
+    
     #endregion
 
     public void SetActive(bool value) { isActive = value; }
@@ -28,6 +30,7 @@ public class CorrectOrder_CW : MonoBehaviour
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         correctOrderText = GameObject.Find("Correct Order Message Text").GetComponent<Text>();
         completionText = GameObject.Find("Completion Text").GetComponent<Text>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
     }
     private void Start()
     {
@@ -59,7 +62,10 @@ public class CorrectOrder_CW : MonoBehaviour
     }
     public void ClosePC()
     {
-
+        if(GameTesting_CW.instance.arePuzzlesDone[8])
+        {
+            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE6);
+        }
         gameObject.tag = "PC";
 
         //Make the cursor invisible again
@@ -86,28 +92,28 @@ public class CorrectOrder_CW : MonoBehaviour
                     if (boxes[3] == boxes[7])
                     {
                         completionText.text = "PASSWORD CORRECT";
-                        //VOICEOVER 9-5
-                        //close article
-                        //VOICEOVER 9-6
+                        GameTesting_CW.instance.arePuzzlesDone[8] = true;
+                        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE5);
+                      
                     }
                     else
                     {
-                        //VOICEOVER 9-4
+                        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE4);
                     }
                 }
                 else
                 {
-                    //VOICEOVER 9-4
+                    subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE4);
                 }
             }
             else
             {
-                //VOICEOVER 9-4
+                subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE4);
             }
         }
         else
         {
-            //VOICEOVER 9-4
+            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE4);
         }
     }
 }

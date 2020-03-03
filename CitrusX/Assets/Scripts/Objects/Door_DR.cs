@@ -12,6 +12,9 @@
  * 
  * Dominique (Changes) 25/02/2020
  * Door has a ToggleOpen instead of just open now - can open AND close
+ * 
+ * Chase (Changes) 1/2/2020
+ * Added new type for correct order
  */
  
 
@@ -27,7 +30,8 @@ public class Door_DR : MonoBehaviour
     {
         COLOUR_MATCHING,
         HIDDEN_MECH,
-        SAFE
+        SAFE,
+        CORRECT_ORDER
     };
     public DOOR_TYPE type;
 
