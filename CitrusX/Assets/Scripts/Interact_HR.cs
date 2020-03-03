@@ -272,30 +272,35 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
+
                     if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                        if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
-                            notificationText.text = "It's locked. I should check my journal.";
-                            colourMatch.isDoorInteractedWith[0] = true;
-
-                        }
-                        if (!colourMatch.hasKeyPart2)
-                        {
-                            notificationText.text = "It's locked. I should check my journal.";
-                        }
-                        if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
-                        {
-                            colourMatch.isDoorInteractedWith[1] = true;
-                            notificationText.text = "Press E to use";
-                            door.unlocked = true;
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
-                                notificationText.text = "";
-                                door.ToggleOpen();
-                                door.tag = "Untagged";
+                                notificationText.text = "It's locked. I should check my journal.";
+                                colourMatch.isDoorInteractedWith[0] = true;
+                            }
+
+                            if (!colourMatch.hasKeyPart2)
+                            {
+                                notificationText.text = "It's locked. I should check my journal.";
+                            }
+                            if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            {
+                                colourMatch.isDoorInteractedWith[1] = true;
+                                notificationText.text = "Press E to use";
+                                door.unlocked = true;
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    notificationText.text = "";
+                                    door.ToggleOpen();
+                                    door.tag = "Untagged";
+                                }
                             }
                         }
+                      
 
                     }
                 }
@@ -319,6 +324,7 @@ public class Interact_HR : MonoBehaviour
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
+                    #region PAPER_TYPES_VOICEOVERS
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
@@ -353,6 +359,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE7);
                     }
+                    #endregion
                 }
             }
             else if (hit.transform.tag == "Fusebox")
