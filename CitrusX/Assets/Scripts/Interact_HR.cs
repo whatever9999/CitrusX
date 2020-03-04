@@ -567,7 +567,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                     {
-                        journal.TickOffTask("Find Book");
+                      //  journal.TickOffTask(book.name);
                         //door opens
                         //note flies out
                         subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);

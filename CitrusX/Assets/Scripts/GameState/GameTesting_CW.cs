@@ -101,7 +101,7 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[7] && !setUpPuzzle[8])
         {
             setUpPuzzle[8] = true;
-            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
+         //   disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             initiate.InitiateCorrectOrderPuzzle();
         }
         else if (arePuzzlesDone[8] && !setUpPuzzle[9])
