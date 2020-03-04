@@ -265,18 +265,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 6b9381beadd505846892a334d7669dbe,
         type: 3}
-      propertyPath: m_Layer
-      value: 2
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 560601877098909023, guid: 6b9381beadd505846892a334d7669dbe,
         type: 3}
-      propertyPath: m_Layer
-      value: 2
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1309896199404092638, guid: 6b9381beadd505846892a334d7669dbe,
         type: 3}
-      propertyPath: m_Layer
-      value: 2
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -8392901276136944644, guid: 6b9381beadd505846892a334d7669dbe,
         type: 3}
