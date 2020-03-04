@@ -20,6 +20,9 @@ TagManager:
   - Trigger
   - Scales
   - Weight
+  - Box
+  - Painting
+  - Book
   layers:
   - Default
   - TransparentFX
