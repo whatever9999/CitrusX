@@ -3,9 +3,6 @@
  * 
  * Dominique (Changes) 11/02/2020
  * Removed unused imports
- * 
- * Chase (Changes) 4/3/2020
- * Tidied up script
  */
 using UnityEngine;
 
@@ -17,14 +14,24 @@ public class HiddenMech_CW : MonoBehaviour
 
     private void Awake()
     {
-        door = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>(); 
+        door = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>(); 
     }
  
     private void HiddenMechPuzzle()
     {
         if(Journal_DR.instance.AreTasksComplete())
         {
-            door.ToggleOpen();  
+
+            door.ToggleOpen();
+
+            //VOICEOVER 8-6
+            //read note
+            //VOICEOVER 8-7
+            //close note
+            //VOICEOVER 8-8
+
+
+            GameTesting_CW.instance.arePuzzlesDone[7] = true;
         }
     }
 }
