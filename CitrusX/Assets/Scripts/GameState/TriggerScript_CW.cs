@@ -32,8 +32,8 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
         journal = Journal_DR.instance;
-        hiddenMechDoor = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>();
-        correctOrderDoor = GameObject.Find("Correct Order Door").GetComponent<Door_DR>();
+        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+      //  correctOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
     }
  //get type, see if active, play relevant audio if so
     private void OnTriggerEnter(Collider other)
@@ -88,7 +88,7 @@ public class TriggerScript_CW : MonoBehaviour
 
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE2);
             journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
-            journal.ChangeTasks(new string[] { "open door", "book" });
+            journal.ChangeTasks(new string[] { "Find Book" });
             allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)

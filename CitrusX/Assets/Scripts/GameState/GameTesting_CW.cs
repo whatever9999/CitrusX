@@ -25,6 +25,7 @@ public class GameTesting_CW : MonoBehaviour
     private bool[] cutscenesDone = { false, false, false };
     private DisturbanceHandler_DR disturbance;
     private InitiatePuzzles_CW initiate;
+    GameObject throwingBox;
 
     private void Awake()
     {
@@ -34,6 +35,11 @@ public class GameTesting_CW : MonoBehaviour
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
+        throwingBox = GameObject.Find("ThrowingBox");
+    }
+    private void Start()
+    {
+        throwingBox.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -74,7 +80,7 @@ public class GameTesting_CW : MonoBehaviour
         {
             setUpPuzzle[5] = true;
             chessTrigger.allowedToBeUsed = true;
-            disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL); //might move to monitor interaction
+           // disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL); //might move to monitor interaction
             initiate.InitiateChessBoardPuzzle();
         }
         else if (arePuzzlesDone[5] && !setUpPuzzle[6])
@@ -87,6 +93,7 @@ public class GameTesting_CW : MonoBehaviour
         }
         else if (arePuzzlesDone[6] && !setUpPuzzle[7])
         {
+            throwingBox.SetActive(true);
             setUpPuzzle[7] = true;
             disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             initiate.InitiateHiddenMechanismPuzzle();

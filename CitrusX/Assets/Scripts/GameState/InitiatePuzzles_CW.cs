@@ -43,6 +43,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
     #region TRIGGER_REFS
     TriggerScript_CW correctOrderTrigger;
     TriggerScript_CW hiddenMechTrigger;
+    Door_DR hiddenMechDoor;
+  
     #endregion
 
     private void Awake()
@@ -60,9 +62,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
       //  correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
       //  correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
-      //  hiddenMechTrigger = GameObject.Find("Hidden Mech Trigger").GetComponent<TriggerScript_CW>();
+        hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
+        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        
         #endregion
     }
+ 
     public void InitiateSetUpRitualPuzzle()
     {
         journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
@@ -117,6 +122,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
             hiddenMechTrigger.allowedToBeUsed = true;
+            hiddenMechDoor.ToggleOpen();
             hiddenMech.SetActive(true);
             monitorInteractionsUsed[6] = true;
         }
