@@ -61,7 +61,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
       //  correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
-      //  correctOrderTrigger = GameObject.Find("Correct Order Trigger").GetComponent<TriggerScript_CW>();
+        correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
        // hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
         
@@ -131,7 +131,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
             correctOrderTrigger.allowedToBeUsed = true;
-            correctOrder.SetActive(true);
+          //  correctOrder.SetActive(true);
             monitorInteractionsUsed[7] = true;
         }
       

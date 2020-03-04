@@ -22,7 +22,7 @@ public class HiddenMech_CW : MonoBehaviour
         if(Journal_DR.instance.AreTasksComplete())
         {
          //   door.ToggleOpen();
-            GameTesting_CW.instance.arePuzzlesDone[7] = true;
+            
         }
     }
 }

@@ -93,9 +93,9 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
-            correctOrderDoor.ToggleOpen();
-            correctOrderDoor.unlocked = false;
-            correctOrderDoor.requiresKey = true;
+           // correctOrderDoor.ToggleOpen();
+           // correctOrderDoor.unlocked = false;
+           // correctOrderDoor.requiresKey = true;
 
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");

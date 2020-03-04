@@ -19,6 +19,7 @@ public class GameTesting_CW : MonoBehaviour
     private TriggerScript_CW ritualTrigger;
     private TriggerScript_CW chessTrigger;
     private TriggerScript_CW throwingTrigger;
+    private TriggerScript_CW correctOrderTrigger;
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false, false };
     private bool[] cutscenes = { false, false, false };
@@ -35,6 +36,7 @@ public class GameTesting_CW : MonoBehaviour
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
+        correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         throwingBox = GameObject.Find("ThrowingBox");
     }
     private void Start()
@@ -101,6 +103,7 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[7] && !setUpPuzzle[8])
         {
             setUpPuzzle[8] = true;
+            correctOrderTrigger.allowedToBeUsed = true;
          //   disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             initiate.InitiateCorrectOrderPuzzle();
         }

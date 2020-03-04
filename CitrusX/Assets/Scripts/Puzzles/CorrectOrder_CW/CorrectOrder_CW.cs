@@ -66,6 +66,7 @@ public class CorrectOrder_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE6);
         }
+       
         gameObject.tag = "PC";
 
         //Make the cursor invisible again
@@ -91,10 +92,9 @@ public class CorrectOrder_CW : MonoBehaviour
                 {
                     if (boxes[3] == boxes[7])
                     {
+                        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE5);
                         completionText.text = "PASSWORD CORRECT";
                         GameTesting_CW.instance.arePuzzlesDone[8] = true;
-                        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE5);
-                      
                     }
                     else
                     {
