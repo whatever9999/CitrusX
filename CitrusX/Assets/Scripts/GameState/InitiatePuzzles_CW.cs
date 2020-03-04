@@ -15,14 +15,17 @@
  * Chase (Changes) 26/2/2020
  * Added an update for monitor interaction text as it was not getting accessed otherwise. Also changed the ways in which they were called for easier
  * transitions with voiceovers.
+ * Chase (Changes) 4/3/2020
+ * Tidied up script, added regions and got all puzzles linked
  */
 using UnityEngine;
 
 public class InitiatePuzzles_CW : MonoBehaviour
 {
     public static InitiatePuzzles_CW instance;
-    private Subtiles_HR subtitles;
+
     #region PUZZLE_REFERENCES
+    private Subtiles_HR subtitles;
     private SetUpRitual_CW ritualSetUp;
     private HiddenMech_CW hiddenMech;
     private ColourMatchingPuzzle_CW colourMatch;
@@ -60,10 +63,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
-      //  correctOrder = GameObject.Find("PC").GetComponent<CorrectOrder_CW>();
+        correctOrder = GameObject.Find("Correct Order PC").GetComponent<CorrectOrder_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
-       // hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
         
         #endregion
     }
@@ -115,15 +118,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
-            //throwing.SetActive(true);
             monitorInteractionsUsed[5] = true;
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
             hiddenMechTrigger.allowedToBeUsed = true;
-           // hiddenMechDoor.ToggleOpen();
-           
             hiddenMech.SetActive(true);
             monitorInteractionsUsed[6] = true;
         }
@@ -131,93 +131,43 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
             correctOrderTrigger.allowedToBeUsed = true;
-          //  correctOrder.SetActive(true);
             monitorInteractionsUsed[7] = true;
         }
       
     }
     public void InitiateFuseboxPuzzle()
     {
-        if (monitorInteractions[0])
-        {
-            fusebox.SetGameActive(true);
-        }
+        fusebox.SetGameActive(true);
     }
     public void InitiateColourMatchingPuzzle()
     {
-        if (monitorInteractions[1])
-        {
-
-            colourMatch.SetActive(true);
-        }
+        colourMatch.SetActive(true);
     }
     public void InitiateHiddenMechanismPuzzle()
     {
-        //check monitor
-        if (monitorInteractions[7])
-        {
-            //subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
-        }
-
-       
         hiddenMech.SetActive(true);
     }
 
     public void InitiateChessBoardPuzzle()
     {
-        if (monitorInteractions[5])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE1);
-        }
-        //enter room
-        //VOICEOVER 6-2
-        //interact with book
-        //VOICEOVER 6-3
-       
         chessboard.SetActive(true);
     }
     public void InitiateKeycodePuzzle()
     {
-        //this is triggered by being in room for a certain amount of time
-
-        if (monitorInteractions[3])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE4);
-            keypad.SetActive(true);
-        }
-
+        keypad.SetActive(true);
     }
     public void InitiateBalancePuzzle()
     {
-        if (monitorInteractions[4])
-        {
-
-            scales.SetActive(true);
-            //journal for check out kitchen?
-
-        }
+        scales.SetActive(true);
     }
     public void InitiateThrowingPuzzle()
     {
-        if (monitorInteractions[6])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
-        }
-        //enter game room
-        //VOICEOVER 7-2
-        //pick up ball
-        //VOICEOVER 7-3
         journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
         journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
-      //  throwing.SetActive(true);
     }
     public void InitiateCorrectOrderPuzzle()
     {
-        if (monitorInteractions[8])
-        {
-            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
-        }
-
+        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
     }
     public void InitiateCoinCountPuzzle()
     {
