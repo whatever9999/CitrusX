@@ -4,6 +4,9 @@
  * Chase (Changes) 1/2/2020
  * Added to the enum for the later puzzles
  * Added ifs for hidden mech and correct order and added an else if for ritual
+ * 
+ * Chase (Changes) 4/3/2020
+ * Added door functionality and edited triggers
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +14,12 @@ using UnityEngine;
 
 public class TriggerScript_CW : MonoBehaviour
 {
+    #region DOORS_AND_BOOLS
+    private Door_DR hiddenMechDoor;
+    private Door_DR correctOrderDoor;
+    public bool allowedToBeUsed;
+    public bool activated;
+    #endregion
     public enum TRIGGER_TYPE
     {
         GARDEN,
@@ -22,26 +31,23 @@ public class TriggerScript_CW : MonoBehaviour
     };
     public TRIGGER_TYPE type;
     private Subtiles_HR subtitles;
-    public bool allowedToBeUsed;
-    public bool activated;
     private Journal_DR journal;
-    private Door_DR hiddenMechDoor;
-    private Door_DR correctOrderDoor;
-
+    
     private void Awake()
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
         journal = Journal_DR.instance;
-        hiddenMechDoor = GameObject.Find("Hidden Mech Door").GetComponent<Door_DR>();
-        correctOrderDoor = GameObject.Find("Correct Order Door").GetComponent<Door_DR>();
+        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        correctOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
     }
- //get type, see if active, play relevant audio if so
+     //get type, see if active, play relevant audio if so
     private void OnTriggerEnter(Collider other)
     {
         if (type == TRIGGER_TYPE.GARDEN && !activated && allowedToBeUsed)
         {
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
             subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
+            allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
         {
@@ -70,7 +76,6 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }
-  
         }
         if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
         {
@@ -82,21 +87,16 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
-            hiddenMechDoor.ToggleOpen();
-            hiddenMechDoor.unlocked = false;
-            hiddenMechDoor.requiresKey = true;
-
+            journal.ChangeTasks(new string[] { "Find Book" });
             subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE2);
             journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
-            journal.ChangeTasks(new string[] { "open door", "book" });
+           
             allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
             correctOrderDoor.ToggleOpen();
             correctOrderDoor.unlocked = false;
-            correctOrderDoor.requiresKey = true;
-
             subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
             journal.ChangeTasks(new string[] { "repeat the sequence" });

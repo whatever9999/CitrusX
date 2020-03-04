@@ -76,6 +76,8 @@
  * 
  * Chase (Changes) 2/3/2020
  * Added interaction for paintings, box and added a bool for paper closure
+ * Chase (Changes) 4/3/2020
+ * Added interaction with hidden mech and correct order doors, also added regions to tidy up
   */
 using System.Collections;
 using UnityEngine;
@@ -119,6 +121,7 @@ public class Interact_HR : MonoBehaviour
 
     private void Awake()
     {
+        #region INITIALISATION
         inventoryManager = GetComponent<Inventory_HR>();
         paper = GameObject.Find("PaperUI");
         fuseboxUI = GameObject.Find("FuseboxUI");
@@ -133,6 +136,7 @@ public class Interact_HR : MonoBehaviour
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtiles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        #endregion
     }
 
     void Update()
@@ -153,7 +157,6 @@ public class Interact_HR : MonoBehaviour
                 originalMaterial = currRenderer.material;
                 targetRenderer = currRenderer;
                 currRenderer.material = outlineMaterial;
-
             }
             else
             {
@@ -276,25 +279,26 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
+                    notificationText.text = "Press E to try handle";
 
                     if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
+                        notificationText.text = "It's locked. I should check my journal.";
+
                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
                             if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
-                                notificationText.text = "It's locked. I should check my journal.";
                                 colourMatch.isDoorInteractedWith[0] = true;
                             }
-
-                            if (!colourMatch.hasKeyPart2)
+                            else if (!colourMatch.hasKeyPart2)
                             {
                                 notificationText.text = "It's locked. I should check my journal.";
                             }
-                            if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
                                 colourMatch.isDoorInteractedWith[1] = true;
-                                notificationText.text = "Press E to use";
+                                notificationText.text = "Press E to open door";
                                 door.unlocked = true;
                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                 {
@@ -304,8 +308,43 @@ public class Interact_HR : MonoBehaviour
                                 }
                             }
                         }
-                      
+                        if (door.type == Door_DR.DOOR_TYPE.HIDDEN_MECH)
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
 
+                            if (GameTesting_CW.instance.arePuzzlesDone[7])
+                            {
+                                notificationText.text = "Press E to open";
+
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                    {
+                                        notificationText.text = "";
+                                        door.ToggleOpen();
+                                        door.tag = "Untagged";
+                                    }
+                                }
+                            }
+
+                        }
+                        if (door.type == Door_DR.DOOR_TYPE.CORRECT_ORDER)
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
+
+                            if (GameTesting_CW.instance.arePuzzlesDone[8])
+                            {
+                                notificationText.text = "Press E to open";
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    notificationText.text = "";
+                                    door.ToggleOpen();
+                                    door.tag = "Untagged";
+                                }
+                               
+                            }
+
+                        }
                     }
                 }
                 else
@@ -567,9 +606,11 @@ public class Interact_HR : MonoBehaviour
                 {
                     if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                     {
+                      //  journal.TickOffTask(book.name);
                         //door opens
                         //note flies out
                         subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);
+                        GameTesting_CW.instance.arePuzzlesDone[7] = true;
                     }
 
                 }
