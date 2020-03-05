@@ -268,7 +268,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985037904}
+      - m_Target: {fileID: 519620857}
         m_MethodName: PLayAnimation
         m_Mode: 1
         m_Arguments:
@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 519620855}
   - component: {fileID: 519620854}
   - component: {fileID: 519620853}
+  - component: {fileID: 519620857}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -420,6 +421,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &519620857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519620852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c004a7cc2dad5654a883e5dcda0e1567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timer: 5
+  TimerStart: 0
 --- !u!1 &560256043
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +517,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985037904}
+      - m_Target: {fileID: 0}
         m_MethodName: QuitButton
         m_Mode: 1
         m_Arguments:
@@ -709,7 +724,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985037904}
+      - m_Target: {fileID: 0}
         m_MethodName: LoadByIndex
         m_Mode: 3
         m_Arguments:
@@ -1135,7 +1150,6 @@ GameObject:
   - component: {fileID: 1985037901}
   - component: {fileID: 1985037900}
   - component: {fileID: 1985037903}
-  - component: {fileID: 1985037904}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1227,18 +1241,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1985037904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985037899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcad409951540ec41bd6b22ba3e25c5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2046972583
 GameObject:
   m_ObjectHideFlags: 0
