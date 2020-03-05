@@ -32,46 +32,38 @@ public class PasswordButton_CW : MonoBehaviour
             case WHICH_BOX.FIRST_BOX:
                 {
                     return 0;
-                }
-                break;
+                    
+                } 
             case WHICH_BOX.SECOND_BOX:
                 {
                     return 1;
                 }
-                break;
             case WHICH_BOX.THIRD_BOX:
                 {
                     return 2;
                 }
-                break;
             case WHICH_BOX.FOURTH_BOX:
                 {
                     return 3;
                 }
-                break;
             case WHICH_BOX.PASSWORD_ONE:
                 {
                     return 4;
                 }
-                break;
             case WHICH_BOX.PASSWORD_TWO:
                 {
                     return 5;
                 }
-                break;
             case WHICH_BOX.PASSWORD_THREE:
                 {
                     return 6;
                 }
-                break;
             case WHICH_BOX.PASSWORD_FOUR:
                 {
                     return 7;
                 }
-                break;
             default:
                 return 0;
-                break;
         }
        
     }
@@ -83,17 +75,25 @@ public class PasswordButton_CW : MonoBehaviour
         switch (box)
         {
             case WHICH_BOX.FIRST_BOX:
-                flashNow = 2f;
-                break;
+                {
+                    flashNow = 2f;
+                    break;
+                }
             case WHICH_BOX.SECOND_BOX:
-                flashNow = 4f;
-                break;
+                {
+                    flashNow = 4f;
+                    break;
+                }
             case WHICH_BOX.THIRD_BOX:
-                flashNow = 8f;
-                break;
+                {
+                    flashNow = 8f;
+                    break;
+                }
             case WHICH_BOX.FOURTH_BOX:
-                flashNow = 10f;
-                break;
+                {
+                    flashNow = 10f;
+                    break;
+                }                
             default:
                 break;
         }
@@ -105,7 +105,7 @@ public class PasswordButton_CW : MonoBehaviour
        {
             thisImage.color = Color.green;
             correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
-        }
+       }
        else if (thisImage.color == Color.green)
        {
             thisImage.color = Color.yellow;
@@ -128,18 +128,18 @@ public class PasswordButton_CW : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(flashTimer);
-        if(flashTimer >= flashNow)
+        if(!isPasswordBox)
         {
-            Flash();
-            flashTimer = 0;
-        }
-        else
-        {
-            flashTimer+=Time.deltaTime;
-        }
-
-        
+            if (flashTimer >= flashNow)
+            {
+                Flash();
+                flashTimer = 0;
+            }
+            else
+            {
+                flashTimer += Time.deltaTime;
+            }
+        } 
     }
     private void Flash()
     {

@@ -11,6 +11,9 @@
  * Alex Added PlayAnimation funtion to enable the animation 
  * for the camera also added a timer to the load scene function so that
  * the aniamtion has time to play before the scene is loaded
+ * 
+ * Dominique 03/03/2020
+ * Added a function that gets the SFXManager in the scene and turns the sound on/off
  */
 
 
@@ -20,6 +23,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager_AR : MonoBehaviour
 {
+
     public float Timer = 5;
     public bool TimerStart = false;
 
@@ -42,6 +46,11 @@ public class UIManager_AR : MonoBehaviour
            SceneManager.LoadScene(sceneIndex);
         }
         
+    }
+
+    public void ToggleSFX()
+    {
+        GameObject.Find("SFXManager").GetComponent<SFXManager_DR>().ToggleSFX();
     }
 
     public void QuitButton()

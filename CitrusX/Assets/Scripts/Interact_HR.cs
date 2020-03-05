@@ -65,6 +65,19 @@
  * 
  * Dominique (Changes) 25/02/2020
  * Door now opens AND closes!
+ * 
+ * Chase(Changes) 26/2/2020
+ * Added monitor interaction ifs for voiceovers and edited colour-matching door segment, added segments for PC, scales and indepth paper interaction for
+ * voiceovers
+ * 
+ * Dominique (Changes) 03/03/2020
+ * Table items being put down now make a call to the animation manager
+ * Candles script is gotten as the parent of the candle selected as there are multiple candles now
+ * 
+ * Chase (Changes) 2/3/2020
+ * Added interaction for paintings, box and added a bool for paper closure
+ * Chase (Changes) 4/3/2020
+ * Added interaction with hidden mech and correct order doors, also added regions to tidy up
   */
 using System.Collections;
 using UnityEngine;
@@ -102,6 +115,7 @@ public class Interact_HR : MonoBehaviour
 
     private void Awake()
     {
+        #region INITIALISATION
         inventoryManager = GetComponent<Inventory_HR>();
         paper = GameObject.Find("PaperUI");
         fuseboxUI = GameObject.Find("FuseboxUI");
@@ -114,6 +128,9 @@ public class Interact_HR : MonoBehaviour
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        subtitles = GetComponent<Subtiles_HR>();
+        scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        #endregion
     }
 
     void Update()
@@ -134,7 +151,6 @@ public class Interact_HR : MonoBehaviour
                 originalMaterial = currRenderer.material;
                 targetRenderer = currRenderer;
                 currRenderer.material = outlineMaterial;
-                
             }
             else
             {
@@ -258,18 +274,28 @@ public class Interact_HR : MonoBehaviour
                 }
                 else if (door.requiresKey)
                 {
-                    if(door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
+                    notificationText.text = "Press E to try handle";
+
+                    if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                     {
-                            if(!colourMatch.isDoorInteractedWith[0])
+                        notificationText.text = "It's locked. I should check my journal.";
+
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        {
+                            if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                            {
+                                colourMatch.isDoorInteractedWith[0] = true;
+                            }
+                            else if (!colourMatch.hasKeyPart2)
                             {
                             notificationText.text = "It's locked. I should check my journal.";
                             colourMatch.isDoorInteractedWith[0] = true;
                                
                             }
-                            if(!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                            else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
                                 colourMatch.isDoorInteractedWith[1] = true;
-                                notificationText.text = "Press E to use";
+                                notificationText.text = "Press E to open door";
                                 door.unlocked = true;
                                  if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                  { 
@@ -278,7 +304,44 @@ public class Interact_HR : MonoBehaviour
                                      door.tag = "Untagged";
                                  }
                             }
-                           
+                        }
+                        if (door.type == Door_DR.DOOR_TYPE.HIDDEN_MECH)
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
+
+                            if (GameTesting_CW.instance.arePuzzlesDone[7])
+                            {
+                                notificationText.text = "Press E to open";
+
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                    {
+                                        notificationText.text = "";
+                                        door.ToggleOpen();
+                                        door.tag = "Untagged";
+                                    }
+                                }
+                            }
+
+                        }
+                        if (door.type == Door_DR.DOOR_TYPE.CORRECT_ORDER)
+                        {
+                            notificationText.text = "It's locked. I should check my journal.";
+
+                            if (GameTesting_CW.instance.arePuzzlesDone[8])
+                            {
+                                notificationText.text = "Press E to open";
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    notificationText.text = "";
+                                    door.ToggleOpen();
+                                    door.tag = "Untagged";
+                                }
+                               
+                            }
+
+                        }
                     }
                 }
                 else
@@ -407,6 +470,66 @@ public class Interact_HR : MonoBehaviour
                 {
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
+            }
+            else if (hit.transform.tag == "Box")
+            {
+                notificationText.text = "Press E to open the Box";
+                bool hasBeenOpened = false;
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    if (!hasBeenOpened)
+                    {
+                        //play box anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        hasBeenOpened = true;
+                    }
+                    else if (hasBeenOpened)
+                    {
+                        //box slam anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE6);
+                    }
+
+                }
+
+            }
+            else if (hit.transform.tag == "Painting")
+            {
+                notificationText.text = "Press E to look at the Painting";
+                bool hasBeenInteracted = false;
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    if (!hasBeenInteracted)
+                    {
+                        //play box anim
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE5);
+                        hasBeenInteracted = true;
+                    }
+                }
+            }
+            else if (hit.transform.tag == "Book")
+            {
+                notificationText.text = "Press E to interact with the book";
+                Book_CW book = hit.transform.GetComponent<Book_CW>();
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
+                    {
+                      //  journal.TickOffTask(book.name);
+                        //door opens
+                        //note flies out
+                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);
+                        GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                    }
+
+                }
+                else
+                {
+                    playerCamera.fieldOfView = defaultFOV;
+                }
+
             }
             else
             {
