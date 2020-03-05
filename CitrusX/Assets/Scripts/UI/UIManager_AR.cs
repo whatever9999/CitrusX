@@ -14,6 +14,9 @@
  * 
  * Dominique 03/03/2020
  * Added a function that gets the SFXManager in the scene and turns the sound on/off
+ * 
+ * Dominique 04/03/2020
+ * Changed the timer a bit so that once it reaches zero it uses LoadSceneByIndex
  */
 
 
@@ -24,7 +27,7 @@ using UnityEngine.SceneManagement;
 public class UIManager_AR : MonoBehaviour
 {
 
-    public float Timer = 5;
+    public float Timer = 3;
     public bool TimerStart = false;
 
     private void Update()
@@ -32,16 +35,17 @@ public class UIManager_AR : MonoBehaviour
         if (TimerStart == true)
         {
             Timer -= Time.deltaTime;
+
+            if (Timer <= 0)
+            {
+                LoadByIndex(3);
+            }
         }
     }
 
     public void LoadByIndex(int sceneIndex)
     {
-        if (Timer <= 0)
-        {
-           SceneManager.LoadScene(sceneIndex);
-        }
-        
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public void ToggleSFX()
