@@ -19,6 +19,20 @@
  * Changed the timer a bit so that once it reaches zero it uses LoadSceneByIndex
  */
 
+/**
+* \class UIManager_AR
+* 
+* \brief Consists of functions that are added to buttons on UI to carry out actions such as loading scenes, toggling sound effects, quitting and playing animations
+* 
+* LoadByIndex(sceneIndex) loads a scene according to its index using the SceneManager
+* ToggleSFX() turns the SFX from the SFXManager on/off
+* QuitButton() quits the application
+* PlayAnimation() is to be used on the start button - it plays an animation moving into the house in the menu scene then starts the game
+* 
+* \author Alex
+* 
+* \date Last Modified: 04/03/2020
+*/
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +40,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager_AR : MonoBehaviour
 {
-
     public float Timer = 3;
     public bool TimerStart = false;
 

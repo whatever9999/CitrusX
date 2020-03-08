@@ -8,8 +8,19 @@
  * Chase (Changes) 4/3/2020
  * Added door functionality and edited triggers
  */
-using System.Collections;
-using System.Collections.Generic;
+
+/**
+* \class TriggerScript_CW
+* 
+* \brief When a player enters the trigger it will cause disturbances or start audio clips according to the state of the game for storytelling
+* 
+* The trigger behaves differently according to an enum that identifies where it is
+* 
+* \author Chase
+* 
+* \date Last Modified: 04/03/2020
+*/
+
 using UnityEngine;
 
 public class TriggerScript_CW : MonoBehaviour
@@ -30,40 +41,46 @@ public class TriggerScript_CW : MonoBehaviour
         CORRECT_ORDER
     };
     public TRIGGER_TYPE type;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     private Journal_DR journal;
     
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     private void Awake()
     {
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         journal = Journal_DR.instance;
         hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
         correctOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
     }
-     //get type, see if active, play relevant audio if so
+
+    /// <summary>
+    /// get trigger type, see if active, play relevant audio if so
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         if (type == TRIGGER_TYPE.GARDEN && !activated && allowedToBeUsed)
         {
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
-            subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
             allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
         {
             if(GameTesting_CW.instance.arePuzzlesDone[1])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE1);
+                subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
             else if(GameTesting_CW.instance.arePuzzlesDone[2])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE1);
+                subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE1);
                 allowedToBeUsed = false;
             }
             else if(GameTesting_CW.instance.arePuzzlesDone[8])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
+                subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
                 journal.AddJournalLog("That should be it. Have I counted enough coins? I should blow out the candles if I have.");
                 journal.ChangeTasks(new string[] { "Blow out candles" });
             }
@@ -73,7 +90,7 @@ public class TriggerScript_CW : MonoBehaviour
             if(GameTesting_CW.instance.arePuzzlesDone[4])
             {
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
-                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE2);
+                subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }
         }
@@ -81,14 +98,14 @@ public class TriggerScript_CW : MonoBehaviour
         {
             if (GameTesting_CW.instance.arePuzzlesDone[5])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE2);
+                subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE2);
                 allowedToBeUsed = false;
             }
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
             journal.ChangeTasks(new string[] { "Find Book" });
-            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE2);
+            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
             journal.AddJournalLog("Hmm...maybe if I find some sort of mechanism I can open this door...");
            
             allowedToBeUsed = false;
@@ -97,20 +114,23 @@ public class TriggerScript_CW : MonoBehaviour
         {
             correctOrderDoor.ToggleOpen();
             correctOrderDoor.unlocked = false;
-            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE2);
+            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Is there some kind of pattern here? Maybe I could recreate it.");
             journal.ChangeTasks(new string[] { "repeat the sequence" });
             allowedToBeUsed = false;
         }
     }
 
+    /// <summary>
+    /// get trigger type, see if active, play relevant audio if so
+    /// </summary>
     private void OnTriggerExit(Collider other)
     {
         if(type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
         {
             if (GameTesting_CW.instance.arePuzzlesDone[5])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE5);
+                subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE5);
                 allowedToBeUsed = false;
             }
         }

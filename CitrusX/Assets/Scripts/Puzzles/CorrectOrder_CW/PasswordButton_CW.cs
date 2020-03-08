@@ -1,5 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Chase
+ */
+
+/**
+* \class PasswordButton_CW
+* 
+* \brief Makes the password boxes for the correct order puzzle flash and lets the player change the colour of the password buttons by clicking on them.
+* 
+* \author Chase
+* 
+* \date Last Modified: 18/02/2020
+*/
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,6 +81,10 @@ public class PasswordButton_CW : MonoBehaviour
        
     }
 #endregion
+
+    /// <summary>
+    /// Inititialise variables and set the flash time of the box according to what box it is
+    /// </summary>
     private void Awake()
     {
         correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
@@ -99,6 +116,9 @@ public class PasswordButton_CW : MonoBehaviour
         }
      
     }
+    /// <summary>
+    /// Is placed on a button so that its colour changes to the next one along when the player clicks on it
+    /// </summary>
     public void ChangeColour()
     {
        if(thisImage.color == Color.red)
@@ -126,6 +146,9 @@ public class PasswordButton_CW : MonoBehaviour
             thisImage.color = Color.red;
        }
     }
+    /// <summary>
+    /// If the button isn't the password box a timer runs for it to make it flash
+    /// </summary>
     private void Update()
     {
         if(!isPasswordBox)
@@ -141,6 +164,9 @@ public class PasswordButton_CW : MonoBehaviour
             }
         } 
     }
+    /// <summary>
+    /// The box flashes to a colour according to what box it is then goes back to white using the coroutine BackToWhite()
+    /// </summary>
     private void Flash()
     {
         switch (box)
@@ -174,6 +200,9 @@ public class PasswordButton_CW : MonoBehaviour
         }
         StartCoroutine(BackToWhite());
     } 
+    /// <summary>
+    /// Changes the image colour to white
+    /// </summary>
     IEnumerator BackToWhite()
     {
         yield return new WaitForSeconds(0.5f);

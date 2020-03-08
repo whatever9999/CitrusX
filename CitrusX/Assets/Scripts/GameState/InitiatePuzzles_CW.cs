@@ -18,6 +18,21 @@
  * Chase (Changes) 4/3/2020
  * Tidied up script, added regions and got all puzzles linked
  */
+
+/**
+* \class InitiatePuzzles_CW
+* 
+* \brief Sets up a puzzle when it is inititalised from GameTesting_CW
+* 
+* InititateSetUpRitualPuzzle() is used at the start of the game
+* In Update monitorInteractions is used to identify what journal logs and tasks are needed and set the state and variables of GOs
+* Initiate<puzzleName>() activates the right GOs for a puzzle to commence
+* 
+* \author Chase
+* 
+* \date Last Modified: 04/03/2020
+*/
+
 using UnityEngine;
 
 public class InitiatePuzzles_CW : MonoBehaviour
@@ -25,7 +40,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     public static InitiatePuzzles_CW instance;
 
     #region PUZZLE_REFERENCES
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     private SetUpRitual_CW ritualSetUp;
     private HiddenMech_CW hiddenMech;
     private ColourMatchingPuzzle_CW colourMatch;
@@ -50,6 +65,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
   
     #endregion
 
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     private void Awake()
     {
         instance = this;
@@ -62,7 +80,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         correctOrder = GameObject.Find("Correct Order PC").GetComponent<CorrectOrder_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
@@ -71,6 +89,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
         #endregion
     }
  
+    /// <summary>
+    /// Set the journal log and tasks for the ritual and set the puzzle to active
+    /// </summary>
     public void InitiateSetUpRitualPuzzle()
     {
         journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
@@ -78,11 +99,14 @@ public class InitiatePuzzles_CW : MonoBehaviour
         //this is here to stop the strings playing constantly as called from Game's update
         ritualSetUp.SetActive(true);
     }
+    /// <summary>
+    /// Check the monitorInteractions array to check the status of a puzzle play subtitles, add journal logs, change tasks and set puzzles active accordingly
+    /// </summary>
     private void Update()
     {
         if (monitorInteractions[0] && !monitorInteractionsUsed[0])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE2);
+            subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE2);
             journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
             journal.ChangeTasks(new string[] { "Fix fusebox" });
             fusebox.SetGameActive(true);
@@ -90,13 +114,13 @@ public class InitiatePuzzles_CW : MonoBehaviour
         }
         else if (monitorInteractions[1] && !monitorInteractionsUsed[1])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+            subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE2);
             colourMatch.SetActive(true);
             monitorInteractionsUsed[1] = true;
         }
         else if (monitorInteractions[2] && !monitorInteractionsUsed[2])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE3);
+            subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE3);
             journal.AddJournalLog("That safe wasn't there before, I wonder what's in it...");
             journal.ChangeTasks(new string[] { "unlock safe" });
             keypad.SetActive(true);
@@ -104,32 +128,32 @@ public class InitiatePuzzles_CW : MonoBehaviour
         }
         else if (monitorInteractions[3] && !monitorInteractionsUsed[3])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE1);
             scales.SetActive(true);
             monitorInteractionsUsed[3] = true;
         }
         else if (monitorInteractions[4] && !monitorInteractionsUsed[4])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE1);
             journal.ChangeTasks(new string[] { "Pawn" });
             chessboard.SetActive(true);
             monitorInteractionsUsed[4] = true;
         }
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE1);
             monitorInteractionsUsed[5] = true;
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE1);
             hiddenMechTrigger.allowedToBeUsed = true;
             hiddenMech.SetActive(true);
             monitorInteractionsUsed[6] = true;
         }
         else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
         {
-            subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
+            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE1);
             correctOrderTrigger.allowedToBeUsed = true;
             monitorInteractionsUsed[7] = true;
         }
@@ -167,7 +191,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateCorrectOrderPuzzle()
     {
-        subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE1);
+        subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE1);
     }
     public void InitiateCoinCountPuzzle()
     {

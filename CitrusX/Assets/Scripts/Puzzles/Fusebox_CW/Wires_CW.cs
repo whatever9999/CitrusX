@@ -3,6 +3,16 @@
  * This is Chase's code for the wires part of the fusebox puzzle
  */
 
+/**
+* \class Wires_CW
+* 
+* \brief Chase's code for the wires part of the fusebox puzzle
+* 
+* \author Chase
+* 
+* \date Last Modified: 02/03/2020
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

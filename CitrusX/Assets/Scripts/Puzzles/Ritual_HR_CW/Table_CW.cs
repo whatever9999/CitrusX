@@ -11,6 +11,16 @@
  * Dominique (Changes) 12/02/2020
  * Added a curly bracket and swapped some old bools around with enums to test after merge conflict (on fps controller)
  */
+
+/**
+* \class Table_CW
+* 
+* \brief If the items on the table have been put down then the game state is updated accordingly using the table enum identifier
+* 
+* \author Chase
+* 
+* \date Last Modified: 12/02/2020
+*/
 using UnityEngine;
 
 public class Table_CW : MonoBehaviour
@@ -25,13 +35,17 @@ public class Table_CW : MonoBehaviour
     internal bool hasBeenPlaced = false;
     private SetUpRitual_CW ritualSetUp;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     void Awake()
     {
         ritualSetUp = GameObject.Find("FirstPersonCharacter").GetComponent<SetUpRitual_CW>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Check what table it is and if the items have been put down on it and update the game state according to this
+    /// </summary>
     void Update()
     {
 

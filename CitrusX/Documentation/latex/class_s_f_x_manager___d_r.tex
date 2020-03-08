@@ -1,0 +1,103 @@
+\hypertarget{class_s_f_x_manager___d_r}{}\doxysection{S\+F\+X\+Manager\+\_\+\+DR Class Reference}
+\label{class_s_f_x_manager___d_r}\index{SFXManager\_DR@{SFXManager\_DR}}
+
+
+Instantiates a prefab in the centre of the scene that plays a sound effect.  
+
+
+Inheritance diagram for S\+F\+X\+Manager\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_s_f_x_manager___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_s_f_x_manager___d_r_afafa14b457a831f733b06a4edff8016f}{Play\+Effect}} (Sound\+Effect\+Names name)
+\begin{DoxyCompactList}\small\item\em When a sound effect is played the enum name for it is passed in This is used in a for loop to find it from the list of S\+F\+Xs available A S\+FX prefab(\+Audio\+Source) is then spawned and its clip is set to the correct clip The clip is then played and the prefab is destroyed once the clip has finished \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_f_x_manager___d_r_a14b0d94fb082c324ab067d039a75e34d}{Play\+Effect}} (Sound\+Effect\+Names name, float seconds\+To\+Play)
+\begin{DoxyCompactList}\small\item\em As with Play\+Effect(name) plays an effect on loop for however many seconds are passed in \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_f_x_manager___d_r_a20a025da7b614a8eec67e20e796f17d4}{Toggle\+S\+FX}} ()
+\begin{DoxyCompactList}\small\item\em Prefabs won\textquotesingle{}t be instantiated if sfx\+On is false. This procedure toggles the boolean on and off. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_af8dcafadcbe486fb12792bbb4af970b6}\label{class_s_f_x_manager___d_r_af8dcafadcbe486fb12792bbb4af970b6}} 
+\mbox{\hyperlink{class_sound_effect___d_r}{Sound\+Effect\+\_\+\+DR}}\mbox{[}$\,$\mbox{]} {\bfseries sound\+Effects}
+\item 
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_a50bdb24c4ccc6a422068a021adaef4c1}\label{class_s_f_x_manager___d_r_a50bdb24c4ccc6a422068a021adaef4c1}} 
+Game\+Object {\bfseries S\+F\+X\+Prefab}
+\item 
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_aa8303b7117016f7117c8c9c60c230126}\label{class_s_f_x_manager___d_r_aa8303b7117016f7117c8c9c60c230126}} 
+float {\bfseries volume}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_acbc364019bf1ff81ad5e307ae30f96f1}\label{class_s_f_x_manager___d_r_acbc364019bf1ff81ad5e307ae30f96f1}} 
+static \mbox{\hyperlink{class_s_f_x_manager___d_r}{S\+F\+X\+Manager\+\_\+\+DR}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instantiates a prefab in the centre of the scene that plays a sound effect. 
+
+This class is a don\textquotesingle{}t destroy singleton and should be added to a start scene that will persist throughout the game and can be accessed using S\+F\+X\+Manager\+\_\+\+D\+R.\+instance Sound effects are instantiated using an enum. This is linked to an audio clip passed in through the inspector. The class handles the destuction of the prefab. Play\+Effect(name) plays an effect for its length then destroys it Play\+Effect(name, seconds\+To\+Play) plays an effect on a loop and destroys it after seconds\+To\+Play
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 28/01/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_afafa14b457a831f733b06a4edff8016f}\label{class_s_f_x_manager___d_r_afafa14b457a831f733b06a4edff8016f}} 
+\index{SFXManager\_DR@{SFXManager\_DR}!PlayEffect@{PlayEffect}}
+\index{PlayEffect@{PlayEffect}!SFXManager\_DR@{SFXManager\_DR}}
+\doxysubsubsection{\texorpdfstring{PlayEffect()}{PlayEffect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void S\+F\+X\+Manager\+\_\+\+D\+R.\+Play\+Effect (\begin{DoxyParamCaption}\item[{Sound\+Effect\+Names}]{name }\end{DoxyParamCaption})}
+
+
+
+When a sound effect is played the enum name for it is passed in This is used in a for loop to find it from the list of S\+F\+Xs available A S\+FX prefab(\+Audio\+Source) is then spawned and its clip is set to the correct clip The clip is then played and the prefab is destroyed once the clip has finished 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name -\/ an enum identifier of the prefab, linked in the inspector} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_a14b0d94fb082c324ab067d039a75e34d}\label{class_s_f_x_manager___d_r_a14b0d94fb082c324ab067d039a75e34d}} 
+\index{SFXManager\_DR@{SFXManager\_DR}!PlayEffect@{PlayEffect}}
+\index{PlayEffect@{PlayEffect}!SFXManager\_DR@{SFXManager\_DR}}
+\doxysubsubsection{\texorpdfstring{PlayEffect()}{PlayEffect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void S\+F\+X\+Manager\+\_\+\+D\+R.\+Play\+Effect (\begin{DoxyParamCaption}\item[{Sound\+Effect\+Names}]{name,  }\item[{float}]{seconds\+To\+Play }\end{DoxyParamCaption})}
+
+
+
+As with Play\+Effect(name) plays an effect on loop for however many seconds are passed in 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name -\/ an enum identifier of the sound effect passed in through the inspector} & \\
+\hline
+{\em seconds\+To\+Play -\/ how long to loop the effect for} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_s_f_x_manager___d_r_a20a025da7b614a8eec67e20e796f17d4}\label{class_s_f_x_manager___d_r_a20a025da7b614a8eec67e20e796f17d4}} 
+\index{SFXManager\_DR@{SFXManager\_DR}!ToggleSFX@{ToggleSFX}}
+\index{ToggleSFX@{ToggleSFX}!SFXManager\_DR@{SFXManager\_DR}}
+\doxysubsubsection{\texorpdfstring{ToggleSFX()}{ToggleSFX()}}
+{\footnotesize\ttfamily void S\+F\+X\+Manager\+\_\+\+D\+R.\+Toggle\+S\+FX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Prefabs won\textquotesingle{}t be instantiated if sfx\+On is false. This procedure toggles the boolean on and off. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/S\+F\+X\+Manager\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

@@ -10,6 +10,16 @@
  * Began adding subtitle functionality
  * 
  */
+
+/**
+* \class BallButtonLogic_HR
+* 
+* \brief When the right weight ball hits the button it is destroyed and the game state is updated
+* 
+* \author Hugo
+* 
+* \date Last Modified: 26/02/2020
+*/
 using UnityEngine;
 
 public class BallButtonLogic_HR : MonoBehaviour
@@ -19,20 +29,29 @@ public class BallButtonLogic_HR : MonoBehaviour
     private bool isActive;
     private Journal_DR journal;
     private InitiatePuzzles_CW puzzleScript;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     public void SetActive(bool value) { isActive = value; }
+
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     private void Awake()
     {
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
     }
 
-    //Initiate puzzle script in start to ensure that the instance is initialised
+    /// <summary>
+    /// Initiate puzzle script in start to ensure that the instance is initialised
+    /// </summary>
     private void Start()
     {
         puzzleScript = InitiatePuzzles_CW.instance;
     }
 
+    /// <summary>
+    /// If the mass of the ball that hit the button is correct then destroy it and update the puzzleScript
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         //check if the mass of the ball is the required to push the button
@@ -43,7 +62,7 @@ public class BallButtonLogic_HR : MonoBehaviour
             if(puzzleScript.ballCounter == ballsRequired)
             {
                 journal.TickOffTask("press all buttons");
-                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE4);
+                subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE4);
                 //Open box
                 //VOICEOVER 7-5
                 //box closes

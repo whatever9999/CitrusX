@@ -8,28 +8,45 @@
  * Chase(Changes) 26/2/2020
  * Added subtitle functionality
  */
+
+/**
+* \class ChessBoard_DR
+* 
+* \brief checks if the chess pieces are all in position and unlocks the door if so
+* 
+* \author Dominique
+* 
+* \date Last Modified: 26/02/2020
+*/
 using UnityEngine;
 
 public class ChessBoard_DR : MonoBehaviour
 {
     public Door_DR door;
-    public ChessPiece[] chessPieces;
+    public ChessPiece_DR[] chessPieces;
 
     private const float checkBoardInterval = 1;
     private float currentCheckBoardInterval;
     private Journal_DR journal;
     private bool isActive = false;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     private TriggerScript_CW chessTrigger;
     public void SetActive(bool value) { isActive = value; }
 
+    /// <summary>
+    /// Initialise variables
+    /// </summary>
     private void Awake()
     {
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
     }
 
+    /// <summary>
+    /// If the door isn't unlocked then a timer is running to check the position of the pieces every half a second
+    /// The game state is updated when the pieces are in place and the door is unlocked
+    /// </summary>
     private void Update()
     {
         
@@ -43,7 +60,7 @@ public class ChessBoard_DR : MonoBehaviour
                     if (CheckPieces() == true)
                     {
                          Debug.Log("plz");
-                         subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE4);
+                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
                          chessTrigger.allowedToBeUsed = true;
                          GameTesting_CW.instance.arePuzzlesDone[5] = true;
                          door.unlocked = true;    
@@ -64,6 +81,10 @@ public class ChessBoard_DR : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Check the position of the pieces compared to their desired position
+    /// </summary>
+    /// <returns>A bool that shows if the pieces are all in place or not</returns>
     public bool CheckPieces()
     {
         bool inPosition = true;
@@ -90,8 +111,17 @@ public class ChessBoard_DR : MonoBehaviour
     }
 }
 
+/**
+ * \class ChessPiece_DR
+ * 
+ * \brief Holds the transform of a piece and the desired position for it to be at
+ * 
+ * \author Dominique
+ * 
+ * \date Last Modified: 04/02/2020
+ */
 [System.Serializable]
-public class ChessPiece
+public class ChessPiece_DR
 {
     public Transform chessPieceTransform;
     public Vector3 desiredPosition;

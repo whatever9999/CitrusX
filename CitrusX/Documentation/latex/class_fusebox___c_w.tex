@@ -1,0 +1,94 @@
+\hypertarget{class_fusebox___c_w}{}\doxysection{Fusebox\+\_\+\+CW Class Reference}
+\label{class_fusebox___c_w}\index{Fusebox\_CW@{Fusebox\_CW}}
+
+
+Open and close the fusebox and check if the pipes are in the right position, updating the game state if they are.  
+
+
+Inheritance diagram for Fusebox\+\_\+\+CW\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_fusebox___c_w}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_fusebox___c_w_a90182c1822487c64d5be1306260921b8}\label{class_fusebox___c_w_a90182c1822487c64d5be1306260921b8}} 
+enum {\bfseries Directions} \{ \newline
+{\bfseries H\+O\+R\+I\+Z\+O\+N\+T\+AL}, 
+{\bfseries V\+E\+R\+T\+I\+C\+AL}, 
+{\bfseries R\+I\+G\+H\+T\+\_\+\+D\+O\+W\+N\+\_\+\+B\+E\+ND}, 
+{\bfseries L\+E\+F\+T\+\_\+\+D\+O\+W\+N\+\_\+\+B\+E\+ND}, 
+\newline
+{\bfseries R\+I\+G\+H\+T\+\_\+\+U\+P\+\_\+\+B\+E\+ND}, 
+{\bfseries L\+E\+F\+T\+\_\+\+U\+P\+\_\+\+B\+E\+ND}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_fusebox___c_w_a083620e5d876b2f581eb6b5de8947de9}{Open\+Fusebox}} ()
+\begin{DoxyCompactList}\small\item\em reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}{Check\+Pipes}} ()
+\begin{DoxyCompactList}\small\item\em Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}{Close\+Fusebox}} ()
+\begin{DoxyCompactList}\small\item\em reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_fusebox___c_w_aafc9711b603887720ecf4ea9480d7bc4}\label{class_fusebox___c_w_aafc9711b603887720ecf4ea9480d7bc4}} 
+Key\+Code {\bfseries close\+Fusebox\+Key} = Key\+Code.\+Z
+\item 
+\mbox{\Hypertarget{class_fusebox___c_w_adccb0c01bf34be66c9854ab2461c1197}\label{class_fusebox___c_w_adccb0c01bf34be66c9854ab2461c1197}} 
+Key\+Code {\bfseries reset\+Pipes\+Key} = Key\+Code.\+X
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Open and close the fusebox and check if the pipes are in the right position, updating the game state if they are. 
+
+\begin{DoxyAuthor}{Author}
+Chase
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 03/03/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}\label{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}} 
+\index{Fusebox\_CW@{Fusebox\_CW}!CheckPipes@{CheckPipes}}
+\index{CheckPipes@{CheckPipes}!Fusebox\_CW@{Fusebox\_CW}}
+\doxysubsubsection{\texorpdfstring{CheckPipes()}{CheckPipes()}}
+{\footnotesize\ttfamily void Fusebox\+\_\+\+C\+W.\+Check\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox 
+
+\mbox{\Hypertarget{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}\label{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}} 
+\index{Fusebox\_CW@{Fusebox\_CW}!CloseFusebox@{CloseFusebox}}
+\index{CloseFusebox@{CloseFusebox}!Fusebox\_CW@{Fusebox\_CW}}
+\doxysubsubsection{\texorpdfstring{CloseFusebox()}{CloseFusebox()}}
+{\footnotesize\ttfamily void Fusebox\+\_\+\+C\+W.\+Close\+Fusebox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game 
+
+\mbox{\Hypertarget{class_fusebox___c_w_a083620e5d876b2f581eb6b5de8947de9}\label{class_fusebox___c_w_a083620e5d876b2f581eb6b5de8947de9}} 
+\index{Fusebox\_CW@{Fusebox\_CW}!OpenFusebox@{OpenFusebox}}
+\index{OpenFusebox@{OpenFusebox}!Fusebox\_CW@{Fusebox\_CW}}
+\doxysubsubsection{\texorpdfstring{OpenFusebox()}{OpenFusebox()}}
+{\footnotesize\ttfamily void Fusebox\+\_\+\+C\+W.\+Open\+Fusebox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+Puzzles/\+Fusebox\+\_\+\+C\+W/Fusebox\+\_\+\+C\+W.\+cs\end{DoxyCompactItemize}

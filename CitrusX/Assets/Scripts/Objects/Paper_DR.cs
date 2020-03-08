@@ -10,6 +10,16 @@
  * Chase(Changes) 26/2/2020
  * Added more to the enum and added a bool for whether it had been read or not
  */
+
+/**
+* \class Paper_DR
+* 
+* \brief Each paper object has its own name, text, textSize and background that appear on the PaperUI_DR when used
+* 
+* \author Dominique
+* 
+* \date Last Modified: 26/02/2020
+*/
 using UnityEngine;
 
 public class Paper_DR : MonoBehaviour

@@ -78,8 +78,21 @@
  * Added interaction for paintings, box and added a bool for paper closure
  * Chase (Changes) 4/3/2020
  * Added interaction with hidden mech and correct order doors, also added regions to tidy up
-  */
-using System.Collections;
+ */
+
+/**
+ * \class Interact_HR
+ * 
+ * \brief Placed on the player, this class handles interactions using tags.
+ * 
+ * This class is placed on the player so that they may interact with items according to their tag.
+ * It does this using raycasting. If the player is looking at an interactable object the class changes the material of that object so it has a glow shader.
+ * The class also contains a record of how many coins the player has collected from the water bowl and has a check to see if they have all of the coins (this can be used to see if the game is over).
+ * 
+ * \author Hugo
+ * 
+ * \date Last Modified: 04/03/2020
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,7 +124,7 @@ public class Interact_HR : MonoBehaviour
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     private ScalesPuzzleScript_AG scales;
     internal bool paperIsClosed = false;
     #endregion
@@ -119,6 +132,9 @@ public class Interact_HR : MonoBehaviour
     private ColourMatchingPuzzle_CW colourMatch;
     #endregion
 
+    ///<summary>
+    ///Initialisation of variables
+    ///</summary>
     private void Awake()
     {
         #region INITIALISATION
@@ -134,11 +150,14 @@ public class Interact_HR : MonoBehaviour
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
-        subtitles = GetComponent<Subtiles_HR>();
+        subtitles = GetComponent<Subtitles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         #endregion
     }
 
+    ///<summary>
+    ///Update casts a raycast from the player. If this hits an interactable then the object is given a glow shader and the player is permitted to interact with it using the interact buttons.
+    ///</summary>
     void Update()
     {
         //Reset text
@@ -370,37 +389,37 @@ public class Interact_HR : MonoBehaviour
                     #region PAPER_TYPES_VOICEOVERS
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE3);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead &&!paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE8);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE8);
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE7);
                     }
                     #endregion
                 }
@@ -492,7 +511,7 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press E to take a coin";
                 if(GameTesting_CW.instance.arePuzzlesDone[8])
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
                 }
 
                 if (Input.GetKeyDown(InteractKey))
@@ -527,7 +546,7 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press E to observe scales";
                 if (Input.GetKeyDown(InteractKey) && !interactedWith)
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE2);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
                     interactedWith = true;
                     // journal.ChangeTasks(new string[] { "Balance Scales" });
 
@@ -556,7 +575,7 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE3);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
@@ -570,13 +589,13 @@ public class Interact_HR : MonoBehaviour
                     if (!hasBeenOpened)
                     {
                         //play box anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
                         hasBeenOpened = true;
                     }
                     else if (hasBeenOpened)
                     {
                         //box slam anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE6);
                     }
 
                 }
@@ -592,7 +611,7 @@ public class Interact_HR : MonoBehaviour
                     if (!hasBeenInteracted)
                     {
                         //play box anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE5);
                         hasBeenInteracted = true;
                     }
                 }
@@ -609,7 +628,7 @@ public class Interact_HR : MonoBehaviour
                       //  journal.TickOffTask(book.name);
                         //door opens
                         //note flies out
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
                     }
 
@@ -632,6 +651,10 @@ public class Interact_HR : MonoBehaviour
          */
        
     }
+
+    ///<summary>
+    ///Check if the player has the total amount of coins required. If not, they have lost. If they do, they have won.
+    ///</summary>
     public void EndGameCheck()
     {
         if (numberCoinsCollected == waterBowl.numberOfCoins)

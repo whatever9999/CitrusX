@@ -13,6 +13,16 @@
  * Dominique (Changes) 03/03/2020
  * Moved and changed directions, simplified script a bit, seperated the commented wires code a bit
 */
+
+/**
+* \class Fusebox_CW
+* 
+* \brief Open and close the fusebox and check if the pipes are in the right position, updating the game state if they are
+* 
+* \author Chase
+* 
+* \date Last Modified: 03/03/2020
+*/
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
@@ -45,24 +55,30 @@ public class Fusebox_CW : MonoBehaviour
     #region GameStateVariables
     private Journal_DR journal;
     private bool[] voiceovers = { false, false };
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     internal bool isFuseboxSolved = false;
     private bool isActive = false;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
     internal void SetGameActive(bool value) { isActive = value; }
 
+    /// <summary>
+    /// Inititalise variables and ensure the UI GO is deactivated
+    /// </summary>
     void Awake()
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = Journal_DR.instance;
         fuseboxText = GameObject.Find("FuseboxMessageText").GetComponent<Text>();
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         pipes = GameObject.FindObjectsOfType<Pipes_CW>();
         fusebox = GameObject.Find("Fusebox");
 
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Check if the player is closing the UI
+    /// </summary>
     private void Update()
     {
         if (Input.GetKeyDown(closeFuseboxKey))
@@ -71,8 +87,9 @@ public class Fusebox_CW : MonoBehaviour
         }
     }
 
-
-    //reused and tweaked some of Dominique's code to open/close the fusebox to lock the cursor etc as will only have one fusebox in game
+    /// <summary>
+    /// reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game
+    /// </summary>
     public void OpenFusebox()
     {
         //Make the cursor useable for solving the puzzle
@@ -84,6 +101,9 @@ public class Fusebox_CW : MonoBehaviour
         //Stop the player from moving while using the fusebox
         fpsController.enabled = false;
     }
+    /// <summary>
+    /// Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox
+    /// </summary>
     public void CheckPipes()
     {
         //set the pipes in the inspector
@@ -104,7 +124,7 @@ public class Fusebox_CW : MonoBehaviour
             journal.TickOffTask("Fix fusebox");
             if (!voiceovers[1])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P2_LINE3);
+                subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
                 voiceovers[1] = true;
                 GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
@@ -113,6 +133,9 @@ public class Fusebox_CW : MonoBehaviour
             fusebox.tag = "Untagged";
         }
     }
+    /// <summary>
+    /// reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game
+    /// </summary>
     public void CloseFusebox()
     {
         //Make the cursor invisible again

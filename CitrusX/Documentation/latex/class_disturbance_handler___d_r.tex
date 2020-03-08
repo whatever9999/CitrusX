@@ -1,0 +1,70 @@
+\hypertarget{class_disturbance_handler___d_r}{}\doxysection{Disturbance\+Handler\+\_\+\+DR Class Reference}
+\label{class_disturbance_handler___d_r}\index{DisturbanceHandler\_DR@{DisturbanceHandler\_DR}}
+
+
+Using an enum and Trigger\+Disturbance(name) an animation/sound will happen to progress the story.  
+
+
+Inheritance diagram for Disturbance\+Handler\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_disturbance_handler___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_disturbance_handler___d_r_a112b8af466f6677484b5e4307154d1fc}\label{class_disturbance_handler___d_r_a112b8af466f6677484b5e4307154d1fc}} 
+enum {\bfseries Disturbance\+Name} \{ \newline
+{\bfseries P\+A\+W\+N\+F\+A\+LL}, 
+{\bfseries B\+O\+X\+F\+A\+LL}, 
+{\bfseries B\+A\+R\+O\+N\+C\+L\+O\+S\+E\+UP}, 
+{\bfseries B\+O\+O\+K\+T\+U\+R\+N\+P\+A\+GE}, 
+\newline
+{\bfseries D\+O\+O\+R\+C\+R\+E\+AK}, 
+{\bfseries B\+A\+R\+O\+N\+I\+N\+R\+O\+OM}, 
+{\bfseries B\+O\+X\+M\+O\+VE}, 
+{\bfseries B\+O\+O\+K\+F\+A\+LL}, 
+\newline
+{\bfseries L\+A\+M\+P\+W\+O\+B\+B\+LE}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_disturbance_handler___d_r_af063c947bca00ee1668731a0bbe0a223}\label{class_disturbance_handler___d_r_af063c947bca00ee1668731a0bbe0a223}} 
+void {\bfseries Trigger\+Disturbance} (Disturbance\+Name name)
+\item 
+\mbox{\Hypertarget{class_disturbance_handler___d_r_afa2822d4c1cc6295092bd3dafcede718}\label{class_disturbance_handler___d_r_afa2822d4c1cc6295092bd3dafcede718}} 
+void {\bfseries Move\+Baron} (Vector3 position)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_disturbance_handler___d_r_a4fde4c086bf466b956e8c1baa91fce6f}\label{class_disturbance_handler___d_r_a4fde4c086bf466b956e8c1baa91fce6f}} 
+float {\bfseries number\+Of\+Seconds\+For\+Baron\+Appearance} = 10
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_disturbance_handler___d_r_a08a31e6c12e82c1ee1db1fe49b7b212c}\label{class_disturbance_handler___d_r_a08a31e6c12e82c1ee1db1fe49b7b212c}} 
+static \mbox{\hyperlink{class_disturbance_handler___d_r}{Disturbance\+Handler\+\_\+\+DR}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Using an enum and Trigger\+Disturbance(name) an animation/sound will happen to progress the story. 
+
+Move\+Baron(position) is used to set the position of the baron for if he needs to appear somewhere in particular (his original position is still stored) Disappear\+Baron() is a coroutine that prevents him from going to the water bowl and makes him appear idle somewhere for number\+Of\+Seconds\+For\+Baron\+Appearance seconds
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 02/03/2020 
+\end{DoxyDate}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+Objects/Disturbance\+Handler\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

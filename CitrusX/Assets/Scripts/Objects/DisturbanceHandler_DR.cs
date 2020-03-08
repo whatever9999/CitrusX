@@ -4,6 +4,18 @@
  * You will have to set where you want the baron to appear by giving him a position with MoveBaron(Vector3 position) - if you don't he'll appear in the main room
  */
 
+/**
+* \class DisturbanceHandler_DR
+* 
+* \brief Using an enum and TriggerDisturbance(name) an animation/sound will happen to progress the story
+* 
+* MoveBaron(position) is used to set the position of the baron for if he needs to appear somewhere in particular (his original position is still stored)
+* DisappearBaron() is a coroutine that prevents him from going to the water bowl and makes him appear idle somewhere for numberOfSecondsForBaronAppearance seconds
+* 
+* \author Dominique
+* 
+* \date Last Modified: 02/03/2020
+*/
 using System.Collections;
 using UnityEngine;
 

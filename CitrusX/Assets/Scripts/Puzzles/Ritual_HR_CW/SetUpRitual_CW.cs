@@ -11,14 +11,23 @@
  * Chase Wilding (Changes) 26/2/2020
  * added reference to trigger box, added bools and subtitles for a continous game state
  */
+
+/**
+* \class SetUpRitual_CW
+* 
+* \brief This puzzle sets up the ritual scene and allows for progression into the next puzzle
+* 
+* \author Chase
+* 
+* \date Last Modified: 26/02/2020
+*/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SetUpRitual_CW : MonoBehaviour
 {
     Journal_DR journal;
-    Subtiles_HR subtitles;
+    Subtitles_HR subtitles;
     #region BOOLS
     private bool isActive = false;
 
@@ -30,16 +39,24 @@ public class SetUpRitual_CW : MonoBehaviour
     private TriggerScript_CW gardenTrigger;
     #endregion
 
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     private void Awake()
     {
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         gardenTrigger = GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>();
     }
 
     private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
     internal void SetActive(bool value) { isActive = value; }
 
+    /// <summary>
+    /// If the puzzle is active then the voiceover for it is played.
+    /// If the setup isn't complete yet a check is made on the tasks in the journal. Once it is complete then the log and tasks are updated and the next puzzle is started
+    /// This is done for the ritual setup and the jewellery setup
+    /// </summary>
     void Update()
     {
         //if nothing has been collected
@@ -47,7 +64,7 @@ public class SetUpRitual_CW : MonoBehaviour
         {
             if (!voiceovers[0])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE1);
+                subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE1);
                 voiceovers[0] = true;
             }
             if (!ritualSetUpCollected)
@@ -57,7 +74,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if (!voiceovers[2])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE3);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE3);
                         voiceovers[2] = true;
                     }
                     //change tasks
@@ -74,7 +91,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if (!voiceovers[3])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE4);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE4);
                         voiceovers[3] = true;
                     }
                     journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
@@ -88,7 +105,7 @@ public class SetUpRitual_CW : MonoBehaviour
                 {
                     if (!voiceovers[4])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE5);
                         voiceovers[4] = true;
                     }
                     journal.AddJournalLog("I should put this in the garden box");
@@ -104,11 +121,11 @@ public class SetUpRitual_CW : MonoBehaviour
                 {//tell the game the puzzle is complete
                     if (!voiceovers[5])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE6);
                         voiceovers[5] = true;
                         if (!voiceovers[6])
                         {
-                            subtitles.PlayAudio(Subtiles_HR.ID.P1_LINE7);
+                            subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE7);
                             //allow ritual trigger to be active
                             gardenTrigger.allowedToBeUsed = true;
                             GameTesting_CW.instance.arePuzzlesDone[0] = true;

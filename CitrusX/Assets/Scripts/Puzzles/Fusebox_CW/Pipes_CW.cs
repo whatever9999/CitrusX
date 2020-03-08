@@ -14,6 +14,20 @@
 * Seperated pipes and wires and simplified script so most is handled by Fusebox
 */
 
+/**
+* \class Pipes_CW
+* 
+* \brief Each pipe has this script. It knows what the current state of the pipe is and what it should be and allows it to be rotated and checked for its position.
+* 
+* GetIsInPosition() compares the currentPosition of the pipe to the desiredPosition
+* Update() resets the pipes if the player presses X while the UI is open, if it's not complete yet
+* Rotate() moves the UI by 90 degrees and updates the currentPosition of the pipe
+* 
+* \author Chase
+* 
+* \date Last Modified: 03/03/2020
+*/
+
 using UnityEngine;
 
 public class Pipes_CW : MonoBehaviour
@@ -35,12 +49,18 @@ public class Pipes_CW : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Inititalise variables and set currentPosition to the startPosition
+    /// </summary>
     public void Awake()
     {
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         currentPosition = startPosition;
     }
     
+    /// <summary>
+    /// If the player presses X and the fusebox puzzle isn't solved yet the position of the pipe is set to its start position by rotating it until it reaches that point
+    /// </summary>
     public void Update()
     {
         //if X, reset puzzle to default colours and state (make sure they can't do this if they've already solved it)
@@ -53,6 +73,9 @@ public class Pipes_CW : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction of the pipe is given its old direction
+    /// </summary>
     public void Rotate()
     {
         gameObject.transform.Rotate(0, 0, degreesToMove);

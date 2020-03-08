@@ -1,8 +1,16 @@
 ﻿/* Chase Wilding : Stores values of the book for the hidden mech puzzle
  */
 
-using System.Collections;
-using System.Collections.Generic;
+/**
+* \class Book_CW
+* 
+* \brief Stores values of the book for the hidden mech puzzle
+* 
+* \author Chase
+* 
+* \date Last Modified: 17/02/2020
+*/
+
 using UnityEngine;
 
 public class Book_CW : MonoBehaviour
