@@ -29,6 +29,7 @@
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pipes_CW : MonoBehaviour
 {
@@ -36,8 +37,13 @@ public class Pipes_CW : MonoBehaviour
     private Fusebox_CW.Directions currentPosition;
     public Fusebox_CW.Directions desiredPosition;
 
+    public Sprite incompletePipe;
+    public Sprite completePipe;
+
     private const int degreesToMove = 90;
     private Fusebox_CW fusebox;
+    private Image image;
+    private bool canBeRotated = true;
 
     public bool GetIsInPosition() {
         if (currentPosition == desiredPosition)
@@ -56,6 +62,7 @@ public class Pipes_CW : MonoBehaviour
     {
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         currentPosition = startPosition;
+        image = GetComponent<Image>();
     }
     
     /// <summary>
@@ -78,40 +85,59 @@ public class Pipes_CW : MonoBehaviour
     /// </summary>
     public void Rotate()
     {
-        gameObject.transform.Rotate(0, 0, degreesToMove);
-
-        switch (currentPosition)
+        if(canBeRotated)
         {
-            case Fusebox_CW.Directions.HORIZONTAL:
-                {
-                    currentPosition = Fusebox_CW.Directions.VERTICAL;
-                }
-                break;
-            case Fusebox_CW.Directions.VERTICAL:
-                {
-                    currentPosition = Fusebox_CW.Directions.HORIZONTAL;
-                }
-                break;
-            case Fusebox_CW.Directions.RIGHT_DOWN_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.RIGHT_UP_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.LEFT_DOWN_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.RIGHT_DOWN_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.RIGHT_UP_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.LEFT_UP_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.LEFT_UP_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.LEFT_DOWN_BEND;
-                }
-                break;
+            gameObject.transform.Rotate(0, 0, degreesToMove);
+
+            switch (currentPosition)
+            {
+                case Fusebox_CW.Directions.HORIZONTAL:
+                    {
+                        currentPosition = Fusebox_CW.Directions.VERTICAL;
+                    }
+                    break;
+                case Fusebox_CW.Directions.VERTICAL:
+                    {
+                        currentPosition = Fusebox_CW.Directions.HORIZONTAL;
+                    }
+                    break;
+                case Fusebox_CW.Directions.RIGHT_DOWN_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.RIGHT_UP_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.LEFT_DOWN_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.RIGHT_DOWN_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.RIGHT_UP_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.LEFT_UP_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.LEFT_UP_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.LEFT_DOWN_BEND;
+                    }
+                    break;
+            }
         }
+    }
+    /// <summary>
+    /// Set the image sprite to the pipe when it's complete. It can't be rotated after this.
+    /// </summary>
+    public void ChangeColour()
+    {
+        image.sprite = completePipe;
+        canBeRotated = false;
+    }
+    /// <summary>
+    /// Set the image sprite to the pipe when it's incomplete
+    /// </summary>
+    public void ResetColour()
+    {
+        image.sprite = incompletePipe;
+        canBeRotated = true;
     }
 }
