@@ -2123,7 +2123,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
-  closePCKey: 27
+  closePCKey: 122
 --- !u!114 &223323890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3928,7 +3928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e2e50eff4267d458c3ac7d997efc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyToClose: 27
+  keyToClose: 122
 --- !u!114 &507122827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11931,7 +11931,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'ESC' to close
+  m_Text: Press 'Z' to close
 --- !u!222 &1055958642
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21195,7 +21195,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press 'ESC' to close
+  m_Text: Press 'Z' to close
 --- !u!222 &1696363143
 CanvasRenderer:
   m_ObjectHideFlags: 0
