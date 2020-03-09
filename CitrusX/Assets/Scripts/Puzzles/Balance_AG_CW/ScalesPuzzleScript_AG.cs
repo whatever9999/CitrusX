@@ -22,6 +22,9 @@
 * 
 * \brief Compares the children of the left and right pan of the scales to see if they are balanced
 * 
+* This is done using the mass of the children on the scales
+* The first child is ignored as this is to be a text mesh that shows the weight on the scale
+* 
 * \author Adam
 * 
 * \date Last Modified: 09/02/2020
@@ -42,10 +45,6 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     // Puzzle State
     private bool isComplete = false;
 
-    // Weights to compare
-    public int leftMass;
-    public int rightMass;
-
     private Journal_DR journal;
     private bool isActive = false;
     private float zPosOfWeights;
@@ -63,51 +62,47 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
 
-        zPosOfWeights = GameObject.Find("WeightToGetZPosition").transform.localPosition.z;
-    }
-
-    /// <summary>
-    /// When a weight is moved its parent is set along with its position on the pan
-    /// Then the pans are compared to see if they're balanced
-    /// </summary>
-    /// <param name="weight - the transform of the weight so its position can be moved and parent can be set"></param>
-    public void MoveWeight(Transform weight)
-    {
-        weight.parent = leftPan;
-
-        //Get a random position for the weight to be in, making sure that it doesn't collide with any others
-        Vector3 newPosition = Vector3.zero;
-        newPosition.z = zPosOfWeights;
-        newPosition.y = whereToPutWeightsAccordingToPan[leftPan.childCount - 1].y;
-        newPosition.x = whereToPutWeightsAccordingToPan[leftPan.childCount - 1].x;
-
-        weight.localPosition = newPosition;
-
-        //You can't move the weight anymore
-        weight.tag = "Untagged";
-        weight.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-
+        //Ensure that the text on the pans is updated
         ComparePans();
     }
 
     /// <summary>
-    /// The number of children of the left pan is compared to the right
-    /// If they are equal the game state is updated
+    /// The mass of the children of each pan is compared
     /// </summary>
     public void ComparePans()
     {
-        if (rightPan.childCount == leftPan.childCount)
-        {
-            print("COMPLETE");
-            // if equal - puzzle complete
-            isComplete = true;
-            journal.TickOffTask("Balance scales");
-            journal.AddJournalLog("The scales seem different know…how much longer until this ritual is over?");
-            journal.ChangeTasks(new string[] { "Return to ritual" });
-            subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE3);
-            GameTesting_CW.instance.arePuzzlesDone[4] = true;
+        float leftPanMass = 0, rightPanMass = 0;
 
-            door.ToggleOpen();
+        //i starts at 1 so it skips the text showing how much weight is on the pan
+        for (int i = 1; i < leftPan.childCount; i++)
+        {
+            leftPanMass += leftPan.GetChild(i).GetComponent<Rigidbody>().mass;
+
+        }
+        for (int i = 1; i < rightPan.childCount; i++)
+        {
+            rightPanMass += rightPan.GetChild(i).GetComponent<Rigidbody>().mass;
+        }
+
+        //Show the weights on the pan
+        leftPan.GetComponent<ScalePan_DR>().UpdateText(leftPanMass);
+        rightPan.GetComponent<ScalePan_DR>().UpdateText(rightPanMass);
+
+        //Once the puzzle is complete the pans don't make the door open/close or make the subtitle play
+        if (!isComplete) {
+            if (leftPanMass == rightPanMass)
+            {
+                print("COMPLETE");
+                // if equal - puzzle complete
+                isComplete = true;
+                journal.TickOffTask("Balance scales");
+                journal.AddJournalLog("The scales seem different know…how much longer until this ritual is over?");
+                journal.ChangeTasks(new string[] { "Return to ritual" });
+                subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE3);
+                GameTesting_CW.instance.arePuzzlesDone[4] = true;
+
+                door.ToggleOpen();
+            }
         }
     }
 }

@@ -589,15 +589,6 @@ public class Interact_HR : MonoBehaviour
                     interactedWith = true;
                 }
             }
-            else if (hit.transform.tag == "Weight")
-            {
-                notificationText.text = "Press " + InteractKey.ToString() + " to put the weight on the pan";
-
-                if (Input.GetKeyDown(InteractKey))
-                {
-                    scales.MoveWeight(hit.transform);
-                }
-            }
             else if (hit.transform.tag == "Candles")
             {
                 notificationText.text = "Press " + InteractKey.ToString() + " to blow out";
