@@ -36,6 +36,8 @@ public class SetUpRitual_CW : MonoBehaviour
     internal bool ritualSetUpPlaced = false;
     internal bool jewelleryCollected = false;
     internal bool jewelleryPlaced = false;
+    internal bool checkedMonitor = false;
+    internal bool checkedPhone = false;
     private TriggerScript_CW gardenTrigger;
     #endregion
 
@@ -89,6 +91,34 @@ public class SetUpRitual_CW : MonoBehaviour
             {
                 if (journal.AreTasksComplete())
                 {
+                   if(!voiceovers[7])
+                    {
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
+                        voiceovers[7] = true;
+                    }
+                    journal.AddJournalLog("I’ve set that up and put the items of scarcity around to ward off the Baron, now I should check out the security system and see how it works.");
+                    journal.ChangeTasks(new string[] { "Check the monitor" });
+                    ritualSetUpPlaced = true;
+                }
+            }
+            else if(ritualSetUpPlaced && !checkedMonitor)
+            {
+                if(journal.AreTasksComplete())
+                {
+                    if (!voiceovers[7])
+                    {
+                        subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE10);
+                        voiceovers[7] = true;
+                    }
+                    journal.AddJournalLog("I need to keep the doors downstairs open otherwise the ritual ends, I can keep an eye on this room from my phone camera.");
+                    journal.ChangeTasks(new string[] { "Check phone camera" });
+                    checkedMonitor = true;
+                }
+            }
+            else if(checkedMonitor && !checkedPhone)
+            {
+                if(journal.AreTasksComplete())
+                {
                     if (!voiceovers[3])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE4);
@@ -96,10 +126,10 @@ public class SetUpRitual_CW : MonoBehaviour
                     }
                     journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
                     journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
-                    ritualSetUpPlaced = true;
+                    checkedPhone = true;
                 }
             }
-            else if (ritualSetUpPlaced && !jewelleryCollected)
+            else if (checkedPhone && !jewelleryCollected)
             {
                 if (journal.AreTasksComplete())
                 {

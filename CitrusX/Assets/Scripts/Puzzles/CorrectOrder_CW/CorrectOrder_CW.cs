@@ -70,6 +70,7 @@ public class CorrectOrder_CW : MonoBehaviour
         gameObject.SetActive(true);
 
 
+
         fpsController.enabled = false;
     }
     /// <summary>
@@ -129,6 +130,9 @@ public class CorrectOrder_CW : MonoBehaviour
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE5);
                         completionText.text = "PASSWORD CORRECT";
                         GameTesting_CW.instance.arePuzzlesDone[8] = true;
+                        journal.AddJournalLog("This is too much, I need to finish this now.");
+                        journal.TickOffTask("Solve puzzle");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                     }
                     else
                     {

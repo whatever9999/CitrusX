@@ -58,15 +58,27 @@ public class BallButtonLogic_HR : MonoBehaviour
         if (collision.gameObject.GetComponent<Rigidbody>().mass == massRequired)
         {
             puzzleScript.ballCounter++;
-            Destroy(collision.gameObject);
-            if(puzzleScript.ballCounter == ballsRequired)
+            #region CHECK_WHICH_BUTTON_FOR_JOURNAL
+            if (gameObject.name == "1Button")
             {
-                journal.TickOffTask("press all buttons");
+                journal.TickOffTask("Button 1");
+            }
+            else if(gameObject.name == "2Button")
+            {
+                journal.TickOffTask("Button 2");
+            }
+            else if (gameObject.name == "3Button")
+            {
+                journal.TickOffTask("Button 3");
+            }
+            #endregion
+            Destroy(collision.gameObject);
+
+            if (puzzleScript.ballCounter == ballsRequired)
+            {
                 subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE4);
-                //Open box
-                //VOICEOVER 7-5
-                //box closes
-                //VOICEOVER 7-6
+                journal.AddJournalLog("A box? Where did this come from?");
+                journal.ChangeTasks(new string[] { "Open box" });
                 GameTesting_CW.instance.arePuzzlesDone[6] = true;
             }
         }

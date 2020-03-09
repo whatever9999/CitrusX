@@ -130,6 +130,7 @@ public class Interact_HR : MonoBehaviour
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
+    private SetUpRitual_CW ritual;
     #endregion
 
     ///<summary>
@@ -152,6 +153,7 @@ public class Interact_HR : MonoBehaviour
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtitles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        ritual = GetComponent<SetUpRitual_CW>();
         #endregion
     }
 
@@ -410,17 +412,25 @@ public class Interact_HR : MonoBehaviour
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
+                        journal.AddJournalLog("The Baron seems to have ruined a lot of people’s lives…");
+                        journal.TickOffTask("Read note");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                        journal.AddJournalLog("A photograph of a family…the Baron’s family.");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead &&!paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                        journal.AddJournalLog("The baron reached a grizzly death it appears.");
+                        journal.TickOffTask("Read note");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && paperIsClosed)
@@ -460,7 +470,13 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
                         #region MONITOR_INTERACTION_IFS
-                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                        if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && !GameTesting_CW.instance.arePuzzlesDone[0])
+                        {
+                            journal.TickOffTask("Check the monitor");
+                            journal.AddJournalLog("The cameras seem to link to every room…this could be useful.");
+                            InitiatePuzzles_CW.instance.monitorInteractions[9] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
                         }
@@ -506,6 +522,10 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        if(!ritual.checkedMonitor && ritual.ritualSetUpPlaced)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
+                        }
                         zoomedIn = false;
                         playerCamera.fieldOfView = defaultFOV;
                     }
@@ -593,6 +613,8 @@ public class Interact_HR : MonoBehaviour
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
+                    journal.TickOffTask("Find a way out");
+                    journal.ChangeTasks(new string[] { "Solve puzzle" });
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
@@ -607,6 +629,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         //play box anim
                         subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                        journal.ChangeTasks(new string[] { "Look at photo" });
                         hasBeenOpened = true;
                     }
                     else if (hasBeenOpened)
@@ -629,6 +652,9 @@ public class Interact_HR : MonoBehaviour
                     {
                         //play box anim
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE5);
+                        journal.TickOffTask("Find clue");
+                        journal.AddJournalLog("I need to find the red accounting book.");
+                        journal.ChangeTasks(new string[] { "Find correct book" });
                         hasBeenInteracted = true;
                     }
                 }
@@ -642,10 +668,10 @@ public class Interact_HR : MonoBehaviour
                 {
                     if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                     {
-                      //  journal.TickOffTask(book.name);
-                        //door opens
-                        //note flies out
+                        journal.TickOffTask("Find correct book");
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
+                        journal.ChangeTasks(new string[] { "Read note" });
+
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
                     }
 

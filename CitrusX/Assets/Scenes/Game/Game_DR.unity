@@ -16840,6 +16840,18 @@ MonoBehaviour:
   - id: 78
     clip: {fileID: 8300000, guid: 20370503483a6cf4fb55091c263d8123, type: 3}
     text: '*gasp*'
+  - id: 79
+    clip: {fileID: 8300000, guid: d6d66eef5c8c83740a24afd0d21a77f9, type: 3}
+    text: There's a security camera system, I should check that out.
+  - id: 80
+    clip: {fileID: 8300000, guid: 86af3fbb768e9e54ba73eb6dff25a73d, type: 3}
+    text: This looks really handy.
+  - id: 81
+    clip: {fileID: 8300000, guid: 20370503483a6cf4fb55091c263d8123, type: 3}
+    text: Oh right, there's also a camera system on my phone I should check it's working.
+  - id: 82
+    clip: {fileID: 8300000, guid: ac33f91d970c3c6419d30ff9c353679f, type: 3}
+    text: This looks great. Now where was I?
 --- !u!114 &1334654700 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5642845893309499700, guid: ef914bb9165fb324eb5e5dc8ed0a668d,

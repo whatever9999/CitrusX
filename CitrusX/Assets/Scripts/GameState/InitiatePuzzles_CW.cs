@@ -55,7 +55,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     #endregion
     #region VOICEOVER_BOOLS
     private bool[] voiceovers = { false, false, false, false, false };
-    internal bool[] monitorInteractions = { false, false, false, false, false, false, false, false, false };
+    internal bool[] monitorInteractions = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion
     #region TRIGGER_REFS
@@ -149,11 +149,17 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE1);
+            journal.TickOffTask("Return to ritual");
+            journal.AddJournalLog("How many coins am I at? I should be about half way…maybe?");
+            journal.AddJournalLog("What's going on in the gym?");
+            journal.ChangeTasks(new string[] { "Check the gym" });
             monitorInteractionsUsed[5] = true;
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE1);
+            journal.TickOffTask("Return to ritual");
+            journal.ChangeTasks(new string[] { "Check out library" });
             hiddenMechTrigger.allowedToBeUsed = true;
             hiddenMech.SetActive(true);
             monitorInteractionsUsed[6] = true;
@@ -161,6 +167,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE1);
+            journal.TickOffTask("Return to ritual");
+            journal.ChangeTasks(new string[] { "Check master bedroom" });
+            journal.AddJournalLog("That PC wasn’t like that before was it?");
             correctOrderTrigger.allowedToBeUsed = true;
             monitorInteractionsUsed[7] = true;
         }

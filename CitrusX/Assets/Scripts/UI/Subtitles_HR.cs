@@ -5,6 +5,8 @@
  * 
  * Dominique (Changes) 25/02/2020
  * Changed subtitles from two dictionaries into a struct so this is easier to use in the inspector and less open for error
+ * Chase (Changes) 9/3/2020
+ * Added lines p1_line8 -> p1_line11 for new dialogue for introducing cameras and phone - need VOs for them still
  */
 
 /**
@@ -106,7 +108,11 @@ public class Subtitles_HR : MonoBehaviour
         B_LINE1,
         B_LINE2,
         SIGH,
-        GASP
+        GASP,
+        P1_LINE8,
+        P1_LINE9,
+        P1_LINE10,
+        P1_LINE11
     }
 
     //This array will show in the inspector for subtitle data to be passed in to
