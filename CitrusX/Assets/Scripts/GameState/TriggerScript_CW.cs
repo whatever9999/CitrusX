@@ -70,12 +70,15 @@ public class TriggerScript_CW : MonoBehaviour
         {
             if(GameTesting_CW.instance.arePuzzlesDone[1])
             {
+                journal.TickOffTask("Return to ritual");
                 subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
             else if(GameTesting_CW.instance.arePuzzlesDone[2])
             {
+                journal.TickOffTask("Return to ritual");
                 subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE1);
+                journal.AddJournalLog("When I hear that water ripple, I should check my phone’s camera");
                 allowedToBeUsed = false;
             }
             else if(GameTesting_CW.instance.arePuzzlesDone[8])
@@ -90,6 +93,9 @@ public class TriggerScript_CW : MonoBehaviour
             if(GameTesting_CW.instance.arePuzzlesDone[4])
             {
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
+                journal.TickOffTask("Check study");
+                journal.AddJournalLog("This book might have some information");
+                journal.ChangeTasks(new string[] { "Read the book" });
                 subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }

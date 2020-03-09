@@ -94,7 +94,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     /// </summary>
     public void InitiateSetUpRitualPuzzle()
     {
-        journal.AddJournalLog("I've got all the things I need in the room. I'll quickly pick them up so I can set up the game...");
+        journal.AddJournalLog("Reddit said I need to find several items: coins, candles, salt, a water jug and a bowl.");
         journal.ChangeTasks(new string[] { "Candles", "Salt", "Bowl", "Water jug", "Coins" });
         //this is here to stop the strings playing constantly as called from Game's update
         ritualSetUp.SetActive(true);
@@ -107,14 +107,16 @@ public class InitiatePuzzles_CW : MonoBehaviour
         if (monitorInteractions[0] && !monitorInteractionsUsed[0])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE2);
-            journal.AddJournalLog("The cameras have gone out, I should check that fusebox.");
-            journal.ChangeTasks(new string[] { "Fix fusebox" });
+            journal.AddJournalLog("The camera has gone out, I should check that fuse box.");
+            journal.ChangeTasks(new string[] { "Check fusebox" });
             fusebox.SetGameActive(true);
             monitorInteractionsUsed[0] = true;
         }
         else if (monitorInteractions[1] && !monitorInteractionsUsed[1])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE2);
+            journal.AddJournalLog("That door upstairs wasn’t closed before. I should check it out.");
+            journal.ChangeTasks(new string[] { "Check bathroom door" });
             colourMatch.SetActive(true);
             monitorInteractionsUsed[1] = true;
         }
@@ -122,20 +124,25 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE3);
             journal.AddJournalLog("That safe wasn't there before, I wonder what's in it...");
-            journal.ChangeTasks(new string[] { "unlock safe" });
+            journal.ChangeTasks(new string[] { "Check safe" });
             keypad.SetActive(true);
             monitorInteractionsUsed[2] = true;
         }
         else if (monitorInteractions[3] && !monitorInteractionsUsed[3])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE1);
+            journal.TickOffTask("Return to ritual");
+            journal.AddJournalLog("Those scales have some weird aura…are they haunted? God this ritual is getting to my head");
+            journal.ChangeTasks(new string[] { "Check the scales " });
             scales.SetActive(true);
             monitorInteractionsUsed[3] = true;
         }
         else if (monitorInteractions[4] && !monitorInteractionsUsed[4])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE1);
-            journal.ChangeTasks(new string[] { "Pawn" });
+            journal.TickOffTask("Return to ritual");
+            journal.AddJournalLog("How did the pieces blow off with the window closed?");
+            journal.ChangeTasks(new string[] {"Check the study"});
             chessboard.SetActive(true);
             monitorInteractionsUsed[4] = true;
         }

@@ -65,7 +65,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
             else if (isDoorInteractedWith[0] && !voiceovers[1])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE3);
-                journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
+                journal.AddJournalLog("It needs a key? Where can I find a key?");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
                 voiceovers[1] = true;
             }
@@ -77,6 +77,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE4);
                         voiceovers[2] = true;
+                        journal.AddJournalLog("Half a key? Who breaks their keys into two halves?");
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
                     }

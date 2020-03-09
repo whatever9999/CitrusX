@@ -59,7 +59,6 @@ public class ChessBoard_DR : MonoBehaviour
                     //Unlock the door if the pieces are in position
                     if (CheckPieces() == true)
                     {
-                         Debug.Log("plz");
                          subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
                          chessTrigger.allowedToBeUsed = true;
                          GameTesting_CW.instance.arePuzzlesDone[5] = true;

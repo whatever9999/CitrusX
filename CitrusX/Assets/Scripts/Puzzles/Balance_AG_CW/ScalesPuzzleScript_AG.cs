@@ -101,7 +101,9 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
             print("COMPLETE");
             // if equal - puzzle complete
             isComplete = true;
-            //  journal.TickOffTask("Balance scales");
+            journal.TickOffTask("Balance scales");
+            journal.AddJournalLog("The scales seem different know…how much longer until this ritual is over?");
+            journal.ChangeTasks(new string[] { "Return to ritual" });
             subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE3);
             GameTesting_CW.instance.arePuzzlesDone[4] = true;
 

@@ -87,9 +87,12 @@ public class KeypadUI_DR : MonoBehaviour
     {
         if(isActive)
         {
-            if(!voiceovers[0])
+            if (!voiceovers[0])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE4);
+                journal.TickOffTask("Check safe");
+                journal.AddJournalLog("This safe needs a password, there’s got to be some clue somewhere…");
+                journal.ChangeTasks(new string[] {"Find clue"});
                 voiceovers[0] = true;
             }
             if(interactedWithSafe && !hasAlreadyInteractedWithSafe)
@@ -139,7 +142,9 @@ public class KeypadUI_DR : MonoBehaviour
             keypadItem.door.ToggleOpen();
             //SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
             //finish journal tasks and let game know the puzzle is complete
-            journal.TickOffTask("unlock safe");
+            journal.TickOffTask("Solve password");
+            journal.AddJournalLog("Finally, what’s this note?");
+            journal.ChangeTasks(new string[] { "Read note" });
             subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE6);
             GameTesting_CW.instance.arePuzzlesDone[3] = true;
             CloseKeypad();

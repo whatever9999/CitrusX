@@ -145,7 +145,7 @@ public class Interact_HR : MonoBehaviour
         paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
-        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        journal = Journal_DR.instance;
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
@@ -309,6 +309,7 @@ public class Interact_HR : MonoBehaviour
                             if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
                                 colourMatch.isDoorInteractedWith[0] = true;
+                                journal.TickOffTask("Check bathroom door");
                             }
                             else if (!colourMatch.hasKeyPart2)
                             {
@@ -316,12 +317,15 @@ public class Interact_HR : MonoBehaviour
                             }
                             else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
-                                colourMatch.isDoorInteractedWith[1] = true;
                                 notificationText.text = "Press E to open door";
+                                colourMatch.isDoorInteractedWith[1] = true;
                                 door.unlocked = true;
                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                 {
                                     notificationText.text = "";
+                                   
+                                    journal.AddJournalLog("What was that on my screen? That couldn’t have been what I thought it was…could it?");
+                                    journal.ChangeTasks(new string[] {"Return to ritual"});
                                     door.ToggleOpen();
                                     door.tag = "Untagged";
                                 }
@@ -390,11 +394,17 @@ public class Interact_HR : MonoBehaviour
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
+                        journal.TickOffTask("Read note");
+                        journal.AddJournalLog("This baron seems like he was quite the character…weird though, why would this be locked away?");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
+                        journal.TickOffTask("Read book");
+                        journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
+                        journal.ChangeTasks(new string[] { "Find the Pawn" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
@@ -421,6 +431,12 @@ public class Interact_HR : MonoBehaviour
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE7);
                     }
+                    else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
+                    {
+                        journal.TickOffTask("Find clue");
+                        journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
+                        journal.ChangeTasks(new string[] { "Solve the password" });
+;                    }
                     #endregion
                 }
             }
@@ -547,9 +563,10 @@ public class Interact_HR : MonoBehaviour
                 if (Input.GetKeyDown(InteractKey) && !interactedWith)
                 {
                     subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
+                    journal.TickOffTask("Check the scales");
+                    journal.AddJournalLog("I could use items from the pantry to balance the scales.");
+                    journal.ChangeTasks(new string[] { "Balance scales" });
                     interactedWith = true;
-                    // journal.ChangeTasks(new string[] { "Balance Scales" });
-
                 }
             }
             else if (hit.transform.tag == "Weight")
@@ -638,6 +655,21 @@ public class Interact_HR : MonoBehaviour
                     playerCamera.fieldOfView = defaultFOV;
                 }
 
+            }
+            else if(hit.transform.tag == "Pawn")
+            {
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+
+                    //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
+                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
+                    hit.transform.gameObject.SetActive(false);
+                    notificationText.text = "";
+                    journal.TickOffTask("Find the Pawn");
+                    journal.ChangeTasks(new string[] { "Solve the puzzle" });
+                }
             }
             else
             {

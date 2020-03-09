@@ -102,6 +102,9 @@ public class Fusebox_CW : MonoBehaviour
         Cursor.visible = true;
 
         gameObject.SetActive(true);
+        journal.AddJournalLog("It’s disconnected? I’m sure I can sort this out.");
+        journal.TickOffTask("Check fusebox");
+        journal.ChangeTasks(new string[] { "Fix fusebox" });
 
         //Stop the player from moving while using the fusebox
         fpsController.enabled = false;
@@ -134,6 +137,8 @@ public class Fusebox_CW : MonoBehaviour
             fuseboxText.text = "COMPLETED";
             isFuseboxSolved = true;
             journal.TickOffTask("Fix fusebox");
+            journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
+            journal.ChangeTasks(new string[] { "Return to ritual" });
             if (!voiceovers[1])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
