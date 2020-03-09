@@ -12,6 +12,9 @@
 * 
 * Dominique (Changes) 03/03/2020
 * Seperated pipes and wires and simplified script so most is handled by Fusebox
+* 
+* Dominique (Changes) 09/03/2020
+* Pipes now have a before and after sprite so the colour can change (and go back if incorrect)
 */
 
 /**
@@ -25,7 +28,7 @@
 * 
 * \author Chase
 * 
-* \date Last Modified: 03/03/2020
+* \date Last Modified: 09/03/2020
 */
 
 using UnityEngine;

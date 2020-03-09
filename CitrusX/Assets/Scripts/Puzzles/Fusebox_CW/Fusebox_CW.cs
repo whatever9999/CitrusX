@@ -12,6 +12,10 @@
  * 
  * Dominique (Changes) 03/03/2020
  * Moved and changed directions, simplified script a bit, seperated the commented wires code a bit
+ * 
+ * Dominique (Changes) 09/03/2020
+ * CheckPipes() is a coroutine so the colour of the pipes changes one by one if they're complete
+ * The fusebox now requires the pipes to be passed in through the inspector to ensure they're in order
 */
 
 /**
@@ -21,7 +25,7 @@
 * 
 * \author Chase
 * 
-* \date Last Modified: 03/03/2020
+* \date Last Modified: 09/03/2020
 */
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;

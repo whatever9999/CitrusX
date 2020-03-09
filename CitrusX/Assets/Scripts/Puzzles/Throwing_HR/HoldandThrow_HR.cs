@@ -11,6 +11,9 @@
  * 
  * Dominique (Changes) 03/03/2020
  * Optimising and fixes
+ * 
+ * Dominique (Changes) 09/03/2020
+ * Every 2 seconds that the ball is moving it will have its velocity set to zero so it doesn't roll everywhere
  */
 
 /**
@@ -25,7 +28,7 @@
 * 
 * \author Hugo
 * 
-* \date Last Modified: 03/03/2020
+* \date Last Modified: 09/03/2020
 */
 
 using UnityEngine;
@@ -42,6 +45,8 @@ public class HoldandThrow_HR : MonoBehaviour
     private bool beingHeld = false;
     private bool isFirstTime = false;
     private Subtitles_HR subtitles;
+    private const float timeToMoveBeforeStop = 2;
+    private float currentTimeMoving;
 
     /// <summary>
     /// Initialise variables
@@ -71,6 +76,24 @@ public class HoldandThrow_HR : MonoBehaviour
                 RB.AddForce(holdPosition.forward * throwForce);
                 Drop();
             }
+        } else
+        {
+            //If the ball is moving for more than 3 seconds make its velocity 0
+            if(RB.velocity != Vector3.zero && currentTimeMoving > timeToMoveBeforeStop)
+            {
+                RB.velocity = Vector3.zero;
+                currentTimeMoving = 0;
+            } 
+            //If the ball is moving increase the currentTimeMoving timer
+            else if (RB.velocity != Vector3.zero)
+            {
+                currentTimeMoving += Time.deltaTime;
+            } 
+            //If the ball is moving make sure the currentTimeMoving timer is at 0
+            else
+            {
+                currentTimeMoving = 0;
+            }
         }
     }
 
@@ -86,7 +109,6 @@ public class HoldandThrow_HR : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         RB.useGravity = false;
-
         RB.velocity = Vector3.zero;
         RB.angularVelocity = Vector3.zero;
     }
@@ -114,7 +136,7 @@ public class HoldandThrow_HR : MonoBehaviour
         {
             if(!isFirstTime)
             {
-                subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE3);
+                //subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE3);
                 isFirstTime = true;
             }
             Hold();
