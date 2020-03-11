@@ -1,5 +1,8 @@
 ﻿/*Chase Wilding 17/2/2020
  * This holds the base for the correct order puzzle
+ * 
+ * Chase (Changes) 11/3/2020
+ * Added a whichRound array of bools to progress through varying rounds
  */
 
 /**
@@ -27,7 +30,8 @@ public class CorrectOrder_CW : MonoBehaviour
     private Text correctOrderText;
     private Text completionText;
     private Subtitles_HR subtitles;
-    
+    internal bool[] whichRound = { true, false, false };
+
     #endregion
 
     public void SetActive(bool value) { isActive = value; }
@@ -127,12 +131,28 @@ public class CorrectOrder_CW : MonoBehaviour
                 {
                     if (boxes[3] == boxes[7])
                     {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE5);
-                        completionText.text = "PASSWORD CORRECT";
-                        GameTesting_CW.instance.arePuzzlesDone[8] = true;
-                        journal.AddJournalLog("This is too much, I need to finish this now.");
-                        journal.TickOffTask("Solve puzzle");
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
+                        if(whichRound[0])
+                        {
+                            whichRound[1] = true;
+                            whichRound[0] = false;
+                            completionText.text = "ROUND 1 CORRECT";
+                        }
+                        else if(whichRound[1])
+                        {
+                            whichRound[2] = true;
+                            whichRound[1] = false;
+                            completionText.text = "ROUND 2 CORRECT";
+                        }
+                        else if(whichRound[2])
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE5);
+                            completionText.text = "PUZZLE SOLVED";
+                            GameTesting_CW.instance.arePuzzlesDone[8] = true;
+                            journal.AddJournalLog("This is too much, I need to finish this now.");
+                            journal.TickOffTask("Solve puzzle");
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                        }
+                        
                     }
                     else
                     {

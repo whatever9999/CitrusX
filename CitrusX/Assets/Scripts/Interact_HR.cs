@@ -76,8 +76,12 @@
  * 
  * Chase (Changes) 2/3/2020
  * Added interaction for paintings, box and added a bool for paper closure
+ * 
  * Chase (Changes) 4/3/2020
  * Added interaction with hidden mech and correct order doors, also added regions to tidy up
+ * 
+ * Chase (Changes) 11/3/2020
+ * Added interaction for symbols of scarcity
  */
 
 /**

@@ -9,6 +9,8 @@
  * Added text size for notes
  * Chase(Changes) 26/2/2020
  * Added more to the enum and added a bool for whether it had been read or not
+ * Chase(Changes) 11/3/2020
+ * Added a new enum member
  */
 
 /**

@@ -1,5 +1,8 @@
 ﻿/*
- * Chase
+ * Chase - holds the correct order puzzles boxes. Flash() controls the lights based off of values set and ChangeColour() will change the password
+ * box's colour when clicked on.
+ * Chase (Changes) 11/3/2020
+ * Fixed known issue of original red not registering. Added two extra rounds to improve the puzzle.
  */
 
 /**
@@ -21,6 +24,7 @@ public class PasswordButton_CW : MonoBehaviour
     #region VARIABLES
     private CorrectOrder_CW correctOrderPuzzle;
     private Image thisImage;
+    private Color originalColor;
     public enum WHICH_BOX
     {
         FIRST_BOX,
@@ -36,6 +40,7 @@ public class PasswordButton_CW : MonoBehaviour
     public bool isPasswordBox = false;
     private float flashTimer = 0;
     private float flashNow;
+   
     #endregion
     #region GET_BOX_NO
     private int GetBoxNumber()
@@ -89,33 +94,9 @@ public class PasswordButton_CW : MonoBehaviour
     {
         correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         thisImage = GetComponent<Image>();
-        switch (box)
-        {
-            case WHICH_BOX.FIRST_BOX:
-                {
-                    flashNow = 2f;
-                    break;
-                }
-            case WHICH_BOX.SECOND_BOX:
-                {
-                    flashNow = 4f;
-                    break;
-                }
-            case WHICH_BOX.THIRD_BOX:
-                {
-                    flashNow = 8f;
-                    break;
-                }
-            case WHICH_BOX.FOURTH_BOX:
-                {
-                    flashNow = 10f;
-                    break;
-                }                
-            default:
-                break;
-        }
-     
+        originalColor = thisImage.color;
     }
+    
     /// <summary>
     /// Is placed on a button so that its colour changes to the next one along when the player clicks on it
     /// </summary>
@@ -141,10 +122,11 @@ public class PasswordButton_CW : MonoBehaviour
             thisImage.color = Color.red;
             correctOrderPuzzle.AssignBoxColour(GetBoxNumber(),Color.red);
         }
-       else
+       else if(thisImage.color == originalColor)
        {
             thisImage.color = Color.red;
-       }
+            correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+        }
     }
     /// <summary>
     /// If the button isn't the password box a timer runs for it to make it flash
@@ -153,6 +135,83 @@ public class PasswordButton_CW : MonoBehaviour
     {
         if(!isPasswordBox)
         {
+            switch (box)
+            {
+                case WHICH_BOX.FIRST_BOX:
+                    {
+                        if (correctOrderPuzzle.whichRound[0])
+                        {
+                            flashNow = 2f;
+                            
+                        }
+                        else if(correctOrderPuzzle.whichRound[1])
+                        {
+                            flashNow = 3f;
+                        }
+                        else if(correctOrderPuzzle.whichRound[2])
+                        {
+                            flashNow = 0.5f;
+                        }
+                            break;
+                    }
+                case WHICH_BOX.SECOND_BOX:
+                    {
+                        if (correctOrderPuzzle.whichRound[0])
+                        {
+                            flashNow = 4f;
+
+                        }
+                        else if (correctOrderPuzzle.whichRound[1])
+                        {
+                            flashNow = 2f;
+                        }
+                        else if (correctOrderPuzzle.whichRound[2])
+                        {
+                            flashNow = 8f;
+                        }
+                        
+                        break;
+                    }
+                case WHICH_BOX.THIRD_BOX:
+                    {
+                        if (correctOrderPuzzle.whichRound[0])
+                        {
+                            flashNow = 8f;
+
+                        }
+                        else if (correctOrderPuzzle.whichRound[1])
+                        {
+                            flashNow = 5f;
+                        }
+                        else if (correctOrderPuzzle.whichRound[2])
+                        {
+                            flashNow = 2f;
+                        }
+                        
+                        break;
+                    }
+                case WHICH_BOX.FOURTH_BOX:
+                    {
+                        if (correctOrderPuzzle.whichRound[0])
+                        {
+                            flashNow = 10f;
+
+                        }
+                        else if (correctOrderPuzzle.whichRound[1])
+                        {
+                            flashNow = 1f;
+                        }
+                        else if (correctOrderPuzzle.whichRound[2])
+                        {
+                            flashNow = 0.4f;
+                        }
+                        
+                        break;
+                    }
+                default:
+                    break;
+            }
+
             if (flashTimer >= flashNow)
             {
                 Flash();
@@ -173,26 +232,83 @@ public class PasswordButton_CW : MonoBehaviour
         {
             case WHICH_BOX.FIRST_BOX:
                 {
-                    thisImage.color = Color.red;
-                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+                    if(correctOrderPuzzle.whichRound[0])
+                    {
+                        thisImage.color = Color.red;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+                    }
+                    else if(correctOrderPuzzle.whichRound[1])
+                    {
+                        thisImage.color = Color.green;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                    }
+                    else if(correctOrderPuzzle.whichRound[2])
+                    {
+                        thisImage.color = Color.yellow;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
+                    }
+                    
                 }
                 break;
             case WHICH_BOX.SECOND_BOX:
                 {
+                    if (correctOrderPuzzle.whichRound[0])
+                    {
+                        thisImage.color = Color.red;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+                    }
+                    else if (correctOrderPuzzle.whichRound[1])
+                    {
+                        thisImage.color = Color.green;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                    }
+                    else if (correctOrderPuzzle.whichRound[2])
+                    {
+                        thisImage.color = Color.yellow;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
+                    }
                     thisImage.color = Color.yellow;
                     correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
                 }
                 break;
             case WHICH_BOX.THIRD_BOX:
                 {
-                    thisImage.color = Color.green;
-                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                    if (correctOrderPuzzle.whichRound[0])
+                    {
+                        thisImage.color = Color.green;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                    }
+                    else if (correctOrderPuzzle.whichRound[1])
+                    {
+                        thisImage.color = Color.green;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);
+                    }
+                    else if (correctOrderPuzzle.whichRound[2])
+                    {
+                        thisImage.color = Color.cyan;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
+                    }
+                    
                 }
                 break;
             case WHICH_BOX.FOURTH_BOX:
                 {
-                    thisImage.color = Color.cyan;
-                    correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
+                    if (correctOrderPuzzle.whichRound[0])
+                    {
+                        thisImage.color = Color.cyan;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.cyan);
+                    }
+                    else if (correctOrderPuzzle.whichRound[1])
+                    {
+                        thisImage.color = Color.red;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.red);
+                    }
+                    else if (correctOrderPuzzle.whichRound[2])
+                    {
+                        thisImage.color = Color.yellow;
+                        correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.yellow);
+                    }
+                 
                 }
                 break;
             default:

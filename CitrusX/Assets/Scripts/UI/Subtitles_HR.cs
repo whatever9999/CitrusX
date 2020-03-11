@@ -7,6 +7,8 @@
  * Changed subtitles from two dictionaries into a struct so this is easier to use in the inspector and less open for error
  * Chase (Changes) 9/3/2020
  * Added lines p1_line8 -> p1_line11 for new dialogue for introducing cameras and phone - need VOs for them still
+ * Chase (Changes) 11/3/2020
+ * Added line A_Line6
  */
 
 /**
