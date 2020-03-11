@@ -54,13 +54,13 @@ public class Table_CW : MonoBehaviour
 
             if (currentTable == TABLES.RITUAL_TABLE && hasBeenPlaced)
             {
-                ritualSetUp.ritualSetUpCollected = true;
+                ritualSetUp.ritualSteps[0] = true;
                 hasBeenPlaced = false;
             }
             else if (currentTable == TABLES.GARDEN_TABLE && hasBeenPlaced)
             {
-                ritualSetUp.jewelleryPlaced = true;
-                ritualSetUp.jewelleryCollected = true;
+                ritualSetUp.ritualSteps[4] = true;
+                ritualSetUp.ritualSteps[5] = true;
                 hasBeenPlaced = false;
 
             }

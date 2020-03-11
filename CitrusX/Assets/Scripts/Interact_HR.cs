@@ -217,7 +217,7 @@ public class Interact_HR : MonoBehaviour
                     if (table.currentTable == Table_CW.TABLES.RITUAL_TABLE)
                     {
                         //check to see if its been set up
-                        if (GetComponent<SetUpRitual_CW>().ritualSetUpCollected)
+                        if (GetComponent<SetUpRitual_CW>().ritualSteps[0])
                         {
                             notificationText.text = "Press E to put down your items";
                             //If he presses the key then pick up the object
@@ -234,7 +234,7 @@ public class Interact_HR : MonoBehaviour
                     else if (table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
                     {
                         //check to see if its been set up
-                        if (GetComponent<SetUpRitual_CW>().jewelleryCollected)
+                        if (GetComponent<SetUpRitual_CW>().ritualSteps[4])
                         {
                             notificationText.text = "Press E to put down your items";
                             //If he presses the key then pick up the object
@@ -405,12 +405,12 @@ public class Interact_HR : MonoBehaviour
                         journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead && !paperIsClosed)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
                         journal.TickOffTask("Read book");
                         journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
-                        journal.ChangeTasks(new string[] { "Find the Pawn" });
+                        journal.ChangeTasks(new string[] { "Pawn" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
@@ -527,7 +527,7 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
-                        if(!ritual.checkedMonitor && ritual.ritualSetUpPlaced)
+                        if(!ritual.ritualSteps[1] && ritual.ritualSteps[0])
                         {
                             subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
                         }

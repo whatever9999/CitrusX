@@ -47,7 +47,7 @@ public class CellPhone_HR : MonoBehaviour
         if (!cellPhone.activeInHierarchy && Input.GetKeyDown(cellphoneOpenKey) || Input.GetButtonDown("Phone"))
         {
             cellPhone.SetActive(true);
-            if(ritual.checkedMonitor && !ritual.checkedPhone)
+            if(ritual.ritualSteps[2] && !ritual.ritualSteps[3])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE11);
                 Journal_DR.instance.TickOffTask("Check phone camera");
