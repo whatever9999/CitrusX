@@ -7,11 +7,21 @@
  * Chase (Changes) 4/3/2020
  * Tidied up script
  */
+
+/**
+* \class HiddenMech_CW
+* 
+* \brief Checks to see if the journal's tasks are complete and opens the door if so
+* 
+* \author Chase
+* 
+* \date Last Modified: 04/03/2020
+*/
 using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
 {
-    Door_DR door;
+    private Door_DR door;
     private bool isActive = false;
     public void SetActive(bool value) { isActive = value; }
 

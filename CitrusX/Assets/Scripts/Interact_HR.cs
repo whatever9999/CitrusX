@@ -76,10 +76,27 @@
  * 
  * Chase (Changes) 2/3/2020
  * Added interaction for paintings, box and added a bool for paper closure
+ * 
  * Chase (Changes) 4/3/2020
  * Added interaction with hidden mech and correct order doors, also added regions to tidy up
-  */
-using System.Collections;
+ * 
+ * Chase (Changes) 11/3/2020
+ * Added interaction for symbols of scarcity
+ */
+
+/**
+ * \class Interact_HR
+ * 
+ * \brief Placed on the player, this class handles interactions using tags.
+ * 
+ * This class is placed on the player so that they may interact with items according to their tag.
+ * It does this using raycasting. If the player is looking at an interactable object the class changes the material of that object so it has a glow shader.
+ * The class also contains a record of how many coins the player has collected from the water bowl and has a check to see if they have all of the coins (this can be used to see if the game is over).
+ * 
+ * \author Hugo
+ * 
+ * \date Last Modified: 04/03/2020
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,14 +128,18 @@ public class Interact_HR : MonoBehaviour
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     private ScalesPuzzleScript_AG scales;
     internal bool paperIsClosed = false;
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
+    private SetUpRitual_CW ritual;
     #endregion
 
+    ///<summary>
+    ///Initialisation of variables
+    ///</summary>
     private void Awake()
     {
         #region INITIALISATION
@@ -129,16 +150,20 @@ public class Interact_HR : MonoBehaviour
         paperBackground = paper.GetComponent<Image>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
-        journal = GameObject.Find("FPSController").GetComponent<Journal_DR>();
+        journal = Journal_DR.instance;
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
-        subtitles = GetComponent<Subtiles_HR>();
+        subtitles = GetComponent<Subtitles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
+        ritual = GetComponent<SetUpRitual_CW>();
         #endregion
     }
 
+    ///<summary>
+    ///Update casts a raycast from the player. If this hits an interactable then the object is given a glow shader and the player is permitted to interact with it using the interact buttons.
+    ///</summary>
     void Update()
     {
         //Reset text
@@ -290,6 +315,7 @@ public class Interact_HR : MonoBehaviour
                             if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                             {
                                 colourMatch.isDoorInteractedWith[0] = true;
+                                journal.TickOffTask("Check bathroom door");
                             }
                             else if (!colourMatch.hasKeyPart2)
                             {
@@ -297,12 +323,15 @@ public class Interact_HR : MonoBehaviour
                             }
                             else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                             {
-                                colourMatch.isDoorInteractedWith[1] = true;
                                 notificationText.text = "Press E to open door";
+                                colourMatch.isDoorInteractedWith[1] = true;
                                 door.unlocked = true;
                                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                 {
                                     notificationText.text = "";
+                                   
+                                    journal.AddJournalLog("What was that on my screen? That couldn’t have been what I thought it was…could it?");
+                                    journal.ChangeTasks(new string[] {"Return to ritual"});
                                     door.ToggleOpen();
                                     door.tag = "Untagged";
                                 }
@@ -370,38 +399,59 @@ public class Interact_HR : MonoBehaviour
                     #region PAPER_TYPES_VOICEOVERS
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P4_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
+                        journal.TickOffTask("Read note");
+                        journal.AddJournalLog("This baron seems like he was quite the character…weird though, why would this be locked away?");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE3);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
+                        journal.TickOffTask("Read book");
+                        journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
+                        journal.ChangeTasks(new string[] { "Find the Pawn" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
+                        journal.AddJournalLog("The Baron seems to have ruined a lot of people’s lives…");
+                        journal.TickOffTask("Read note");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead && !paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                        journal.AddJournalLog("A photograph of a family…the Baron’s family.");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead &&!paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                        journal.AddJournalLog("The baron reached a grizzly death it appears.");
+                        journal.TickOffTask("Read note");
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE8);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE8);
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && paperIsClosed)
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P6_LINE7);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE7);
                     }
+                    else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
+                    {
+                        journal.TickOffTask("Find clue");
+                        journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
+                        journal.ChangeTasks(new string[] { "Solve the password" });
+;                    }
+                   
                     #endregion
                 }
             }
@@ -425,7 +475,13 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
                         #region MONITOR_INTERACTION_IFS
-                        if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                        if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && !GameTesting_CW.instance.arePuzzlesDone[0])
+                        {
+                            journal.TickOffTask("Check the monitor");
+                            journal.AddJournalLog("The cameras seem to link to every room…this could be useful.");
+                            InitiatePuzzles_CW.instance.monitorInteractions[9] = true;
+                        }
+                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
                         {
                             InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
                         }
@@ -471,6 +527,10 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        if(!ritual.checkedMonitor && ritual.ritualSetUpPlaced)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
+                        }
                         zoomedIn = false;
                         playerCamera.fieldOfView = defaultFOV;
                     }
@@ -492,7 +552,7 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press E to take a coin";
                 if(GameTesting_CW.instance.arePuzzlesDone[8])
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P10_LINE2);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
                 }
 
                 if (Input.GetKeyDown(InteractKey))
@@ -527,19 +587,11 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press E to observe scales";
                 if (Input.GetKeyDown(InteractKey) && !interactedWith)
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P5_LINE2);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
+                    journal.TickOffTask("Check the scales");
+                    journal.AddJournalLog("I could use items from the pantry to balance the scales.");
+                    journal.ChangeTasks(new string[] { "Balance scales" });
                     interactedWith = true;
-                    // journal.ChangeTasks(new string[] { "Balance Scales" });
-
-                }
-            }
-            else if (hit.transform.tag == "Weight")
-            {
-                notificationText.text = "Press " + InteractKey.ToString() + " to put the weight on the pan";
-
-                if (Input.GetKeyDown(InteractKey))
-                {
-                    scales.MoveWeight(hit.transform);
                 }
             }
             else if (hit.transform.tag == "Candles")
@@ -556,7 +608,9 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    subtitles.PlayAudio(Subtiles_HR.ID.P9_LINE3);
+                    subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
+                    journal.TickOffTask("Find a way out");
+                    journal.ChangeTasks(new string[] { "Solve puzzle" });
                     correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
                 }
             }
@@ -570,13 +624,14 @@ public class Interact_HR : MonoBehaviour
                     if (!hasBeenOpened)
                     {
                         //play box anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                        journal.ChangeTasks(new string[] { "Look at photo" });
                         hasBeenOpened = true;
                     }
                     else if (hasBeenOpened)
                     {
                         //box slam anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE6);
                     }
 
                 }
@@ -592,7 +647,10 @@ public class Interact_HR : MonoBehaviour
                     if (!hasBeenInteracted)
                     {
                         //play box anim
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE5);
+                        journal.TickOffTask("Find clue");
+                        journal.AddJournalLog("I need to find the red accounting book.");
+                        journal.ChangeTasks(new string[] { "Find correct book" });
                         hasBeenInteracted = true;
                     }
                 }
@@ -606,10 +664,10 @@ public class Interact_HR : MonoBehaviour
                 {
                     if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                     {
-                      //  journal.TickOffTask(book.name);
-                        //door opens
-                        //note flies out
-                        subtitles.PlayAudio(Subtiles_HR.ID.P8_LINE6);
+                        journal.TickOffTask("Find correct book");
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
+                        journal.ChangeTasks(new string[] { "Read note" });
+
                         GameTesting_CW.instance.arePuzzlesDone[7] = true;
                     }
 
@@ -619,6 +677,30 @@ public class Interact_HR : MonoBehaviour
                     playerCamera.fieldOfView = defaultFOV;
                 }
 
+            }
+            else if(hit.transform.tag == "Pawn")
+            {
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+
+                    //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
+                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+
+                    hit.transform.gameObject.SetActive(false);
+                    notificationText.text = "";
+                    journal.TickOffTask("Find the Pawn");
+                    journal.ChangeTasks(new string[] { "Solve the puzzle" });
+                }
+            }
+            else if (hit.transform.tag == "SymbolOfScarcity")
+            {
+                notificationText.text = "Press E to interact with the " + hit.transform.name;
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                }
             }
             else
             {
@@ -632,6 +714,10 @@ public class Interact_HR : MonoBehaviour
          */
        
     }
+
+    ///<summary>
+    ///Check if the player has the total amount of coins required. If not, they have lost. If they do, they have won.
+    ///</summary>
     public void EndGameCheck()
     {
         if (numberCoinsCollected == waterBowl.numberOfCoins)

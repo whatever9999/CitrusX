@@ -15,6 +15,18 @@
  * Added curly brackets to for loop (I find this makes code more readable for me)
  */
 
+/**
+* \class PutDown_HR
+* 
+* \brief When the player interacts with an object that has this script all children of the object are activated
+* 
+* GetBeenUsed() identifies if the items are already down or not
+* PutItemsDown() activates all children of the object
+* 
+* \author Hugo
+* 
+* \date Last Modified: 11/02/2020
+*/
 using UnityEngine;
 
 public class PutDown_HR : MonoBehaviour
@@ -24,6 +36,9 @@ public class PutDown_HR : MonoBehaviour
 
     public bool GetBeenUsed() { return beenUsed; }
 
+    /// <summary>
+    /// Activate all children of the object and set been used to true
+    /// </summary>
     public void PutItemsDown() 
     {
         tableChildren = transform.childCount;

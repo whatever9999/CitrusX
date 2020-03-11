@@ -1,0 +1,73 @@
+\hypertarget{class_animation_manager___d_r}{}\doxysection{Animation\+Manager\+\_\+\+DR Class Reference}
+\label{class_animation_manager___d_r}\index{AnimationManager\_DR@{AnimationManager\_DR}}
+
+
+Enables the triggering of animations on objects around the game using an enum.  
+
+
+Inheritance diagram for Animation\+Manager\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_animation_manager___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_animation_manager___d_r_a62c3f4bce961ca609579a1e4b109c083}\label{class_animation_manager___d_r_a62c3f4bce961ca609579a1e4b109c083}} 
+enum {\bfseries Animation\+Name} \{ \newline
+{\bfseries P\+L\+A\+C\+E\+R\+I\+T\+U\+A\+L\+I\+T\+E\+MS}, 
+{\bfseries P\+L\+A\+C\+E\+J\+E\+W\+E\+L\+L\+E\+RY}, 
+{\bfseries O\+P\+E\+N\+C\+H\+E\+S\+S\+B\+O\+A\+R\+D\+B\+O\+OK}, 
+{\bfseries O\+P\+E\+N\+G\+A\+M\+E\+S\+R\+O\+O\+M\+B\+OX}, 
+\newline
+{\bfseries S\+L\+A\+M\+G\+A\+M\+E\+S\+R\+O\+O\+M\+B\+OX}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_animation_manager___d_r_aec146fc2c37c8d6fe1c80452468f91b6}{Trigger\+Animation}} (Animation\+Name name)
+\begin{DoxyCompactList}\small\item\em Uses a switch case to use the name parameter to trigger a specific animation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_animation_manager___d_r_a0c4c94832d3dfbb09b0f3f5101d42b54}\label{class_animation_manager___d_r_a0c4c94832d3dfbb09b0f3f5101d42b54}} 
+static \mbox{\hyperlink{class_animation_manager___d_r}{Animation\+Manager\+\_\+\+DR}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Enables the triggering of animations on objects around the game using an enum. 
+
+Using the instance of this class you can call \mbox{\hyperlink{class_animation_manager___d_r_aec146fc2c37c8d6fe1c80452468f91b6}{Trigger\+Animation()}} with an enum identifier of a particular animation to make it start. There is also a Fade\+To\+Black() coroutine that will make an animation happen as the screen is fading back in from black to signify time passing.
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 03/03/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_animation_manager___d_r_aec146fc2c37c8d6fe1c80452468f91b6}\label{class_animation_manager___d_r_aec146fc2c37c8d6fe1c80452468f91b6}} 
+\index{AnimationManager\_DR@{AnimationManager\_DR}!TriggerAnimation@{TriggerAnimation}}
+\index{TriggerAnimation@{TriggerAnimation}!AnimationManager\_DR@{AnimationManager\_DR}}
+\doxysubsubsection{\texorpdfstring{TriggerAnimation()}{TriggerAnimation()}}
+{\footnotesize\ttfamily void Animation\+Manager\+\_\+\+D\+R.\+Trigger\+Animation (\begin{DoxyParamCaption}\item[{Animation\+Name}]{name }\end{DoxyParamCaption})}
+
+
+
+Uses a switch case to use the name parameter to trigger a specific animation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name -\/ an enum that identifies what animation needs to be carried out} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+Objects/Animation\+Manager\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

@@ -10,6 +10,16 @@
  * Began adding subtitle functionality
  * 
  */
+
+/**
+* \class BallButtonLogic_HR
+* 
+* \brief When the right weight ball hits the button it is destroyed and the game state is updated
+* 
+* \author Hugo
+* 
+* \date Last Modified: 26/02/2020
+*/
 using UnityEngine;
 
 public class BallButtonLogic_HR : MonoBehaviour
@@ -19,35 +29,56 @@ public class BallButtonLogic_HR : MonoBehaviour
     private bool isActive;
     private Journal_DR journal;
     private InitiatePuzzles_CW puzzleScript;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     public void SetActive(bool value) { isActive = value; }
+
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
     private void Awake()
     {
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
     }
 
-    //Initiate puzzle script in start to ensure that the instance is initialised
+    /// <summary>
+    /// Initiate puzzle script in start to ensure that the instance is initialised
+    /// </summary>
     private void Start()
     {
         puzzleScript = InitiatePuzzles_CW.instance;
     }
 
+    /// <summary>
+    /// If the mass of the ball that hit the button is correct then destroy it and update the puzzleScript
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         //check if the mass of the ball is the required to push the button
         if (collision.gameObject.GetComponent<Rigidbody>().mass == massRequired)
         {
             puzzleScript.ballCounter++;
-            Destroy(collision.gameObject);
-            if(puzzleScript.ballCounter == ballsRequired)
+            #region CHECK_WHICH_BUTTON_FOR_JOURNAL
+            if (gameObject.name == "1Button")
             {
-                journal.TickOffTask("press all buttons");
-                subtitles.PlayAudio(Subtiles_HR.ID.P7_LINE4);
-                //Open box
-                //VOICEOVER 7-5
-                //box closes
-                //VOICEOVER 7-6
+                journal.TickOffTask("Button 1");
+            }
+            else if(gameObject.name == "2Button")
+            {
+                journal.TickOffTask("Button 2");
+            }
+            else if (gameObject.name == "3Button")
+            {
+                journal.TickOffTask("Button 3");
+            }
+            #endregion
+            Destroy(collision.gameObject);
+
+            if (puzzleScript.ballCounter == ballsRequired)
+            {
+                subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE4);
+                journal.AddJournalLog("A box? Where did this come from?");
+                journal.ChangeTasks(new string[] { "Open box" });
                 GameTesting_CW.instance.arePuzzlesDone[6] = true;
             }
         }

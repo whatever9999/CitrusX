@@ -1,5 +1,5 @@
 ﻿/*
- *Alex 
+ * Alex 
  * opens and closes the pause menu
  * 
  * Dominique
@@ -7,6 +7,16 @@
  * Made script work on FPSController instead of itself as then it won't run update
  * When the player presses the pause button the baron timer is disabled so nothing happens while they're paused and they lose the ability to move and their mouse appears
  */
+
+/**
+* \class PauseMenu_AR
+* 
+* \brief Lets the player open and close the menu. When it is open they can use their mouse to click on buttons. It stops the game from running while paused.
+* 
+* \author Alex
+* 
+* \date Last Modified: 18/02/2020
+*/
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 
@@ -19,6 +29,9 @@ public class PauseMenu_AR : MonoBehaviour
     //The water bowl handles the baron's appearances on a timer
     private WaterBowl_DR waterBowl;
 
+    /// <summary>
+    /// Initialise variables
+    /// </summary>
     void Start()
     {
         pauseMenu = GameObject.Find("PauseMenu");
@@ -28,6 +41,10 @@ public class PauseMenu_AR : MonoBehaviour
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
     }
     
+    /// <summary>
+    /// When the player presses the open/close button the GO is disabled/enabled accordingly.
+    /// The mouse's lock state and visibility is also changed along with the ability of the player to move and the appearances of the baron are paused
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(openAndCloseMenu))

@@ -19,10 +19,11 @@ TagManager:
   - Keypad
   - Trigger
   - Scales
-  - Weight
   - Box
   - Painting
   - Book
+  - Pawn
+  - SymbolOfScarcity
   layers:
   - Default
   - TransparentFX

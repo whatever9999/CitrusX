@@ -12,8 +12,17 @@
  * out the entire puzzle
 
  */
-using System.Collections;
-using System.Collections.Generic;
+
+/**
+* \class ColourMatchingPuzzle_CW
+* 
+* \brief Start the colour matching puzzle and update the journal tasks and logs and subtitles accordingly
+* 
+* \author Chase
+* 
+* \date Last Modified: 22/02/2020
+*/
+
 using UnityEngine;
 
 public class ColourMatchingPuzzle_CW : MonoBehaviour
@@ -28,15 +37,21 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
 
     private Journal_DR journal;
     private Door_DR door;
-    private Subtiles_HR subtitles;
+    private Subtitles_HR subtitles;
     #endregion
     internal void SetActive(bool value) { isActive = value; }
-    public void Awake()
+    /// <summary>
+    /// Inititalise variables
+    /// </summary>
+    private void Awake()
     {
         journal = Journal_DR.instance;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtiles_HR>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
     }
+    /// <summary>
+    /// According to the state of the puzzle play the right subtitles and update the journal
+    /// </summary>
     private void Update()
     {
         journal = Journal_DR.instance;
@@ -49,8 +64,8 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
             }
             else if (isDoorInteractedWith[0] && !voiceovers[1])
             {
-                subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE3);
-                journal.AddJournalLog("This door looks like it needs a key...maybe I should try the garage");
+                subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE3);
+                journal.AddJournalLog("It needs a key? Where can I find a key?");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
                 voiceovers[1] = true;
             }
@@ -60,8 +75,9 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 {
                     if (!voiceovers[2])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE4);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE4);
                         voiceovers[2] = true;
+                        journal.AddJournalLog("Half a key? Who breaks their keys into two halves?");
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
                     }
@@ -73,7 +89,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 {
                     if (!voiceovers[3])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE5);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE5);
                         voiceovers[3] = true;
                         hasKeyPart2 = true;
                     }
@@ -85,7 +101,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
                 {
                     if (!voiceovers[4])
                     {
-                        subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE6);
+                        subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE6);
                         voiceovers[4] = true;
 
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");

@@ -1,0 +1,113 @@
+\hypertarget{class_keypad_u_i___d_r}{}\doxysection{Keypad\+U\+I\+\_\+\+DR Class Reference}
+\label{class_keypad_u_i___d_r}\index{KeypadUI\_DR@{KeypadUI\_DR}}
+
+
+Consists of functions that are added to buttons on a keypad UI that let the player put in numbers, clear input and enter input.  
+
+
+Inheritance diagram for Keypad\+U\+I\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_keypad_u_i___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_keypad_u_i___d_r_a36f2bb573ca28f55c864d428c867a58d}\label{class_keypad_u_i___d_r_a36f2bb573ca28f55c864d428c867a58d}} 
+void {\bfseries Set\+Keypad\+Item} (\mbox{\hyperlink{class_keypad_item___d_r}{Keypad\+Item\+\_\+\+DR}} new\+Keypad\+Item)
+\item 
+\mbox{\Hypertarget{class_keypad_u_i___d_r_a54197ff64bf6b6a0371edfc593dddc43}\label{class_keypad_u_i___d_r_a54197ff64bf6b6a0371edfc593dddc43}} 
+void {\bfseries Set\+Active} (bool value)
+\item 
+void \mbox{\hyperlink{class_keypad_u_i___d_r_a27502c37043cf662f0fa43ac77214a10}{Number\+Button}} (int number)
+\begin{DoxyCompactList}\small\item\em Add the number to the input string \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_keypad_u_i___d_r_af7e56b46b98fae1c5a76d861e3898813}{Enter\+Button}} ()
+\begin{DoxyCompactList}\small\item\em Check if the input string matches the keypad\+Item\textquotesingle{}s passcode. Give negative or positive feedback accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_keypad_u_i___d_r_a9c368024cd5ff2999ddd87e83768cb10}{Clear\+Button}} ()
+\begin{DoxyCompactList}\small\item\em Clear the input and show this on screen too \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_keypad_u_i___d_r_aad7e88573bdd92fcd83997d1d9e77340}{Open\+Keypad}} (\mbox{\hyperlink{class_keypad_item___d_r}{Keypad\+Item\+\_\+\+DR}} new\+Keypad\+Item)
+\begin{DoxyCompactList}\small\item\em Set the UI\textquotesingle{}s keypad\+Item and ensure the player can use the mouse and can\textquotesingle{}t move \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_keypad_u_i___d_r_ae499d1a8c812bfe7f02d25997c99711e}{Close\+Keypad}} ()
+\begin{DoxyCompactList}\small\item\em Makes the mouse invisible and lock it in the centre, reset the keypad input and let the player move again \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Consists of functions that are added to buttons on a keypad UI that let the player put in numbers, clear input and enter input. 
+
+Number\+Button(number) is placed on a button that is linked to a certain number and the number is an int that pertains to that number. \mbox{\hyperlink{class_keypad_u_i___d_r_af7e56b46b98fae1c5a76d861e3898813}{Enter\+Button()}} is placed on an enter button and will check if the current input aligns with the key\+Pad\+Item\textquotesingle{}s passcode. \mbox{\hyperlink{class_keypad_u_i___d_r_a9c368024cd5ff2999ddd87e83768cb10}{Clear\+Button()}} ensures that the input shown in the input text is blank, along with the string that stores the current input. Clear\+Input() is a coroutine that makes the input flash as a number of Xs to show that the user input the wrong passcode \mbox{\hyperlink{class_keypad_u_i___d_r_aad7e88573bdd92fcd83997d1d9e77340}{Open\+Keypad()}} and \mbox{\hyperlink{class_keypad_u_i___d_r_ae499d1a8c812bfe7f02d25997c99711e}{Close\+Keypad()}} change the lock\+Mode and visibility of the mouse and enable/disable player\+Movement accordingly.
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 26/02/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_keypad_u_i___d_r_a9c368024cd5ff2999ddd87e83768cb10}\label{class_keypad_u_i___d_r_a9c368024cd5ff2999ddd87e83768cb10}} 
+\index{KeypadUI\_DR@{KeypadUI\_DR}!ClearButton@{ClearButton}}
+\index{ClearButton@{ClearButton}!KeypadUI\_DR@{KeypadUI\_DR}}
+\doxysubsubsection{\texorpdfstring{ClearButton()}{ClearButton()}}
+{\footnotesize\ttfamily void Keypad\+U\+I\+\_\+\+D\+R.\+Clear\+Button (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear the input and show this on screen too 
+
+\mbox{\Hypertarget{class_keypad_u_i___d_r_ae499d1a8c812bfe7f02d25997c99711e}\label{class_keypad_u_i___d_r_ae499d1a8c812bfe7f02d25997c99711e}} 
+\index{KeypadUI\_DR@{KeypadUI\_DR}!CloseKeypad@{CloseKeypad}}
+\index{CloseKeypad@{CloseKeypad}!KeypadUI\_DR@{KeypadUI\_DR}}
+\doxysubsubsection{\texorpdfstring{CloseKeypad()}{CloseKeypad()}}
+{\footnotesize\ttfamily void Keypad\+U\+I\+\_\+\+D\+R.\+Close\+Keypad (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Makes the mouse invisible and lock it in the centre, reset the keypad input and let the player move again 
+
+\mbox{\Hypertarget{class_keypad_u_i___d_r_af7e56b46b98fae1c5a76d861e3898813}\label{class_keypad_u_i___d_r_af7e56b46b98fae1c5a76d861e3898813}} 
+\index{KeypadUI\_DR@{KeypadUI\_DR}!EnterButton@{EnterButton}}
+\index{EnterButton@{EnterButton}!KeypadUI\_DR@{KeypadUI\_DR}}
+\doxysubsubsection{\texorpdfstring{EnterButton()}{EnterButton()}}
+{\footnotesize\ttfamily void Keypad\+U\+I\+\_\+\+D\+R.\+Enter\+Button (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if the input string matches the keypad\+Item\textquotesingle{}s passcode. Give negative or positive feedback accordingly. 
+
+\mbox{\Hypertarget{class_keypad_u_i___d_r_a27502c37043cf662f0fa43ac77214a10}\label{class_keypad_u_i___d_r_a27502c37043cf662f0fa43ac77214a10}} 
+\index{KeypadUI\_DR@{KeypadUI\_DR}!NumberButton@{NumberButton}}
+\index{NumberButton@{NumberButton}!KeypadUI\_DR@{KeypadUI\_DR}}
+\doxysubsubsection{\texorpdfstring{NumberButton()}{NumberButton()}}
+{\footnotesize\ttfamily void Keypad\+U\+I\+\_\+\+D\+R.\+Number\+Button (\begin{DoxyParamCaption}\item[{int}]{number }\end{DoxyParamCaption})}
+
+
+
+Add the number to the input string 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number -\/ a number to be added onto the input if the player pushes the button} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_keypad_u_i___d_r_aad7e88573bdd92fcd83997d1d9e77340}\label{class_keypad_u_i___d_r_aad7e88573bdd92fcd83997d1d9e77340}} 
+\index{KeypadUI\_DR@{KeypadUI\_DR}!OpenKeypad@{OpenKeypad}}
+\index{OpenKeypad@{OpenKeypad}!KeypadUI\_DR@{KeypadUI\_DR}}
+\doxysubsubsection{\texorpdfstring{OpenKeypad()}{OpenKeypad()}}
+{\footnotesize\ttfamily void Keypad\+U\+I\+\_\+\+D\+R.\+Open\+Keypad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_keypad_item___d_r}{Keypad\+Item\+\_\+\+DR}}}]{new\+Keypad\+Item }\end{DoxyParamCaption})}
+
+
+
+Set the UI\textquotesingle{}s keypad\+Item and ensure the player can use the mouse and can\textquotesingle{}t move 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Keypad\+Item -\/ the keypad\+Item that the player clicked on (means that different keypads can have different passcodes)} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+U\+I/Keypad\+U\+I\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

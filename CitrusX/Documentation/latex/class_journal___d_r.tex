@@ -1,0 +1,135 @@
+\hypertarget{class_journal___d_r}{}\doxysection{Journal\+\_\+\+DR Class Reference}
+\label{class_journal___d_r}\index{Journal\_DR@{Journal\_DR}}
+
+
+Shows a log of the players activity in a scroll\+Rect and has a list of tasks for the player to complete.  
+
+
+Inheritance diagram for Journal\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_journal___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_journal___d_r_aed4b7fe34c65ff93adab1dead121c099}{Add\+Journal\+Log}} (string text)
+\begin{DoxyCompactList}\small\item\em Calculate the size that the contents and text box will need to increase to show all of the text then add the text to the bo including new lines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_journal___d_r_a8dfc64f7b74057c5bf39b18741e9c699}{Change\+Tasks}} (string\mbox{[}$\,$\mbox{]} new\+Tasks)
+\begin{DoxyCompactList}\small\item\em Set the tasks to those in the string array. If the array has less than 5 tasks set the rest of the task text boxes to be blank. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_journal___d_r_ab1fd778d5789f71a198ffb6c97207c79}{Tick\+Off\+Task}} (int task\+Number)
+\begin{DoxyCompactList}\small\item\em Place a tick next to the task\+Numberth task \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_journal___d_r_a7de77eaacbae02818ec272b58c563cfb}{Tick\+Off\+Task}} (string task)
+\begin{DoxyCompactList}\small\item\em Place a tick next to the task that matches the task string exactly \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_journal___d_r_aa5f3937dfb052ba970850768d5aa9e17}{Are\+Tasks\+Complete}} ()
+\begin{DoxyCompactList}\small\item\em Go through all the tasks and check if they end with a tick (skips blank tasks) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_journal___d_r_a27f5006692a98a8c8fce39d2f9df7b01}\label{class_journal___d_r_a27f5006692a98a8c8fce39d2f9df7b01}} 
+Key\+Code {\bfseries journal\+Open\+Key} = Key\+Code.\+J
+\item 
+\mbox{\Hypertarget{class_journal___d_r_ad30afb83ee72ae666c70f6f06b737bff}\label{class_journal___d_r_ad30afb83ee72ae666c70f6f06b737bff}} 
+Key\+Code\mbox{[}$\,$\mbox{]} {\bfseries journal\+Close\+Keys} = \{ Key\+Code.\+J, Key\+Code.\+Escape \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_journal___d_r_a780dc460f99dd4b2a246587d408c37a0}\label{class_journal___d_r_a780dc460f99dd4b2a246587d408c37a0}} 
+static \mbox{\hyperlink{class_journal___d_r}{Journal\+\_\+\+DR}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Shows a log of the players activity in a scroll\+Rect and has a list of tasks for the player to complete. 
+
+Use Add\+Journal\+Log(text) to add the next to the top of the scroll\+Rect that shows the journal log. Use Change\+Tasks(tasks) to pass in up to 5 strings in an array to be used as the new tasks. If under 5 are passed in the rest of the tasks will be made blank. Use Tick\+Off\+Task(task\+Number) or Tick\+Off\+Task(task) to tick off the task that corresponds to that number in the list or has the text shown in the task variable. (A literal tick appears next to the task and this is used later to check if the tasks are complete) Use \mbox{\hyperlink{class_journal___d_r_aa5f3937dfb052ba970850768d5aa9e17}{Are\+Tasks\+Complete()}} to check if all tasks have been ticked off. Returns a bool for yes or no.
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 11/02/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_journal___d_r_aed4b7fe34c65ff93adab1dead121c099}\label{class_journal___d_r_aed4b7fe34c65ff93adab1dead121c099}} 
+\index{Journal\_DR@{Journal\_DR}!AddJournalLog@{AddJournalLog}}
+\index{AddJournalLog@{AddJournalLog}!Journal\_DR@{Journal\_DR}}
+\doxysubsubsection{\texorpdfstring{AddJournalLog()}{AddJournalLog()}}
+{\footnotesize\ttfamily void Journal\+\_\+\+D\+R.\+Add\+Journal\+Log (\begin{DoxyParamCaption}\item[{string}]{text }\end{DoxyParamCaption})}
+
+
+
+Calculate the size that the contents and text box will need to increase to show all of the text then add the text to the bo including new lines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text -\/ the log text} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_journal___d_r_aa5f3937dfb052ba970850768d5aa9e17}\label{class_journal___d_r_aa5f3937dfb052ba970850768d5aa9e17}} 
+\index{Journal\_DR@{Journal\_DR}!AreTasksComplete@{AreTasksComplete}}
+\index{AreTasksComplete@{AreTasksComplete}!Journal\_DR@{Journal\_DR}}
+\doxysubsubsection{\texorpdfstring{AreTasksComplete()}{AreTasksComplete()}}
+{\footnotesize\ttfamily bool Journal\+\_\+\+D\+R.\+Are\+Tasks\+Complete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Go through all the tasks and check if they end with a tick (skips blank tasks) 
+
+\begin{DoxyReturn}{Returns}
+A boolean for yes or no if all the tasks are complete
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_journal___d_r_a8dfc64f7b74057c5bf39b18741e9c699}\label{class_journal___d_r_a8dfc64f7b74057c5bf39b18741e9c699}} 
+\index{Journal\_DR@{Journal\_DR}!ChangeTasks@{ChangeTasks}}
+\index{ChangeTasks@{ChangeTasks}!Journal\_DR@{Journal\_DR}}
+\doxysubsubsection{\texorpdfstring{ChangeTasks()}{ChangeTasks()}}
+{\footnotesize\ttfamily void Journal\+\_\+\+D\+R.\+Change\+Tasks (\begin{DoxyParamCaption}\item[{string\mbox{[}$\,$\mbox{]}}]{new\+Tasks }\end{DoxyParamCaption})}
+
+
+
+Set the tasks to those in the string array. If the array has less than 5 tasks set the rest of the task text boxes to be blank. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Tasks -\/ an array of up to 5 strings that show the tasks the player needs to carry out} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_journal___d_r_ab1fd778d5789f71a198ffb6c97207c79}\label{class_journal___d_r_ab1fd778d5789f71a198ffb6c97207c79}} 
+\index{Journal\_DR@{Journal\_DR}!TickOffTask@{TickOffTask}}
+\index{TickOffTask@{TickOffTask}!Journal\_DR@{Journal\_DR}}
+\doxysubsubsection{\texorpdfstring{TickOffTask()}{TickOffTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Journal\+\_\+\+D\+R.\+Tick\+Off\+Task (\begin{DoxyParamCaption}\item[{int}]{task\+Number }\end{DoxyParamCaption})}
+
+
+
+Place a tick next to the task\+Numberth task 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Number -\/ the number of the task from top to bottom, 0 indexed} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_journal___d_r_a7de77eaacbae02818ec272b58c563cfb}\label{class_journal___d_r_a7de77eaacbae02818ec272b58c563cfb}} 
+\index{Journal\_DR@{Journal\_DR}!TickOffTask@{TickOffTask}}
+\index{TickOffTask@{TickOffTask}!Journal\_DR@{Journal\_DR}}
+\doxysubsubsection{\texorpdfstring{TickOffTask()}{TickOffTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Journal\+\_\+\+D\+R.\+Tick\+Off\+Task (\begin{DoxyParamCaption}\item[{string}]{task }\end{DoxyParamCaption})}
+
+
+
+Place a tick next to the task that matches the task string exactly 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task -\/ the task text} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+U\+I/Journal\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

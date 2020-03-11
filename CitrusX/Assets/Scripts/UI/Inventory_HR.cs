@@ -6,13 +6,25 @@
  * From another script you can use the Inventory class to add,remove items or check if an item is in the inventory
  * 
  */
+
+/**
+* \class Inventory_HR
+* 
+* \brief The player can open and close the inventory and items can be placed and removed from it
+* 
+* Items are placed using an enum that is connected to a corresponding sprite
+* Use AddItem(itemName) for an item with that name to appear in the inventory
+* Use RemoveItem(slot) for the item at that slot to be reset
+* Use CheckItem(itemName) to see if that item is currently in the inventory or not (returns a int that corresponds to the slot the item is at)
+* 
+* \author Hugo
+* 
+* \date Last Modified: 11/02/2020
+*/
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using System; // Parse / Try Parse for future
-
-
-
 public class Inventory_HR : MonoBehaviour
 {
     // First aproach with enums
@@ -33,6 +45,9 @@ public class Inventory_HR : MonoBehaviour
     private GameObject inventory;
     private GameObject[] inventoryItems = new GameObject[maxItems];
 
+    /// <summary>
+    /// Initialise variables and the items dictionary (enum to sprite)
+    /// </summary>
     void Awake()
     {
         inventory = GameObject.Find("InventoryBg");
@@ -53,6 +68,9 @@ public class Inventory_HR : MonoBehaviour
         inventory.SetActive(false);
     }
 
+    /// <summary>
+    /// If the player presses I open/close the inventory UI object
+    /// </summary>
     private void Update()
     {
         if (!inventory.activeInHierarchy && Input.GetKeyDown(inventoryOpenKey))
@@ -71,6 +89,10 @@ public class Inventory_HR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Find the closest empty item slot and set the image and text in it to that of the itemName
+    /// </summary>
+    /// <param name="itemName - an enum linked to a sprite for the item"></param>
     public void AddItem(Names itemName)
     {
         for (int i = 0; i < maxItems; i++)
@@ -86,6 +108,10 @@ public class Inventory_HR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the image sprite for the slot to null an the text to ""
+    /// </summary>
+    /// <param name="slot - the slot where the object needs to be removed"></param>
     public void RemoveItem(int slot) 
     {
         //Remove item from slot
@@ -93,6 +119,11 @@ public class Inventory_HR : MonoBehaviour
         inventoryItems[slot].transform.GetChild(1).GetComponent<Text>().text = "";
     }
 
+    /// <summary>
+    /// Go through each slot and check if the next matches the itemName.
+    /// </summary>
+    /// <param name="itemName - the enum linked to the item"></param>
+    /// <returns>The slot that the item is stored at. -1 if it is not there</returns>
     public int CheckItem(string itemName) 
     {
         int itemSlot = -1;

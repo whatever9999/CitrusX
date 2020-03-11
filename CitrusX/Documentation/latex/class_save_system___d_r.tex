@@ -1,0 +1,84 @@
+\hypertarget{class_save_system___d_r}{}\doxysection{Save\+System\+\_\+\+DR Class Reference}
+\label{class_save_system___d_r}\index{SaveSystem\_DR@{SaveSystem\_DR}}
+
+
+Saves positions of moveable objects and the state of the game into a .dat file and loads it upon start (if there is a save file)  
+
+
+Inheritance diagram for Save\+System\+\_\+\+DR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_save_system___d_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_save_system___d_r_a19c96681c11281910b1c212e57b08972}{Save}} ()
+\begin{DoxyCompactList}\small\item\em Use a binary formatter to create a save file at the Application.\+persistent\+Data\+Path + \char`\"{}/save.\+dat\char`\"{} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_save_system___d_r_afa109f8632992566e23f5cb96c657a59}{Load}} ()
+\begin{DoxyCompactList}\small\item\em Load the save file from the Application.\+persistent\+Data\+Path + \char`\"{}/save.\+dat\char`\"{} by collecting the data and placing it in the appropriate variables \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_save_system___d_r_ab41648af86fac3f564befd863c0da033}{Update\+Variables}} (\mbox{\hyperlink{class_game_data___d_r}{Game\+Data\+\_\+\+DR}} GD)
+\begin{DoxyCompactList}\small\item\em Takes values from a Game\+Data class and puts them in the appropriate variables within the current game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_save_system___d_r_a5d6573d5cc66f55698b53fae139d62e2}\label{class_save_system___d_r_a5d6573d5cc66f55698b53fae139d62e2}} 
+static \mbox{\hyperlink{class_save_system___d_r}{Save\+System\+\_\+\+DR}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Saves positions of moveable objects and the state of the game into a .dat file and loads it upon start (if there is a save file) 
+
+When the player presses f5 the current state of the game is saved into a .dat file. When they load up the game again it will use that save file to load the game. If there is no save file the game will start at the beginning and when the player next saves one will be created. When the player completes the game their save file is deleted so the game will start from the beginning when they next play.
+
+\begin{DoxyAuthor}{Author}
+Dominique
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 18/02/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_save_system___d_r_afa109f8632992566e23f5cb96c657a59}\label{class_save_system___d_r_afa109f8632992566e23f5cb96c657a59}} 
+\index{SaveSystem\_DR@{SaveSystem\_DR}!Load@{Load}}
+\index{Load@{Load}!SaveSystem\_DR@{SaveSystem\_DR}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily void Save\+System\+\_\+\+D\+R.\+Load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Load the save file from the Application.\+persistent\+Data\+Path + \char`\"{}/save.\+dat\char`\"{} by collecting the data and placing it in the appropriate variables 
+
+\mbox{\Hypertarget{class_save_system___d_r_a19c96681c11281910b1c212e57b08972}\label{class_save_system___d_r_a19c96681c11281910b1c212e57b08972}} 
+\index{SaveSystem\_DR@{SaveSystem\_DR}!Save@{Save}}
+\index{Save@{Save}!SaveSystem\_DR@{SaveSystem\_DR}}
+\doxysubsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily void Save\+System\+\_\+\+D\+R.\+Save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Use a binary formatter to create a save file at the Application.\+persistent\+Data\+Path + \char`\"{}/save.\+dat\char`\"{} 
+
+\mbox{\Hypertarget{class_save_system___d_r_ab41648af86fac3f564befd863c0da033}\label{class_save_system___d_r_ab41648af86fac3f564befd863c0da033}} 
+\index{SaveSystem\_DR@{SaveSystem\_DR}!UpdateVariables@{UpdateVariables}}
+\index{UpdateVariables@{UpdateVariables}!SaveSystem\_DR@{SaveSystem\_DR}}
+\doxysubsubsection{\texorpdfstring{UpdateVariables()}{UpdateVariables()}}
+{\footnotesize\ttfamily void Save\+System\+\_\+\+D\+R.\+Update\+Variables (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_data___d_r}{Game\+Data\+\_\+\+DR}}}]{GD }\end{DoxyParamCaption})}
+
+
+
+Takes values from a Game\+Data class and puts them in the appropriate variables within the current game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em G\+D -\/ a class that stores all of the data for the game that needs to be saved} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/Save\+System\+\_\+\+D\+R.\+cs\end{DoxyCompactItemize}

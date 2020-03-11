@@ -7,6 +7,16 @@
  * Now coins are instantiated according to how many are asked for in the inspector
  */
 
+/**
+* \class WaterBowl_DR
+* 
+* \brief Make the baron appear on a timer and hold the coins
+* 
+* \author Dominique
+* 
+* \date Last Modified: 20/02/2020
+*/
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +33,9 @@ public class WaterBowl_DR : MonoBehaviour
 
     public bool GetBaronActive() { return baron.activeInHierarchy; }
 
-    //Create the coins and set the current interval until the baron will appear
+    /// <summary>
+    /// Create the coins and set the current interval until the baron will appear
+    /// </summary>
     private void Start()
     {
         baron = GameObject.Find("Baron");
@@ -40,7 +52,9 @@ public class WaterBowl_DR : MonoBehaviour
         }
     }
 
-    //Run the timer for the baron's appearance (if he is not currently present) or make him appear
+    /// <summary>
+    /// Run the timer for the baron's appearance (if he is not currently present) or make him appear
+    /// </summary>
     private void Update()
     {
         if(currentBaronAppearanceInterval >= baronAppearanceInterval)
@@ -52,7 +66,9 @@ public class WaterBowl_DR : MonoBehaviour
         }
     }
 
-    //Make the baron disappear and reset the time until he will next be visible
+    /// <summary>
+    /// Make the baron disappear and reset the time until he will next be visible
+    /// </summary>
     public void ResetBaron()
     {
         baron.SetActive(false);
@@ -60,6 +76,11 @@ public class WaterBowl_DR : MonoBehaviour
         baronAppearanceInterval = Random.Range(baronAppearanceIntervalRange[0], baronAppearanceIntervalRange[1]);
     }
 
+    /// <summary>
+    /// If there are no coins left then the player has lost for trying to take more out or not blowing the candles out in time
+    /// Otherwise a coin is removed
+    /// </summary>
+    /// <returns>a boolean to show if the coin was successfully removed or not</returns>
     public bool RemoveCoin()
     {
         bool coinWasRemoved = false;

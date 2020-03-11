@@ -9,6 +9,16 @@
  * Changed the way the baron moves (change velocity instead of adding force)
  * Added animation to the baron
  */
+
+/**
+* \class Baron_DR
+* 
+* \brief When the baron is active he tries to move towards the water bowl. If he collides with it then he reaches for a coin and picks it up
+* 
+* \author Dominique
+* 
+* \date Last Modified: 20/02/2020
+*/
 using System.Collections;
 using UnityEngine;
 
@@ -21,6 +31,9 @@ public class Baron_DR : MonoBehaviour
     private Rigidbody rigidbody;
     private Animator animator;
 
+    /// <summary>
+    /// Initialise variables
+    /// </summary>
     private void Awake()
     {
         startPosition = transform.position;
@@ -29,6 +42,9 @@ public class Baron_DR : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Make the baron look at the water bowl and move forwards
+    /// </summary>
     private void FixedUpdate()
     {
         //Set target as water bowl
@@ -43,6 +59,9 @@ public class Baron_DR : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Reset the position of the baron and his speed each time he is disabled
+    /// </summary>
     private void OnDisable()
     {
         //Reset position and speed
@@ -50,6 +69,9 @@ public class Baron_DR : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
     }
 
+    /// <summary>
+    /// Start the PickUpCoin() coroutine if the player collides with the water bowl
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "WaterBowl")
@@ -59,6 +81,10 @@ public class Baron_DR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Play the animation of the baron picking up the coin, remove it from the bowl and reset him
+    /// </summary>
+    /// <param name="waterBowl - the WaterBowl_DR that the baron collides with"></param>
     public IEnumerator PickUpCoin(WaterBowl_DR waterBowl)
     {
         //Play the reach animation and pick up a coin then disappear

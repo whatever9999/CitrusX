@@ -1,0 +1,113 @@
+\hypertarget{class_inventory___h_r}{}\doxysection{Inventory\+\_\+\+HR Class Reference}
+\label{class_inventory___h_r}\index{Inventory\_HR@{Inventory\_HR}}
+
+
+The player can open and close the inventory and items can be placed and removed from it.  
+
+
+Inheritance diagram for Inventory\+\_\+\+HR\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_inventory___h_r}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_inventory___h_r_a7045cdc047d9f40bbf6e8bb5029f36e7}\label{class_inventory___h_r_a7045cdc047d9f40bbf6e8bb5029f36e7}} 
+enum {\bfseries Names} \{ {\bfseries Water\+Jug}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_inventory___h_r_a76336780da03d5af6ac5cd2419e4704d}{Add\+Item}} (Names item\+Name)
+\begin{DoxyCompactList}\small\item\em Find the closest empty item slot and set the image and text in it to that of the item\+Name \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_inventory___h_r_ad94cf5225d73364792daaa3bd8a10724}{Remove\+Item}} (int slot)
+\begin{DoxyCompactList}\small\item\em Set the image sprite for the slot to null an the text to \char`\"{}\char`\"{} \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_inventory___h_r_ac1591aa5a646721145fe6da1e2e29c60}{Check\+Item}} (string item\+Name)
+\begin{DoxyCompactList}\small\item\em Go through each slot and check if the next matches the item\+Name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_inventory___h_r_acbc0b966bc66d599349bedfe2692474c}\label{class_inventory___h_r_acbc0b966bc66d599349bedfe2692474c}} 
+Key\+Code {\bfseries inventory\+Open\+Key} = Key\+Code.\+I
+\item 
+\mbox{\Hypertarget{class_inventory___h_r_a31c91ba340bb65dc2115d2373a9deb0b}\label{class_inventory___h_r_a31c91ba340bb65dc2115d2373a9deb0b}} 
+Key\+Code\mbox{[}$\,$\mbox{]} {\bfseries inventory\+Close\+Keys} = \{ Key\+Code.\+I, Key\+Code.\+Escape \}
+\item 
+\mbox{\Hypertarget{class_inventory___h_r_af9b2aa31649650e49dfd780532ee2ef3}\label{class_inventory___h_r_af9b2aa31649650e49dfd780532ee2ef3}} 
+List$<$ Names $>$ {\bfseries item\+Names} = new List$<$Names$>$()
+\item 
+\mbox{\Hypertarget{class_inventory___h_r_af7863a75e6cb06641fe20c069e75cc88}\label{class_inventory___h_r_af7863a75e6cb06641fe20c069e75cc88}} 
+List$<$ Sprite $>$ {\bfseries item\+Images} = new List$<$Sprite$>$()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The player can open and close the inventory and items can be placed and removed from it. 
+
+Items are placed using an enum that is connected to a corresponding sprite Use Add\+Item(item\+Name) for an item with that name to appear in the inventory Use Remove\+Item(slot) for the item at that slot to be reset Use Check\+Item(item\+Name) to see if that item is currently in the inventory or not (returns a int that corresponds to the slot the item is at)
+
+\begin{DoxyAuthor}{Author}
+Hugo
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Last Modified\+: 11/02/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_inventory___h_r_a76336780da03d5af6ac5cd2419e4704d}\label{class_inventory___h_r_a76336780da03d5af6ac5cd2419e4704d}} 
+\index{Inventory\_HR@{Inventory\_HR}!AddItem@{AddItem}}
+\index{AddItem@{AddItem}!Inventory\_HR@{Inventory\_HR}}
+\doxysubsubsection{\texorpdfstring{AddItem()}{AddItem()}}
+{\footnotesize\ttfamily void Inventory\+\_\+\+H\+R.\+Add\+Item (\begin{DoxyParamCaption}\item[{Names}]{item\+Name }\end{DoxyParamCaption})}
+
+
+
+Find the closest empty item slot and set the image and text in it to that of the item\+Name 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+Name -\/ an enum linked to a sprite for the item} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_inventory___h_r_ac1591aa5a646721145fe6da1e2e29c60}\label{class_inventory___h_r_ac1591aa5a646721145fe6da1e2e29c60}} 
+\index{Inventory\_HR@{Inventory\_HR}!CheckItem@{CheckItem}}
+\index{CheckItem@{CheckItem}!Inventory\_HR@{Inventory\_HR}}
+\doxysubsubsection{\texorpdfstring{CheckItem()}{CheckItem()}}
+{\footnotesize\ttfamily int Inventory\+\_\+\+H\+R.\+Check\+Item (\begin{DoxyParamCaption}\item[{string}]{item\+Name }\end{DoxyParamCaption})}
+
+
+
+Go through each slot and check if the next matches the item\+Name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+Name -\/ the enum linked to the item} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The slot that the item is stored at. -\/1 if it is not there
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inventory___h_r_ad94cf5225d73364792daaa3bd8a10724}\label{class_inventory___h_r_ad94cf5225d73364792daaa3bd8a10724}} 
+\index{Inventory\_HR@{Inventory\_HR}!RemoveItem@{RemoveItem}}
+\index{RemoveItem@{RemoveItem}!Inventory\_HR@{Inventory\_HR}}
+\doxysubsubsection{\texorpdfstring{RemoveItem()}{RemoveItem()}}
+{\footnotesize\ttfamily void Inventory\+\_\+\+H\+R.\+Remove\+Item (\begin{DoxyParamCaption}\item[{int}]{slot }\end{DoxyParamCaption})}
+
+
+
+Set the image sprite for the slot to null an the text to \char`\"{}\char`\"{} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slot -\/ the slot where the object needs to be removed} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Domin/\+One\+Drive/\+Documents/\+Git\+Hub/\+Citrus\+X/\+Citrus\+X/\+Assets/\+Scripts/\+U\+I/Inventory\+\_\+\+H\+R.\+cs\end{DoxyCompactItemize}

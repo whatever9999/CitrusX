@@ -29,6 +29,22 @@
  * Chase (Changes) 11/2/2020
  * Moved original journal tasks to initiate puzzles script
  */
+
+/**
+* \class Journal_DR
+* 
+* \brief Shows a log of the players activity in a scrollRect and has a list of tasks for the player to complete.
+* 
+* Use AddJournalLog(text) to add the next to the top of the scrollRect that shows the journal log.
+* Use ChangeTasks(tasks) to pass in up to 5 strings in an array to be used as the new tasks. If under 5 are passed in the rest of the tasks will be made blank.
+* Use TickOffTask(taskNumber) or TickOffTask(task) to tick off the task that corresponds to that number in the list or has the text shown in the task variable. (A literal tick appears next to the task and this is used later to check if the tasks are complete)
+* Use AreTasksComplete() to check if all tasks have been ticked off. Returns a bool for yes or no.
+* 
+* \author Dominique
+* 
+* \date Last Modified: 11/02/2020
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,6 +67,9 @@ public class Journal_DR : MonoBehaviour
     //This is an underestimate so that more space would be given as opposed to less (since this would mean the player couldn't read the entry)
     private const float numberOfCharactersPerLine = 14;
 
+    /// <summary>
+    /// Inititalise variables and ensure the journal GO is disabled
+    /// </summary>
     private void Awake()
     {
         instance = this;
@@ -68,10 +87,9 @@ public class Journal_DR : MonoBehaviour
 
     }
 
-    /*
-     * Opening and closing the journal
-     */
-
+    /// <summary>
+    /// Open and close the journal (using J)
+    /// </summary>
     private void Update()
     {
         if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey) || Input.GetButtonDown("Journal"))
@@ -90,6 +108,10 @@ public class Journal_DR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Calculate the size that the contents and text box will need to increase to show all of the text then add the text to the bo including new lines.
+    /// </summary>
+    /// <param name="text - the log text"></param>
     public void AddJournalLog(string text)
     {
         int numLines = (int)Mathf.Ceil(text.Length / numberOfCharactersPerLine);
@@ -107,6 +129,11 @@ public class Journal_DR : MonoBehaviour
         journalLogText.text = text + "\n\n" + journalLogText.text; ;
     }
 
+
+    /// <summary>
+    /// Set the tasks to those in the string array. If the array has less than 5 tasks set the rest of the task text boxes to be blank.
+    /// </summary>
+    /// <param name="newTasks - an array of up to 5 strings that show the tasks the player needs to carry out"></param>
     public void ChangeTasks(string[] newTasks)
     {
         for(int i = 0; i < newTasks.Length; i++)
@@ -120,11 +147,19 @@ public class Journal_DR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Place a tick next to the taskNumberth task
+    /// </summary>
+    /// <param name="taskNumber - the number of the task from top to bottom, 0 indexed"></param>
     public void TickOffTask(int taskNumber)
     {
         journalTasks[taskNumber].text = journalTasks[taskNumber].text + " ✓";
     }
 
+    /// <summary>
+    /// Place a tick next to the task that matches the task string exactly
+    /// </summary>
+    /// <param name="task - the task text"></param>
     public void TickOffTask(string task)
     {
         //Make sure both strings are lower case so capitilisation doesn't matter
@@ -137,6 +172,10 @@ public class Journal_DR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Go through all the tasks and check if they end with a tick (skips blank tasks)
+    /// </summary>
+    /// <returns>A boolean for yes or no if all the tasks are complete</returns>
     public bool AreTasksComplete()
     {
         bool complete = true;

@@ -9,7 +9,19 @@
  * Added text size for notes
  * Chase(Changes) 26/2/2020
  * Added more to the enum and added a bool for whether it had been read or not
+ * Chase(Changes) 11/3/2020
+ * Added a new enum member
  */
+
+/**
+* \class Paper_DR
+* 
+* \brief Each paper object has its own name, text, textSize and background that appear on the PaperUI_DR when used
+* 
+* \author Dominique
+* 
+* \date Last Modified: 26/02/2020
+*/
 using UnityEngine;
 
 public class Paper_DR : MonoBehaviour
@@ -26,7 +38,8 @@ public class Paper_DR : MonoBehaviour
         PHOTOGRAPH_REVERSE,
         DEATH_CERTIFICATE,
         CORRECT_ORDER_ARTICLE,
-        RITUAL_ARTICLE
+        RITUAL_ARTICLE,
+        COLOUR_MATCH_CLUE
     };
     public NOTE_NAME nameOfNote;
     public bool hasBeenRead = false;

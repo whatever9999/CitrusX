@@ -16,7 +16,16 @@
  * Chase (Changes) 1/2/2020
  * Added new type for correct order
  */
- 
+
+/**
+* \class Door_DR
+* 
+* \brief The door is linked to an animator so it can open and close and can be unlocked, locked or require a key
+* 
+* \author Dominique
+* 
+* \date Last Modified: 01/02/2020
+*/
 
 using UnityEngine;
 

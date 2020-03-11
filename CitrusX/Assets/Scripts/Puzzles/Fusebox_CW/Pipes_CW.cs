@@ -12,9 +12,27 @@
 * 
 * Dominique (Changes) 03/03/2020
 * Seperated pipes and wires and simplified script so most is handled by Fusebox
+* 
+* Dominique (Changes) 09/03/2020
+* Pipes now have a before and after sprite so the colour can change (and go back if incorrect)
+*/
+
+/**
+* \class Pipes_CW
+* 
+* \brief Each pipe has this script. It knows what the current state of the pipe is and what it should be and allows it to be rotated and checked for its position.
+* 
+* GetIsInPosition() compares the currentPosition of the pipe to the desiredPosition
+* Update() resets the pipes if the player presses X while the UI is open, if it's not complete yet
+* Rotate() moves the UI by 90 degrees and updates the currentPosition of the pipe
+* 
+* \author Chase
+* 
+* \date Last Modified: 09/03/2020
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pipes_CW : MonoBehaviour
 {
@@ -22,8 +40,13 @@ public class Pipes_CW : MonoBehaviour
     private Fusebox_CW.Directions currentPosition;
     public Fusebox_CW.Directions desiredPosition;
 
+    public Sprite incompletePipe;
+    public Sprite completePipe;
+
     private const int degreesToMove = 90;
     private Fusebox_CW fusebox;
+    private Image image;
+    private bool canBeRotated = true;
 
     public bool GetIsInPosition() {
         if (currentPosition == desiredPosition)
@@ -35,13 +58,20 @@ public class Pipes_CW : MonoBehaviour
         }
     }
 
-    public void Awake()
+    /// <summary>
+    /// Inititalise variables and set currentPosition to the startPosition
+    /// </summary>
+    private void Awake()
     {
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         currentPosition = startPosition;
+        image = GetComponent<Image>();
     }
     
-    public void Update()
+    /// <summary>
+    /// If the player presses X and the fusebox puzzle isn't solved yet the position of the pipe is set to its start position by rotating it until it reaches that point
+    /// </summary>
+    private void Update()
     {
         //if X, reset puzzle to default colours and state (make sure they can't do this if they've already solved it)
         if(!fusebox.isFuseboxSolved && Input.GetKeyDown(fusebox.resetPipesKey))
@@ -53,42 +83,64 @@ public class Pipes_CW : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction of the pipe is given its old direction
+    /// </summary>
     public void Rotate()
     {
-        gameObject.transform.Rotate(0, 0, degreesToMove);
-
-        switch (currentPosition)
+        if(canBeRotated)
         {
-            case Fusebox_CW.Directions.HORIZONTAL:
-                {
-                    currentPosition = Fusebox_CW.Directions.VERTICAL;
-                }
-                break;
-            case Fusebox_CW.Directions.VERTICAL:
-                {
-                    currentPosition = Fusebox_CW.Directions.HORIZONTAL;
-                }
-                break;
-            case Fusebox_CW.Directions.RIGHT_DOWN_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.RIGHT_UP_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.LEFT_DOWN_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.RIGHT_DOWN_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.RIGHT_UP_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.LEFT_UP_BEND;
-                }
-                break;
-            case Fusebox_CW.Directions.LEFT_UP_BEND:
-                {
-                    currentPosition = Fusebox_CW.Directions.LEFT_DOWN_BEND;
-                }
-                break;
+            gameObject.transform.Rotate(0, 0, degreesToMove);
+
+            switch (currentPosition)
+            {
+                case Fusebox_CW.Directions.HORIZONTAL:
+                    {
+                        currentPosition = Fusebox_CW.Directions.VERTICAL;
+                    }
+                    break;
+                case Fusebox_CW.Directions.VERTICAL:
+                    {
+                        currentPosition = Fusebox_CW.Directions.HORIZONTAL;
+                    }
+                    break;
+                case Fusebox_CW.Directions.RIGHT_DOWN_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.RIGHT_UP_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.LEFT_DOWN_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.RIGHT_DOWN_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.RIGHT_UP_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.LEFT_UP_BEND;
+                    }
+                    break;
+                case Fusebox_CW.Directions.LEFT_UP_BEND:
+                    {
+                        currentPosition = Fusebox_CW.Directions.LEFT_DOWN_BEND;
+                    }
+                    break;
+            }
         }
+    }
+    /// <summary>
+    /// Set the image sprite to the pipe when it's complete. It can't be rotated after this.
+    /// </summary>
+    public void ChangeColour()
+    {
+        image.sprite = completePipe;
+        canBeRotated = false;
+    }
+    /// <summary>
+    /// Set the image sprite to the pipe when it's incomplete
+    /// </summary>
+    public void ResetColour()
+    {
+        image.sprite = incompletePipe;
+        canBeRotated = true;
     }
 }

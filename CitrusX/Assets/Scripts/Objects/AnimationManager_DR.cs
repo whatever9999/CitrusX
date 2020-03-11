@@ -4,6 +4,19 @@
  * Animations for puzzles happen here
  * If an animation is not here or in the DisturbanceHandler then it is handled by the object itself (this is usually the case when the player directly interacts with the object)
  */
+
+ /**
+  * \class AnimationManager_DR
+  * 
+  * \brief Enables the triggering of animations on objects around the game using an enum.
+  * 
+  * Using the instance of this class you can call TriggerAnimation() with an enum identifier of a particular animation to make it start.
+  * There is also a FadeToBlack() coroutine that will make an animation happen as the screen is fading back in from black to signify time passing.
+  * 
+  * \author Dominique
+  * 
+  * \date Last Modified: 03/03/2020
+  */
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +44,9 @@ public class AnimationManager_DR : MonoBehaviour
         SLAMGAMESROOMBOX
     }
 
+    /// <summary>
+    /// Initialise variables
+    /// </summary>
     private void Awake()
     {
         #region Initialisations
@@ -47,17 +63,10 @@ public class AnimationManager_DR : MonoBehaviour
         hand.SetActive(false);
     }
 
-    //TEST
-    private void Start()
-    {
-        StartCoroutine(Test());
-    }
-
-    private IEnumerator Test()
-    {
-        yield return new WaitForSeconds(1);
-    }
-
+    /// <summary>
+    /// Uses a switch case to use the name parameter to trigger a specific animation
+    /// </summary>
+    /// <param name="name - an enum that identifies what animation needs to be carried out"></param>
     public void TriggerAnimation(AnimationName name)
     {
         switch (name)
@@ -79,6 +88,11 @@ public class AnimationManager_DR : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The player's movement is temporarily disabled as a fade to black occurs.
+    /// The fade increases the alpha of a black UI image to 1, makes any effects of the animation happen, waits, reduces the alpha again and when the alpha reaches 0.95 triggers another animation if there is one for the player to see happening.
+    /// </summary>
+    /// <param name="name - an enum that identifies what animation needs to be carried out"></param>
     private IEnumerator FadeToBlack(AnimationName name)
     {
         //Make sure player can't move during animation
@@ -136,10 +150,13 @@ public class AnimationManager_DR : MonoBehaviour
         controller.enabled = true;
     }
 
+    /// <summary>
+    /// Activates the hand object (coming off of the player), makes it animate and once it is complete deactivates it again.
+    /// </summary>
     private IEnumerator HandAnimation()
     {
         hand.SetActive(true);
-        //handAnimator.SetTrigger("PutDown");
+        handAnimator.SetTrigger("PutDown");
         yield return new WaitForSeconds(handAnimator.GetCurrentAnimatorStateInfo(0).length);
         hand.SetActive(false);
     }

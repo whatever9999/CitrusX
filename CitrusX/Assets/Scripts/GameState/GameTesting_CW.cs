@@ -11,8 +11,18 @@
  * Added GameObjects for puzzles, tidied script up aswell
  */
 
-using System.Collections;
-using System.Collections.Generic;
+/**
+* \class GameTesting_CW
+* 
+* \brief Starts each puzzle once the last one is completed, triggering disturbances, using triggers in game that react to the player and changes GOs
+* 
+* Works by checking the status of puzzles in Update using booleans.
+* 
+* \author Chase
+* 
+* \date Last Modified: 04/03/2020
+*/
+
 using UnityEngine;
 
 public class GameTesting_CW : MonoBehaviour
@@ -32,12 +42,15 @@ public class GameTesting_CW : MonoBehaviour
     #region OTHER_VARIABLES
     private DisturbanceHandler_DR disturbance;
     private InitiatePuzzles_CW initiate;
-    GameObject throwingBox;
-    GameObject hiddenMechDoc;
+    private GameObject throwingBox;
+    private GameObject hiddenMechDoc;
     #endregion
 
     public static GameTesting_CW instance;
 
+    /// <summary>
+    /// Initialise variables
+    /// </summary>
     private void Awake()
     {
         instance = this;
@@ -52,13 +65,20 @@ public class GameTesting_CW : MonoBehaviour
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         #endregion
     }
+
+    /// <summary>
+    /// Ensure that GOs that are disabled are so
+    /// </summary>
     private void Start()
     {
         throwingBox.SetActive(false);
         hiddenMechDoc.SetActive(false);
     }
 
-    void Update()
+    /// <summary>
+    /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
+    /// </summary>
+    private void Update()
     {
         if (!cutscenes[0])
         {
