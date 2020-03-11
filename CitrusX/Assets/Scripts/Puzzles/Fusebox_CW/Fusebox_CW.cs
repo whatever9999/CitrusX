@@ -122,7 +122,7 @@ internal class Fusebox_CW : PuzzleBaseScript
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
                 voiceovers[8] = true;
-                GameTesting_CW.instance.arePuzzlesDone[1] = true;
+                game.arePuzzlesDone[1] = true;
             }
 
             //Player can't use the fusebox anymore
