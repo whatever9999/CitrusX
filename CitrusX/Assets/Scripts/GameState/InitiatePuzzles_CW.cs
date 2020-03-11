@@ -109,7 +109,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE2);
             journal.AddJournalLog("The camera has gone out, I should check that fuse box.");
             journal.ChangeTasks(new string[] { "Check fusebox" });
-            fusebox.SetGameActive(true);
+            fusebox.SetActive(true);
             monitorInteractionsUsed[0] = true;
         }
         else if (monitorInteractions[1] && !monitorInteractionsUsed[1])
@@ -177,7 +177,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateFuseboxPuzzle()
     {
-        fusebox.SetGameActive(true);
+        fusebox.SetActive(true);
     }
     public void InitiateColourMatchingPuzzle()
     {

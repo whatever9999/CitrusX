@@ -36,9 +36,18 @@ using UnityEngine.UI;
 
 public class Pipes_CW : MonoBehaviour
 {
-    public Fusebox_CW.Directions startPosition;
-    private Fusebox_CW.Directions currentPosition;
-    public Fusebox_CW.Directions desiredPosition;
+    public enum Directions
+    {
+        HORIZONTAL,
+        VERTICAL,
+        RIGHT_DOWN_BEND,
+        LEFT_DOWN_BEND,
+        RIGHT_UP_BEND,
+        LEFT_UP_BEND
+    };
+    public Directions startPosition;
+    private Directions currentPosition;
+    public Directions desiredPosition;
 
     public Sprite incompletePipe;
     public Sprite completePipe;
@@ -94,34 +103,34 @@ public class Pipes_CW : MonoBehaviour
 
             switch (currentPosition)
             {
-                case Fusebox_CW.Directions.HORIZONTAL:
+                case Directions.HORIZONTAL:
                     {
-                        currentPosition = Fusebox_CW.Directions.VERTICAL;
+                        currentPosition = Directions.VERTICAL;
                     }
                     break;
-                case Fusebox_CW.Directions.VERTICAL:
+                case Directions.VERTICAL:
                     {
-                        currentPosition = Fusebox_CW.Directions.HORIZONTAL;
+                        currentPosition = Directions.HORIZONTAL;
                     }
                     break;
-                case Fusebox_CW.Directions.RIGHT_DOWN_BEND:
+                case Directions.RIGHT_DOWN_BEND:
                     {
-                        currentPosition = Fusebox_CW.Directions.RIGHT_UP_BEND;
+                        currentPosition = Directions.RIGHT_UP_BEND;
                     }
                     break;
-                case Fusebox_CW.Directions.LEFT_DOWN_BEND:
+                case Directions.LEFT_DOWN_BEND:
                     {
-                        currentPosition = Fusebox_CW.Directions.RIGHT_DOWN_BEND;
+                        currentPosition = Directions.RIGHT_DOWN_BEND;
                     }
                     break;
-                case Fusebox_CW.Directions.RIGHT_UP_BEND:
+                case Directions.RIGHT_UP_BEND:
                     {
-                        currentPosition = Fusebox_CW.Directions.LEFT_UP_BEND;
+                        currentPosition = Directions.LEFT_UP_BEND;
                     }
                     break;
-                case Fusebox_CW.Directions.LEFT_UP_BEND:
+                case Directions.LEFT_UP_BEND:
                     {
-                        currentPosition = Fusebox_CW.Directions.LEFT_DOWN_BEND;
+                        currentPosition = Directions.LEFT_DOWN_BEND;
                     }
                     break;
             }

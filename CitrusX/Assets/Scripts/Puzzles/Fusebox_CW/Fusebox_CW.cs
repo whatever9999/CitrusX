@@ -16,6 +16,9 @@
  * Dominique (Changes) 09/03/2020
  * CheckPipes() is a coroutine so the colour of the pipes changes one by one if they're complete
  * The fusebox now requires the pipes to be passed in through the inspector to ensure they're in order
+ * 
+ * Chase (Changes) 11/3/2020
+ * Made it inherit from PuzzleBase Script and tidied the script up. Moved directions to pipes
 */
 
 /**
@@ -32,52 +35,28 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Fusebox_CW : MonoBehaviour
+internal class Fusebox_CW : PuzzleBaseScript
 {
+    #region PUZZLE_VARS
     private const float timeForFlowInPipes = 0.5f;
-    public enum Directions
-    {
-        HORIZONTAL,
-        VERTICAL,
-        RIGHT_DOWN_BEND,
-        LEFT_DOWN_BEND,
-        RIGHT_UP_BEND,
-        LEFT_UP_BEND
-    }
-
-    #region PuzzleVariables
     public KeyCode closeFuseboxKey = KeyCode.Z;
     public KeyCode resetPipesKey = KeyCode.X;
     public Pipes_CW[] pipesFromStartToEnd; //Pipes need to be passed in in order so that they will change colour in order
-
-    private FirstPersonController fpsController;
     private Text fuseboxText;
     private GameObject fusebox;
-    //public Pipes_CW[] wires;
-    //private int wireCompletedCount;
-    //private Color drawColour;
-    #endregion
-
-    #region GameStateVariables
-    private Journal_DR journal;
-    private bool[] voiceovers = { false, false };
-    private Subtitles_HR subtitles;
     internal bool isFuseboxSolved = false;
-    private bool isActive = false;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
-    internal void SetGameActive(bool value) { isActive = value; }
 
     /// <summary>
     /// Inititalise variables and ensure the UI GO is deactivated
     /// </summary>
     private void Awake()
-    {
-        fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
-        journal = Journal_DR.instance;
+    {   
         fuseboxText = GameObject.Find("FuseboxMessageText").GetComponent<Text>();
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         fusebox = GameObject.Find("Fusebox");
+        journal = Journal_DR.instance;
 
         gameObject.SetActive(false);
     }
@@ -139,10 +118,10 @@ public class Fusebox_CW : MonoBehaviour
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
             journal.ChangeTasks(new string[] { "Return to ritual" });
-            if (!voiceovers[1])
+            if (!voiceovers[8])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
-                voiceovers[1] = true;
+                voiceovers[8] = true;
                 GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
 

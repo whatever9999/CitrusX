@@ -31,18 +31,20 @@ internal class SetUpRitual_CW : PuzzleBaseScript
 
     #region BOOLS
     internal bool[] ritualSteps = { false, false, false, false, false, false, false };
-    private bool isActive = false;
 
 
-    
+
+
     #endregion
 
     /// <summary>
     /// Inititalise variables
     /// </summary>
+    private void Awake()
+    {
+        journal = Journal_DR.instance;
 
-
-    internal void SetActive(bool value) { isActive = value; }
+    }
 
     /// <summary>
     /// If the puzzle is active then the voiceover for it is played.
