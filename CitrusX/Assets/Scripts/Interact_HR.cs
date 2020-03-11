@@ -688,6 +688,15 @@ public class Interact_HR : MonoBehaviour
                     journal.ChangeTasks(new string[] { "Solve the puzzle" });
                 }
             }
+            else if (hit.transform.tag == "SymbolOfScarcity")
+            {
+                notificationText.text = "Press E to interact with the " + hit.transform.name;
+
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                {
+                    subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                }
+            }
             else
             {
                 playerCamera.fieldOfView = defaultFOV;

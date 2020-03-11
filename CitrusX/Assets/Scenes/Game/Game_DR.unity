@@ -2506,6 +2506,98 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296246684}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &313946752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313946756}
+  - component: {fileID: 313946755}
+  - component: {fileID: 313946754}
+  - component: {fileID: 313946753}
+  m_Layer: 0
+  m_Name: Symbol of Scarcity
+  m_TagString: SymbolOfScarcity
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!136 &313946753
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313946752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &313946754
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313946752}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &313946755
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313946752}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &313946756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313946752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.643, y: 0.678, z: 2.02}
+  m_LocalScale: {x: 0.22272, y: 0.22272, z: 0.22272}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &346820593 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7357705731489074144, guid: 54a4ec43310935c4ab2f92f1c3cc7b17,
@@ -3671,6 +3763,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 632103008}
     m_Modifications:
+    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
+        type: 3}
+      propertyPath: m_Name
+      value: StuckWeight
+      objectReference: {fileID: 0}
     - target: {fileID: 3592439808456680282, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
       propertyPath: throwForce
@@ -3680,11 +3777,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
-        type: 3}
-      propertyPath: m_Name
-      value: StuckWeight
       objectReference: {fileID: 0}
     - target: {fileID: 2653294015542037466, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
@@ -3787,6 +3879,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1384666745}
     m_Modifications:
+    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
+        type: 3}
+      propertyPath: m_Name
+      value: MoveableWeight (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 3592439808456680282, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
       propertyPath: throwForce
@@ -3811,11 +3908,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
-        type: 3}
-      propertyPath: m_Name
-      value: MoveableWeight (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2653294015542037466, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
@@ -5153,6 +5245,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2327797036778405544, guid: 3841789d8de57274f9b926b0dbb3b5aa,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2327797036778405544, guid: 3841789d8de57274f9b926b0dbb3b5aa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.181
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3841789d8de57274f9b926b0dbb3b5aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5222,16 +5324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2327797036778405544, guid: 3841789d8de57274f9b926b0dbb3b5aa,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2327797036778405544, guid: 3841789d8de57274f9b926b0dbb3b5aa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.181
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3841789d8de57274f9b926b0dbb3b5aa, type: 3}
@@ -6188,6 +6280,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 632103008}
     m_Modifications:
+    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
+        type: 3}
+      propertyPath: m_Name
+      value: MoveableWeight
+      objectReference: {fileID: 0}
     - target: {fileID: 3592439808456680282, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
       propertyPath: throwForce
@@ -6207,11 +6304,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
-        type: 3}
-      propertyPath: m_Name
-      value: MoveableWeight
       objectReference: {fileID: 0}
     - target: {fileID: 2653294015542037466, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
@@ -16871,7 +16963,7 @@ MonoBehaviour:
     text: '*gasp*'
   - id: 79
     clip: {fileID: 8300000, guid: d6d66eef5c8c83740a24afd0d21a77f9, type: 3}
-    text: There's a security camera system, I should check that out.
+    text: There's a security camera system, I should check that out.t.
   - id: 80
     clip: {fileID: 8300000, guid: 86af3fbb768e9e54ba73eb6dff25a73d, type: 3}
     text: This looks really handy.
@@ -16881,6 +16973,11 @@ MonoBehaviour:
   - id: 82
     clip: {fileID: 8300000, guid: ac33f91d970c3c6419d30ff9c353679f, type: 3}
     text: This looks great. Now where was I?
+  - id: 83
+    clip: {fileID: 8300000, guid: ac33f91d970c3c6419d30ff9c353679f, type: 3}
+    text: An item of scarcity. I can't move it. If one of these moves it means the
+      Baron's trying to get what he's owed and if they're gone the Baron wins so I
+      best step over them carefully.
 --- !u!114 &1334654700 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5642845893309499700, guid: ef914bb9165fb324eb5e5dc8ed0a668d,
@@ -22281,6 +22378,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1384666745}
     m_Modifications:
+    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
+        type: 3}
+      propertyPath: m_Name
+      value: MoveableWeight
+      objectReference: {fileID: 0}
     - target: {fileID: 3592439808456680282, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}
       propertyPath: throwForce
@@ -22300,11 +22402,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1335665841657313737, guid: 37b58513ca6befc4fb29aac70be3cdf5,
-        type: 3}
-      propertyPath: m_Name
-      value: MoveableWeight
       objectReference: {fileID: 0}
     - target: {fileID: 2653294015542037466, guid: 37b58513ca6befc4fb29aac70be3cdf5,
         type: 3}

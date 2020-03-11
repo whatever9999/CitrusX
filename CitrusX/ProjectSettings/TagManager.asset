@@ -23,6 +23,7 @@ TagManager:
   - Painting
   - Book
   - Pawn
+  - SymbolOfScarcity
   layers:
   - Default
   - TransparentFX
