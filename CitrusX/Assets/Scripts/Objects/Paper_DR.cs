@@ -36,7 +36,8 @@ public class Paper_DR : MonoBehaviour
         PHOTOGRAPH_REVERSE,
         DEATH_CERTIFICATE,
         CORRECT_ORDER_ARTICLE,
-        RITUAL_ARTICLE
+        RITUAL_ARTICLE,
+        COLOUR_MATCH_CLUE
     };
     public NOTE_NAME nameOfNote;
     public bool hasBeenRead = false;

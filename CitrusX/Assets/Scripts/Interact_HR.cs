@@ -447,6 +447,7 @@ public class Interact_HR : MonoBehaviour
                         journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
                         journal.ChangeTasks(new string[] { "Solve the password" });
 ;                    }
+                   
                     #endregion
                 }
             }
