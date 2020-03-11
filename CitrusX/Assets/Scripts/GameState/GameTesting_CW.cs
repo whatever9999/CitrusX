@@ -42,8 +42,8 @@ public class GameTesting_CW : MonoBehaviour
     #region OTHER_VARIABLES
     private DisturbanceHandler_DR disturbance;
     private InitiatePuzzles_CW initiate;
-    GameObject throwingBox;
-    GameObject hiddenMechDoc;
+    private GameObject throwingBox;
+    private GameObject hiddenMechDoc;
     #endregion
 
     public static GameTesting_CW instance;
@@ -78,7 +78,7 @@ public class GameTesting_CW : MonoBehaviour
     /// <summary>
     /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
     /// </summary>
-    void Update()
+    private void Update()
     {
         if (!cutscenes[0])
         {

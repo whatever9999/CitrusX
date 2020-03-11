@@ -26,11 +26,10 @@ using UnityEngine;
 
 public class SetUpRitual_CW : MonoBehaviour
 {
-    Journal_DR journal;
-    Subtitles_HR subtitles;
+    private Journal_DR journal;
+    private Subtitles_HR subtitles;
     #region BOOLS
     private bool isActive = false;
-
     internal bool jewelleryCollectionInitiated = false;
     internal bool ritualSetUpCollected = false;
     internal bool ritualSetUpPlaced = false;
@@ -39,6 +38,8 @@ public class SetUpRitual_CW : MonoBehaviour
     internal bool checkedMonitor = false;
     internal bool checkedPhone = false;
     private TriggerScript_CW gardenTrigger;
+
+    private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
     #endregion
 
     /// <summary>
@@ -51,7 +52,6 @@ public class SetUpRitual_CW : MonoBehaviour
         gardenTrigger = GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>();
     }
 
-    private bool[] voiceovers = { false, false, false, false, false, false, false, false, false };
     internal void SetActive(bool value) { isActive = value; }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class SetUpRitual_CW : MonoBehaviour
     /// If the setup isn't complete yet a check is made on the tasks in the journal. Once it is complete then the log and tasks are updated and the next puzzle is started
     /// This is done for the ritual setup and the jewellery setup
     /// </summary>
-    void Update()
+    private void Update()
     {
         //if nothing has been collected
         if (isActive)
@@ -168,7 +168,7 @@ public class SetUpRitual_CW : MonoBehaviour
 
         }
     }
-    IEnumerator Pause()
+    private IEnumerator Pause()
     {
         yield return new WaitForSeconds(1.0f);
     }

@@ -38,7 +38,7 @@ public class Table_CW : MonoBehaviour
     /// <summary>
     /// Inititalise variables
     /// </summary>
-    void Awake()
+    private void Awake()
     {
         ritualSetUp = GameObject.Find("FirstPersonCharacter").GetComponent<SetUpRitual_CW>();
     }
@@ -46,7 +46,7 @@ public class Table_CW : MonoBehaviour
     /// <summary>
     /// Check what table it is and if the items have been put down on it and update the game state according to this
     /// </summary>
-    void Update()
+    private void Update()
     {
 
         if (hasBeenPlaced)

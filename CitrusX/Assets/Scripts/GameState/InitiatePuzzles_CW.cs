@@ -59,9 +59,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
     internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion
     #region TRIGGER_REFS
-    TriggerScript_CW correctOrderTrigger;
-    TriggerScript_CW hiddenMechTrigger;
-    Door_DR hiddenMechDoor;
+    private TriggerScript_CW correctOrderTrigger;
+    private TriggerScript_CW hiddenMechTrigger;
+    private Door_DR hiddenMechDoor;
   
     #endregion
 

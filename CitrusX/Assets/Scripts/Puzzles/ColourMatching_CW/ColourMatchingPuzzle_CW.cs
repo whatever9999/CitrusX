@@ -43,7 +43,7 @@ public class ColourMatchingPuzzle_CW : MonoBehaviour
     /// <summary>
     /// Inititalise variables
     /// </summary>
-    public void Awake()
+    private void Awake()
     {
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();

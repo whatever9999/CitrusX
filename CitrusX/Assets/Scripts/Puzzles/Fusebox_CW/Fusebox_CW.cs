@@ -71,7 +71,7 @@ public class Fusebox_CW : MonoBehaviour
     /// <summary>
     /// Inititalise variables and ensure the UI GO is deactivated
     /// </summary>
-    void Awake()
+    private void Awake()
     {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         journal = Journal_DR.instance;

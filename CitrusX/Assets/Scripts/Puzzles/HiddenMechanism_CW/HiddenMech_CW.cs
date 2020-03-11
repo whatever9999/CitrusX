@@ -21,7 +21,7 @@ using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
 {
-    Door_DR door;
+    private Door_DR door;
     private bool isActive = false;
     public void SetActive(bool value) { isActive = value; }
 

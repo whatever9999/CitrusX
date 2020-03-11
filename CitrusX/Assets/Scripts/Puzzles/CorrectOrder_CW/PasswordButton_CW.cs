@@ -319,7 +319,7 @@ public class PasswordButton_CW : MonoBehaviour
     /// <summary>
     /// Changes the image colour to white
     /// </summary>
-    IEnumerator BackToWhite()
+    private IEnumerator BackToWhite()
     {
         yield return new WaitForSeconds(0.5f);
         thisImage.color = Color.white;

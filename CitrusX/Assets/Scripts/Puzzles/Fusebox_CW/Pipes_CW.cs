@@ -61,7 +61,7 @@ public class Pipes_CW : MonoBehaviour
     /// <summary>
     /// Inititalise variables and set currentPosition to the startPosition
     /// </summary>
-    public void Awake()
+    private void Awake()
     {
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         currentPosition = startPosition;
@@ -71,7 +71,7 @@ public class Pipes_CW : MonoBehaviour
     /// <summary>
     /// If the player presses X and the fusebox puzzle isn't solved yet the position of the pipe is set to its start position by rotating it until it reaches that point
     /// </summary>
-    public void Update()
+    private void Update()
     {
         //if X, reset puzzle to default colours and state (make sure they can't do this if they've already solved it)
         if(!fusebox.isFuseboxSolved && Input.GetKeyDown(fusebox.resetPipesKey))
