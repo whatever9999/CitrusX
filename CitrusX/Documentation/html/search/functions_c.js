@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['removecoin_157',['RemoveCoin',['../class_water_bowl___d_r.html#a3eef47fa65440f5c808bebfb411db16e',1,'WaterBowl_DR']]],
-  ['removeitem_158',['RemoveItem',['../class_inventory___h_r.html#ad94cf5225d73364792daaa3bd8a10724',1,'Inventory_HR']]],
-  ['resetbaron_159',['ResetBaron',['../class_water_bowl___d_r.html#aec6c06516c7a28a5971171e2ea54f000',1,'WaterBowl_DR']]],
-  ['rotate_160',['Rotate',['../class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd',1,'Pipes_CW']]]
+  ['save_161',['Save',['../class_save_system___d_r.html#a19c96681c11281910b1c212e57b08972',1,'SaveSystem_DR']]],
+  ['spoopyscare_162',['SpoopyScare',['../class_baron_popup___d_r.html#a5c93a27e8f780658ae9fe270fa284ec7',1,'BaronPopup_DR']]]
 ];

@@ -30,8 +30,8 @@ enum {\bfseries Directions} \{ \newline
 \item 
 void \mbox{\hyperlink{class_fusebox___c_w_a083620e5d876b2f581eb6b5de8947de9}{Open\+Fusebox}} ()
 \begin{DoxyCompactList}\small\item\em reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}{Check\+Pipes}} ()
-\begin{DoxyCompactList}\small\item\em Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_fusebox___c_w_a6986185a76ecee9cee2979c5dbcf4996}{Power\+Button}} ()
+\begin{DoxyCompactList}\small\item\em Start the coroutine Check\+Pipes() to go through each pipe one by one and check the flow in it, changing the image to show it\textquotesingle{}s complete and chaning it back if the flow fails \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}{Close\+Fusebox}} ()
 \begin{DoxyCompactList}\small\item\em reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -42,6 +42,9 @@ Key\+Code {\bfseries close\+Fusebox\+Key} = Key\+Code.\+Z
 \item 
 \mbox{\Hypertarget{class_fusebox___c_w_adccb0c01bf34be66c9854ab2461c1197}\label{class_fusebox___c_w_adccb0c01bf34be66c9854ab2461c1197}} 
 Key\+Code {\bfseries reset\+Pipes\+Key} = Key\+Code.\+X
+\item 
+\mbox{\Hypertarget{class_fusebox___c_w_a7b97d3dca75b762d558043c2e8492f05}\label{class_fusebox___c_w_a7b97d3dca75b762d558043c2e8492f05}} 
+\mbox{\hyperlink{class_pipes___c_w}{Pipes\+\_\+\+CW}}\mbox{[}$\,$\mbox{]} {\bfseries pipes\+From\+Start\+To\+End}
 \end{DoxyCompactItemize}
 
 
@@ -52,21 +55,11 @@ Open and close the fusebox and check if the pipes are in the right position, upd
 Chase
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-Last Modified\+: 03/03/2020 
+Last Modified\+: 09/03/2020 
 \end{DoxyDate}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}\label{class_fusebox___c_w_a3de4eebf794b6fd17b75633bad5cafe4}} 
-\index{Fusebox\_CW@{Fusebox\_CW}!CheckPipes@{CheckPipes}}
-\index{CheckPipes@{CheckPipes}!Fusebox\_CW@{Fusebox\_CW}}
-\doxysubsubsection{\texorpdfstring{CheckPipes()}{CheckPipes()}}
-{\footnotesize\ttfamily void Fusebox\+\_\+\+C\+W.\+Check\+Pipes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox 
-
 \mbox{\Hypertarget{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}\label{class_fusebox___c_w_a5da257fa3f2758f047af0ff610d11492}} 
 \index{Fusebox\_CW@{Fusebox\_CW}!CloseFusebox@{CloseFusebox}}
 \index{CloseFusebox@{CloseFusebox}!Fusebox\_CW@{Fusebox\_CW}}
@@ -86,6 +79,16 @@ reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+D
 
 
 reused and tweaked some of Dominique\textquotesingle{}s code for Keypad\+\_\+\+DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game 
+
+\mbox{\Hypertarget{class_fusebox___c_w_a6986185a76ecee9cee2979c5dbcf4996}\label{class_fusebox___c_w_a6986185a76ecee9cee2979c5dbcf4996}} 
+\index{Fusebox\_CW@{Fusebox\_CW}!PowerButton@{PowerButton}}
+\index{PowerButton@{PowerButton}!Fusebox\_CW@{Fusebox\_CW}}
+\doxysubsubsection{\texorpdfstring{PowerButton()}{PowerButton()}}
+{\footnotesize\ttfamily void Fusebox\+\_\+\+C\+W.\+Power\+Button (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start the coroutine Check\+Pipes() to go through each pipe one by one and check the flow in it, changing the image to show it\textquotesingle{}s complete and chaning it back if the flow fails 
 
 
 

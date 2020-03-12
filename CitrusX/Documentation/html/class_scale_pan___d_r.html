@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CitrusX: ScalesPuzzleScript_AG Class Reference</title>
+<title>CitrusX: ScalePan_DR Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,64 +64,60 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="class_scales_puzzle_script___a_g-members.html">List of all members</a>  </div>
+<a href="class_scale_pan___d_r-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ScalesPuzzleScript_AG Class Reference</div>  </div>
+<div class="title">ScalePan_DR Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Compares the children of the left and right pan of the scales to see if they are balanced.  
- <a href="class_scales_puzzle_script___a_g.html#details">More...</a></p>
+<p>If an object collides with the pan or leaves it, it becomes a child and the pans are checked to see if they are balanced.  
+ <a href="class_scale_pan___d_r.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for ScalesPuzzleScript_AG:</div>
+Inheritance diagram for ScalePan_DR:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="class_scales_puzzle_script___a_g.png" alt=""/>
+  <img src="class_scale_pan___d_r.png" alt=""/>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6fb7d4030d4f9035ba81a0504e03d7d5"><td class="memItemLeft" align="right" valign="top"><a id="a6fb7d4030d4f9035ba81a0504e03d7d5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetActive</b> (bool value)</td></tr>
-<tr class="separator:a6fb7d4030d4f9035ba81a0504e03d7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bc2b7378cb4809258be1c866e282400"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scales_puzzle_script___a_g.html#a0bc2b7378cb4809258be1c866e282400">ComparePans</a> ()</td></tr>
-<tr class="memdesc:a0bc2b7378cb4809258be1c866e282400"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mass of the children of each pan is compared  <a href="class_scales_puzzle_script___a_g.html#a0bc2b7378cb4809258be1c866e282400">More...</a><br /></td></tr>
-<tr class="separator:a0bc2b7378cb4809258be1c866e282400"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a24a1839ceb07e7cf9192d9a6f8988221"><td class="memItemLeft" align="right" valign="top"><a id="a24a1839ceb07e7cf9192d9a6f8988221"></a>
-Vector2[]&#160;</td><td class="memItemRight" valign="bottom"><b>whereToPutWeightsAccordingToPan</b></td></tr>
-<tr class="separator:a24a1839ceb07e7cf9192d9a6f8988221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cda5bd47f3084f4fae34ce6609b6c57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scale_pan___d_r.html#a4cda5bd47f3084f4fae34ce6609b6c57">UpdateText</a> (float value)</td></tr>
+<tr class="memdesc:a4cda5bd47f3084f4fae34ce6609b6c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the text that is shown on the screen for the weight on the pan  <a href="class_scale_pan___d_r.html#a4cda5bd47f3084f4fae34ce6609b6c57">More...</a><br /></td></tr>
+<tr class="separator:a4cda5bd47f3084f4fae34ce6609b6c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Compares the children of the left and right pan of the scales to see if they are balanced. </p>
-<p>This is done using the mass of the children on the scales The first child is ignored as this is to be a text mesh that shows the weight on the scale</p>
-<dl class="section author"><dt>Author</dt><dd>Adam</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Last Modified: 09/02/2020 </dd></dl>
+<div class="textblock"><p>If an object collides with the pan or leaves it, it becomes a child and the pans are checked to see if they are balanced. </p>
+<dl class="section author"><dt>Author</dt><dd>Dominique</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Last Modified: 09/03/2020 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0bc2b7378cb4809258be1c866e282400"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bc2b7378cb4809258be1c866e282400">&#9670;&nbsp;</a></span>ComparePans()</h2>
+<a id="a4cda5bd47f3084f4fae34ce6609b6c57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cda5bd47f3084f4fae34ce6609b6c57">&#9670;&nbsp;</a></span>UpdateText()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ScalesPuzzleScript_AG.ComparePans </td>
+          <td class="memname">void ScalePan_DR.UpdateText </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The mass of the children of each pan is compared </p>
+<p>Change the text that is shown on the screen for the weight on the pan </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value - the value that should be shown (will have '00g' added to the end)</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/Domin/OneDrive/Documents/GitHub/CitrusX/CitrusX/Assets/Scripts/Puzzles/Balance_AG_CW/ScalesPuzzleScript_AG.cs</li>
+<li>C:/Users/Domin/OneDrive/Documents/GitHub/CitrusX/CitrusX/Assets/Scripts/Puzzles/Balance_AG_CW/ScalePan_DR.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -17,12 +17,12 @@ Inheritance diagram for Pipes\+\_\+\+CW\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_pipes___c_w_a161faecc753ac3a32ef99b2af6e6fb7b}\label{class_pipes___c_w_a161faecc753ac3a32ef99b2af6e6fb7b}} 
 bool {\bfseries Get\+Is\+In\+Position} ()
 \item 
-void \mbox{\hyperlink{class_pipes___c_w_a8edb35e221d403ada00a209bc8c441bb}{Awake}} ()
-\begin{DoxyCompactList}\small\item\em Inititalise variables and set current\+Position to the start\+Position \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_pipes___c_w_ab1778b10a28a3f473d53c0a77d61fcc9}{Update}} ()
-\begin{DoxyCompactList}\small\item\em If the player presses X and the fusebox puzzle isn\textquotesingle{}t solved yet the position of the pipe is set to its start position by rotating it until it reaches that point \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_pipes___c_w_a77b3c1f8e2bb88f42a2c1959b2474efd}{Rotate}} ()
-\begin{DoxyCompactList}\small\item\em Rotate the GO by 90 degrees and use the enum Fusebox\+\_\+\+C\+W.\+Directions to identify what the new direction of the pipe is given its old direction \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Rotate the GO by 90 degrees and use the enum Fusebox\+\_\+\+C\+W.\+Directions to identify what the new direction of the pipe is given its old direction \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pipes___c_w_a3edd4615f3d2b414faa3801d3bfd336f}{Change\+Colour}} ()
+\begin{DoxyCompactList}\small\item\em Set the image sprite to the pipe when it\textquotesingle{}s complete. It can\textquotesingle{}t be rotated after this. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pipes___c_w_ad9a3727b22fcf3f701843bf3ee8212ab}{Reset\+Colour}} ()
+\begin{DoxyCompactList}\small\item\em Set the image sprite to the pipe when it\textquotesingle{}s incomplete \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,32 +31,48 @@ Fusebox\+\_\+\+C\+W.\+Directions {\bfseries start\+Position}
 \item 
 \mbox{\Hypertarget{class_pipes___c_w_a7ec7595dfbf14abf7cf11100958905a4}\label{class_pipes___c_w_a7ec7595dfbf14abf7cf11100958905a4}} 
 Fusebox\+\_\+\+C\+W.\+Directions {\bfseries desired\+Position}
+\item 
+\mbox{\Hypertarget{class_pipes___c_w_a576c8fae31374b07a5477dbcfc3101f8}\label{class_pipes___c_w_a576c8fae31374b07a5477dbcfc3101f8}} 
+Sprite {\bfseries incomplete\+Pipe}
+\item 
+\mbox{\Hypertarget{class_pipes___c_w_a211caf5452d1d0d9ba719811b8a3b1dc}\label{class_pipes___c_w_a211caf5452d1d0d9ba719811b8a3b1dc}} 
+Sprite {\bfseries complete\+Pipe}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Each pipe has this script. It knows what the current state of the pipe is and what it should be and allows it to be rotated and checked for its position. 
 
-Get\+Is\+In\+Position() compares the current\+Position of the pipe to the desired\+Position \mbox{\hyperlink{class_pipes___c_w_ab1778b10a28a3f473d53c0a77d61fcc9}{Update()}} resets the pipes if the player presses X while the UI is open, if it\textquotesingle{}s not complete yet \mbox{\hyperlink{class_pipes___c_w_a77b3c1f8e2bb88f42a2c1959b2474efd}{Rotate()}} moves the UI by 90 degrees and updates the current\+Position of the pipe
+Get\+Is\+In\+Position() compares the current\+Position of the pipe to the desired\+Position Update() resets the pipes if the player presses X while the UI is open, if it\textquotesingle{}s not complete yet \mbox{\hyperlink{class_pipes___c_w_a77b3c1f8e2bb88f42a2c1959b2474efd}{Rotate()}} moves the UI by 90 degrees and updates the current\+Position of the pipe
 
 \begin{DoxyAuthor}{Author}
 Chase
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-Last Modified\+: 03/03/2020 
+Last Modified\+: 09/03/2020 
 \end{DoxyDate}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_pipes___c_w_a8edb35e221d403ada00a209bc8c441bb}\label{class_pipes___c_w_a8edb35e221d403ada00a209bc8c441bb}} 
-\index{Pipes\_CW@{Pipes\_CW}!Awake@{Awake}}
-\index{Awake@{Awake}!Pipes\_CW@{Pipes\_CW}}
-\doxysubsubsection{\texorpdfstring{Awake()}{Awake()}}
-{\footnotesize\ttfamily void Pipes\+\_\+\+C\+W.\+Awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_pipes___c_w_a3edd4615f3d2b414faa3801d3bfd336f}\label{class_pipes___c_w_a3edd4615f3d2b414faa3801d3bfd336f}} 
+\index{Pipes\_CW@{Pipes\_CW}!ChangeColour@{ChangeColour}}
+\index{ChangeColour@{ChangeColour}!Pipes\_CW@{Pipes\_CW}}
+\doxysubsubsection{\texorpdfstring{ChangeColour()}{ChangeColour()}}
+{\footnotesize\ttfamily void Pipes\+\_\+\+C\+W.\+Change\+Colour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Inititalise variables and set current\+Position to the start\+Position 
+Set the image sprite to the pipe when it\textquotesingle{}s complete. It can\textquotesingle{}t be rotated after this. 
+
+\mbox{\Hypertarget{class_pipes___c_w_ad9a3727b22fcf3f701843bf3ee8212ab}\label{class_pipes___c_w_ad9a3727b22fcf3f701843bf3ee8212ab}} 
+\index{Pipes\_CW@{Pipes\_CW}!ResetColour@{ResetColour}}
+\index{ResetColour@{ResetColour}!Pipes\_CW@{Pipes\_CW}}
+\doxysubsubsection{\texorpdfstring{ResetColour()}{ResetColour()}}
+{\footnotesize\ttfamily void Pipes\+\_\+\+C\+W.\+Reset\+Colour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the image sprite to the pipe when it\textquotesingle{}s incomplete 
 
 \mbox{\Hypertarget{class_pipes___c_w_a77b3c1f8e2bb88f42a2c1959b2474efd}\label{class_pipes___c_w_a77b3c1f8e2bb88f42a2c1959b2474efd}} 
 \index{Pipes\_CW@{Pipes\_CW}!Rotate@{Rotate}}
@@ -67,16 +83,6 @@ Inititalise variables and set current\+Position to the start\+Position
 
 
 Rotate the GO by 90 degrees and use the enum Fusebox\+\_\+\+C\+W.\+Directions to identify what the new direction of the pipe is given its old direction 
-
-\mbox{\Hypertarget{class_pipes___c_w_ab1778b10a28a3f473d53c0a77d61fcc9}\label{class_pipes___c_w_ab1778b10a28a3f473d53c0a77d61fcc9}} 
-\index{Pipes\_CW@{Pipes\_CW}!Update@{Update}}
-\index{Update@{Update}!Pipes\_CW@{Pipes\_CW}}
-\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
-{\footnotesize\ttfamily void Pipes\+\_\+\+C\+W.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-If the player presses X and the fusebox puzzle isn\textquotesingle{}t solved yet the position of the pipe is set to its start position by rotating it until it reaches that point 
 
 
 

@@ -85,15 +85,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a161faecc753ac3a32ef99b2af6e6fb7b"><td class="memItemLeft" align="right" valign="top"><a id="a161faecc753ac3a32ef99b2af6e6fb7b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>GetIsInPosition</b> ()</td></tr>
 <tr class="separator:a161faecc753ac3a32ef99b2af6e6fb7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8edb35e221d403ada00a209bc8c441bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pipes___c_w.html#a8edb35e221d403ada00a209bc8c441bb">Awake</a> ()</td></tr>
-<tr class="memdesc:a8edb35e221d403ada00a209bc8c441bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inititalise variables and set currentPosition to the startPosition  <a href="class_pipes___c_w.html#a8edb35e221d403ada00a209bc8c441bb">More...</a><br /></td></tr>
-<tr class="separator:a8edb35e221d403ada00a209bc8c441bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1778b10a28a3f473d53c0a77d61fcc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pipes___c_w.html#ab1778b10a28a3f473d53c0a77d61fcc9">Update</a> ()</td></tr>
-<tr class="memdesc:ab1778b10a28a3f473d53c0a77d61fcc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the player presses X and the fusebox puzzle isn't solved yet the position of the pipe is set to its start position by rotating it until it reaches that point  <a href="class_pipes___c_w.html#ab1778b10a28a3f473d53c0a77d61fcc9">More...</a><br /></td></tr>
-<tr class="separator:ab1778b10a28a3f473d53c0a77d61fcc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77b3c1f8e2bb88f42a2c1959b2474efd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd">Rotate</a> ()</td></tr>
 <tr class="memdesc:a77b3c1f8e2bb88f42a2c1959b2474efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction of the pipe is given its old direction  <a href="class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd">More...</a><br /></td></tr>
 <tr class="separator:a77b3c1f8e2bb88f42a2c1959b2474efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3edd4615f3d2b414faa3801d3bfd336f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pipes___c_w.html#a3edd4615f3d2b414faa3801d3bfd336f">ChangeColour</a> ()</td></tr>
+<tr class="memdesc:a3edd4615f3d2b414faa3801d3bfd336f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the image sprite to the pipe when it's complete. It can't be rotated after this.  <a href="class_pipes___c_w.html#a3edd4615f3d2b414faa3801d3bfd336f">More...</a><br /></td></tr>
+<tr class="separator:a3edd4615f3d2b414faa3801d3bfd336f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9a3727b22fcf3f701843bf3ee8212ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pipes___c_w.html#ad9a3727b22fcf3f701843bf3ee8212ab">ResetColour</a> ()</td></tr>
+<tr class="memdesc:ad9a3727b22fcf3f701843bf3ee8212ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the image sprite to the pipe when it's incomplete  <a href="class_pipes___c_w.html#ad9a3727b22fcf3f701843bf3ee8212ab">More...</a><br /></td></tr>
+<tr class="separator:ad9a3727b22fcf3f701843bf3ee8212ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -103,21 +103,27 @@ Fusebox_CW.Directions&#160;</td><td class="memItemRight" valign="bottom"><b>star
 <tr class="memitem:a7ec7595dfbf14abf7cf11100958905a4"><td class="memItemLeft" align="right" valign="top"><a id="a7ec7595dfbf14abf7cf11100958905a4"></a>
 Fusebox_CW.Directions&#160;</td><td class="memItemRight" valign="bottom"><b>desiredPosition</b></td></tr>
 <tr class="separator:a7ec7595dfbf14abf7cf11100958905a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576c8fae31374b07a5477dbcfc3101f8"><td class="memItemLeft" align="right" valign="top"><a id="a576c8fae31374b07a5477dbcfc3101f8"></a>
+Sprite&#160;</td><td class="memItemRight" valign="bottom"><b>incompletePipe</b></td></tr>
+<tr class="separator:a576c8fae31374b07a5477dbcfc3101f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a211caf5452d1d0d9ba719811b8a3b1dc"><td class="memItemLeft" align="right" valign="top"><a id="a211caf5452d1d0d9ba719811b8a3b1dc"></a>
+Sprite&#160;</td><td class="memItemRight" valign="bottom"><b>completePipe</b></td></tr>
+<tr class="separator:a211caf5452d1d0d9ba719811b8a3b1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Each pipe has this script. It knows what the current state of the pipe is and what it should be and allows it to be rotated and checked for its position. </p>
-<p>GetIsInPosition() compares the currentPosition of the pipe to the desiredPosition <a class="el" href="class_pipes___c_w.html#ab1778b10a28a3f473d53c0a77d61fcc9" title="If the player presses X and the fusebox puzzle isn&#39;t solved yet the position of the pipe is set to it...">Update()</a> resets the pipes if the player presses X while the UI is open, if it's not complete yet <a class="el" href="class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd" title="Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction...">Rotate()</a> moves the UI by 90 degrees and updates the currentPosition of the pipe</p>
+<p>GetIsInPosition() compares the currentPosition of the pipe to the desiredPosition Update() resets the pipes if the player presses X while the UI is open, if it's not complete yet <a class="el" href="class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd" title="Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction...">Rotate()</a> moves the UI by 90 degrees and updates the currentPosition of the pipe</p>
 <dl class="section author"><dt>Author</dt><dd>Chase</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Last Modified: 03/03/2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Last Modified: 09/03/2020 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8edb35e221d403ada00a209bc8c441bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8edb35e221d403ada00a209bc8c441bb">&#9670;&nbsp;</a></span>Awake()</h2>
+<a id="a3edd4615f3d2b414faa3801d3bfd336f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3edd4615f3d2b414faa3801d3bfd336f">&#9670;&nbsp;</a></span>ChangeColour()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Pipes_CW.Awake </td>
+          <td class="memname">void Pipes_CW.ChangeColour </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -125,7 +131,26 @@ Fusebox_CW.Directions&#160;</td><td class="memItemRight" valign="bottom"><b>desi
       </table>
 </div><div class="memdoc">
 
-<p>Inititalise variables and set currentPosition to the startPosition </p>
+<p>Set the image sprite to the pipe when it's complete. It can't be rotated after this. </p>
+
+</div>
+</div>
+<a id="ad9a3727b22fcf3f701843bf3ee8212ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9a3727b22fcf3f701843bf3ee8212ab">&#9670;&nbsp;</a></span>ResetColour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Pipes_CW.ResetColour </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the image sprite to the pipe when it's incomplete </p>
 
 </div>
 </div>
@@ -145,25 +170,6 @@ Fusebox_CW.Directions&#160;</td><td class="memItemRight" valign="bottom"><b>desi
 </div><div class="memdoc">
 
 <p>Rotate the GO by 90 degrees and use the enum Fusebox_CW.Directions to identify what the new direction of the pipe is given its old direction </p>
-
-</div>
-</div>
-<a id="ab1778b10a28a3f473d53c0a77d61fcc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1778b10a28a3f473d53c0a77d61fcc9">&#9670;&nbsp;</a></span>Update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Pipes_CW.Update </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>If the player presses X and the fusebox puzzle isn't solved yet the position of the pipe is set to its start position by rotating it until it reaches that point </p>
 
 </div>
 </div>

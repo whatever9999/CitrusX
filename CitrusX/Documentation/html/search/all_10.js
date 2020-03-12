@@ -1,7 +1,13 @@
 var searchData=
 [
-  ['removecoin_61',['RemoveCoin',['../class_water_bowl___d_r.html#a3eef47fa65440f5c808bebfb411db16e',1,'WaterBowl_DR']]],
-  ['removeitem_62',['RemoveItem',['../class_inventory___h_r.html#ad94cf5225d73364792daaa3bd8a10724',1,'Inventory_HR']]],
-  ['resetbaron_63',['ResetBaron',['../class_water_bowl___d_r.html#aec6c06516c7a28a5971171e2ea54f000',1,'WaterBowl_DR']]],
-  ['rotate_64',['Rotate',['../class_pipes___c_w.html#a77b3c1f8e2bb88f42a2c1959b2474efd',1,'Pipes_CW']]]
+  ['save_64',['Save',['../class_save_system___d_r.html#a19c96681c11281910b1c212e57b08972',1,'SaveSystem_DR']]],
+  ['savesystem_5fdr_65',['SaveSystem_DR',['../class_save_system___d_r.html',1,'']]],
+  ['scalepan_5fdr_66',['ScalePan_DR',['../class_scale_pan___d_r.html',1,'']]],
+  ['scalespuzzlescript_5fag_67',['ScalesPuzzleScript_AG',['../class_scales_puzzle_script___a_g.html',1,'']]],
+  ['setupritual_5fcw_68',['SetUpRitual_CW',['../class_set_up_ritual___c_w.html',1,'']]],
+  ['sfxmanager_5fdr_69',['SFXManager_DR',['../class_s_f_x_manager___d_r.html',1,'']]],
+  ['soundeffect_5fdr_70',['SoundEffect_DR',['../class_sound_effect___d_r.html',1,'']]],
+  ['spoopyscare_71',['SpoopyScare',['../class_baron_popup___d_r.html#a5c93a27e8f780658ae9fe270fa284ec7',1,'BaronPopup_DR']]],
+  ['subtitle_5fdr_72',['Subtitle_DR',['../struct_subtitle___d_r.html',1,'']]],
+  ['subtitles_5fhr_73',['Subtitles_HR',['../class_subtitles___h_r.html',1,'']]]
 ];

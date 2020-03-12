@@ -17,26 +17,20 @@ Inheritance diagram for Scales\+Puzzle\+Script\+\_\+\+AG\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_scales_puzzle_script___a_g_a6fb7d4030d4f9035ba81a0504e03d7d5}\label{class_scales_puzzle_script___a_g_a6fb7d4030d4f9035ba81a0504e03d7d5}} 
 void {\bfseries Set\+Active} (bool value)
 \item 
-void \mbox{\hyperlink{class_scales_puzzle_script___a_g_a475b587a95b36df47144a6eeba374ace}{Move\+Weight}} (Transform weight)
-\begin{DoxyCompactList}\small\item\em When a weight is moved its parent is set along with its position on the pan Then the pans are compared to see if they\textquotesingle{}re balanced \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_scales_puzzle_script___a_g_a0bc2b7378cb4809258be1c866e282400}{Compare\+Pans}} ()
-\begin{DoxyCompactList}\small\item\em The number of children of the left pan is compared to the right If they are equal the game state is updated \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The mass of the children of each pan is compared \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_scales_puzzle_script___a_g_a24a1839ceb07e7cf9192d9a6f8988221}\label{class_scales_puzzle_script___a_g_a24a1839ceb07e7cf9192d9a6f8988221}} 
 Vector2\mbox{[}$\,$\mbox{]} {\bfseries where\+To\+Put\+Weights\+According\+To\+Pan}
-\item 
-\mbox{\Hypertarget{class_scales_puzzle_script___a_g_a413aac7b219ddc596e68343b2d458203}\label{class_scales_puzzle_script___a_g_a413aac7b219ddc596e68343b2d458203}} 
-int {\bfseries left\+Mass}
-\item 
-\mbox{\Hypertarget{class_scales_puzzle_script___a_g_ae80979516c25ab9afa438083db65f0f5}\label{class_scales_puzzle_script___a_g_ae80979516c25ab9afa438083db65f0f5}} 
-int {\bfseries right\+Mass}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Compares the children of the left and right pan of the scales to see if they are balanced. 
+
+This is done using the mass of the children on the scales The first child is ignored as this is to be a text mesh that shows the weight on the scale
 
 \begin{DoxyAuthor}{Author}
 Adam
@@ -55,23 +49,8 @@ Last Modified\+: 09/02/2020
 
 
 
-The number of children of the left pan is compared to the right If they are equal the game state is updated 
+The mass of the children of each pan is compared 
 
-\mbox{\Hypertarget{class_scales_puzzle_script___a_g_a475b587a95b36df47144a6eeba374ace}\label{class_scales_puzzle_script___a_g_a475b587a95b36df47144a6eeba374ace}} 
-\index{ScalesPuzzleScript\_AG@{ScalesPuzzleScript\_AG}!MoveWeight@{MoveWeight}}
-\index{MoveWeight@{MoveWeight}!ScalesPuzzleScript\_AG@{ScalesPuzzleScript\_AG}}
-\doxysubsubsection{\texorpdfstring{MoveWeight()}{MoveWeight()}}
-{\footnotesize\ttfamily void Scales\+Puzzle\+Script\+\_\+\+A\+G.\+Move\+Weight (\begin{DoxyParamCaption}\item[{Transform}]{weight }\end{DoxyParamCaption})}
-
-
-
-When a weight is moved its parent is set along with its position on the pan Then the pans are compared to see if they\textquotesingle{}re balanced 
-
-
-\begin{DoxyParams}{Parameters}
-{\em weight -\/ the transform of the weight so its position can be moved and parent can be set} & \\
-\hline
-\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
