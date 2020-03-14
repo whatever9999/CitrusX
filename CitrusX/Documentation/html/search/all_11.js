@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['save_65',['Save',['../class_save_system___d_r.html#a19c96681c11281910b1c212e57b08972',1,'SaveSystem_DR']]],
-  ['savesystem_5fdr_66',['SaveSystem_DR',['../class_save_system___d_r.html',1,'']]],
-  ['scalespuzzlescript_5fag_67',['ScalesPuzzleScript_AG',['../class_scales_puzzle_script___a_g.html',1,'']]],
-  ['setupritual_5fcw_68',['SetUpRitual_CW',['../class_set_up_ritual___c_w.html',1,'']]],
-  ['sfxmanager_5fdr_69',['SFXManager_DR',['../class_s_f_x_manager___d_r.html',1,'']]],
-  ['soundeffect_5fdr_70',['SoundEffect_DR',['../class_sound_effect___d_r.html',1,'']]],
-  ['spoopyscare_71',['SpoopyScare',['../class_baron_popup___d_r.html#a5c93a27e8f780658ae9fe270fa284ec7',1,'BaronPopup_DR']]],
-  ['subtitle_5fdr_72',['Subtitle_DR',['../struct_subtitle___d_r.html',1,'']]],
-  ['subtitles_5fhr_73',['Subtitles_HR',['../class_subtitles___h_r.html',1,'']]]
+  ['table_5fcw_74',['Table_CW',['../class_table___c_w.html',1,'']]],
+  ['tickofftask_75',['TickOffTask',['../class_journal___d_r.html#ab1fd778d5789f71a198ffb6c97207c79',1,'Journal_DR.TickOffTask(int taskNumber)'],['../class_journal___d_r.html#a7de77eaacbae02818ec272b58c563cfb',1,'Journal_DR.TickOffTask(string task)']]],
+  ['togglesfx_76',['ToggleSFX',['../class_s_f_x_manager___d_r.html#a20a025da7b614a8eec67e20e796f17d4',1,'SFXManager_DR']]],
+  ['triggeranimation_77',['TriggerAnimation',['../class_animation_manager___d_r.html#aec146fc2c37c8d6fe1c80452468f91b6',1,'AnimationManager_DR']]],
+  ['triggerscript_5fcw_78',['TriggerScript_CW',['../class_trigger_script___c_w.html',1,'']]]
 ];

@@ -85,11 +85,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6fb7d4030d4f9035ba81a0504e03d7d5"><td class="memItemLeft" align="right" valign="top"><a id="a6fb7d4030d4f9035ba81a0504e03d7d5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetActive</b> (bool value)</td></tr>
 <tr class="separator:a6fb7d4030d4f9035ba81a0504e03d7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a475b587a95b36df47144a6eeba374ace"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scales_puzzle_script___a_g.html#a475b587a95b36df47144a6eeba374ace">MoveWeight</a> (Transform weight)</td></tr>
-<tr class="memdesc:a475b587a95b36df47144a6eeba374ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">When a weight is moved its parent is set along with its position on the pan Then the pans are compared to see if they're balanced  <a href="class_scales_puzzle_script___a_g.html#a475b587a95b36df47144a6eeba374ace">More...</a><br /></td></tr>
-<tr class="separator:a475b587a95b36df47144a6eeba374ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bc2b7378cb4809258be1c866e282400"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scales_puzzle_script___a_g.html#a0bc2b7378cb4809258be1c866e282400">ComparePans</a> ()</td></tr>
-<tr class="memdesc:a0bc2b7378cb4809258be1c866e282400"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of children of the left pan is compared to the right If they are equal the game state is updated  <a href="class_scales_puzzle_script___a_g.html#a0bc2b7378cb4809258be1c866e282400">More...</a><br /></td></tr>
+<tr class="memdesc:a0bc2b7378cb4809258be1c866e282400"><td class="mdescLeft">&#160;</td><td class="mdescRight">The mass of the children of each pan is compared  <a href="class_scales_puzzle_script___a_g.html#a0bc2b7378cb4809258be1c866e282400">More...</a><br /></td></tr>
 <tr class="separator:a0bc2b7378cb4809258be1c866e282400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -97,15 +94,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a24a1839ceb07e7cf9192d9a6f8988221"><td class="memItemLeft" align="right" valign="top"><a id="a24a1839ceb07e7cf9192d9a6f8988221"></a>
 Vector2[]&#160;</td><td class="memItemRight" valign="bottom"><b>whereToPutWeightsAccordingToPan</b></td></tr>
 <tr class="separator:a24a1839ceb07e7cf9192d9a6f8988221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a413aac7b219ddc596e68343b2d458203"><td class="memItemLeft" align="right" valign="top"><a id="a413aac7b219ddc596e68343b2d458203"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>leftMass</b></td></tr>
-<tr class="separator:a413aac7b219ddc596e68343b2d458203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae80979516c25ab9afa438083db65f0f5"><td class="memItemLeft" align="right" valign="top"><a id="ae80979516c25ab9afa438083db65f0f5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>rightMass</b></td></tr>
-<tr class="separator:ae80979516c25ab9afa438083db65f0f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compares the children of the left and right pan of the scales to see if they are balanced. </p>
+<p>This is done using the mass of the children on the scales The first child is ignored as this is to be a text mesh that shows the weight on the scale</p>
 <dl class="section author"><dt>Author</dt><dd>Adam</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>Last Modified: 09/02/2020 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -124,33 +116,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>rightMass</b></td></tr
       </table>
 </div><div class="memdoc">
 
-<p>The number of children of the left pan is compared to the right If they are equal the game state is updated </p>
-
-</div>
-</div>
-<a id="a475b587a95b36df47144a6eeba374ace"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a475b587a95b36df47144a6eeba374ace">&#9670;&nbsp;</a></span>MoveWeight()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ScalesPuzzleScript_AG.MoveWeight </td>
-          <td>(</td>
-          <td class="paramtype">Transform&#160;</td>
-          <td class="paramname"><em>weight</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>When a weight is moved its parent is set along with its position on the pan Then the pans are compared to see if they're balanced </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">weight - the transform of the weight so its position can be moved and parent can be set</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+<p>The mass of the children of each pan is compared </p>
 
 </div>
 </div>

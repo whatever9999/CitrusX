@@ -100,9 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a083620e5d876b2f581eb6b5de8947de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fusebox___c_w.html#a083620e5d876b2f581eb6b5de8947de9">OpenFusebox</a> ()</td></tr>
 <tr class="memdesc:a083620e5d876b2f581eb6b5de8947de9"><td class="mdescLeft">&#160;</td><td class="mdescRight">reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game  <a href="class_fusebox___c_w.html#a083620e5d876b2f581eb6b5de8947de9">More...</a><br /></td></tr>
 <tr class="separator:a083620e5d876b2f581eb6b5de8947de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3de4eebf794b6fd17b75633bad5cafe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fusebox___c_w.html#a3de4eebf794b6fd17b75633bad5cafe4">CheckPipes</a> ()</td></tr>
-<tr class="memdesc:a3de4eebf794b6fd17b75633bad5cafe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox  <a href="class_fusebox___c_w.html#a3de4eebf794b6fd17b75633bad5cafe4">More...</a><br /></td></tr>
-<tr class="separator:a3de4eebf794b6fd17b75633bad5cafe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6986185a76ecee9cee2979c5dbcf4996"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fusebox___c_w.html#a6986185a76ecee9cee2979c5dbcf4996">PowerButton</a> ()</td></tr>
+<tr class="memdesc:a6986185a76ecee9cee2979c5dbcf4996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the coroutine CheckPipes() to go through each pipe one by one and check the flow in it, changing the image to show it's complete and chaning it back if the flow fails  <a href="class_fusebox___c_w.html#a6986185a76ecee9cee2979c5dbcf4996">More...</a><br /></td></tr>
+<tr class="separator:a6986185a76ecee9cee2979c5dbcf4996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5da257fa3f2758f047af0ff610d11492"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_fusebox___c_w.html#a5da257fa3f2758f047af0ff610d11492">CloseFusebox</a> ()</td></tr>
 <tr class="memdesc:a5da257fa3f2758f047af0ff610d11492"><td class="mdescLeft">&#160;</td><td class="mdescRight">reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game  <a href="class_fusebox___c_w.html#a5da257fa3f2758f047af0ff610d11492">More...</a><br /></td></tr>
 <tr class="separator:a5da257fa3f2758f047af0ff610d11492"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,31 +115,15 @@ KeyCode&#160;</td><td class="memItemRight" valign="bottom"><b>closeFuseboxKey</b
 <tr class="memitem:adccb0c01bf34be66c9854ab2461c1197"><td class="memItemLeft" align="right" valign="top"><a id="adccb0c01bf34be66c9854ab2461c1197"></a>
 KeyCode&#160;</td><td class="memItemRight" valign="bottom"><b>resetPipesKey</b> = KeyCode.X</td></tr>
 <tr class="separator:adccb0c01bf34be66c9854ab2461c1197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b97d3dca75b762d558043c2e8492f05"><td class="memItemLeft" align="right" valign="top"><a id="a7b97d3dca75b762d558043c2e8492f05"></a>
+<a class="el" href="class_pipes___c_w.html">Pipes_CW</a>[]&#160;</td><td class="memItemRight" valign="bottom"><b>pipesFromStartToEnd</b></td></tr>
+<tr class="separator:a7b97d3dca75b762d558043c2e8492f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Open and close the fusebox and check if the pipes are in the right position, updating the game state if they are. </p>
 <dl class="section author"><dt>Author</dt><dd>Chase</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Last Modified: 03/03/2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Last Modified: 09/03/2020 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3de4eebf794b6fd17b75633bad5cafe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3de4eebf794b6fd17b75633bad5cafe4">&#9670;&nbsp;</a></span>CheckPipes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Fusebox_CW.CheckPipes </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks the position of each pipe. If they are all in their desired position then the puzzle is marked as complete and the game state is updated with this. The player can no longer interact with the fusebox </p>
-
-</div>
-</div>
 <a id="a5da257fa3f2758f047af0ff610d11492"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5da257fa3f2758f047af0ff610d11492">&#9670;&nbsp;</a></span>CloseFusebox()</h2>
 
@@ -175,6 +159,25 @@ KeyCode&#160;</td><td class="memItemRight" valign="bottom"><b>resetPipesKey</b> 
 </div><div class="memdoc">
 
 <p>reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game </p>
+
+</div>
+</div>
+<a id="a6986185a76ecee9cee2979c5dbcf4996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6986185a76ecee9cee2979c5dbcf4996">&#9670;&nbsp;</a></span>PowerButton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fusebox_CW.PowerButton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start the coroutine CheckPipes() to go through each pipe one by one and check the flow in it, changing the image to show it's complete and chaning it back if the flow fails </p>
 
 </div>
 </div>
