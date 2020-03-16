@@ -9,6 +9,8 @@
  * Added disturbances, changed initiate to a reference instead of calling the instance every time
  * Chase (Changes) 4/3/2020
  * Added GameObjects for puzzles, tidied script up aswell
+ * Chase (Changes) 16/3/2020
+ * Tidied up the script by moving all none game state related variables and features to EventManager_CW
  */
 
 /**
@@ -27,12 +29,6 @@ using UnityEngine;
 
 public class GameTesting_CW : MonoBehaviour
 {
-    #region TRIGGERS
-    private TriggerScript_CW ritualTrigger;
-    private TriggerScript_CW chessTrigger;
-    private TriggerScript_CW throwingTrigger;
-    private TriggerScript_CW correctOrderTrigger;
-    #endregion
     #region BOOLS
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false, false };
@@ -40,10 +36,7 @@ public class GameTesting_CW : MonoBehaviour
     private bool[] cutscenesDone = { false, false, false };
     #endregion
     #region OTHER_VARIABLES
-    private DisturbanceHandler_DR disturbance;
     private InitiatePuzzles_CW initiate;
-    private GameObject throwingBox;
-    private GameObject hiddenMechDoc;
     #endregion
 
     public static GameTesting_CW instance;
@@ -54,27 +47,8 @@ public class GameTesting_CW : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        disturbance = DisturbanceHandler_DR.instance;
         initiate = InitiatePuzzles_CW.instance;
-        throwingBox = GameObject.Find("ThrowingBox");
-        hiddenMechDoc = GameObject.Find("HiddenMechNote");
-        #region INTIALISE_TRIGGERS
-        ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
-        chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
-        throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
-        correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
-        #endregion
     }
-
-    /// <summary>
-    /// Ensure that GOs that are disabled are so
-    /// </summary>
-    private void Start()
-    {
-        throwingBox.SetActive(false);
-        hiddenMechDoc.SetActive(false);
-    }
-
     /// <summary>
     /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
     /// </summary>
@@ -98,7 +72,6 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[1] && !setUpPuzzle[2])
         {
             setUpPuzzle[2] = true;
-            ritualTrigger.allowedToBeUsed = true;
             initiate.InitiateColourMatchingPuzzle();
         }
         else if (arePuzzlesDone[2] && !setUpPuzzle[3])
@@ -114,36 +87,26 @@ public class GameTesting_CW : MonoBehaviour
         else if (arePuzzlesDone[4] && !setUpPuzzle[5])
         {
             setUpPuzzle[5] = true;
-            chessTrigger.allowedToBeUsed = true;
-           // disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL); //might move to monitor interaction
+  
             initiate.InitiateChessBoardPuzzle();
         }
         else if (arePuzzlesDone[5] && !setUpPuzzle[6])
         {
             setUpPuzzle[6] = true;
-            chessTrigger.allowedToBeUsed = true;
-          //  disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
-            throwingTrigger.allowedToBeUsed = true;
             initiate.InitiateThrowingPuzzle();
         }
         else if (arePuzzlesDone[6] && !setUpPuzzle[7])
         {
-            throwingBox.SetActive(true);
             setUpPuzzle[7] = true;
-            //disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             initiate.InitiateHiddenMechanismPuzzle();
         }
         else if (arePuzzlesDone[7] && !setUpPuzzle[8])
         {
-            hiddenMechDoc.SetActive(true);
-            setUpPuzzle[8] = true;
-            correctOrderTrigger.allowedToBeUsed = true;
-         //   disturbance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
+            setUpPuzzle[8] = true; 
             initiate.InitiateCorrectOrderPuzzle();
         }
         else if (arePuzzlesDone[8] && !setUpPuzzle[9])
         {
-            ritualTrigger.allowedToBeUsed = true;
             setUpPuzzle[9] = true;
             initiate.InitiateCoinCountPuzzle();
         }

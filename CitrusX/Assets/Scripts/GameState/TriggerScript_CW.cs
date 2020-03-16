@@ -10,6 +10,8 @@
  * 
  * Chase (Changes) 9/3/2020
  * Added new journal entries/tasks and added a new trigger "Chessboard Extra" which is for the room that the chessboard puzzle opens
+ * Chase (Changes) 16/3/2020
+ * Added a few disturbances upon entrance
  */
 
 /**
@@ -97,6 +99,7 @@ public class TriggerScript_CW : MonoBehaviour
         {
             if(GameTesting_CW.instance.arePuzzlesDone[4])
             {
+                DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
                 journal.TickOffTask("Check study");
                 journal.AddJournalLog("This book might have some information");
@@ -118,6 +121,7 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
+            hiddenMechDoor.ToggleOpen();
             journal.TickOffTask("Check out library");
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
             journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
