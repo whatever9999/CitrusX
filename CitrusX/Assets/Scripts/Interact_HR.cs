@@ -124,7 +124,8 @@ public class Interact_HR : MonoBehaviour
     private Text paperText;
     private Image paperBackground;
     private Camera playerCamera;
-    private int numberCoinsCollected;
+    [HideInInspector]
+    public int numberCoinsCollected;
     private GameObject correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;

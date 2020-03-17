@@ -125,6 +125,8 @@ public class Subtitles_HR : MonoBehaviour
     private AudioSource voiceSource;
 
     private ID currentCutsceneSubtitle;
+    private ID currentGoodCutsceneSubtitle;
+    private ID currentBadCutsceneSubtitle;
 
     /// <summary>
     /// Initialise variables
@@ -137,6 +139,8 @@ public class Subtitles_HR : MonoBehaviour
         subtitleText.text = "";
 
         currentCutsceneSubtitle = ID.S_LINE1;
+        currentBadCutsceneSubtitle = ID.B_LINE1;
+        currentGoodCutsceneSubtitle = ID.G_LINE1;
     }
 
     //THE BIG FUNCTION TO CALL CHASE
@@ -171,9 +175,26 @@ public class Subtitles_HR : MonoBehaviour
         subtitleText.text = "";
     }
 
+    //Set lines for cutscenes
     public void StartCutsceneSubtitle()
     {
         PlayAudio(currentCutsceneSubtitle++);
+    }
+    public void GoodEndCutsceneSubtitle()
+    {
+        PlayAudio(currentGoodCutsceneSubtitle++);
+    }
+    public void BadEndCutsceneSubtitle()
+    {
+        PlayAudio(currentBadCutsceneSubtitle++);
+    }
+    public void Gasp()
+    {
+        PlayAudio(ID.GASP);
+    }
+    public void Sigh()
+    {
+        PlayAudio(ID.SIGH);
     }
 }
 

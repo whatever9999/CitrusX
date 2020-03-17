@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4174789593882853646}
   - component: {fileID: 5628826926481223744}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 542085371487222788}
   - component: {fileID: 2577147617002800325}
   - component: {fileID: 6801678234673952022}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Branches
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 7185703951809757096}
   - component: {fileID: 8770687092023478125}
   - component: {fileID: 3854089930473841635}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
