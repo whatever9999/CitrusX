@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeInFrames: 1
-  timeAreaShownRange: {x: -0.000000108513866, y: 129.2999}
+  timeAreaShownRange: {x: -0.9678136, y: 128.33208}
   showAudioWaveform: 1
   trackHeight: 30
   trackScale: 1
@@ -132,8 +132,8 @@ MonoBehaviour:
       y: 1
       width: 1
       height: 1
-    m_MarkerTimeStampsKeys: e673ffffdc6effff846bffff6869ffff6c67ffff3665ffff2e63ffffa256ffff3026ffff8c25ffffa607ffffb8f5feff989b0000
-    m_MarkerTimeStampsValues: 442dc5d679cad708c2b697ae79cad708d05896b179cad708118180b479cad708b52c87a47ecad7089ad49dba79cad708984c03a77ecad7087fed376f80cad7085c41e4a17ecad7083f2d306283cad708b3606c6083cad7089fa5b36783cad70821945e48a5cad708
+    m_MarkerTimeStampsKeys: e673ffffdc6effff846bffff6869ffff6c67ffff3665ffff2e63ffffa256ffff3026ffff8c25ffffa607ffffb8f5feff989b0000049c0000069c0000089c00000a9c00000c9c00000e9c0000109c0000149c0000129c0000169c00001a9c0000189c0000
+    m_MarkerTimeStampsValues: 442dc5d679cad708c2b697ae79cad708d05896b179cad708118180b479cad708b52c87a47ecad7089ad49dba79cad708984c03a77ecad7087fed376f80cad7085c41e4a17ecad7083f2d306283cad708b3606c6083cad7089fa5b36783cad70821945e48a5cad7083a085026afcad7085d52b52bafcad70831c84c2cafcad708d651b42cafcad7087953732dafcad70819f42c2eafcad708981aeb2eafcad7082b726131afcad7081ecdb930afcad708c5ff5e37afcad7087e140c38afcad7080a8a963cafcad708
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
