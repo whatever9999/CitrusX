@@ -8,12 +8,19 @@
  * Dominique (Changes) 20/02/2020
  * Changed the way the baron moves (change velocity instead of adding force)
  * Added animation to the baron
+ * 
+ * Dominique (Changes) 17/03/2020
+ * The baron now handles itself and is told when to go for the water/appear in a room (as opposed to being on a timer from the water bowl)
  */
 
 /**
 * \class Baron_DR
 * 
 * \brief When the baron is active he tries to move towards the water bowl. If he collides with it then he reaches for a coin and picks it up
+* 
+* Where baron is a reference to the Baron_DR script use:
+* baron.GetCoin(); to make the baron go for the bowl
+* baron.AppearStill(baron.transform, 5); to make the baron appear for a certain amount of time
 * 
 * \author Dominique
 * 
@@ -26,6 +33,9 @@ public class Baron_DR : MonoBehaviour
 {
     public float speed;
 
+    private float appearanceTimer;
+    private float currentAppearanceTimer;
+    private bool gettingCoin = true;
     private Vector3 startPosition;
     private Transform waterBowl;
     private Rigidbody rigidbody;
@@ -37,9 +47,17 @@ public class Baron_DR : MonoBehaviour
     private void Awake()
     {
         startPosition = transform.position;
-        waterBowl = GameObject.FindObjectOfType<WaterBowl_DR>().transform;
+        waterBowl = FindObjectOfType<WaterBowl_DR>().transform;
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+    }
+
+    /// <summary>
+    /// Disable the object after it has been accessed for references
+    /// </summary>
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -47,16 +65,63 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        //Set target as water bowl
-        transform.LookAt(waterBowl);
-        //Make sure that the baron doesn't rotate in the wrong axis
-        Vector3 rotation = transform.rotation.eulerAngles;
-        rotation.x = 0;
-        rotation.z = 0;
-        transform.rotation = Quaternion.Euler(rotation);
-        //Move towards water bowl
-        rigidbody.velocity = transform.forward * speed;
+        if(gettingCoin)
+        {
+            //Set target as water bowl
+            transform.LookAt(waterBowl);
+            //Make sure that the baron doesn't rotate in the wrong axis
+            Vector3 rotation = transform.rotation.eulerAngles;
+            rotation.x = 0;
+            rotation.z = 0;
+            transform.rotation = Quaternion.Euler(rotation);
+            //Move towards water bowl
+            rigidbody.velocity = transform.forward * speed;
+        }
+    }
 
+    /// <summary>
+    /// A timer runs to make the baron disappear after he has appeared in a room
+    /// </summary>
+    private void Update()
+    {
+        if(!gettingCoin)
+        {
+            appearanceTimer += Time.deltaTime;
+            if (appearanceTimer > currentAppearanceTimer)
+            {
+                appearanceTimer = 0;
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Baron appears at a specified position and rotation for a number of seconds then disappears
+    /// </summary>
+    /// <param name="location - where the baron will appear"></param>
+    /// <param name="lengthOfAppearance - how long until he disappears"></param>
+    public void AppearStill(Transform location, float lengthOfAppearance)
+    {
+        transform.position = location.position;
+        transform.rotation = location.rotation;
+
+        currentAppearanceTimer = lengthOfAppearance;
+
+        gettingCoin = false;
+
+        gameObject.SetActive(true);
+
+        animator.SetBool("NotMoving", true);
+    }
+
+    /// <summary>
+    /// The baron appears in his start position (according to the scene) and goes for the water bowl
+    /// </summary>
+    public void GetCoin()
+    {
+        transform.position = startPosition;
+        gettingCoin = true;
+        gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -65,8 +130,8 @@ public class Baron_DR : MonoBehaviour
     private void OnDisable()
     {
         //Reset position and speed
-        transform.position = startPosition;
         rigidbody.velocity = Vector3.zero;
+        animator.SetBool("NotMoving", false);
     }
 
     /// <summary>
@@ -91,7 +156,7 @@ public class Baron_DR : MonoBehaviour
         animator.SetBool("ReachedBowl", true);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         waterBowl.RemoveCoin();
-        waterBowl.ResetBaron();
         Debug.Log("The baron has taken a coin");
+        gameObject.SetActive(false);
     }
 }

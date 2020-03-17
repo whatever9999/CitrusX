@@ -5,12 +5,15 @@
  * 
  * Dominique (Changes) 20/02/2020
  * Now coins are instantiated according to how many are asked for in the inspector
+ * 
+ * Dominique (Changes) 17/03/2020
+ * The bowl no longer uses a timer to activate/deactivate the baron
  */
 
 /**
 * \class WaterBowl_DR
 * 
-* \brief Make the baron appear on a timer and hold the coins
+* \brief Handle the coins (Hold and pick up)
 * 
 * \author Dominique
 * 
@@ -22,58 +25,22 @@ using UnityEngine;
 
 public class WaterBowl_DR : MonoBehaviour
 {
-    public Vector2 baronAppearanceIntervalRange;
     public int numberOfCoins;
     public GameObject coinPrefab;
 
-    private float currentBaronAppearanceInterval;
-    private float baronAppearanceInterval;
-    private GameObject baron;
     private List<GameObject> coins;
-
-    public bool GetBaronActive() { return baron.activeInHierarchy; }
 
     /// <summary>
     /// Create the coins and set the current interval until the baron will appear
     /// </summary>
     private void Start()
     {
-        baron = GameObject.Find("Baron");
-        baron.SetActive(false);
-
-        currentBaronAppearanceInterval = 0;
-        baronAppearanceInterval = Random.Range(baronAppearanceIntervalRange[0], baronAppearanceIntervalRange[1]);
-
         coins = new List<GameObject>();
         for(int i = 0; i < numberOfCoins; i++)
         {
             GameObject thisCoin = Instantiate(coinPrefab, transform);
             coins.Add(thisCoin);
         }
-    }
-
-    /// <summary>
-    /// Run the timer for the baron's appearance (if he is not currently present) or make him appear
-    /// </summary>
-    private void Update()
-    {
-        if(currentBaronAppearanceInterval >= baronAppearanceInterval)
-        {
-            baron.SetActive(true);
-        } else if(!baron.activeInHierarchy)
-        {
-            currentBaronAppearanceInterval += Time.deltaTime;
-        }
-    }
-
-    /// <summary>
-    /// Make the baron disappear and reset the time until he will next be visible
-    /// </summary>
-    public void ResetBaron()
-    {
-        baron.SetActive(false);
-        currentBaronAppearanceInterval = 0;
-        baronAppearanceInterval = Random.Range(baronAppearanceIntervalRange[0], baronAppearanceIntervalRange[1]);
     }
 
     /// <summary>

@@ -130,6 +130,7 @@ public class Interact_HR : MonoBehaviour
     private WaterBowl_DR waterBowl;
     private Subtitles_HR subtitles;
     private ScalesPuzzleScript_AG scales;
+    private Baron_DR baron;
     internal bool paperIsClosed = false;
     #endregion
     #region VARS_FOR_PUZZLES
@@ -158,6 +159,7 @@ public class Interact_HR : MonoBehaviour
         subtitles = GetComponent<Subtitles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         ritual = GetComponent<SetUpRitual_CW>();
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         #endregion
     }
 
@@ -559,12 +561,12 @@ public class Interact_HR : MonoBehaviour
                 {
                     WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
 
-                    if (waterBowl.GetBaronActive())
+                    if (baron.isActiveAndEnabled)
                     {
                         if (waterBowl.RemoveCoin())
                         {
                             numberCoinsCollected++;
-                            waterBowl.ResetBaron();
+                            baron.gameObject.SetActive(false);
                             Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
                         }
                         else
