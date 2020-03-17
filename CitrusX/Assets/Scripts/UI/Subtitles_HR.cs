@@ -124,6 +124,8 @@ public class Subtitles_HR : MonoBehaviour
     private Text subtitleText;
     private AudioSource voiceSource;
 
+    private ID currentCutsceneSubtitle;
+
     /// <summary>
     /// Initialise variables
     /// </summary>
@@ -133,6 +135,8 @@ public class Subtitles_HR : MonoBehaviour
         subtitleText = GameObject.Find("Subtitles").GetComponent<Text>();
 
         subtitleText.text = "";
+
+        currentCutsceneSubtitle = ID.S_LINE1;
     }
 
     //THE BIG FUNCTION TO CALL CHASE
@@ -165,6 +169,11 @@ public class Subtitles_HR : MonoBehaviour
     {
         yield return new WaitForSeconds(timeToWait);
         subtitleText.text = "";
+    }
+
+    public void StartCutsceneSubtitle()
+    {
+        PlayAudio(currentCutsceneSubtitle++);
     }
 }
 
