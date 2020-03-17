@@ -51,6 +51,8 @@ public class Pipes_CW : MonoBehaviour
 
     public Sprite incompletePipe;
     public Sprite completePipe;
+    private Color startColour;
+    private Color completeColour;
 
     private const int degreesToMove = 90;
     private Fusebox_CW fusebox;
@@ -75,6 +77,11 @@ public class Pipes_CW : MonoBehaviour
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         currentPosition = startPosition;
         image = GetComponent<Image>();
+        startColour = GetComponent<Image>().color;
+        completeColour.r = 238;
+        completeColour.g = 255;
+        completeColour.b = 0;
+        completeColour.a = 255;
     }
     
     /// <summary>
@@ -141,7 +148,7 @@ public class Pipes_CW : MonoBehaviour
     /// </summary>
     public void ChangeColour()
     {
-        image.sprite = completePipe;
+        image.color = completeColour;
         canBeRotated = false;
     }
     /// <summary>
@@ -149,7 +156,7 @@ public class Pipes_CW : MonoBehaviour
     /// </summary>
     public void ResetColour()
     {
-        image.sprite = incompletePipe;
+        image.color = startColour;
         canBeRotated = true;
     }
 }
