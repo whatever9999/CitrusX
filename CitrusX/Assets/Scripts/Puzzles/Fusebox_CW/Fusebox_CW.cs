@@ -19,6 +19,9 @@
  * 
  * Chase (Changes) 11/3/2020
  * Made it inherit from PuzzleBase Script and tidied the script up. Moved directions to pipes
+ * 
+ * Chase (Changes) 17/3/2020
+ * Changed it from sprites to colours for completion
 */
 
 /**
@@ -53,7 +56,7 @@ internal class Fusebox_CW : PuzzleBaseScript
     /// </summary>
     private void Awake()
     {   
-        fuseboxText = GameObject.Find("FuseboxMessageText").GetComponent<Text>();
+
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         fusebox = GameObject.Find("Fusebox");
         journal = Journal_DR.instance;
@@ -113,7 +116,6 @@ internal class Fusebox_CW : PuzzleBaseScript
 
         if (complete)
         {
-            fuseboxText.text = "COMPLETED";
             isFuseboxSolved = true;
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");

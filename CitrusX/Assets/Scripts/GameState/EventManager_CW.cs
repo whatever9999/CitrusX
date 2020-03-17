@@ -28,6 +28,9 @@ public class EventManager_CW : MonoBehaviour
     private GameObject hiddenMechDoc;
     private GameObject bathroomKeyPart1;
     private GameObject bathroomKeyPart2;
+    private GameObject safe;
+    private GameObject[] balls;
+    private GameObject[] buttons;
     #endregion
     #region DISTURBANCES
     private DisturbanceHandler_DR disturbances;
@@ -44,24 +47,53 @@ public class EventManager_CW : MonoBehaviour
     {
         game = GameTesting_CW.instance;
         disturbances = DisturbanceHandler_DR.instance;
+        #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
+        bathroomKeyPart1 = GameObject.Find("Bathroom Key");
+        bathroomKeyPart2 = GameObject.Find("Bathroom Key Part 2");
+      //  balls[0] = GameObject.Find("1Ball");
+      //  balls[1] = GameObject.Find("2Ball");
+       // balls[2] = GameObject.Find("3Ball");
+      //  buttons[0] = GameObject.Find("1Button");
+       // buttons[1] = GameObject.Find("2Button");
+       // buttons[2] = GameObject.Find("3Button");
+        safe = GameObject.Find("Safe");
+        #endregion
+        #region INITIATE_TRIGGERS
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
+        #endregion
     }
     private void Start()
     {
         throwingBox.SetActive(false);
         hiddenMechDoc.SetActive(false);
+        bathroomKeyPart1.SetActive(false);
+        bathroomKeyPart2.SetActive(false);
+        safe.SetActive(false);
+        balls[0].SetActive(false);
+        balls[1].SetActive(false);
+        balls[2].SetActive(false);
+        buttons[0].SetActive(false);
+        buttons[1].SetActive(false);
+        buttons[2].SetActive(false);
     }
     private void Update()
     {
         if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
+            bathroomKeyPart1.SetActive(true);
+            bathroomKeyPart1.SetActive(true);
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[0] = true;
+        }
+        else if(game.arePuzzlesDone[2] && !itemsSet[2])
+        {
+            safe.SetActive(true);
+            itemsSet[2] = true;
         }
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
@@ -72,6 +104,12 @@ public class EventManager_CW : MonoBehaviour
         {
             chessTrigger.allowedToBeUsed = true;
             throwingTrigger.allowedToBeUsed = true;
+            balls[0].SetActive(true);
+            balls[1].SetActive(true);
+            balls[2].SetActive(true);
+            buttons[0].SetActive(true);
+            buttons[1].SetActive(true);
+            buttons[2].SetActive(true);
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             triggersSet[2] = true;
         }
