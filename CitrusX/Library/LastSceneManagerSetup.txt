@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Game/Game_DR.unity
+=======
+- path: Assets/Scenes/Game/Start_DR.unity
+>>>>>>> SFX
   isLoaded: 1
   isActive: 1
   isSubScene: 0

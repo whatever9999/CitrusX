@@ -102,6 +102,7 @@ public class Inventory_HR : MonoBehaviour
             {
                 //Add image and text
                 inventoryItems[i].transform.GetChild(0).GetComponent<Image>().sprite = items[itemName];
+                inventoryItems[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text = itemName.ToString();
                 break;
             }
@@ -115,7 +116,8 @@ public class Inventory_HR : MonoBehaviour
     public void RemoveItem(int slot) 
     {
         //Remove item from slot
-        inventoryItems[slot].transform.GetChild(0).GetComponent<Image>().sprite = null; 
+        inventoryItems[slot].transform.GetChild(0).GetComponent<Image>().sprite = null;
+        inventoryItems[slot].transform.GetChild(0).GetComponent<Image>().enabled = false;
         inventoryItems[slot].transform.GetChild(1).GetComponent<Text>().text = "";
     }
 
