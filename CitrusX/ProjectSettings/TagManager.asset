@@ -24,6 +24,7 @@ TagManager:
   - Book
   - Pawn
   - SymbolOfScarcity
+  - Weight
   layers:
   - Default
   - TransparentFX
