@@ -96,10 +96,14 @@ public class Cinematics_DR : MonoBehaviour
             playerController.enabled = false;
             startCameraAnimator.SetTrigger("StartCinematic");
             startCinematic.Play();
-        } else
+        }
+        //If in the unity editor ensure the monitor is visible (not necessary in game as this is done according to saved data
+#if UNITY_EDITOR
+        else
         {
             ToggleMonitor();
         }
+#endif
     }
 
     /// <summary>

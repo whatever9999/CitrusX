@@ -23,8 +23,6 @@ public class DisturbanceHandler_DR : MonoBehaviour
 {
     public static DisturbanceHandler_DR instance;
 
-    public float numberOfSecondsForBaronAppearance = 10;
-
     #region Disturbance Components
     private Animator pawn;
     private Animator slamBook;
@@ -49,7 +47,6 @@ public class DisturbanceHandler_DR : MonoBehaviour
         BARONCLOSEUP,
         BOOKTURNPAGE,
         DOORCREAK,
-        BARONINROOM,
         BOXMOVE,
         BOOKFALL,
         LAMPWOBBLE
@@ -94,15 +91,6 @@ public class DisturbanceHandler_DR : MonoBehaviour
             case DisturbanceName.DOORCREAK:
                 creakyDoor.ToggleOpen();
                 break;
-            case DisturbanceName.BARONINROOM:
-                //Stop baron AI and ensure he stands still
-                baron.SetActive(true);
-                baronAnimator.SetBool("NotMoving", true);
-                baronAI.enabled = false;
-                baronTimer.enabled = false;
-                //Trigger disappearance
-                StartCoroutine(DisappearBaron());
-                break;
             case DisturbanceName.BOXMOVE:
                 boxMove.SetTrigger("Shufft");
                 break;
@@ -120,16 +108,5 @@ public class DisturbanceHandler_DR : MonoBehaviour
     public void MoveBaron(Vector3 position)
     {
         baron.transform.position = position;
-    }
-
-    //Make sure that after a certain amount of time the baron disappears and his AI is re-enabled (with him walking again)
-    private IEnumerator DisappearBaron()
-    {
-        yield return new WaitForSeconds(numberOfSecondsForBaronAppearance);
-        baronAnimator.SetBool("NotMoving", false);
-        baronAI.enabled = true;
-        baronTimer.enabled = true;
-        baron.transform.position = baronStart;
-        baron.SetActive(false);
     }
 }
