@@ -82,6 +82,9 @@
  * 
  * Chase (Changes) 11/3/2020
  * Added interaction for symbols of scarcity
+ * 
+ * Dominique (Changes) 18/03/2020
+ * Chess pieces now rotate themselves
  */
 
 /**
@@ -546,8 +549,7 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    //Rotate 90 degrees in y axis
-                    hit.transform.Rotate(0, 0, 90);
+                    hit.transform.GetComponent<ChessPiece_DR>().Rotate();
                 }
             }
             else if (hit.transform.tag == "WaterBowl")

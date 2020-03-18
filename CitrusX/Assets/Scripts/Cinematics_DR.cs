@@ -29,25 +29,25 @@ public class Cinematics_DR : MonoBehaviour
 {
     public bool playStartCinematic = true;
 
+    #region CinematicProgress
     private VideoPlayer videoPlayer;
+    private Animator endCameraAnimator;
+    private Animator startCameraAnimator;
+    private GameObject monitor;
+    private bool monitorOn = false;
+    private GameObject cutsceneCoins;
+    private Image blackScreen;
+    private GameObject creditScreen;
+    #endregion
+    #region Cinematics
     private PlayableDirector startCinematic;
     private PlayableDirector goodEndCinematic;
     private PlayableDirector badEndCinematic;
-
-    private Animator endCameraAnimator;
-    private Animator startCameraAnimator;
-
-    private GameObject monitor;
-    private bool monitorOn = false;
-
+    #endregion
+    #region PlayerControl
     private Interact_HR playerInteraction;
     private FirstPersonController playerController;
-
-    private GameObject cutsceneCoins;
-
-    private Image blackScreen;
-
-    private GameObject creditScreen;
+    #endregion
 
     public enum END_CINEMATICS
     {
