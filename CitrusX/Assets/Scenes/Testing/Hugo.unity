@@ -4578,7 +4578,8 @@ PrefabInstance:
       propertyPath: RayRange
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4397068213095997787, guid: ef914bb9165fb324eb5e5dc8ed0a668d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ef914bb9165fb324eb5e5dc8ed0a668d, type: 3}
 --- !u!20 &953419461 stripped
 Camera:
@@ -12109,7 +12110,7 @@ MonoBehaviour:
   inventoryCloseKeys: 690000001b000000
   itemNames: 00000000
   itemImages:
-  - {fileID: 21300000, guid: eb5f6e2757c821940b69cf1456f7865a, type: 3}
+  - {fileID: 21300000, guid: 7ae85cd1dfbe6714ca6be53be15e8fef, type: 3}
 --- !u!1 &1760220570
 GameObject:
   m_ObjectHideFlags: 0
@@ -13844,6 +13845,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4103423558833471755, guid: 97cb56c0627da094c86e0c9b48213e02,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4103423557865884960, guid: 97cb56c0627da094c86e0c9b48213e02,
         type: 3}
       propertyPath: m_Material
@@ -13857,17 +13863,12 @@ PrefabInstance:
     - target: {fileID: 4103423557865884960, guid: 97cb56c0627da094c86e0c9b48213e02,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4103423557865884960, guid: 97cb56c0627da094c86e0c9b48213e02,
         type: 3}
       propertyPath: m_Type
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4103423558833471755, guid: 97cb56c0627da094c86e0c9b48213e02,
-        type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97cb56c0627da094c86e0c9b48213e02, type: 3}

@@ -197,7 +197,7 @@ public class Interact_HR : MonoBehaviour
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
 
-                   // inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+                    inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
                     //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
