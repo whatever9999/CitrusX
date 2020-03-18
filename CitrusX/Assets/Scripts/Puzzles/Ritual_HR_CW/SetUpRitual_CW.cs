@@ -40,10 +40,10 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     private GameObject symbol2;
     private GameObject symbol3;
     private GameObject symbol4;
-    private Door_DR door1;
-    private Door_DR door2;
-    private Door_DR door3;
-    private Door_DR door4;
+    public Door_DR door1;
+    public Door_DR door2;
+    public Door_DR door3;
+    public Door_DR door4;
     /// <summary>
     /// Inititalise variables
     /// </summary>
@@ -54,10 +54,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         pendant = GameObject.Find("Pendant");
         jewelleryBox = GameObject.Find("Jewellery Box");
         bracelet = GameObject.Find("Bracelet");
-        door1 = GameObject.Find("ChessDoor").GetComponent<Door_DR>();
-        door2 = GameObject.Find("DiningRoomDoor").GetComponent<Door_DR>();
-        door3 = GameObject.Find("DownstairBathroomDoor").GetComponent<Door_DR>();
-        door4 = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+  
         symbol1 = GameObject.Find("SymbolOfScarcity");
         symbol2 = GameObject.Find("SymbolOfScarcity 2");
         symbol3 = GameObject.Find("SymbolOfScarcity 3");
