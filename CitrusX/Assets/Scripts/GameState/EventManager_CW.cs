@@ -29,8 +29,13 @@ public class EventManager_CW : MonoBehaviour
     private GameObject bathroomKeyPart1;
     private GameObject bathroomKeyPart2;
     private GameObject safe;
-    private GameObject[] balls;
-    private GameObject[] buttons;
+    private GameObject balls1;
+    private GameObject balls2;
+    private GameObject balls3;
+    private GameObject buttons1;
+    private GameObject buttons2;
+    private GameObject buttons3;
+    private GameObject pawn;
     #endregion
     #region DISTURBANCES
     private DisturbanceHandler_DR disturbances;
@@ -45,20 +50,21 @@ public class EventManager_CW : MonoBehaviour
 
     private void Awake()
     {
-        game = GameTesting_CW.instance;
+        
         disturbances = DisturbanceHandler_DR.instance;
         #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
         bathroomKeyPart1 = GameObject.Find("Bathroom Key");
         bathroomKeyPart2 = GameObject.Find("Bathroom Key Part 2");
-      //  balls[0] = GameObject.Find("1Ball");
-      //  balls[1] = GameObject.Find("2Ball");
-       // balls[2] = GameObject.Find("3Ball");
-      //  buttons[0] = GameObject.Find("1Button");
-       // buttons[1] = GameObject.Find("2Button");
-       // buttons[2] = GameObject.Find("3Button");
+        balls1 = GameObject.Find("Ball 1");
+        balls2 = GameObject.Find("2Ball");
+        balls3 = GameObject.Find("3Ball");
+        buttons1 = GameObject.Find("1Button");
+        buttons2 = GameObject.Find("2Button");
+        buttons3 = GameObject.Find("3Button");
         safe = GameObject.Find("Safe");
+        pawn = GameObject.Find("Pawn");
         #endregion
         #region INITIATE_TRIGGERS
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
@@ -69,17 +75,19 @@ public class EventManager_CW : MonoBehaviour
     }
     private void Start()
     {
+        game = GameTesting_CW.instance;
         throwingBox.SetActive(false);
         hiddenMechDoc.SetActive(false);
         bathroomKeyPart1.SetActive(false);
         bathroomKeyPart2.SetActive(false);
         safe.SetActive(false);
-        balls[0].SetActive(false);
-        balls[1].SetActive(false);
-        balls[2].SetActive(false);
-        buttons[0].SetActive(false);
-        buttons[1].SetActive(false);
-        buttons[2].SetActive(false);
+        balls1.SetActive(false);
+        balls2.SetActive(false);
+        balls3.SetActive(false);
+        buttons1.SetActive(false);
+        buttons2.SetActive(false);
+        buttons3.SetActive(false);
+        pawn.SetActive(false);
     }
     private void Update()
     {
@@ -98,18 +106,19 @@ public class EventManager_CW : MonoBehaviour
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
             chessTrigger.allowedToBeUsed = true;
+            pawn.SetActive(true);
             triggersSet[1] = true;
         }
         else if(game.arePuzzlesDone[5] && !triggersSet[2])
         {
             chessTrigger.allowedToBeUsed = true;
             throwingTrigger.allowedToBeUsed = true;
-            balls[0].SetActive(true);
-            balls[1].SetActive(true);
-            balls[2].SetActive(true);
-            buttons[0].SetActive(true);
-            buttons[1].SetActive(true);
-            buttons[2].SetActive(true);
+            balls1.SetActive(true);
+            balls2.SetActive(true);
+            balls3.SetActive(true);
+            buttons1.SetActive(true);
+            buttons2.SetActive(true);
+            buttons3.SetActive(true);
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             triggersSet[2] = true;
         }
