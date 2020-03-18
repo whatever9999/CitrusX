@@ -142,7 +142,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE1);
             journal.TickOffTask("Return to ritual");
             journal.AddJournalLog("How did the pieces blow off with the window closed?");
-            journal.ChangeTasks(new string[] {"Check the study"});
+            journal.ChangeTasks(new string[] {"Check the living room"});
             chessboard.SetActive(true);
             monitorInteractionsUsed[4] = true;
         }
