@@ -74,12 +74,12 @@ public class EventManager_CW : MonoBehaviour
         bathroomKeyPart1.SetActive(false);
         bathroomKeyPart2.SetActive(false);
         safe.SetActive(false);
-        balls[0].SetActive(false);
-        balls[1].SetActive(false);
-        balls[2].SetActive(false);
-        buttons[0].SetActive(false);
-        buttons[1].SetActive(false);
-        buttons[2].SetActive(false);
+        //balls[0].SetActive(false);
+        //balls[1].SetActive(false);
+        //balls[2].SetActive(false);
+        //buttons[0].SetActive(false);
+        //buttons[1].SetActive(false);
+        //buttons[2].SetActive(false);
     }
     private void Update()
     {
