@@ -111,6 +111,7 @@ public class Interact_HR : MonoBehaviour
     public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
     public Material outlineMaterial;
+    private Cinematics_DR cinematics;
 
     private Material originalMaterial;
     private MeshRenderer targetRenderer;
@@ -164,6 +165,7 @@ public class Interact_HR : MonoBehaviour
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         ritual = GetComponent<SetUpRitual_CW>();
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
+        cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         #endregion
     }
 
@@ -727,11 +729,11 @@ public class Interact_HR : MonoBehaviour
     {
         if (numberCoinsCollected == waterBowl.numberOfCoins)
         {
-            Debug.Log("Player has won");
+            cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.GOOD);
         }
         else
         {
-            Debug.Log("Player has lost");
+            cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.BAD);
         }
     }
 }

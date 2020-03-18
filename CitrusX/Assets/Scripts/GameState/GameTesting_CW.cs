@@ -37,6 +37,8 @@ public class GameTesting_CW : MonoBehaviour
     #endregion
     #region OTHER_VARIABLES
     private InitiatePuzzles_CW initiate;
+    private Cinematics_DR cinematics;
+    private Interact_HR interact;
     #endregion
 
     public static GameTesting_CW instance;
@@ -48,6 +50,7 @@ public class GameTesting_CW : MonoBehaviour
     {
         instance = this;
         initiate = InitiatePuzzles_CW.instance;
+        interact = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
     }
     /// <summary>
     /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
@@ -56,7 +59,6 @@ public class GameTesting_CW : MonoBehaviour
     {
         if (!cutscenes[0])
         {
-            //play start cutscene
             cutscenes[0] = true;
         }
         else if (!arePuzzlesDone[0] && !setUpPuzzle[0])
@@ -110,9 +112,6 @@ public class GameTesting_CW : MonoBehaviour
             setUpPuzzle[9] = true;
             initiate.InitiateCoinCountPuzzle();
         }
-        else if (arePuzzlesDone[9])
-        {
-            //DISTURBANCES DONE
-        }
+       
     }
 }
