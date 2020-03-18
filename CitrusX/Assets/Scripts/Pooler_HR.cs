@@ -56,7 +56,7 @@ public class Pooler_HR : MonoBehaviour
             poolDictionary.Add(pool.tag, objectPool);
         }
     }
-
+    //call this function
     public GameObject SpawnFromPool(Tags tag, Vector3 position, AudioClip clip)
     {
         if (!poolDictionary.ContainsKey(tag))
