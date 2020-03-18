@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Testing/Dominique.unity
-=======
-- path: Assets/Scenes/Game/Start_DR.unity
->>>>>>> SFX
+- path: Assets/Scenes/Game/Game_DR.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
