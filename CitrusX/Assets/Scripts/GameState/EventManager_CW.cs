@@ -79,6 +79,7 @@ public class EventManager_CW : MonoBehaviour
     private void Start()
     {
         game = GameTesting_CW.instance;
+        #region ACTIVATE_OBJECTS
         throwingBox.SetActive(false);
         hiddenMechDoc.SetActive(false);
         bathroomKeyPart1.SetActive(false);
@@ -92,6 +93,7 @@ public class EventManager_CW : MonoBehaviour
         buttons3.SetActive(false);
         pawn.SetActive(false);
         chessNote.SetActive(false);
+        #endregion
     }
     private void Update()
     {
@@ -118,12 +120,14 @@ public class EventManager_CW : MonoBehaviour
             chessNote.SetActive(true);
             chessTrigger.allowedToBeUsed = true;
             throwingTrigger.allowedToBeUsed = true;
+            #region ACTIVATE_THROWING
             balls1.SetActive(true);
             balls2.SetActive(true);
             balls3.SetActive(true);
             buttons1.SetActive(true);
             buttons2.SetActive(true);
             buttons3.SetActive(true);
+            #endregion
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             triggersSet[2] = true;
         }
