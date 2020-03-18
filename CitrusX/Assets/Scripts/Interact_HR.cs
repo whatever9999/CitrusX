@@ -428,11 +428,15 @@ public class Interact_HR : MonoBehaviour
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
                     {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
-                        journal.TickOffTask("Read book");
-                        journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
-                        journal.ChangeTasks(new string[] { "Pawn" });
-                        paperItem.hasBeenRead = true;
+                        if(GameTesting_CW.instance.arePuzzlesDone[4])
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
+                            journal.TickOffTask("Read book");
+                            journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
+                            journal.ChangeTasks(new string[] { "Pawn" });
+                            paperItem.hasBeenRead = true;
+                        }
+                        
                     }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
                     {

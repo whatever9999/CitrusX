@@ -31,21 +31,39 @@ internal class SetUpRitual_CW : PuzzleBaseScript
 
     #region BOOLS
     internal bool[] ritualSteps = { false, false, false, false, false, false, false };
-
-
-
-
     #endregion
-
+    private GameObject necklace;
+    private GameObject pendant;
+    private GameObject jewelleryBox;
+    private GameObject bracelet;
+    private GameObject symbol1;
+    private GameObject symbol2;
+    private GameObject symbol3;
+    private GameObject symbol4;
+    private Door_DR door1;
+    private Door_DR door2;
+    private Door_DR door3;
+    private Door_DR door4;
     /// <summary>
     /// Inititalise variables
     /// </summary>
     private void Awake()
     {
         journal = Journal_DR.instance;
-
+        necklace = GameObject.Find("Necklace");
+        pendant = GameObject.Find("Pendant");
+        jewelleryBox = GameObject.Find("Jewellery Box");
+        bracelet = GameObject.Find("Bracelet");
+        door1 = GameObject.Find("ChessDoor").GetComponent<Door_DR>();
+        door2 = GameObject.Find("DiningRoomDoor").GetComponent<Door_DR>();
+        door3 = GameObject.Find("DownstairBathroomDoor").GetComponent<Door_DR>();
+        door4 = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        symbol1 = GameObject.Find("SymbolOfScarcity");
+        symbol2 = GameObject.Find("SymbolOfScarcity 2");
+        symbol3 = GameObject.Find("SymbolOfScarcity 3");
+        symbol4 = GameObject.Find("SymbolOfScarcity 4");
     }
-
+    
     /// <summary>
     /// If the puzzle is active then the voiceover for it is played.
     /// If the setup isn't complete yet a check is made on the tasks in the journal. Once it is complete then the log and tasks are updated and the next puzzle is started
@@ -58,6 +76,16 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         {
             if (!voiceovers[0])
             {
+                symbol1.SetActive(false);
+                symbol2.SetActive(false);
+                symbol3.SetActive(false);
+                symbol4.SetActive(false);
+                jewelleryBox.SetActive(false);
+                necklace.SetActive(false);
+                pendant.SetActive(false);
+                bracelet.SetActive(false);
+
+
                 subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE1);
                 voiceovers[0] = true;
             }
@@ -68,6 +96,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                     if (!voiceovers[1])
                     {
+                     
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE3);
                         voiceovers[1] = true;
                     }
@@ -85,6 +114,14 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                    if(!voiceovers[2])
                     {
+                        door1.ToggleOpen();
+                        door2.ToggleOpen();
+                        door3.ToggleOpen();
+                        door4.ToggleOpen();
+                        symbol1.SetActive(true);
+                        symbol2.SetActive(true);
+                        symbol3.SetActive(true);
+                        symbol4.SetActive(true);
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
                         voiceovers[2] = true;
                     }
@@ -117,6 +154,16 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                         voiceovers[4] = true;
                     }
                     journal.AddJournalLog("Now I need to get the jewellery and move it to the house...");
+                    bool setJewellery = false;
+                    if(!setJewellery)
+                    {
+                        pendant.SetActive(true);
+                        necklace.SetActive(true);
+                        jewelleryBox.SetActive(true);
+                        bracelet.SetActive(true);
+                        setJewellery = true;
+                    }
+                    
                     journal.ChangeTasks(new string[] { "necklace", "jewellery box", "bracelet", "pendant" });
                     ritualSteps[3] = true;
                 }

@@ -36,6 +36,8 @@ public class EventManager_CW : MonoBehaviour
     private GameObject buttons2;
     private GameObject buttons3;
     private GameObject pawn;
+    private GameObject chessNote;
+   
     #endregion
     #region DISTURBANCES
     private DisturbanceHandler_DR disturbances;
@@ -50,7 +52,6 @@ public class EventManager_CW : MonoBehaviour
 
     private void Awake()
     {
-        
         disturbances = DisturbanceHandler_DR.instance;
         #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
@@ -65,6 +66,8 @@ public class EventManager_CW : MonoBehaviour
         buttons3 = GameObject.Find("3Button");
         safe = GameObject.Find("Safe");
         pawn = GameObject.Find("Pawn");
+        chessNote = GameObject.Find("Chess Note");
+       
         #endregion
         #region INITIATE_TRIGGERS
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
@@ -88,6 +91,7 @@ public class EventManager_CW : MonoBehaviour
         buttons2.SetActive(false);
         buttons3.SetActive(false);
         pawn.SetActive(false);
+        chessNote.SetActive(false);
     }
     private void Update()
     {
@@ -111,6 +115,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[5] && !triggersSet[2])
         {
+            chessNote.SetActive(true);
             chessTrigger.allowedToBeUsed = true;
             throwingTrigger.allowedToBeUsed = true;
             balls1.SetActive(true);
