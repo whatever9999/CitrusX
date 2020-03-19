@@ -100,7 +100,6 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                     if (!voiceovers[1])
                     {
-                     
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE3);
                         voiceovers[1] = true;
                     }
@@ -118,14 +117,28 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                    if(!voiceovers[2])
                     {
-                        door1.ToggleOpen();
-                        door2.ToggleOpen();
-                        door3.ToggleOpen();
-                        door4.ToggleOpen();
+                        #region RITUAL_SETUP
+                        if (!door1.GetState())
+                        {
+                            door1.ToggleOpen();
+                        }
+                        if(!door2.GetState())
+                        {
+                            door2.ToggleOpen();
+                        }
+                        if(!door3.GetState())
+                        {
+                            door3.ToggleOpen();
+                        }
+                        if(!door4.GetState())
+                        {
+                            door4.ToggleOpen();
+                        }
                         symbol1.SetActive(true);
                         symbol2.SetActive(true);
                         symbol3.SetActive(true);
                         symbol4.SetActive(true);
+                        #endregion
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
                         voiceovers[2] = true;
                     }

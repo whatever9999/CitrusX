@@ -37,6 +37,7 @@ public class EventManager_CW : MonoBehaviour
     private GameObject buttons3;
     private GameObject pawn;
     private GameObject chessNote;
+    private GameObject keypadDoc;
    
     #endregion
     #region DISTURBANCES
@@ -45,7 +46,7 @@ public class EventManager_CW : MonoBehaviour
     #endregion
     #region BOOLS
     private bool[] triggersSet = { false, false, false, false, false };
-    private bool[] itemsSet = { false, false };
+    private bool[] itemsSet = { false, false, false, false };
     private bool[] disturbancesSet = { false, false };
     #endregion
     private GameTesting_CW game;
@@ -67,6 +68,7 @@ public class EventManager_CW : MonoBehaviour
         safe = GameObject.Find("Safe");
         pawn = GameObject.Find("Pawn");
         chessNote = GameObject.Find("Chess Note");
+        keypadDoc = GameObject.Find("KeyPadDoc");
        
         #endregion
         #region INITIATE_TRIGGERS
@@ -80,6 +82,7 @@ public class EventManager_CW : MonoBehaviour
     {
         game = GameTesting_CW.instance;
         #region ACTIVATE_OBJECTS
+        keypadDoc.SetActive(false);
         throwingBox.SetActive(false);
         hiddenMechDoc.SetActive(false);
         bathroomKeyPart1.SetActive(false);
@@ -100,7 +103,7 @@ public class EventManager_CW : MonoBehaviour
         if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
             bathroomKeyPart1.SetActive(true);
-            bathroomKeyPart1.SetActive(true);
+            bathroomKeyPart2.SetActive(true);
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[0] = true;
         }
@@ -108,6 +111,11 @@ public class EventManager_CW : MonoBehaviour
         {
             safe.SetActive(true);
             itemsSet[2] = true;
+        }
+        else if(game.arePuzzlesDone[3] && !itemsSet[3])
+        {
+            keypadDoc.SetActive(true);
+            itemsSet[3] = true;
         }
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
