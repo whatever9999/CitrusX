@@ -422,7 +422,7 @@ public class Interact_HR : MonoBehaviour
                     paper.SetActive(true);
                     //if note is in the safe, let safe know
                     #region PAPER_TYPES_VOICEOVERS
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead && !paperIsClosed)
+                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
                         journal.TickOffTask("Read note");
