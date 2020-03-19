@@ -59,7 +59,7 @@ public class EventManager_CW : MonoBehaviour
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
         bathroomKeyPart1 = GameObject.Find("Bathroom Key");
         bathroomKeyPart2 = GameObject.Find("Bathroom Key Part 2");
-        balls1 = GameObject.Find("Ball 1");
+        balls1 = GameObject.Find("1Ball");
         balls2 = GameObject.Find("2Ball");
         balls3 = GameObject.Find("3Ball");
         buttons1 = GameObject.Find("1Button");

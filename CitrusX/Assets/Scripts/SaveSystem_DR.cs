@@ -32,7 +32,7 @@ public class SaveSystem_DR: MonoBehaviour
 
     #region TransformsAndActiveStates
     internal Transform playerT;
-    internal Transform journalT;
+    internal GameObject journalGO;
     internal Transform fuseboxT;
     internal Transform baronT;
     internal Transform chessBoardT;
@@ -94,6 +94,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Paper_DR chessPaper;
     internal Paper_DR hiddenMechanismPaper;
     internal Paper_DR keypadPaper;
+    internal Paper_DR keysPaper;
 
     internal Door_DR colourMatchingDoor;
     internal Door_DR correntOrderDoor;
@@ -159,32 +160,32 @@ public class SaveSystem_DR: MonoBehaviour
 
         #region Initialisations
         playerT = GameObject.Find("FPSController").GetComponent<Transform>();
-        journalT = GameObject.Find("JournalBackground").GetComponent<Transform>();
+        journalGO = GameObject.Find("JournalBackground");
         fuseboxT = GameObject.Find("Fusebox").GetComponent<Transform>();
         baronT = GameObject.Find("Baron").GetComponent<Transform>();
         chessBoardT = GameObject.Find("ChessBoard").GetComponent<Transform>();
         gardenTableT = GameObject.Find("GardenTable").GetComponent<Transform>();
         ritualTableT = GameObject.Find("RitualTable").GetComponent<Transform>();
-        bowlT = GameObject.Find("PickUpBowl").GetComponent<Transform>(); //Change name in scene
-        candlesT = GameObject.Find("PickUpCandles").GetComponent<Transform>(); //Change name in scene
-        coinsT = GameObject.Find("PickUpCoins").GetComponent<Transform>(); //Change name in scene
-        saltT = GameObject.Find("PickUpSalt").GetComponent<Transform>(); //Change name in scene
+        bowlT = GameObject.Find("Bowl").GetComponent<Transform>();
+        candlesT = GameObject.Find("Candles").GetComponent<Transform>();
+        coinsT = GameObject.Find("Coins").GetComponent<Transform>();
+        saltT = GameObject.Find("Salt").GetComponent<Transform>();
         hiddenMechNoteT = GameObject.Find("HiddenMechNote").GetComponent<Transform>();
         monitorT = GameObject.Find("Monitor").GetComponent<Transform>();
         keypadT = GameObject.Find("KeypadUI").GetComponent<Transform>();
         throwingBoxT = GameObject.Find("ThrowingBox").GetComponent<Transform>();
-        ball1T = GameObject.Find("1Ball").GetComponent<Transform>(); //Change name in scene
+        ball1T = GameObject.Find("1Ball").GetComponent<Transform>();
         ball2T = GameObject.Find("2Ball").GetComponent<Transform>();
         ball3T = GameObject.Find("3Ball").GetComponent<Transform>();
-        weight1T = GameObject.Find("Weight200").GetComponent<Transform>(); //Change name in scene
-        weight2T = GameObject.Find("Weight400").GetComponent<Transform>(); //Change name in scene
-        weight3T = GameObject.Find("Weight500").GetComponent<Transform>(); //Change name in scene
-        keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>(); //Change name in scene
-        keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>(); //Change name in scene
-        keyHandle3T = GameObject.Find("KeyHandle3").GetComponent<Transform>(); //Change name in scene
-        keyHandle4T = GameObject.Find("KeyHandle4").GetComponent<Transform>(); //Change name in scene
-        keyBit2T = GameObject.Find("KeyBit1").GetComponent<Transform>(); //Change name in scene
-        keyBit3T = GameObject.Find("KeyBit2").GetComponent<Transform>(); //Change name in scene
+        weight1T = GameObject.Find("Weight200").GetComponent<Transform>();
+        weight2T = GameObject.Find("Weight400").GetComponent<Transform>();
+        weight3T = GameObject.Find("Weight500").GetComponent<Transform>();
+        keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>();
+        keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>();
+        keyHandle3T = GameObject.Find("KeyHandle3").GetComponent<Transform>();
+        keyHandle4T = GameObject.Find("KeyHandle4").GetComponent<Transform>();
+        keyBit2T = GameObject.Find("KeyBit1").GetComponent<Transform>();
+        keyBit3T = GameObject.Find("KeyBit2").GetComponent<Transform>();
         jewellery = GameObject.Find("Jewellery Box").GetComponent<Transform>();
         pendant = GameObject.Find("Pendant").GetComponent<Transform>();
         necklace = GameObject.Find("Necklace").GetComponent<Transform>();
@@ -199,7 +200,7 @@ public class SaveSystem_DR: MonoBehaviour
         keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
         inventory = GameObject.Find("FPSController").GetComponentInChildren<Inventory_HR>();
-        eventManager = GameObject.Find("Mangers").GetComponent<EventManager_CW>();
+        eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
 
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
@@ -219,30 +220,31 @@ public class SaveSystem_DR: MonoBehaviour
         chessPaper = GameObject.Find("Chess Note").GetComponent<Paper_DR>();
         hiddenMechanismPaper = GameObject.Find("HiddenMechNote").GetComponent<Paper_DR>();
         keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
+        keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
 
         colourMatchingDoor = GameObject.Find("ColourMatchingDoor").GetComponentInChildren<Door_DR>();
         correntOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponentInChildren<Door_DR>();
-        leftFrontDoor = GameObject.Find("LeftFrontDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
-        rightFrontDoor = GameObject.Find("RightFrontDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
+        leftFrontDoor = GameObject.Find("LeftFrontDoor").GetComponentInChildren<Door_DR>();
+        rightFrontDoor = GameObject.Find("RightFrontDoor").GetComponentInChildren<Door_DR>();
         pantryDoor = GameObject.Find("PantryDoor").GetComponentInChildren<Door_DR>();
         gymDoor = GameObject.Find("GymDoor").GetComponentInChildren<Door_DR>();
         garageDoor = GameObject.Find("GarageDoor").GetComponentInChildren<Door_DR>();
-        downstairsBathroomDoor = GameObject.Find("DownstairsBathroomDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
+        downstairsBathroomDoor = GameObject.Find("DownstairsBathroomDoor").GetComponentInChildren<Door_DR>();
         diningRoomDoor = GameObject.Find("DiningRoomDoor").GetComponentInChildren<Door_DR>();
         safeDoor = GameObject.Find("Safe").GetComponentInChildren<Door_DR>();
 
-        ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>();
         ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
         ball3 = GameObject.Find("3Ball").GetComponent<HoldandThrow_HR>();
-        weight1 = GameObject.Find("Weight200").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        weight2 = GameObject.Find("Weight400").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        weight3 = GameObject.Find("Weight500").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyHandle1 = GameObject.Find("KeyHandle1").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyHandle2 = GameObject.Find("KeyHandle2").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyHandle3 = GameObject.Find("KeyHandle3").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyHandle4 = GameObject.Find("KeyHandle4").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyBit2 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>(); //Change name in scene
-        keyBit3 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        weight1 = GameObject.Find("Weight200").GetComponent<HoldandThrow_HR>();
+        weight2 = GameObject.Find("Weight400").GetComponent<HoldandThrow_HR>();
+        weight3 = GameObject.Find("Weight500").GetComponent<HoldandThrow_HR>();
+        keyHandle1 = GameObject.Find("KeyHandle1").GetComponent<HoldandThrow_HR>();
+        keyHandle2 = GameObject.Find("KeyHandle2").GetComponent<HoldandThrow_HR>();
+        keyHandle3 = GameObject.Find("KeyHandle3").GetComponent<HoldandThrow_HR>();
+        keyHandle4 = GameObject.Find("KeyHandle4").GetComponent<HoldandThrow_HR>();
+        keyBit2 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>();
+        keyBit3 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>();
 
         button1 = GameObject.Find("1Button").GetComponent<BallButtonLogic_HR>();
         button2 = GameObject.Find("2Button").GetComponent<BallButtonLogic_HR>();
@@ -251,28 +253,29 @@ public class SaveSystem_DR: MonoBehaviour
         setUpRitual = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
         hiddenMech = GameObject.Find("FPSController").GetComponent<HiddenMech_CW>();
         fusebox = GameObject.Find("Fusebox").GetComponent<Fusebox_CW>();
-        correctOrder = GameObject.Find("FPSController").GetComponent<CorrectOrder_CW>();
-        colourMatchingPuzzle = GameObject.Find("FPSController").GetComponent<ColourMatchingPuzzle_CW>();
-        chessBoard = GameObject.Find("FPSController").GetComponent<ChessBoard_DR>();
-        scalesPuzzleScript = GameObject.Find("FPSController").GetComponent<ScalesPuzzleScript_AG>();
+        correctOrder = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
+        colourMatchingPuzzle = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        chessBoard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
+        scalesPuzzleScript = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
 
-        pipe1 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe2 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe3 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe4 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe5 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe6 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe7 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe8 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe9 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe10 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe11 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
-        pipe12 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe1 = GameObject.Find("Pipe 1").GetComponent<Pipes_CW>();
+        pipe2 = GameObject.Find("Pipe 2").GetComponent<Pipes_CW>();
+        pipe3 = GameObject.Find("Pipe 3").GetComponent<Pipes_CW>();
+        pipe4 = GameObject.Find("Pipe 4").GetComponent<Pipes_CW>();
+        pipe5 = GameObject.Find("Pipe 5").GetComponent<Pipes_CW>();
+        pipe6 = GameObject.Find("Pipe 6").GetComponent<Pipes_CW>();
+        pipe7 = GameObject.Find("Pipe 7").GetComponent<Pipes_CW>();
+        pipe8 = GameObject.Find("Pipe 8").GetComponent<Pipes_CW>();
+        pipe9 = GameObject.Find("Pipe 9").GetComponent<Pipes_CW>();
+        pipe10 = GameObject.Find("Pipe 10").GetComponent<Pipes_CW>();
+        pipe11 = GameObject.Find("Pipe 11").GetComponent<Pipes_CW>();
+        pipe12 = GameObject.Find("Pipe 12").GetComponent<Pipes_CW>();
 
-        knight = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
-        king = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
-        queen = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
-        pawn = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
+        knight = GameObject.Find("BoardKnight").GetComponent<ChessPiece_DR>();
+        king = GameObject.Find("BoardKing").GetComponent<ChessPiece_DR>();
+        queen = GameObject.Find("BoardQueen").GetComponent<ChessPiece_DR>();
+        pawn = GameObject.Find("BoardPawn").GetComponent<ChessPiece_DR>();
+        pawn.gameObject.SetActive(false);
         #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
