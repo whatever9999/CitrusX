@@ -85,6 +85,10 @@
  * 
  * Dominique (Changes) 18/03/2020
  * Chess pieces now rotate themselves
+ * 
+ * Chase (Changes) 18/3/2020
+ * Added link to cinematics for the end puzzle. Also created if barriers for certain objects to ensure they can only be interacted with at the correct moment
+ * to remove issues with puzzles being played in the wrong order
  */
 
 /**

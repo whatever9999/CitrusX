@@ -2,6 +2,9 @@
  * Dominique
  * 
  * This script handles any changes in the scene needed for cinematics and can be used to make cinematics start
+ * 
+ * Chase (Changes) 19/3/2020
+ * Linked to game state to start first puzzle when start cinematic is done
  */
 
 /**
@@ -48,6 +51,7 @@ public class Cinematics_DR : MonoBehaviour
     private Interact_HR playerInteraction;
     private FirstPersonController playerController;
     #endregion
+    
 
     public enum END_CINEMATICS
     {
@@ -207,5 +211,6 @@ public class Cinematics_DR : MonoBehaviour
         playStartCinematic = false;
         playerController.enabled = true;
         playerInteraction.enabled = true;
+        GameTesting_CW.instance.cutscenes[0] = true;
     }
 }

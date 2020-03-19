@@ -26,19 +26,23 @@
 */
 
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameTesting_CW : MonoBehaviour
 {
     #region BOOLS
     private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false, false };
-    private bool[] cutscenes = { false, false, false };
+    internal bool[] cutscenes = { false, false, false };
     private bool[] cutscenesDone = { false, false, false };
+    internal bool controlsSeen = false;
     #endregion
     #region OTHER_VARIABLES
     private InitiatePuzzles_CW initiate;
     private Cinematics_DR cinematics;
     private Interact_HR interact;
+    private GameObject controls;
+    internal FirstPersonController fpsController;
     #endregion
 
     public static GameTesting_CW instance;
@@ -51,17 +55,42 @@ public class GameTesting_CW : MonoBehaviour
         instance = this;
         initiate = InitiatePuzzles_CW.instance;
         interact = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
+        fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
+        cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
+        controls = GameObject.Find("Controls");
+    }
+    private void Start()
+    {
+        controls.SetActive(false);
+        cinematics.playStartCinematic = true;
     }
     /// <summary>
     /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
     /// </summary>
+    
+    internal void OpenControls()
+    {
+        controls.SetActive(true);
+    
+    }
+    public void ControlsScreen()
+    {
+        controlsSeen = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        fpsController.enabled = true;
+        controls.SetActive(false);
+    }
     private void Update()
     {
-        if (!cutscenes[0])
+        if(!controlsSeen && cutscenes[0])
         {
-            cutscenes[0] = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            fpsController.enabled = false;
+            OpenControls();
         }
-        else if (!arePuzzlesDone[0] && !setUpPuzzle[0])
+        else if (controlsSeen && !setUpPuzzle[0])
         {
             setUpPuzzle[0] = true;
             initiate.InitiateSetUpRitualPuzzle();

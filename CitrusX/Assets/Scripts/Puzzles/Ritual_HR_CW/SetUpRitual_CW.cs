@@ -12,6 +12,8 @@
  * added reference to trigger box, added bools and subtitles for a continous game state
  * Chase (Changes) 11/3/2020
  * Tidied script and got it to inherit from a base class to remove repetition between classes
+ * Chase (Changes) 18/3/2020
+ * Added symbols of scarcity and doors to this puzzle so that they show at the right times.
  */
 
 /**
@@ -32,6 +34,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     #region BOOLS
     internal bool[] ritualSteps = { false, false, false, false, false, false, false };
     #endregion
+    #region GAME_OBJECTS AND DOORS
     private GameObject necklace;
     private GameObject pendant;
     private GameObject jewelleryBox;
@@ -44,11 +47,13 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     public Door_DR door2;
     public Door_DR door3;
     public Door_DR door4;
+    #endregion
     /// <summary>
     /// Inititalise variables
     /// </summary>
     private void Awake()
     {
+        #region INITIALISATION
         journal = Journal_DR.instance;
         necklace = GameObject.Find("Necklace");
         pendant = GameObject.Find("Pendant");
@@ -59,8 +64,9 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         symbol2 = GameObject.Find("SymbolOfScarcity 2");
         symbol3 = GameObject.Find("SymbolOfScarcity 3");
         symbol4 = GameObject.Find("SymbolOfScarcity 4");
+        #endregion
     }
-    
+
     /// <summary>
     /// If the puzzle is active then the voiceover for it is played.
     /// If the setup isn't complete yet a check is made on the tasks in the journal. Once it is complete then the log and tasks are updated and the next puzzle is started
@@ -73,6 +79,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         {
             if (!voiceovers[0])
             {
+                #region ITEMS_TO_ACTIVATE
                 symbol1.SetActive(false);
                 symbol2.SetActive(false);
                 symbol3.SetActive(false);
@@ -81,7 +88,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 necklace.SetActive(false);
                 pendant.SetActive(false);
                 bracelet.SetActive(false);
-
+                #endregion
 
                 subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE1);
                 voiceovers[0] = true;
@@ -93,7 +100,6 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                     if (!voiceovers[1])
                     {
-                     
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE3);
                         voiceovers[1] = true;
                     }
@@ -111,14 +117,28 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 {
                    if(!voiceovers[2])
                     {
-                        door1.ToggleOpen();
-                        door2.ToggleOpen();
-                        door3.ToggleOpen();
-                        door4.ToggleOpen();
+                        #region RITUAL_SETUP
+                        if (!door1.GetState())
+                        {
+                            door1.ToggleOpen();
+                        }
+                        if(!door2.GetState())
+                        {
+                            door2.ToggleOpen();
+                        }
+                        if(!door3.GetState())
+                        {
+                            door3.ToggleOpen();
+                        }
+                        if(!door4.GetState())
+                        {
+                            door4.ToggleOpen();
+                        }
                         symbol1.SetActive(true);
                         symbol2.SetActive(true);
                         symbol3.SetActive(true);
                         symbol4.SetActive(true);
+                        #endregion
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
                         voiceovers[2] = true;
                     }

@@ -46,6 +46,7 @@ public class Door_DR : MonoBehaviour
 
     private Animator animator;
 
+    internal bool GetState() { return isOpen; }
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
