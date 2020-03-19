@@ -34,8 +34,6 @@ using UnityEngine;
 
 public class ScalesPuzzleScript_AG : MonoBehaviour
 {
-    public Vector2[] whereToPutWeightsAccordingToPan;
-
     // Each side of scales
     private Transform leftPan;
     private Transform rightPan;
@@ -47,7 +45,6 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
 
     private Journal_DR journal;
     private bool isActive = false;
-    private float zPosOfWeights;
 
     public void SetActive(bool value) { isActive = value; }
 

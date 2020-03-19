@@ -107,7 +107,7 @@ public class Inventory_HR : MonoBehaviour
             }
         }
     }
-
+    //s
     /// <summary>
     /// Set the image sprite for the slot to null an the text to ""
     /// </summary>
