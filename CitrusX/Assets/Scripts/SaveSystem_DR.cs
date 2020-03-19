@@ -30,8 +30,124 @@ public class SaveSystem_DR: MonoBehaviour
 {
     public static SaveSystem_DR instance;
 
-    #region ObjectsToSave
-    private Transform player;
+    #region TransformsAndActiveStates
+    internal Transform playerT;
+    internal Transform journalT;
+    internal Transform fuseboxT;
+    internal Transform baronT;
+    internal Transform chessBoardT;
+    internal Transform gardenTableT;
+    internal Transform ritualTableT;
+    internal Transform bowlT;
+    internal Transform candlesT;
+    internal Transform coinsT;
+    internal Transform saltT;
+    internal Transform hiddenMechNoteT;
+    internal Transform monitorT;
+    internal Transform keypadT;
+    internal Transform throwingBoxT;
+    internal Transform ball1T;
+    internal Transform ball2T;
+    internal Transform ball3T;
+    internal Transform weight1T;
+    internal Transform weight2T;
+    internal Transform weight3T;
+    internal Transform keyHandle1T;
+    internal Transform keyHandle2T;
+    internal Transform keyHandle3T;
+    internal Transform keyHandle4T;
+    internal Transform keyBit2T;
+    internal Transform keyBit3T;
+    internal Transform jewellery;
+    internal Transform pendant;
+    internal Transform necklace;
+    internal Transform bracelet;
+    #endregion
+
+    #region ScriptVariables
+    internal Cinematics_DR cinematics;
+    internal Interact_HR interact;
+    internal InitiatePuzzles_CW initiatePuzzles;
+    internal GameTesting_CW gameTesting;
+    internal Baron_DR baron;
+    internal WaterBowl_DR waterBowl;
+    internal KeypadUI_DR keyPadUI;
+    internal Journal_DR journal;
+    internal Inventory_HR inventory;
+    internal EventManager_CW eventManager;
+
+    internal TriggerScript_CW chessTrigger;
+    internal TriggerScript_CW correctOrderTrigger;
+    internal TriggerScript_CW gardenTrigger;
+    internal TriggerScript_CW hiddenMechanismTrigger;
+    internal TriggerScript_CW ritualTrigger;
+    internal TriggerScript_CW throwingTrigger;
+
+    internal PutDown_HR ritualPutDown;
+    internal PutDown_HR gardenPutDown;
+    internal PutDown_HR chessPutDown;
+
+    internal Table_CW ritualTable;
+    internal Table_CW gardenTable;
+    internal Table_CW chessTable;
+
+    internal Paper_DR chessPaper;
+    internal Paper_DR hiddenMechanismPaper;
+    internal Paper_DR keypadPaper;
+
+    internal Door_DR colourMatchingDoor;
+    internal Door_DR correntOrderDoor;
+    internal Door_DR leftFrontDoor;
+    internal Door_DR rightFrontDoor;
+    internal Door_DR pantryDoor;
+    internal Door_DR gymDoor;
+    internal Door_DR garageDoor;
+    internal Door_DR downstairsBathroomDoor;
+    internal Door_DR diningRoomDoor;
+    internal Door_DR safeDoor;
+
+    internal HoldandThrow_HR ball1;
+    internal HoldandThrow_HR ball2;
+    internal HoldandThrow_HR ball3;
+    internal HoldandThrow_HR weight1;
+    internal HoldandThrow_HR weight2;
+    internal HoldandThrow_HR weight3;
+    internal HoldandThrow_HR keyHandle1;
+    internal HoldandThrow_HR keyHandle2;
+    internal HoldandThrow_HR keyHandle3;
+    internal HoldandThrow_HR keyHandle4;
+    internal HoldandThrow_HR keyBit2;
+    internal HoldandThrow_HR keyBit3;
+
+    internal BallButtonLogic_HR button1;
+    internal BallButtonLogic_HR button2;
+    internal BallButtonLogic_HR button3;
+
+    internal SetUpRitual_CW setUpRitual;
+    internal HiddenMech_CW hiddenMech;
+    internal Fusebox_CW fusebox;
+    internal CorrectOrder_CW correctOrder;
+    internal ColourMatchingPuzzle_CW colourMatchingPuzzle;
+    internal ChessBoard_DR chessBoard;
+    internal ScalesPuzzleScript_AG scalesPuzzleScript;
+
+    internal Pipes_CW pipe1;
+    internal Pipes_CW pipe2;
+    internal Pipes_CW pipe3;
+    internal Pipes_CW pipe4;
+    internal Pipes_CW pipe5;
+    internal Pipes_CW pipe6;
+    internal Pipes_CW pipe7;
+    internal Pipes_CW pipe8;
+    internal Pipes_CW pipe9;
+    internal Pipes_CW pipe10;
+    internal Pipes_CW pipe11;
+    internal Pipes_CW pipe12;
+
+    internal ChessPiece_DR knight;
+    internal ChessPiece_DR king;
+    internal ChessPiece_DR queen;
+    internal ChessPiece_DR pawn;
     #endregion
 
     /// <summary>
@@ -41,10 +157,126 @@ public class SaveSystem_DR: MonoBehaviour
     {
         instance = this;
 
-        player = GameObject.Find("FPSController").GetComponent<Transform>();
+        #region Initialisations
+        playerT = GameObject.Find("FPSController").GetComponent<Transform>();
+        journalT = GameObject.Find("JournalBackground").GetComponent<Transform>();
+        fuseboxT = GameObject.Find("Fusebox").GetComponent<Transform>();
+        baronT = GameObject.Find("Baron").GetComponent<Transform>();
+        chessBoardT = GameObject.Find("ChessBoard").GetComponent<Transform>();
+        gardenTableT = GameObject.Find("GardenTable").GetComponent<Transform>();
+        ritualTableT = GameObject.Find("RitualTable").GetComponent<Transform>();
+        bowlT = GameObject.Find("PickUpBowl").GetComponent<Transform>(); //Change name in scene
+        candlesT = GameObject.Find("PickUpCandles").GetComponent<Transform>(); //Change name in scene
+        coinsT = GameObject.Find("PickUpCoins").GetComponent<Transform>(); //Change name in scene
+        saltT = GameObject.Find("PickUpSalt").GetComponent<Transform>(); //Change name in scene
+        hiddenMechNoteT = GameObject.Find("HiddenMechNote").GetComponent<Transform>();
+        monitorT = GameObject.Find("Monitor").GetComponent<Transform>();
+        keypadT = GameObject.Find("KeypadUI").GetComponent<Transform>();
+        throwingBoxT = GameObject.Find("ThrowingBox").GetComponent<Transform>();
+        ball1T = GameObject.Find("1Ball").GetComponent<Transform>(); //Change name in scene
+        ball2T = GameObject.Find("2Ball").GetComponent<Transform>();
+        ball3T = GameObject.Find("3Ball").GetComponent<Transform>();
+        weight1T = GameObject.Find("Weight200").GetComponent<Transform>(); //Change name in scene
+        weight2T = GameObject.Find("Weight400").GetComponent<Transform>(); //Change name in scene
+        weight3T = GameObject.Find("Weight500").GetComponent<Transform>(); //Change name in scene
+        keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>(); //Change name in scene
+        keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>(); //Change name in scene
+        keyHandle3T = GameObject.Find("KeyHandle3").GetComponent<Transform>(); //Change name in scene
+        keyHandle4T = GameObject.Find("KeyHandle4").GetComponent<Transform>(); //Change name in scene
+        keyBit2T = GameObject.Find("KeyBit1").GetComponent<Transform>(); //Change name in scene
+        keyBit3T = GameObject.Find("KeyBit2").GetComponent<Transform>(); //Change name in scene
+        jewellery = GameObject.Find("Jewellery Box").GetComponent<Transform>();
+        pendant = GameObject.Find("Pendant").GetComponent<Transform>();
+        necklace = GameObject.Find("Necklace").GetComponent<Transform>();
+        bracelet = GameObject.Find("Bracelet").GetComponent<Transform>();
+
+        cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
+        interact = GameObject.Find("FPSController").GetComponentInChildren<Interact_HR>();
+        initiatePuzzles = GameObject.Find("FPSController").GetComponentInChildren<InitiatePuzzles_CW>();
+        gameTesting = GameObject.Find("FPSController").GetComponentInChildren<GameTesting_CW>();
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
+        waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
+        keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
+        journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
+        inventory = GameObject.Find("FPSController").GetComponentInChildren<Inventory_HR>();
+        eventManager = GameObject.Find("Mangers").GetComponent<EventManager_CW>();
+
+        chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
+        correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
+        gardenTrigger = GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>();
+        hiddenMechanismTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
+        ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
+        throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
+
+        ritualPutDown = GameObject.Find("RitualTable").GetComponent<PutDown_HR>();
+        gardenPutDown = GameObject.Find("GardenTable").GetComponent<PutDown_HR>();
+        chessPutDown = GameObject.Find("ChessBoard").GetComponent<PutDown_HR>();
+
+        ritualTable = GameObject.Find("RitualTable").GetComponent<Table_CW>();
+        gardenTable = GameObject.Find("GardenTable").GetComponent<Table_CW>();
+        chessTable = GameObject.Find("ChessBoard").GetComponent<Table_CW>();
+
+        chessPaper = GameObject.Find("Chess Note").GetComponent<Paper_DR>();
+        hiddenMechanismPaper = GameObject.Find("HiddenMechNote").GetComponent<Paper_DR>();
+        keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
+
+        colourMatchingDoor = GameObject.Find("ColourMatchingDoor").GetComponentInChildren<Door_DR>();
+        correntOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponentInChildren<Door_DR>();
+        leftFrontDoor = GameObject.Find("LeftFrontDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
+        rightFrontDoor = GameObject.Find("RightFrontDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
+        pantryDoor = GameObject.Find("PantryDoor").GetComponentInChildren<Door_DR>();
+        gymDoor = GameObject.Find("GymDoor").GetComponentInChildren<Door_DR>();
+        garageDoor = GameObject.Find("GarageDoor").GetComponentInChildren<Door_DR>();
+        downstairsBathroomDoor = GameObject.Find("DownstairsBathroomDoor").GetComponentInChildren<Door_DR>(); //Change name in scene
+        diningRoomDoor = GameObject.Find("DiningRoomDoor").GetComponentInChildren<Door_DR>();
+        safeDoor = GameObject.Find("Safe").GetComponentInChildren<Door_DR>();
+
+        ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
+        ball3 = GameObject.Find("3Ball").GetComponent<HoldandThrow_HR>();
+        weight1 = GameObject.Find("Weight200").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        weight2 = GameObject.Find("Weight400").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        weight3 = GameObject.Find("Weight500").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyHandle1 = GameObject.Find("KeyHandle1").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyHandle2 = GameObject.Find("KeyHandle2").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyHandle3 = GameObject.Find("KeyHandle3").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyHandle4 = GameObject.Find("KeyHandle4").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyBit2 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>(); //Change name in scene
+        keyBit3 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>(); //Change name in scene
+
+        button1 = GameObject.Find("1Button").GetComponent<BallButtonLogic_HR>();
+        button2 = GameObject.Find("2Button").GetComponent<BallButtonLogic_HR>();
+        button3 = GameObject.Find("3Button").GetComponent<BallButtonLogic_HR>();
+
+        setUpRitual = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
+        hiddenMech = GameObject.Find("FPSController").GetComponent<HiddenMech_CW>();
+        fusebox = GameObject.Find("Fusebox").GetComponent<Fusebox_CW>();
+        correctOrder = GameObject.Find("FPSController").GetComponent<CorrectOrder_CW>();
+        colourMatchingPuzzle = GameObject.Find("FPSController").GetComponent<ColourMatchingPuzzle_CW>();
+        chessBoard = GameObject.Find("FPSController").GetComponent<ChessBoard_DR>();
+        scalesPuzzleScript = GameObject.Find("FPSController").GetComponent<ScalesPuzzleScript_AG>();
+
+        pipe1 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe2 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe3 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe4 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe5 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe6 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe7 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe8 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe9 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe10 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe11 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+        pipe12 = GameObject.Find("FPSController").GetComponent<Pipes_CW>();
+
+        knight = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
+        king = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
+        queen = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
+        pawn = GameObject.Find("FPSController").GetComponent<ChessPiece_DR>();
+        #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
-        CharacterController characterController = player.GetComponent<CharacterController>();
+        CharacterController characterController = playerT.GetComponent<CharacterController>();
         characterController.enabled = false;
         Load();
         characterController.enabled = true;
@@ -85,7 +317,7 @@ public class SaveSystem_DR: MonoBehaviour
         }
 
         //Save the game state data into the file
-        GameData_DR gameData = new GameData_DR(player);
+        GameData_DR gameData = new GameData_DR(this);
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, gameData);
         file.Close();
@@ -132,8 +364,8 @@ public class SaveSystem_DR: MonoBehaviour
     /// <param name="GD - a class that stores all of the data for the game that needs to be saved"></param>
     public void UpdateVariables(GameData_DR GD)
     {
-        player.position = new Vector3(GD.playerPosition[0], GD.playerPosition[1], GD.playerPosition[2]);
-        player.rotation = new Quaternion(GD.playerRotation[0], GD.playerRotation[1], GD.playerRotation[2], GD.playerRotation[3]);
+        playerT.position = new Vector3(GD.playerPosition[0], GD.playerPosition[1], GD.playerPosition[2]);
+        playerT.rotation = new Quaternion(GD.playerRotation[0], GD.playerRotation[1], GD.playerRotation[2], GD.playerRotation[3]);
     }
 }
 
@@ -158,15 +390,15 @@ public class GameData_DR
     public float[] playerRotation = new float[4];
     #endregion
 
-    public GameData_DR(Transform player)
+    public GameData_DR(SaveSystem_DR saveData)
     {
-        playerPosition[0] = player.position.x;
-        playerPosition[1] = player.position.y;
-        playerPosition[2] = player.position.z;
+        playerPosition[0] = saveData.playerT.position.x;
+        playerPosition[1] = saveData.playerT.position.y;
+        playerPosition[2] = saveData.playerT.position.z;
 
-        playerRotation[0] = player.rotation.x;
-        playerRotation[1] = player.rotation.y;
-        playerRotation[2] = player.rotation.z;
-        playerRotation[3] = player.rotation.w;
+        playerRotation[0] = saveData.playerT.rotation.x;
+        playerRotation[1] = saveData.playerT.rotation.y;
+        playerRotation[2] = saveData.playerT.rotation.z;
+        playerRotation[3] = saveData.playerT.rotation.w;
     }
 }
