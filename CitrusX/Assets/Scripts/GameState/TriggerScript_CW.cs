@@ -66,7 +66,7 @@ public class TriggerScript_CW : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        if (type == TRIGGER_TYPE.GARDEN && !activated && allowedToBeUsed)
+        if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
         {
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);

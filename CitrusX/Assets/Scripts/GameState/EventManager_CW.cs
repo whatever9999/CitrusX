@@ -22,6 +22,7 @@ public class EventManager_CW : MonoBehaviour
     private TriggerScript_CW chessTrigger;
     private TriggerScript_CW throwingTrigger;
     private TriggerScript_CW correctOrderTrigger;
+    private TriggerScript_CW gardenTrigger;
     #endregion
     #region GAMEOBJECT_REFERENCES
     private GameObject throwingBox;
@@ -45,7 +46,7 @@ public class EventManager_CW : MonoBehaviour
     private Baron_DR baron;
     #endregion
     #region BOOLS
-    private bool[] triggersSet = { false, false, false, false, false };
+    private bool[] triggersSet = { false, false, false, false, false, false };
     private bool[] itemsSet = { false, false, false, false };
     private bool[] disturbancesSet = { false, false };
     #endregion
@@ -76,6 +77,7 @@ public class EventManager_CW : MonoBehaviour
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         throwingTrigger = GameObject.Find("ThrowingTrigger").GetComponent<TriggerScript_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
+        gardenTrigger = GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>();
         #endregion
     }
     private void Start()
@@ -100,7 +102,12 @@ public class EventManager_CW : MonoBehaviour
     }
     private void Update()
     {
-        if(game.arePuzzlesDone[1] && !triggersSet[0])
+        if(game.arePuzzlesDone[0] && !triggersSet[5])
+        {
+            gardenTrigger.allowedToBeUsed = true;
+            triggersSet[5] = true;
+        }
+        else if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
             bathroomKeyPart1.SetActive(true);
             bathroomKeyPart2.SetActive(true);
