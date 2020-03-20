@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":19.94880485534668,"y":3.3822367191314699,"z":-23.909156799316408},"rotation":{"x":-0.1668618768453598,"y":0.8228408694267273,"z":-0.30578798055648806,"w":-0.44899991154670718},"size":3.637700080871582,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":0.21223866939544679,"y":8.126391410827637,"z":181.5937042236328},"rotation":{"x":0.016766808927059175,"y":0.052166350185871127,"z":0.0008852881728671491,"w":-0.9985155463218689},"size":189.36412048339845,"orthographic":false}
+>>>>>>> BugFixing
