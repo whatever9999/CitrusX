@@ -34,6 +34,7 @@ public class HiddenMech_CW : MonoBehaviour
     {
         if(Journal_DR.instance.AreTasksComplete())
         {
+            door.unlocked = true;
             door.ToggleOpen();  
         }
     }

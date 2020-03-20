@@ -121,7 +121,11 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
-            hiddenMechDoor.ToggleOpen();
+            if(hiddenMechDoor.GetState())
+            {
+                hiddenMechDoor.ToggleOpen();
+            }
+            hiddenMechDoor.unlocked = false;
             journal.TickOffTask("Check out library");
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
             journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
@@ -131,7 +135,10 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
-            correctOrderDoor.ToggleOpen();
+            if(correctOrderDoor.GetState())
+            {
+                correctOrderDoor.ToggleOpen();
+            }
             correctOrderDoor.unlocked = false;
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Locked in again? I should’ve seen it coming.");

@@ -55,6 +55,7 @@ public class EventManager_CW : MonoBehaviour
     private void Awake()
     {
         disturbances = DisturbanceHandler_DR.instance;
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
@@ -70,6 +71,7 @@ public class EventManager_CW : MonoBehaviour
         pawn = GameObject.Find("Pawn");
         chessNote = GameObject.Find("Chess Note");
         keypadDoc = GameObject.Find("KeyPadDoc");
+        masterBedroomDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
        
         #endregion
         #region INITIATE_TRIGGERS
@@ -116,22 +118,26 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
+            
             safe.SetActive(true);
             itemsSet[2] = true;
         }
         else if(game.arePuzzlesDone[3] && !itemsSet[3])
         {
+            baron.GetCoin();
             keypadDoc.SetActive(true);
             itemsSet[3] = true;
         }
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
+            baron.GetCoin();
             chessTrigger.allowedToBeUsed = true;
             pawn.SetActive(true);
             triggersSet[1] = true;
         }
         else if(game.arePuzzlesDone[5] && !triggersSet[2])
         {
+            baron.GetCoin();
             chessNote.SetActive(true);
             chessTrigger.allowedToBeUsed = true;
             throwingTrigger.allowedToBeUsed = true;
@@ -162,6 +168,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
+            baron.GetCoin();
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[4] = true;
         }
