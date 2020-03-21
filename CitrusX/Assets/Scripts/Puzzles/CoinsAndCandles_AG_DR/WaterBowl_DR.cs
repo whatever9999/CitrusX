@@ -8,6 +8,9 @@
  * 
  * Dominique (Changes) 17/03/2020
  * The bowl no longer uses a timer to activate/deactivate the baron
+ * 
+ * Dominique (Changes)
+ * Coins were being instantiated in the air in game
  */
 
 /**
@@ -17,7 +20,7 @@
 * 
 * \author Dominique
 * 
-* \date Last Modified: 20/02/2020
+* \date Last Modified: 21/03/2020
 */
 
 using System.Collections.Generic;
@@ -39,6 +42,7 @@ public class WaterBowl_DR : MonoBehaviour
         for(int i = 0; i < numberOfCoins; i++)
         {
             GameObject thisCoin = Instantiate(coinPrefab, transform);
+            thisCoin.transform.localPosition = Vector3.zero;
             coins.Add(thisCoin);
         }
     }

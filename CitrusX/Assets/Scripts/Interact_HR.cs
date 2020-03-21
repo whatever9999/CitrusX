@@ -117,7 +117,8 @@ public class Interact_HR : MonoBehaviour
     public Material outlineMaterial;
     private Cinematics_DR cinematics;
 
-    private Material originalMaterial;
+    private Material[] matArray;
+    private Material[] originalMaterials;
     private MeshRenderer targetRenderer;
     private MeshRenderer currRenderer;
     private bool zoomedIn = false;
@@ -184,19 +185,43 @@ public class Interact_HR : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
         {
             //Get the current Renderer for the object
-            currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+            if (hit.transform.gameObject.GetComponent<MeshRenderer>())
+            {
+                currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
+            }
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.material != targetRenderer.material && hit.transform.tag != "Keypad")
+            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad")
             {
-                targetRenderer.material = originalMaterial;
-                originalMaterial = currRenderer.material;
+
+                targetRenderer.materials = originalMaterials;
+                originalMaterials = currRenderer.materials;
+                matArray = currRenderer.materials;
+                try
+                {
+                    matArray[1] = outlineMaterial;
+                } catch (System.IndexOutOfRangeException e)
+                {
+                    Debug.Log(e.StackTrace);
+                }
+                currRenderer.materials = matArray;
                 targetRenderer = currRenderer;
-                currRenderer.material = outlineMaterial;
             }
             else
             {
+                
+                originalMaterials = currRenderer.materials;
+                matArray = currRenderer.materials;
+                try
+                {
+                    matArray[1] = outlineMaterial;
+                }
+                catch (System.IndexOutOfRangeException e)
+                {
+                    Debug.Log(e.StackTrace);
+                }
+                currRenderer.materials = matArray;
                 targetRenderer = currRenderer;
             }
 
@@ -210,9 +235,6 @@ public class Interact_HR : MonoBehaviour
                 {
 
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
-
-                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
-
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
@@ -569,8 +591,7 @@ public class Interact_HR : MonoBehaviour
                     }
                 }
 
-            }
-           
+            }           
             else if (hit.transform.tag == "ChessPiece")
             {
                 if(GameTesting_CW.instance.arePuzzlesDone[4])
@@ -766,10 +787,20 @@ public class Interact_HR : MonoBehaviour
             }
             else
             {
+                zoomedIn = false;
                 playerCamera.fieldOfView = defaultFOV;
                 notificationText.text = "";
             }
         }
+        else if (targetRenderer)
+        {
+            targetRenderer.materials = originalMaterials;
+            targetRenderer = null;
+            zoomedIn = false;
+            playerCamera.fieldOfView = defaultFOV;
+            notificationText.text = "";
+        }
+        
 
         /*
          * Play the good or bad cinematic after the player blows the candles out according to if they've won or not
