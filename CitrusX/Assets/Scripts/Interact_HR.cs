@@ -198,7 +198,13 @@ public class Interact_HR : MonoBehaviour
                 targetRenderer.materials = originalMaterials;
                 originalMaterials = currRenderer.materials;
                 matArray = currRenderer.materials;
-                matArray[1] = outlineMaterial;
+                try
+                {
+                    matArray[1] = outlineMaterial;
+                } catch (System.IndexOutOfRangeException e)
+                {
+                    Debug.Log(e.StackTrace);
+                }
                 currRenderer.materials = matArray;
                 targetRenderer = currRenderer;
             }
@@ -207,7 +213,14 @@ public class Interact_HR : MonoBehaviour
                 
                 originalMaterials = currRenderer.materials;
                 matArray = currRenderer.materials;
-                matArray[1] = outlineMaterial;
+                try
+                {
+                    matArray[1] = outlineMaterial;
+                }
+                catch (System.IndexOutOfRangeException e)
+                {
+                    Debug.Log(e.StackTrace);
+                }
                 currRenderer.materials = matArray;
                 targetRenderer = currRenderer;
             }
