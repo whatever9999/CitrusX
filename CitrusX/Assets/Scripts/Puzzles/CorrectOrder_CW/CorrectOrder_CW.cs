@@ -31,7 +31,7 @@ public class CorrectOrder_CW : MonoBehaviour
     private Text completionText;
     private Subtitles_HR subtitles;
     internal bool[] whichRound = { true, false, false };
-    Door_DR correctOrderDoor;
+    public Door_DR correctOrderDoor;
 
     #endregion
 
@@ -46,7 +46,7 @@ public class CorrectOrder_CW : MonoBehaviour
         correctOrderText = GameObject.Find("Correct Order Message Text").GetComponent<Text>();
         completionText = GameObject.Find("Completion Text").GetComponent<Text>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
-        correctOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
+
     }
     /// <summary>
     /// Ensure that the mouse cursor is invisible and locked and the correct order UI is deactivated

@@ -142,6 +142,7 @@ public class Interact_HR : MonoBehaviour
     private ScalesPuzzleScript_AG scales;
     private Baron_DR baron;
     internal bool paperIsClosed = false;
+    HiddenMech_CW hiddenMech;
     private GameObject pawn;
     #endregion
     #region VARS_FOR_PUZZLES
@@ -172,6 +173,7 @@ public class Interact_HR : MonoBehaviour
         ritual = GetComponent<SetUpRitual_CW>();
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
+        hiddenMech = GameObject.Find("Painting_AG").GetComponent<HiddenMech_CW>();
         pawn = GameObject.Find("Pawn");
         #endregion
     }
@@ -751,7 +753,7 @@ public class Interact_HR : MonoBehaviour
                             journal.TickOffTask("Find correct book");
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
                             journal.ChangeTasks(new string[] { "Read note" });
-
+                            hiddenMech.complete = true;
                             GameTesting_CW.instance.arePuzzlesDone[7] = true;
                         }
 

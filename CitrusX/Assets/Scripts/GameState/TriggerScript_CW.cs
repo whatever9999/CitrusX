@@ -47,6 +47,7 @@ public class TriggerScript_CW : MonoBehaviour
         CHESSBOARD_EXTRA_ROOM
     };
     public TRIGGER_TYPE type;
+    public Door_DR relatedDoor;
     private Subtitles_HR subtitles;
     private Journal_DR journal;
     
@@ -57,8 +58,6 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         journal = Journal_DR.instance;
-        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
-        correctOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
     }
 
     /// <summary>
@@ -121,11 +120,11 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
-            if(hiddenMechDoor.GetState())
+            if(relatedDoor.GetState())
             {
-                hiddenMechDoor.ToggleOpen();
+                relatedDoor.ToggleOpen();
             }
-            hiddenMechDoor.unlocked = false;
+            relatedDoor.unlocked = false;
             journal.TickOffTask("Check out library");
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
             journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
@@ -135,11 +134,11 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
-            if(correctOrderDoor.GetState())
+            if(relatedDoor.GetState())
             {
-                correctOrderDoor.ToggleOpen();
+                relatedDoor.ToggleOpen();
             }
-            correctOrderDoor.unlocked = false;
+            relatedDoor.unlocked = false;
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Locked in again? I should’ve seen it coming.");
             journal.ChangeTasks(new string[] { "Find a way out" });

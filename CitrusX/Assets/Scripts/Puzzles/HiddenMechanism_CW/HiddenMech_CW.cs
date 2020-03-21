@@ -21,21 +21,18 @@ using UnityEngine;
 
 public class HiddenMech_CW : MonoBehaviour
 {
-    private Door_DR door;
+    public Door_DR door;
     private bool isActive = false;
+    internal bool complete = false;
     public void SetActive(bool value) { isActive = value; }
 
-    private void Awake()
+    private void Update()
     {
-        door = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>(); 
-    }
- 
-    private void HiddenMechPuzzle()
-    {
-        if(Journal_DR.instance.AreTasksComplete())
+        if(complete)
         {
             door.unlocked = true;
-            door.ToggleOpen();  
+            door.ToggleOpen();
+            complete = false;
         }
     }
 }
