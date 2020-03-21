@@ -149,17 +149,5 @@ public class TriggerScript_CW : MonoBehaviour
     /// <summary>
     /// get trigger type, see if active, play relevant audio if so
     /// </summary>
-    private void OnTriggerExit(Collider other)
-    {
-        if(type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
-        {
-            if (GameTesting_CW.instance.arePuzzlesDone[5])
-            {
-                subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE5);
-                journal.AddJournalLog("What's in that room?");
-                journal.ChangeTasks(new string[] { "Enter the new room " });
-                allowedToBeUsed = false;
-            }
-        }
-    }
+
 }

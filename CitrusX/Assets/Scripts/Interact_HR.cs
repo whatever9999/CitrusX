@@ -513,7 +513,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Fusebox")
             {
-                if(GameTesting_CW.instance.arePuzzlesDone[0])
+                if(InitiatePuzzles_CW.instance.monitorInteractionsUsed[0])
                 {
                     notificationText.text = "Press E to open the fuse box";
 
