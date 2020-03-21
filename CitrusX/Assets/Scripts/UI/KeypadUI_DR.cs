@@ -187,7 +187,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// </summary>
     public void ClearButton()
     {
-        SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
+        //SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
         input = "";
         inputText.text = input;
     }

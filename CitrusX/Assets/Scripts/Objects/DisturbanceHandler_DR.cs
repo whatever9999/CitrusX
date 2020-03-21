@@ -89,7 +89,7 @@ public class DisturbanceHandler_DR : MonoBehaviour
                 slamBook.SetTrigger("TurnPage");
                 break;
             case DisturbanceName.DOORCREAK:
-                creakyDoor.ToggleOpen();
+                //creakyDoor.ToggleOpen();
                 break;
             case DisturbanceName.BOXMOVE:
                 boxMove.SetTrigger("Shufft");
