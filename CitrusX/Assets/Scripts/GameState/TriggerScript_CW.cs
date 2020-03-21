@@ -97,7 +97,7 @@ public class TriggerScript_CW : MonoBehaviour
         }
         if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
         {
-            if(GameTesting_CW.instance.arePuzzlesDone[4])
+            if(GameTesting_CW.instance.arePuzzlesDone[4] && !GameTesting_CW.instance.arePuzzlesDone[5])
             {
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
@@ -143,12 +143,6 @@ public class TriggerScript_CW : MonoBehaviour
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
             journal.AddJournalLog("Locked in again? I should’ve seen it coming.");
             journal.ChangeTasks(new string[] { "Find a way out" });
-            allowedToBeUsed = false;
-        }
-        if(type == TRIGGER_TYPE.CHESSBOARD_EXTRA_ROOM && allowedToBeUsed)
-        {
-            journal.AddJournalLog("Another note?");
-            journal.ChangeTasks(new string[] { "Read the note" });
             allowedToBeUsed = false;
         }
     }

@@ -105,6 +105,7 @@ public class GameTesting_CW : MonoBehaviour
             setUpPuzzle[2] = true;
             initiate.InitiateColourMatchingPuzzle();
         }
+  
         else if (arePuzzlesDone[2] && !setUpPuzzle[3])
         {
             setUpPuzzle[3] = true;

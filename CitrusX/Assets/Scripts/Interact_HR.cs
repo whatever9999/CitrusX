@@ -142,6 +142,7 @@ public class Interact_HR : MonoBehaviour
     private ScalesPuzzleScript_AG scales;
     private Baron_DR baron;
     internal bool paperIsClosed = false;
+    private GameObject pawn;
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -171,6 +172,7 @@ public class Interact_HR : MonoBehaviour
         ritual = GetComponent<SetUpRitual_CW>();
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
+        pawn = GameObject.Find("Pawn");
         #endregion
     }
 
@@ -460,6 +462,7 @@ public class Interact_HR : MonoBehaviour
                             journal.TickOffTask("Read book");
                             journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
                             journal.ChangeTasks(new string[] { "Pawn" });
+                            pawn.SetActive(true);
                             paperItem.hasBeenRead = true;
                         }
                         
@@ -530,7 +533,7 @@ public class Interact_HR : MonoBehaviour
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
                         #region MONITOR_INTERACTION_IFS
-                        if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && !GameTesting_CW.instance.arePuzzlesDone[0])
+                        if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && ritual.ritualSteps[1])
                         {
                             journal.TickOffTask("Check the monitor");
                             journal.AddJournalLog("The cameras seem to link to every room…this could be useful.");

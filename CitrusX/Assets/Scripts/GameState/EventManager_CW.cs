@@ -113,8 +113,20 @@ public class EventManager_CW : MonoBehaviour
         {
             bathroomKeyPart1.SetActive(true);
             bathroomKeyPart2.SetActive(true);
+            bathroomKeyPart2.name = "Bathroom Key"; 
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[0] = true;
+        }
+        else if(triggersSet[0] && !game.arePuzzlesDone[2])
+        {
+            if(!bathroomKeyPart2.activeInHierarchy)
+            {
+                bathroomKeyPart1.name = "Bathroom Key Part 2";
+            }
+            else if(!bathroomKeyPart1.activeInHierarchy)
+            {
+                bathroomKeyPart2.name = "Bathroom Key Part 2";
+            }
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
@@ -132,7 +144,6 @@ public class EventManager_CW : MonoBehaviour
         {
             baron.GetCoin();
             chessTrigger.allowedToBeUsed = true;
-            pawn.SetActive(true);
             triggersSet[1] = true;
         }
         else if(game.arePuzzlesDone[5] && !triggersSet[2])
