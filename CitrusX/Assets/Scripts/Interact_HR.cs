@@ -865,12 +865,19 @@ public class Interact_HR : MonoBehaviour
     ///</summary>
     public void EndGameCheck()
     {
+        Color blackOutColour;
+        blackOutColour.r = 0;
+        blackOutColour.g = 0;
+        blackOutColour.b = 0;
+        blackOutColour.a = 0;
         if (numberCoinsCollected == waterBowl.numberOfCoins)
         {
+          //  GameObject.Find("BlackoutScreen").GetComponent<Image>().color = blackOutColour;
             cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.GOOD);
         }
         else
         {
+          //  GameObject.Find("BlackoutScreen").GetComponent<Image>().color = blackOutColour;
             cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.BAD);
         }
     }
