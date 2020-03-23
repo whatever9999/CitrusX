@@ -25,6 +25,7 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.UI;
 
 public class SaveSystem_DR: MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform pendant;
     internal Transform necklace;
     internal Transform bracelet;
+    internal GameObject inventory;
     #endregion
 
     #region ScriptVariables
@@ -73,7 +75,6 @@ public class SaveSystem_DR: MonoBehaviour
     internal WaterBowl_DR waterBowl;
     internal KeypadUI_DR keyPadUI;
     internal Journal_DR journal;
-    internal Inventory_HR inventory;
     internal EventManager_CW eventManager;
 
     internal TriggerScript_CW chessTrigger;
@@ -190,6 +191,7 @@ public class SaveSystem_DR: MonoBehaviour
         pendant = GameObject.Find("Pendant").GetComponent<Transform>();
         necklace = GameObject.Find("Necklace").GetComponent<Transform>();
         bracelet = GameObject.Find("Bracelet").GetComponent<Transform>();
+        inventory = GameObject.Find("Inventory");
 
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         interact = GameObject.Find("FPSController").GetComponentInChildren<Interact_HR>();
@@ -199,7 +201,6 @@ public class SaveSystem_DR: MonoBehaviour
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
-        inventory = GameObject.Find("FPSController").GetComponentInChildren<Inventory_HR>();
         eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
 
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
@@ -389,12 +390,234 @@ public class SaveSystem_DR: MonoBehaviour
 public class GameData_DR
 {
     #region VariablesToSave
-    public float[] playerPosition = new float[3];
-    public float[] playerRotation = new float[4];
+    //Player
+    internal float[] playerPosition = new float[3];
+    internal float[] playerRotation = new float[4];
+    //JournalUI
+    internal string[] journalTasks;
+    internal string journalLog;
+    //Baron
+    internal bool baronActive;
+    internal float[] baronPosition = new float[3];
+    internal float[] baronRotation = new float[4];
+    //Chessboard
+    internal bool chessTableActivated;
+    internal float[] chessPawnRotation;
+    internal float[] chessKnightRotation;
+    internal float[] chessKingRotation;
+    internal float[] chessQueenRotation;
+    //GardenTable
+    internal bool gardenTableActivated;
+    //RitualTable
+    internal bool ritualTableActivated;
+    //RitualItems
+    internal bool bowlNotPickedUp;
+    internal bool candlesNotPickedUp;
+    internal bool coinsNotPickedUp;
+    internal bool saltNotPickedUp;
+    //HiddenMechNote
+    internal bool hiddenMechNoteActivated;
+    //Monitor
+    internal bool monitorOn;
+    //Keypad
+    internal bool keypadTableActivated;
+    //ThrowingBox
+    internal bool throwingBoxActivated;
+    //Balls
+    internal float[] ball1TPosition = new float[3];
+    internal float[] ball1TRotation = new float[4];
+    internal float[] ball2TPosition = new float[3];
+    internal float[] ball2TRotation = new float[4];
+    internal float[] ball3TPosition = new float[3];
+    internal float[] ball3TRotation = new float[4];
+    //Weights
+    internal float[] weight1TPosition = new float[3];
+    internal float[] weight1TRotation = new float[4];
+    internal float[] weight2TPosition = new float[3];
+    internal float[] weight2TRotation = new float[4];
+    internal float[] weight3TPosition = new float[3];
+    internal float[] weight3TRotation = new float[4];
+    //KeyPieces
+    internal float[] keyHandle1TPosition = new float[3];
+    internal float[] keyHandle1TRotation = new float[4];
+    internal float[] keyHandle2TPosition = new float[3];
+    internal float[] keyHandle2TRotation = new float[4];
+    internal float[] keyHandle3TPosition = new float[3];
+    internal float[] keyHandle3TRotation = new float[4];
+    internal float[] keyHandle4TPosition = new float[3];
+    internal float[] keyHandle4TRotation = new float[4];
+    internal float[] keyBit2TPosition = new float[3];
+    internal float[] keyBit2TRotation = new float[4];
+    internal float[] keyBit3TPosition = new float[3];
+    internal float[] keyBit3TRotation = new float[4];
+    //JewelleryItems
+    internal bool jewelleryNotPickedUp;
+    internal bool pendantNotPickedUp;
+    internal bool necklaceNotPickedUp;
+    internal bool braceletNotPickedUp;
+    //Inventory
+    internal Inventory_HR.Names[] inventory;
+
+    //Cinematics
+    internal bool playStartCinematic;
+    //Interact
+    internal int numberCoinsCollected;
+    //InitiatePuzzles
+    internal int ballCounter;
+    internal bool[] puzzleVoiceovers;
+    internal bool[] monitorInteractions;
+    internal bool[] monitorInteractionsUsed;
+    //GameTesting
+    internal bool[] setUpPuzzle;
+    internal bool[] arePuzzlesDone;
+    internal bool[] cutscenes;
+    internal bool[] cutscenesDone;
+    //Baron
+    internal float appearanceTimer;
+    //Water Bowl
+    internal int coinsLeft;
+    //KeypadUI
+    internal bool interactedWithSafe;
+    internal bool hasAlreadyInteractedWithSafe;
+    internal bool playerInteractsWithDoc;
+    internal bool[] keypadVoiceovers;
+    internal bool isActive;
+    //EventManager
+    internal bool[] triggersSet;
+    internal bool[] itemsSet;
+    internal bool[] disturbancesSet;
+
+    //TriggerScripts
+    internal bool chessAllowedToBeUsed;
+    internal bool chessActivated;
+    internal bool correctOrderAllowedToBeUsed;
+    internal bool correctOrderActivated;
+    internal bool gardenAllowedToBeUsed;
+    internal bool gardenActivated;
+    internal bool hiddenMechanismAllowedToBeUsed;
+    internal bool hiddenMechanismActivated;
+    internal bool ritualAllowedToBeUsed;
+    internal bool ritualActivated;
+    internal bool throwingAllowedToBeUsed;
+    internal bool throwingActivated;
+
+    //PutDown
+    internal bool ritualPDBeenUsed;
+    internal bool gardenPDBeenUsed;
+    internal bool chessPDBeenUsed;
+
+    //Table
+    internal bool ritualTHasBeenPlaced;
+    internal bool gardenTHasBeenPlaced;
+    internal bool chessTHasBeenPlaced;
+
+    //Paper
+    internal bool chessPHasBeenRead;
+    internal bool hiddenMechanismPHasBeenRead;
+    internal bool keypadPHasBeenRead;
+    internal bool keysPHasBeenRead;
+
+    //Door
+    internal bool colourMatchingDoorUnlocked;
+    internal bool colourMatchingDoorIsOpen;
+    internal bool correntOrderDoorUnlocked;
+    internal bool correntOrderDoorIsOpen;
+    internal bool leftFrontDoorUnlocked;
+    internal bool leftFrontDoorIsOpen;
+    internal bool rightFrontDoorUnlocked;
+    internal bool rightFrontDoorIsOpen;
+    internal bool pantryDoorUnlocked;
+    internal bool pantryDoorIsOpen;
+    internal bool gymDoorUnlocked;
+    internal bool gymDoorIsOpen;
+    internal bool garageDoorUnlocked;
+    internal bool garageDoorIsOpen;
+    internal bool downstairsBathroomDoorUnlocked;
+    internal bool downstairsBathroomDoorIsOpen;
+    internal bool diningRoomDoorUnlocked;
+    internal bool diningRoomDoorIsOpen;
+    internal bool safeDoorUnlocked;
+    internal bool safeDoorIsOpen;
+
+    //HoldandThrow
+    internal bool canHoldBall1;
+    internal bool ball1IsFirstTime;
+    internal bool canHoldBall2;
+    internal bool ball2IsFirstTime;
+    internal bool canHoldBall3;
+    internal bool ball3IsFirstTime;
+
+    internal bool canHoldWeight1;
+    internal bool weight1IsFirstTime;
+    internal bool canHoldWeight2;
+    internal bool weight2IsFirstTime;
+    internal bool canHoldWeight3;
+    internal bool weight3IsFirstTime;
+
+    internal bool canHoldKeyHandle1;
+    internal bool keyHandle1IsFirstTime;
+    internal bool canHoldKeyHandle2;
+    internal bool keyHandle2IsFirstTime;
+    internal bool canHoldKeyHandle3;
+    internal bool keyHandle3IsFirstTime;
+    internal bool canHoldKeyHandle4;
+    internal bool keyHandle4IsFirstTime;
+
+    internal bool canHoldKeyBit2;
+    internal bool keyBit2IsFirstTime;
+    internal bool canHoldKeyBit3;
+    internal bool keyBit3IsFirstTime;
+
+    //BallButtonLogic
+    internal bool button1IsActive;
+    internal bool button2IsActive;
+    internal bool button3IsActive;
+
+    //SetUpRitual
+    internal bool[] ritualSteps;
+    internal bool ritualIsActive;
+    //HiddenMech
+    internal bool hiddenMechIsActive;
+    //Fusebox
+    internal bool isFuseboxSolved;
+    //CorrectOrder
+    internal bool correctOrderIsActive;
+    internal bool[] correctOrderWhichRound;
+    //ColourMatchingPuzzle
+    internal bool colourMatchingPuzzleIsActive;
+    internal bool[] isDoorInteractedWith;
+    internal bool hasKeyPart1;
+    internal bool hasKeyPart2;
+    //Chessboard
+    internal bool chessBoardIsActive;
+    //ScalesPuzzleScript
+    internal bool scalesPuzzleIsActive;
+    internal bool scalesPuzzleIsComplete;
+
+    //Pipes
+    internal Pipes_CW.Directions pipe1CurrentPosition;
+    internal Pipes_CW.Directions pipe2CurrentPosition;
+    internal Pipes_CW.Directions pipe3CurrentPosition;
+    internal Pipes_CW.Directions pipe4CurrentPosition;
+    internal Pipes_CW.Directions pipe5CurrentPosition;
+    internal Pipes_CW.Directions pipe6CurrentPosition;
+    internal Pipes_CW.Directions pipe7CurrentPosition;
+    internal Pipes_CW.Directions pipe8CurrentPosition;
+    internal Pipes_CW.Directions pipe9CurrentPosition;
+    internal Pipes_CW.Directions pipe10CurrentPosition;
+    internal Pipes_CW.Directions pipe11CurrentPosition;
+    internal Pipes_CW.Directions pipe12CurrentPosition;
+
+    //ChessPieces
+    internal ChessBoard_DR.POSITION knightCurrentPosition;
+    internal ChessBoard_DR.POSITION kingCurrentPosition;
+    internal ChessBoard_DR.POSITION queenCurrentPosition;
+    internal ChessBoard_DR.POSITION pawnCurrentPosition;
     #endregion
 
     public GameData_DR(SaveSystem_DR saveData)
     {
+        //Player
         playerPosition[0] = saveData.playerT.position.x;
         playerPosition[1] = saveData.playerT.position.y;
         playerPosition[2] = saveData.playerT.position.z;
@@ -403,5 +626,295 @@ public class GameData_DR
         playerRotation[1] = saveData.playerT.rotation.y;
         playerRotation[2] = saveData.playerT.rotation.z;
         playerRotation[3] = saveData.playerT.rotation.w;
-    }
+
+        //JournalUI
+        Text[] journalTexts = saveData.GetComponentsInChildren<Text>();
+        for (int i = 0; i < journalTexts.Length; i++)
+        {
+            switch (journalTexts[i].name)
+            {
+                case "Task":
+                    journalTasks[0] = journalTexts[i].text;
+                    break;
+                case "Task (1)":
+                    journalTasks[1] = journalTexts[i].text;
+                    break;
+                case "Task (2)":
+                    journalTasks[2] = journalTexts[i].text;
+                    break;
+                case "Task (3)":
+                    journalTasks[3] = journalTexts[i].text;
+                    break;
+                case "Task (4)":
+                    journalTasks[4] = journalTexts[i].text;
+                    break;
+                case "JournalLogs":
+                    journalLog = journalTexts[i].text;
+                    break;
+            }
+        }
+
+        //Baron
+        baronActive = saveData.baronT.gameObject.activeInHierarchy;
+
+        baronPosition[0] = saveData.baronT.position.x;
+        baronPosition[1] = saveData.baronT.position.y;
+        baronPosition[2] = saveData.baronT.position.z;
+
+        baronRotation[0] = saveData.baronT.rotation.x;
+        baronRotation[1] = saveData.baronT.rotation.y;
+        baronRotation[2] = saveData.baronT.rotation.z;
+        baronRotation[3] = saveData.baronT.rotation.w;
+
+        //Chessboard
+        chessTableActivated = saveData.chessBoardT.gameObject.activeInHierarchy;
+
+        Transform[] chessPieces = saveData.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < chessPieces.Length; i++)
+        {
+            switch (chessPieces[i].name)
+            {
+                case "BoardKnight":
+                    chessKnightRotation[0] = chessPieces[i].rotation.x;
+                    chessKnightRotation[1] = chessPieces[i].rotation.y;
+                    chessKnightRotation[2] = chessPieces[i].rotation.z;
+                    chessKnightRotation[3] = chessPieces[i].rotation.w;
+                    break;
+                case "BoardKing":
+                    chessKingRotation[0] = chessPieces[i].rotation.x;
+                    chessKingRotation[1] = chessPieces[i].rotation.y;
+                    chessKingRotation[2] = chessPieces[i].rotation.z;
+                    chessKingRotation[3] = chessPieces[i].rotation.w;
+                    break;
+                case "BoardQueen":
+                    chessQueenRotation[0] = chessPieces[i].rotation.x;
+                    chessQueenRotation[1] = chessPieces[i].rotation.y;
+                    chessQueenRotation[2] = chessPieces[i].rotation.z;
+                    chessQueenRotation[3] = chessPieces[i].rotation.w;
+                    break;
+                case "BoardPawn":
+                    chessPawnRotation[0] = chessPieces[i].rotation.x;
+                    chessPawnRotation[1] = chessPieces[i].rotation.y;
+                    chessPawnRotation[2] = chessPieces[i].rotation.z;
+                    chessPawnRotation[3] = chessPieces[i].rotation.w;
+                    break;
+            }
+        }
+
+        //GardenTable
+        gardenTableActivated = saveData.gardenTableT.gameObject.activeInHierarchy;
+
+        //RitualTable
+        ritualTableActivated = saveData.ritualTableT.gameObject.activeInHierarchy;
+
+        //RitualItems
+        bowlNotPickedUp = saveData.bowlT.gameObject.activeInHierarchy;
+        candlesNotPickedUp = saveData.candlesT.gameObject.activeInHierarchy;
+        coinsNotPickedUp = saveData.coinsT.gameObject.activeInHierarchy;
+        saltNotPickedUp = saveData.saltT.gameObject.activeInHierarchy;
+
+        //HiddenMechNote
+        hiddenMechNoteActivated = saveData.hiddenMechNoteT.gameObject.activeInHierarchy;
+
+        //Monitor
+        monitorOn = saveData.monitorT.GetChild(0).gameObject.activeInHierarchy;
+
+
+
+
+    //Keypad
+    internal bool keypadTableActivated;
+    //ThrowingBox
+    internal bool throwingBoxActivated;
+    //Balls
+    internal float[] ball1TPosition = new float[3];
+    internal float[] ball1TRotation = new float[4];
+    internal float[] ball2TPosition = new float[3];
+    internal float[] ball2TRotation = new float[4];
+    internal float[] ball3TPosition = new float[3];
+    internal float[] ball3TRotation = new float[4];
+    //Weights
+    internal float[] weight1TPosition = new float[3];
+    internal float[] weight1TRotation = new float[4];
+    internal float[] weight2TPosition = new float[3];
+    internal float[] weight2TRotation = new float[4];
+    internal float[] weight3TPosition = new float[3];
+    internal float[] weight3TRotation = new float[4];
+    //KeyPieces
+    internal float[] keyHandle1TPosition = new float[3];
+    internal float[] keyHandle1TRotation = new float[4];
+    internal float[] keyHandle2TPosition = new float[3];
+    internal float[] keyHandle2TRotation = new float[4];
+    internal float[] keyHandle3TPosition = new float[3];
+    internal float[] keyHandle3TRotation = new float[4];
+    internal float[] keyHandle4TPosition = new float[3];
+    internal float[] keyHandle4TRotation = new float[4];
+    internal float[] keyBit2TPosition = new float[3];
+    internal float[] keyBit2TRotation = new float[4];
+    internal float[] keyBit3TPosition = new float[3];
+    internal float[] keyBit3TRotation = new float[4];
+    //JewelleryItems
+    internal bool jewelleryNotPickedUp;
+    internal bool pendantNotPickedUp;
+    internal bool necklaceNotPickedUp;
+    internal bool braceletNotPickedUp;
+    //Inventory
+    internal Inventory_HR.Names[] inventory;
+
+    //Cinematics
+    internal bool playStartCinematic;
+    //Interact
+    internal int numberCoinsCollected;
+    //InitiatePuzzles
+    internal int ballCounter;
+    internal bool[] puzzleVoiceovers;
+    internal bool[] monitorInteractions;
+    internal bool[] monitorInteractionsUsed;
+    //GameTesting
+    internal bool[] setUpPuzzle;
+    internal bool[] arePuzzlesDone;
+    internal bool[] cutscenes;
+    internal bool[] cutscenesDone;
+    //Baron
+    internal float appearanceTimer;
+    //Water Bowl
+    internal int coinsLeft;
+    //KeypadUI
+    internal bool interactedWithSafe;
+    internal bool hasAlreadyInteractedWithSafe;
+    internal bool playerInteractsWithDoc;
+    internal bool[] keypadVoiceovers;
+    internal bool isActive;
+    //EventManager
+    internal bool[] triggersSet;
+    internal bool[] itemsSet;
+    internal bool[] disturbancesSet;
+
+    //TriggerScripts
+    internal bool chessAllowedToBeUsed;
+    internal bool chessActivated;
+    internal bool correctOrderAllowedToBeUsed;
+    internal bool correctOrderActivated;
+    internal bool gardenAllowedToBeUsed;
+    internal bool gardenActivated;
+    internal bool hiddenMechanismAllowedToBeUsed;
+    internal bool hiddenMechanismActivated;
+    internal bool ritualAllowedToBeUsed;
+    internal bool ritualActivated;
+    internal bool throwingAllowedToBeUsed;
+    internal bool throwingActivated;
+
+    //PutDown
+    internal bool ritualPDBeenUsed;
+    internal bool gardenPDBeenUsed;
+    internal bool chessPDBeenUsed;
+
+    //Table
+    internal bool ritualTHasBeenPlaced;
+    internal bool gardenTHasBeenPlaced;
+    internal bool chessTHasBeenPlaced;
+
+    //Paper
+    internal bool chessPHasBeenRead;
+    internal bool hiddenMechanismPHasBeenRead;
+    internal bool keypadPHasBeenRead;
+    internal bool keysPHasBeenRead;
+
+    //Door
+    internal bool colourMatchingDoorUnlocked;
+    internal bool colourMatchingDoorIsOpen;
+    internal bool correntOrderDoorUnlocked;
+    internal bool correntOrderDoorIsOpen;
+    internal bool leftFrontDoorUnlocked;
+    internal bool leftFrontDoorIsOpen;
+    internal bool rightFrontDoorUnlocked;
+    internal bool rightFrontDoorIsOpen;
+    internal bool pantryDoorUnlocked;
+    internal bool pantryDoorIsOpen;
+    internal bool gymDoorUnlocked;
+    internal bool gymDoorIsOpen;
+    internal bool garageDoorUnlocked;
+    internal bool garageDoorIsOpen;
+    internal bool downstairsBathroomDoorUnlocked;
+    internal bool downstairsBathroomDoorIsOpen;
+    internal bool diningRoomDoorUnlocked;
+    internal bool diningRoomDoorIsOpen;
+    internal bool safeDoorUnlocked;
+    internal bool safeDoorIsOpen;
+
+    //HoldandThrow
+    internal bool canHoldBall1;
+    internal bool ball1IsFirstTime;
+    internal bool canHoldBall2;
+    internal bool ball2IsFirstTime;
+    internal bool canHoldBall3;
+    internal bool ball3IsFirstTime;
+
+    internal bool canHoldWeight1;
+    internal bool weight1IsFirstTime;
+    internal bool canHoldWeight2;
+    internal bool weight2IsFirstTime;
+    internal bool canHoldWeight3;
+    internal bool weight3IsFirstTime;
+
+    internal bool canHoldKeyHandle1;
+    internal bool keyHandle1IsFirstTime;
+    internal bool canHoldKeyHandle2;
+    internal bool keyHandle2IsFirstTime;
+    internal bool canHoldKeyHandle3;
+    internal bool keyHandle3IsFirstTime;
+    internal bool canHoldKeyHandle4;
+    internal bool keyHandle4IsFirstTime;
+
+    internal bool canHoldKeyBit2;
+    internal bool keyBit2IsFirstTime;
+    internal bool canHoldKeyBit3;
+    internal bool keyBit3IsFirstTime;
+
+    //BallButtonLogic
+    internal bool button1IsActive;
+    internal bool button2IsActive;
+    internal bool button3IsActive;
+
+    //SetUpRitual
+    internal bool[] ritualSteps;
+    internal bool ritualIsActive;
+    //HiddenMech
+    internal bool hiddenMechIsActive;
+    //Fusebox
+    internal bool isFuseboxSolved;
+    //CorrectOrder
+    internal bool correctOrderIsActive;
+    internal bool[] correctOrderWhichRound;
+    //ColourMatchingPuzzle
+    internal bool colourMatchingPuzzleIsActive;
+    internal bool[] isDoorInteractedWith;
+    internal bool hasKeyPart1;
+    internal bool hasKeyPart2;
+    //Chessboard
+    internal bool chessBoardIsActive;
+    //ScalesPuzzleScript
+    internal bool scalesPuzzleIsActive;
+    internal bool scalesPuzzleIsComplete;
+
+    //Pipes
+    internal Pipes_CW.Directions pipe1CurrentPosition;
+    internal Pipes_CW.Directions pipe2CurrentPosition;
+    internal Pipes_CW.Directions pipe3CurrentPosition;
+    internal Pipes_CW.Directions pipe4CurrentPosition;
+    internal Pipes_CW.Directions pipe5CurrentPosition;
+    internal Pipes_CW.Directions pipe6CurrentPosition;
+    internal Pipes_CW.Directions pipe7CurrentPosition;
+    internal Pipes_CW.Directions pipe8CurrentPosition;
+    internal Pipes_CW.Directions pipe9CurrentPosition;
+    internal Pipes_CW.Directions pipe10CurrentPosition;
+    internal Pipes_CW.Directions pipe11CurrentPosition;
+    internal Pipes_CW.Directions pipe12CurrentPosition;
+
+    //ChessPieces
+    internal ChessBoard_DR.POSITION knightCurrentPosition;
+    internal ChessBoard_DR.POSITION kingCurrentPosition;
+    internal ChessBoard_DR.POSITION queenCurrentPosition;
+    internal ChessBoard_DR.POSITION pawnCurrentPosition;
+}
 }
