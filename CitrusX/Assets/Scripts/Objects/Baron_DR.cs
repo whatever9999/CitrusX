@@ -57,7 +57,7 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(SaveSystem_DR.instance.loadedGD.baronActive);
     }
 
     /// <summary>

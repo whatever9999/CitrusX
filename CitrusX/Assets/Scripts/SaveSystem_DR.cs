@@ -28,10 +28,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SaveSystem_DR: MonoBehaviour
 {
     public static SaveSystem_DR instance;
+
+    private Text saveNotificationText;
+    internal GameData_DR loadedGD;
+    internal bool loaded;
 
     #region TransformsAndActiveStates
     internal Transform playerT;
@@ -135,19 +140,6 @@ public class SaveSystem_DR: MonoBehaviour
     internal ChessBoard_DR chessBoard;
     internal ScalesPuzzleScript_AG scalesPuzzleScript;
 
-    internal Pipes_CW pipe1;
-    internal Pipes_CW pipe2;
-    internal Pipes_CW pipe3;
-    internal Pipes_CW pipe4;
-    internal Pipes_CW pipe5;
-    internal Pipes_CW pipe6;
-    internal Pipes_CW pipe7;
-    internal Pipes_CW pipe8;
-    internal Pipes_CW pipe9;
-    internal Pipes_CW pipe10;
-    internal Pipes_CW pipe11;
-    internal Pipes_CW pipe12;
-
     internal ChessPiece_DR knight;
     internal ChessPiece_DR king;
     internal ChessPiece_DR queen;
@@ -160,6 +152,8 @@ public class SaveSystem_DR: MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        saveNotificationText = GameObject.Find("SaveNotification").GetComponent<Text>();
 
         #region Initialisations
         playerT = GameObject.Find("FPSController").GetComponent<Transform>();
@@ -249,30 +243,17 @@ public class SaveSystem_DR: MonoBehaviour
         keyBit2 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>();
         keyBit3 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>();
 
-        button1 = GameObject.Find("1Button").GetComponent<BallButtonLogic_HR>();
-        button2 = GameObject.Find("2Button").GetComponent<BallButtonLogic_HR>();
-        button3 = GameObject.Find("3Button").GetComponent<BallButtonLogic_HR>();
+        button1 = GameObject.Find("1Button").GetComponentInChildren<BallButtonLogic_HR>();
+        button2 = GameObject.Find("2Button").GetComponentInChildren<BallButtonLogic_HR>();
+        button3 = GameObject.Find("3Button").GetComponentInChildren<BallButtonLogic_HR>();
 
-        setUpRitual = GameObject.Find("FPSController").GetComponent<SetUpRitual_CW>();
-        hiddenMech = GameObject.Find("FPSController").GetComponent<HiddenMech_CW>();
-        fusebox = GameObject.Find("Fusebox").GetComponent<Fusebox_CW>();
+        setUpRitual = GameObject.Find("FPSController").GetComponentInChildren<SetUpRitual_CW>();
+        hiddenMech = GameObject.Find("FPSController").GetComponentInChildren<HiddenMech_CW>();
+        fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         correctOrder = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         colourMatchingPuzzle = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         chessBoard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         scalesPuzzleScript = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
-
-        pipe1 = GameObject.Find("Pipe 1").GetComponent<Pipes_CW>();
-        pipe2 = GameObject.Find("Pipe 2").GetComponent<Pipes_CW>();
-        pipe3 = GameObject.Find("Pipe 3").GetComponent<Pipes_CW>();
-        pipe4 = GameObject.Find("Pipe 4").GetComponent<Pipes_CW>();
-        pipe5 = GameObject.Find("Pipe 5").GetComponent<Pipes_CW>();
-        pipe6 = GameObject.Find("Pipe 6").GetComponent<Pipes_CW>();
-        pipe7 = GameObject.Find("Pipe 7").GetComponent<Pipes_CW>();
-        pipe8 = GameObject.Find("Pipe 8").GetComponent<Pipes_CW>();
-        pipe9 = GameObject.Find("Pipe 9").GetComponent<Pipes_CW>();
-        pipe10 = GameObject.Find("Pipe 10").GetComponent<Pipes_CW>();
-        pipe11 = GameObject.Find("Pipe 11").GetComponent<Pipes_CW>();
-        pipe12 = GameObject.Find("Pipe 12").GetComponent<Pipes_CW>();
 
         knight = GameObject.Find("BoardKnight").GetComponent<ChessPiece_DR>();
         king = GameObject.Find("BoardKing").GetComponent<ChessPiece_DR>();
@@ -304,6 +285,7 @@ public class SaveSystem_DR: MonoBehaviour
     /// </summary>
     public void Save()
     {
+        saveNotificationText.text = "Saving...";
         //Save data path
 #if UNITY_EDITOR
         string path = Application.dataPath + "/save.dat";
@@ -328,7 +310,14 @@ public class SaveSystem_DR: MonoBehaviour
         bf.Serialize(file, gameData);
         file.Close();
 
-        Debug.Log("Saved");
+        StartCoroutine(NotifyPlayer("Save Complete"));
+    }
+
+    private IEnumerator NotifyPlayer(string notification)
+    {
+        saveNotificationText.text = notification;
+        yield return new WaitForSeconds(2);
+        saveNotificationText.text = "";
     }
 
     /// <summary>
@@ -338,7 +327,7 @@ public class SaveSystem_DR: MonoBehaviour
     {
        //Load data path
 #if UNITY_EDITOR
-       string path = Application.dataPath + "/SaveFiles/save.dat";
+       string path = Application.dataPath + "/save.dat";
 #else
        string path = Application.persistentDataPath + "/save.dat";
 #endif
@@ -361,7 +350,10 @@ public class SaveSystem_DR: MonoBehaviour
         //Put file data into variables
         UpdateVariables(gameData);
 
-        Debug.Log("Loaded");
+        loadedGD = gameData;
+
+        loaded = true;
+        StartCoroutine(NotifyPlayer("Loaded"));
     }
 
     /// <summary>
@@ -370,8 +362,268 @@ public class SaveSystem_DR: MonoBehaviour
     /// <param name="GD - a class that stores all of the data for the game that needs to be saved"></param>
     public void UpdateVariables(GameData_DR GD)
     {
+        //Player
         playerT.position = new Vector3(GD.playerPosition[0], GD.playerPosition[1], GD.playerPosition[2]);
         playerT.rotation = new Quaternion(GD.playerRotation[0], GD.playerRotation[1], GD.playerRotation[2], GD.playerRotation[3]);
+
+        //JournalUI
+        Text[] journalTexts = journal.GetComponentsInChildren<Text>();
+        for (int i = 0; i < journalTexts.Length; i++)
+        {
+            journalTexts[i].text = GD.journalTasks[i];
+        }
+
+        //Baron
+        baronT.position = new Vector3(GD.baronPosition[0], GD.baronPosition[1], GD.baronPosition[2]);
+        baronT.rotation = new Quaternion(GD.baronRotation[0], GD.baronRotation[1], GD.baronRotation[2], GD.baronRotation[3]);
+
+        //Chessboard
+        chessBoardT.gameObject.SetActive(GD.chessTableActivated);
+
+        Transform[] chessPieces = chessBoard.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < chessPieces.Length; i++)
+        {
+            switch (chessPieces[i].name)
+            {
+                case "BoardKnight":
+                    chessPieces[i].rotation = new Quaternion(GD.chessKnightRotation[0], GD.chessKnightRotation[1], GD.chessKnightRotation[2], GD.chessKnightRotation[3]);
+                    break;
+                case "BoardKing":
+                    chessPieces[i].rotation = new Quaternion(GD.chessKingRotation[0], GD.chessKingRotation[1], GD.chessKingRotation[2], GD.chessKingRotation[3]);
+                    break;
+                case "BoardQueen":
+                    chessPieces[i].rotation = new Quaternion(GD.chessQueenRotation[0], GD.chessQueenRotation[1], GD.chessQueenRotation[2], GD.chessQueenRotation[3]);
+                    break;
+                case "BoardPawn":
+                    chessPieces[i].rotation = new Quaternion(GD.chessPawnRotation[0], GD.chessPawnRotation[1], GD.chessPawnRotation[2], GD.chessPawnRotation[3]);
+                    break;
+            }
+        }
+
+        //GardenTable
+        gardenTableT.gameObject.SetActive(GD.gardenTableActivated);
+
+        //RitualTable
+        ritualTableT.gameObject.SetActive(GD.ritualTableActivated);
+
+        //RitualItems
+        bowlT.gameObject.SetActive(GD.bowlNotPickedUp);
+        candlesT.gameObject.SetActive(GD.candlesNotPickedUp);
+        coinsT.gameObject.SetActive(GD.coinsNotPickedUp);
+        saltT.gameObject.SetActive(GD.saltNotPickedUp);
+
+        //Monitor
+        saltT.gameObject.SetActive(GD.monitorOn);
+        for(int i = 0; i < monitorT.childCount; i++)
+        {
+            monitorT.GetChild(i).gameObject.SetActive(GD.monitorOn);
+        }
+
+        //KeypadTable
+        keypadT.gameObject.SetActive(GD.keypadTableActivated);
+
+        //Balls
+        ball1T.position = new Vector3(GD.ball1TPosition[0], GD.ball1TPosition[1], GD.ball1TPosition[2]);
+
+        ball2T.position = new Vector3(GD.ball2TPosition[0], GD.ball2TPosition[1], GD.ball2TPosition[2]);
+
+        ball3T.position = new Vector3(GD.ball3TPosition[0], GD.ball3TPosition[1], GD.ball3TPosition[2]);
+
+        //Weights
+        weight1T.position = new Vector3(GD.weight1TPosition[0], GD.weight1TPosition[1], GD.weight1TPosition[2]);
+
+        weight2T.position = new Vector3(GD.weight2TPosition[0], GD.weight2TPosition[1], GD.weight2TPosition[2]);
+
+        weight3T.position = new Vector3(GD.weight3TPosition[0], GD.weight3TPosition[1], GD.weight3TPosition[2]);
+
+        //KeyPieces
+        keyHandle1T.position = new Vector3(GD.keyHandle1TPosition[0], GD.keyHandle1TPosition[1], GD.keyHandle1TPosition[2]);
+
+        keyHandle2T.position = new Vector3(GD.keyHandle2TPosition[0], GD.keyHandle2TPosition[1], GD.keyHandle2TPosition[2]);
+
+        keyHandle3T.position = new Vector3(GD.keyHandle3TPosition[0], GD.keyHandle3TPosition[1], GD.keyHandle3TPosition[2]);
+
+        keyHandle4T.position = new Vector3(GD.keyHandle4TPosition[0], GD.keyHandle4TPosition[1], GD.keyHandle4TPosition[2]);
+
+        keyBit2T.position = new Vector3(GD.keyBit2TPosition[0], GD.keyBit2TPosition[1], GD.keyBit2TPosition[2]);
+
+        keyBit3T.position = new Vector3(GD.keyBit3TPosition[0], GD.keyBit3TPosition[1], GD.keyBit3TPosition[2]);
+
+        //JewelleryItems
+        jewellery.gameObject.SetActive(GD.jewelleryNotPickedUp);
+        pendant.gameObject.SetActive(GD.pendantNotPickedUp);
+        necklace.gameObject.SetActive(GD.necklaceNotPickedUp);
+        bracelet.gameObject.SetActive(GD.braceletNotPickedUp);
+
+        //Inventory
+        for (int i = 0; i < GD.inventory.Length; i++)
+        {
+            inventory.AddItem(GD.inventory[i]);
+        }
+
+        //Cinematics
+        cinematics.playStartCinematic = GD.playStartCinematic;
+
+        //Interact
+        interact.numberCoinsCollected = GD.numberCoinsCollected;
+
+        //InitiatePuzzles
+        initiatePuzzles.ballCounter = GD.ballCounter;
+        initiatePuzzles.voiceovers = GD.puzzleVoiceovers;
+        initiatePuzzles.monitorInteractions = GD.monitorInteractions;
+        initiatePuzzles.monitorInteractionsUsed = GD.monitorInteractionsUsed;
+
+        //GameTesting
+        gameTesting.setUpPuzzle = GD.setUpPuzzle;
+        gameTesting.arePuzzlesDone = GD.arePuzzlesDone;
+        gameTesting.cutscenes = GD.cutscenes;
+        gameTesting.cutscenesDone = GD.cutscenesDone;
+
+        //Baron
+        baron.appearanceTimer = GD.appearanceTimer;
+
+        //WaterBowl
+        for(int i = waterBowl.numberOfCoins; i > GD.coinsLeft; i--)
+        {
+            waterBowl.RemoveCoin();
+        }
+
+        //KeypadUI
+        keyPadUI.interactedWithSafe = GD.interactedWithSafe;
+        keyPadUI.hasAlreadyInteractedWithSafe = GD.hasAlreadyInteractedWithSafe;
+        keyPadUI.playerInteractsWithDoc = GD.playerInteractsWithDoc;
+        keyPadUI.voiceovers = GD.keypadVoiceovers;
+        keyPadUI.isActive = GD.isActive;
+
+        //EventManager
+        eventManager.triggersSet = GD.triggersSet;
+        eventManager.itemsSet = GD.itemsSet;
+        eventManager.disturbancesSet = GD.disturbancesSet;
+
+        //TriggerScripts
+        chessTrigger.allowedToBeUsed = GD.chessAllowedToBeUsed;
+        chessTrigger.activated = GD.chessActivated;
+        correctOrderTrigger.allowedToBeUsed = GD.correctOrderAllowedToBeUsed;
+        correctOrderTrigger.activated = GD.correctOrderActivated;
+        gardenTrigger.allowedToBeUsed = GD.gardenAllowedToBeUsed;
+        gardenTrigger.activated = GD.gardenActivated;
+        hiddenMechanismTrigger.allowedToBeUsed = GD.hiddenMechanismAllowedToBeUsed;
+        hiddenMechanismTrigger.activated = GD.hiddenMechanismActivated;
+        ritualTrigger.allowedToBeUsed = GD.ritualAllowedToBeUsed;
+        ritualTrigger.activated = GD.ritualActivated;
+        throwingTrigger.allowedToBeUsed = GD.throwingAllowedToBeUsed;
+        throwingTrigger.activated = GD.throwingActivated;
+
+        //PutDown
+        ritualPutDown.SetBeenUsed(GD.ritualPDBeenUsed);
+        gardenPutDown.SetBeenUsed(GD.gardenPDBeenUsed);
+        chessPutDown.SetBeenUsed(GD.chessPDBeenUsed);
+
+        //Table
+        ritualTable.hasBeenPlaced = GD.ritualTHasBeenPlaced;
+        gardenTable.hasBeenPlaced = GD.gardenTHasBeenPlaced;
+        chessTable.hasBeenPlaced = GD.chessTHasBeenPlaced;
+
+        //Paper
+        chessPaper.hasBeenRead = GD.chessPHasBeenRead;
+        hiddenMechanismPaper.hasBeenRead = GD.hiddenMechanismPHasBeenRead;
+        keypadPaper.hasBeenRead = GD.keypadPHasBeenRead;
+        keysPaper.hasBeenRead = GD.keysPHasBeenRead;
+
+        //Door
+        colourMatchingDoor.unlocked = GD.colourMatchingDoorUnlocked;
+        colourMatchingDoor.isOpen = GD.colourMatchingDoorIsOpen;
+        correntOrderDoor.unlocked = GD.correntOrderDoorUnlocked;
+        correntOrderDoor.isOpen = GD.correntOrderDoorIsOpen;
+        leftFrontDoor.unlocked = GD.leftFrontDoorUnlocked;
+        leftFrontDoor.isOpen = GD.leftFrontDoorIsOpen;
+        rightFrontDoor.unlocked = GD.rightFrontDoorUnlocked;
+        rightFrontDoor.isOpen = GD.rightFrontDoorIsOpen;
+        pantryDoor.unlocked = GD.pantryDoorUnlocked;
+        pantryDoor.isOpen = GD.pantryDoorIsOpen;
+        gymDoor.unlocked = GD.gymDoorUnlocked;
+        gymDoor.isOpen = GD.gymDoorIsOpen;
+        garageDoor.unlocked = GD.garageDoorUnlocked;
+        garageDoor.isOpen = GD.garageDoorIsOpen;
+        downstairsBathroomDoor.unlocked = GD.downstairsBathroomDoorUnlocked;
+        downstairsBathroomDoor.isOpen = GD.downstairsBathroomDoorIsOpen;
+        diningRoomDoor.unlocked = GD.diningRoomDoorUnlocked;
+        diningRoomDoor.isOpen = GD.diningRoomDoorIsOpen;
+        safeDoor.unlocked = GD.safeDoorUnlocked;
+        safeDoor.isOpen = GD.safeDoorIsOpen;
+
+        //HoldandThrow
+        ball1.canHold = GD.canHoldBall1;
+        ball1.isFirstTime = GD.ball1IsFirstTime;
+        ball2.canHold = GD.canHoldBall2;
+        ball2.isFirstTime = GD.ball2IsFirstTime;
+        ball3.canHold = GD.canHoldBall3;
+        ball3.isFirstTime = GD.ball3IsFirstTime;
+
+        weight1.canHold = GD.canHoldWeight1;
+        weight1.isFirstTime = GD.weight1IsFirstTime;
+        weight2.canHold = GD.canHoldWeight2;
+        weight2.isFirstTime = GD.weight2IsFirstTime;
+        weight3.canHold = GD.canHoldWeight3;
+        weight3.isFirstTime = GD.weight3IsFirstTime;
+
+        keyHandle1.canHold = GD.canHoldKeyHandle1;
+        keyHandle1.isFirstTime = GD.keyHandle1IsFirstTime;
+        keyHandle2.canHold = GD.canHoldKeyHandle2;
+        keyHandle2.isFirstTime = GD.keyHandle2IsFirstTime;
+        keyHandle3.canHold = GD.canHoldKeyHandle3;
+        keyHandle3.isFirstTime = GD.keyHandle3IsFirstTime;
+        keyHandle4.canHold = GD.canHoldKeyHandle4;
+        keyHandle4.isFirstTime = GD.keyHandle4IsFirstTime;
+
+        keyBit2.canHold = GD.canHoldKeyBit2;
+        keyBit2.isFirstTime = GD.keyBit2IsFirstTime;
+        keyBit3.canHold = GD.canHoldKeyBit3;
+        keyBit3.isFirstTime = GD.keyBit3IsFirstTime;
+
+        //BallButtonLogic
+        button1.isActive = GD.button1IsActive;
+        button2.isActive = GD.button2IsActive;
+        button3.isActive = GD.button3IsActive;
+
+        //SetUpRitual
+        setUpRitual.ritualSteps = GD.ritualSteps;
+        setUpRitual.isActive = GD.ritualIsActive;
+        //HiddenMech
+        hiddenMech.isActive = GD.hiddenMechIsActive;
+        //Fusebox
+        fusebox.isFuseboxSolved = GD.isFuseboxSolved;
+        //CorrectOrder
+        correctOrder.isActive = GD.correctOrderIsActive;
+        correctOrder.whichRound = GD.correctOrderWhichRound;
+        //ColourMatchingPuzzle
+        colourMatchingPuzzle.isActive = GD.colourMatchingPuzzleIsActive;
+        colourMatchingPuzzle.isDoorInteractedWith = GD.isDoorInteractedWith;
+        colourMatchingPuzzle.hasKeyPart1 = GD.hasKeyPart1;
+        colourMatchingPuzzle.hasKeyPart2 = GD.hasKeyPart2;
+        //Chessboard
+        chessBoard.isActive = GD.chessBoardIsActive;
+        //ScalesPuzzleScript
+        scalesPuzzleScript.isActive = GD.scalesPuzzleIsActive;
+        scalesPuzzleScript.isComplete = GD.scalesPuzzleIsComplete;
+
+        //ChessPieces
+        while(knight.currentPosition != GD.knightCurrentPosition)
+        {
+            knight.Rotate();
+        }
+        while (king.currentPosition != GD.knightCurrentPosition)
+        {
+            king.Rotate();
+        }
+        while (queen.currentPosition != GD.knightCurrentPosition)
+        {
+            queen.Rotate();
+        }
+        while (pawn.currentPosition != GD.knightCurrentPosition)
+        {
+            pawn.Rotate();
+        }
     }
 }
 
@@ -630,7 +882,8 @@ public class GameData_DR
         playerRotation[3] = saveData.playerT.rotation.w;
 
         //JournalUI
-        Text[] journalTexts = saveData.GetComponentsInChildren<Text>();
+        Text[] journalTexts = saveData.journalGO.GetComponentsInChildren<Text>();
+        journalTasks = new string[5];
         for (int i = 0; i < journalTexts.Length; i++)
         {
             switch (journalTexts[i].name)
@@ -671,7 +924,11 @@ public class GameData_DR
         //Chessboard
         chessTableActivated = saveData.chessBoardT.gameObject.activeInHierarchy;
 
-        Transform[] chessPieces = saveData.GetComponentsInChildren<Transform>();
+        Transform[] chessPieces = saveData.chessBoard.GetComponentsInChildren<Transform>();
+        chessKnightRotation = new float[4];
+        chessKingRotation = new float[4];
+        chessQueenRotation = new float[4];
+        chessPawnRotation = new float[4];
         for (int i = 0; i < chessPieces.Length; i++)
         {
             switch (chessPieces[i].name)
@@ -722,7 +979,7 @@ public class GameData_DR
         monitorOn = saveData.monitorT.GetChild(0).gameObject.activeInHierarchy;
 
         //KeypadTable
-        keypadTableActivated = saveData.keypadT.GetChild(0).gameObject.activeInHierarchy;
+        keypadTableActivated = saveData.keypadT.gameObject.activeInHierarchy;
 
         //ThrowingBox
         throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;
@@ -779,10 +1036,10 @@ public class GameData_DR
         keyBit3TPosition[2] = saveData.keyBit3T.position.z;
 
         //JewelleryItems
-        jewelleryNotPickedUp = saveData.jewellery.GetChild(0).gameObject.activeInHierarchy;
-        pendantNotPickedUp = saveData.pendant.GetChild(0).gameObject.activeInHierarchy;
-        necklaceNotPickedUp = saveData.necklace.GetChild(0).gameObject.activeInHierarchy;
-        braceletNotPickedUp = saveData.bracelet.GetChild(0).gameObject.activeInHierarchy;
+        jewelleryNotPickedUp = saveData.jewellery.gameObject.activeInHierarchy;
+        pendantNotPickedUp = saveData.pendant.gameObject.activeInHierarchy;
+        necklaceNotPickedUp = saveData.necklace.gameObject.activeInHierarchy;
+        braceletNotPickedUp = saveData.bracelet.gameObject.activeInHierarchy;
 
         //Inventory
         GameObject[] inventoryGOs = saveData.inventory.inventoryItems;
@@ -790,7 +1047,7 @@ public class GameData_DR
         List<Inventory_HR.Names> tempInventory = new List<Inventory_HR.Names>();
         for(int i = 0; i < inventoryGOs.Length; i++)
         {
-            string inventoryItem = inventoryGOs[i].GetComponent<Text>().text;
+            string inventoryItem = inventoryGOs[i].GetComponentInChildren<Text>().text;
             if (inventoryItem.Trim() != "")
             {
                 tempInventory.Add((Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), inventoryItem));
@@ -945,20 +1202,6 @@ public class GameData_DR
         //ScalesPuzzleScript
         scalesPuzzleIsActive = saveData.scalesPuzzleScript.isActive;
         scalesPuzzleIsComplete = saveData.scalesPuzzleScript.isComplete;
-
-        //Pipes
-        pipe1CurrentPosition = saveData.pipe1.currentPosition;
-        pipe2CurrentPosition = saveData.pipe2.currentPosition;
-        pipe3CurrentPosition = saveData.pipe3.currentPosition;
-        pipe4CurrentPosition = saveData.pipe4.currentPosition;
-        pipe5CurrentPosition = saveData.pipe5.currentPosition;
-        pipe6CurrentPosition = saveData.pipe6.currentPosition;
-        pipe7CurrentPosition = saveData.pipe7.currentPosition;
-        pipe8CurrentPosition = saveData.pipe8.currentPosition;
-        pipe9CurrentPosition = saveData.pipe9.currentPosition;
-        pipe10CurrentPosition = saveData.pipe10.currentPosition;
-        pipe11CurrentPosition = saveData.pipe11.currentPosition;
-        pipe12CurrentPosition = saveData.pipe12.currentPosition;
 
         //ChessPieces
         knightCurrentPosition = saveData.knight.currentPosition;

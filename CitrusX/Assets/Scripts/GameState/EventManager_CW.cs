@@ -87,8 +87,8 @@ public class EventManager_CW : MonoBehaviour
         game = GameTesting_CW.instance;
         #region ACTIVATE_OBJECTS
         keypadDoc.SetActive(false);
-        throwingBox.SetActive(false);
-        hiddenMechDoc.SetActive(false);
+        throwingBox.SetActive(SaveSystem_DR.instance.loadedGD.throwingActivated);
+        hiddenMechDoc.SetActive(SaveSystem_DR.instance.loadedGD.hiddenMechNoteActivated);
         bathroomKeyPart1.SetActive(false);
         bathroomKeyPart2.SetActive(false);
         safe.SetActive(false);

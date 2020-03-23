@@ -82,9 +82,11 @@ public class Journal_DR : MonoBehaviour
         GameObject journalLogGO = GameObject.Find("JournalLogs");
         journalLogTextBox = journalLogGO.GetComponent<RectTransform>();
         journalLogText = journalLogGO.GetComponent<Text>();
+    }
 
+    private void Start()
+    {
         journal.SetActive(false);
-
     }
 
     /// <summary>

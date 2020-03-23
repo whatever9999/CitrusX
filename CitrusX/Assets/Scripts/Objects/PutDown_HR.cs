@@ -35,6 +35,7 @@ public class PutDown_HR : MonoBehaviour
     private bool beenUsed;
 
     public bool GetBeenUsed() { return beenUsed; }
+    public void SetBeenUsed(bool newValue) { beenUsed = newValue; }
 
     /// <summary>
     /// Activate all children of the object and set been used to true

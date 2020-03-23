@@ -210,7 +210,7 @@ public class Interact_HR : MonoBehaviour
                     matArray[1] = outlineMaterial;
                 } catch (System.IndexOutOfRangeException e)
                 {
-                    Debug.Log(e.StackTrace);
+                    //Fix dis
                 }
                 currRenderer.materials = matArray;
                 targetRenderer = currRenderer;
