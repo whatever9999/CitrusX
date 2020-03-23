@@ -45,15 +45,15 @@ public class KeypadUI_DR : MonoBehaviour
     #region REFERENCES
     private KeypadItem_DR keypadItem;
     private FirstPersonController firstPersonController;
-    private bool isActive = false;
+    internal bool isActive = false;
     private Journal_DR journal;
     private Subtitles_HR subtitles;
     #endregion
     #region BOOLS
     internal bool interactedWithSafe = false; //needs to be set in interact
-    private bool hasAlreadyInteractedWithSafe = false;
+    internal bool hasAlreadyInteractedWithSafe = false;
     internal bool playerInteractsWithDoc = false;
-    private bool[] voiceovers = { false, false, false, false, false, false, false };
+    internal bool[] voiceovers = { false, false, false, false, false, false, false };
     #endregion
     public void SetKeypadItem(KeypadItem_DR newKeypadItem) { keypadItem = newKeypadItem; }
     public void SetActive(bool value) { isActive = value; }

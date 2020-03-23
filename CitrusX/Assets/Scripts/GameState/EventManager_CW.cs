@@ -46,9 +46,9 @@ public class EventManager_CW : MonoBehaviour
     private Baron_DR baron;
     #endregion
     #region BOOLS
-    private bool[] triggersSet = { false, false, false, false, false, false };
-    private bool[] itemsSet = { false, false, false, false };
-    private bool[] disturbancesSet = { false, false };
+    internal bool[] triggersSet = { false, false, false, false, false, false };
+    internal bool[] itemsSet = { false, false, false, false };
+    internal bool[] disturbancesSet = { false, false };
     #endregion
     private GameTesting_CW game;
 

@@ -41,10 +41,10 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     private Subtitles_HR subtitles;
 
     // Puzzle State
-    private bool isComplete = false;
+    internal bool isComplete = false;
 
     private Journal_DR journal;
-    private bool isActive = false;
+    internal bool isActive = false;
 
     public void SetActive(bool value) { isActive = value; }
 

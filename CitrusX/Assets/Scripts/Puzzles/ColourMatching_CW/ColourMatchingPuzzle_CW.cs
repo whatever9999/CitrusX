@@ -32,7 +32,7 @@ internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
 {
     #region VARIABLES
     internal bool[] isDoorInteractedWith = { false, false };
-    private bool hasKeyPart1 = false;
+    internal bool hasKeyPart1 = false;
     internal bool hasKeyPart2 = false;
     private Door_DR door;
     #endregion

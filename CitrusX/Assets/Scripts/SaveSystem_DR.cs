@@ -26,6 +26,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
+using System;
 
 public class SaveSystem_DR: MonoBehaviour
 {
@@ -63,7 +64,6 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform pendant;
     internal Transform necklace;
     internal Transform bracelet;
-    internal GameObject inventory;
     #endregion
 
     #region ScriptVariables
@@ -76,6 +76,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal KeypadUI_DR keyPadUI;
     internal Journal_DR journal;
     internal EventManager_CW eventManager;
+    internal Inventory_HR inventory;
 
     internal TriggerScript_CW chessTrigger;
     internal TriggerScript_CW correctOrderTrigger;
@@ -191,7 +192,6 @@ public class SaveSystem_DR: MonoBehaviour
         pendant = GameObject.Find("Pendant").GetComponent<Transform>();
         necklace = GameObject.Find("Necklace").GetComponent<Transform>();
         bracelet = GameObject.Find("Bracelet").GetComponent<Transform>();
-        inventory = GameObject.Find("Inventory");
 
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         interact = GameObject.Find("FPSController").GetComponentInChildren<Interact_HR>();
@@ -202,6 +202,7 @@ public class SaveSystem_DR: MonoBehaviour
         keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
         eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
+        inventory = GameObject.Find("FPSController").GetComponent<Inventory_HR>();
 
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
@@ -304,7 +305,7 @@ public class SaveSystem_DR: MonoBehaviour
     {
         //Save data path
 #if UNITY_EDITOR
-        string path = Application.dataPath + "/SaveFiles/save.dat";
+        string path = Application.dataPath + "/save.dat";
 #else
         string path = Application.persistentDataPath + "/save.dat";
 #endif
@@ -719,202 +720,238 @@ public class GameData_DR
         //Monitor
         monitorOn = saveData.monitorT.GetChild(0).gameObject.activeInHierarchy;
 
+        //KeypadTable
+        keypadTableActivated = saveData.keypadT.GetChild(0).gameObject.activeInHierarchy;
 
+        //ThrowingBox
+        throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;
 
+        //Balls
+        ball1TPosition[0] = saveData.baronT.position.x;
+        ball1TPosition[1] = saveData.baronT.position.y;
+        ball1TPosition[2] = saveData.baronT.position.z;
 
-    //Keypad
-    internal bool keypadTableActivated;
-    //ThrowingBox
-    internal bool throwingBoxActivated;
-    //Balls
-    internal float[] ball1TPosition = new float[3];
-    internal float[] ball1TRotation = new float[4];
-    internal float[] ball2TPosition = new float[3];
-    internal float[] ball2TRotation = new float[4];
-    internal float[] ball3TPosition = new float[3];
-    internal float[] ball3TRotation = new float[4];
-    //Weights
-    internal float[] weight1TPosition = new float[3];
-    internal float[] weight1TRotation = new float[4];
-    internal float[] weight2TPosition = new float[3];
-    internal float[] weight2TRotation = new float[4];
-    internal float[] weight3TPosition = new float[3];
-    internal float[] weight3TRotation = new float[4];
-    //KeyPieces
-    internal float[] keyHandle1TPosition = new float[3];
-    internal float[] keyHandle1TRotation = new float[4];
-    internal float[] keyHandle2TPosition = new float[3];
-    internal float[] keyHandle2TRotation = new float[4];
-    internal float[] keyHandle3TPosition = new float[3];
-    internal float[] keyHandle3TRotation = new float[4];
-    internal float[] keyHandle4TPosition = new float[3];
-    internal float[] keyHandle4TRotation = new float[4];
-    internal float[] keyBit2TPosition = new float[3];
-    internal float[] keyBit2TRotation = new float[4];
-    internal float[] keyBit3TPosition = new float[3];
-    internal float[] keyBit3TRotation = new float[4];
-    //JewelleryItems
-    internal bool jewelleryNotPickedUp;
-    internal bool pendantNotPickedUp;
-    internal bool necklaceNotPickedUp;
-    internal bool braceletNotPickedUp;
-    //Inventory
-    internal Inventory_HR.Names[] inventory;
+        ball2TPosition[0] = saveData.baronT.position.x;
+        ball2TPosition[1] = saveData.baronT.position.y;
+        ball2TPosition[2] = saveData.baronT.position.z;
 
-    //Cinematics
-    internal bool playStartCinematic;
-    //Interact
-    internal int numberCoinsCollected;
-    //InitiatePuzzles
-    internal int ballCounter;
-    internal bool[] puzzleVoiceovers;
-    internal bool[] monitorInteractions;
-    internal bool[] monitorInteractionsUsed;
-    //GameTesting
-    internal bool[] setUpPuzzle;
-    internal bool[] arePuzzlesDone;
-    internal bool[] cutscenes;
-    internal bool[] cutscenesDone;
-    //Baron
-    internal float appearanceTimer;
-    //Water Bowl
-    internal int coinsLeft;
-    //KeypadUI
-    internal bool interactedWithSafe;
-    internal bool hasAlreadyInteractedWithSafe;
-    internal bool playerInteractsWithDoc;
-    internal bool[] keypadVoiceovers;
-    internal bool isActive;
-    //EventManager
-    internal bool[] triggersSet;
-    internal bool[] itemsSet;
-    internal bool[] disturbancesSet;
+        ball3TPosition[0] = saveData.baronT.position.x;
+        ball3TPosition[1] = saveData.baronT.position.y;
+        ball3TPosition[2] = saveData.baronT.position.z;
 
-    //TriggerScripts
-    internal bool chessAllowedToBeUsed;
-    internal bool chessActivated;
-    internal bool correctOrderAllowedToBeUsed;
-    internal bool correctOrderActivated;
-    internal bool gardenAllowedToBeUsed;
-    internal bool gardenActivated;
-    internal bool hiddenMechanismAllowedToBeUsed;
-    internal bool hiddenMechanismActivated;
-    internal bool ritualAllowedToBeUsed;
-    internal bool ritualActivated;
-    internal bool throwingAllowedToBeUsed;
-    internal bool throwingActivated;
+        //Weights
+        weight1TPosition[0] = saveData.baronT.position.x;
+        weight1TPosition[1] = saveData.baronT.position.y;
+        weight1TPosition[2] = saveData.baronT.position.z;
 
-    //PutDown
-    internal bool ritualPDBeenUsed;
-    internal bool gardenPDBeenUsed;
-    internal bool chessPDBeenUsed;
+        weight2TPosition[0] = saveData.baronT.position.x;
+        weight2TPosition[1] = saveData.baronT.position.y;
+        weight2TPosition[2] = saveData.baronT.position.z;
 
-    //Table
-    internal bool ritualTHasBeenPlaced;
-    internal bool gardenTHasBeenPlaced;
-    internal bool chessTHasBeenPlaced;
+        weight3TPosition[0] = saveData.baronT.position.x;
+        weight3TPosition[1] = saveData.baronT.position.y;
+        weight3TPosition[2] = saveData.baronT.position.z;
 
-    //Paper
-    internal bool chessPHasBeenRead;
-    internal bool hiddenMechanismPHasBeenRead;
-    internal bool keypadPHasBeenRead;
-    internal bool keysPHasBeenRead;
+        //KeyPieces
+        keyHandle1TPosition[0] = saveData.keyHandle1T.position.x;
+        keyHandle1TPosition[1] = saveData.keyHandle1T.position.y;
+        keyHandle1TPosition[2] = saveData.keyHandle1T.position.z;
 
-    //Door
-    internal bool colourMatchingDoorUnlocked;
-    internal bool colourMatchingDoorIsOpen;
-    internal bool correntOrderDoorUnlocked;
-    internal bool correntOrderDoorIsOpen;
-    internal bool leftFrontDoorUnlocked;
-    internal bool leftFrontDoorIsOpen;
-    internal bool rightFrontDoorUnlocked;
-    internal bool rightFrontDoorIsOpen;
-    internal bool pantryDoorUnlocked;
-    internal bool pantryDoorIsOpen;
-    internal bool gymDoorUnlocked;
-    internal bool gymDoorIsOpen;
-    internal bool garageDoorUnlocked;
-    internal bool garageDoorIsOpen;
-    internal bool downstairsBathroomDoorUnlocked;
-    internal bool downstairsBathroomDoorIsOpen;
-    internal bool diningRoomDoorUnlocked;
-    internal bool diningRoomDoorIsOpen;
-    internal bool safeDoorUnlocked;
-    internal bool safeDoorIsOpen;
+        keyHandle2TPosition[0] = saveData.keyHandle2T.position.x;
+        keyHandle2TPosition[1] = saveData.keyHandle2T.position.y;
+        keyHandle2TPosition[2] = saveData.keyHandle2T.position.z;
 
-    //HoldandThrow
-    internal bool canHoldBall1;
-    internal bool ball1IsFirstTime;
-    internal bool canHoldBall2;
-    internal bool ball2IsFirstTime;
-    internal bool canHoldBall3;
-    internal bool ball3IsFirstTime;
+        keyHandle3TPosition[0] = saveData.keyHandle3T.position.x;
+        keyHandle3TPosition[1] = saveData.keyHandle3T.position.y;
+        keyHandle3TPosition[2] = saveData.keyHandle3T.position.z;
 
-    internal bool canHoldWeight1;
-    internal bool weight1IsFirstTime;
-    internal bool canHoldWeight2;
-    internal bool weight2IsFirstTime;
-    internal bool canHoldWeight3;
-    internal bool weight3IsFirstTime;
+        keyHandle4TPosition[0] = saveData.keyHandle4T.position.x;
+        keyHandle4TPosition[1] = saveData.keyHandle4T.position.y;
+        keyHandle4TPosition[2] = saveData.keyHandle4T.position.z;
 
-    internal bool canHoldKeyHandle1;
-    internal bool keyHandle1IsFirstTime;
-    internal bool canHoldKeyHandle2;
-    internal bool keyHandle2IsFirstTime;
-    internal bool canHoldKeyHandle3;
-    internal bool keyHandle3IsFirstTime;
-    internal bool canHoldKeyHandle4;
-    internal bool keyHandle4IsFirstTime;
+        keyBit2TPosition[0] = saveData.keyBit2T.position.x;
+        keyBit2TPosition[1] = saveData.keyBit2T.position.y;
+        keyBit2TPosition[2] = saveData.keyBit2T.position.z;
 
-    internal bool canHoldKeyBit2;
-    internal bool keyBit2IsFirstTime;
-    internal bool canHoldKeyBit3;
-    internal bool keyBit3IsFirstTime;
+        keyBit3TPosition[0] = saveData.keyBit3T.position.x;
+        keyBit3TPosition[1] = saveData.keyBit3T.position.y;
+        keyBit3TPosition[2] = saveData.keyBit3T.position.z;
 
-    //BallButtonLogic
-    internal bool button1IsActive;
-    internal bool button2IsActive;
-    internal bool button3IsActive;
+        //JewelleryItems
+        jewelleryNotPickedUp = saveData.jewellery.GetChild(0).gameObject.activeInHierarchy;
+        pendantNotPickedUp = saveData.pendant.GetChild(0).gameObject.activeInHierarchy;
+        necklaceNotPickedUp = saveData.necklace.GetChild(0).gameObject.activeInHierarchy;
+        braceletNotPickedUp = saveData.bracelet.GetChild(0).gameObject.activeInHierarchy;
 
-    //SetUpRitual
-    internal bool[] ritualSteps;
-    internal bool ritualIsActive;
-    //HiddenMech
-    internal bool hiddenMechIsActive;
-    //Fusebox
-    internal bool isFuseboxSolved;
-    //CorrectOrder
-    internal bool correctOrderIsActive;
-    internal bool[] correctOrderWhichRound;
-    //ColourMatchingPuzzle
-    internal bool colourMatchingPuzzleIsActive;
-    internal bool[] isDoorInteractedWith;
-    internal bool hasKeyPart1;
-    internal bool hasKeyPart2;
-    //Chessboard
-    internal bool chessBoardIsActive;
-    //ScalesPuzzleScript
-    internal bool scalesPuzzleIsActive;
-    internal bool scalesPuzzleIsComplete;
+        //Inventory
+        GameObject[] inventoryGOs = saveData.inventory.inventoryItems;
+        inventory = new Inventory_HR.Names[inventoryGOs.Length];
+        for(int i = 0; i < inventoryGOs.Length; i++)
+        {
+            inventory[i] = (Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), inventoryGOs[i].GetComponent<Text>().text);
+        }
 
-    //Pipes
-    internal Pipes_CW.Directions pipe1CurrentPosition;
-    internal Pipes_CW.Directions pipe2CurrentPosition;
-    internal Pipes_CW.Directions pipe3CurrentPosition;
-    internal Pipes_CW.Directions pipe4CurrentPosition;
-    internal Pipes_CW.Directions pipe5CurrentPosition;
-    internal Pipes_CW.Directions pipe6CurrentPosition;
-    internal Pipes_CW.Directions pipe7CurrentPosition;
-    internal Pipes_CW.Directions pipe8CurrentPosition;
-    internal Pipes_CW.Directions pipe9CurrentPosition;
-    internal Pipes_CW.Directions pipe10CurrentPosition;
-    internal Pipes_CW.Directions pipe11CurrentPosition;
-    internal Pipes_CW.Directions pipe12CurrentPosition;
+        //Cinematics
+        playStartCinematic = saveData.cinematics.playStartCinematic;
 
-    //ChessPieces
-    internal ChessBoard_DR.POSITION knightCurrentPosition;
-    internal ChessBoard_DR.POSITION kingCurrentPosition;
-    internal ChessBoard_DR.POSITION queenCurrentPosition;
-    internal ChessBoard_DR.POSITION pawnCurrentPosition;
-}
+        //Interact
+        numberCoinsCollected = saveData.interact.numberCoinsCollected;
+
+        //InitiatePuzzles
+        ballCounter = saveData.initiatePuzzles.ballCounter;
+        puzzleVoiceovers = saveData.initiatePuzzles.voiceovers;
+        monitorInteractions = saveData.initiatePuzzles.monitorInteractions;
+        monitorInteractionsUsed = saveData.initiatePuzzles.monitorInteractionsUsed;
+
+        //GameTesting
+        setUpPuzzle = saveData.gameTesting.setUpPuzzle;
+        arePuzzlesDone = saveData.gameTesting.arePuzzlesDone;
+        cutscenes = saveData.gameTesting.cutscenes;
+        cutscenesDone = saveData.gameTesting.cutscenesDone;
+
+        //Baron
+        appearanceTimer = saveData.baron.appearanceTimer;
+
+        //WaterBowl
+        coinsLeft = saveData.waterBowl.coins.Count;
+
+        //KeypadUI
+        interactedWithSafe = saveData.keyPadUI.interactedWithSafe;
+        hasAlreadyInteractedWithSafe = saveData.keyPadUI.hasAlreadyInteractedWithSafe;
+        playerInteractsWithDoc = saveData.keyPadUI.playerInteractsWithDoc;
+        keypadVoiceovers = saveData.keyPadUI.voiceovers;
+        isActive = saveData.keyPadUI.isActive;
+
+        //EventManager
+        triggersSet = saveData.eventManager.triggersSet;
+        itemsSet = saveData.eventManager.itemsSet;
+        disturbancesSet = saveData.eventManager.disturbancesSet;
+
+        //TriggerScripts
+        chessAllowedToBeUsed = saveData.chessTrigger.allowedToBeUsed;
+        chessActivated = saveData.chessTrigger.activated;
+        correctOrderAllowedToBeUsed = saveData.correctOrderTrigger.allowedToBeUsed;
+        correctOrderActivated = saveData.correctOrderTrigger.activated;
+        gardenAllowedToBeUsed = saveData.gardenTrigger.allowedToBeUsed;
+        gardenActivated = saveData.gardenTrigger.activated;
+        hiddenMechanismAllowedToBeUsed = saveData.hiddenMechanismTrigger.allowedToBeUsed;
+        hiddenMechanismActivated = saveData.hiddenMechanismTrigger.activated;
+        ritualAllowedToBeUsed = saveData.ritualTrigger.allowedToBeUsed;
+        ritualActivated = saveData.ritualTrigger.activated;
+        throwingAllowedToBeUsed = saveData.throwingTrigger.allowedToBeUsed;
+        throwingActivated = saveData.throwingTrigger.activated;
+
+        //PutDown
+        ritualPDBeenUsed = saveData.ritualPutDown.GetBeenUsed();
+        gardenPDBeenUsed = saveData.gardenPutDown.GetBeenUsed();
+        chessPDBeenUsed = saveData.chessPutDown.GetBeenUsed();
+
+        //Table
+        ritualTHasBeenPlaced = saveData.ritualTable.hasBeenPlaced;
+        gardenTHasBeenPlaced = saveData.gardenTable.hasBeenPlaced;
+        chessTHasBeenPlaced = saveData.chessTable.hasBeenPlaced;
+
+        //Paper
+        chessPHasBeenRead = saveData.chessPaper.hasBeenRead;
+        hiddenMechanismPHasBeenRead = saveData.hiddenMechanismPaper.hasBeenRead;
+        keypadPHasBeenRead = saveData.keypadPaper.hasBeenRead;
+        keysPHasBeenRead = saveData.keysPaper.hasBeenRead;
+
+        //Door
+        colourMatchingDoorUnlocked = saveData.colourMatchingDoor.unlocked;
+        colourMatchingDoorIsOpen = saveData.colourMatchingDoor.isOpen;
+        correntOrderDoorUnlocked = saveData.correntOrderDoor.unlocked;
+        correntOrderDoorIsOpen = saveData.correntOrderDoor.isOpen;
+        leftFrontDoorUnlocked = saveData.leftFrontDoor.unlocked;
+        leftFrontDoorIsOpen = saveData.leftFrontDoor.isOpen;
+        rightFrontDoorUnlocked = saveData.rightFrontDoor.unlocked;
+        rightFrontDoorIsOpen = saveData.rightFrontDoor.isOpen;
+        pantryDoorUnlocked = saveData.pantryDoor.unlocked;
+        pantryDoorIsOpen = saveData.pantryDoor.isOpen;
+        gymDoorUnlocked = saveData.gymDoor.unlocked;
+        gymDoorIsOpen = saveData.gymDoor.isOpen;
+        garageDoorUnlocked = saveData.garageDoor.unlocked;
+        garageDoorIsOpen = saveData.garageDoor.isOpen;
+        downstairsBathroomDoorUnlocked = saveData.downstairsBathroomDoor.unlocked;
+        downstairsBathroomDoorIsOpen = saveData.downstairsBathroomDoor.isOpen;
+        diningRoomDoorUnlocked = saveData.diningRoomDoor.unlocked;
+        diningRoomDoorIsOpen = saveData.diningRoomDoor.isOpen;
+        safeDoorUnlocked = saveData.safeDoor.unlocked;
+        safeDoorIsOpen = saveData.safeDoor.isOpen;
+
+        //HoldandThrow
+        canHoldBall1 = saveData.ball1.canHold;
+        ball1IsFirstTime = saveData.ball1.isFirstTime;
+        canHoldBall2 = saveData.ball2.canHold;
+        ball2IsFirstTime = saveData.ball2.isFirstTime;
+        canHoldBall3 = saveData.ball3.canHold;
+        ball3IsFirstTime = saveData.ball3.isFirstTime;
+
+        canHoldWeight1 = saveData.weight1.canHold;
+        weight1IsFirstTime = saveData.weight1.isFirstTime;
+        canHoldWeight2 = saveData.weight2.canHold;
+        weight2IsFirstTime = saveData.weight2.isFirstTime;
+        canHoldWeight3 = saveData.weight3.canHold;
+        weight3IsFirstTime = saveData.weight3.isFirstTime;
+
+        canHoldKeyHandle1 = saveData.keyHandle1.canHold;
+        keyHandle1IsFirstTime = saveData.keyHandle1.isFirstTime;
+        canHoldKeyHandle2 = saveData.keyHandle2.canHold;
+        keyHandle2IsFirstTime = saveData.keyHandle2.isFirstTime;
+        canHoldKeyHandle3 = saveData.keyHandle3.canHold;
+        keyHandle3IsFirstTime = saveData.keyHandle3.isFirstTime;
+        canHoldKeyHandle4 = saveData.keyHandle4.canHold;
+        keyHandle4IsFirstTime = saveData.keyHandle4.isFirstTime;
+
+        canHoldKeyBit2 = saveData.keyBit2.canHold;
+        keyBit2IsFirstTime = saveData.keyBit2.isFirstTime;
+        canHoldKeyBit3 = saveData.keyBit3.canHold;
+        keyBit3IsFirstTime = saveData.keyBit3.isFirstTime;
+
+        //BallButtonLogic
+        button1IsActive = saveData.button1.isActive;
+        button2IsActive = saveData.button2.isActive;
+        button3IsActive = saveData.button3.isActive;
+
+        //SetUpRitual
+        ritualSteps = saveData.setUpRitual.ritualSteps;
+        ritualIsActive = saveData.setUpRitual.isActive;
+        //HiddenMech
+        hiddenMechIsActive = saveData.hiddenMech.isActive;
+        //Fusebox
+        isFuseboxSolved = saveData.fusebox.isFuseboxSolved;
+        //CorrectOrder
+        correctOrderIsActive = saveData.correctOrder.isActive;
+        correctOrderWhichRound = saveData.correctOrder.whichRound;
+        //ColourMatchingPuzzle
+        colourMatchingPuzzleIsActive = saveData.colourMatchingPuzzle.isActive;
+        isDoorInteractedWith = saveData.colourMatchingPuzzle.isDoorInteractedWith;
+        hasKeyPart1 = saveData.colourMatchingPuzzle.hasKeyPart1;
+        hasKeyPart2 = saveData.colourMatchingPuzzle.hasKeyPart2;
+        //Chessboard
+        chessBoardIsActive = saveData.chessBoard.isActive;
+        //ScalesPuzzleScript
+        scalesPuzzleIsActive = saveData.scalesPuzzleScript.isActive;
+        scalesPuzzleIsComplete = saveData.scalesPuzzleScript.isComplete;
+
+        //Pipes
+        pipe1CurrentPosition = saveData.pipe1.currentPosition;
+        pipe2CurrentPosition = saveData.pipe2.currentPosition;
+        pipe3CurrentPosition = saveData.pipe3.currentPosition;
+        pipe4CurrentPosition = saveData.pipe4.currentPosition;
+        pipe5CurrentPosition = saveData.pipe5.currentPosition;
+        pipe6CurrentPosition = saveData.pipe6.currentPosition;
+        pipe7CurrentPosition = saveData.pipe7.currentPosition;
+        pipe8CurrentPosition = saveData.pipe8.currentPosition;
+        pipe9CurrentPosition = saveData.pipe9.currentPosition;
+        pipe10CurrentPosition = saveData.pipe10.currentPosition;
+        pipe11CurrentPosition = saveData.pipe11.currentPosition;
+        pipe12CurrentPosition = saveData.pipe12.currentPosition;
+
+        //ChessPieces
+        knightCurrentPosition = saveData.knight.currentPosition;
+        kingCurrentPosition = saveData.king.currentPosition;
+        queenCurrentPosition = saveData.queen.currentPosition;
+        pawnCurrentPosition = saveData.pawn.currentPosition;
+    }
 }

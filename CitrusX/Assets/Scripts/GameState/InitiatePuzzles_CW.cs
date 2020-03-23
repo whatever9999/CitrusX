@@ -54,7 +54,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     internal int ballCounter = 0;
     #endregion
     #region VOICEOVER_BOOLS
-    private bool[] voiceovers = { false, false, false, false, false };
+    internal bool[] voiceovers = { false, false, false, false, false };
     internal bool[] monitorInteractions = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] monitorInteractionsUsed = { false, false, false, false, false, false, false, false };
     #endregion

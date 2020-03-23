@@ -31,7 +31,7 @@ public class WaterBowl_DR : MonoBehaviour
     public int numberOfCoins;
     public GameObject coinPrefab;
 
-    private List<GameObject> coins;
+    internal List<GameObject> coins;
 
     /// <summary>
     /// Create the coins and set the current interval until the baron will appear

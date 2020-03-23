@@ -33,7 +33,7 @@ public class Baron_DR : MonoBehaviour
 {
     public float speed;
 
-    private float appearanceTimer;
+    internal float appearanceTimer;
     private float currentAppearanceTimer;
     private bool gettingCoin = true;
     private Vector3 startPosition;

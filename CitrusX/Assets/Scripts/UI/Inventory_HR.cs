@@ -43,7 +43,7 @@ public class Inventory_HR : MonoBehaviour
     private Dictionary<Names, Sprite> items = new Dictionary<Names, Sprite>();    
     private const int maxItems = 12;
     private GameObject inventory;
-    private GameObject[] inventoryItems = new GameObject[maxItems];
+    internal GameObject[] inventoryItems = new GameObject[maxItems];
 
     /// <summary>
     /// Initialise variables and the items dictionary (enum to sprite)

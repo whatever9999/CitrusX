@@ -26,7 +26,7 @@ public class BallButtonLogic_HR : MonoBehaviour
 {
     public int massRequired;
     private const int ballsRequired = 3;
-    private bool isActive;
+    internal bool isActive;
     private Journal_DR journal;
     private InitiatePuzzles_CW puzzleScript;
     private Subtitles_HR subtitles;

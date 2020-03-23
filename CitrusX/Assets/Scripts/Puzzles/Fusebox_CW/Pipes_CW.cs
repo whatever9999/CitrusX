@@ -46,7 +46,7 @@ public class Pipes_CW : MonoBehaviour
         LEFT_UP_BEND
     };
     public Directions startPosition;
-    private Directions currentPosition;
+    internal Directions currentPosition;
     public Directions desiredPosition;
 
     public Sprite incompletePipe;

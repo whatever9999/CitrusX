@@ -43,7 +43,7 @@ public class HoldandThrow_HR : MonoBehaviour
     private Transform holdPosition;
 
     private bool beingHeld = false;
-    private bool isFirstTime = false;
+    internal bool isFirstTime = false;
     private Subtitles_HR subtitles;
     private const float timeToMoveBeforeStop = 2;
     private float currentTimeMoving;

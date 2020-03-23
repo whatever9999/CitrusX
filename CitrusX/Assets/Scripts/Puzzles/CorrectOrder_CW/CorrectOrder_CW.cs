@@ -23,7 +23,7 @@ public class CorrectOrder_CW : MonoBehaviour
 {
     #region VARIABLES
     private Journal_DR journal;
-    private bool isActive = false;
+    internal bool isActive = false;
     public Color[] boxes;
     private FirstPersonController fpsController;
     public KeyCode closePCKey = KeyCode.Escape;

@@ -41,7 +41,7 @@ public class ChessBoard_DR : MonoBehaviour
     public ChessPiece_DR[] chessPieces;
 
     private Journal_DR journal;
-    private bool isActive = false;
+    internal bool isActive = false;
     private Subtitles_HR subtitles;
     private TriggerScript_CW chessTrigger;
     private TriggerScript_CW chessExtraTrigger;

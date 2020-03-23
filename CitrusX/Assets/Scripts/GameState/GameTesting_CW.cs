@@ -31,10 +31,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class GameTesting_CW : MonoBehaviour
 {
     #region BOOLS
-    private bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
+    internal bool[] setUpPuzzle = { false, false, false, false, false, false, false, false, false, false };
     internal bool[] arePuzzlesDone = { false, false, false, false, false, false, false, false, false, false, false };
     internal bool[] cutscenes = { false, false, false };
-    private bool[] cutscenesDone = { false, false, false };
+    internal bool[] cutscenesDone = { false, false, false };
     internal bool controlsSeen = false;
     #endregion
     #region OTHER_VARIABLES
