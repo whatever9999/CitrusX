@@ -62,7 +62,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private TriggerScript_CW correctOrderTrigger;
     private TriggerScript_CW hiddenMechTrigger;
     private Door_DR hiddenMechDoor;
-  
+    private IdleVoiceover_CW idleVos;
     #endregion
 
     /// <summary>
@@ -85,6 +85,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
         
         #endregion
     }
@@ -110,7 +111,10 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("The camera has gone out, I should check that fuse box.");
             journal.ChangeTasks(new string[] { "Check fusebox" });
             fusebox.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[0] = true;
+
         }
         else if (monitorInteractions[1] && !monitorInteractionsUsed[1])
         {
@@ -118,6 +122,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("That door upstairs wasn’t closed before. I should check it out.");
             journal.ChangeTasks(new string[] { "Check bathroom door" });
             colourMatch.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[1] = true;
         }
         else if (monitorInteractions[2] && !monitorInteractionsUsed[2])
@@ -126,6 +132,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("That safe wasn't there before, I wonder what's in it...");
             journal.ChangeTasks(new string[] { "Check safe" });
             keypad.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[2] = true;
         }
         else if (monitorInteractions[3] && !monitorInteractionsUsed[3])
@@ -135,6 +143,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("Those scales have some weird aura…are they haunted? God this ritual is getting to my head");
             journal.ChangeTasks(new string[] { "Check the scales " });
             scales.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[3] = true;
         }
         else if (monitorInteractions[4] && !monitorInteractionsUsed[4])
@@ -144,6 +154,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("How did the pieces blow off with the window closed?");
             journal.ChangeTasks(new string[] {"Check the living room"});
             chessboard.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[4] = true;
         }
         else if (monitorInteractions[5] && !monitorInteractionsUsed[5])
@@ -153,6 +165,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.AddJournalLog("How many coins am I at? I should be about half way…maybe?");
             journal.AddJournalLog("What's going on in the gym?");
             journal.ChangeTasks(new string[] { "Check the gym" });
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[5] = true;
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
@@ -162,6 +176,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.ChangeTasks(new string[] { "Check out library" });
             hiddenMechTrigger.allowedToBeUsed = true;
             hiddenMech.SetActive(true);
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[6] = true;
         }
         else if (monitorInteractions[7] && !monitorInteractionsUsed[7])
@@ -171,6 +187,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.ChangeTasks(new string[] { "Check master bedroom" });
             journal.AddJournalLog("That PC wasn’t like that before was it?");
             correctOrderTrigger.allowedToBeUsed = true;
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
             monitorInteractionsUsed[7] = true;
         }
       

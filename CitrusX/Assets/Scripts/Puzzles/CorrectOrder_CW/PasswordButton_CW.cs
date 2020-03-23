@@ -40,6 +40,7 @@ public class PasswordButton_CW : MonoBehaviour
     public bool isPasswordBox = false;
     private float flashTimer = 0;
     private float flashNow;
+    private IdleVoiceover_CW idleVos;
    
     #endregion
     #region GET_BOX_NO
@@ -95,6 +96,7 @@ public class PasswordButton_CW : MonoBehaviour
         correctOrderPuzzle = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         thisImage = GetComponent<Image>();
         originalColor = thisImage.color;
+        idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
     }
     
     /// <summary>
@@ -102,7 +104,9 @@ public class PasswordButton_CW : MonoBehaviour
     /// </summary>
     public void ChangeColour()
     {
-       if(thisImage.color == Color.red)
+        idleVos.interactedWith = true;
+        idleVos.interactedWith = false;
+        if (thisImage.color == Color.red)
        {
             thisImage.color = Color.green;
             correctOrderPuzzle.AssignBoxColour(GetBoxNumber(), Color.green);

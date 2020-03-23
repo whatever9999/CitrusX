@@ -45,6 +45,7 @@ public class HoldandThrow_HR : MonoBehaviour
     private bool beingHeld = false;
     internal bool isFirstTime = false;
     private Subtitles_HR subtitles;
+    private IdleVoiceover_CW idleVos;
     private const float timeToMoveBeforeStop = 2;
     private float currentTimeMoving;
 
@@ -56,6 +57,7 @@ public class HoldandThrow_HR : MonoBehaviour
         RB = GetComponent<Rigidbody>();
         holdPosition = GameObject.Find("HoldGuide").transform;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
     }
     /// <summary>
     /// Drop the object if the player is too far from it or throws it (also add force to it in the forward direction if this is the case)
@@ -102,6 +104,8 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     public void Hold()
     {
+        idleVos.interactedWith = true;
+        
         beingHeld = true;
 
         transform.SetParent(holdPosition);
@@ -118,6 +122,7 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     public void Drop()
     {
+        idleVos.interactedWith = false;
         beingHeld = false;
 
         transform.SetParent(null);
