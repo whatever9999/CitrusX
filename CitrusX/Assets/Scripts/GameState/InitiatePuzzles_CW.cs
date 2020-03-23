@@ -225,7 +225,6 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateCorrectOrderPuzzle()
     {
-        subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE1);
     }
     public void InitiateCoinCountPuzzle()
     {

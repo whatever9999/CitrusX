@@ -25,12 +25,15 @@
 * \date Last Modified: 01/03/2020
 */
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CandleScript_AG : MonoBehaviour
 {
     private ParticleSystem[] flames;
     private Interact_HR player;
     private Subtitles_HR subtitles;
+    private GameObject blackout;
+    private Color blackOutColour;
 
     /// <summary>
     /// Inititalise variables
@@ -40,6 +43,11 @@ public class CandleScript_AG : MonoBehaviour
         flames = GetComponentsInChildren<ParticleSystem>();
         player = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        blackout = GameObject.Find("BlackScreen");
+        blackOutColour.a = 1;
+        blackOutColour.b = 0;
+        blackOutColour.r = 0;
+        blackOutColour.g = 0;
     }
 
     /// <summary>
@@ -52,6 +60,8 @@ public class CandleScript_AG : MonoBehaviour
             flames[i].Stop();
         }
         subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
+       // blackout.GetComponent<Image>().color = blackOutColour;
         player.EndGameCheck();
     }
+  
 }

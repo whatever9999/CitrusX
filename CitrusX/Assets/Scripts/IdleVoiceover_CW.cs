@@ -10,19 +10,22 @@ public class IdleVoiceover_CW : MonoBehaviour
     private bool completeLoop = false;
     internal bool interactedWith = false;
     private Subtitles_HR subtitles;
-    private enum VOICEOVERS
+    private TriggerScript_CW hiddenMechTrigger;
+    internal enum VOICEOVERS
     {
         QUICK,
         JOURNAL,
         WHY,
         CAMERAS,
-        RITUAL
+        RITUAL,
+        HIDDEN_MECH
     };
-    VOICEOVERS vos;
+    internal VOICEOVERS vos;
 
     private void Awake()
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
     }
     void Update()
     {
@@ -54,7 +57,7 @@ public class IdleVoiceover_CW : MonoBehaviour
     IEnumerator IdleLine()
     {
         completeLoop = true;
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(120);
         switch (vos)
         {
             case VOICEOVERS.QUICK:
@@ -125,39 +128,36 @@ public class IdleVoiceover_CW : MonoBehaviour
         {
             vos = VOICEOVERS.CAMERAS;
         }
-        else if (GameTesting_CW.instance.arePuzzlesDone[8] && !InitiatePuzzles_CW.instance.monitorInteractionsUsed[8])
-        {
-            vos = VOICEOVERS.CAMERAS;
-        }
-        else if(InitiatePuzzles_CW.instance.monitorInteractions[0])
+     
+        else if(InitiatePuzzles_CW.instance.monitorInteractions[0] && !InitiatePuzzles_CW.instance.monitorInteractions[1])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[1])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[1] && !InitiatePuzzles_CW.instance.monitorInteractions[2])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[2])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[2] && !InitiatePuzzles_CW.instance.monitorInteractions[3])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[3])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[3] && !InitiatePuzzles_CW.instance.monitorInteractions[4])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[4])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[4] && !InitiatePuzzles_CW.instance.monitorInteractions[5])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[5])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[5] && !InitiatePuzzles_CW.instance.monitorInteractions[6])
         {
             vos = VOICEOVERS.JOURNAL;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[6])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[6] && !hiddenMechTrigger.allowedToBeUsed && !InitiatePuzzles_CW.instance.monitorInteractions[7])
         {
-            vos = VOICEOVERS.JOURNAL;
+            vos = VOICEOVERS.HIDDEN_MECH;
         }
-        else if (InitiatePuzzles_CW.instance.monitorInteractions[7])
+        else if (InitiatePuzzles_CW.instance.monitorInteractions[7] && !InitiatePuzzles_CW.instance.monitorInteractions[8])
         {
             vos = VOICEOVERS.JOURNAL;
         }
