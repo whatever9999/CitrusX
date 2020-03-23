@@ -27,6 +27,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class SaveSystem_DR: MonoBehaviour
 {
@@ -202,7 +203,7 @@ public class SaveSystem_DR: MonoBehaviour
         keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
         eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
-        inventory = GameObject.Find("FPSController").GetComponent<Inventory_HR>();
+        inventory = GameObject.Find("FPSController").GetComponentInChildren<Inventory_HR>();
 
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
@@ -785,10 +786,21 @@ public class GameData_DR
 
         //Inventory
         GameObject[] inventoryGOs = saveData.inventory.inventoryItems;
-        inventory = new Inventory_HR.Names[inventoryGOs.Length];
+        int itemCount = 0;
+        List<Inventory_HR.Names> tempInventory = new List<Inventory_HR.Names>();
         for(int i = 0; i < inventoryGOs.Length; i++)
         {
-            inventory[i] = (Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), inventoryGOs[i].GetComponent<Text>().text);
+            string inventoryItem = inventoryGOs[i].GetComponent<Text>().text;
+            if (inventoryItem.Trim() != "")
+            {
+                tempInventory.Add((Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), inventoryItem));
+                itemCount++;
+            }
+        }
+        inventory = new Inventory_HR.Names[itemCount];
+        for(int i = 0; i < itemCount; i++)
+        {
+            inventory[i] = tempInventory[i];
         }
 
         //Cinematics
