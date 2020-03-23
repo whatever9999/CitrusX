@@ -144,6 +144,7 @@ public class Interact_HR : MonoBehaviour
     internal bool paperIsClosed = false;
     HiddenMech_CW hiddenMech;
     private GameObject pawn;
+    private IdleVoiceover_CW idleVos;
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -175,6 +176,8 @@ public class Interact_HR : MonoBehaviour
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         hiddenMech = GameObject.Find("Painting_AG").GetComponent<HiddenMech_CW>();
         pawn = GameObject.Find("Pawn");
+        idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
+
         #endregion
     }
 
@@ -237,7 +240,8 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-
+                    idleVos.interactedWith = true;
+                    idleVos.interactedWith = false;
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
@@ -261,6 +265,8 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
@@ -278,6 +284,8 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
@@ -294,6 +302,8 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
                                 putDownScript.PutItemsDown();
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
@@ -320,6 +330,8 @@ public class Interact_HR : MonoBehaviour
 
                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
                             //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                             keypad.OpenKeypad(keypadItem);
 
@@ -340,6 +352,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         notificationText.text = "";
                         door.ToggleOpen();
                     }
@@ -355,6 +369,8 @@ public class Interact_HR : MonoBehaviour
 
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
                                 if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                                 {
                                     colourMatch.isDoorInteractedWith[0] = true;
@@ -371,6 +387,8 @@ public class Interact_HR : MonoBehaviour
                                     door.unlocked = true;
                                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                     {
+                                        idleVos.interactedWith = true;
+                                        idleVos.interactedWith = false;
                                         notificationText.text = "";
 
                                         journal.AddJournalLog("What was that on my screen? That couldn’t have been what I thought it was…could it?");
@@ -395,6 +413,8 @@ public class Interact_HR : MonoBehaviour
                                     {
                                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                         {
+                                            idleVos.interactedWith = true;
+                                            idleVos.interactedWith = false;
                                             notificationText.text = "";
                                             door.ToggleOpen();
                                             door.tag = "Untagged";
@@ -415,6 +435,8 @@ public class Interact_HR : MonoBehaviour
                                     notificationText.text = "Press E to open";
                                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                     {
+                                        idleVos.interactedWith = true;
+                                        idleVos.interactedWith = false;
                                         notificationText.text = "";
                                         door.ToggleOpen();
                                         door.tag = "Untagged";
@@ -439,6 +461,8 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    idleVos.interactedWith = true;
+                    idleVos.interactedWith = false;
                     Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
                     notificationText.text = "";
                     //Set paper text and background according to the object
@@ -519,6 +543,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                     }
                 }
@@ -531,6 +557,8 @@ public class Interact_HR : MonoBehaviour
                     notificationText.text = "Press E to zoom in";
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         playerCamera.transform.LookAt(hit.transform);
                         playerCamera.fieldOfView = zoomedFOV;
                         zoomedIn = true;
@@ -587,7 +615,9 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
-                        if(!ritual.ritualSteps[1] && ritual.ritualSteps[0])
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
+                        if (!ritual.ritualSteps[1] && ritual.ritualSteps[0])
                         {
                             subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
                         }
@@ -605,6 +635,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         hit.transform.GetComponent<ChessPiece_DR>().Rotate();
                     }
                 }
@@ -657,6 +689,8 @@ public class Interact_HR : MonoBehaviour
                     
                     if (Input.GetKeyDown(InteractKey) && !interactedWith)
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
                         journal.TickOffTask("Check the scales");
                         journal.AddJournalLog("I could use items from the pantry to balance the scales.");
@@ -673,6 +707,8 @@ public class Interact_HR : MonoBehaviour
                     notificationText.text = "Press " + InteractKey.ToString() + " to blow out";
                     if (Input.GetKeyDown(InteractKey))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         hit.transform.parent.GetComponent<CandleScript_AG>().BlowOut();
                     }
                 }
@@ -686,6 +722,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                         journal.TickOffTask("Find a way out");
                         journal.ChangeTasks(new string[] { "Solve puzzle" });
@@ -701,6 +739,8 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    idleVos.interactedWith = true;
+                    idleVos.interactedWith = false;
                     if (!hasBeenOpened)
                     {
                         //play box anim
@@ -726,6 +766,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         if (!hasBeenInteracted)
                         {
                             //play box anim
@@ -748,6 +790,8 @@ public class Interact_HR : MonoBehaviour
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
                         if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                         {
                             journal.TickOffTask("Find correct book");
@@ -770,7 +814,8 @@ public class Interact_HR : MonoBehaviour
             {
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-
+                    idleVos.interactedWith = true;
+                    idleVos.interactedWith = false;
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
 
                     //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
@@ -787,6 +832,8 @@ public class Interact_HR : MonoBehaviour
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    idleVos.interactedWith = true;
+                    idleVos.interactedWith = false;
                     subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
                 }
             }

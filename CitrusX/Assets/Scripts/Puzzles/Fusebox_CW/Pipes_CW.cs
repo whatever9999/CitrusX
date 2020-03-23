@@ -58,6 +58,7 @@ public class Pipes_CW : MonoBehaviour
     private Fusebox_CW fusebox;
     private Image image;
     private bool canBeRotated = true;
+    private IdleVoiceover_CW idleVos;
 
     public bool GetIsInPosition() {
         if (currentPosition == desiredPosition)
@@ -82,6 +83,7 @@ public class Pipes_CW : MonoBehaviour
         completeColour.g = 255;
         completeColour.b = 0;
         completeColour.a = 255;
+        idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
     }
     
     /// <summary>
@@ -104,7 +106,10 @@ public class Pipes_CW : MonoBehaviour
     /// </summary>
     public void Rotate()
     {
-        if(canBeRotated)
+        idleVos.interactedWith = true;
+        idleVos.interactedWith = false;
+
+        if (canBeRotated)
         {
             gameObject.transform.Rotate(0, 0, degreesToMove);
 
