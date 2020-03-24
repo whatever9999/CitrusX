@@ -114,6 +114,9 @@ public class SaveSystem_DR: MonoBehaviour
     internal Door_DR downstairsBathroomDoor;
     internal Door_DR diningRoomDoor;
     internal Door_DR safeDoor;
+    internal Door_DR hiddenMechDoor;
+    internal Door_DR chessDoor;
+    internal Door_DR scalesDoor;
 
     internal HoldandThrow_HR ball1;
     internal HoldandThrow_HR ball2;
@@ -229,6 +232,9 @@ public class SaveSystem_DR: MonoBehaviour
         downstairsBathroomDoor = GameObject.Find("DownstairsBathroomDoor").GetComponentInChildren<Door_DR>();
         diningRoomDoor = GameObject.Find("DiningRoomDoor").GetComponentInChildren<Door_DR>();
         safeDoor = GameObject.Find("Safe").GetComponentInChildren<Door_DR>();
+        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponentInChildren<Door_DR>();
+        chessDoor = GameObject.Find("ChessDoor").GetComponentInChildren<Door_DR>();
+        scalesDoor = GameObject.Find("ScalesDoor").GetComponentInChildren<Door_DR>();
 
         ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>();
         ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
@@ -249,7 +255,8 @@ public class SaveSystem_DR: MonoBehaviour
 
         setUpRitual = GameObject.Find("FPSController").GetComponentInChildren<SetUpRitual_CW>();
         hiddenMech = GameObject.Find("FPSController").GetComponentInChildren<HiddenMech_CW>();
-        fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
+        GameObject fuseboxUI = GameObject.Find("FuseboxUI");
+        fusebox = fuseboxUI.GetComponent<Fusebox_CW>();
         correctOrder = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         colourMatchingPuzzle = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
         chessBoard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
@@ -335,10 +342,14 @@ public class SaveSystem_DR: MonoBehaviour
         FileStream file;
 
         //If the file exists then open it, otherwise there is no file to be read
-        if (File.Exists(path)) file = File.OpenRead(path);
+        if (File.Exists(path))
+        {
+            file = File.OpenRead(path);
+            loaded = true;
+        }
         else
         {
-            Debug.Log("File not found");
+            //No save file available
             return;
         }
 
@@ -352,7 +363,6 @@ public class SaveSystem_DR: MonoBehaviour
 
         loadedGD = gameData;
 
-        loaded = true;
         StartCoroutine(NotifyPlayer("Loaded"));
     }
 
@@ -367,11 +377,36 @@ public class SaveSystem_DR: MonoBehaviour
         playerT.rotation = new Quaternion(GD.playerRotation[0], GD.playerRotation[1], GD.playerRotation[2], GD.playerRotation[3]);
 
         //JournalUI
-        Text[] journalTexts = journal.GetComponentsInChildren<Text>();
+        Text[] journalTexts = journalGO.GetComponentsInChildren<Text>();
         for (int i = 0; i < journalTexts.Length; i++)
         {
-            journalTexts[i].text = GD.journalTasks[i];
+            switch (journalTexts[i].name)
+            {
+                case "Task":
+                    journalTexts[i].text = GD.journalTasks[0];
+                    break;
+                case "Task (1)":
+                    journalTexts[i].text = GD.journalTasks[1];
+                    break;
+                case "Task (2)":
+                    journalTexts[i].text = GD.journalTasks[2];
+                    break;
+                case "Task (3)":
+                    journalTexts[i].text = GD.journalTasks[3];
+                    break;
+                case "Task (4)":
+                    journalTexts[i].text = GD.journalTasks[4];
+                    break;
+                case "JournalLogs":
+                    journalTexts[i].text = GD.journalLog;
+                    break;
+            }
         }
+        Vector2 journalLogSize = new Vector2(GD.journalBoxSize[0], GD.journalBoxSize[1]);
+        GameObject.Find("JournalLogs").GetComponent<RectTransform>().sizeDelta = journalLogSize;
+        //Make sure the text box width doesn't affect the content box width (otherwise text moves to the right)
+        journalLogSize.x = 0;
+        GameObject.Find("JournalContentBox").GetComponent<RectTransform>().sizeDelta = journalLogSize;
 
         //Baron
         baronT.position = new Vector3(GD.baronPosition[0], GD.baronPosition[1], GD.baronPosition[2]);
@@ -478,6 +513,7 @@ public class SaveSystem_DR: MonoBehaviour
         gameTesting.arePuzzlesDone = GD.arePuzzlesDone;
         gameTesting.cutscenes = GD.cutscenes;
         gameTesting.cutscenesDone = GD.cutscenesDone;
+        gameTesting.controlsSeen = GD.controlsSeen;
 
         //Baron
         baron.appearanceTimer = GD.appearanceTimer;
@@ -551,6 +587,12 @@ public class SaveSystem_DR: MonoBehaviour
         diningRoomDoor.isOpen = GD.diningRoomDoorIsOpen;
         safeDoor.unlocked = GD.safeDoorUnlocked;
         safeDoor.isOpen = GD.safeDoorIsOpen;
+        scalesDoor.unlocked = GD.scalesDoorUnlocked;
+        scalesDoor.isOpen = GD.scalesDoorIsOpen;
+        hiddenMechDoor.unlocked = GD.hiddenMechDoorUnlocked;
+        hiddenMechDoor.isOpen = GD.hiddenMechDoorIsOpen;
+        chessDoor.unlocked = GD.chessDoorUnlocked;
+        chessDoor.isOpen = GD.chessDoorIsOpen;
 
         //HoldandThrow
         ball1.canHold = GD.canHoldBall1;
@@ -589,10 +631,14 @@ public class SaveSystem_DR: MonoBehaviour
         //SetUpRitual
         setUpRitual.ritualSteps = GD.ritualSteps;
         setUpRitual.isActive = GD.ritualIsActive;
+        setUpRitual.voiceovers = GD.ritualVoiceovers;
+
         //HiddenMech
         hiddenMech.isActive = GD.hiddenMechIsActive;
         //Fusebox
         fusebox.isFuseboxSolved = GD.isFuseboxSolved;
+        fusebox.voiceovers = GD.fuseboxVoiceovers;
+        fusebox.isActive = GD.fuseboxActive;
         //CorrectOrder
         correctOrder.isActive = GD.correctOrderIsActive;
         correctOrder.whichRound = GD.correctOrderWhichRound;
@@ -601,6 +647,7 @@ public class SaveSystem_DR: MonoBehaviour
         colourMatchingPuzzle.isDoorInteractedWith = GD.isDoorInteractedWith;
         colourMatchingPuzzle.hasKeyPart1 = GD.hasKeyPart1;
         colourMatchingPuzzle.hasKeyPart2 = GD.hasKeyPart2;
+        colourMatchingPuzzle.voiceovers = GD.colourMatchingVoiceovers;
         //Chessboard
         chessBoard.isActive = GD.chessBoardIsActive;
         //ScalesPuzzleScript
@@ -650,6 +697,7 @@ public class GameData_DR
     //JournalUI
     internal string[] journalTasks;
     internal string journalLog;
+    internal float[] journalBoxSize = new float[2];
     //Baron
     internal bool baronActive;
     internal float[] baronPosition = new float[3];
@@ -726,6 +774,7 @@ public class GameData_DR
     internal bool[] arePuzzlesDone;
     internal bool[] cutscenes;
     internal bool[] cutscenesDone;
+    internal bool controlsSeen;
     //Baron
     internal float appearanceTimer;
     //Water Bowl
@@ -792,6 +841,12 @@ public class GameData_DR
     internal bool diningRoomDoorIsOpen;
     internal bool safeDoorUnlocked;
     internal bool safeDoorIsOpen;
+    internal bool scalesDoorUnlocked;
+    internal bool scalesDoorIsOpen;
+    internal bool chessDoorUnlocked;
+    internal bool chessDoorIsOpen;
+    internal bool hiddenMechDoorUnlocked;
+    internal bool hiddenMechDoorIsOpen;
 
     //HoldandThrow
     internal bool canHoldBall1;
@@ -830,10 +885,14 @@ public class GameData_DR
     //SetUpRitual
     internal bool[] ritualSteps;
     internal bool ritualIsActive;
+    internal bool[] ritualVoiceovers;
+
     //HiddenMech
     internal bool hiddenMechIsActive;
     //Fusebox
     internal bool isFuseboxSolved;
+    internal bool[] fuseboxVoiceovers;
+    internal bool fuseboxActive;
     //CorrectOrder
     internal bool correctOrderIsActive;
     internal bool[] correctOrderWhichRound;
@@ -842,6 +901,7 @@ public class GameData_DR
     internal bool[] isDoorInteractedWith;
     internal bool hasKeyPart1;
     internal bool hasKeyPart2;
+    internal bool[] colourMatchingVoiceovers;
     //Chessboard
     internal bool chessBoardIsActive;
     //ScalesPuzzleScript
@@ -908,6 +968,10 @@ public class GameData_DR
                     break;
             }
         }
+        saveData.journalGO.SetActive(true);
+        journalBoxSize[0] = GameObject.Find("JournalLogs").GetComponent<RectTransform>().sizeDelta[0];
+        journalBoxSize[1] = GameObject.Find("JournalLogs").GetComponent<RectTransform>().sizeDelta[1];
+        saveData.journalGO.SetActive(false);
 
         //Baron
         baronActive = saveData.baronT.gameObject.activeInHierarchy;
@@ -998,17 +1062,17 @@ public class GameData_DR
         ball3TPosition[2] = saveData.baronT.position.z;
 
         //Weights
-        weight1TPosition[0] = saveData.baronT.position.x;
-        weight1TPosition[1] = saveData.baronT.position.y;
-        weight1TPosition[2] = saveData.baronT.position.z;
+        weight1TPosition[0] = saveData.weight1T.position.x;
+        weight1TPosition[1] = saveData.weight1T.position.y;
+        weight1TPosition[2] = saveData.weight1T.position.z;
 
-        weight2TPosition[0] = saveData.baronT.position.x;
-        weight2TPosition[1] = saveData.baronT.position.y;
-        weight2TPosition[2] = saveData.baronT.position.z;
+        weight2TPosition[0] = saveData.weight2T.position.x;
+        weight2TPosition[1] = saveData.weight2T.position.y;
+        weight2TPosition[2] = saveData.weight2T.position.z;
 
-        weight3TPosition[0] = saveData.baronT.position.x;
-        weight3TPosition[1] = saveData.baronT.position.y;
-        weight3TPosition[2] = saveData.baronT.position.z;
+        weight3TPosition[0] = saveData.weight3T.position.x;
+        weight3TPosition[1] = saveData.weight3T.position.y;
+        weight3TPosition[2] = saveData.weight3T.position.z;
 
         //KeyPieces
         keyHandle1TPosition[0] = saveData.keyHandle1T.position.x;
@@ -1077,6 +1141,7 @@ public class GameData_DR
         arePuzzlesDone = saveData.gameTesting.arePuzzlesDone;
         cutscenes = saveData.gameTesting.cutscenes;
         cutscenesDone = saveData.gameTesting.cutscenesDone;
+        controlsSeen = saveData.gameTesting.controlsSeen;
 
         //Baron
         appearanceTimer = saveData.baron.appearanceTimer;
@@ -1147,6 +1212,12 @@ public class GameData_DR
         diningRoomDoorIsOpen = saveData.diningRoomDoor.isOpen;
         safeDoorUnlocked = saveData.safeDoor.unlocked;
         safeDoorIsOpen = saveData.safeDoor.isOpen;
+        scalesDoorUnlocked = saveData.scalesDoor.unlocked;
+        scalesDoorIsOpen = saveData.scalesDoor.isOpen;
+        chessDoorUnlocked = saveData.chessDoor.unlocked;
+        chessDoorIsOpen = saveData.chessDoor.isOpen;
+        hiddenMechDoorUnlocked = saveData.hiddenMechDoor.unlocked;
+        hiddenMechDoorIsOpen = saveData.hiddenMechDoor.isOpen;
 
         //HoldandThrow
         canHoldBall1 = saveData.ball1.canHold;
@@ -1185,10 +1256,13 @@ public class GameData_DR
         //SetUpRitual
         ritualSteps = saveData.setUpRitual.ritualSteps;
         ritualIsActive = saveData.setUpRitual.isActive;
+        ritualVoiceovers = saveData.setUpRitual.voiceovers;
         //HiddenMech
         hiddenMechIsActive = saveData.hiddenMech.isActive;
         //Fusebox
         isFuseboxSolved = saveData.fusebox.isFuseboxSolved;
+        fuseboxActive = saveData.fusebox.isActive;
+        fuseboxVoiceovers = saveData.fusebox.voiceovers;
         //CorrectOrder
         correctOrderIsActive = saveData.correctOrder.isActive;
         correctOrderWhichRound = saveData.correctOrder.whichRound;
@@ -1197,6 +1271,7 @@ public class GameData_DR
         isDoorInteractedWith = saveData.colourMatchingPuzzle.isDoorInteractedWith;
         hasKeyPart1 = saveData.colourMatchingPuzzle.hasKeyPart1;
         hasKeyPart2 = saveData.colourMatchingPuzzle.hasKeyPart2;
+        colourMatchingVoiceovers = saveData.colourMatchingPuzzle.voiceovers;
         //Chessboard
         chessBoardIsActive = saveData.chessBoard.isActive;
         //ScalesPuzzleScript

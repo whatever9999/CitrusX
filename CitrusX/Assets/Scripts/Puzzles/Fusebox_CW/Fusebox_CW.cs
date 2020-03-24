@@ -60,9 +60,13 @@ internal class Fusebox_CW : PuzzleBaseScript
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         fusebox = GameObject.Find("Fusebox");
         journal = Journal_DR.instance;
+    }
 
+    private void Start()
+    {
         gameObject.SetActive(false);
     }
+
     /// <summary>
     /// Check if the player is closing the UI
     /// </summary>

@@ -62,7 +62,6 @@ public class GameTesting_CW : MonoBehaviour
     private void Start()
     {
         controls.SetActive(false);
-        cinematics.playStartCinematic = true;
     }
     /// <summary>
     /// Check the status of booleans in  cutscenes and arePuzzlesDone to start the next puzzle
