@@ -26,6 +26,7 @@ public class IdleVoiceover_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
+
     }
     void Update()
     {

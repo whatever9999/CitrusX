@@ -28,13 +28,20 @@
 
 using UnityEngine;
 
-internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
+internal class ColourMatchingPuzzle_CW : MonoBehaviour
 {
     #region VARIABLES
     internal bool[] isDoorInteractedWith = { false, false };
     internal bool hasKeyPart1 = false;
     internal bool hasKeyPart2 = false;
     private Door_DR door;
+    internal bool isActive = false;
+    internal Journal_DR journal;
+    internal Subtitles_HR subtitles;
+    internal bool[] voiceovers = { false, false, false, false, false };
+    internal TriggerScript_CW ritualTrigger;
+
+    internal void SetActive(bool value) { isActive = value; }
     #endregion
     /// <summary>
     /// Inititalise variables
@@ -43,6 +50,7 @@ internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
     {
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
     }
     /// <summary>
     /// According to the state of the puzzle play the right subtitles and update the journal
@@ -51,26 +59,26 @@ internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
     {
         if (isActive)
         {
-            if (!voiceovers[9])
+            if (!voiceovers[0])
             {
                 //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
-                voiceovers[9] = true;
+                voiceovers[0] = true;
             }
-            else if (isDoorInteractedWith[0] && !voiceovers[10])
+            else if (isDoorInteractedWith[0] && !voiceovers[1])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE3);
                 journal.AddJournalLog("It needs a key? Where can I find a key?");
                 journal.ChangeTasks(new string[] { "Bathroom Key" });
-                voiceovers[10] = true;
+                voiceovers[1] = true;
             }
-            else if (isDoorInteractedWith[0] && !hasKeyPart1 && voiceovers[10])
+            else if (isDoorInteractedWith[0] && !hasKeyPart1 && voiceovers[1])
             {
                 if (journal.AreTasksComplete())
                 {
-                    if (!voiceovers[11])
+                    if (!voiceovers[2])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE4);
-                        voiceovers[11] = true;
+                        voiceovers[2] = true;
                         journal.AddJournalLog("Half a key? Who breaks their keys into two halves?");
                         journal.ChangeTasks(new string[] { "Bathroom Key Part 2" });
                         hasKeyPart1 = true;
@@ -81,10 +89,10 @@ internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
             {
                 if (journal.AreTasksComplete())
                 {
-                    if (!voiceovers[12])
+                    if (!voiceovers[3])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE5);
-                        voiceovers[12] = true;
+                        voiceovers[3] = true;
                         hasKeyPart2 = true;
                     }
                 }
@@ -93,14 +101,14 @@ internal class ColourMatchingPuzzle_CW : PuzzleBaseScript
             {
                 if (isDoorInteractedWith[1])
                 {
-                    if (!voiceovers[13])
+                    if (!voiceovers[4])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE6);
-                        voiceovers[13] = true;
+                        voiceovers[4] = true;
 
                         journal.AddJournalLog("Was that a ghost?! I better go back and see.");
                         ritualTrigger.allowedToBeUsed = true;
-                        game.arePuzzlesDone[2] = true;
+                        GameTesting_CW.instance.arePuzzlesDone[2] = true;
                     }
                 }
 

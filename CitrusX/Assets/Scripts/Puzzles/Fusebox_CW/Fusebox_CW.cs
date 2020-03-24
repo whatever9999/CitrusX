@@ -38,7 +38,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
 using System.Collections;
 
-internal class Fusebox_CW : PuzzleBaseScript
+internal class Fusebox_CW : MonoBehaviour
 {
     #region PUZZLE_VARS
     private const float timeForFlowInPipes = 0.5f;
@@ -48,18 +48,25 @@ internal class Fusebox_CW : PuzzleBaseScript
     private Text fuseboxText;
     private GameObject fusebox;
     internal bool isFuseboxSolved = false;
+    internal Journal_DR journal;
+    internal Subtitles_HR subtitles;
+    internal FirstPersonController fpsController;
+    internal GameTesting_CW game;
+    internal bool[] voiceovers = { false, false, false };
+    internal bool isActive = false;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
-
+    internal void SetActive(bool value) { isActive = value; }
     /// <summary>
     /// Inititalise variables and ensure the UI GO is deactivated
     /// </summary>
     private void Awake()
-    {   
-
+    {
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
+        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         fusebox = GameObject.Find("Fusebox");
         journal = Journal_DR.instance;
+        game = GameTesting_CW.instance;
     }
 
     private void Start()
@@ -124,11 +131,11 @@ internal class Fusebox_CW : PuzzleBaseScript
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
             journal.ChangeTasks(new string[] { "Return to ritual" });
-            if (!voiceovers[8])
+            if (!voiceovers[0])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
-                voiceovers[8] = true;
-                game.arePuzzlesDone[1] = true;
+                voiceovers[0] = true;
+                GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
 
             //Player can't use the fusebox anymore
