@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeInFrames: 1
-  timeAreaShownRange: {x: -0.9678136, y: 128.33208}
+  timeAreaShownRange: {x: 22.710806, y: 29.509325}
   showAudioWaveform: 1
   trackHeight: 30
   trackScale: 1
   playRangeEnabled: 0
   timeAreaPlayRange: {x: 0, y: 12}
-  windowTime: 0
+  windowTime: 0.019999999552965164
   verticalScroll: 0
   showMarkerHeader: 0
   m_Keys:
@@ -132,8 +132,8 @@ MonoBehaviour:
       y: 1
       width: 1
       height: 1
-    m_MarkerTimeStampsKeys: e673ffffdc6effff846bffff6869ffff6c67ffff3665ffff2e63ffffa256ffff3026ffff8c25ffffa607ffffb8f5feff989b0000049c0000069c0000089c00000a9c00000c9c00000e9c0000109c0000149c0000129c0000169c00001a9c0000189c0000
-    m_MarkerTimeStampsValues: 442dc5d679cad708c2b697ae79cad708d05896b179cad708118180b479cad708b52c87a47ecad7089ad49dba79cad708984c03a77ecad7087fed376f80cad7085c41e4a17ecad7083f2d306283cad708b3606c6083cad7089fa5b36783cad70821945e48a5cad7083a085026afcad7085d52b52bafcad70831c84c2cafcad708d651b42cafcad7087953732dafcad70819f42c2eafcad708981aeb2eafcad7082b726131afcad7081ecdb930afcad708c5ff5e37afcad7087e140c38afcad7080a8a963cafcad708
+    m_MarkerTimeStampsKeys: e673ffffdc6effff846bffff6869ffff6c67ffff3665ffff2e63ffffa256ffff3026ffff8c25ffffa607ffffb8f5feff989b0000049c0000069c0000089c00000a9c00000c9c00000e9c0000109c0000149c0000129c0000169c00001a9c0000189c0000faa60000fca60000709afffff8a60000f6a60000f4a60000f2a60000f0a600009c9affffb49affffeea60000c49affffeca60000de9affffeaa60000769bffffe8a60000e6a60000
+    m_MarkerTimeStampsValues: 442dc5d679cad708c2b697ae79cad708d05896b179cad708118180b479cad708b52c87a47ecad7089ad49dba79cad708984c03a77ecad7087fed376f80cad7085c41e4a17ecad7083f2d306283cad708b3606c6083cad7089fa5b36783cad70821945e48a5cad7083a085026afcad7085d52b52bafcad70831c84c2cafcad708d651b42cafcad7087953732dafcad70819f42c2eafcad708981aeb2eafcad7082b726131afcad7081ecdb930afcad708c5ff5e37afcad7087e140c38afcad7080a8a963cafcad708bdddd5b8f6cfd708eba286b9f6cfd7080fb04cbaf6cfd70869a1cd26f6cfd7089e1d8f28f6cfd70852fc742af6cfd70814146e2bf6cfd7087af53a2ef6cfd708441e810ff7cfd7081ed12d0cf7cfd708e8e96c33f6cfd7084aa82abdf8cfd708692755bbf8cfd708ae57f377f9cfd708e94ac9b1f8cfd708212c3d3cf6cfd708b1d3e63ef6cfd708a851db3ff6cfd708
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
