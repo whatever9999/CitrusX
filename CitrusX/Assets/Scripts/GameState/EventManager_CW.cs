@@ -71,7 +71,7 @@ public class EventManager_CW : MonoBehaviour
         pawn = GameObject.Find("Pawn");
         chessNote = GameObject.Find("Chess Note");
         keypadDoc = GameObject.Find("KeyPadDoc");
-        masterBedroomDoor = GameObject.Find("CorrectOrderDoor").GetComponent<Door_DR>();
+        masterBedroomDoor = GameObject.Find("Bedroom Door").GetComponent<Door_DR>();
        
         #endregion
         #region INITIATE_TRIGGERS

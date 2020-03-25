@@ -126,7 +126,6 @@ public class SaveSystem_DR: MonoBehaviour
 
     internal Door_DR colourMatchingDoor;
     internal Door_DR correntOrderDoor;
-    internal Door_DR leftFrontDoor;
     internal Door_DR rightFrontDoor;
     internal Door_DR pantryDoor;
     internal Door_DR gymDoor;
@@ -283,19 +282,18 @@ public class SaveSystem_DR: MonoBehaviour
         keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
         keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
 
-        colourMatchingDoor = GameObject.Find("ColourMatchingDoor").GetComponentInChildren<Door_DR>();
-        correntOrderDoor = GameObject.Find("CorrectOrderDoor").GetComponentInChildren<Door_DR>();
-        leftFrontDoor = GameObject.Find("LeftFrontDoor").GetComponentInChildren<Door_DR>();
-        rightFrontDoor = GameObject.Find("RightFrontDoor").GetComponentInChildren<Door_DR>();
-        pantryDoor = GameObject.Find("PantryDoor").GetComponentInChildren<Door_DR>();
-        gymDoor = GameObject.Find("GymDoor").GetComponentInChildren<Door_DR>();
-        garageDoor = GameObject.Find("GarageDoor").GetComponentInChildren<Door_DR>();
-        downstairsBathroomDoor = GameObject.Find("DownstairsBathroomDoor").GetComponentInChildren<Door_DR>();
-        diningRoomDoor = GameObject.Find("DiningRoomDoor").GetComponentInChildren<Door_DR>();
-        safeDoor = GameObject.Find("Safe").GetComponentInChildren<Door_DR>();
-        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponentInChildren<Door_DR>();
-        chessDoor = GameObject.Find("ChessDoor").GetComponentInChildren<Door_DR>();
-        scalesDoor = GameObject.Find("ScalesDoor").GetComponentInChildren<Door_DR>();
+        colourMatchingDoor = GameObject.Find("Upstairs Bathroom Door").GetComponentInChildren<Door_DR>();
+        correntOrderDoor = GameObject.Find("Upstairs Bathroom Door").GetComponentInChildren<Door_DR>();
+        rightFrontDoor = GameObject.Find("Front Door").GetComponentInChildren<Door_DR>();
+        pantryDoor = GameObject.Find("Pantry Door").GetComponentInChildren<Door_DR>();
+        gymDoor = GameObject.Find("Gym Door").GetComponentInChildren<Door_DR>();
+        garageDoor = GameObject.Find("Workshop Door").GetComponentInChildren<Door_DR>();
+        downstairsBathroomDoor = GameObject.Find("Downstairs Bathroom Door").GetComponentInChildren<Door_DR>();
+        diningRoomDoor = GameObject.Find("Dining Room Door").GetComponentInChildren<Door_DR>();
+        safeDoor = GameObject.Find("Safe Door").GetComponentInChildren<Door_DR>();
+        hiddenMechDoor = GameObject.Find("Study Door").GetComponentInChildren<Door_DR>();
+        chessDoor = GameObject.Find("Living Room Door").GetComponentInChildren<Door_DR>();
+        scalesDoor = GameObject.Find("Kitchen Door").GetComponentInChildren<Door_DR>();
 
         ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>();
         ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
@@ -339,7 +337,7 @@ public class SaveSystem_DR: MonoBehaviour
         GameObject fuseboxUI = GameObject.Find("FuseboxUI");
         fusebox = fuseboxUI.GetComponent<Fusebox_CW>();
         correctOrder = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
-        colourMatchingPuzzle = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatchingPuzzle = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();
         chessBoard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         scalesPuzzleScript = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
 
@@ -700,8 +698,6 @@ public class SaveSystem_DR: MonoBehaviour
         colourMatchingDoor.isOpen = GD.colourMatchingDoorIsOpen;
         correntOrderDoor.unlocked = GD.correntOrderDoorUnlocked;
         correntOrderDoor.isOpen = GD.correntOrderDoorIsOpen;
-        leftFrontDoor.unlocked = GD.leftFrontDoorUnlocked;
-        leftFrontDoor.isOpen = GD.leftFrontDoorIsOpen;
         rightFrontDoor.unlocked = GD.rightFrontDoorUnlocked;
         rightFrontDoor.isOpen = GD.rightFrontDoorIsOpen;
         pantryDoor.unlocked = GD.pantryDoorUnlocked;
@@ -1017,8 +1013,6 @@ public class GameData_DR
     internal bool colourMatchingDoorIsOpen;
     internal bool correntOrderDoorUnlocked;
     internal bool correntOrderDoorIsOpen;
-    internal bool leftFrontDoorUnlocked;
-    internal bool leftFrontDoorIsOpen;
     internal bool rightFrontDoorUnlocked;
     internal bool rightFrontDoorIsOpen;
     internal bool pantryDoorUnlocked;
@@ -1550,8 +1544,6 @@ public class GameData_DR
         colourMatchingDoorIsOpen = saveData.colourMatchingDoor.isOpen;
         correntOrderDoorUnlocked = saveData.correntOrderDoor.unlocked;
         correntOrderDoorIsOpen = saveData.correntOrderDoor.isOpen;
-        leftFrontDoorUnlocked = saveData.leftFrontDoor.unlocked;
-        leftFrontDoorIsOpen = saveData.leftFrontDoor.isOpen;
         rightFrontDoorUnlocked = saveData.rightFrontDoor.unlocked;
         rightFrontDoorIsOpen = saveData.rightFrontDoor.isOpen;
         pantryDoorUnlocked = saveData.pantryDoor.unlocked;

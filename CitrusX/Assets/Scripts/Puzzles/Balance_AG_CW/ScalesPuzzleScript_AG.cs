@@ -55,7 +55,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     {
         leftPan = GameObject.Find("LeftPan").transform;
         rightPan = GameObject.Find("RightPan").transform;
-        door = GameObject.Find("ScalesDoor").GetComponent<Door_DR>();
+        door = GameObject.Find("Kitchen Door").GetComponent<Door_DR>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
 

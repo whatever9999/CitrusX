@@ -168,7 +168,7 @@ public class Interact_HR : MonoBehaviour
         playerCamera = GetComponent<Camera>();
         correctOrderUI = GameObject.Find("CorrectOrderUI");
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
-        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatch = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtitles_HR>();
         scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         ritual = GetComponent<SetUpRitual_CW>();
@@ -348,7 +348,7 @@ public class Interact_HR : MonoBehaviour
 
                 if (door.unlocked)
                 {
-                    notificationText.text = "Press E to use";
+                    notificationText.text = "Press E to open the " + hit.transform.parent.name;
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
