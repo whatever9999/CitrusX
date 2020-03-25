@@ -13,9 +13,7 @@
  * 
  * Chase(Changes) 11/3/2020
  * Inherited from puzzlebase and tidied up
- *
- * Chase (Changes) 25/3/2020
- * This week I have uninherited from the base script as it was causing issues with saving and loading
+
  */
 
 /**

@@ -39,9 +39,6 @@ public class EventManager_CW : MonoBehaviour
     private GameObject pawn;
     private GameObject chessNote;
     private GameObject keypadDoc;
-    private Material gardenCamera;
-    public Material fuzzyScreen;
-    private Material gardenCameraDefault;
    
     #endregion
     #region DISTURBANCES
@@ -59,7 +56,6 @@ public class EventManager_CW : MonoBehaviour
     {
         disturbances = DisturbanceHandler_DR.instance;
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
-        gardenCamera = GameObject.Find("RitualCamera").GetComponent<MeshRenderer>().materials[0];
         #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
@@ -119,12 +115,10 @@ public class EventManager_CW : MonoBehaviour
         if(game.arePuzzlesDone[0] && !triggersSet[5])
         {
             gardenTrigger.allowedToBeUsed = true;
-            GameObject.Find("RitualCamera").GetComponent<MeshRenderer>().materials[0] = fuzzyScreen;
             triggersSet[5] = true;
         }
         else if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
-            GameObject.Find("RitualCamera").GetComponent<MeshRenderer>().materials[0] = gardenCamera;
             bathroomKeyPart1.SetActive(true);
             bathroomKeyPart2.SetActive(true);
             bathroomKeyPart2.name = "Bathroom Key"; 
@@ -144,7 +138,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
-            baron.GetCoin();
+            
             safe.SetActive(true);
             itemsSet[2] = true;
         }
@@ -179,14 +173,12 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[6] && !itemsSet[0])
         {
-            baron.GetCoin();
             throwingBox.SetActive(true);
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             itemsSet[0] = true;
         }
         else if(game.arePuzzlesDone[7] && (!itemsSet[1] || !triggersSet[3]))
         {
-            baron.GetCoin();
             hiddenMechDoc.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);

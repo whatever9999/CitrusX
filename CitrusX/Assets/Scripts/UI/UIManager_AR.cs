@@ -61,9 +61,19 @@ public class UIManager_AR : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void ToggleSFX()
+    {
+        GameObject.Find("SFXManager").GetComponent<SFXManager_DR>().ToggleSFX();
+    }
+
     public void QuitButton()
     {
         Application.Quit();
+    }
+
+    public void SFXToggle()
+    {
+        SFXManager_DR.instance.ToggleSFX();
     }
 
     public void PLayAnimation()
