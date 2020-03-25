@@ -75,7 +75,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         journal = Journal_DR.instance;
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
-        colourMatch = GameObject.Find("ColourMatchingDoor").GetComponent<ColourMatchingPuzzle_CW>();
+        colourMatch = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         keypad = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>(); //might need to edit this
@@ -84,7 +84,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         correctOrder = GameObject.Find("Correct Order PC").GetComponent<CorrectOrder_CW>();
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
-        hiddenMechDoor = GameObject.Find("HiddenMechDoor").GetComponent<Door_DR>();
+        hiddenMechDoor = GameObject.Find("Study Door").GetComponent<Door_DR>();
         idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
         
         #endregion
