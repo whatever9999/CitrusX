@@ -30,8 +30,10 @@ ScriptsOnlyBuild:
     - GameTesting_CW
     - HiddenMech_CW
     - HoldandThrow_HR
+    - IdleVoiceover_CW
     - InitiatePuzzles_CW
     - Interact_HR
+    - Inventory_HR
     - Journal_DR
     - KeypadItem_DR
     - KeypadUI_DR
@@ -52,6 +54,10 @@ ScriptsOnlyBuild:
     - TriggerScript_CW
     - UIManager_AR
     - WaterBowl_DR
+    Unity.Timeline.Editor.dll:
+    - UnityEditor.Timeline.SequenceHierarchy
+    - UnityEditor.Timeline.Signals.SignalReceiverInspector
+    - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
     - UnityEngine.Timeline.AudioPlayableAsset
     - UnityEngine.Timeline.AudioTrack
@@ -61,6 +67,12 @@ ScriptsOnlyBuild:
     - UnityEngine.Timeline.SignalReceiver
     - UnityEngine.Timeline.SignalTrack
     - UnityEngine.Timeline.TimelineAsset
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
@@ -69,6 +81,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.Mask
     - UnityEngine.UI.Outline
@@ -152,6 +165,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9406}
     - Class: 114
+      Script: {instanceID: 9408}
+    - Class: 114
       Script: {instanceID: 9414}
     - Class: 114
       Script: {instanceID: 9422}
@@ -222,6 +237,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10314}
     - Class: 114
+      Script: {instanceID: 10326}
+    - Class: 114
       Script: {instanceID: 10338}
     - Class: 114
       Script: {instanceID: 10372}
@@ -240,29 +257,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 10572}
+      Script: {instanceID: 10512}
     - Class: 114
-      Script: {instanceID: 10666}
+      Script: {instanceID: 10574}
     - Class: 114
-      Script: {instanceID: 10676}
+      Script: {instanceID: 10668}
     - Class: 114
-      Script: {instanceID: 10778}
+      Script: {instanceID: 10678}
     - Class: 114
-      Script: {instanceID: 10836}
+      Script: {instanceID: 10780}
     - Class: 114
-      Script: {instanceID: 10848}
+      Script: {instanceID: 10838}
     - Class: 114
-      Script: {instanceID: 10856}
+      Script: {instanceID: 10850}
     - Class: 114
-      Script: {instanceID: 10860}
+      Script: {instanceID: 10858}
     - Class: 114
-      Script: {instanceID: 10910}
+      Script: {instanceID: 10862}
     - Class: 114
-      Script: {instanceID: 10920}
+      Script: {instanceID: 10912}
     - Class: 114
-      Script: {instanceID: 10948}
+      Script: {instanceID: 10922}
     - Class: 114
-      Script: {instanceID: 40836}
+      Script: {instanceID: 10950}
+    - Class: 114
+      Script: {instanceID: 37390}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -349,7 +368,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9452}
     - Class: 114
-      Script: {instanceID: 10672}
+      Script: {instanceID: 10674}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -392,7 +411,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9452}
     - Class: 114
-      Script: {instanceID: 40836}
+      Script: {instanceID: 37390}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -435,7 +454,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10342}
     - Class: 114
-      Script: {instanceID: 46544}
+      Script: {instanceID: 1115048}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -763,18 +782,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.CrossPlatformInput
     className: TiltInput
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -1569,6 +1576,12 @@ ScriptsOnlyBuild:
     className: DisturbanceHandler_DR
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: IdleVoiceover_CW
+  - hash:
+      serializedVersion: 2
       Hash: ee0cef6caaac8ae485bfa82f000f0f7b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1753,4 +1766,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Game/MainMenu_AR.unity
   - Assets/Scenes/Game/OptionsMenu_AR.unity
   - Assets/Scenes/Game/Game_DR.unity
-  playerPath: C:/Users/Dominique Russell/Downloads/Test/CitrusX.exe
+  playerPath: C:/Users/Dominique Russell/Downloads/Test/GreedyBaron.exe

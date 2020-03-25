@@ -52,7 +52,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform saltT;
     internal Transform hiddenMechNoteT;
     internal Transform monitorT;
-    internal Transform keypadT;
+    internal Transform safeT;
     internal Transform throwingBoxT;
     internal Transform ball1T;
     internal Transform ball2T;
@@ -172,7 +172,7 @@ public class SaveSystem_DR: MonoBehaviour
         saltT = GameObject.Find("Salt").GetComponent<Transform>();
         hiddenMechNoteT = GameObject.Find("HiddenMechNote").GetComponent<Transform>();
         monitorT = GameObject.Find("Monitor").GetComponent<Transform>();
-        keypadT = GameObject.Find("KeypadUI").GetComponent<Transform>();
+        safeT = GameObject.Find("Safe").GetComponent<Transform>();
         throwingBoxT = GameObject.Find("ThrowingBox").GetComponent<Transform>();
         ball1T = GameObject.Find("1Ball").GetComponent<Transform>();
         ball2T = GameObject.Find("2Ball").GetComponent<Transform>();
@@ -455,7 +455,7 @@ public class SaveSystem_DR: MonoBehaviour
         }
 
         //KeypadTable
-        keypadT.gameObject.SetActive(GD.keypadTableActivated);
+        safeT.gameObject.SetActive(GD.keypadTableActivated);
 
         //Balls
         ball1T.position = new Vector3(GD.ball1TPosition[0], GD.ball1TPosition[1], GD.ball1TPosition[2]);
@@ -1043,7 +1043,7 @@ public class GameData_DR
         monitorOn = saveData.monitorT.GetChild(0).gameObject.activeInHierarchy;
 
         //KeypadTable
-        keypadTableActivated = saveData.keypadT.gameObject.activeInHierarchy;
+        keypadTableActivated = saveData.safeT.gameObject.activeInHierarchy;
 
         //ThrowingBox
         throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;

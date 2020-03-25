@@ -161,7 +161,7 @@ public class Subtitles_HR : MonoBehaviour
             }
         }
         voiceSource.Play();
-        SubtitleReset(voiceSource.clip.length);
+        StartCoroutine(SubtitleReset(voiceSource.clip.length));
     }
 
     /// <summary>

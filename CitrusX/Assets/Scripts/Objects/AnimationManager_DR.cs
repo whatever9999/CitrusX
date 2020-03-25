@@ -88,6 +88,37 @@ public class AnimationManager_DR : MonoBehaviour
         }
     }
 
+    public void StartCinematicFade()
+    {
+        StartCoroutine(CinematicFade());
+    }
+
+    private IEnumerator CinematicFade()
+    {
+        //Fade to black
+        while (blackScreen.color.a < 1f)
+        {
+            Color newColor = blackScreen.color;
+            newColor.a += Time.deltaTime * 2;
+            //Emphasise the fade
+            yield return new WaitForSeconds(Time.deltaTime);
+            blackScreen.color = newColor;
+        }
+
+        //Black screen for a second
+        yield return new WaitForSeconds(1);
+
+        //Fade back from black
+        while (blackScreen.color.a > 0f)
+        {
+            Color newColor = blackScreen.color;
+            newColor.a -= Time.deltaTime * 2;
+            yield return new WaitForSeconds(Time.deltaTime);
+            blackScreen.color = newColor;
+        }
+    }
+
+
     /// <summary>
     /// The player's movement is temporarily disabled as a fade to black occurs.
     /// The fade increases the alpha of a black UI image to 1, makes any effects of the animation happen, waits, reduces the alpha again and when the alpha reaches 0.95 triggers another animation if there is one for the player to see happening.
