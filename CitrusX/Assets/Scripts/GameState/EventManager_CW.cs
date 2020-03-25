@@ -119,6 +119,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
+
             bathroomKeyPart1.SetActive(true);
             bathroomKeyPart2.SetActive(true);
             bathroomKeyPart2.name = "Bathroom Key"; 
@@ -138,7 +139,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
-            
+            baron.GetCoin();
             safe.SetActive(true);
             itemsSet[2] = true;
         }
@@ -173,12 +174,14 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[6] && !itemsSet[0])
         {
+            baron.GetCoin();
             throwingBox.SetActive(true);
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             itemsSet[0] = true;
         }
         else if(game.arePuzzlesDone[7] && (!itemsSet[1] || !triggersSet[3]))
         {
+            baron.GetCoin();
             hiddenMechDoc.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);

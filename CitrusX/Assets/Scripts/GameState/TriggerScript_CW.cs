@@ -50,6 +50,9 @@ public class TriggerScript_CW : MonoBehaviour
     public Door_DR relatedDoor;
     private Subtitles_HR subtitles;
     private Journal_DR journal;
+    private Baron_DR baron;
+    private Transform ritualRoom;
+    private Transform gymRoom;
     
     /// <summary>
     /// Inititalise variables
@@ -58,6 +61,9 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         journal = Journal_DR.instance;
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
+        ritualRoom = GameObject.Find("RitualBaronLocation").GetComponent<Transform>();
+        gymRoom = GameObject.Find("GymBaronLocation").GetComponent<Transform>();
     }
 
     /// <summary>
@@ -101,8 +107,10 @@ public class TriggerScript_CW : MonoBehaviour
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
                 journal.TickOffTask("Check study");
+                baron.AppearStill(ritualRoom,3.0f);
                 journal.AddJournalLog("This book might have some information");
                 journal.ChangeTasks(new string[] { "Read book" });
+                baron.GetCoin();
                 subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
                 allowedToBeUsed = false;
             }
@@ -114,6 +122,7 @@ public class TriggerScript_CW : MonoBehaviour
                 subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE2);
                 journal.TickOffTask("Check the gym");
                 journal.AddJournalLog("This is the same aura I got from the scales…I need to get rid of it now.");
+                baron.AppearStill(gymRoom, 5.0f);
                 journal.ChangeTasks(new string[] { "Button 1", "Button 2", "Button 3" });
                 allowedToBeUsed = false;
             }
