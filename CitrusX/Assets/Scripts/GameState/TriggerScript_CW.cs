@@ -12,8 +12,6 @@
  * Added new journal entries/tasks and added a new trigger "Chessboard Extra" which is for the room that the chessboard puzzle opens
  * Chase (Changes) 16/3/2020
  * Added a few disturbances upon entrance
- * Chase (Changes) 25/3/2020
- * Earlier in the week I removed the Chess Exit trigger and the Chess Extra trigger. I also have added in the baron's room appearances.
  */
 
 /**
