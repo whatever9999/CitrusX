@@ -40,7 +40,7 @@ public class BallButtonLogic_HR : MonoBehaviour
     {
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
     }
 
     /// <summary>

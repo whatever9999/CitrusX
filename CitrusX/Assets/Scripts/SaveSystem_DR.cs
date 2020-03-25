@@ -1049,17 +1049,17 @@ public class GameData_DR
         throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;
 
         //Balls
-        ball1TPosition[0] = saveData.baronT.position.x;
-        ball1TPosition[1] = saveData.baronT.position.y;
-        ball1TPosition[2] = saveData.baronT.position.z;
+        ball1TPosition[0] = saveData.ball1T.position.x;
+        ball1TPosition[1] = saveData.ball1T.position.y;
+        ball1TPosition[2] = saveData.ball1T.position.z;
 
-        ball2TPosition[0] = saveData.baronT.position.x;
-        ball2TPosition[1] = saveData.baronT.position.y;
-        ball2TPosition[2] = saveData.baronT.position.z;
+        ball2TPosition[0] = saveData.ball2T.position.x;
+        ball2TPosition[1] = saveData.ball2T.position.y;
+        ball2TPosition[2] = saveData.ball2T.position.z;
 
-        ball3TPosition[0] = saveData.baronT.position.x;
-        ball3TPosition[1] = saveData.baronT.position.y;
-        ball3TPosition[2] = saveData.baronT.position.z;
+        ball3TPosition[0] = saveData.ball3T.position.x;
+        ball3TPosition[1] = saveData.ball3T.position.y;
+        ball3TPosition[2] = saveData.ball3T.position.z;
 
         //Weights
         weight1TPosition[0] = saveData.weight1T.position.x;
