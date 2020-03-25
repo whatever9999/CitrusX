@@ -57,9 +57,29 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform ball1T;
     internal Transform ball2T;
     internal Transform ball3T;
-    internal Transform weight1T;
-    internal Transform weight2T;
-    internal Transform weight3T;
+
+    internal Transform crisps1T;
+    internal Transform crisps2T;
+    internal Transform crisps3T;
+    internal Transform crisps4T;
+    internal Transform crisps5T;
+    internal Transform crisps6T;
+    internal Transform crisps7T;
+    internal Transform crisps8T;
+
+    internal Transform peaches1T;
+    internal Transform peaches2T;
+    internal Transform peaches3T;
+
+    internal Transform beets1T;
+    internal Transform beets2T;
+    internal Transform beets3T;
+
+    internal Transform cereal1T;
+    internal Transform cereal2T;
+    internal Transform cereal3T;
+    internal Transform cereal4T;
+
     internal Transform keyHandle1T;
     internal Transform keyHandle2T;
     internal Transform keyHandle3T;
@@ -121,9 +141,30 @@ public class SaveSystem_DR: MonoBehaviour
     internal HoldandThrow_HR ball1;
     internal HoldandThrow_HR ball2;
     internal HoldandThrow_HR ball3;
+
     internal HoldandThrow_HR weight1;
     internal HoldandThrow_HR weight2;
     internal HoldandThrow_HR weight3;
+
+    internal HoldandThrow_HR crisps1;
+    internal HoldandThrow_HR crisps2;
+    internal HoldandThrow_HR crisps3;
+    internal HoldandThrow_HR crisps4;
+    internal HoldandThrow_HR crisps5;
+    internal HoldandThrow_HR crisps6;
+    internal HoldandThrow_HR crisps7;
+    internal HoldandThrow_HR crisps8;
+    internal HoldandThrow_HR peaches1;
+    internal HoldandThrow_HR peaches2;
+    internal HoldandThrow_HR peaches3;
+    internal HoldandThrow_HR beets1;
+    internal HoldandThrow_HR beets2;
+    internal HoldandThrow_HR beets3;
+    internal HoldandThrow_HR cereal1;
+    internal HoldandThrow_HR cereal2;
+    internal HoldandThrow_HR cereal3;
+    internal HoldandThrow_HR cereal4;
+
     internal HoldandThrow_HR keyHandle1;
     internal HoldandThrow_HR keyHandle2;
     internal HoldandThrow_HR keyHandle3;
@@ -177,9 +218,29 @@ public class SaveSystem_DR: MonoBehaviour
         ball1T = GameObject.Find("1Ball").GetComponent<Transform>();
         ball2T = GameObject.Find("2Ball").GetComponent<Transform>();
         ball3T = GameObject.Find("3Ball").GetComponent<Transform>();
-        weight1T = GameObject.Find("Weight200").GetComponent<Transform>();
-        weight2T = GameObject.Find("Weight400").GetComponent<Transform>();
-        weight3T = GameObject.Find("Weight500").GetComponent<Transform>();
+
+        crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
+        crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
+        crisps3T = GameObject.Find("Crisp3").GetComponent<Transform>();
+        crisps4T = GameObject.Find("Crisp4").GetComponent<Transform>();
+        crisps5T = GameObject.Find("Crisp5").GetComponent<Transform>();
+        crisps6T = GameObject.Find("Crisp6").GetComponent<Transform>();
+        crisps7T = GameObject.Find("Crisp7").GetComponent<Transform>();
+        crisps8T = GameObject.Find("Crisp8").GetComponent<Transform>();
+
+        peaches1T = GameObject.Find("Peaches1").GetComponent<Transform>();
+        peaches2T = GameObject.Find("Peaches2").GetComponent<Transform>();
+        peaches3T = GameObject.Find("Peaches3").GetComponent<Transform>();
+
+        beets1T = GameObject.Find("Beets1").GetComponent<Transform>();
+        beets2T = GameObject.Find("Beets2").GetComponent<Transform>();
+        beets3T = GameObject.Find("Beets3").GetComponent<Transform>();
+
+        cereal1T = GameObject.Find("Cereal1").GetComponent<Transform>();
+        cereal2T = GameObject.Find("Cereal2").GetComponent<Transform>();
+        cereal3T = GameObject.Find("Cereal3").GetComponent<Transform>();
+        cereal4T = GameObject.Find("Cereal4").GetComponent<Transform>();
+
         keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>();
         keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>();
         keyHandle3T = GameObject.Find("KeyHandle3").GetComponent<Transform>();
@@ -239,9 +300,29 @@ public class SaveSystem_DR: MonoBehaviour
         ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>();
         ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
         ball3 = GameObject.Find("3Ball").GetComponent<HoldandThrow_HR>();
-        weight1 = GameObject.Find("Weight200").GetComponent<HoldandThrow_HR>();
-        weight2 = GameObject.Find("Weight400").GetComponent<HoldandThrow_HR>();
-        weight3 = GameObject.Find("Weight500").GetComponent<HoldandThrow_HR>();
+
+        crisps1 = GameObject.Find("Crisp1").GetComponent<HoldandThrow_HR>();
+        crisps2 = GameObject.Find("Crisp2").GetComponent<HoldandThrow_HR>();
+        crisps3 = GameObject.Find("Crisp3").GetComponent<HoldandThrow_HR>();
+        crisps4 = GameObject.Find("Crisp4").GetComponent<HoldandThrow_HR>();
+        crisps5 = GameObject.Find("Crisp5").GetComponent<HoldandThrow_HR>();
+        crisps6 = GameObject.Find("Crisp6").GetComponent<HoldandThrow_HR>();
+        crisps7 = GameObject.Find("Crisp7").GetComponent<HoldandThrow_HR>();
+        crisps8 = GameObject.Find("Crisp8").GetComponent<HoldandThrow_HR>();
+
+        peaches1 = GameObject.Find("Peaches1").GetComponent<HoldandThrow_HR>();
+        peaches2 = GameObject.Find("Peaches2").GetComponent<HoldandThrow_HR>();
+        peaches3 = GameObject.Find("Peaches3").GetComponent<HoldandThrow_HR>();
+
+        beets1 = GameObject.Find("Beets1").GetComponent<HoldandThrow_HR>();
+        beets2 = GameObject.Find("Beets2").GetComponent<HoldandThrow_HR>();
+        beets3 = GameObject.Find("Beets3").GetComponent<HoldandThrow_HR>();
+
+        cereal1 = GameObject.Find("Cereal1").GetComponent<HoldandThrow_HR>();
+        cereal2 = GameObject.Find("Cereal2").GetComponent<HoldandThrow_HR>();
+        cereal3 = GameObject.Find("Cereal3").GetComponent<HoldandThrow_HR>();
+        cereal4 = GameObject.Find("Cereal4").GetComponent<HoldandThrow_HR>();
+
         keyHandle1 = GameObject.Find("KeyHandle1").GetComponent<HoldandThrow_HR>();
         keyHandle2 = GameObject.Find("KeyHandle2").GetComponent<HoldandThrow_HR>();
         keyHandle3 = GameObject.Find("KeyHandle3").GetComponent<HoldandThrow_HR>();
@@ -464,12 +545,60 @@ public class SaveSystem_DR: MonoBehaviour
 
         ball3T.position = new Vector3(GD.ball3TPosition[0], GD.ball3TPosition[1], GD.ball3TPosition[2]);
 
-        //Weights
-        weight1T.position = new Vector3(GD.weight1TPosition[0], GD.weight1TPosition[1], GD.weight1TPosition[2]);
+        //FoodItems
+        crisps1T.position = new Vector3(GD.crisps1Position[0], GD.crisps1Position[1], GD.crisps1Position[2]);
+        crisps1T.rotation = new Quaternion(GD.crisps1Rotation[0], GD.crisps1Rotation[1], GD.crisps1Rotation[2], GD.crisps1Rotation[3]);
 
-        weight2T.position = new Vector3(GD.weight2TPosition[0], GD.weight2TPosition[1], GD.weight2TPosition[2]);
+        crisps2T.position = new Vector3(GD.crisps2Position[0], GD.crisps2Position[1], GD.crisps2Position[2]);
+        crisps2T.rotation = new Quaternion(GD.crisps2Rotation[0], GD.crisps2Rotation[1], GD.crisps2Rotation[2], GD.crisps2Rotation[3]);
 
-        weight3T.position = new Vector3(GD.weight3TPosition[0], GD.weight3TPosition[1], GD.weight3TPosition[2]);
+        crisps3T.position = new Vector3(GD.crisps3Position[0], GD.crisps3Position[1], GD.crisps3Position[2]);
+        crisps3T.rotation = new Quaternion(GD.crisps3Rotation[0], GD.crisps3Rotation[1], GD.crisps3Rotation[2], GD.crisps3Rotation[3]);
+
+        crisps4T.position = new Vector3(GD.crisps4Position[0], GD.crisps4Position[1], GD.crisps4Position[2]);
+        crisps4T.rotation = new Quaternion(GD.crisps4Rotation[0], GD.crisps4Rotation[1], GD.crisps4Rotation[2], GD.crisps4Rotation[3]);
+
+        crisps5T.position = new Vector3(GD.crisps5Position[0], GD.crisps5Position[1], GD.crisps5Position[2]);
+        crisps5T.rotation = new Quaternion(GD.crisps5Rotation[0], GD.crisps5Rotation[1], GD.crisps5Rotation[2], GD.crisps5Rotation[3]);
+
+        crisps6T.position = new Vector3(GD.crisps6Position[0], GD.crisps6Position[1], GD.crisps6Position[2]);
+        crisps6T.rotation = new Quaternion(GD.crisps6Rotation[0], GD.crisps6Rotation[1], GD.crisps6Rotation[2], GD.crisps6Rotation[3]);
+
+        crisps7T.position = new Vector3(GD.crisps7Position[0], GD.crisps7Position[1], GD.crisps7Position[2]);
+        crisps7T.rotation = new Quaternion(GD.crisps7Rotation[0], GD.crisps7Rotation[1], GD.crisps7Rotation[2], GD.crisps7Rotation[3]);
+
+        crisps8T.position = new Vector3(GD.crisps8Position[0], GD.crisps8Position[1], GD.crisps8Position[2]);
+        crisps8T.rotation = new Quaternion(GD.crisps8Rotation[0], GD.crisps8Rotation[1], GD.crisps8Rotation[2], GD.crisps8Rotation[3]);
+
+        cereal1T.position = new Vector3(GD.cereal1Position[0], GD.cereal1Position[1], GD.cereal1Position[2]);
+        cereal1T.rotation = new Quaternion(GD.cereal1Rotation[0], GD.cereal1Rotation[1], GD.cereal1Rotation[2], GD.cereal1Rotation[3]);
+        
+        cereal2T.position = new Vector3(GD.cereal2Position[0], GD.cereal2Position[1], GD.cereal2Position[2]);
+        cereal2T.rotation = new Quaternion(GD.cereal2Rotation[0], GD.cereal2Rotation[1], GD.cereal2Rotation[2], GD.cereal2Rotation[3]);
+        
+        cereal3T.position = new Vector3(GD.cereal3Position[0], GD.cereal3Position[1], GD.cereal3Position[2]);
+        cereal3T.rotation = new Quaternion(GD.cereal3Rotation[0], GD.cereal3Rotation[1], GD.cereal3Rotation[2], GD.cereal3Rotation[3]);
+        
+        cereal4T.position = new Vector3(GD.cereal4Position[0], GD.cereal4Position[1], GD.cereal4Position[2]);
+        cereal4T.rotation = new Quaternion(GD.cereal4Rotation[0], GD.cereal4Rotation[1], GD.cereal4Rotation[2], GD.cereal4Rotation[3]);
+
+        beets1T.position = new Vector3(GD.beets1Position[0], GD.beets1Position[1], GD.beets1Position[2]);
+        beets1T.rotation = new Quaternion(GD.beets1Rotation[0], GD.beets1Rotation[1], GD.beets1Rotation[2], GD.beets1Rotation[3]);
+        
+        beets2T.position = new Vector3(GD.beets2Position[0], GD.beets2Position[1], GD.beets2Position[2]);
+        beets2T.rotation = new Quaternion(GD.beets2Rotation[0], GD.beets2Rotation[1], GD.beets2Rotation[2], GD.beets2Rotation[3]);
+        
+        beets3T.position = new Vector3(GD.beets3Position[0], GD.beets3Position[1], GD.beets3Position[2]);
+        beets3T.rotation = new Quaternion(GD.beets3Rotation[0], GD.beets3Rotation[1], GD.beets3Rotation[2], GD.beets3Rotation[3]);
+
+        peaches1T.position = new Vector3(GD.peaches1Position[0], GD.peaches1Position[1], GD.peaches1Position[2]);
+        peaches1T.rotation = new Quaternion(GD.peaches1Rotation[0], GD.peaches1Rotation[1], GD.peaches1Rotation[2], GD.peaches1Rotation[3]);
+        
+        peaches2T.position = new Vector3(GD.peaches2Position[0], GD.peaches2Position[1], GD.peaches2Position[2]);
+        peaches2T.rotation = new Quaternion(GD.peaches2Rotation[0], GD.peaches2Rotation[1], GD.peaches2Rotation[2], GD.peaches2Rotation[3]);
+        
+        peaches3T.position = new Vector3(GD.peaches3Position[0], GD.peaches3Position[1], GD.peaches3Position[2]);
+        peaches3T.rotation = new Quaternion(GD.peaches3Rotation[0], GD.peaches3Rotation[1], GD.peaches3Rotation[2], GD.peaches3Rotation[3]);
 
         //KeyPieces
         keyHandle1T.position = new Vector3(GD.keyHandle1TPosition[0], GD.keyHandle1TPosition[1], GD.keyHandle1TPosition[2]);
@@ -602,12 +731,42 @@ public class SaveSystem_DR: MonoBehaviour
         ball3.canHold = GD.canHoldBall3;
         ball3.isFirstTime = GD.ball3IsFirstTime;
 
-        weight1.canHold = GD.canHoldWeight1;
-        weight1.isFirstTime = GD.weight1IsFirstTime;
-        weight2.canHold = GD.canHoldWeight2;
-        weight2.isFirstTime = GD.weight2IsFirstTime;
-        weight3.canHold = GD.canHoldWeight3;
-        weight3.isFirstTime = GD.weight3IsFirstTime;
+        crisps1.canHold = GD.canHoldcrisps1;
+        crisps2.canHold = GD.canHoldcrisps2;
+        crisps3.canHold = GD.canHoldcrisps3;
+        crisps4.canHold = GD.canHoldcrisps4;
+        crisps5.canHold = GD.canHoldcrisps5;
+        crisps6.canHold = GD.canHoldcrisps6;
+        crisps7.canHold = GD.canHoldcrisps7;
+        crisps8.canHold = GD.canHoldcrisps8;
+        peaches1.canHold = GD.canHoldpeaches1;
+        peaches2.canHold = GD.canHoldpeaches2;
+        peaches3.canHold = GD.canHoldpeaches3;
+        beets1.canHold = GD.canHoldbeets1;
+        beets2.canHold = GD.canHoldbeets2;
+        beets3.canHold = GD.canHoldbeets3;
+        cereal1.canHold = GD.canHoldcereal1;
+        cereal2.canHold = GD.canHoldcereal2;
+        cereal3.canHold = GD.canHoldcereal3;
+        cereal4.canHold = GD.canHoldcereal4;
+        crisps1.isFirstTime = GD.crisps1IsFirstTime;
+        crisps2.isFirstTime = GD.crisps2IsFirstTime;
+        crisps3.isFirstTime = GD.crisps3IsFirstTime;
+        crisps4.isFirstTime = GD.crisps4IsFirstTime;
+        crisps5.isFirstTime = GD.crisps5IsFirstTime;
+        crisps6.isFirstTime = GD.crisps6IsFirstTime;
+        crisps7.isFirstTime = GD.crisps7IsFirstTime;
+        crisps8.isFirstTime = GD.crisps8IsFirstTime;
+        peaches1.isFirstTime = GD.peaches1IsFirstTime;
+        peaches2.isFirstTime = GD.peaches2IsFirstTime;
+        peaches3.isFirstTime = GD.peaches3IsFirstTime;
+        beets1.isFirstTime = GD.beets1IsFirstTime;
+        beets2.isFirstTime = GD.beets2IsFirstTime;
+        beets3.isFirstTime = GD.beets3IsFirstTime;
+        cereal1.isFirstTime = GD.cereal1IsFirstTime;
+        cereal2.isFirstTime = GD.cereal2IsFirstTime;
+        cereal3.isFirstTime = GD.cereal3IsFirstTime;
+        cereal4.isFirstTime = GD.cereal4IsFirstTime;
 
         keyHandle1.canHold = GD.canHoldKeyHandle1;
         keyHandle1.isFirstTime = GD.keyHandle1IsFirstTime;
@@ -732,13 +891,46 @@ public class GameData_DR
     internal float[] ball2TRotation = new float[4];
     internal float[] ball3TPosition = new float[3];
     internal float[] ball3TRotation = new float[4];
-    //Weights
-    internal float[] weight1TPosition = new float[3];
-    internal float[] weight1TRotation = new float[4];
-    internal float[] weight2TPosition = new float[3];
-    internal float[] weight2TRotation = new float[4];
-    internal float[] weight3TPosition = new float[3];
-    internal float[] weight3TRotation = new float[4];
+    //FoodItems
+    internal float[] crisps1Position = new float[3];
+    internal float[] crisps1Rotation = new float[4];
+    internal float[] crisps2Position = new float[3];
+    internal float[] crisps2Rotation = new float[4];
+    internal float[] crisps3Position = new float[3];
+    internal float[] crisps3Rotation = new float[4];
+    internal float[] crisps4Position = new float[3];
+    internal float[] crisps4Rotation = new float[4];
+    internal float[] crisps5Position = new float[3];
+    internal float[] crisps5Rotation = new float[4];
+    internal float[] crisps6Position = new float[3];
+    internal float[] crisps6Rotation = new float[4];
+    internal float[] crisps7Position = new float[3];
+    internal float[] crisps7Rotation = new float[4];
+    internal float[] crisps8Position = new float[3];
+    internal float[] crisps8Rotation = new float[4];
+
+    internal float[] peaches1Position = new float[3];
+    internal float[] peaches1Rotation = new float[4];
+    internal float[] peaches2Position = new float[3];
+    internal float[] peaches2Rotation = new float[4];
+    internal float[] peaches3Position = new float[3];
+    internal float[] peaches3Rotation = new float[4];
+
+    internal float[] beets1Position = new float[3];
+    internal float[] beets1Rotation = new float[4];
+    internal float[] beets2Position = new float[3];
+    internal float[] beets2Rotation = new float[4];
+    internal float[] beets3Position = new float[3];
+    internal float[] beets3Rotation = new float[4];
+
+    internal float[] cereal1Position = new float[3];
+    internal float[] cereal1Rotation = new float[4];
+    internal float[] cereal2Position = new float[3];
+    internal float[] cereal2Rotation = new float[4];
+    internal float[] cereal3Position = new float[3];
+    internal float[] cereal3Rotation = new float[4];
+    internal float[] cereal4Position = new float[3];
+    internal float[] cereal4Rotation = new float[4];
     //KeyPieces
     internal float[] keyHandle1TPosition = new float[3];
     internal float[] keyHandle1TRotation = new float[4];
@@ -856,12 +1048,42 @@ public class GameData_DR
     internal bool canHoldBall3;
     internal bool ball3IsFirstTime;
 
-    internal bool canHoldWeight1;
-    internal bool weight1IsFirstTime;
-    internal bool canHoldWeight2;
-    internal bool weight2IsFirstTime;
-    internal bool canHoldWeight3;
-    internal bool weight3IsFirstTime;
+    internal bool canHoldcrisps1;
+    internal bool canHoldcrisps2;
+    internal bool canHoldcrisps3;
+    internal bool canHoldcrisps4;
+    internal bool canHoldcrisps5;
+    internal bool canHoldcrisps6;
+    internal bool canHoldcrisps7;
+    internal bool canHoldcrisps8;
+    internal bool canHoldpeaches1;
+    internal bool canHoldpeaches2;
+    internal bool canHoldpeaches3;
+    internal bool canHoldbeets1;
+    internal bool canHoldbeets2;
+    internal bool canHoldbeets3;
+    internal bool canHoldcereal1;
+    internal bool canHoldcereal2;
+    internal bool canHoldcereal3;
+    internal bool canHoldcereal4;
+    internal bool crisps1IsFirstTime;
+    internal bool crisps2IsFirstTime;
+    internal bool crisps3IsFirstTime;
+    internal bool crisps4IsFirstTime;
+    internal bool crisps5IsFirstTime;
+    internal bool crisps6IsFirstTime;
+    internal bool crisps7IsFirstTime;
+    internal bool crisps8IsFirstTime;
+    internal bool peaches1IsFirstTime;
+    internal bool peaches2IsFirstTime;
+    internal bool peaches3IsFirstTime;
+    internal bool beets1IsFirstTime;
+    internal bool beets2IsFirstTime;
+    internal bool beets3IsFirstTime;
+    internal bool cereal1IsFirstTime;
+    internal bool cereal2IsFirstTime;
+    internal bool cereal3IsFirstTime;
+    internal bool cereal4IsFirstTime;
 
     internal bool canHoldKeyHandle1;
     internal bool keyHandle1IsFirstTime;
@@ -1061,18 +1283,150 @@ public class GameData_DR
         ball3TPosition[1] = saveData.ball3T.position.y;
         ball3TPosition[2] = saveData.ball3T.position.z;
 
-        //Weights
-        weight1TPosition[0] = saveData.weight1T.position.x;
-        weight1TPosition[1] = saveData.weight1T.position.y;
-        weight1TPosition[2] = saveData.weight1T.position.z;
+        //FoodItems
+        crisps1Position[0] = saveData.crisps1T.position.x;
+        crisps1Position[1] = saveData.crisps1T.position.y;
+        crisps1Position[2] = saveData.crisps1T.position.z;
+        crisps1Rotation[0] = saveData.crisps1T.rotation.x;
+        crisps1Rotation[1] = saveData.crisps1T.rotation.y;
+        crisps1Rotation[2] = saveData.crisps1T.rotation.z;
+        crisps1Rotation[3] = saveData.crisps1T.rotation.w;
 
-        weight2TPosition[0] = saveData.weight2T.position.x;
-        weight2TPosition[1] = saveData.weight2T.position.y;
-        weight2TPosition[2] = saveData.weight2T.position.z;
+        crisps2Position[0] = saveData.crisps2T.position.x;
+        crisps2Position[1] = saveData.crisps2T.position.y;
+        crisps2Position[2] = saveData.crisps2T.position.z;
+        crisps2Rotation[0] = saveData.crisps2T.rotation.x;
+        crisps2Rotation[1] = saveData.crisps2T.rotation.y;
+        crisps2Rotation[2] = saveData.crisps2T.rotation.z;
+        crisps2Rotation[3] = saveData.crisps2T.rotation.w;
 
-        weight3TPosition[0] = saveData.weight3T.position.x;
-        weight3TPosition[1] = saveData.weight3T.position.y;
-        weight3TPosition[2] = saveData.weight3T.position.z;
+        crisps3Position[0] = saveData.crisps3T.position.x;
+        crisps3Position[1] = saveData.crisps3T.position.y;
+        crisps3Position[2] = saveData.crisps3T.position.z;
+        crisps3Rotation[0] = saveData.crisps3T.rotation.x;
+        crisps3Rotation[1] = saveData.crisps3T.rotation.y;
+        crisps3Rotation[2] = saveData.crisps3T.rotation.z;
+        crisps3Rotation[3] = saveData.crisps3T.rotation.w;
+
+        crisps4Position[0] = saveData.crisps4T.position.x;
+        crisps4Position[1] = saveData.crisps4T.position.y;
+        crisps4Position[2] = saveData.crisps4T.position.z;
+        crisps4Rotation[0] = saveData.crisps4T.rotation.x;
+        crisps4Rotation[1] = saveData.crisps4T.rotation.y;
+        crisps4Rotation[2] = saveData.crisps4T.rotation.z;
+        crisps4Rotation[3] = saveData.crisps4T.rotation.w;
+
+        crisps5Position[0] = saveData.crisps5T.position.x;
+        crisps5Position[1] = saveData.crisps5T.position.y;
+        crisps5Position[2] = saveData.crisps5T.position.z;
+        crisps5Rotation[0] = saveData.crisps5T.rotation.x;
+        crisps5Rotation[1] = saveData.crisps5T.rotation.y;
+        crisps5Rotation[2] = saveData.crisps5T.rotation.z;
+        crisps5Rotation[3] = saveData.crisps5T.rotation.w;
+
+        crisps6Position[0] = saveData.crisps6T.position.x;
+        crisps6Position[1] = saveData.crisps6T.position.y;
+        crisps6Position[2] = saveData.crisps6T.position.z;
+        crisps6Rotation[0] = saveData.crisps6T.rotation.x;
+        crisps6Rotation[1] = saveData.crisps6T.rotation.y;
+        crisps6Rotation[2] = saveData.crisps6T.rotation.z;
+        crisps6Rotation[3] = saveData.crisps6T.rotation.w;
+
+        crisps7Position[0] = saveData.crisps7T.position.x;
+        crisps7Position[1] = saveData.crisps7T.position.y;
+        crisps7Position[2] = saveData.crisps7T.position.z;
+        crisps7Rotation[0] = saveData.crisps7T.rotation.x;
+        crisps7Rotation[1] = saveData.crisps7T.rotation.y;
+        crisps7Rotation[2] = saveData.crisps7T.rotation.z;
+        crisps7Rotation[3] = saveData.crisps7T.rotation.w;
+
+        crisps8Position[0] = saveData.crisps8T.position.x;
+        crisps8Position[1] = saveData.crisps8T.position.y;
+        crisps8Position[2] = saveData.crisps8T.position.z;
+        crisps8Rotation[0] = saveData.crisps8T.rotation.x;
+        crisps8Rotation[1] = saveData.crisps8T.rotation.y;
+        crisps8Rotation[2] = saveData.crisps8T.rotation.z;
+        crisps8Rotation[3] = saveData.crisps8T.rotation.w;
+
+        peaches1Position[0] = saveData.peaches1T.position.x;
+        peaches1Position[1] = saveData.peaches1T.position.y;
+        peaches1Position[2] = saveData.peaches1T.position.z;
+        peaches1Rotation[0] = saveData.peaches1T.rotation.x;
+        peaches1Rotation[1] = saveData.peaches1T.rotation.y;
+        peaches1Rotation[2] = saveData.peaches1T.rotation.z;
+        peaches1Rotation[3] = saveData.peaches1T.rotation.w;
+
+        peaches2Position[0] = saveData.peaches2T.position.x;
+        peaches2Position[1] = saveData.peaches2T.position.y;
+        peaches2Position[2] = saveData.peaches2T.position.z;
+        peaches2Rotation[0] = saveData.peaches2T.rotation.x;
+        peaches2Rotation[1] = saveData.peaches2T.rotation.y;
+        peaches2Rotation[2] = saveData.peaches2T.rotation.z;
+        peaches2Rotation[3] = saveData.peaches2T.rotation.w;
+
+        peaches3Position[0] = saveData.peaches3T.position.x;
+        peaches3Position[1] = saveData.peaches3T.position.y;
+        peaches3Position[2] = saveData.peaches3T.position.z;
+        peaches3Rotation[0] = saveData.peaches3T.rotation.x;
+        peaches3Rotation[1] = saveData.peaches3T.rotation.y;
+        peaches3Rotation[2] = saveData.peaches3T.rotation.z;
+        peaches3Rotation[3] = saveData.peaches3T.rotation.w;
+
+        beets1Position[0] = saveData.beets1T.position.x;
+        beets1Position[1] = saveData.beets1T.position.y;
+        beets1Position[2] = saveData.beets1T.position.z;
+        beets1Rotation[0] = saveData.beets1T.rotation.x;
+        beets1Rotation[1] = saveData.beets1T.rotation.y;
+        beets1Rotation[2] = saveData.beets1T.rotation.z;
+        beets1Rotation[3] = saveData.beets1T.rotation.w;
+
+        beets2Position[0] = saveData.beets2T.position.x;
+        beets2Position[1] = saveData.beets2T.position.y;
+        beets2Position[2] = saveData.beets2T.position.z;
+        beets2Rotation[0] = saveData.beets2T.rotation.x;
+        beets2Rotation[1] = saveData.beets2T.rotation.y;
+        beets2Rotation[2] = saveData.beets2T.rotation.z;
+        beets2Rotation[3] = saveData.beets2T.rotation.w;
+
+        beets3Position[0] = saveData.beets3T.position.x;
+        beets3Position[1] = saveData.beets3T.position.y;
+        beets3Position[2] = saveData.beets3T.position.z;
+        beets3Rotation[0] = saveData.beets3T.rotation.x;
+        beets3Rotation[1] = saveData.beets3T.rotation.y;
+        beets3Rotation[2] = saveData.beets3T.rotation.z;
+        beets3Rotation[3] = saveData.beets3T.rotation.w;
+
+        cereal1Position[0] = saveData.cereal1T.position.x;
+        cereal1Position[1] = saveData.cereal1T.position.y;
+        cereal1Position[2] = saveData.cereal1T.position.z;
+        cereal1Rotation[0] = saveData.cereal1T.rotation.x;
+        cereal1Rotation[1] = saveData.cereal1T.rotation.y;
+        cereal1Rotation[2] = saveData.cereal1T.rotation.z;
+        cereal1Rotation[3] = saveData.cereal1T.rotation.w;
+
+        cereal2Position[0] = saveData.cereal2T.position.x;
+        cereal2Position[1] = saveData.cereal2T.position.y;
+        cereal2Position[2] = saveData.cereal2T.position.z;
+        cereal2Rotation[0] = saveData.cereal2T.rotation.x;
+        cereal2Rotation[1] = saveData.cereal2T.rotation.y;
+        cereal2Rotation[2] = saveData.cereal2T.rotation.z;
+        cereal2Rotation[3] = saveData.cereal2T.rotation.w;
+
+        cereal3Position[0] = saveData.cereal3T.position.x;
+        cereal3Position[1] = saveData.cereal3T.position.y;
+        cereal3Position[2] = saveData.cereal3T.position.z;
+        cereal3Rotation[0] = saveData.cereal3T.rotation.x;
+        cereal3Rotation[1] = saveData.cereal3T.rotation.y;
+        cereal3Rotation[2] = saveData.cereal3T.rotation.z;
+        cereal3Rotation[3] = saveData.cereal3T.rotation.w;
+
+        cereal4Position[0] = saveData.cereal4T.position.x;
+        cereal4Position[1] = saveData.cereal4T.position.y;
+        cereal4Position[2] = saveData.cereal4T.position.z;
+        cereal4Rotation[0] = saveData.cereal4T.rotation.x;
+        cereal4Rotation[1] = saveData.cereal4T.rotation.y;
+        cereal4Rotation[2] = saveData.cereal4T.rotation.z;
+        cereal4Rotation[3] = saveData.cereal4T.rotation.w;
 
         //KeyPieces
         keyHandle1TPosition[0] = saveData.keyHandle1T.position.x;
@@ -1227,12 +1581,42 @@ public class GameData_DR
         canHoldBall3 = saveData.ball3.canHold;
         ball3IsFirstTime = saveData.ball3.isFirstTime;
 
-        canHoldWeight1 = saveData.weight1.canHold;
-        weight1IsFirstTime = saveData.weight1.isFirstTime;
-        canHoldWeight2 = saveData.weight2.canHold;
-        weight2IsFirstTime = saveData.weight2.isFirstTime;
-        canHoldWeight3 = saveData.weight3.canHold;
-        weight3IsFirstTime = saveData.weight3.isFirstTime;
+        canHoldcrisps1 = saveData.crisps1.canHold;
+        canHoldcrisps2 = saveData.crisps2.canHold;
+        canHoldcrisps3 = saveData.crisps3.canHold;
+        canHoldcrisps4 = saveData.crisps4.canHold;
+        canHoldcrisps5 = saveData.crisps5.canHold;
+        canHoldcrisps6 = saveData.crisps6.canHold;
+        canHoldcrisps7 = saveData.crisps7.canHold;
+        canHoldcrisps8 = saveData.crisps8.canHold;
+        canHoldpeaches1 = saveData.peaches1.canHold;
+        canHoldpeaches2 = saveData.peaches2.canHold;
+        canHoldpeaches3 = saveData.peaches3.canHold;
+        canHoldbeets1 = saveData.beets1.canHold;
+        canHoldbeets2 = saveData.beets2.canHold;
+        canHoldbeets3 = saveData.beets3.canHold;
+        canHoldcereal1 = saveData.cereal1.canHold;
+        canHoldcereal2 = saveData.cereal2.canHold;
+        canHoldcereal3 = saveData.cereal3.canHold;
+        canHoldcereal4 = saveData.cereal4.canHold;
+        crisps1IsFirstTime = saveData.crisps1.isFirstTime;
+        crisps2IsFirstTime = saveData.crisps2.isFirstTime;
+        crisps3IsFirstTime = saveData.crisps3.isFirstTime;
+        crisps4IsFirstTime = saveData.crisps4.isFirstTime;
+        crisps5IsFirstTime = saveData.crisps5.isFirstTime;
+        crisps6IsFirstTime = saveData.crisps6.isFirstTime;
+        crisps7IsFirstTime = saveData.crisps7.isFirstTime;
+        crisps8IsFirstTime = saveData.crisps8.isFirstTime;
+        peaches1IsFirstTime = saveData.peaches1.isFirstTime;
+        peaches2IsFirstTime = saveData.peaches2.isFirstTime;
+        peaches3IsFirstTime = saveData.peaches3.isFirstTime;
+        beets1IsFirstTime = saveData.beets1.isFirstTime;
+        beets2IsFirstTime = saveData.beets2.isFirstTime;
+        beets3IsFirstTime = saveData.beets3.isFirstTime;
+        cereal1IsFirstTime = saveData.cereal1.isFirstTime;
+        cereal2IsFirstTime = saveData.cereal2.isFirstTime;
+        cereal3IsFirstTime = saveData.cereal3.isFirstTime;
+        cereal4IsFirstTime = saveData.cereal4.isFirstTime;
 
         canHoldKeyHandle1 = saveData.keyHandle1.canHold;
         keyHandle1IsFirstTime = saveData.keyHandle1.isFirstTime;

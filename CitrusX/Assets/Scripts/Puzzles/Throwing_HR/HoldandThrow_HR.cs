@@ -14,6 +14,9 @@
  * 
  * Dominique (Changes) 09/03/2020
  * Every 2 seconds that the ball is moving it will have its velocity set to zero so it doesn't roll everywhere
+ * 
+ * Dominique (Changes) 25/03/2020
+ * Ensured that objects stay centrered when held
  */
 
 /**
@@ -28,7 +31,7 @@
 * 
 * \author Hugo
 * 
-* \date Last Modified: 09/03/2020
+* \date Last Modified: 25/03/2020
 */
 
 using UnityEngine;
@@ -66,6 +69,9 @@ public class HoldandThrow_HR : MonoBehaviour
     {
         if (beingHeld)
         {
+            //Make sure the object stays in the centre of the players vision
+            transform.localPosition = Vector3.zero; 
+
             //If the player gets too far from the object he is holding drop it (In case it gets stuck)
             float distance = Vector3.Distance(transform.position, holdPosition.position);
             if (distance >= minDistanceToPickup)
