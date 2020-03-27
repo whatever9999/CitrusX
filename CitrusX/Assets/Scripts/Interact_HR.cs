@@ -245,6 +245,10 @@ public class Interact_HR : MonoBehaviour
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
+                    if(item.name == "Pawn")
+                    {
+                        journal.ChangeTasks(new string[] {"Solve the puzzle" });
+                    }
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                 }
             }
