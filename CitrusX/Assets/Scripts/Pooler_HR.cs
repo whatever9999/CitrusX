@@ -3,7 +3,7 @@
  * 
  * Object pooling class
  * 
- * It creates various pools with different tags for efficency
+ * It creates various pools with different tags for efficencyX
  */
 
 

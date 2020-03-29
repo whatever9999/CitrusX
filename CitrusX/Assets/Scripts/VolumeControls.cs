@@ -2,6 +2,7 @@
  * Hugo
  * 
  * Change volume through the pause menu with sliders
+ * x
  */
 
 
@@ -28,7 +29,7 @@ public class VolumeControls : MonoBehaviour
     }
     public Groups group;
 
-    //Slider will call this function every time the user changes the value. Changing the volune of each respective group
+    //Slider will call this function every time the user changes the value. Changing the volune of each respective groupX
     public void changeVolume() 
     {
 
