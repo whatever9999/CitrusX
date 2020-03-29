@@ -106,6 +106,7 @@
  */
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Interact_HR : MonoBehaviour
 {
@@ -117,7 +118,7 @@ public class Interact_HR : MonoBehaviour
     public Material outlineMaterial;
     private Cinematics_DR cinematics;
 
-    private Material[] matArray;
+    private List<Material> matArray;
     private Material[] originalMaterials;
     private MeshRenderer targetRenderer;
     private MeshRenderer currRenderer;
@@ -204,31 +205,17 @@ public class Interact_HR : MonoBehaviour
 
                 targetRenderer.materials = originalMaterials;
                 originalMaterials = currRenderer.materials;
-                matArray = currRenderer.materials;
-                try
-                {
-                    matArray[1] = outlineMaterial;
-                } catch (System.IndexOutOfRangeException e)
-                {
-                    //Fix dis
-                }
-                currRenderer.materials = matArray;
+                matArray = new List<Material>(currRenderer.materials);
+                matArray.Add(outlineMaterial);
+                currRenderer.materials = matArray.ToArray();
                 targetRenderer = currRenderer;
             }
             else
             {
-                
                 originalMaterials = currRenderer.materials;
-                matArray = currRenderer.materials;
-                try
-                {
-                    matArray[1] = outlineMaterial;
-                }
-                catch (System.IndexOutOfRangeException e)
-                {
-                    Debug.Log(e.StackTrace);
-                }
-                currRenderer.materials = matArray;
+                matArray = new List<Material>(currRenderer.materials);
+                matArray.Add(outlineMaterial);
+                currRenderer.materials = matArray.ToArray();
                 targetRenderer = currRenderer;
             }
 
