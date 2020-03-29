@@ -1,4 +1,13 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Hugo
+ * 
+ * Object pooling class
+ * 
+ * It creates various pools with different tags for efficencyX
+ */
+
+
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,11 +46,12 @@ public class Pooler_HR : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<Tags, Queue<GameObject>> poolDictionary;
 
-    // Start is called before the first frame update
     private void Start()
     {
+        //Populates the pool dictionary
         poolDictionary = new Dictionary<Tags, Queue<GameObject>>();
 
+        //Looks for the amount of pools introduced in the inspector and queues the amount of instanciated objects set in the inspector
         foreach (Pool pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
@@ -56,7 +66,8 @@ public class Pooler_HR : MonoBehaviour
             poolDictionary.Add(pool.tag, objectPool);
         }
     }
-    //call this function
+    //SFX manager will call this function.
+    //It will look at the next available object from the pool and give it to the manager to play
     public GameObject SpawnFromPool(Tags tag, Vector3 position, AudioClip clip)
     {
         if (!poolDictionary.ContainsKey(tag))

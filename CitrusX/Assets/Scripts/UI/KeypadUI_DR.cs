@@ -48,6 +48,7 @@ public class KeypadUI_DR : MonoBehaviour
     internal bool isActive = false;
     private Journal_DR journal;
     private Subtitles_HR subtitles;
+    private SFX_Manager_HR SFXManager;
     #endregion
     #region BOOLS
     internal bool interactedWithSafe = false; //needs to be set in interact
@@ -69,6 +70,7 @@ public class KeypadUI_DR : MonoBehaviour
         inputText = GameObject.Find("InputText").GetComponent<Text>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        SFXManager = GameObject.Find("FirstPersonCharacter").GetComponent<SFX_Manager_HR>();
     }
 
     /// <summary>
@@ -123,7 +125,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// <param name="number - a number to be added onto the input if the player pushes the button"></param>
     public void NumberButton(int number)
     {
-       // SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
+        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.BUTTON, Vector3.zero);
         //The player can't enter more digits than the length of the password
         if (input.Length != keypadItem.password.Length)
         {
@@ -140,7 +142,7 @@ public class KeypadUI_DR : MonoBehaviour
         if (input == keypadItem.password)
         {
             keypadItem.door.ToggleOpen();
-            //SFXManager_DR.instance.PlayEffect(SoundEffectNames.CORRECT);
+            SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.CORRECT, Vector3.zero);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("Solve password");
             journal.AddJournalLog("Finally, what’s this note?");
@@ -158,7 +160,7 @@ public class KeypadUI_DR : MonoBehaviour
                 {
                     StartCoroutine(ClearInput());
                     subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE5);
-                    SFXManager_DR.instance.PlayEffect(SoundEffectNames.INCORRECT);
+                    SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.INCORRECT,Vector3.zero);
                 }
             }
         }
@@ -187,7 +189,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// </summary>
     public void ClearButton()
     {
-        //SFXManager_DR.instance.PlayEffect(SoundEffectNames.BUTTON);
+        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.BUTTON, Vector3.zero);
         input = "";
         inputText.text = input;
     }

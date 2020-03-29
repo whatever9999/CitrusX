@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Hugo
+ * 
+ * Other scripts call this one to set an audio clip into the pool objects and bring them to the desired location playing them afterwards
+ * X
+ */
+
 using UnityEngine;
 
 public class SFX_Manager_HR : MonoBehaviour
 {
-    
     public enum SoundEffectNames
     {
         CORRECT,
@@ -12,21 +16,25 @@ public class SFX_Manager_HR : MonoBehaviour
         BUTTON
     }
 
+    public SoundEffect_HR[] soundEffects;
     Pooler_HR pooler;
     AudioSource soundSource;
-    public Dictionary<SoundEffectNames, AudioClip> soundEffects;
+
+
     public float volume;
 
+    //Get the Pooler instance
     void Awake()
     {
-         pooler = Pooler_HR.instance;
+        pooler = Pooler_HR.instance;
     }
 
-    
-    public void PlaySFX(SoundEffectNames clipName ,Vector3 position, double seconds = 0) 
-    {
 
-        soundSource = pooler.SpawnFromPool(Pooler_HR.Tags.SFX, position, soundEffects[clipName]).GetComponent<AudioSource>();
+    //Scripts will call this function and pass the name, the position and optionally the amount of time to play
+    public void PlaySFX(SoundEffectNames clipName, Vector3 position, double seconds = 0)
+    {
+        //Calls the pooler script to dequeue a pool object 
+        soundSource = pooler.SpawnFromPool(Pooler_HR.Tags.SFX, position, soundEffects[(int)clipName].clip).GetComponent<AudioSource>();
         soundSource.volume = volume;
 
         //If time is given
@@ -36,5 +44,11 @@ public class SFX_Manager_HR : MonoBehaviour
             soundSource.Play();
 
     }
-}
+    [System.Serializable]
+    public class SoundEffect_HR
+    {
+        public SoundEffectNames name;
+        public AudioClip clip;
+    }
 
+}
