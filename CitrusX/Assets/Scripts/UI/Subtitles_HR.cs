@@ -102,6 +102,7 @@ public class Subtitles_HR : MonoBehaviour
         S_LINE7,
         S_LINE8,
         S_LINE9,
+        S_LINE10,
         G_LINE1,
         G_LINE2,
         G_LINE3,
