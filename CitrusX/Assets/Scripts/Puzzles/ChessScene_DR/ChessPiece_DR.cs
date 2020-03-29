@@ -32,6 +32,8 @@ public class ChessPiece_DR : MonoBehaviour
                 break;
         }
 
+        chessBoard.CheckPieces();
+
         if (SaveSystem_DR.instance.loaded)
         {
             chessBoard.CheckPieces();

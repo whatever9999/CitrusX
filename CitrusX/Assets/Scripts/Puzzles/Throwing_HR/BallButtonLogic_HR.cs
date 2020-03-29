@@ -80,7 +80,7 @@ public class BallButtonLogic_HR : MonoBehaviour
             if (puzzleScript.ballCounter == ballsRequired)
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE4);
-                journal.AddJournalLog("A box? Where did this come from?");
+                //journal.AddJournalLog("A box? Where did this come from?");
                 journal.ChangeTasks(new string[] { "Open box" });
                 GameTesting_CW.instance.arePuzzlesDone[6] = true;
             }

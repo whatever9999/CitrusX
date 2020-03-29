@@ -233,6 +233,7 @@ public class Interact_HR : MonoBehaviour
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
+                  
                 }
             }
             else if (hit.transform.tag == "Table")
@@ -295,6 +296,8 @@ public class Interact_HR : MonoBehaviour
                                 //let the table and journal know the items are put down
                                 table.hasBeenPlaced = true;
                                 notificationText.text = "";
+                                journal.ChangeTasks(new string[] { "Solve Puzzle" });
+                              
                             }
                         }
                     }
