@@ -724,7 +724,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Box")
             {
-                notificationText.text = "Press E to open the Box";
+                notificationText.text = "Press E to look inside the box";
                 bool hasBeenOpened = false;
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
