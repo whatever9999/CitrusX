@@ -59,11 +59,11 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         pendant = GameObject.Find("Pendant");
         jewelleryBox = GameObject.Find("Jewellery Box");
         bracelet = GameObject.Find("Bracelet");
-  
-        symbol1 = GameObject.Find("SymbolOfScarcity");
-        symbol2 = GameObject.Find("SymbolOfScarcity 2");
-        symbol3 = GameObject.Find("SymbolOfScarcity 3");
-        symbol4 = GameObject.Find("SymbolOfScarcity 4");
+
+        symbol1 = GameObject.Find("Bathroom Symbol of Scarcity");
+        symbol2 = GameObject.Find("Dining Room Symbol of Scarcity");
+        symbol3 = GameObject.Find("Living Room Symbol of Scarcity");
+        symbol4 = GameObject.Find("Study Symbol of Scarcity");
         #endregion
     }
 

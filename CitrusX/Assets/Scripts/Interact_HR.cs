@@ -91,7 +91,7 @@
  * to remove issues with puzzles being played in the wrong order
  * 
  * Dominique (changes) 31/02/2020
- * Changed text for the throwing box
+ * Changed text for the throwing box and locked doors
  */
 
 /**
@@ -444,8 +444,7 @@ public class Interact_HR : MonoBehaviour
                 }
                 else
                 {
-                    notificationText.text = "How can I unlock this?";
-
+                    notificationText.text = "Locked.";
                 }
             }
             else if (hit.transform.tag == "Paper")

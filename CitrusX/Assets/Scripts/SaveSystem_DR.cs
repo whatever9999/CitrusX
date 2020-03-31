@@ -80,6 +80,11 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform cereal3T;
     internal Transform cereal4T;
 
+    internal Transform scarcity1T;
+    internal Transform scarcity2T;
+    internal Transform scarcity3T;
+    internal Transform scarcity4T;
+
     internal Transform keyHandle1T;
     internal Transform keyHandle2T;
     internal Transform keyHandle3T;
@@ -239,6 +244,11 @@ public class SaveSystem_DR: MonoBehaviour
         cereal2T = GameObject.Find("Cereal2").GetComponent<Transform>();
         cereal3T = GameObject.Find("Cereal3").GetComponent<Transform>();
         cereal4T = GameObject.Find("Cereal4").GetComponent<Transform>();
+
+        scarcity1T = GameObject.Find("Bathroom Symbol of Scarcity").GetComponent<Transform>();
+        scarcity2T = GameObject.Find("Dining Room Symbol of Scarcity").GetComponent<Transform>();
+        scarcity3T = GameObject.Find("Living Room Symbol of Scarcity").GetComponent<Transform>();
+        scarcity4T = GameObject.Find("Study Symbol of Scarcity").GetComponent<Transform>();
 
         keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>();
         keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>();
@@ -598,6 +608,12 @@ public class SaveSystem_DR: MonoBehaviour
         peaches3T.position = new Vector3(GD.peaches3Position[0], GD.peaches3Position[1], GD.peaches3Position[2]);
         peaches3T.rotation = new Quaternion(GD.peaches3Rotation[0], GD.peaches3Rotation[1], GD.peaches3Rotation[2], GD.peaches3Rotation[3]);
 
+        //Symbols of Scarcity
+        scarcity1T.gameObject.SetActive(GD.activeScarcity1);
+        scarcity2T.gameObject.SetActive(GD.activeScarcity2);
+        scarcity3T.gameObject.SetActive(GD.activeScarcity3);
+        scarcity4T.gameObject.SetActive(GD.activeScarcity4);
+
         //KeyPieces
         keyHandle1T.position = new Vector3(GD.keyHandle1TPosition[0], GD.keyHandle1TPosition[1], GD.keyHandle1TPosition[2]);
 
@@ -927,6 +943,13 @@ public class GameData_DR
     internal float[] cereal3Rotation = new float[4];
     internal float[] cereal4Position = new float[3];
     internal float[] cereal4Rotation = new float[4];
+
+    //Symbols of Scarcity
+    internal bool activeScarcity1;
+    internal bool activeScarcity2;
+    internal bool activeScarcity3;
+    internal bool activeScarcity4;
+
     //KeyPieces
     internal float[] keyHandle1TPosition = new float[3];
     internal float[] keyHandle1TRotation = new float[4];
@@ -1421,6 +1444,12 @@ public class GameData_DR
         cereal4Rotation[1] = saveData.cereal4T.rotation.y;
         cereal4Rotation[2] = saveData.cereal4T.rotation.z;
         cereal4Rotation[3] = saveData.cereal4T.rotation.w;
+
+        //Symbols of Scarcity
+        activeScarcity1 = saveData.scarcity1T.gameObject.activeInHierarchy;
+        activeScarcity2 = saveData.scarcity2T.gameObject.activeInHierarchy;
+        activeScarcity3 = saveData.scarcity3T.gameObject.activeInHierarchy;
+        activeScarcity4 = saveData.scarcity4T.gameObject.activeInHierarchy;
 
         //KeyPieces
         keyHandle1TPosition[0] = saveData.keyHandle1T.position.x;
