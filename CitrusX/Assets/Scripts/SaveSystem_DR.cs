@@ -406,7 +406,7 @@ public class SaveSystem_DR: MonoBehaviour
         bf.Serialize(file, gameData);
         file.Close();
 
-        StartCoroutine(NotifyPlayer("Save Complete"));
+        StartCoroutine(NotifyPlayer("Saved"));
     }
 
     private IEnumerator NotifyPlayer(string notification)
@@ -442,17 +442,20 @@ public class SaveSystem_DR: MonoBehaviour
             return;
         }
 
-        //Deserialize the file
-        BinaryFormatter bf = new BinaryFormatter();
-        GameData_DR gameData = (GameData_DR)bf.Deserialize(file);
-        file.Close();
+        if(loaded)
+        {
+            //Deserialize the file
+            BinaryFormatter bf = new BinaryFormatter();
+            GameData_DR gameData = (GameData_DR)bf.Deserialize(file);
+            file.Close();
 
-        //Put file data into variables
-        UpdateVariables(gameData);
+            //Put file data into variables
+            UpdateVariables(gameData);
 
-        loadedGD = gameData;
+            loadedGD = gameData;
 
-        StartCoroutine(NotifyPlayer("Loaded"));
+            StartCoroutine(NotifyPlayer("Loaded"));
+        }
     }
 
     /// <summary>

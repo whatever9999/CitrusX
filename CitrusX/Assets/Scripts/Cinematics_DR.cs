@@ -50,6 +50,7 @@ public class Cinematics_DR : MonoBehaviour
     #region PlayerControl
     private Interact_HR playerInteraction;
     private FirstPersonController playerController;
+    private PauseMenu_AR pauseMenu;
     #endregion
     
 
@@ -77,6 +78,7 @@ public class Cinematics_DR : MonoBehaviour
 
         playerController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         playerInteraction = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
+        pauseMenu = playerController.GetComponent<PauseMenu_AR>();
 
         startCameraAnimator = GameObject.Find("StartCinematicCamera").GetComponent<Animator>();
         endCameraAnimator = GameObject.Find("EndCinematicCamera").GetComponent<Animator>();
@@ -98,6 +100,8 @@ public class Cinematics_DR : MonoBehaviour
         {
             playerInteraction.enabled = false;
             playerController.enabled = false;
+            pauseMenu.enabled = false;
+
             startCameraAnimator.SetTrigger("StartCinematic");
             startCinematic.Play();
         }
@@ -204,6 +208,7 @@ public class Cinematics_DR : MonoBehaviour
         playStartCinematic = false;
         playerController.enabled = true;
         playerInteraction.enabled = true;
+        pauseMenu.enabled = true;
         GameTesting_CW.instance.cutscenes[0] = true;
     }
 }
