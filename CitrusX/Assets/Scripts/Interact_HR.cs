@@ -89,6 +89,9 @@
  * Chase (Changes) 18/3/2020
  * Added link to cinematics for the end puzzle. Also created if barriers for certain objects to ensure they can only be interacted with at the correct moment
  * to remove issues with puzzles being played in the wrong order
+ * 
+ * Dominique (changes) 31/02/2020
+ * Changed text for the throwing box
  */
 
 /**
@@ -724,7 +727,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Box")
             {
-                notificationText.text = "Press E to open the Box";
+                notificationText.text = "Press E to look inside the Box";
                 bool hasBeenOpened = false;
 
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
