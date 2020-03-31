@@ -36,7 +36,7 @@ public class SaveSystem_DR: MonoBehaviour
 
     private Text saveNotificationText;
     internal GameData_DR loadedGD;
-    internal bool loaded;
+    internal bool loaded = false;
 
     #region TransformsAndActiveStates
     internal Transform playerT;
@@ -421,9 +421,9 @@ public class SaveSystem_DR: MonoBehaviour
     /// </summary>
     public void Load()
     {
-       //Load data path
+        //Load data path
 #if UNITY_EDITOR
-       string path = Application.dataPath + "/save.dat";
+        string path = Application.dataPath + "/save.dat";
 #else
        string path = Application.persistentDataPath + "/save.dat";
 #endif

@@ -18,6 +18,7 @@
 * \date Last Modified: 18/02/2020
 */
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class PauseMenu_AR : MonoBehaviour
@@ -65,5 +66,10 @@ public class PauseMenu_AR : MonoBehaviour
                 waterBowl.enabled = false;
             }
         }
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene(1);
     }
 }
