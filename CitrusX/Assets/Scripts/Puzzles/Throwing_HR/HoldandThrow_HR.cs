@@ -17,6 +17,9 @@
  * 
  * Dominique (Changes) 25/03/2020
  * Ensured that objects stay centrered when held
+ * 
+ * Dominique (Changes) 01/04/2020
+ * Added raycasting for polish - if items collide while held they don't blend into other colliders
  */
 
 /**
@@ -31,19 +34,21 @@
 * 
 * \author Hugo
 * 
-* \date Last Modified: 25/03/2020
+* \date Last Modified: 01/04/2020
 */
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HoldandThrow_HR : MonoBehaviour
 {
-    public float minDistanceToPickup = 1;
+    public float minDistanceToPickup = 5;
     public bool canHold = true;
     public float throwForce = 600;
 
     private Rigidbody RB;
-    private Transform holdPosition;
+    private Transform player;
+    private Transform holdGuide;
 
     private bool beingHeld = false;
     internal bool isFirstTime = false;
@@ -52,15 +57,22 @@ public class HoldandThrow_HR : MonoBehaviour
     private const float timeToMoveBeforeStop = 2;
     private float currentTimeMoving;
 
+    private const int throwableMask = ~(1 << 9);
+    private float rayRange;
+    private const float addToCollidingObjectsYPositions = 0.1f;
+
     /// <summary>
     /// Initialise variables
     /// </summary>
     void Awake()
     {
         RB = GetComponent<Rigidbody>();
-        holdPosition = GameObject.Find("HoldGuide").transform;
-        subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        holdGuide = GameObject.Find("HoldGuide").transform;
+        player = GameObject.Find("FirstPersonCharacter").transform;
+        subtitles = player.GetComponent<Subtitles_HR>();
         idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
+
+        rayRange = holdGuide.localPosition.z;
     }
     /// <summary>
     /// Drop the object if the player is too far from it or throws it (also add force to it in the forward direction if this is the case)
@@ -70,10 +82,10 @@ public class HoldandThrow_HR : MonoBehaviour
         if (beingHeld)
         {
             //Make sure the object stays in the centre of the players vision
-            transform.localPosition = Vector3.zero; 
+            CheckItemPosition();
 
             //If the player gets too far from the object he is holding drop it (In case it gets stuck)
-            float distance = Vector3.Distance(transform.position, holdPosition.position);
+            float distance = Vector3.Distance(transform.position, player.position);
             if (distance >= minDistanceToPickup)
             {
                 Drop();
@@ -81,7 +93,7 @@ public class HoldandThrow_HR : MonoBehaviour
             //if right click then throw object
             else if (Input.GetMouseButtonDown(1))
             {
-                RB.AddForce(holdPosition.forward * throwForce);
+                RB.AddForce(player.forward * throwForce);
                 Drop();
             }
         } else
@@ -114,13 +126,14 @@ public class HoldandThrow_HR : MonoBehaviour
         
         beingHeld = true;
 
-        transform.SetParent(holdPosition);
+        transform.SetParent(player);
 
         transform.localPosition = Vector3.zero;
 
         RB.useGravity = false;
         RB.velocity = Vector3.zero;
         RB.angularVelocity = Vector3.zero;
+        RB.freezeRotation = true;
     }
 
     /// <summary>
@@ -134,6 +147,7 @@ public class HoldandThrow_HR : MonoBehaviour
         transform.SetParent(null);
 
         RB.useGravity = true;
+        RB.freezeRotation = false;
     }
 
     /// <summary>
@@ -141,7 +155,7 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        float distance = Vector3.Distance(transform.position, holdPosition.position);
+        float distance = Vector3.Distance(transform.position, holdGuide.position);
         //if the player is near the object
         if (distance <= minDistanceToPickup)
         {
@@ -161,5 +175,21 @@ public class HoldandThrow_HR : MonoBehaviour
     {
         //release the object
         Drop();
+    }
+
+    /// <summary>
+    /// If items are colliding they move to the hit point while they'll be in the centre of the player's view otherwise
+    /// </summary>
+    private void CheckItemPosition()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(player.position, player.forward, out hit, rayRange, throwableMask))
+        {
+            Vector3 newPosition = new Vector3(hit.point.x, hit.point.y + addToCollidingObjectsYPositions, hit.point.z);
+            transform.position = newPosition;
+        } else
+        {
+            transform.position = holdGuide.position;
+        }
     }
 }

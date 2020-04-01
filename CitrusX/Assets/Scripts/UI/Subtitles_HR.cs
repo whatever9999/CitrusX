@@ -129,6 +129,9 @@ public class Subtitles_HR : MonoBehaviour
     private ID currentGoodCutsceneSubtitle;
     private ID currentBadCutsceneSubtitle;
 
+    private Coroutine currentCoroutine;
+    private bool coroutineRunning = false;
+
     /// <summary>
     /// Initialise variables
     /// </summary>
@@ -162,7 +165,14 @@ public class Subtitles_HR : MonoBehaviour
             }
         }
         voiceSource.Play();
-        StartCoroutine(SubtitleReset(voiceSource.clip.length));
+
+        //If the coroutine for resetting the subtitles is already running stop it before this subtitle plays (for overlapped subtitles)
+        if(coroutineRunning)
+        {
+            StopCoroutine(currentCoroutine);
+            coroutineRunning = false;
+        }
+        currentCoroutine = StartCoroutine(SubtitleReset(voiceSource.clip.length));
     }
 
     /// <summary>
@@ -172,8 +182,10 @@ public class Subtitles_HR : MonoBehaviour
     /// <returns></returns>
     IEnumerator SubtitleReset(float timeToWait)
     {
+        coroutineRunning = true;
         yield return new WaitForSeconds(timeToWait);
         subtitleText.text = "";
+        coroutineRunning = false;
     }
 
     //Set lines for cutscenes
