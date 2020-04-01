@@ -17,6 +17,9 @@
  * 
  * Dominique 04/03/2020
  * Changed the timer a bit so that once it reaches zero it uses LoadSceneByIndex
+ * 
+ * Dominique 01/04/2020
+ * Added start new and load options
  */
 
 /**
@@ -31,34 +34,51 @@
 * 
 * \author Alex
 * 
-* \date Last Modified: 04/03/2020
+* \date Last Modified: 01/04/2020
 */
 
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class UIManager_AR : MonoBehaviour
 {
-    public float Timer = 3;
-    public bool TimerStart = false;
+    private GameObject loadGameGO;
+    private Text notificationText;
 
-    private void Update()
+    private void Awake()
     {
-        if (TimerStart == true)
-        {
-            Timer -= Time.deltaTime;
+        loadGameGO = GameObject.Find("LoadGameButton");
+        notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
+    }
 
-            if (Timer <= 0)
-            {
-                LoadByIndex(3);
-            }
+    private void Start()
+    {
+        if(CheckIfSave())
+        {
+            loadGameGO.SetActive(true);
+        } else
+        {
+            loadGameGO.SetActive(false);
         }
     }
 
-    public void LoadByIndex(int sceneIndex)
+    public void StartNewGameButton()
     {
-        SceneManager.LoadScene(sceneIndex);
+        DeleteFile();
+        LoadGameButton();
+    }
+
+    public void LoadGameButton()
+    {
+        notificationText.text = "Loading...";
+        LoadByIndex(3);
+    }
+
+    public void OptionsButton()
+    {
+        LoadByIndex(1);
     }
 
     public void QuitButton()
@@ -66,9 +86,48 @@ public class UIManager_AR : MonoBehaviour
         Application.Quit();
     }
 
-    public void PLayAnimation()
+    private void LoadByIndex(int sceneIndex)
     {
-        Camera.main.GetComponent<Animator>().SetBool("Play", true);
-        TimerStart = true;
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    public bool CheckIfSave()
+    {
+        //Load data path
+#if UNITY_EDITOR
+        string path = Application.dataPath + "/save.dat";
+#else
+       string path = Application.persistentDataPath + "/save.dat";
+#endif
+        //If the file exists then return true
+        if (File.Exists(path))
+        {
+            return true;
+        }
+        else
+        {
+            //No save file available
+            return false;
+        }
+    }
+
+    public void DeleteFile()
+    {
+        //Load data path
+#if UNITY_EDITOR
+        string path = Application.dataPath + "/save.dat";
+#else
+       string path = Application.persistentDataPath + "/save.dat";
+#endif
+        //If the file exists then return true
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+        else
+        {
+            //No save file available
+            Debug.LogError("Trying to delete a save file when there isn't one");
+        }
     }
 }

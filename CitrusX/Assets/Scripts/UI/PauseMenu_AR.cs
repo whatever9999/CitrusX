@@ -33,13 +33,11 @@ public class PauseMenu_AR : MonoBehaviour
     /// <summary>
     /// Initialise variables
     /// </summary>
-    void Start()
+    void Awake()
     {
-        pauseMenu = GameObject.Find("PauseMenu");
-        pauseMenu.SetActive(false);
-
         firstPersonController = gameObject.GetComponent<FirstPersonController>();
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
+        pauseMenu = GameObject.Find("PauseMenu");
     }
     
     /// <summary>

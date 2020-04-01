@@ -41,6 +41,7 @@ public class Cinematics_DR : MonoBehaviour
     private GameObject cutsceneCoins;
     private Image blackScreen;
     private GameObject creditScreen;
+    private GameObject pauseMenuUI;
     #endregion
     #region Cinematics
     private PlayableDirector startCinematic;
@@ -79,6 +80,7 @@ public class Cinematics_DR : MonoBehaviour
         playerController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         playerInteraction = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
         pauseMenu = playerController.GetComponent<PauseMenu_AR>();
+        pauseMenuUI = GameObject.Find("PauseMenu");
 
         startCameraAnimator = GameObject.Find("StartCinematicCamera").GetComponent<Animator>();
         endCameraAnimator = GameObject.Find("EndCinematicCamera").GetComponent<Animator>();
@@ -96,7 +98,8 @@ public class Cinematics_DR : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if(playStartCinematic)
+        pauseMenuUI.SetActive(false);
+        if (playStartCinematic)
         {
             playerInteraction.enabled = false;
             playerController.enabled = false;
