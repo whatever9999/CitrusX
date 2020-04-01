@@ -25,6 +25,7 @@ TagManager:
   - Pawn
   - SymbolOfScarcity
   - Weight
+  - StuckCan
   layers:
   - Default
   - TransparentFX

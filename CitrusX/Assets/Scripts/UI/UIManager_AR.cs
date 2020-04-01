@@ -126,8 +126,7 @@ public class UIManager_AR : MonoBehaviour
         }
         else
         {
-            //No save file available
-            Debug.LogError("Trying to delete a save file when there isn't one");
+            //Starting a game for the first time
         }
     }
 }

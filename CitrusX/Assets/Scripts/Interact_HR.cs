@@ -139,7 +139,7 @@ public class Interact_HR : MonoBehaviour
     private Camera playerCamera;
     [HideInInspector]
     public int numberCoinsCollected;
-    private GameObject correctOrderUI;
+    private CorrectOrder_CW correctOrderUI;
     private Inventory_HR inventoryManager;
     private WaterBowl_DR waterBowl;
     private Subtitles_HR subtitles;
@@ -170,7 +170,7 @@ public class Interact_HR : MonoBehaviour
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
         journal = Journal_DR.instance;
         playerCamera = GetComponent<Camera>();
-        correctOrderUI = GameObject.Find("CorrectOrderUI");
+        correctOrderUI = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
         waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
         colourMatch = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();
         subtitles = GetComponent<Subtitles_HR>();
@@ -719,7 +719,7 @@ public class Interact_HR : MonoBehaviour
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                         journal.TickOffTask("Find a way out");
                         journal.ChangeTasks(new string[] { "Solve puzzle" });
-                        correctOrderUI.GetComponent<CorrectOrder_CW>().OpenPC();
+                        correctOrderUI.OpenPC();
                     }
                 }
               
@@ -828,6 +828,9 @@ public class Interact_HR : MonoBehaviour
                     idleVos.interactedWith = false;
                     subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
                 }
+            } else if(hit.transform.tag == "StuckCan")
+            {
+                notificationText.text = "What the..? It's stuck";
             }
             else
             {
