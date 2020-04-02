@@ -92,6 +92,10 @@
  * 
  * Dominique (changes) 31/02/2020
  * Changed text for the throwing box and locked doors
+ * 
+ * Chase (Changes) 2/4/2020
+ * Added to the paper section for the hidden mech clue and removed the painting section. Fleshed out the book section for the new version
+ * of hidden mech
  */
 
 /**
@@ -521,8 +525,18 @@ public class Interact_HR : MonoBehaviour
                         journal.TickOffTask("Find clue");
                         journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
                         journal.ChangeTasks(new string[] { "Solve the password" });
-;                    }
-                   
+;                   }
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
+                    {
+                        //lalalalalal ooooo note on books
+                        journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
+                        journal.TickOffTask("Find a clue");
+                        journal.ChangeTasks(new string[] { "Solve riddle" });
+                        hiddenMech.clueRead = true;
+                        paperItem.hasBeenRead = true;
+                    }
+
+
                     #endregion
                 }
             }
@@ -748,30 +762,6 @@ public class Interact_HR : MonoBehaviour
                 }
 
             }
-            else if (hit.transform.tag == "Painting")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[6])
-                {
-                    notificationText.text = "Press E to look at the Painting";
-                    bool hasBeenInteracted = false;
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                    {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        if (!hasBeenInteracted)
-                        {
-                            
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE5);
-                            journal.TickOffTask("Find clue");
-                            journal.AddJournalLog("I need to find the red accounting book.");
-                            journal.ChangeTasks(new string[] { "Find correct book" });
-                            hasBeenInteracted = true;
-                        }
-                    }
-                }
-               
-            }
             else if (hit.transform.tag == "Book")
             {
                 if(GameTesting_CW.instance.arePuzzlesDone[6])
@@ -783,14 +773,42 @@ public class Interact_HR : MonoBehaviour
                     {
                         idleVos.interactedWith = true;
                         idleVos.interactedWith = false;
-                        if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
+                        if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK && hiddenMech.steps[3])
                         {
                             //SOUND HERE for MOVING BOOK
-                            journal.TickOffTask("Read Book");
+                            journal.TickOffTask("Solve riddle");
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
                             journal.ChangeTasks(new string[] { "Read note" });
                             hiddenMech.complete = true;
                             GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                        }
+                        else if(book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
+                        {
+                            //line here lalalalallala
+                            hiddenMech.steps[0] = true;
+                        }
+                        else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
+                        {
+                            //line here lalalalallala
+                            hiddenMech.steps[1] = true;
+                        }
+                        else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
+                        {
+                            //line here lalalalallala
+                            hiddenMech.steps[2] = true;
+                        }
+                        else if (book.type == Book_CW.BOOK_TYPE.ANGRY && !hiddenMech.steps[3] && hiddenMech.clueRead)
+                        {
+                            //line here lalalalallala
+                            hiddenMech.steps[3] = true;
+                        }
+                        else if (book.type == Book_CW.BOOK_TYPE.DEFAULT && !hiddenMech.steps[4] && hiddenMech.clueRead)
+                        {
+                            //line here lalalalallala oh no start again
+                            hiddenMech.steps[0] = false;
+                            hiddenMech.steps[1] = false;
+                            hiddenMech.steps[2] = false;
+                            hiddenMech.steps[3] = false;
                         }
 
                     }

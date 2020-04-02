@@ -129,7 +129,7 @@ public class TriggerScript_CW : MonoBehaviour
             journal.TickOffTask("Check out library");
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
             journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
-            journal.ChangeTasks(new string[] { "Find clue" });
+            journal.ChangeTasks(new string[] { "Find a clue" });
            
             allowedToBeUsed = false;
         }
