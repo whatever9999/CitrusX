@@ -39,7 +39,8 @@ public class Paper_DR : MonoBehaviour
         DEATH_CERTIFICATE,
         CORRECT_ORDER_ARTICLE,
         RITUAL_ARTICLE,
-        COLOUR_MATCH_CLUE
+        COLOUR_MATCH_CLUE,
+        HIDDEN_MECH_CLUE
     };
     public NOTE_NAME nameOfNote;
     public bool hasBeenRead = false;

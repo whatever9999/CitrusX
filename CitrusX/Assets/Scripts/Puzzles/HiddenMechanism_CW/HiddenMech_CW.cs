@@ -24,6 +24,8 @@ public class HiddenMech_CW : MonoBehaviour
     public Door_DR door;
     internal bool isActive = false;
     internal bool complete = false;
+    internal bool clueRead = false;
+    internal bool[] steps = { false, false, false, false, false };
     public void SetActive(bool value) { isActive = value; }
 
     private void Update()

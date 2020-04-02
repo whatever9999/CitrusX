@@ -17,7 +17,13 @@ public class Book_CW : MonoBehaviour
 {
     public enum BOOK_TYPE
     {
-        HIDDEN_MECH_BOOK
+        HIDDEN_MECH_BOOK,
+        BLUE_BOOK,
+        FOURTH_EAST,
+        TWO_NW,
+        ANGRY,
+        DEFAULT
     };
     public BOOK_TYPE type;
+    
 }
