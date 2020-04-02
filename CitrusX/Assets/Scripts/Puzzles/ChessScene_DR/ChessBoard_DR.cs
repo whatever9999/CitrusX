@@ -82,6 +82,7 @@ public class ChessBoard_DR : MonoBehaviour
 
         if (inPosition)
         {
+            //SOUND HERE a CLICK to signify completion
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
             chessTrigger.allowedToBeUsed = true;
             journal.TickOffTask("Solve Puzzle");

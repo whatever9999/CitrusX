@@ -67,19 +67,20 @@ public class TriggerScript_CW : MonoBehaviour
     {
         if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
         {
+            //SOUND HERE for LARGE BOX FALLING (or another loud noise, just something distracting)
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
             allowedToBeUsed = false;
         }
         if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
         {
-            if(GameTesting_CW.instance.arePuzzlesDone[1])
+            if(GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
             {
                 journal.TickOffTask("Return to ritual");
                 subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
-            else if(GameTesting_CW.instance.arePuzzlesDone[2])
+            else if(GameTesting_CW.instance.arePuzzlesDone[2] && !GameTesting_CW.instance.arePuzzlesDone[3])
             {
                 journal.TickOffTask("Return to ritual");
                 subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE1);

@@ -98,7 +98,7 @@ internal class Fusebox_CW : MonoBehaviour
         journal.AddJournalLog("It’s disconnected? I’m sure I can sort this out.");
         journal.TickOffTask("Check fusebox");
         journal.ChangeTasks(new string[] { "Fix fusebox" });
-
+        //SOUND HERE DOOR OPENING
         //Stop the player from moving while using the fusebox
         fpsController.enabled = false;
     }
@@ -128,6 +128,7 @@ internal class Fusebox_CW : MonoBehaviour
         if (complete)
         {
             isFuseboxSolved = true;
+            //SOUND HERE big ELECTRIC SOUND
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
             journal.ChangeTasks(new string[] { "Return to ritual" });
@@ -164,7 +165,7 @@ internal class Fusebox_CW : MonoBehaviour
         //Make the cursor invisible again
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        //SOUND HERE DOOR CLOSING
         //Let the player move again
         fpsController.enabled = true;
 

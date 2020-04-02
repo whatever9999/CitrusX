@@ -60,6 +60,7 @@ public class CandleScript_AG : MonoBehaviour
             flames[i].Stop();
         }
         subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
+        //SOUND HERE - BLOW
        // blackout.GetComponent<Image>().color = blackOutColour;
         player.EndGameCheck();
     }

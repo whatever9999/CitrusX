@@ -15,6 +15,7 @@ public class ChessPiece_DR : MonoBehaviour
     public void Rotate()
     {
         transform.Rotate(0, 0, 90);
+        //SOUND HERE a SHFFFT sound (like the one used for boxes maybe?)
 
         switch (currentPosition)
         {

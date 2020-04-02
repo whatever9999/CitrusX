@@ -230,6 +230,7 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
+                    //SOUND PICK UP
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
@@ -258,6 +259,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                //SOUND HERE for PLACE ITEMS
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
@@ -277,6 +279,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                //SOUND HERE for PLACE ITEMS
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
@@ -295,6 +298,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
+                                //SOUND HERE for PLACING PAWN
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 putDownScript.PutItemsDown();
@@ -464,6 +468,7 @@ public class Interact_HR : MonoBehaviour
                     paperText.fontSize = paperItem.textSize;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
+                    //SOUND HERE like PAPER/PAGE TURNING
                     //if note is in the safe, let safe know
                     #region PAPER_TYPES_VOICEOVERS
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )
@@ -721,7 +726,7 @@ public class Interact_HR : MonoBehaviour
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                         journal.TickOffTask("Find a way out");
                         journal.ChangeTasks(new string[] { "Solve puzzle" });
-                        correctOrderUI.OpenPC();
+                        correctOrderUI.enabled = true;
                     }
                 }
               
@@ -764,7 +769,7 @@ public class Interact_HR : MonoBehaviour
                         idleVos.interactedWith = false;
                         if (!hasBeenInteracted)
                         {
-                            //play box anim
+                            
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE5);
                             journal.TickOffTask("Find clue");
                             journal.AddJournalLog("I need to find the red accounting book.");
@@ -788,6 +793,7 @@ public class Interact_HR : MonoBehaviour
                         idleVos.interactedWith = false;
                         if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                         {
+                            //SOUND HERE for MOVING BOOK
                             journal.TickOffTask("Find correct book");
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
                             journal.ChangeTasks(new string[] { "Read note" });

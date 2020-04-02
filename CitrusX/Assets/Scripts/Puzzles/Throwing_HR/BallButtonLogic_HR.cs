@@ -76,6 +76,7 @@ public class BallButtonLogic_HR : MonoBehaviour
             }
             #endregion
             Destroy(collision.gameObject);
+            //SOUND HERE for BALL hitting
 
             if (puzzleScript.ballCounter == ballsRequired)
             {

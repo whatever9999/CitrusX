@@ -69,6 +69,7 @@ public class WaterBowl_DR : MonoBehaviour
             coins[coins.Count - 1].SetActive(false);
             coins.RemoveAt(coins.Count - 1);
             coinWasRemoved = true;
+            //SOUND HERE WATER
         }
 
         return coinWasRemoved;

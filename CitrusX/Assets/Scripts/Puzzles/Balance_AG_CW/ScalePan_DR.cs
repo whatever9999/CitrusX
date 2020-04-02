@@ -34,6 +34,7 @@ public class ScalePan_DR : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         collision.transform.parent = transform;
+        //SOUND ITEM BEING PLACED
         scales.ComparePans();
 
     }

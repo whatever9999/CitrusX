@@ -3,6 +3,8 @@
  * 
  * Chase (Changes) 11/3/2020
  * Added a whichRound array of bools to progress through varying rounds
+ * Chase (Changes) 2/4/2020
+ * Commented in sounds for Dominique and changed where correct order stems from
  */
 
 /**
@@ -32,6 +34,8 @@ public class CorrectOrder_CW : MonoBehaviour
     private Subtitles_HR subtitles;
     internal bool[] whichRound = { true, false, false };
     public Door_DR correctOrderDoor;
+    private GameObject correctOrderScreen;
+    private GameObject PC;
 
     #endregion
 
@@ -46,6 +50,8 @@ public class CorrectOrder_CW : MonoBehaviour
         correctOrderText = GameObject.Find("Correct Order Message Text").GetComponent<Text>();
         completionText = GameObject.Find("Completion Text").GetComponent<Text>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        correctOrderScreen = GameObject.Find("CorrectOrderUI");
+        PC = GameObject.Find("Correct Order PC");
 
     }
     /// <summary>
@@ -55,11 +61,17 @@ public class CorrectOrder_CW : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        gameObject.SetActive(false);
+        correctOrderScreen.SetActive(false);
     }
     /// <summary>
     /// Update checks to see player is trying to close the box
     /// </summary>
+
+    private void OnEnable()
+    {
+        //SOUND HERE electronic sound
+        OpenPC();
+    }
     private void Update()
     {
         CheckForClose();
@@ -72,11 +84,7 @@ public class CorrectOrder_CW : MonoBehaviour
         //Make the cursor useable for solving the puzzle
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        gameObject.SetActive(true);
-
-
-
+        correctOrderScreen.SetActive(true);
         fpsController.enabled = false;
     }
     /// <summary>
@@ -100,13 +108,14 @@ public class CorrectOrder_CW : MonoBehaviour
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE6);
         }
        
-        gameObject.tag = "PC";
+        PC.tag = "PC";
 
         //Make the cursor invisible again
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        gameObject.SetActive(false);
+        correctOrderScreen.SetActive(false);
+        //SOUND HERE electronic sound
 
         //Let the player move again
         fpsController.enabled = true;
@@ -137,12 +146,14 @@ public class CorrectOrder_CW : MonoBehaviour
                         {
                             whichRound[1] = true;
                             whichRound[0] = false;
+                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
                             completionText.text = "ROUND 1 CORRECT";
                         }
                         else if(whichRound[1])
                         {
                             whichRound[2] = true;
                             whichRound[1] = false;
+                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
                             completionText.text = "ROUND 2 CORRECT";
                         }
                         else if(whichRound[2])
@@ -151,6 +162,7 @@ public class CorrectOrder_CW : MonoBehaviour
                             completionText.text = "PUZZLE SOLVED";
                             correctOrderDoor.unlocked = true;
                             correctOrderDoor.ToggleOpen();
+                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
                             GameTesting_CW.instance.arePuzzlesDone[8] = true;
                             journal.AddJournalLog("This is too much, I need to finish this now.");
                             journal.TickOffTask("Solve puzzle");
