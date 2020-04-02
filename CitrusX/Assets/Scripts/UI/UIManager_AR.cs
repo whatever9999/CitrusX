@@ -20,6 +20,9 @@
  * 
  * Dominique 01/04/2020
  * Added start new and load options
+ * 
+ * Dominique 02/04/2020
+ * Added loading text animation (only shows in builds), start game animation, lightning effect and added settings to same scene as main
  */
 
 /**
@@ -34,9 +37,10 @@
 * 
 * \author Alex
 * 
-* \date Last Modified: 01/04/2020
+* \date Last Modified: 02/04/2020
 */
 
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -44,13 +48,39 @@ using UnityEngine.UI;
 
 public class UIManager_AR : MonoBehaviour
 {
+    private enum Scenes
+    {
+        START,
+        MENU,
+        GAME
+    }
+
+    public Vector2 lightningTimerRange = new Vector2(5, 10);
+    public Vector3 lightningLightIntensity = new Vector3(0.5f, 5, 10);
+    private float currentLightningTimer = 0;
+    private float lightningTimer = 0;
+    private AudioSource lightningCrack;
+    private bool lightningHappening;
+
     private GameObject loadGameGO;
     private Text notificationText;
+    private const float secondPerLoadingTextChange = 0.2f;
+    private Animator cameraAnimator;
+    private Light sceneLight;
+
+    private GameObject menuUI;
+    private GameObject optionsUI;
 
     private void Awake()
     {
+        cameraAnimator = Camera.main.GetComponent<Animator>();
         loadGameGO = GameObject.Find("LoadGameButton");
         notificationText = GameObject.Find("NotificationText").GetComponent<Text>();
+        sceneLight = GameObject.Find("Directional Light").GetComponent<Light>();
+        lightningCrack = sceneLight.GetComponent<AudioSource>();
+        menuUI = GameObject.Find("MainMenu");
+        optionsUI = GameObject.Find("OptionsMenu");
+        optionsUI.SetActive(false);
     }
 
     private void Start()
@@ -62,6 +92,27 @@ public class UIManager_AR : MonoBehaviour
         {
             loadGameGO.SetActive(false);
         }
+
+        StartCoroutine(BeginningLightning());
+
+        NewLightningTimer();
+    }
+
+    private IEnumerator BeginningLightning()
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(LightningFlash());
+    }
+
+    private void Update()
+    {
+        lightningTimer += Time.deltaTime;
+        if(lightningTimer >= currentLightningTimer)
+        {
+            StartCoroutine(LightningFlash());
+            lightningTimer = 0;
+            NewLightningTimer();
+        }
     }
 
     public void StartNewGameButton()
@@ -72,13 +123,19 @@ public class UIManager_AR : MonoBehaviour
 
     public void LoadGameButton()
     {
-        notificationText.text = "Loading...";
-        LoadByIndex(3);
+        StartCoroutine(LoadGame((int)Scenes.GAME));
     }
 
     public void OptionsButton()
     {
-        LoadByIndex(1);
+        menuUI.SetActive(false);
+        optionsUI.SetActive(true);
+    }
+
+    public void BackButton()
+    {
+        optionsUI.SetActive(false);
+        menuUI.SetActive(true);
     }
 
     public void QuitButton()
@@ -86,9 +143,47 @@ public class UIManager_AR : MonoBehaviour
         Application.Quit();
     }
 
-    private void LoadByIndex(int sceneIndex)
+    private void NewLightningTimer()
     {
-        SceneManager.LoadScene(sceneIndex);
+        currentLightningTimer = Random.Range(lightningTimerRange[0], lightningTimerRange[1]);
+    }
+
+    private IEnumerator LightningFlash()
+    {
+        if(!lightningHappening)
+        {
+            lightningHappening = true;
+            float timeBetweenLightChange = lightningCrack.time / 3;
+            lightningCrack.Play();
+            sceneLight.intensity = lightningLightIntensity[1];
+            yield return new WaitForSeconds(timeBetweenLightChange);
+            sceneLight.intensity = lightningLightIntensity[2];
+            yield return new WaitForSeconds(timeBetweenLightChange);
+            sceneLight.intensity = lightningLightIntensity[1];
+            yield return new WaitForSeconds(timeBetweenLightChange);
+            sceneLight.intensity = lightningLightIntensity[0];
+            lightningHappening = false;
+        }
+    }
+
+    private IEnumerator LoadGame(int sceneIndex)
+    {
+        cameraAnimator.SetTrigger("Play");
+        yield return new WaitForSeconds(cameraAnimator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(cameraAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
+        while (!asyncLoad.isDone)
+        {
+            notificationText.text = "Loading";
+            yield return new WaitForSeconds(secondPerLoadingTextChange);
+            notificationText.text = "Loading.";
+            yield return new WaitForSeconds(secondPerLoadingTextChange);
+            notificationText.text = "Loading..";
+            yield return new WaitForSeconds(secondPerLoadingTextChange);
+            notificationText.text = "Loading...";
+            yield return new WaitForSeconds(secondPerLoadingTextChange);
+        }
     }
 
     public bool CheckIfSave()
