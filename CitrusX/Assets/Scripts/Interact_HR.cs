@@ -492,7 +492,7 @@ public class Interact_HR : MonoBehaviour
                         }
                         
                     }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead && !paperIsClosed)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
                         journal.AddJournalLog("The Baron seems to have ruined a lot of people’s lives…");
@@ -500,30 +500,22 @@ public class Interact_HR : MonoBehaviour
                         journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead && !paperIsClosed)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
                         journal.AddJournalLog("A photograph of a family…the Baron’s family.");
                         journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead &&!paperIsClosed)
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
-                        GameTesting_CW.instance.arePuzzlesDone[7] = true;
                         journal.AddJournalLog("The baron reached a grizzly death it appears.");
                         journal.TickOffTask("Read note");
                         journal.ChangeTasks(new string[] { "Return to ritual" });
                         paperItem.hasBeenRead = true;
                     }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && paperIsClosed)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE8);
-                    }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && paperIsClosed)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE7);
-                    }
+         
                     else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
                     {
                         journal.TickOffTask("Find clue");
@@ -726,7 +718,7 @@ public class Interact_HR : MonoBehaviour
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                         journal.TickOffTask("Find a way out");
                         journal.ChangeTasks(new string[] { "Solve puzzle" });
-                        correctOrderUI.enabled = true;
+                        correctOrderUI.OpenPC(); 
                     }
                 }
               
@@ -744,7 +736,7 @@ public class Interact_HR : MonoBehaviour
                     {
                         //play box anim
                         subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
-                        journal.ChangeTasks(new string[] { "Look at photo" });
+                        journal.ChangeTasks(new string[] { "Return to ritual" });
                         hasBeenOpened = true;
                     }
                     else if (hasBeenOpened)
@@ -794,7 +786,7 @@ public class Interact_HR : MonoBehaviour
                         if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK)
                         {
                             //SOUND HERE for MOVING BOOK
-                            journal.TickOffTask("Find correct book");
+                            journal.TickOffTask("Read Book");
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
                             journal.ChangeTasks(new string[] { "Read note" });
                             hiddenMech.complete = true;

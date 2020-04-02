@@ -58,7 +58,7 @@ public class IdleVoiceover_CW : MonoBehaviour
     IEnumerator IdleLine()
     {
         completeLoop = true;
-        yield return new WaitForSeconds(120);
+        yield return new WaitForSeconds(300);
         switch (vos)
         {
             case VOICEOVERS.QUICK:

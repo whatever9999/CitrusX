@@ -101,7 +101,7 @@ public class TriggerScript_CW : MonoBehaviour
             {
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
-                journal.TickOffTask("Check study");
+                journal.TickOffTask("Check out library");
                 journal.AddJournalLog("This book might have some information");
                 journal.ChangeTasks(new string[] { "Read book" });
                 subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);

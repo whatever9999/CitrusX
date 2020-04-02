@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -383,10 +383,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f0270000
+      scrollPos: {x: 0, y: 148}
+      m_SelectedIDs: 10290000
       m_LastClickedID: 0
-      m_ExpandedIDs: 8cfbffff
+      m_ExpandedIDs: a2a2feff32cffeff7e28ffff7ea1ffff6afbffff345c0100da5d0100367c0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 23.871696, y: 3.1054356, z: 24.600046}
+    m_Target: {x: 475, y: 267, z: 0}
     speed: 2
-    m_Value: {x: 23.871696, y: 3.1054356, z: 24.600046}
+    m_Value: {x: 475, y: 267, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -479,11 +479,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.119554035, y: -0.054028492, z: 0.0064511695, w: -0.99140495}
     speed: 2
-    m_Value: {x: -0.119555354, y: -0.052537713, z: 0.0062714, w: -0.9914167}
+    m_Value: {x: -0.11954581, y: -0.054024775, z: 0.0064507257, w: -0.99133676}
   m_Size:
-    m_Target: 0.70690364
+    m_Target: 1302.7251
     speed: 2
-    m_Value: 0.70690364
+    m_Value: 1302.7251
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -572,20 +572,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/GameState
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/GameState
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Chase\Documents\GitHub\CitrusX\CitrusX
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 676}
-    m_SelectedIDs: c0440000
-    m_LastClickedID: 17600
-    m_ExpandedIDs: 00000000042d0000562e0000d830000044310000a6310000be370000023a00005c3a0000003b0000183c0000c03c0000f43d000072410000064200009e450000cc450000c2490000984e0000acac0000aeac0000b0ac0000b2ac0000b4ac0000b6ac0000b8ac0000baac0000bcac0000beac0000c0ac0000c2ac0000c4ac0000c6ac0000c8ac0000caac0000ccac0000ceac0000d0ac0000d2ac0000d4ac0000d6ac0000d8ac0000daac0000dcac0000deac000000ca9a3b
+    scrollPos: {x: 0, y: 616}
+    m_SelectedIDs: ec3c0000
+    m_LastClickedID: 15596
+    m_ExpandedIDs: 00000000302d0000822e00000431000070310000d2310000ea3700002e3a0000883a00002c3b0000443c0000ec3c0000203e00009e41000032420000ca450000f8450000ee490000c44e0000d2ac0000d4ac0000d6ac0000d8ac0000daac0000dcac0000deac0000e0ac0000e2ac0000e4ac0000e6ac0000e8ac0000eaac0000ecac0000eeac0000f0ac0000f2ac0000f4ac0000f6ac0000f8ac0000faac0000fcac0000feac000000ad000002ad000004ad000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -613,7 +613,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000042d0000562e0000d830000044310000a6310000be370000023a00005c3a0000003b0000183c0000c03c0000f43d000072410000064200009e450000cc450000c2490000984e0000acac0000aeac0000b0ac0000b2ac0000b4ac0000b6ac0000b8ac0000baac0000bcac0000beac0000c0ac0000c2ac0000c4ac0000c6ac0000c8ac0000caac0000ccac0000ceac0000d0ac0000d2ac0000d4ac0000d6ac0000d8ac0000daac0000dcac0000deac0000
+    m_ExpandedIDs: 00000000302d0000822e00000431000070310000d2310000ea3700002e3a0000883a00002c3b0000443c0000ec3c0000203e00009e41000032420000ca450000f8450000ee490000c44e0000d2ac0000d4ac0000d6ac0000d8ac0000daac0000dcac0000deac0000e0ac0000e2ac0000e4ac0000e6ac0000e8ac0000eaac0000ecac0000eeac0000f0ac0000f2ac0000f4ac0000f6ac0000f8ac0000faac0000fcac0000feac000000ad000002ad000004ad0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
