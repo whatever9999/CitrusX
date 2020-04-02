@@ -220,8 +220,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     }
     public void InitiateThrowingPuzzle()
     {
-        journal.AddJournalLog("These buttons have some weird barrier, maybe I can throw something to hit them.");
-        journal.ChangeTasks(new string[] { "button 1", "button 2", "button 3" });
+     
     }
     public void InitiateCorrectOrderPuzzle()
     {

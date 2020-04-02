@@ -86,6 +86,7 @@ public class ChessBoard_DR : MonoBehaviour
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
             chessTrigger.allowedToBeUsed = true;
             journal.TickOffTask("Solve Puzzle");
+            journal.ChangeTasks(new string[] { "Return to ritual" });
             GameTesting_CW.instance.arePuzzlesDone[5] = true;
             door.unlocked = true;
         }
