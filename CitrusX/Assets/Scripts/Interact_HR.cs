@@ -203,7 +203,7 @@ public class Interact_HR : MonoBehaviour
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad")
+            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad" && hit.transform.tag != "Door")
             {
 
                 targetRenderer.materials = originalMaterials;
@@ -241,6 +241,8 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Table")
             {
+                zoomedIn = false;
+                playerCamera.fieldOfView = defaultFOV;
                 //Check if the table already has the items or not yet
                 PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
                 if (!putDownScript.GetBeenUsed())
