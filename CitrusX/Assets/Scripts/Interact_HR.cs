@@ -96,6 +96,9 @@
  * Chase (Changes) 2/4/2020
  * Added to the paper section for the hidden mech clue and removed the painting section. Fleshed out the book section for the new version
  * of hidden mech
+ * 
+ * Chase (Changes) 3/4/2020
+ * Added subs for the new hidden mech
  */
 
 /**
@@ -784,27 +787,27 @@ public class Interact_HR : MonoBehaviour
                         }
                         else if(book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
                         {
-                            //line here lalalalallala
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE10);
                             hiddenMech.steps[0] = true;
                         }
                         else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
                         {
-                            //line here lalalalallala
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE11);
                             hiddenMech.steps[1] = true;
                         }
                         else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
                         {
-                            //line here lalalalallala
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE12);
                             hiddenMech.steps[2] = true;
                         }
                         else if (book.type == Book_CW.BOOK_TYPE.ANGRY && !hiddenMech.steps[3] && hiddenMech.clueRead)
                         {
-                            //line here lalalalallala
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE13);
                             hiddenMech.steps[3] = true;
                         }
                         else if (book.type == Book_CW.BOOK_TYPE.DEFAULT && !hiddenMech.steps[4] && hiddenMech.clueRead)
                         {
-                            //line here lalalalallala oh no start again
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE14);
                             hiddenMech.steps[0] = false;
                             hiddenMech.steps[1] = false;
                             hiddenMech.steps[2] = false;

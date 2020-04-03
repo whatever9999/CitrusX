@@ -12,6 +12,9 @@
  * Added new journal entries/tasks and added a new trigger "Chessboard Extra" which is for the room that the chessboard puzzle opens
  * Chase (Changes) 16/3/2020
  * Added a few disturbances upon entrance
+ * 
+ * Chase (Changes) 3/4/2020
+ * Added in baron appearances in relevant rooms
  */
 
 /**
@@ -35,7 +38,9 @@ public class TriggerScript_CW : MonoBehaviour
     private Door_DR correctOrderDoor;
     public bool allowedToBeUsed;
     public bool activated;
+    public bool entering = false;
     #endregion
+    #region TRIGGER_VARS
     public enum TRIGGER_TYPE
     {
         GARDEN,
@@ -44,13 +49,32 @@ public class TriggerScript_CW : MonoBehaviour
         THROWING,
         HIDDEN_MECH,
         CORRECT_ORDER,
-        CHESSBOARD_EXTRA_ROOM
+        CHESSBOARD_EXTRA_ROOM,
+        DINING_TO_RITUAL,
+        DINING_TO_KITCHEN,
+        KITCHEN_TO_PANTRY,
+        DINING_TO_GYM,
+        GYM_TO_WORKSHOP,
+        LOUNGE
     };
     public TRIGGER_TYPE type;
+    #endregion
+    #region GAME_VARIABLES
     public Door_DR relatedDoor;
     private Subtitles_HR subtitles;
     private Journal_DR journal;
-    
+    private Baron_DR baron;
+    private float baronTime = 5.0f;
+    #endregion
+    #region BARON_LOCATIONS
+    private GameObject loungeLocation;
+    private GameObject diningRoomLocation;
+    private GameObject kitchenLocation;
+    private GameObject pantryLocation;
+    private GameObject gymLocation;
+    private GameObject workshopLocation;
+    #endregion
+
     /// <summary>
     /// Inititalise variables
     /// </summary>
@@ -58,6 +82,14 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         journal = Journal_DR.instance;
+        #region INITIALISATION_OF_LOCATIONS
+        loungeLocation = GameObject.Find("LoungeBaronLocation");
+        diningRoomLocation = GameObject.Find("DiningRoomBaronLocation");
+        kitchenLocation = GameObject.Find("KitchenBaronLocation");
+        pantryLocation = GameObject.Find("PantryBaronLocation");
+        gymLocation = GameObject.Find("GymBaronLocation");
+        workshopLocation = GameObject.Find("WorkshopBaronLocation");
+        #endregion
     }
 
     /// <summary>
@@ -65,6 +97,7 @@ public class TriggerScript_CW : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
+        #region GAMESTATE_TRIGGERS
         if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
         {
             //SOUND HERE for LARGE BOX FALLING (or another loud noise, just something distracting)
@@ -77,7 +110,7 @@ public class TriggerScript_CW : MonoBehaviour
                 allowedToBeUsed = false;
             }
         }
-        if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
+        else if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
         {
             if(GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
             {
@@ -99,7 +132,7 @@ public class TriggerScript_CW : MonoBehaviour
                 journal.ChangeTasks(new string[] { "Blow out candles" });
             }
         }
-        if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
+        else if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
         {
             if(GameTesting_CW.instance.arePuzzlesDone[4] && !GameTesting_CW.instance.arePuzzlesDone[5])
             {
@@ -112,7 +145,7 @@ public class TriggerScript_CW : MonoBehaviour
                 allowedToBeUsed = false;
             }
         }
-        if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
+        else if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
         {
             if (GameTesting_CW.instance.arePuzzlesDone[5])
             {
@@ -123,7 +156,7 @@ public class TriggerScript_CW : MonoBehaviour
                 allowedToBeUsed = false;
             }
         }
-        if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
+        else if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
         {
             if(relatedDoor.GetState())
             {
@@ -137,7 +170,7 @@ public class TriggerScript_CW : MonoBehaviour
            
             allowedToBeUsed = false;
         }
-        if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
+        else if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
         {
             if(relatedDoor.GetState())
             {
@@ -149,6 +182,83 @@ public class TriggerScript_CW : MonoBehaviour
             journal.ChangeTasks(new string[] { "Find a way out" });
             allowedToBeUsed = false;
         }
+        #endregion
+        #region BARON_TRIGGERS
+        else if (type == TRIGGER_TYPE.DINING_TO_GYM && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(gymLocation.transform, baronTime);
+            }
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.DINING_TO_GYM && entering)
+        {
+            entering = false;
+        }
+        else if (type == TRIGGER_TYPE.DINING_TO_KITCHEN && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(kitchenLocation.transform, baronTime);
+            }
+
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.DINING_TO_KITCHEN && entering)
+        {
+            entering = false;
+        }
+        else if (type == TRIGGER_TYPE.DINING_TO_RITUAL && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(diningRoomLocation.transform, baronTime);
+            }          
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.DINING_TO_RITUAL && entering)
+        {
+            entering = false;
+        }
+        else if (type == TRIGGER_TYPE.GYM_TO_WORKSHOP && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(workshopLocation.transform, baronTime);
+            }
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.GYM_TO_WORKSHOP && entering)
+        {
+            entering = false;
+        }
+        else if (type == TRIGGER_TYPE.LOUNGE && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(loungeLocation.transform, baronTime);
+            }
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.LOUNGE && entering)
+        {
+            entering = false;
+        }
+        else if (type == TRIGGER_TYPE.KITCHEN_TO_PANTRY && !entering)
+        {
+            if(!baron.gettingCoin)
+            {
+                baron.AppearStill(pantryLocation.transform, baronTime);
+            }
+            entering = true;
+        }
+        else if (type == TRIGGER_TYPE.KITCHEN_TO_PANTRY && entering)
+        {
+            
+            entering = false;
+        }
+        #endregion
     }
 
     /// <summary>
