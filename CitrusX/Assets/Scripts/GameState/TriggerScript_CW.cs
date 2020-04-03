@@ -71,19 +71,23 @@ public class TriggerScript_CW : MonoBehaviour
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
             allowedToBeUsed = false;
+            if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
+            {
+                subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
+                allowedToBeUsed = false;
+            }
         }
         if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
         {
             if(GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
             {
                 journal.TickOffTask("Return to ritual");
-                subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
                 allowedToBeUsed = false;
             }
             else if(GameTesting_CW.instance.arePuzzlesDone[2] && !GameTesting_CW.instance.arePuzzlesDone[3])
             {
                 journal.TickOffTask("Return to ritual");
-                subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE1);
+                subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE2);
                 journal.AddJournalLog("When I hear that water ripple, I should check my phone’s camera");
                 allowedToBeUsed = false;
             }
