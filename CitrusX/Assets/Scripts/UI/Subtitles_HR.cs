@@ -9,6 +9,8 @@
  * Added lines p1_line8 -> p1_line11 for new dialogue for introducing cameras and phone - need VOs for them still
  * Chase (Changes) 11/3/2020
  * Added line A_Line6
+ * Chase (Changes) 03/04/2020
+ * Added extra dialogue for hidden mech
  */
 
 /**
@@ -116,7 +118,13 @@ public class Subtitles_HR : MonoBehaviour
         P1_LINE9,
         P1_LINE10,
         P1_LINE11,
-        A_LINE6
+        A_LINE6,
+        P8_LINE9,
+        P8_LINE10,
+        P8_LINE11,
+        P8_LINE12,
+        P8_LINE13,
+        P8_LINE14
     }
 
     //This array will show in the inspector for subtitle data to be passed in to

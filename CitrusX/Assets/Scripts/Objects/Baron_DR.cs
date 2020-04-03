@@ -36,7 +36,7 @@ public class Baron_DR : MonoBehaviour
 
     internal float appearanceTimer;
     private float currentAppearanceTimer;
-    private bool gettingCoin = true;
+    internal bool gettingCoin = true;
     private Vector3 startPosition;
     private Transform waterBowl;
     private Rigidbody rigidbody;
