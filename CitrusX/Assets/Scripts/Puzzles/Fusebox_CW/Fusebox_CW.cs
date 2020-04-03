@@ -137,6 +137,7 @@ internal class Fusebox_CW : MonoBehaviour
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE3);
                 voiceovers[0] = true;
+                GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>().allowedToBeUsed = true;
                 GameTesting_CW.instance.arePuzzlesDone[1] = true;
             }
 

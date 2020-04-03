@@ -54,15 +54,17 @@ public class EventManager_CW : MonoBehaviour
     #endregion
     #region BOOLS
     internal bool[] triggersSet = { false, false, false, false, false, false };
-    internal bool[] itemsSet = { false, false, false, false };
+    internal bool[] itemsSet = { false, false, false, false, false };
     internal bool[] disturbancesSet = { false, false };
     #endregion
     private GameTesting_CW game;
+    private Cinematics_DR cinematics;
 
     private void Awake()
     {
         disturbances = DisturbanceHandler_DR.instance;
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
+        cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         #region INITIATE_GOs
         throwingBox = GameObject.Find("ThrowingBox");
         hiddenMechDoc = GameObject.Find("HiddenMechNote");
@@ -130,8 +132,14 @@ public class EventManager_CW : MonoBehaviour
             gardenTrigger.allowedToBeUsed = true;
             triggersSet[5] = true;
         }
+        else if(game.arePuzzlesDone[0] && !game.arePuzzlesDone[1] && !itemsSet[4])
+        {
+            cinematics.ToggleMonitor();
+            itemsSet[4] = true;
+        }
         else if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
+            cinematics.ToggleMonitor();
             bathroomKeyPart1.SetActive(true);
             bathroomKeyPart2.SetActive(true);
             bathroomKeyPart2.name = "Bathroom Key"; 
@@ -207,6 +215,10 @@ public class EventManager_CW : MonoBehaviour
             baron.GetCoin();
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[4] = true;
+        }
+        else if(game.arePuzzlesDone[9])
+        {
+            cinematics.ToggleBlackScreen();
         }
     }
 }
