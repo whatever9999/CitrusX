@@ -43,6 +43,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     // Puzzle State
     internal bool isComplete = false;
 
+    private ParticleSystem aura;
     private Journal_DR journal;
     internal bool isActive = false;
 
@@ -58,6 +59,7 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         door = GameObject.Find("Kitchen Door").GetComponent<Door_DR>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        aura = GetComponentInChildren<ParticleSystem>();
 
         //Ensure that the text on the pans is updated
         ComparePans();
@@ -89,6 +91,8 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
         if (!isComplete) {
             if (leftPanMass == rightPanMass)
             {
+                aura.Stop();
+
                 print("COMPLETE");
                 // if equal - puzzle complete
                 isComplete = true;
