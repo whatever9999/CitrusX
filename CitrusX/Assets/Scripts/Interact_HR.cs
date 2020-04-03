@@ -531,7 +531,7 @@ public class Interact_HR : MonoBehaviour
 ;                   }
                     else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
                     {
-                        //lalalalalal ooooo note on books
+                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
                         journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
                         journal.TickOffTask("Find a clue");
                         journal.ChangeTasks(new string[] { "Solve riddle" });

@@ -196,8 +196,12 @@ public class TriggerScript_CW : MonoBehaviour
                     allowedToBeUsed = false;
                 }
             }
-            #endregion
-            #region BARON_TRIGGERS
+        #endregion
+        #region BARON_TRIGGERS
+            else if (type == TRIGGER_TYPE.DINING_TO_GYM && entering)
+            {
+                entering = false;
+            }
             else if (type == TRIGGER_TYPE.DINING_TO_GYM && !entering)
             {
                 if (!baron.gettingCoin)
@@ -206,9 +210,9 @@ public class TriggerScript_CW : MonoBehaviour
                 }
                 entering = true;
             }
-            else if (type == TRIGGER_TYPE.DINING_TO_GYM && entering)
+            else if (type == TRIGGER_TYPE.DINING_TO_KITCHEN && entering)
             {
-                entering = false;
+               entering = false;
             }
             else if (type == TRIGGER_TYPE.DINING_TO_KITCHEN && !entering)
             {
@@ -219,7 +223,7 @@ public class TriggerScript_CW : MonoBehaviour
 
                 entering = true;
             }
-            else if (type == TRIGGER_TYPE.DINING_TO_KITCHEN && entering)
+            else if (type == TRIGGER_TYPE.DINING_TO_RITUAL && entering)
             {
                 entering = false;
             }
@@ -231,7 +235,7 @@ public class TriggerScript_CW : MonoBehaviour
                 }
                 entering = true;
             }
-            else if (type == TRIGGER_TYPE.DINING_TO_RITUAL && entering)
+            else if (type == TRIGGER_TYPE.GYM_TO_WORKSHOP && entering)
             {
                 entering = false;
             }
@@ -243,7 +247,7 @@ public class TriggerScript_CW : MonoBehaviour
                 }
                 entering = true;
             }
-            else if (type == TRIGGER_TYPE.GYM_TO_WORKSHOP && entering)
+            else if (type == TRIGGER_TYPE.LOUNGE && entering)
             {
                 entering = false;
             }
@@ -255,7 +259,7 @@ public class TriggerScript_CW : MonoBehaviour
                 }
                 entering = true;
             }
-            else if (type == TRIGGER_TYPE.LOUNGE && entering)
+            else if (type == TRIGGER_TYPE.KITCHEN_TO_PANTRY && entering)
             {
                 entering = false;
             }
@@ -266,12 +270,7 @@ public class TriggerScript_CW : MonoBehaviour
                     baron.AppearStill(pantryLocation.transform, baronTime);
                 }
                 entering = true;
-            }
-            else if (type == TRIGGER_TYPE.KITCHEN_TO_PANTRY && entering)
-            {
-
-                entering = false;
-            }
+            } 
             #endregion
         
 
