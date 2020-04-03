@@ -65,89 +65,92 @@ public class TriggerScript_CW : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
+        if(other.tag == "Player")
         {
-            //SOUND HERE for LARGE BOX FALLING (or another loud noise, just something distracting)
-            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
-            subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
-            allowedToBeUsed = false;
-            if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
+            if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
             {
-                subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
+                //SOUND HERE for LARGE BOX FALLING (or another loud noise, just something distracting)
+                DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
+                subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
                 allowedToBeUsed = false;
+                if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
+                {
+                    subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
+                    allowedToBeUsed = false;
+                }
             }
-        }
-        if(type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
-        {
-            if(GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
+            if (type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
             {
-                journal.TickOffTask("Return to ritual");
-                allowedToBeUsed = false;
+                if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
+                {
+                    journal.TickOffTask("Return to ritual");
+                    allowedToBeUsed = false;
+                }
+                else if (GameTesting_CW.instance.arePuzzlesDone[2] && !GameTesting_CW.instance.arePuzzlesDone[3])
+                {
+                    journal.TickOffTask("Return to ritual");
+                    subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE2);
+                    journal.AddJournalLog("When I hear that water ripple, I should check my phone’s camera");
+                    allowedToBeUsed = false;
+                }
+                else if (GameTesting_CW.instance.arePuzzlesDone[8])
+                {
+                    subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
+                    journal.TickOffTask("Return to ritual");
+                    journal.AddJournalLog("I can’t take anymore, blowing out the candles will end the ritual. But have I counted the right amount of coins?");
+                    journal.ChangeTasks(new string[] { "Blow out candles" });
+                }
             }
-            else if(GameTesting_CW.instance.arePuzzlesDone[2] && !GameTesting_CW.instance.arePuzzlesDone[3])
+            if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
             {
-                journal.TickOffTask("Return to ritual");
-                subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE2);
-                journal.AddJournalLog("When I hear that water ripple, I should check my phone’s camera");
-                allowedToBeUsed = false;
+                if (GameTesting_CW.instance.arePuzzlesDone[4] && !GameTesting_CW.instance.arePuzzlesDone[5])
+                {
+                    DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
+                    DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
+                    journal.TickOffTask("Check out library");
+                    journal.AddJournalLog("This book might have some information");
+                    journal.ChangeTasks(new string[] { "Read book" });
+                    subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
+                    allowedToBeUsed = false;
+                }
             }
-            else if(GameTesting_CW.instance.arePuzzlesDone[8])
+            if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
             {
-                subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
-                journal.TickOffTask("Return to ritual");
-                journal.AddJournalLog("I can’t take anymore, blowing out the candles will end the ritual. But have I counted the right amount of coins?");
-                journal.ChangeTasks(new string[] { "Blow out candles" });
+                if (GameTesting_CW.instance.arePuzzlesDone[5])
+                {
+                    subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE2);
+                    journal.TickOffTask("Check the gym");
+                    journal.AddJournalLog("This is the same aura I got from the scales…I need to get rid of it now.");
+                    journal.ChangeTasks(new string[] { "Button 1", "Button 2", "Button 3" });
+                    allowedToBeUsed = false;
+                }
             }
-        }
-        if (type == TRIGGER_TYPE.CHESSBOARD && allowedToBeUsed)
-        {
-            if(GameTesting_CW.instance.arePuzzlesDone[4] && !GameTesting_CW.instance.arePuzzlesDone[5])
+            if (type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
             {
-                DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
-                DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
+                if (relatedDoor.GetState())
+                {
+                    relatedDoor.ToggleOpen();
+                }
+                relatedDoor.unlocked = false;
                 journal.TickOffTask("Check out library");
-                journal.AddJournalLog("This book might have some information");
-                journal.ChangeTasks(new string[] { "Read book" });
-                subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
+                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
+                journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
+                journal.ChangeTasks(new string[] { "Find a clue" });
+
                 allowedToBeUsed = false;
             }
-        }
-        if (type == TRIGGER_TYPE.THROWING && allowedToBeUsed)
-        {
-            if (GameTesting_CW.instance.arePuzzlesDone[5])
+            if (type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
             {
-                subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE2);
-                journal.TickOffTask("Check the gym");
-                journal.AddJournalLog("This is the same aura I got from the scales…I need to get rid of it now.");
-                journal.ChangeTasks(new string[] { "Button 1", "Button 2", "Button 3" });
+                if (relatedDoor.GetState())
+                {
+                    relatedDoor.ToggleOpen();
+                }
+                relatedDoor.unlocked = false;
+                subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
+                journal.AddJournalLog("Locked in again? I should’ve seen it coming.");
+                journal.ChangeTasks(new string[] { "Find a way out" });
                 allowedToBeUsed = false;
             }
-        }
-        if(type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
-        {
-            if(relatedDoor.GetState())
-            {
-                relatedDoor.ToggleOpen();
-            }
-            relatedDoor.unlocked = false;
-            journal.TickOffTask("Check out library");
-            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
-            journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
-            journal.ChangeTasks(new string[] { "Find a clue" });
-           
-            allowedToBeUsed = false;
-        }
-        if(type == TRIGGER_TYPE.CORRECT_ORDER && allowedToBeUsed)
-        {
-            if(relatedDoor.GetState())
-            {
-                relatedDoor.ToggleOpen();
-            }
-            relatedDoor.unlocked = false;
-            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE2);
-            journal.AddJournalLog("Locked in again? I should’ve seen it coming.");
-            journal.ChangeTasks(new string[] { "Find a way out" });
-            allowedToBeUsed = false;
         }
     }
 
