@@ -82,6 +82,7 @@ public class TriggerScript_CW : MonoBehaviour
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         journal = Journal_DR.instance;
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         #region INITIALISATION_OF_LOCATIONS
         loungeLocation = GameObject.Find("LoungeBaronLocation");
         diningRoomLocation = GameObject.Find("DiningRoomBaronLocation");
@@ -97,8 +98,7 @@ public class TriggerScript_CW : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
+
             #region GAMESTATE_TRIGGERS
             if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
             {
@@ -273,7 +273,7 @@ public class TriggerScript_CW : MonoBehaviour
                 entering = false;
             }
             #endregion
-        }
+        
 
 
 
