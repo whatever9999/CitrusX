@@ -81,6 +81,7 @@ public class CorrectOrder_CW : MonoBehaviour
     /// </summary>
     public void OpenPC()
     {
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.COMPUTER_ON_OFF, transform.position);
         //Make the cursor useable for solving the puzzle
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -115,7 +116,7 @@ public class CorrectOrder_CW : MonoBehaviour
         Cursor.visible = false;
 
         correctOrderScreen.SetActive(false);
-        //SOUND HERE electronic sound
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.COMPUTER_ON_OFF, transform.position);
 
         //Let the player move again
         fpsController.enabled = true;
@@ -146,14 +147,14 @@ public class CorrectOrder_CW : MonoBehaviour
                         {
                             whichRound[1] = true;
                             whichRound[0] = false;
-                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
+                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_CORRECT, transform.position);
                             completionText.text = "ROUND 1 CORRECT";
                         }
                         else if(whichRound[1])
                         {
                             whichRound[2] = true;
                             whichRound[1] = false;
-                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
+                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_CORRECT, transform.position);
                             completionText.text = "ROUND 2 CORRECT";
                         }
                         else if(whichRound[2])
@@ -162,7 +163,7 @@ public class CorrectOrder_CW : MonoBehaviour
                             completionText.text = "PUZZLE SOLVED";
                             correctOrderDoor.unlocked = true;
                             correctOrderDoor.ToggleOpen();
-                            //SOUND HERE SOME SORT OF 'BING' FOR WINNING
+                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_CORRECT, transform.position);
                             GameTesting_CW.instance.arePuzzlesDone[8] = true;
                             journal.AddJournalLog("This is too much, I need to finish this now.");
                             journal.TickOffTask("Solve puzzle");
@@ -172,21 +173,25 @@ public class CorrectOrder_CW : MonoBehaviour
                     }
                     else
                     {
+                        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_INCORRECT, transform.position);
                         subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE4);
                     }
                 }
                 else
                 {
+                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_INCORRECT, transform.position);
                     subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE4);
                 }
             }
             else
             {
+                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_INCORRECT, transform.position);
                 subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE4);
             }
         }
         else
         {
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_INCORRECT, transform.position);
             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE4);
         }
     }

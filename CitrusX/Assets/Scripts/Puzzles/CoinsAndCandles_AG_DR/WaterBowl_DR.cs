@@ -55,8 +55,9 @@ public class WaterBowl_DR : MonoBehaviour
     public bool RemoveCoin()
     {
         bool coinWasRemoved = false;
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
 
-        if(coins.Count == 0)
+        if (coins.Count == 0)
         {
             Debug.Log("Coins have run out but someone is trying to take one");
             //Player hasn't blown out candles even though coins have run out and baron has tried to take a coin
@@ -69,7 +70,6 @@ public class WaterBowl_DR : MonoBehaviour
             coins[coins.Count - 1].SetActive(false);
             coins.RemoveAt(coins.Count - 1);
             coinWasRemoved = true;
-            //SOUND HERE WATER
         }
 
         return coinWasRemoved;

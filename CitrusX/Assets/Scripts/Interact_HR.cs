@@ -234,7 +234,7 @@ public class Interact_HR : MonoBehaviour
                 //If he presses the key then pick up the object
                 if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
-                    //SOUND PICK UP
+                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, hit.transform.position);
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
                     //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
@@ -263,7 +263,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                //SOUND HERE for PLACE ITEMS
+                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_RITUAL, hit.transform.position);
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
@@ -283,7 +283,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                //SOUND HERE for PLACE ITEMS
+                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_JEWELLERY, hit.transform.position);
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
@@ -302,7 +302,7 @@ public class Interact_HR : MonoBehaviour
                             //If he presses the key then pick up the object
                             if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                             {
-                                //SOUND HERE for PLACING PAWN
+                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_PAWN, hit.transform.position);
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 putDownScript.PutItemsDown();
@@ -472,7 +472,7 @@ public class Interact_HR : MonoBehaviour
                     paperText.fontSize = paperItem.textSize;
                     paperBackground.sprite = paperItem.background;
                     paper.SetActive(true);
-                    //SOUND HERE like PAPER/PAGE TURNING
+                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.NOTE, hit.transform.position);
                     //if note is in the safe, let safe know
                     #region PAPER_TYPES_VOICEOVERS
                     if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )

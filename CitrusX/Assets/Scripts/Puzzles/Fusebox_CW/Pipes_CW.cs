@@ -108,7 +108,7 @@ public class Pipes_CW : MonoBehaviour
     {
         idleVos.interactedWith = true;
         idleVos.interactedWith = false;
-        //SOUND HERE a TURNING SOUND
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PIPE, transform.position);
         if (canBeRotated)
         {
             gameObject.transform.Rotate(0, 0, degreesToMove);

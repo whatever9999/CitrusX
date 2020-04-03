@@ -32,6 +32,7 @@ using UnityEngine;
 public class Baron_DR : MonoBehaviour
 {
     public float speed;
+    public Drip[] drips;
 
     internal float appearanceTimer;
     private float currentAppearanceTimer;
@@ -51,6 +52,8 @@ public class Baron_DR : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
+
+
 
     /// <summary>
     /// Disable the object after it has been accessed for references
@@ -97,6 +100,16 @@ public class Baron_DR : MonoBehaviour
             {
                 appearanceTimer = 0;
                 gameObject.SetActive(false);
+            }
+        }
+
+        for(int i = 0; i < drips.Length; i++)
+        {
+            drips[i].UpdateTimer();
+            if(drips[i].CheckTimer())
+            {
+                drips[i].PlayDrip(waterBowl.position);
+                drips[i].NewDripTimer();
             }
         }
     }
@@ -164,5 +177,42 @@ public class Baron_DR : MonoBehaviour
         waterBowl.RemoveCoin();
         Debug.Log("The baron has taken a coin");
         gameObject.SetActive(false);
+    }
+}
+
+[System.Serializable]
+public class Drip
+{
+    private enum DripVolumes
+    {
+        QUIET,
+        MEDIUM,
+        LOUD
+    }
+    public Vector2 timerRange;
+    public SFX_Manager_HR.SoundEffectNames dripSound;
+    private float currentDripTimer;
+    private float dripTimer;
+
+
+    public void NewDripTimer()
+    {
+        dripTimer = 0;
+        currentDripTimer = Random.Range(timerRange[0], timerRange[1]);
+    }
+
+    public void UpdateTimer()
+    {
+        dripTimer += Time.deltaTime;
+    }
+
+    public bool CheckTimer()
+    {
+        return dripTimer > currentDripTimer;
+    }
+
+    public void PlayDrip(Vector3 dripPosition)
+    {
+        SFX_Manager_HR.instance.PlaySFX(dripSound, dripPosition);
     }
 }

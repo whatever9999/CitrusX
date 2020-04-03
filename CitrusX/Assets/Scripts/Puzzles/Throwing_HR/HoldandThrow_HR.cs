@@ -122,6 +122,7 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     public void Hold()
     {
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, transform.position);
         idleVos.interactedWith = true;
         
         beingHeld = true;
@@ -141,6 +142,7 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     public void Drop()
     {
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_SCALES, transform.position);
         idleVos.interactedWith = false;
         beingHeld = false;
 

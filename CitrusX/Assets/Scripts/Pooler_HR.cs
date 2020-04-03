@@ -3,7 +3,10 @@
  * 
  * Object pooling class
  * 
- * It creates various pools with different tags for efficencyX
+ * It creates various pools with different tags for efficency
+ * 
+ * Dominique (Changes) 04/04/2020
+ * Made object activate after having values changed (or wrong sound plays)
  */
 
 
@@ -76,9 +79,9 @@ public class Pooler_HR : MonoBehaviour
         }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.GetComponent<AudioSource>().clip = clip;
+        objectToSpawn.SetActive(true);
 
         poolDictionary[tag].Enqueue(objectToSpawn);
 

@@ -98,7 +98,7 @@ internal class Fusebox_CW : MonoBehaviour
         journal.AddJournalLog("It’s disconnected? I’m sure I can sort this out.");
         journal.TickOffTask("Check fusebox");
         journal.ChangeTasks(new string[] { "Fix fusebox" });
-        //SOUND HERE DOOR OPENING
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.FUSEBOX_DOOR, transform.position);
         //Stop the player from moving while using the fusebox
         fpsController.enabled = false;
     }
@@ -116,10 +116,12 @@ internal class Fusebox_CW : MonoBehaviour
         {
             if(!pipesFromStartToEnd[numberComplete].GetIsInPosition())
             {
+                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PIPE_INCORRECT, transform.position);
                 complete = false;
                 break;
             } else
             {
+                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PIPE_CORRECT, transform.position);
                 pipesFromStartToEnd[numberComplete].ChangeColour();
                 yield return new WaitForSeconds(timeForFlowInPipes);
             }
@@ -128,7 +130,6 @@ internal class Fusebox_CW : MonoBehaviour
         if (complete)
         {
             isFuseboxSolved = true;
-            //SOUND HERE big ELECTRIC SOUND
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
             journal.ChangeTasks(new string[] { "Return to ritual" });
@@ -145,6 +146,7 @@ internal class Fusebox_CW : MonoBehaviour
         {
             for (; numberComplete >= 0; numberComplete--)
             {
+                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PIPE_INCORRECT, transform.position);
                 pipesFromStartToEnd[numberComplete].ResetColour();
                 yield return new WaitForSeconds(timeForFlowInPipes);
             }
@@ -165,7 +167,7 @@ internal class Fusebox_CW : MonoBehaviour
         //Make the cursor invisible again
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //SOUND HERE DOOR CLOSING
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.FUSEBOX_DOOR, transform.position);
         //Let the player move again
         fpsController.enabled = true;
 

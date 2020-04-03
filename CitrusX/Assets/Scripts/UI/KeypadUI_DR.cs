@@ -125,7 +125,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// <param name="number - a number to be added onto the input if the player pushes the button"></param>
     public void NumberButton(int number)
     {
-        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.BUTTON, Vector3.zero);
+        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.KEYPAD_BUTTON, Vector3.zero);
         //The player can't enter more digits than the length of the password
         if (input.Length != keypadItem.password.Length)
         {
@@ -142,7 +142,7 @@ public class KeypadUI_DR : MonoBehaviour
         if (input == keypadItem.password)
         {
             keypadItem.door.ToggleOpen();
-            SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.CORRECT, Vector3.zero);
+            SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.KEYPAD_CORRECT, Vector3.zero);
             //finish journal tasks and let game know the puzzle is complete
             journal.TickOffTask("Solve password");
             journal.AddJournalLog("Finally, what’s this note?");
@@ -160,7 +160,7 @@ public class KeypadUI_DR : MonoBehaviour
                 {
                     StartCoroutine(ClearInput());
                     subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE5);
-                    SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.INCORRECT,Vector3.zero);
+                    SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.KEYPAD_INCORRECT,Vector3.zero);
                 }
             }
         }
@@ -189,7 +189,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// </summary>
     public void ClearButton()
     {
-        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.BUTTON, Vector3.zero);
+        SFXManager.PlaySFX(SFX_Manager_HR.SoundEffectNames.KEYPAD_BUTTON, Vector3.zero);
         input = "";
         inputText.text = input;
     }
