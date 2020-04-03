@@ -31,6 +31,7 @@ public class BallButtonLogic_HR : MonoBehaviour
     private InitiatePuzzles_CW puzzleScript;
     private Subtitles_HR subtitles;
     private Animator animator;
+    private ParticleSystem aura;
     public void SetActive(bool value) { isActive = value; }
 
     /// <summary>
@@ -38,6 +39,7 @@ public class BallButtonLogic_HR : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        aura = transform.parent.GetComponentInChildren<ParticleSystem>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         animator = GetComponentInParent<Animator>();
@@ -59,6 +61,7 @@ public class BallButtonLogic_HR : MonoBehaviour
         //check if the mass of the ball is the required to push the button
         if (collision.gameObject.GetComponent<Rigidbody>().mass == massRequired)
         {
+            aura.Stop();
             animator.SetTrigger("Hit");
             puzzleScript.ballCounter++;
             #region CHECK_WHICH_BUTTON_FOR_JOURNAL

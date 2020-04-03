@@ -40,6 +40,8 @@ public class ChessBoard_DR : MonoBehaviour
     public Door_DR door;
     public ChessPiece_DR[] chessPieces;
 
+    private ParticleSystem aura;
+
     private Journal_DR journal;
     internal bool isActive = false;
     private Subtitles_HR subtitles;
@@ -52,6 +54,7 @@ public class ChessBoard_DR : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        aura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
@@ -83,6 +86,7 @@ public class ChessBoard_DR : MonoBehaviour
         if (inPosition)
         {
             //SOUND HERE a CLICK to signify completion
+            aura.Stop();
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
             chessTrigger.allowedToBeUsed = true;
             journal.TickOffTask("Solve Puzzle");

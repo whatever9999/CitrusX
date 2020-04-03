@@ -45,6 +45,13 @@ public class EventManager_CW : MonoBehaviour
     private DisturbanceHandler_DR disturbances;
     private Baron_DR baron;
     #endregion
+    #region PARTICLE_EFFECTS
+    ParticleSystem scalesEffect;
+    ParticleSystem chessBookEffect;
+    ParticleSystem button1Effect;
+    ParticleSystem button2Effect;
+    ParticleSystem button3Effect;
+    #endregion
     #region BOOLS
     internal bool[] triggersSet = { false, false, false, false, false, false };
     internal bool[] itemsSet = { false, false, false, false, false };
@@ -74,7 +81,13 @@ public class EventManager_CW : MonoBehaviour
         chessNote = GameObject.Find("Chess Note");
         keypadDoc = GameObject.Find("KeyPadDoc");
         masterBedroomDoor = GameObject.Find("Bedroom Door").GetComponent<Door_DR>();
-       
+
+        scalesEffect = GameObject.Find("Scales").GetComponentInChildren<ParticleSystem>();
+        chessBookEffect = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
+        button1Effect = GameObject.Find("1Button").GetComponentInChildren<ParticleSystem>();
+        button2Effect = GameObject.Find("2Button").GetComponentInChildren<ParticleSystem>();
+        button3Effect = GameObject.Find("3Button").GetComponentInChildren<ParticleSystem>();
+
         #endregion
         #region INITIATE_TRIGGERS
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
@@ -146,7 +159,6 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
-            
             safe.SetActive(true);
             itemsSet[2] = true;
         }
@@ -154,11 +166,13 @@ public class EventManager_CW : MonoBehaviour
         {
             baron.GetCoin();
             keypadDoc.SetActive(true);
+            scalesEffect.Play();
             itemsSet[3] = true;
         }
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
             baron.GetCoin();
+            chessBookEffect.Play();
             chessTrigger.allowedToBeUsed = true;
             triggersSet[1] = true;
         }
@@ -175,6 +189,9 @@ public class EventManager_CW : MonoBehaviour
             buttons1.SetActive(true);
             buttons2.SetActive(true);
             buttons3.SetActive(true);
+            button1Effect.Play();
+            button2Effect.Play();
+            button3Effect.Play();
             #endregion
             disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             triggersSet[2] = true;
