@@ -36,7 +36,7 @@ public class Baron_DR : MonoBehaviour
 
     internal float appearanceTimer;
     private float currentAppearanceTimer;
-    internal bool gettingCoin = true;
+    internal bool gettingCoin = false;
     private Vector3 startPosition;
     private Transform waterBowl;
     private Rigidbody rigidbody;
@@ -52,8 +52,6 @@ public class Baron_DR : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
-
-
 
     /// <summary>
     /// Disable the object after it has been accessed for references
@@ -101,15 +99,16 @@ public class Baron_DR : MonoBehaviour
                 appearanceTimer = 0;
                 gameObject.SetActive(false);
             }
-        }
-
-        for(int i = 0; i < drips.Length; i++)
+        } else
         {
-            drips[i].UpdateTimer();
-            if(drips[i].CheckTimer())
+            for (int i = 0; i < drips.Length; i++)
             {
-                drips[i].PlayDrip(waterBowl.position);
-                drips[i].NewDripTimer();
+                drips[i].UpdateTimer();
+                if (drips[i].CheckTimer())
+                {
+                    drips[i].PlayDrip(waterBowl.position);
+                    drips[i].NewDripTimer();
+                }
             }
         }
     }
@@ -126,8 +125,6 @@ public class Baron_DR : MonoBehaviour
 
         currentAppearanceTimer = lengthOfAppearance;
 
-        gettingCoin = false;
-
         gameObject.SetActive(true);
 
         animator.SetBool("NotMoving", true);
@@ -138,8 +135,9 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     public void GetCoin()
     {
-        transform.position = startPosition;
+        animator.SetBool("NotMoving", false);
         gettingCoin = true;
+        transform.position = startPosition;
         gameObject.SetActive(true);
     }
 
@@ -149,6 +147,7 @@ public class Baron_DR : MonoBehaviour
     private void OnDisable()
     {
         //Reset position and speed
+        gettingCoin = false;
         rigidbody.velocity = Vector3.zero;
         animator.SetBool("NotMoving", false);
     }

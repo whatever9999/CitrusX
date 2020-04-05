@@ -85,7 +85,7 @@ public class ChessBoard_DR : MonoBehaviour
 
         if (inPosition)
         {
-            //SOUND HERE a CLICK to signify completion
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_PAWN, transform.position);
             aura.Stop();
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE4);
             chessTrigger.allowedToBeUsed = true;

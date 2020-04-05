@@ -1,4 +1,7 @@
 ﻿/* Chase Wilding : Stores values of the book for the hidden mech puzzle
+ * 
+ * Dominique (Changes) 05/04/2020
+ * Added canInteractWith bool
  */
 
 /**
@@ -21,9 +24,8 @@ public class Book_CW : MonoBehaviour
         BLUE_BOOK,
         FOURTH_EAST,
         TWO_NW,
-        ANGRY,
         DEFAULT
     };
     public BOOK_TYPE type;
-    
+    public bool canInteractWith = false;
 }

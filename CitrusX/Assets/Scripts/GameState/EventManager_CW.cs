@@ -42,7 +42,6 @@ public class EventManager_CW : MonoBehaviour
    
     #endregion
     #region DISTURBANCES
-    private DisturbanceHandler_DR disturbances;
     private Baron_DR baron;
     #endregion
     #region PARTICLE_EFFECTS
@@ -62,7 +61,6 @@ public class EventManager_CW : MonoBehaviour
 
     private void Awake()
     {
-        disturbances = DisturbanceHandler_DR.instance;
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
         #region INITIATE_GOs
@@ -159,6 +157,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
+            baron.GetCoin();
             safe.SetActive(true);
             itemsSet[2] = true;
         }
@@ -193,25 +192,24 @@ public class EventManager_CW : MonoBehaviour
             button2Effect.Play();
             button3Effect.Play();
             #endregion
-            disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             triggersSet[2] = true;
         }
         else if(game.arePuzzlesDone[6] && !itemsSet[0])
         {
             throwingBox.SetActive(true);
-            disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
+            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             itemsSet[0] = true;
         }
         else if(game.arePuzzlesDone[7] && (!itemsSet[1] || !triggersSet[3]))
         {
             hiddenMechDoc.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
-            disturbances.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.DOORCREAK);
             itemsSet[1] = true;
             triggersSet[3] = true;
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
+            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BARONCLOSEUP);
             baron.GetCoin();
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[4] = true;

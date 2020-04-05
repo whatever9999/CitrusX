@@ -124,7 +124,6 @@ public class Subtitles_HR : MonoBehaviour
         P8_LINE11,
         P8_LINE12,
         P8_LINE13,
-        P8_LINE14
     }
 
     //This array will show in the inspector for subtitle data to be passed in to

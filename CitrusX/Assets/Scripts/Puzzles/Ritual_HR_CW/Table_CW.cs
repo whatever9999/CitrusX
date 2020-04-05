@@ -48,7 +48,6 @@ public class Table_CW : MonoBehaviour
     /// </summary>
     private void Update()
     {
-
         if (hasBeenPlaced)
         {
 
