@@ -165,7 +165,7 @@ public class TriggerScript_CW : MonoBehaviour
             }
             else if (type == TRIGGER_TYPE.HIDDEN_MECH && allowedToBeUsed)
             {
-                if (GameTesting_CW.instance.arePuzzlesDone[4] && !GameTesting_CW.instance.arePuzzlesDone[5])
+                if (GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
                 {
                     if (relatedDoor.GetState())
                     {
