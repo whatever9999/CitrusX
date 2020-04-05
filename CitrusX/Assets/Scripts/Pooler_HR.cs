@@ -10,6 +10,7 @@
  */
 
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -83,8 +84,13 @@ public class Pooler_HR : MonoBehaviour
         objectToSpawn.GetComponent<AudioSource>().clip = clip;
         objectToSpawn.SetActive(true);
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
-
         return objectToSpawn;
+    }
+
+    public IEnumerator ReturnToPool(Tags tag, GameObject spawnedObject, float afterSeconds)
+    {
+        yield return new WaitForSeconds(afterSeconds);
+        poolDictionary[tag].Enqueue(spawnedObject);
+        spawnedObject.SetActive(false);
     }
 }

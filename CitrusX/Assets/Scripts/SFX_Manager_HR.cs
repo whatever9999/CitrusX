@@ -61,6 +61,7 @@ public class SFX_Manager_HR : MonoBehaviour
         else
             soundSource.Play();
 
+        StartCoroutine(pooler.ReturnToPool(Pooler_HR.Tags.SFX, soundSource.gameObject, soundSource.clip.length));
     }
     [System.Serializable]
     public class SoundEffect_HR

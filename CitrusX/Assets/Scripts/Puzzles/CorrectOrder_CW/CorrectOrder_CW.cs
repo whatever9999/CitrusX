@@ -36,7 +36,7 @@ public class CorrectOrder_CW : MonoBehaviour
     public Door_DR correctOrderDoor;
     private GameObject correctOrderScreen;
     private GameObject PC;
-
+    bool startGameOpen = false;
     #endregion
 
     public void SetActive(bool value) { isActive = value; }
@@ -69,8 +69,13 @@ public class CorrectOrder_CW : MonoBehaviour
 
     private void OnEnable()
     {
-        //SOUND HERE electronic sound
-        OpenPC();
+        if(!startGameOpen)
+        {
+            startGameOpen = true;
+        } else
+        {
+            OpenPC();
+        }
     }
     private void Update()
     {
