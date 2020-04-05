@@ -210,7 +210,7 @@ public class Interact_HR : MonoBehaviour
 
             //If the object is not the same as the previous object then revert to the original material
             //and change the new object to the outline material
-            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad" && hit.transform.tag != "Door")
+            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad")
             {
 
                 targetRenderer.materials = originalMaterials;
