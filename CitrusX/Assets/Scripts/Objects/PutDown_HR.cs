@@ -48,6 +48,11 @@ public class PutDown_HR : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(true);
         }
         beenUsed = true;
+
+        if(name == "ChessBoard")
+        {
+            GetComponent<ChessBoard_DR>().CheckPieces();
+        }
     }
 
 }

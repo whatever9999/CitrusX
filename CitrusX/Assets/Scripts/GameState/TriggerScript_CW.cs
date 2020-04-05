@@ -102,12 +102,12 @@ public class TriggerScript_CW : MonoBehaviour
             #region GAMESTATE_TRIGGERS
             if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
             {
-                //SOUND HERE for LARGE BOX FALLING (or another loud noise, just something distracting)
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
                 subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE1);
                 allowedToBeUsed = false;
                 if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
                 {
+                    DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKFALL);
                     subtitles.PlayAudio(Subtitles_HR.ID.P3_LINE1);
                     allowedToBeUsed = false;
                 }
@@ -272,10 +272,6 @@ public class TriggerScript_CW : MonoBehaviour
                 entering = true;
             } 
             #endregion
-        
-
-
-
     }
     /// <summary>
     /// get trigger type, see if active, play relevant audio if so

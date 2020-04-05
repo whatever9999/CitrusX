@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 783355092945921931}
   - component: {fileID: 851785443484621947}
   - component: {fileID: 9068052529915077940}
-  - component: {fileID: 7896313033330285661}
-  - component: {fileID: 8106487103629490270}
   m_Layer: 0
   m_Name: InteriorDoor (1)
   m_TagString: Door
@@ -79,35 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7896313033330285661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410497857261126346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f61f66519336d94da83012cbc613462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unlocked: 1
-  requiresKey: 0
-  isOpen: 0
-  type: 3
---- !u!65 &8106487103629490270
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410497857261126346}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.4526372, y: 0.15042645, z: 6.787014}
-  m_Center: {x: 0, y: -0.0000019036243, z: 3.3976674}
 --- !u!82 &1327944499621986760
 AudioSource:
   m_ObjectHideFlags: 0
@@ -247,8 +216,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4526372, y: 0.15042645, z: 6.787014}
-  m_Center: {x: 0, y: -0.0000038109729, z: 3.3976674}
+  m_Size: {x: 3.4526372, y: 0.67806274, z: 6.787014}
+  m_Center: {x: 0, y: -0.2223493, z: 3.3976674}
 --- !u!114 &2172069527439377862
 MonoBehaviour:
   m_ObjectHideFlags: 0

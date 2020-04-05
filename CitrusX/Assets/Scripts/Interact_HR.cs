@@ -99,6 +99,9 @@
  * 
  * Chase (Changes) 3/4/2020
  * Added subs for the new hidden mech
+ * 
+ * Dominique (Changes) 05/04/2020
+ * Can only interact with books at certain point
  */
 
 /**
@@ -188,7 +191,6 @@ public class Interact_HR : MonoBehaviour
         hiddenMech = GameObject.Find("Painting_AG").GetComponent<HiddenMech_CW>();
         pawn = GameObject.Find("Pawn");
         idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
-
         #endregion
     }
 
@@ -537,6 +539,7 @@ public class Interact_HR : MonoBehaviour
                         journal.ChangeTasks(new string[] { "Solve riddle" });
                         hiddenMech.clueRead = true;
                         paperItem.hasBeenRead = true;
+                        GameObject.Find("BlueBook").GetComponent<Book_CW>().canInteractWith = true;
                     }
 
 
@@ -769,51 +772,42 @@ public class Interact_HR : MonoBehaviour
             {
                 if(GameTesting_CW.instance.arePuzzlesDone[6])
                 {
-                    notificationText.text = "Press E to interact with the book";
                     Book_CW book = hit.transform.GetComponent<Book_CW>();
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                    
+                    if(book.canInteractWith)
                     {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK && hiddenMech.steps[3])
-                        {
-                            //SOUND HERE for MOVING BOOK
-                            journal.TickOffTask("Solve riddle");
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
-                            journal.ChangeTasks(new string[] { "Read note" });
-                            hiddenMech.complete = true;
-                            GameTesting_CW.instance.arePuzzlesDone[7] = true;
-                        }
-                        else if(book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
-                        {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE10);
-                            hiddenMech.steps[0] = true;
-                        }
-                        else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
-                        {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE11);
-                            hiddenMech.steps[1] = true;
-                        }
-                        else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
-                        {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE12);
-                            hiddenMech.steps[2] = true;
-                        }
-                        else if (book.type == Book_CW.BOOK_TYPE.ANGRY && !hiddenMech.steps[3] && hiddenMech.clueRead)
-                        {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE13);
-                            hiddenMech.steps[3] = true;
-                        }
-                        else if (book.type == Book_CW.BOOK_TYPE.DEFAULT && !hiddenMech.steps[4] && hiddenMech.clueRead)
-                        {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE14);
-                            hiddenMech.steps[0] = false;
-                            hiddenMech.steps[1] = false;
-                            hiddenMech.steps[2] = false;
-                            hiddenMech.steps[3] = false;
-                        }
+                        notificationText.text = "Press E to interact with the book";
 
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        {
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+
+                            if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK && hiddenMech.steps[2])
+                            {
+                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, book.transform.position);
+                                journal.TickOffTask("Solve riddle");
+                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
+                                journal.ChangeTasks(new string[] { "Read note" });
+                                hiddenMech.complete = true;
+                                GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                            }
+                            else if (book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
+                            {
+                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE10);
+                                hiddenMech.steps[0] = true;
+                            }
+                            else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
+                            {
+                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE11);
+                                hiddenMech.steps[1] = true;
+                            }
+                            else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
+                            {
+                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE12);
+                                hiddenMech.steps[2] = true;
+                            }
+                        }
                     }
                     else
                     {
