@@ -690,7 +690,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Scales")
             {
-                if(GameTesting_CW.instance.arePuzzlesDone[3])
+                if(!GameTesting_CW.instance.arePuzzlesDone[4] && GameTesting_CW.instance.arePuzzlesDone[3])
                 {
                     notificationText.text = "Press E to observe scales";
                     bool interactedWith = false;
@@ -842,13 +842,16 @@ public class Interact_HR : MonoBehaviour
             else if (hit.transform.tag == "SymbolOfScarcity")
             {
                 notificationText.text = "Press E to interact with the " + hit.transform.name;
-
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                if(!GameTesting_CW.instance.arePuzzlesDone[4])
                 {
-                    idleVos.interactedWith = true;
-                    idleVos.interactedWith = false;
-                    subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                    {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
+                        subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                    }
                 }
+               
             } else if(hit.transform.tag == "StuckCan")
             {
                 notificationText.text = "What the..? It's stuck";
