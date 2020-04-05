@@ -216,9 +216,5 @@ public class EventManager_CW : MonoBehaviour
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[4] = true;
         }
-        else if(game.arePuzzlesDone[9])
-        {
-            cinematics.ToggleBlackScreen();
-        }
     }
 }
