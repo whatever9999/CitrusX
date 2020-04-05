@@ -29,6 +29,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class SaveSystem_DR: MonoBehaviour
 {
@@ -363,6 +364,7 @@ public class SaveSystem_DR: MonoBehaviour
         characterController.enabled = false;
         Load();
         characterController.enabled = true;
+        playerT.GetComponentInParent<FirstPersonController>().enabled = true;
     }
 
     /// <summary>
@@ -531,7 +533,10 @@ public class SaveSystem_DR: MonoBehaviour
         gardenTableT.gameObject.SetActive(GD.gardenTableActivated);
 
         //RitualTable
-        ritualTableT.gameObject.SetActive(GD.ritualTableActivated);
+        if(GD.ritualTableActivated)
+        {
+            ritualTableT.GetComponent<PutDown_HR>().PutItemsDown();
+        }
 
         //RitualItems
         bowlT.gameObject.SetActive(GD.bowlNotPickedUp);
@@ -1270,7 +1275,7 @@ public class GameData_DR
         gardenTableActivated = saveData.gardenTableT.gameObject.activeInHierarchy;
 
         //RitualTable
-        ritualTableActivated = saveData.ritualTableT.gameObject.activeInHierarchy;
+        ritualTableActivated = saveData.ritualTableT.GetChild(0).gameObject.activeInHierarchy;
 
         //RitualItems
         bowlNotPickedUp = saveData.bowlT.gameObject.activeInHierarchy;
