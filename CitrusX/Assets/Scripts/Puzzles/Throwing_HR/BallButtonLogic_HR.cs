@@ -78,7 +78,7 @@ public class BallButtonLogic_HR : MonoBehaviour
                 journal.TickOffTask("Button 3");
             }
             #endregion
-            gameObject.SetActive(false);
+            collision.gameObject.SetActive(false);
             //SOUND HERE for BALL hitting
 
             if (puzzleScript.ballCounter == ballsRequired)
