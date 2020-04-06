@@ -23,7 +23,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PauseMenu_AR : MonoBehaviour
 {
-    public KeyCode openAndCloseMenu = KeyCode.Escape;
+    public KeyCode openPause = KeyCode.Escape;
 
     private FirstPersonController firstPersonController;
     private GameObject pauseMenu;
@@ -46,28 +46,25 @@ public class PauseMenu_AR : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(openAndCloseMenu))
+        if (Input.GetKeyDown(openPause))
         {
-            if (pauseMenu.activeInHierarchy)
-            {
-                pauseMenu.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                firstPersonController.enabled = true;
-                waterBowl.enabled = true;
-            } else
-            {
-                pauseMenu.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                firstPersonController.enabled = false;
-                waterBowl.enabled = false;
-            }
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            firstPersonController.enabled = false;
         }
     }
 
     public void MainMenuButton()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ClosePauseButton()
+    {
+        pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        firstPersonController.enabled = true;
     }
 }

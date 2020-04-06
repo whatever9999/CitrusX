@@ -102,6 +102,9 @@
  * 
  * Dominique (Changes) 05/04/2020
  * Can only interact with books at certain point
+ * 
+ * Dominique(Changes) 06/04/2020
+ * Added inventory use
  */
 
 /**
@@ -115,7 +118,7 @@
  * 
  * \author Hugo
  * 
- * \date Last Modified: 04/03/2020
+ * \date Last Modified: 06/04/2020
  */
 using UnityEngine;
 using UnityEngine.UI;
@@ -242,7 +245,7 @@ public class Interact_HR : MonoBehaviour
                     SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, hit.transform.position);
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
-                    //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
+                    inventoryManager.AddItem(hit.transform.GetComponent<Object_DR>().inventoryName);
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
@@ -276,6 +279,7 @@ public class Interact_HR : MonoBehaviour
                                 table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place on table");
                                 notificationText.text = "";
+                                inventoryManager.RemoveRitualItems();
                             }
                         }
                     }
@@ -296,6 +300,7 @@ public class Interact_HR : MonoBehaviour
                                 table.hasBeenPlaced = true;
                                 Journal_DR.instance.TickOffTask("Place in garden");
                                 notificationText.text = "";
+                                inventoryManager.RemoveJewelleryItems();
                             }
                         }
                     }
@@ -315,7 +320,7 @@ public class Interact_HR : MonoBehaviour
                                 table.hasBeenPlaced = true;
                                 notificationText.text = "";
                                 journal.ChangeTasks(new string[] { "Solve Puzzle" });
-                              
+                                inventoryManager.RemovePawn();
                             }
                         }
                     }
@@ -393,6 +398,7 @@ public class Interact_HR : MonoBehaviour
                                     notificationText.text = "Press E to open door";
                                     colourMatch.isDoorInteractedWith[1] = true;
                                     door.unlocked = true;
+                                    inventoryManager.RemoveKey();
                                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                     {
                                         idleVos.interactedWith = true;

@@ -5,6 +5,8 @@
  * Opens and closes the Inventory on the UI using keycodes
  * From another script you can use the Inventory class to add,remove items or check if an item is in the inventory
  * 
+ * Dominique (Changes) 06/04/2020
+ * Added to enum, made sure item names appear with spaces instead of underscores and added functions to remove groups of items
  */
 
 /**
@@ -19,7 +21,7 @@
 * 
 * \author Hugo
 * 
-* \date Last Modified: 11/02/2020
+* \date Last Modified: 06/04/2020
 */
 using UnityEngine.UI;
 using UnityEngine;
@@ -30,7 +32,19 @@ public class Inventory_HR : MonoBehaviour
     // First aproach with enums
     public enum Names 
     {
-      WaterJug
+        Water_Jug,
+        Bowl,
+        Salt,
+        Bracelet,
+        Necklace,
+        Pendant,
+        Key,
+        Key_Handle,
+        Key_Bit,
+        Candle,
+        Jewellery_Box,
+        Coins,
+        Pawn
     }
 
     public KeyCode inventoryOpenKey = KeyCode.I;
@@ -95,15 +109,54 @@ public class Inventory_HR : MonoBehaviour
     /// <param name="itemName - an enum linked to a sprite for the item"></param>
     public void AddItem(Names itemName)
     {
-        for (int i = 0; i < maxItems; i++)
+        bool addedKey = false;
+        if(itemName == Names.Key_Bit)
         {
-            //If slot is empty
-            if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == "")
+            int IsItemInInventory = CheckItem(Names.Key_Handle.ToString());
+            if (IsItemInInventory != -1)
             {
-                //Add image and text
-                inventoryItems[i].transform.GetChild(0).GetComponent<Image>().sprite = items[itemName];
-                inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text = itemName.ToString();
-                break;
+                RemoveItem(IsItemInInventory);
+                AddItem(Names.Key);
+                addedKey = true;
+            }
+        } else if (itemName == Names.Key_Handle)
+        {
+            int IsItemInInventory = CheckItem(Names.Key_Bit.ToString());
+            if (IsItemInInventory != -1)
+            {
+                RemoveItem(IsItemInInventory);
+                AddItem(Names.Key);
+                addedKey = true;
+            }
+        } 
+
+        if(!addedKey)
+        {
+            for (int i = 0; i < maxItems; i++)
+            {
+                //If slot is empty
+                if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == "")
+                {
+                    //Add image and text
+                    Image inventoryImage = inventoryItems[i].transform.GetChild(0).GetComponent<Image>();
+                    inventoryImage.sprite = items[itemName];
+                    inventoryImage.enabled = true;
+                    string name = itemName.ToString();
+                    string nameInInventory = "";
+                    for (int j = 0; j < name.Length; j++)
+                    {
+                        if (name[j] == '_')
+                        {
+                            nameInInventory += ' ';
+                        }
+                        else
+                        {
+                            nameInInventory += name[j];
+                        }
+                    }
+                    inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text = nameInInventory;
+                    break;
+                }
             }
         }
     }
@@ -115,7 +168,9 @@ public class Inventory_HR : MonoBehaviour
     public void RemoveItem(int slot) 
     {
         //Remove item from slot
-        inventoryItems[slot].transform.GetChild(0).GetComponent<Image>().sprite = null; 
+        Image inventoryImage = inventoryItems[slot].transform.GetChild(0).GetComponent<Image>();
+        inventoryImage.sprite = null;
+        inventoryImage.enabled = false;
         inventoryItems[slot].transform.GetChild(1).GetComponent<Text>().text = "";
     }
 
@@ -126,12 +181,26 @@ public class Inventory_HR : MonoBehaviour
     /// <returns>The slot that the item is stored at. -1 if it is not there</returns>
     public int CheckItem(string itemName) 
     {
+        string name = itemName.ToString();
+        string nameInInventory = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            if (name[i] == '_')
+            {
+                nameInInventory += ' ';
+            }
+            else
+            {
+                nameInInventory += name[i];
+            }
+        }
+
         int itemSlot = -1;
 
         for (int i = 0; i < maxItems; i++)
         {
             //If item is present in the inventory return the slot number
-            if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == itemName)
+            if (inventoryItems[i].transform.GetChild(1).GetComponent<Text>().text == nameInInventory)
             {
                 itemSlot = i;
                 break;
@@ -139,6 +208,43 @@ public class Inventory_HR : MonoBehaviour
         }
 
         return itemSlot;
-    
+    }
+
+    public void RemoveRitualItems()
+    {
+        int waterJugLocation = CheckItem(Names.Water_Jug.ToString());
+        RemoveItem(waterJugLocation);
+        int candlesLocation = CheckItem(Names.Candle.ToString());
+        RemoveItem(candlesLocation);
+        int coinsLocation = CheckItem(Names.Coins.ToString());
+        RemoveItem(coinsLocation);
+        int bowlLocation = CheckItem(Names.Bowl.ToString());
+        RemoveItem(bowlLocation);
+        int saltLocation = CheckItem(Names.Salt.ToString());
+        RemoveItem(saltLocation);
+    }
+
+    public void RemoveJewelleryItems()
+    {
+        int jewelleryBoxLocation = CheckItem(Names.Jewellery_Box.ToString());
+        RemoveItem(jewelleryBoxLocation);
+        int braceletLocation = CheckItem(Names.Bracelet.ToString());
+        RemoveItem(braceletLocation);
+        int necklaceLocation = CheckItem(Names.Necklace.ToString());
+        RemoveItem(necklaceLocation);
+        int pendantLocation = CheckItem(Names.Pendant.ToString());
+        RemoveItem(pendantLocation);
+    }
+
+    public void RemoveKey()
+    {
+        int keyLocation = CheckItem(Names.Key.ToString());
+        RemoveItem(keyLocation);
+    }
+
+    public void RemovePawn()
+    {
+        int pawnLocation = CheckItem(Names.Pawn.ToString());
+        RemoveItem(pawnLocation);
     }
 }
