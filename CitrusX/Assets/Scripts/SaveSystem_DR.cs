@@ -136,7 +136,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Paper_DR keysPaper;
 
     internal Door_DR colourMatchingDoor;
-    internal Door_DR correntOrderDoor;
+    internal Door_DR correctOrderDoor;
     internal Door_DR rightFrontDoor;
     internal Door_DR pantryDoor;
     internal Door_DR gymDoor;
@@ -198,6 +198,12 @@ public class SaveSystem_DR: MonoBehaviour
     internal ChessPiece_DR king;
     internal ChessPiece_DR queen;
     internal ChessPiece_DR pawn;
+
+    internal ParticleSystem button1Aura;
+    internal ParticleSystem button2Aura;
+    internal ParticleSystem button3Aura;
+    internal ParticleSystem scalesAura;
+    internal ParticleSystem chessBookAura;
     #endregion
 
     /// <summary>
@@ -232,7 +238,7 @@ public class SaveSystem_DR: MonoBehaviour
         chessNoteT = GameObject.Find("Chess Note").GetComponent<Transform>();
         bathroomKeyPartOne = GameObject.Find("Bathroom Key").GetComponent<Transform>();
         bathroomKeyPartTwo = GameObject.Find("Bathroom Key Part 2").GetComponent<Transform>();
-        keypadNoteT = GameObject.Find("KeypadDoc").GetComponent<Transform>();
+        keypadNoteT = GameObject.Find("KeyPadDoc").GetComponent<Transform>();
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -304,7 +310,7 @@ public class SaveSystem_DR: MonoBehaviour
         keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
 
         colourMatchingDoor = GameObject.Find("Upstairs Bathroom Door").GetComponentInChildren<Door_DR>();
-        correntOrderDoor = GameObject.Find("Upstairs Bathroom Door").GetComponentInChildren<Door_DR>();
+        correctOrderDoor = GameObject.Find("Bedroom Door").GetComponentInChildren<Door_DR>();
         rightFrontDoor = GameObject.Find("Front Door").GetComponentInChildren<Door_DR>();
         pantryDoor = GameObject.Find("Pantry Door").GetComponentInChildren<Door_DR>();
         gymDoor = GameObject.Find("Gym Door").GetComponentInChildren<Door_DR>();
@@ -366,6 +372,12 @@ public class SaveSystem_DR: MonoBehaviour
         king = GameObject.Find("BoardKing").GetComponent<ChessPiece_DR>();
         queen = GameObject.Find("BoardQueen").GetComponent<ChessPiece_DR>();
         pawn = GameObject.Find("BoardPawn").GetComponent<ChessPiece_DR>();
+
+        button1Aura = button1.transform.parent.GetComponentInChildren<ParticleSystem>();
+        button2Aura = button2.transform.parent.GetComponentInChildren<ParticleSystem>();
+        button3Aura = button3.transform.parent.GetComponentInChildren<ParticleSystem>();
+        scalesAura = scalesPuzzleScript.GetComponentInChildren<ParticleSystem>();
+        chessBookAura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
         #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
@@ -374,11 +386,6 @@ public class SaveSystem_DR: MonoBehaviour
         Load();
         characterController.enabled = true;
         playerT.GetComponentInParent<FirstPersonController>().enabled = true;
-
-        if(!loaded)
-        {
-            keypadNoteT.gameObject.SetActive(false);
-        }
     }
 
     /// <summary>
@@ -672,9 +679,11 @@ public class SaveSystem_DR: MonoBehaviour
 
         //Baron
         baron.appearanceTimer = GD.appearanceTimer;
+        baron.gettingCoin = GD.baronGettingCoin;
+        baron.currentAppearanceTimer = GD.currentAppearanceTimer;
 
         //WaterBowl
-        for(int i = waterBowl.numberOfCoins; i > GD.coinsLeft; i--)
+        for (int i = waterBowl.numberOfCoins; i > GD.coinsLeft; i--)
         {
             waterBowl.RemoveCoin();
         }
@@ -724,8 +733,8 @@ public class SaveSystem_DR: MonoBehaviour
         //Door
         colourMatchingDoor.unlocked = GD.colourMatchingDoorUnlocked;
         colourMatchingDoor.isOpen = GD.colourMatchingDoorIsOpen;
-        correntOrderDoor.unlocked = GD.correntOrderDoorUnlocked;
-        correntOrderDoor.isOpen = GD.correntOrderDoorIsOpen;
+        correctOrderDoor.unlocked = GD.correctOrderDoorUnlocked;
+        correctOrderDoor.isOpen = GD.correctOrderDoorIsOpen;
         rightFrontDoor.unlocked = GD.rightFrontDoorUnlocked;
         rightFrontDoor.isOpen = GD.rightFrontDoorIsOpen;
         pantryDoor.unlocked = GD.pantryDoorUnlocked;
@@ -838,6 +847,13 @@ public class SaveSystem_DR: MonoBehaviour
         //ScalesPuzzleScript
         scalesPuzzleScript.isActive = GD.scalesPuzzleIsActive;
         scalesPuzzleScript.isComplete = GD.scalesPuzzleIsComplete;
+
+        //Auras
+        if (GD.button1AuraPlaying) button1Aura.Play();
+        if (GD.button2AuraPlaying) button2Aura.Play();
+        if (GD.button3AuraPlaying) button3Aura.Play();
+        if (GD.scalesAuraPlaying) scalesAura.Play();
+        if (GD.chessBookAuraPlaying) chessBookAura.Play();
     }
 }
 
@@ -982,6 +998,8 @@ public class GameData_DR
     internal bool controlsSeen;
     //Baron
     internal float appearanceTimer;
+    internal bool baronGettingCoin;
+    internal float currentAppearanceTimer;
     //Water Bowl
     internal int coinsLeft;
     //KeypadUI
@@ -1028,8 +1046,8 @@ public class GameData_DR
     //Door
     internal bool colourMatchingDoorUnlocked;
     internal bool colourMatchingDoorIsOpen;
-    internal bool correntOrderDoorUnlocked;
-    internal bool correntOrderDoorIsOpen;
+    internal bool correctOrderDoorUnlocked;
+    internal bool correctOrderDoorIsOpen;
     internal bool rightFrontDoorUnlocked;
     internal bool rightFrontDoorIsOpen;
     internal bool pantryDoorUnlocked;
@@ -1152,6 +1170,13 @@ public class GameData_DR
     internal bool scalesPuzzleIsActive;
     internal bool scalesPuzzleIsComplete;
 
+    //Auras
+    internal bool button1AuraPlaying;
+    internal bool button2AuraPlaying;
+    internal bool button3AuraPlaying;
+    internal bool scalesAuraPlaying;
+    internal bool chessBookAuraPlaying;
+
     //Pipes
     internal Pipes_CW.Directions pipe1CurrentPosition;
     internal Pipes_CW.Directions pipe2CurrentPosition;
@@ -1222,6 +1247,9 @@ public class GameData_DR
 
         //Baron
         baronActive = saveData.baronT.gameObject.activeInHierarchy;
+        baronGettingCoin = saveData.baron.gettingCoin;
+        appearanceTimer = saveData.baron.appearanceTimer;
+        currentAppearanceTimer = saveData.baron.currentAppearanceTimer;
 
         baronPosition[0] = saveData.baronT.position.x;
         baronPosition[1] = saveData.baronT.position.y;
@@ -1552,8 +1580,8 @@ public class GameData_DR
         //Door
         colourMatchingDoorUnlocked = saveData.colourMatchingDoor.unlocked;
         colourMatchingDoorIsOpen = saveData.colourMatchingDoor.isOpen;
-        correntOrderDoorUnlocked = saveData.correntOrderDoor.unlocked;
-        correntOrderDoorIsOpen = saveData.correntOrderDoor.isOpen;
+        correctOrderDoorUnlocked = saveData.correctOrderDoor.unlocked;
+        correctOrderDoorIsOpen = saveData.correctOrderDoor.isOpen;
         rightFrontDoorUnlocked = saveData.rightFrontDoor.unlocked;
         rightFrontDoorIsOpen = saveData.rightFrontDoor.isOpen;
         pantryDoorUnlocked = saveData.pantryDoor.unlocked;
@@ -1676,5 +1704,12 @@ public class GameData_DR
         kingCurrentPosition = saveData.king.currentPosition;
         queenCurrentPosition = saveData.queen.currentPosition;
         pawnCurrentPosition = saveData.pawn.currentPosition;
+
+        //Auras
+        button1AuraPlaying = saveData.button1Aura.isPlaying;
+        button2AuraPlaying = saveData.button2Aura.isPlaying;
+        button3AuraPlaying = saveData.button3Aura.isPlaying;
+        scalesAuraPlaying = saveData.scalesAura.isPlaying;
+        chessBookAuraPlaying = saveData.chessBookAura.isPlaying;
     }
 }

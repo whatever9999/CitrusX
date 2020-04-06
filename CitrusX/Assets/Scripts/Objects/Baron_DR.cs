@@ -35,7 +35,7 @@ public class Baron_DR : MonoBehaviour
     public Drip[] drips;
 
     internal float appearanceTimer;
-    private float currentAppearanceTimer;
+    internal float currentAppearanceTimer;
     internal bool gettingCoin = false;
     private Vector3 startPosition;
     private Transform waterBowl;
@@ -61,6 +61,11 @@ public class Baron_DR : MonoBehaviour
         if (SaveSystem_DR.instance.loaded)
         {
             gameObject.SetActive(SaveSystem_DR.instance.loadedGD.baronActive);
+
+            if(gameObject.activeInHierarchy && !gettingCoin)
+            {
+                animator.SetBool("NotMoving", true);
+            }
         } else
         {
             gameObject.SetActive(false);

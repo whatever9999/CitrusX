@@ -99,7 +99,6 @@ public class EventManager_CW : MonoBehaviour
     {
         game = GameTesting_CW.instance;
         #region ACTIVATE_OBJECTS
-        keypadDoc.SetActive(false);
         if (SaveSystem_DR.instance.loaded)
         {
             throwingBox.SetActive(SaveSystem_DR.instance.loadedGD.throwingActivated);
@@ -114,6 +113,7 @@ public class EventManager_CW : MonoBehaviour
             buttons2.SetActive(SaveSystem_DR.instance.loadedGD.button2IsActive);
             buttons3.SetActive(SaveSystem_DR.instance.loadedGD.button3IsActive);
             chessNote.SetActive(SaveSystem_DR.instance.loadedGD.chessNoteActivated);
+            keypadDoc.SetActive(SaveSystem_DR.instance.loadedGD.keypadNoteActive);
         }
         else
         {
@@ -129,6 +129,7 @@ public class EventManager_CW : MonoBehaviour
             buttons2.SetActive(false);
             buttons3.SetActive(false);
             chessNote.SetActive(false);
+            keypadDoc.SetActive(false);
         }
         #endregion
     }
