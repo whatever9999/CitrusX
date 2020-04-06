@@ -829,10 +829,6 @@ public class Interact_HR : MonoBehaviour
                 {
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
-                    //inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
-
-                    //  inventoryManager.AddItem(Inventory_HR.Names.WaterJug);
-
                     hit.transform.gameObject.SetActive(false);
                     notificationText.text = "";
                     journal.TickOffTask("Find the Pawn");

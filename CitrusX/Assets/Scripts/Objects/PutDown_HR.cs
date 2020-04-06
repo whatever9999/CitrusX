@@ -37,6 +37,17 @@ public class PutDown_HR : MonoBehaviour
     public bool GetBeenUsed() { return beenUsed; }
     public void SetBeenUsed(bool newValue) { beenUsed = newValue; }
 
+    private void Start()
+    {
+        if(beenUsed)
+        {
+            PutItemsDown();
+        } else if (name == "ChessBoard")
+        {
+            GameObject.Find("BoardPawn").SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Activate all children of the object and set been used to true
     /// </summary>

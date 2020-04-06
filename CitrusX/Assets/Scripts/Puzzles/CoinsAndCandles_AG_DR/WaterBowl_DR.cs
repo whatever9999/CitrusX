@@ -36,7 +36,7 @@ public class WaterBowl_DR : MonoBehaviour
     /// <summary>
     /// Create the coins and set the current interval until the baron will appear
     /// </summary>
-    private void Start()
+    private void Awake()
     {
         coins = new List<GameObject>();
         for(int i = 0; i < numberOfCoins; i++)

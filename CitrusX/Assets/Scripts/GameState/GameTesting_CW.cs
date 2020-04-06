@@ -82,7 +82,7 @@ public class GameTesting_CW : MonoBehaviour
     }
     private void Update()
     {
-        if(!controlsSeen && cutscenes[0])
+        if (!controlsSeen && cutscenes[0])
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

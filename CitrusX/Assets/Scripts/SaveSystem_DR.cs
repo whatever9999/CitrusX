@@ -58,6 +58,8 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform ball1T;
     internal Transform ball2T;
     internal Transform ball3T;
+    internal Transform pawnObjectT;
+    internal Transform chessNoteT;
 
     internal Transform crisps1T;
     internal Transform crisps2T;
@@ -223,6 +225,8 @@ public class SaveSystem_DR: MonoBehaviour
         ball1T = GameObject.Find("1Ball").GetComponent<Transform>();
         ball2T = GameObject.Find("2Ball").GetComponent<Transform>();
         ball3T = GameObject.Find("3Ball").GetComponent<Transform>();
+        pawnObjectT = GameObject.Find("Pawn").GetComponent<Transform>();
+        chessNoteT = GameObject.Find("Chess Note").GetComponent<Transform>();
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -288,7 +292,7 @@ public class SaveSystem_DR: MonoBehaviour
         gardenTable = GameObject.Find("GardenTable").GetComponent<Table_CW>();
         chessTable = GameObject.Find("ChessBoard").GetComponent<Table_CW>();
 
-        chessPaper = GameObject.Find("Chess Note").GetComponent<Paper_DR>();
+        chessPaper = GameObject.Find("ChessBook").GetComponent<Paper_DR>();
         hiddenMechanismPaper = GameObject.Find("HiddenMechNote").GetComponent<Paper_DR>();
         keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
         keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
@@ -356,7 +360,6 @@ public class SaveSystem_DR: MonoBehaviour
         king = GameObject.Find("BoardKing").GetComponent<ChessPiece_DR>();
         queen = GameObject.Find("BoardQueen").GetComponent<ChessPiece_DR>();
         pawn = GameObject.Find("BoardPawn").GetComponent<ChessPiece_DR>();
-        pawn.gameObject.SetActive(false);
         #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
@@ -441,6 +444,7 @@ public class SaveSystem_DR: MonoBehaviour
         else
         {
             //No save file available
+            pawnObjectT.gameObject.SetActive(false);
             return;
         }
 
@@ -506,37 +510,27 @@ public class SaveSystem_DR: MonoBehaviour
         baronT.position = new Vector3(GD.baronPosition[0], GD.baronPosition[1], GD.baronPosition[2]);
         baronT.rotation = new Quaternion(GD.baronRotation[0], GD.baronRotation[1], GD.baronRotation[2], GD.baronRotation[3]);
 
-        //Chessboard
-        chessBoardT.gameObject.SetActive(GD.chessTableActivated);
+        //PawnObject
+        pawnObjectT.gameObject.SetActive(GD.pawnObjectActive);
 
-        Transform[] chessPieces = chessBoard.GetComponentsInChildren<Transform>();
-        for (int i = 0; i < chessPieces.Length; i++)
+        //ChessPieces
+        while (knight.currentPosition != GD.knightCurrentPosition)
         {
-            switch (chessPieces[i].name)
-            {
-                case "BoardKnight":
-                    chessPieces[i].rotation = new Quaternion(GD.chessKnightRotation[0], GD.chessKnightRotation[1], GD.chessKnightRotation[2], GD.chessKnightRotation[3]);
-                    break;
-                case "BoardKing":
-                    chessPieces[i].rotation = new Quaternion(GD.chessKingRotation[0], GD.chessKingRotation[1], GD.chessKingRotation[2], GD.chessKingRotation[3]);
-                    break;
-                case "BoardQueen":
-                    chessPieces[i].rotation = new Quaternion(GD.chessQueenRotation[0], GD.chessQueenRotation[1], GD.chessQueenRotation[2], GD.chessQueenRotation[3]);
-                    break;
-                case "BoardPawn":
-                    chessPieces[i].rotation = new Quaternion(GD.chessPawnRotation[0], GD.chessPawnRotation[1], GD.chessPawnRotation[2], GD.chessPawnRotation[3]);
-                    break;
-            }
+            knight.Rotate();
         }
-
-        //GardenTable
-        gardenTableT.gameObject.SetActive(GD.gardenTableActivated);
-
-        //RitualTable
-        if(GD.ritualTableActivated)
+        while (king.currentPosition != GD.kingCurrentPosition)
         {
-            ritualTableT.GetComponent<PutDown_HR>().PutItemsDown();
+            king.Rotate();
         }
+        while (queen.currentPosition != GD.queenCurrentPosition)
+        {
+            queen.Rotate();
+        }
+        while (pawn.currentPosition != GD.pawnCurrentPosition)
+        {
+            pawn.Rotate();
+        }
+        chessNoteT.gameObject.SetActive(GD.chessNoteActivated);
 
         //RitualItems
         bowlT.gameObject.SetActive(GD.bowlNotPickedUp);
@@ -832,24 +826,6 @@ public class SaveSystem_DR: MonoBehaviour
         //ScalesPuzzleScript
         scalesPuzzleScript.isActive = GD.scalesPuzzleIsActive;
         scalesPuzzleScript.isComplete = GD.scalesPuzzleIsComplete;
-
-        //ChessPieces
-        while(knight.currentPosition != GD.knightCurrentPosition)
-        {
-            knight.Rotate();
-        }
-        while (king.currentPosition != GD.knightCurrentPosition)
-        {
-            king.Rotate();
-        }
-        while (queen.currentPosition != GD.knightCurrentPosition)
-        {
-            queen.Rotate();
-        }
-        while (pawn.currentPosition != GD.knightCurrentPosition)
-        {
-            pawn.Rotate();
-        }
     }
 }
 
@@ -881,16 +857,8 @@ public class GameData_DR
     internal bool baronActive;
     internal float[] baronPosition = new float[3];
     internal float[] baronRotation = new float[4];
-    //Chessboard
-    internal bool chessTableActivated;
-    internal float[] chessPawnRotation;
-    internal float[] chessKnightRotation;
-    internal float[] chessKingRotation;
-    internal float[] chessQueenRotation;
-    //GardenTable
-    internal bool gardenTableActivated;
-    //RitualTable
-    internal bool ritualTableActivated;
+    //Pawn Object
+    internal bool pawnObjectActive;
     //RitualItems
     internal bool bowlNotPickedUp;
     internal bool candlesNotPickedUp;
@@ -904,6 +872,8 @@ public class GameData_DR
     internal bool keypadTableActivated;
     //ThrowingBox
     internal bool throwingBoxActivated;
+    //Chess Note
+    internal bool chessNoteActivated;
     //Balls
     internal float[] ball1TPosition = new float[3];
     internal float[] ball1TRotation = new float[4];
@@ -1233,49 +1203,10 @@ public class GameData_DR
         baronRotation[3] = saveData.baronT.rotation.w;
 
         //Chessboard
-        chessTableActivated = saveData.chessBoardT.gameObject.activeInHierarchy;
+        pawnObjectActive = saveData.pawnObjectT.gameObject.activeInHierarchy;
 
-        Transform[] chessPieces = saveData.chessBoard.GetComponentsInChildren<Transform>();
-        chessKnightRotation = new float[4];
-        chessKingRotation = new float[4];
-        chessQueenRotation = new float[4];
-        chessPawnRotation = new float[4];
-        for (int i = 0; i < chessPieces.Length; i++)
-        {
-            switch (chessPieces[i].name)
-            {
-                case "BoardKnight":
-                    chessKnightRotation[0] = chessPieces[i].rotation.x;
-                    chessKnightRotation[1] = chessPieces[i].rotation.y;
-                    chessKnightRotation[2] = chessPieces[i].rotation.z;
-                    chessKnightRotation[3] = chessPieces[i].rotation.w;
-                    break;
-                case "BoardKing":
-                    chessKingRotation[0] = chessPieces[i].rotation.x;
-                    chessKingRotation[1] = chessPieces[i].rotation.y;
-                    chessKingRotation[2] = chessPieces[i].rotation.z;
-                    chessKingRotation[3] = chessPieces[i].rotation.w;
-                    break;
-                case "BoardQueen":
-                    chessQueenRotation[0] = chessPieces[i].rotation.x;
-                    chessQueenRotation[1] = chessPieces[i].rotation.y;
-                    chessQueenRotation[2] = chessPieces[i].rotation.z;
-                    chessQueenRotation[3] = chessPieces[i].rotation.w;
-                    break;
-                case "BoardPawn":
-                    chessPawnRotation[0] = chessPieces[i].rotation.x;
-                    chessPawnRotation[1] = chessPieces[i].rotation.y;
-                    chessPawnRotation[2] = chessPieces[i].rotation.z;
-                    chessPawnRotation[3] = chessPieces[i].rotation.w;
-                    break;
-            }
-        }
-
-        //GardenTable
-        gardenTableActivated = saveData.gardenTableT.gameObject.activeInHierarchy;
-
-        //RitualTable
-        ritualTableActivated = saveData.ritualTableT.GetChild(0).gameObject.activeInHierarchy;
+        //Chess Note
+        chessNoteActivated = saveData.chessNoteT.gameObject.activeInHierarchy;
 
         //RitualItems
         bowlNotPickedUp = saveData.bowlT.gameObject.activeInHierarchy;

@@ -15,7 +15,7 @@ public class ChessPiece_DR : MonoBehaviour
     public void Rotate()
     {
         transform.Rotate(0, 0, 90);
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PAWN, transform.position);
+        if(SaveSystem_DR.instance.loaded) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PAWN, transform.position);
 
         switch (currentPosition)
         {
@@ -32,8 +32,6 @@ public class ChessPiece_DR : MonoBehaviour
                 currentPosition = ChessBoard_DR.POSITION.LEFT;
                 break;
         }
-
-        chessBoard.CheckPieces();
 
         if (SaveSystem_DR.instance.loaded)
         {

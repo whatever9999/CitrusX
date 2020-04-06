@@ -119,7 +119,6 @@ public class EventManager_CW : MonoBehaviour
         buttons1.SetActive(false);
         buttons2.SetActive(false);
         buttons3.SetActive(false);
-        pawn.SetActive(false);
         chessNote.SetActive(false);
         #endregion
     }

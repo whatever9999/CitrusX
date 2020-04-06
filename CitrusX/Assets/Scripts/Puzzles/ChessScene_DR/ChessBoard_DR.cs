@@ -58,7 +58,6 @@ public class ChessBoard_DR : MonoBehaviour
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
-       // chessExtraTrigger = GameObject.Find("ChessboardExtraTrigger").GetComponent<TriggerScript_CW>();
     }
 
     /// <summary>
