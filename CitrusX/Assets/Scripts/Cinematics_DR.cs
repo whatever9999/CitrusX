@@ -37,7 +37,7 @@ public class Cinematics_DR : MonoBehaviour
     private Animator endCameraAnimator;
     private Animator startCameraAnimator;
     private GameObject monitor;
-    private bool monitorOn = false;
+    internal bool monitorOn = false;
     private GameObject cutsceneCoins;
     private Image blackScreen;
     private GameObject creditScreen;

@@ -31,12 +31,12 @@ public class HiddenMech_CW : MonoBehaviour
     internal bool[] steps = { false, false, false, false };
     public void SetActive(bool value) { isActive = value; }
 
-    private Book_CW blueBook;
-    private Book_CW FourEastBook;
-    private Book_CW TwoNorthWestBook;
-    private Book_CW HiddenMechBook;
+    internal Book_CW blueBook;
+    internal Book_CW FourEastBook;
+    internal Book_CW TwoNorthWestBook;
+    internal Book_CW HiddenMechBook;
 
-    private void Start()
+    private void Awake()
     {
         blueBook = GameObject.Find("BlueBook").GetComponent<Book_CW>();
         FourEastBook = GameObject.Find("FourEastBook").GetComponent<Book_CW>();

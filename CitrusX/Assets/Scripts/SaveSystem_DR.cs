@@ -60,6 +60,9 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform ball3T;
     internal Transform pawnObjectT;
     internal Transform chessNoteT;
+    internal Transform bathroomKeyPartOne;
+    internal Transform bathroomKeyPartTwo;
+    internal Transform keypadNoteT;
 
     internal Transform crisps1T;
     internal Transform crisps2T;
@@ -92,8 +95,8 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform keyHandle2T;
     internal Transform keyHandle3T;
     internal Transform keyHandle4T;
+    internal Transform keyBit1T;
     internal Transform keyBit2T;
-    internal Transform keyBit3T;
     internal Transform jewellery;
     internal Transform pendant;
     internal Transform necklace;
@@ -176,8 +179,8 @@ public class SaveSystem_DR: MonoBehaviour
     internal HoldandThrow_HR keyHandle2;
     internal HoldandThrow_HR keyHandle3;
     internal HoldandThrow_HR keyHandle4;
+    internal HoldandThrow_HR keyBit1;
     internal HoldandThrow_HR keyBit2;
-    internal HoldandThrow_HR keyBit3;
 
     internal BallButtonLogic_HR button1;
     internal BallButtonLogic_HR button2;
@@ -227,6 +230,9 @@ public class SaveSystem_DR: MonoBehaviour
         ball3T = GameObject.Find("3Ball").GetComponent<Transform>();
         pawnObjectT = GameObject.Find("Pawn").GetComponent<Transform>();
         chessNoteT = GameObject.Find("Chess Note").GetComponent<Transform>();
+        bathroomKeyPartOne = GameObject.Find("Bathroom Key").GetComponent<Transform>();
+        bathroomKeyPartTwo = GameObject.Find("Bathroom Key Part 2").GetComponent<Transform>();
+        keypadNoteT = GameObject.Find("KeypadDoc").GetComponent<Transform>();
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -259,8 +265,8 @@ public class SaveSystem_DR: MonoBehaviour
         keyHandle2T = GameObject.Find("KeyHandle2").GetComponent<Transform>();
         keyHandle3T = GameObject.Find("KeyHandle3").GetComponent<Transform>();
         keyHandle4T = GameObject.Find("KeyHandle4").GetComponent<Transform>();
-        keyBit2T = GameObject.Find("KeyBit1").GetComponent<Transform>();
-        keyBit3T = GameObject.Find("KeyBit2").GetComponent<Transform>();
+        keyBit1T = GameObject.Find("KeyBit1").GetComponent<Transform>();
+        keyBit2T = GameObject.Find("KeyBit2").GetComponent<Transform>();
         jewellery = GameObject.Find("Jewellery Box").GetComponent<Transform>();
         pendant = GameObject.Find("Pendant").GetComponent<Transform>();
         necklace = GameObject.Find("Necklace").GetComponent<Transform>();
@@ -340,8 +346,8 @@ public class SaveSystem_DR: MonoBehaviour
         keyHandle2 = GameObject.Find("KeyHandle2").GetComponent<HoldandThrow_HR>();
         keyHandle3 = GameObject.Find("KeyHandle3").GetComponent<HoldandThrow_HR>();
         keyHandle4 = GameObject.Find("KeyHandle4").GetComponent<HoldandThrow_HR>();
-        keyBit2 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>();
-        keyBit3 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>();
+        keyBit1 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>();
+        keyBit2 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>();
 
         button1 = GameObject.Find("1Button").GetComponentInChildren<BallButtonLogic_HR>();
         button2 = GameObject.Find("2Button").GetComponentInChildren<BallButtonLogic_HR>();
@@ -368,6 +374,11 @@ public class SaveSystem_DR: MonoBehaviour
         Load();
         characterController.enabled = true;
         playerT.GetComponentInParent<FirstPersonController>().enabled = true;
+
+        if(!loaded)
+        {
+            keypadNoteT.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -474,6 +485,9 @@ public class SaveSystem_DR: MonoBehaviour
         playerT.position = new Vector3(GD.playerPosition[0], GD.playerPosition[1], GD.playerPosition[2]);
         playerT.rotation = new Quaternion(GD.playerRotation[0], GD.playerRotation[1], GD.playerRotation[2], GD.playerRotation[3]);
 
+        //Keypad Note
+        keypadNoteT.gameObject.SetActive(GD.keypadNoteActive);
+
         //JournalUI
         Text[] journalTexts = journalGO.GetComponentsInChildren<Text>();
         for (int i = 0; i < journalTexts.Length; i++)
@@ -539,14 +553,10 @@ public class SaveSystem_DR: MonoBehaviour
         saltT.gameObject.SetActive(GD.saltNotPickedUp);
 
         //Monitor
-        saltT.gameObject.SetActive(GD.monitorOn);
-        for(int i = 0; i < monitorT.childCount; i++)
+        if(GD.monitorOn)
         {
-            monitorT.GetChild(i).gameObject.SetActive(GD.monitorOn);
+            cinematics.ToggleMonitor();
         }
-
-        //KeypadTable
-        safeT.gameObject.SetActive(GD.keypadTableActivated);
 
         //Balls
         ball1T.position = new Vector3(GD.ball1TPosition[0], GD.ball1TPosition[1], GD.ball1TPosition[2]);
@@ -625,9 +635,9 @@ public class SaveSystem_DR: MonoBehaviour
 
         keyHandle4T.position = new Vector3(GD.keyHandle4TPosition[0], GD.keyHandle4TPosition[1], GD.keyHandle4TPosition[2]);
 
-        keyBit2T.position = new Vector3(GD.keyBit2TPosition[0], GD.keyBit2TPosition[1], GD.keyBit2TPosition[2]);
+        keyBit1T.position = new Vector3(GD.keyBit1TPosition[0], GD.keyBit1TPosition[1], GD.keyBit1TPosition[2]);
 
-        keyBit3T.position = new Vector3(GD.keyBit3TPosition[0], GD.keyBit3TPosition[1], GD.keyBit3TPosition[2]);
+        keyBit2T.position = new Vector3(GD.keyBit2TPosition[0], GD.keyBit2TPosition[1], GD.keyBit2TPosition[2]);
 
         //JewelleryItems
         jewellery.gameObject.SetActive(GD.jewelleryNotPickedUp);
@@ -791,15 +801,10 @@ public class SaveSystem_DR: MonoBehaviour
         keyHandle4.canHold = GD.canHoldKeyHandle4;
         keyHandle4.isFirstTime = GD.keyHandle4IsFirstTime;
 
+        keyBit1.canHold = GD.canHoldKeyBit1;
+        keyBit1.isFirstTime = GD.keyBit1IsFirstTime;
         keyBit2.canHold = GD.canHoldKeyBit2;
         keyBit2.isFirstTime = GD.keyBit2IsFirstTime;
-        keyBit3.canHold = GD.canHoldKeyBit3;
-        keyBit3.isFirstTime = GD.keyBit3IsFirstTime;
-
-        //BallButtonLogic
-        button1.isActive = GD.button1IsActive;
-        button2.isActive = GD.button2IsActive;
-        button3.isActive = GD.button3IsActive;
 
         //SetUpRitual
         setUpRitual.ritualSteps = GD.ritualSteps;
@@ -808,6 +813,13 @@ public class SaveSystem_DR: MonoBehaviour
 
         //HiddenMech
         hiddenMech.isActive = GD.hiddenMechIsActive;
+        hiddenMech.complete = GD.hiddenMechIsComplete;
+        hiddenMech.clueRead = GD.hiddenMechClueIsRead;
+        hiddenMech.steps = GD.hiddenMechSteps;
+        hiddenMech.HiddenMechBook.canInteractWith = GD.canInteractWithHiddenMechBook;
+        hiddenMech.blueBook.canInteractWith = GD.canInteractWithBlueBook;
+        hiddenMech.FourEastBook.canInteractWith = GD.canInteractWithFourthEastBook;
+        hiddenMech.TwoNorthWestBook.canInteractWith = GD.canInteractWithTwoNorthWestBook;
         //Fusebox
         fusebox.isFuseboxSolved = GD.isFuseboxSolved;
         fusebox.voiceovers = GD.fuseboxVoiceovers;
@@ -870,8 +882,12 @@ public class GameData_DR
     internal bool monitorOn;
     //Keypad
     internal bool keypadTableActivated;
+    internal bool keypadNoteActive;
     //ThrowingBox
     internal bool throwingBoxActivated;
+    //Bathroom Keys
+    internal bool bathroomKeyPartOneActive;
+    internal bool bathroomKeyPartTwoActive;
     //Chess Note
     internal bool chessNoteActivated;
     //Balls
@@ -937,9 +953,9 @@ public class GameData_DR
     internal float[] keyHandle3TRotation = new float[4];
     internal float[] keyHandle4TPosition = new float[3];
     internal float[] keyHandle4TRotation = new float[4];
+    internal float[] keyBit1TPosition = new float[3];
+    internal float[] keyBit1TRotation = new float[4];
     internal float[] keyBit2TPosition = new float[3];
-    internal float[] keyBit2TRotation = new float[4];
-    internal float[] keyBit3TPosition = new float[3];
     internal float[] keyBit3TRotation = new float[4];
     //JewelleryItems
     internal bool jewelleryNotPickedUp;
@@ -1042,6 +1058,9 @@ public class GameData_DR
     internal bool ball2IsFirstTime;
     internal bool canHoldBall3;
     internal bool ball3IsFirstTime;
+    internal bool ball1IsActive;
+    internal bool ball2IsActive;
+    internal bool ball3IsActive;
 
     internal bool canHoldcrisps1;
     internal bool canHoldcrisps2;
@@ -1089,10 +1108,10 @@ public class GameData_DR
     internal bool canHoldKeyHandle4;
     internal bool keyHandle4IsFirstTime;
 
+    internal bool canHoldKeyBit1;
+    internal bool keyBit1IsFirstTime;
     internal bool canHoldKeyBit2;
     internal bool keyBit2IsFirstTime;
-    internal bool canHoldKeyBit3;
-    internal bool keyBit3IsFirstTime;
 
     //BallButtonLogic
     internal bool button1IsActive;
@@ -1106,6 +1125,14 @@ public class GameData_DR
 
     //HiddenMech
     internal bool hiddenMechIsActive;
+    internal bool hiddenMechIsComplete;
+    internal bool hiddenMechClueIsRead;
+    internal bool[] hiddenMechSteps = new bool[4];
+    internal bool canInteractWithHiddenMechBook;
+    internal bool canInteractWithBlueBook;
+    internal bool canInteractWithFourthEastBook;
+    internal bool canInteractWithTwoNorthWestBook;
+
     //Fusebox
     internal bool isFuseboxSolved;
     internal bool[] fuseboxVoiceovers;
@@ -1158,6 +1185,9 @@ public class GameData_DR
         playerRotation[2] = saveData.playerT.rotation.z;
         playerRotation[3] = saveData.playerT.rotation.w;
 
+        //KeypadNote
+        keypadNoteActive = saveData.keypadNoteT.gameObject.activeInHierarchy;
+
         //JournalUI
         Text[] journalTexts = saveData.journalGO.GetComponentsInChildren<Text>();
         journalTasks = new string[5];
@@ -1202,11 +1232,12 @@ public class GameData_DR
         baronRotation[2] = saveData.baronT.rotation.z;
         baronRotation[3] = saveData.baronT.rotation.w;
 
+        //Bathroom Keys
+        bathroomKeyPartOneActive = saveData.bathroomKeyPartOne.gameObject.activeInHierarchy;
+        bathroomKeyPartTwoActive = saveData.bathroomKeyPartTwo.gameObject.activeInHierarchy;
+
         //Chessboard
         pawnObjectActive = saveData.pawnObjectT.gameObject.activeInHierarchy;
-
-        //Chess Note
-        chessNoteActivated = saveData.chessNoteT.gameObject.activeInHierarchy;
 
         //RitualItems
         bowlNotPickedUp = saveData.bowlT.gameObject.activeInHierarchy;
@@ -1238,6 +1269,10 @@ public class GameData_DR
         ball3TPosition[0] = saveData.ball3T.position.x;
         ball3TPosition[1] = saveData.ball3T.position.y;
         ball3TPosition[2] = saveData.ball3T.position.z;
+
+        ball1IsActive = saveData.ball1T.gameObject.activeInHierarchy;
+        ball2IsActive = saveData.ball2T.gameObject.activeInHierarchy;
+        ball3IsActive = saveData.ball3T.gameObject.activeInHierarchy;
 
         //FoodItems
         crisps1Position[0] = saveData.crisps1T.position.x;
@@ -1407,13 +1442,13 @@ public class GameData_DR
         keyHandle4TPosition[1] = saveData.keyHandle4T.position.y;
         keyHandle4TPosition[2] = saveData.keyHandle4T.position.z;
 
+        keyBit1TPosition[0] = saveData.keyBit1T.position.x;
+        keyBit1TPosition[1] = saveData.keyBit1T.position.y;
+        keyBit1TPosition[2] = saveData.keyBit1T.position.z;
+
         keyBit2TPosition[0] = saveData.keyBit2T.position.x;
         keyBit2TPosition[1] = saveData.keyBit2T.position.y;
         keyBit2TPosition[2] = saveData.keyBit2T.position.z;
-
-        keyBit3TPosition[0] = saveData.keyBit3T.position.x;
-        keyBit3TPosition[1] = saveData.keyBit3T.position.y;
-        keyBit3TPosition[2] = saveData.keyBit3T.position.z;
 
         //JewelleryItems
         jewelleryNotPickedUp = saveData.jewellery.gameObject.activeInHierarchy;
@@ -1428,9 +1463,16 @@ public class GameData_DR
         for(int i = 0; i < inventoryGOs.Length; i++)
         {
             string inventoryItem = inventoryGOs[i].GetComponentInChildren<Text>().text;
-            if (inventoryItem.Trim() != "")
+            string enumName = "";
+            for(int j = 0; j < inventoryItem.Length; j++)
             {
-                tempInventory.Add((Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), inventoryItem));
+                if (inventoryItem[j] == ' ') enumName += "_";
+                else enumName += inventoryItem[j];
+            }
+
+            if (enumName.Trim() != "")
+            {
+                tempInventory.Add((Inventory_HR.Names)Enum.Parse(typeof(Inventory_HR.Names), enumName));
                 itemCount++;
             }
         }
@@ -1587,10 +1629,10 @@ public class GameData_DR
         canHoldKeyHandle4 = saveData.keyHandle4.canHold;
         keyHandle4IsFirstTime = saveData.keyHandle4.isFirstTime;
 
+        canHoldKeyBit1 = saveData.keyBit1.canHold;
+        keyBit1IsFirstTime = saveData.keyBit1.isFirstTime;
         canHoldKeyBit2 = saveData.keyBit2.canHold;
         keyBit2IsFirstTime = saveData.keyBit2.isFirstTime;
-        canHoldKeyBit3 = saveData.keyBit3.canHold;
-        keyBit3IsFirstTime = saveData.keyBit3.isFirstTime;
 
         //BallButtonLogic
         button1IsActive = saveData.button1.isActive;
@@ -1603,6 +1645,13 @@ public class GameData_DR
         ritualVoiceovers = saveData.setUpRitual.voiceovers;
         //HiddenMech
         hiddenMechIsActive = saveData.hiddenMech.isActive;
+        hiddenMechIsComplete = saveData.hiddenMech.complete;
+        hiddenMechClueIsRead = saveData.hiddenMech.clueRead;
+        hiddenMechSteps = saveData.hiddenMech.steps;
+        canInteractWithHiddenMechBook = saveData.hiddenMech.HiddenMechBook.canInteractWith;
+        canInteractWithBlueBook = saveData.hiddenMech.blueBook.canInteractWith;
+        canInteractWithFourthEastBook = saveData.hiddenMech.FourEastBook.canInteractWith;
+        canInteractWithTwoNorthWestBook = saveData.hiddenMech.TwoNorthWestBook.canInteractWith;
         //Fusebox
         isFuseboxSolved = saveData.fusebox.isFuseboxSolved;
         fuseboxActive = saveData.fusebox.isActive;

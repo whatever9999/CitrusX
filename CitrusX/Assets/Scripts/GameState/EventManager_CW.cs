@@ -104,22 +104,32 @@ public class EventManager_CW : MonoBehaviour
         {
             throwingBox.SetActive(SaveSystem_DR.instance.loadedGD.throwingActivated);
             hiddenMechDoc.SetActive(SaveSystem_DR.instance.loadedGD.hiddenMechNoteActivated);
+            bathroomKeyPart1.SetActive(SaveSystem_DR.instance.loadedGD.bathroomKeyPartOneActive);
+            bathroomKeyPart2.SetActive(SaveSystem_DR.instance.loadedGD.bathroomKeyPartTwoActive);
+            safe.SetActive(SaveSystem_DR.instance.loadedGD.keypadTableActivated);
+            balls1.SetActive(SaveSystem_DR.instance.loadedGD.ball1IsActive);
+            balls2.SetActive(SaveSystem_DR.instance.loadedGD.ball2IsActive);
+            balls3.SetActive(SaveSystem_DR.instance.loadedGD.ball3IsActive);
+            buttons1.SetActive(SaveSystem_DR.instance.loadedGD.button1IsActive);
+            buttons2.SetActive(SaveSystem_DR.instance.loadedGD.button2IsActive);
+            buttons3.SetActive(SaveSystem_DR.instance.loadedGD.button3IsActive);
+            chessNote.SetActive(SaveSystem_DR.instance.loadedGD.chessNoteActivated);
         }
         else
         {
             throwingBox.SetActive(false);
             hiddenMechDoc.SetActive(false);
+            bathroomKeyPart1.SetActive(false);
+            bathroomKeyPart2.SetActive(false);
+            safe.SetActive(false);
+            balls1.SetActive(false);
+            balls2.SetActive(false);
+            balls3.SetActive(false);
+            buttons1.SetActive(false);
+            buttons2.SetActive(false);
+            buttons3.SetActive(false);
+            chessNote.SetActive(false);
         }
-        bathroomKeyPart1.SetActive(false);
-        bathroomKeyPart2.SetActive(false);
-        safe.SetActive(false);
-        balls1.SetActive(false);
-        balls2.SetActive(false);
-        balls3.SetActive(false);
-        buttons1.SetActive(false);
-        buttons2.SetActive(false);
-        buttons3.SetActive(false);
-        chessNote.SetActive(false);
         #endregion
     }
     private void Update()

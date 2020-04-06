@@ -332,7 +332,7 @@ MonoBehaviour:
   - tag: 0
     prefab: {fileID: 7244813815731819002, guid: cb1819c9696ea4b4e96b8239cbb8ce88,
       type: 3}
-    size: 5
+    size: 10
 --- !u!4 &1101902551
 Transform:
   m_ObjectHideFlags: 0

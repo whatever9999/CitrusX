@@ -59,6 +59,7 @@ public class Pipes_CW : MonoBehaviour
     private Image image;
     private bool canBeRotated = true;
     private IdleVoiceover_CW idleVos;
+    private bool beingReset = false;
 
     public bool GetIsInPosition() {
         if (currentPosition == desiredPosition)
@@ -94,10 +95,12 @@ public class Pipes_CW : MonoBehaviour
         //if X, reset puzzle to default colours and state (make sure they can't do this if they've already solved it)
         if(!fusebox.isFuseboxSolved && Input.GetKeyDown(fusebox.resetPipesKey))
         {
-            while(currentPosition != startPosition)
+            beingReset = true;
+            while (currentPosition != startPosition)
             {
                 Rotate();
             }
+            beingReset = false;
         }
     }
 
@@ -108,7 +111,7 @@ public class Pipes_CW : MonoBehaviour
     {
         idleVos.interactedWith = true;
         idleVos.interactedWith = false;
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PIPE, transform.position);
+        if(!beingReset) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PIPE, transform.position);
         if (canBeRotated)
         {
             gameObject.transform.Rotate(0, 0, degreesToMove);
