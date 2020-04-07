@@ -681,16 +681,11 @@ public class Interact_HR : MonoBehaviour
                                 baron.gameObject.SetActive(false);
                                 Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
                             }
-                            else
-                            {
-                                Debug.Log("Player has lost by trying to take a coin when there weren't any in the bowl");
-                                //TODO: There wasn't a coin for the player to take so they lose the game
-                            }
                         }
                         else
                         {
-                            Debug.Log("Player has lost by trying to take a coin when the baron wasn't present");
-                            //TODO: Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                            //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                            waterBowl.playerHasLost = true;
                         }
 
                     }
@@ -867,12 +862,6 @@ public class Interact_HR : MonoBehaviour
             playerCamera.fieldOfView = defaultFOV;
             notificationText.text = "";
         }
-        
-
-        /*
-         * Play the good or bad cinematic after the player blows the candles out according to if they've won or not
-         */
-       
     }
 
     ///<summary>
@@ -880,19 +869,12 @@ public class Interact_HR : MonoBehaviour
     ///</summary>
     public void EndGameCheck()
     {
-        Color blackOutColour;
-        blackOutColour.r = 0;
-        blackOutColour.g = 0;
-        blackOutColour.b = 0;
-        blackOutColour.a = 0;
-        if (numberCoinsCollected == waterBowl.numberOfCoins)
+        if (numberCoinsCollected == waterBowl.numberOfCoins && !waterBowl.playerHasLost)
         {
-          //  GameObject.Find("BlackoutScreen").GetComponent<Image>().color = blackOutColour;
             cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.GOOD);
         }
         else
         {
-          //  GameObject.Find("BlackoutScreen").GetComponent<Image>().color = blackOutColour;
             cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.BAD);
         }
     }

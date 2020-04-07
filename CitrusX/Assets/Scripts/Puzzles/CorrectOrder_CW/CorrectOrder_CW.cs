@@ -155,6 +155,7 @@ public class CorrectOrder_CW : MonoBehaviour
                             correctOrderDoor.unlocked = true;
                             correctOrderDoor.ToggleOpen();
                             SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_CORRECT, transform.position);
+                            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BARONCLOSEUP);
                             GameTesting_CW.instance.arePuzzlesDone[8] = true;
                             journal.AddJournalLog("This is too much, I need to finish this now.");
                             journal.TickOffTask("Solve puzzle");

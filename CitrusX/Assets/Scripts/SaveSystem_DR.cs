@@ -305,7 +305,7 @@ public class SaveSystem_DR: MonoBehaviour
         gardenTable = GameObject.Find("GardenTable").GetComponent<Table_CW>();
         chessTable = GameObject.Find("ChessBoard").GetComponent<Table_CW>();
 
-        chessPaper = GameObject.Find("ChessBook").GetComponent<Paper_DR>();
+        chessPaper = GameObject.Find("ChessBook").GetComponentInChildren<Paper_DR>();
         hiddenMechanismPaper = GameObject.Find("HiddenMechNote").GetComponent<Paper_DR>();
         keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
         keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
@@ -697,6 +697,7 @@ public class SaveSystem_DR: MonoBehaviour
         {
             waterBowl.RemoveCoin();
         }
+        waterBowl.playerHasLost = GD.playerHasLost;
 
         //KeypadUI
         keyPadUI.interactedWithSafe = GD.interactedWithSafe;
@@ -1012,6 +1013,7 @@ public class GameData_DR
     internal float currentAppearanceTimer;
     //Water Bowl
     internal int coinsLeft;
+    internal bool playerHasLost;
     //KeypadUI
     internal bool interactedWithSafe;
     internal bool hasAlreadyInteractedWithSafe;
@@ -1544,6 +1546,7 @@ public class GameData_DR
 
         //WaterBowl
         coinsLeft = saveData.waterBowl.coins.Count;
+        playerHasLost = saveData.waterBowl.playerHasLost;
 
         //KeypadUI
         interactedWithSafe = saveData.keyPadUI.interactedWithSafe;

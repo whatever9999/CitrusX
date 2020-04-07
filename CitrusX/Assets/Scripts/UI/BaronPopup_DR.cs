@@ -24,8 +24,7 @@ public class BaronPopup_DR : MonoBehaviour
 {
     public static BaronPopup_DR instance;
 
-    GameObject baronPopup;
-    Animation popupAnimation;
+    Animator popupAnimator;
 
     /// <summary>
     /// Inititalise variables and set the object to false
@@ -33,9 +32,8 @@ public class BaronPopup_DR : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        baronPopup = GameObject.Find("BaronPopup");
-        popupAnimation = baronPopup.GetComponent<Animation>();
-        baronPopup.SetActive(false);
+        popupAnimator = GetComponent<Animator>();
+        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -43,9 +41,9 @@ public class BaronPopup_DR : MonoBehaviour
     /// </summary>
     public void SpoopyScare()
     {
-        baronPopup.SetActive(true);
-        popupAnimation.Play();
-        StartCoroutine(GoAway(popupAnimation.clip.length));
+        gameObject.SetActive(true);
+        popupAnimator.SetTrigger("PopUp");
+        StartCoroutine(GoAway(popupAnimator.GetCurrentAnimatorStateInfo(0).length));
     }
 
     /// <summary>
@@ -54,6 +52,6 @@ public class BaronPopup_DR : MonoBehaviour
     private IEnumerator GoAway(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        baronPopup.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

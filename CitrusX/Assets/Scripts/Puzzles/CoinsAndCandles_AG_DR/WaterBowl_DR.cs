@@ -31,6 +31,7 @@ public class WaterBowl_DR : MonoBehaviour
     public int numberOfCoins;
     public GameObject coinPrefab;
 
+    internal bool playerHasLost = false;
     internal List<GameObject> coins;
 
     /// <summary>
@@ -59,14 +60,11 @@ public class WaterBowl_DR : MonoBehaviour
 
         if (coins.Count == 0)
         {
-            Debug.Log("Coins have run out but someone is trying to take one");
-            //Player hasn't blown out candles even though coins have run out and baron has tried to take a coin
-            //OR player has lost count of coins and tried to take one when they shouldn't
-            //TODO: Game ends
+            //Trying to take coin when there are none left
+            playerHasLost = true;
         } else
         {
-            //Remove a coin and give it to the player if they are the one who got it
-            //If the baron is the one taking a coin then it disappears but the player won't be able to get the right amount of coins so they've lost the game
+            //Remove a coin
             coins[coins.Count - 1].SetActive(false);
             coins.RemoveAt(coins.Count - 1);
             coinWasRemoved = true;
