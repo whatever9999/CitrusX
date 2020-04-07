@@ -85,6 +85,11 @@ internal class Fusebox_CW : MonoBehaviour
     {
         if (Input.GetKeyDown(closeFuseboxKey))
         {
+            for (int i = 0; i < pipesFromStartToEnd.Length; i++)
+            {
+                pipesFromStartToEnd[i].ResetPipe();
+            }
+
             CloseFusebox();
         }
     }

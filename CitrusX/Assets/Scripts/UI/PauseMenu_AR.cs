@@ -27,8 +27,6 @@ public class PauseMenu_AR : MonoBehaviour
 
     private FirstPersonController firstPersonController;
     private GameObject pauseMenu;
-    //The water bowl handles the baron's appearances on a timer
-    private WaterBowl_DR waterBowl;
 
     /// <summary>
     /// Initialise variables
@@ -36,7 +34,6 @@ public class PauseMenu_AR : MonoBehaviour
     void Awake()
     {
         firstPersonController = gameObject.GetComponent<FirstPersonController>();
-        waterBowl = GameObject.Find("Water").GetComponent<WaterBowl_DR>();
         pauseMenu = GameObject.Find("PauseMenu");
     }
     

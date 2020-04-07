@@ -392,7 +392,10 @@ public class SaveSystem_DR: MonoBehaviour
 
     private void Start()
     {
-        waterBowl.transform.parent.gameObject.SetActive(false);
+        if(!loaded)
+        {
+            waterBowl.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>

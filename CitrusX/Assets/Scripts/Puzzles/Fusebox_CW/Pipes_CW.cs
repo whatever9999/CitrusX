@@ -93,7 +93,15 @@ public class Pipes_CW : MonoBehaviour
     private void Update()
     {
         //if X, reset puzzle to default colours and state (make sure they can't do this if they've already solved it)
-        if(!fusebox.isFuseboxSolved && Input.GetKeyDown(fusebox.resetPipesKey))
+        if(Input.GetKeyDown(fusebox.resetPipesKey))
+        {
+            ResetPipe();
+        }
+    }
+
+    public void ResetPipe()
+    {
+        if(!fusebox.isFuseboxSolved)
         {
             beingReset = true;
             while (currentPosition != startPosition)
@@ -101,6 +109,7 @@ public class Pipes_CW : MonoBehaviour
                 Rotate();
             }
             beingReset = false;
+            ResetColour();
         }
     }
 

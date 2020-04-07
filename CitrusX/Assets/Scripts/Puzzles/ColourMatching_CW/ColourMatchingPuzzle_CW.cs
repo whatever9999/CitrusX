@@ -51,6 +51,7 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
+        door = GetComponentInChildren<Door_DR>();
     }
     /// <summary>
     /// According to the state of the puzzle play the right subtitles and update the journal
@@ -62,6 +63,9 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
             if (!voiceovers[0])
             {
                 //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
+                if(door.isOpen) door.ToggleOpen();
+                door.unlocked = false;
+                door.requiresKey = true;
                 voiceovers[0] = true;
             }
             else if (isDoorInteractedWith[0] && !voiceovers[1])
