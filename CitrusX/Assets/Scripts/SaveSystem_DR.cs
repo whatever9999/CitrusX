@@ -38,6 +38,7 @@ public class SaveSystem_DR: MonoBehaviour
     private Text saveNotificationText;
     internal GameData_DR loadedGD;
     internal bool loaded = false;
+    internal bool startingGame = true;
 
     #region TransformsAndActiveStates
     internal Transform playerT;
@@ -283,7 +284,7 @@ public class SaveSystem_DR: MonoBehaviour
         initiatePuzzles = GameObject.Find("FPSController").GetComponentInChildren<InitiatePuzzles_CW>();
         gameTesting = GameObject.Find("FPSController").GetComponentInChildren<GameTesting_CW>();
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
-        waterBowl = GameObject.Find("WaterBowl").GetComponent<WaterBowl_DR>();
+        waterBowl = GameObject.Find("Water").GetComponent<WaterBowl_DR>();
         keyPadUI = GameObject.Find("KeypadUI").GetComponent<KeypadUI_DR>();
         journal = GameObject.Find("FPSController").GetComponentInChildren<Journal_DR>();
         eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
@@ -386,6 +387,12 @@ public class SaveSystem_DR: MonoBehaviour
         Load();
         characterController.enabled = true;
         playerT.GetComponentInParent<FirstPersonController>().enabled = true;
+        startingGame = false;
+    }
+
+    private void Start()
+    {
+        waterBowl.transform.parent.gameObject.SetActive(false);
     }
 
     /// <summary>

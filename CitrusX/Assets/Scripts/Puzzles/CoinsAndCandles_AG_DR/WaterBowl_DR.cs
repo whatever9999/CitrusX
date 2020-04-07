@@ -55,7 +55,7 @@ public class WaterBowl_DR : MonoBehaviour
     public bool RemoveCoin()
     {
         bool coinWasRemoved = false;
-        if(SaveSystem_DR.instance.loaded) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
+        if(!SaveSystem_DR.instance.startingGame) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
 
         if (coins.Count == 0)
         {

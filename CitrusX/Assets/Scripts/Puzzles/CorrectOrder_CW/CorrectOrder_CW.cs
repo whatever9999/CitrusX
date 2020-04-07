@@ -28,15 +28,13 @@ public class CorrectOrder_CW : MonoBehaviour
     internal bool isActive = false;
     public Color[] boxes;
     private FirstPersonController fpsController;
-    public KeyCode closePCKey = KeyCode.Escape;
-    private Text correctOrderText;
+    public KeyCode closePCKey = KeyCode.Z;
     private Text completionText;
     private Subtitles_HR subtitles;
     internal bool[] whichRound = { true, false, false };
     public Door_DR correctOrderDoor;
     private GameObject correctOrderScreen;
     private GameObject PC;
-    bool startGameOpen = false;
     #endregion
 
     public void SetActive(bool value) { isActive = value; }
@@ -47,7 +45,6 @@ public class CorrectOrder_CW : MonoBehaviour
     {
         journal = Journal_DR.instance;
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
-        correctOrderText = GameObject.Find("Correct Order Message Text").GetComponent<Text>();
         completionText = GameObject.Find("Completion Text").GetComponent<Text>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         correctOrderScreen = GameObject.Find("CorrectOrderUI");
@@ -66,17 +63,6 @@ public class CorrectOrder_CW : MonoBehaviour
     /// <summary>
     /// Update checks to see player is trying to close the box
     /// </summary>
-
-    private void OnEnable()
-    {
-        if(!startGameOpen)
-        {
-            startGameOpen = true;
-        } else
-        {
-            OpenPC();
-        }
-    }
     private void Update()
     {
         CheckForClose();
