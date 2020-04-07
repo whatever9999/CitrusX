@@ -47,6 +47,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     public Door_DR door2;
     public Door_DR door3;
     public Door_DR door4;
+    public Door_DR door5;
     #endregion
     /// <summary>
     /// Inititalise variables
@@ -133,6 +134,10 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                         if(!door4.GetState())
                         {
                             door4.ToggleOpen();
+                        }
+                        if(!door5.GetState())
+                        {
+                            door5.ToggleOpen();
                         }
                         symbol1.SetActive(true);
                         symbol2.SetActive(true);

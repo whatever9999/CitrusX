@@ -538,7 +538,7 @@ public class Interact_HR : MonoBehaviour
                         journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
                         journal.ChangeTasks(new string[] { "Solve the password" });
 ;                   }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
                         journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
@@ -849,7 +849,8 @@ public class Interact_HR : MonoBehaviour
                     }
                 }
                
-            } else if(hit.transform.tag == "StuckCan")
+            }
+            else if(hit.transform.tag == "StuckCan")
             {
                 notificationText.text = "What the..? It's stuck";
             }

@@ -83,12 +83,9 @@ internal class Fusebox_CW : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(closeFuseboxKey))
+        if (Input.GetKeyDown(closeFuseboxKey) && !coroutinePlaying)
         {
-            for (int i = 0; i < pipesFromStartToEnd.Length; i++)
-            {
-                pipesFromStartToEnd[i].ResetPipe();
-            }
+           
 
             CloseFusebox();
         }
@@ -141,6 +138,7 @@ internal class Fusebox_CW : MonoBehaviour
         if (complete)
         {
             isFuseboxSolved = true;
+            coroutinePlaying = false;
             journal.TickOffTask("Fix fusebox");
             journal.AddJournalLog("Stupid old electrics, I’ll return to the ritual now.");
             journal.ChangeTasks(new string[] { "Return to ritual" });
@@ -181,14 +179,21 @@ internal class Fusebox_CW : MonoBehaviour
     /// </summary>
     public void CloseFusebox()
     {
-        //Make the cursor invisible again
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.FUSEBOX_DOOR, transform.position);
-        //Let the player move again
-        fpsController.enabled = true;
+       
+            for (int i = 0; i < pipesFromStartToEnd.Length; i++)
+            {
+                pipesFromStartToEnd[i].ResetPipe();
+            }
+            //Make the cursor invisible again
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.FUSEBOX_DOOR, transform.position);
+            //Let the player move again
+            fpsController.enabled = true;
 
-        gameObject.SetActive(false);
+            gameObject.SetActive(false);
+       
+       
     }
 }
 

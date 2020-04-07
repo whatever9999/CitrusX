@@ -52,6 +52,7 @@ public class Cinematics_DR : MonoBehaviour
     private Interact_HR playerInteraction;
     private FirstPersonController playerController;
     private PauseMenu_AR pauseMenu;
+    private GameObject centreOfScreen;
     #endregion
     
 
@@ -66,6 +67,7 @@ public class Cinematics_DR : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        #region INITIALISE_CINEMATICS
         videoPlayer = GameObject.Find("LaptopScreen").GetComponent<VideoPlayer>();
         startCinematic = GameObject.Find("StartCinematic").GetComponent<PlayableDirector>();
         goodEndCinematic = GameObject.Find("GoodEndCinematic").GetComponent<PlayableDirector>();
@@ -76,12 +78,15 @@ public class Cinematics_DR : MonoBehaviour
         {
             monitor.transform.GetChild(i).gameObject.SetActive(false);
         }
-
+        #endregion
+        #region INITIALISE_PLAYER_AND_UI
         playerController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         playerInteraction = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
         pauseMenu = playerController.GetComponent<PauseMenu_AR>();
         pauseMenuUI = GameObject.Find("PauseMenu");
-
+        centreOfScreen = GameObject.Find("CentreOfScreenMarker");
+        #endregion
+        #region OTHER_INITIALISATION
         startCameraAnimator = GameObject.Find("StartCinematicCamera").GetComponent<Animator>();
         endCameraAnimator = GameObject.Find("EndCinematicCamera").GetComponent<Animator>();
 
@@ -91,6 +96,7 @@ public class Cinematics_DR : MonoBehaviour
 
         creditScreen = GameObject.Find("CreditScreen");
         creditScreen.SetActive(false);
+        #endregion
     }
 
     /// <summary>
@@ -99,6 +105,7 @@ public class Cinematics_DR : MonoBehaviour
     private void Start()
     {
         pauseMenuUI.SetActive(false);
+        centreOfScreen.SetActive(false);
         if (playStartCinematic)
         {
             playerInteraction.enabled = false;
@@ -216,6 +223,7 @@ public class Cinematics_DR : MonoBehaviour
         playerController.enabled = true;
         playerInteraction.enabled = true;
         pauseMenu.enabled = true;
+        centreOfScreen.SetActive(true);
         GameTesting_CW.instance.cutscenes[0] = true;
     }
 
