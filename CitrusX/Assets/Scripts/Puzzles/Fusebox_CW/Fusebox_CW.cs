@@ -22,6 +22,9 @@
  * 
  * Chase (Changes) 17/3/2020
  * Changed it from sprites to colours for completion
+ * 
+ * Chase (Changes) 7/4/2020
+ * Added a bool to coroutine to stop spamming of power button.
 */
 
 /**
@@ -54,6 +57,7 @@ internal class Fusebox_CW : MonoBehaviour
     internal GameTesting_CW game;
     internal bool[] voiceovers = { false, false, false };
     internal bool isActive = false;
+    private bool coroutinePlaying = false;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
     internal void SetActive(bool value) { isActive = value; }
@@ -114,6 +118,8 @@ internal class Fusebox_CW : MonoBehaviour
         int numberComplete;
         for(numberComplete = 0; numberComplete < pipesFromStartToEnd.Length; numberComplete++)
         {
+            coroutinePlaying = true;
+
             if(!pipesFromStartToEnd[numberComplete].GetIsInPosition())
             {
                 SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PIPE_INCORRECT, transform.position);
@@ -152,13 +158,18 @@ internal class Fusebox_CW : MonoBehaviour
                 yield return new WaitForSeconds(timeForFlowInPipes);
             }
         }
+        coroutinePlaying = false;
     }
     /// <summary>
     /// Start the coroutine CheckPipes() to go through each pipe one by one and check the flow in it, changing the image to show it's complete and chaning it back if the flow fails
     /// </summary>
     public void PowerButton()
     {
-        StartCoroutine(CheckPipes());
+        if(!coroutinePlaying)
+        {
+            StartCoroutine(CheckPipes());
+        }
+        
     }
     /// <summary>
     /// reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game

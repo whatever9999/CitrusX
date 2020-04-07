@@ -20,6 +20,9 @@
  * 
  * Dominique (Changes) 01/04/2020
  * Added raycasting for polish - if items collide while held they don't blend into other colliders
+ * 
+ * Chase (Changes) 7/4/2020
+ * Added regions to tidy the script up and added an if to prevent scales from being accessed early. Also added a bool for food items.
  */
 
 /**
@@ -42,6 +45,7 @@ using UnityEngine;
 
 public class HoldandThrow_HR : MonoBehaviour
 {
+    #region PHYS_VARS
     public float minDistanceToPickup = 5;
     public bool canHold = true;
     public float throwForce = 600;
@@ -49,17 +53,22 @@ public class HoldandThrow_HR : MonoBehaviour
     private Rigidbody RB;
     private Transform player;
     private Transform holdGuide;
-
+    #endregion
+    #region GAME_VARS
     private bool beingHeld = false;
     internal bool isFirstTime = false;
     private Subtitles_HR subtitles;
     private IdleVoiceover_CW idleVos;
     private const float timeToMoveBeforeStop = 2;
     private float currentTimeMoving;
-
+    public bool isFood = false;
+    #endregion
+    #region THROWING_LOGIC_VARS
     private const int throwableMask = ~(1 << 9);
     private float rayRange;
     private const float addToCollidingObjectsYPositions = 0.1f;
+    #endregion
+    
 
     /// <summary>
     /// Initialise variables
@@ -122,19 +131,23 @@ public class HoldandThrow_HR : MonoBehaviour
     /// </summary>
     public void Hold()
     {
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, transform.position);
-        idleVos.interactedWith = true;
-        
-        beingHeld = true;
+        if(isFood && GameTesting_CW.instance.arePuzzlesDone[3] || !isFood)
+        {
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, transform.position);
+            idleVos.interactedWith = true;
 
-        transform.SetParent(player);
+            beingHeld = true;
 
-        transform.localPosition = Vector3.zero;
+            transform.SetParent(player);
 
-        RB.useGravity = false;
-        RB.velocity = Vector3.zero;
-        RB.angularVelocity = Vector3.zero;
-        RB.freezeRotation = true;
+            transform.localPosition = Vector3.zero;
+
+            RB.useGravity = false;
+            RB.velocity = Vector3.zero;
+            RB.angularVelocity = Vector3.zero;
+            RB.freezeRotation = true;
+        }
+      
     }
 
     /// <summary>
