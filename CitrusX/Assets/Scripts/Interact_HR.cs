@@ -538,15 +538,16 @@ public class Interact_HR : MonoBehaviour
                         journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
                         journal.ChangeTasks(new string[] { "Solve the password" });
 ;                   }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
+                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
                         journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
                         journal.TickOffTask("Find a clue");
                         journal.ChangeTasks(new string[] { "Solve riddle" });
                         hiddenMech.clueRead = true;
-                        paperItem.hasBeenRead = true;
                         GameObject.Find("BlueBook").GetComponent<Book_CW>().canInteractWith = true;
+                        paperItem.hasBeenRead = true;
+                        
                     }
 
 
@@ -777,7 +778,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Book")
             {
-                if(GameTesting_CW.instance.arePuzzlesDone[6])
+                if(GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
                 {
                     Book_CW book = hit.transform.GetComponent<Book_CW>();
                     
