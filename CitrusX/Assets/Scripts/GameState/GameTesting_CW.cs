@@ -141,6 +141,5 @@ public class GameTesting_CW : MonoBehaviour
             setUpPuzzle[9] = true;
             initiate.InitiateCoinCountPuzzle();
         }
-       
     }
 }

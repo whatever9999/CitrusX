@@ -39,6 +39,7 @@ public class EventManager_CW : MonoBehaviour
     private GameObject pawn;
     private GameObject chessNote;
     private GameObject keypadDoc;
+    private GameObject baronRitualLocation;
    
     #endregion
     #region DISTURBANCES
@@ -79,12 +80,14 @@ public class EventManager_CW : MonoBehaviour
         chessNote = GameObject.Find("Chess Note");
         keypadDoc = GameObject.Find("KeyPadDoc");
         masterBedroomDoor = GameObject.Find("Bedroom Door").GetComponent<Door_DR>();
-
+        baronRitualLocation = GameObject.Find("RitualBaronLocation");
         scalesEffect = GameObject.Find("Scales").GetComponentInChildren<ParticleSystem>();
         chessBookEffect = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
         button1Effect = GameObject.Find("1Button").GetComponentInChildren<ParticleSystem>();
         button2Effect = GameObject.Find("2Button").GetComponentInChildren<ParticleSystem>();
         button3Effect = GameObject.Find("3Button").GetComponentInChildren<ParticleSystem>();
+
+
 
         #endregion
         #region INITIATE_TRIGGERS
@@ -219,8 +222,8 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
-            DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BARONCLOSEUP);
-            baron.GetCoin();
+            baron.gameIsEnding = true;
+            baron.AppearStill(baronRitualLocation.transform, 0);
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[4] = true;
         }

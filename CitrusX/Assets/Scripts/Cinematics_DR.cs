@@ -85,7 +85,7 @@ public class Cinematics_DR : MonoBehaviour
         startCameraAnimator = GameObject.Find("StartCinematicCamera").GetComponent<Animator>();
         endCameraAnimator = GameObject.Find("EndCinematicCamera").GetComponent<Animator>();
 
-        cutsceneCoins = GameObject.Find("CoinsForCutscene");
+        cutsceneCoins = GameObject.Find("CutsceneCoins");
 
         blackScreen = GameObject.Find("BlackScreen").GetComponent<Image>();
 
@@ -116,19 +116,21 @@ public class Cinematics_DR : MonoBehaviour
     /// <param name="type - GOOD or BAD"></param>
     public void PlayEndCinematic(END_CINEMATICS type)
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         switch (type)
         {
             case END_CINEMATICS.GOOD:
                 playerInteraction.enabled = false;
                 playerController.enabled = false;
-                endCameraAnimator.SetBool("GoodEnding", true);
                 goodEndCinematic.Play();
+                endCameraAnimator.SetBool("GoodEnding", true);
                 break;
             case END_CINEMATICS.BAD:
                 playerInteraction.enabled = false;
                 playerController.enabled = false;
-                endCameraAnimator.SetBool("GoodEnding", false);
                 badEndCinematic.Play();
+                endCameraAnimator.SetBool("GoodEnding", false);
                 break;
         }
         endCameraAnimator.SetTrigger("PlayEnd");
@@ -199,6 +201,8 @@ public class Cinematics_DR : MonoBehaviour
     {
         creditScreen.SetActive(true);
         yield return new WaitForSeconds(4);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         //Go back to menu
         SceneManager.LoadScene(1);
     }
@@ -214,4 +218,6 @@ public class Cinematics_DR : MonoBehaviour
         pauseMenu.enabled = true;
         GameTesting_CW.instance.cutscenes[0] = true;
     }
+
+    
 }

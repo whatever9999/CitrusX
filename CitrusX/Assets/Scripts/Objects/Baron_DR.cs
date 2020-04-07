@@ -41,6 +41,7 @@ public class Baron_DR : MonoBehaviour
     private Transform waterBowl;
     private Rigidbody rigidbody;
     private Animator animator;
+    internal bool gameIsEnding = false;
 
     /// <summary>
     /// Initialise variables
@@ -96,7 +97,7 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(!gettingCoin)
+        if(!gettingCoin && !gameIsEnding)
         {
             appearanceTimer += Time.deltaTime;
             if (appearanceTimer > currentAppearanceTimer)

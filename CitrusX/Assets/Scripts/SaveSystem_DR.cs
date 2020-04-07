@@ -698,6 +698,7 @@ public class SaveSystem_DR: MonoBehaviour
             waterBowl.RemoveCoin();
         }
         waterBowl.playerHasLost = GD.playerHasLost;
+        waterBowl.reasonForLosing = GD.reasonForLosing;
 
         //KeypadUI
         keyPadUI.interactedWithSafe = GD.interactedWithSafe;
@@ -1014,6 +1015,7 @@ public class GameData_DR
     //Water Bowl
     internal int coinsLeft;
     internal bool playerHasLost;
+    internal WaterBowl_DR.ReasonForLosing reasonForLosing;
     //KeypadUI
     internal bool interactedWithSafe;
     internal bool hasAlreadyInteractedWithSafe;
@@ -1547,6 +1549,7 @@ public class GameData_DR
         //WaterBowl
         coinsLeft = saveData.waterBowl.coins.Count;
         playerHasLost = saveData.waterBowl.playerHasLost;
+        reasonForLosing = saveData.waterBowl.reasonForLosing;
 
         //KeypadUI
         interactedWithSafe = saveData.keyPadUI.interactedWithSafe;

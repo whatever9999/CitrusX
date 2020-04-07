@@ -124,6 +124,9 @@ public class Subtitles_HR : MonoBehaviour
         P8_LINE11,
         P8_LINE12,
         P8_LINE13,
+        Too_Few_Coins,
+        Took_Without_Baron,
+        Took_More_Than_There_Were
     }
 
     //This array will show in the inspector for subtitle data to be passed in to
@@ -134,10 +137,11 @@ public class Subtitles_HR : MonoBehaviour
 
     private ID currentCutsceneSubtitle;
     private ID currentGoodCutsceneSubtitle;
-    private ID currentBadCutsceneSubtitle;
 
     private Coroutine currentCoroutine;
     private bool coroutineRunning = false;
+
+    private WaterBowl_DR waterBowl;
 
     /// <summary>
     /// Initialise variables
@@ -146,11 +150,11 @@ public class Subtitles_HR : MonoBehaviour
     {
         voiceSource = GetComponent<AudioSource>();
         subtitleText = GameObject.Find("Subtitles").GetComponent<Text>();
+        waterBowl = GameObject.Find("Water").GetComponent<WaterBowl_DR>();
 
         subtitleText.text = "";
 
         currentCutsceneSubtitle = ID.S_LINE1;
-        currentBadCutsceneSubtitle = ID.B_LINE1;
         currentGoodCutsceneSubtitle = ID.G_LINE1;
     }
 
@@ -204,10 +208,6 @@ public class Subtitles_HR : MonoBehaviour
     {
         PlayAudio(currentGoodCutsceneSubtitle++);
     }
-    public void BadEndCutsceneSubtitle()
-    {
-        PlayAudio(currentBadCutsceneSubtitle++);
-    }
     public void Gasp()
     {
         PlayAudio(ID.GASP);
@@ -215,6 +215,21 @@ public class Subtitles_HR : MonoBehaviour
     public void Sigh()
     {
         PlayAudio(ID.SIGH);
+    }
+    public void ReasonForLosingLine()
+    {
+        switch (waterBowl.reasonForLosing)
+        {
+            case WaterBowl_DR.ReasonForLosing.Too_Few_Coins:
+                PlayAudio(Subtitles_HR.ID.Too_Few_Coins);
+                break;
+            case WaterBowl_DR.ReasonForLosing.Took_Without_Baron:
+                PlayAudio(Subtitles_HR.ID.Took_Without_Baron);
+                break;
+            case WaterBowl_DR.ReasonForLosing.Took_More_Than_There_Were:
+                PlayAudio(Subtitles_HR.ID.Took_More_Than_There_Were);
+                break;
+        }
     }
 }
 

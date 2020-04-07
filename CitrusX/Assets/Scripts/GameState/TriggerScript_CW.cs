@@ -135,6 +135,7 @@ public class TriggerScript_CW : MonoBehaviour
                         journal.TickOffTask("Return to ritual");
                         journal.AddJournalLog("I can’t take anymore, blowing out the candles will end the ritual. But have I counted the right amount of coins?");
                         journal.ChangeTasks(new string[] { "Blow out candles" });
+                        allowedToBeUsed = false;
                     }
                 }
 

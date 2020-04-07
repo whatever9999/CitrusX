@@ -31,6 +31,15 @@ public class WaterBowl_DR : MonoBehaviour
     public int numberOfCoins;
     public GameObject coinPrefab;
 
+    internal enum ReasonForLosing
+    {
+        None,
+        Too_Few_Coins,
+        Took_Without_Baron,
+        Took_More_Than_There_Were
+    }
+
+    internal ReasonForLosing reasonForLosing = ReasonForLosing.None;
     internal bool playerHasLost = false;
     internal List<GameObject> coins;
 
@@ -61,6 +70,7 @@ public class WaterBowl_DR : MonoBehaviour
         if (coins.Count == 0)
         {
             //Trying to take coin when there are none left
+            if (reasonForLosing == WaterBowl_DR.ReasonForLosing.None) reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_More_Than_There_Were;
             playerHasLost = true;
         } else
         {

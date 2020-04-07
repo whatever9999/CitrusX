@@ -162,6 +162,7 @@ public class Interact_HR : MonoBehaviour
     HiddenMech_CW hiddenMech;
     private GameObject pawn;
     private IdleVoiceover_CW idleVos;
+    private bool waterRippleLinePlayed = false;
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -664,9 +665,10 @@ public class Interact_HR : MonoBehaviour
                 if(GameTesting_CW.instance.arePuzzlesDone[0])
                 {
                     notificationText.text = "Press E to take a coin";
-                    if (GameTesting_CW.instance.arePuzzlesDone[8])
+                    if (GameTesting_CW.instance.arePuzzlesDone[8] && !waterRippleLinePlayed)
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
+                        waterRippleLinePlayed = true;
                     }
 
                     if (Input.GetKeyDown(InteractKey))
@@ -678,13 +680,17 @@ public class Interact_HR : MonoBehaviour
                             if (waterBowl.RemoveCoin())
                             {
                                 numberCoinsCollected++;
-                                baron.gameObject.SetActive(false);
+                                if(!baron.gameIsEnding)
+                                {
+                                    baron.gameObject.SetActive(false);
+                                }
                                 Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
                             }
                         }
                         else
                         {
                             //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                            if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_Without_Baron;
                             waterBowl.playerHasLost = true;
                         }
 
@@ -875,6 +881,7 @@ public class Interact_HR : MonoBehaviour
         }
         else
         {
+            if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Too_Few_Coins;
             cinematics.PlayEndCinematic(Cinematics_DR.END_CINEMATICS.BAD);
         }
     }

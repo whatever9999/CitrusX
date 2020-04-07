@@ -26,7 +26,10 @@ public class PlaySoundEffect_DR : MonoBehaviour
 
     public void PlayEffect(AudioClip clip)
     {
-        AS.clip = clip;
-        AS.Play();
+        if(!SaveSystem_DR.instance.startingGame)
+        {
+            AS.clip = clip;
+            AS.Play();
+        }
     }
 }
