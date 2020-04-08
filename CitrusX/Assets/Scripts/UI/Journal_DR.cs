@@ -89,7 +89,7 @@ public class Journal_DR : MonoBehaviour
         journalLogTextBox = journalLogGO.GetComponent<RectTransform>();
         journalLogText = journalLogGO.GetComponent<Text>();
 
-        firstPersonController = gameObject.GetComponent<FirstPersonController>();
+        firstPersonController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
     }
 
     private void Start()
@@ -104,7 +104,6 @@ public class Journal_DR : MonoBehaviour
     {
         if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey) || Input.GetButtonDown("Journal"))
         {
-            
             JournalOpen();
         } 
         else if (journal.activeInHierarchy)
@@ -205,17 +204,19 @@ public class Journal_DR : MonoBehaviour
     }
     private void JournalOpen()
     {
-        journal.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        journal.SetActive(true);
+        
         firstPersonController.enabled = false;
     }
 
     private void JournalClose()
     {
-        journal.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        journal.SetActive(false);
+        
         firstPersonController.enabled = true;
     }
 }
