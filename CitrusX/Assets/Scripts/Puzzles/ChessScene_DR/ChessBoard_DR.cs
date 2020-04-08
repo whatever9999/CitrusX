@@ -55,7 +55,7 @@ public class ChessBoard_DR : MonoBehaviour
     private void Awake()
     {
         aura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
     }

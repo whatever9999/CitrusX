@@ -390,10 +390,6 @@ public class Interact_HR : MonoBehaviour
                                     colourMatch.isDoorInteractedWith[0] = true;
                                     journal.TickOffTask("Check bathroom door");
                                 }
-                                else if (!colourMatch.hasKeyPart2)
-                                {
-                                    notificationText.text = "It's locked. I should check my journal.";
-                                }
                                 else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
                                 {
                                     notificationText.text = "Press E to open door";
@@ -820,6 +816,7 @@ public class Interact_HR : MonoBehaviour
                     else
                     {
                         playerCamera.fieldOfView = defaultFOV;
+                        zoomedIn = false;
                     }
                 }
             

@@ -72,7 +72,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         instance = this;
         #region INITIALISATION
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         ritualSetUp = GetComponent<SetUpRitual_CW>();
         hiddenMech = GetComponent<HiddenMech_CW>();
         colourMatch = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();

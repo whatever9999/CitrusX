@@ -142,6 +142,8 @@ public class Subtitles_HR : MonoBehaviour
     private bool coroutineRunning = false;
 
     private WaterBowl_DR waterBowl;
+    private Interact_HR interact;
+    private bool endSubtitle = false;
 
     /// <summary>
     /// Initialise variables
@@ -151,6 +153,7 @@ public class Subtitles_HR : MonoBehaviour
         voiceSource = GetComponent<AudioSource>();
         subtitleText = GameObject.Find("Subtitles").GetComponent<Text>();
         waterBowl = GameObject.Find("Water").GetComponent<WaterBowl_DR>();
+        interact = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
 
         subtitleText.text = "";
 
@@ -166,6 +169,9 @@ public class Subtitles_HR : MonoBehaviour
     /// <param name="id - the enum linked to the audio clip/subtitle"></param>
     public void PlayAudio(ID id)
     {
+        if (id == ID.P10_LINE3) endSubtitle = true;
+        else endSubtitle = false;
+
         for (int i = 0; i < subtitles.Length; i++)
         {
             if (subtitles[i].id == id)
@@ -197,6 +203,7 @@ public class Subtitles_HR : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
         subtitleText.text = "";
         coroutineRunning = false;
+        if (endSubtitle) interact.EndGameCheck();
     }
 
     //Set lines for cutscenes

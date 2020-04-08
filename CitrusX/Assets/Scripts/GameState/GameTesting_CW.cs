@@ -53,7 +53,7 @@ public class GameTesting_CW : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        initiate = InitiatePuzzles_CW.instance;
+        initiate = GameObject.Find("FirstPersonCharacter").GetComponent<InitiatePuzzles_CW>();
         interact = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         cinematics = GameObject.Find("Cinematics").GetComponent<Cinematics_DR>();
