@@ -40,7 +40,7 @@ public class BallButtonLogic_HR : MonoBehaviour
     private void Awake()
     {
         aura = transform.parent.GetComponentInChildren<ParticleSystem>();
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         animator = GetComponentInParent<Animator>();
     }

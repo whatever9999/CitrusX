@@ -54,7 +54,6 @@ public class CandleScript_AG : MonoBehaviour
         }
         subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
         SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.CANDLE_BLOW, transform.position);
-        player.EndGameCheck();
     }
   
 }

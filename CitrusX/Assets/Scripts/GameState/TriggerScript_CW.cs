@@ -81,7 +81,7 @@ public class TriggerScript_CW : MonoBehaviour
     private void Awake()
     {
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
         #region INITIALISATION_OF_LOCATIONS
         loungeLocation = GameObject.Find("LoungeBaronLocation");
@@ -115,7 +115,6 @@ public class TriggerScript_CW : MonoBehaviour
             else if (type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
             {
                 if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
-
                 {
                     if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
                     {

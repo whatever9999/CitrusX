@@ -69,8 +69,8 @@ internal class Fusebox_CW : MonoBehaviour
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         fusebox = GameObject.Find("Fusebox");
-        journal = Journal_DR.instance;
-        game = GameTesting_CW.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
+        game = GameObject.Find("FirstPersonCharacter").GetComponent<GameTesting_CW>();
     }
 
     private void Start()
@@ -85,8 +85,6 @@ internal class Fusebox_CW : MonoBehaviour
     {
         if (Input.GetKeyDown(closeFuseboxKey) && !coroutinePlaying)
         {
-           
-
             CloseFusebox();
         }
     }

@@ -55,7 +55,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     private void Awake()
     {
         #region INITIALISATION
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         necklace = GameObject.Find("Necklace");
         pendant = GameObject.Find("Pendant");
         jewelleryBox = GameObject.Find("Jewellery Box");

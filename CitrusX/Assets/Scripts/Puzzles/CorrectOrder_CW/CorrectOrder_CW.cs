@@ -43,7 +43,7 @@ public class CorrectOrder_CW : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         fpsController = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         completionText = GameObject.Find("Completion Text").GetComponent<Text>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
@@ -157,9 +157,9 @@ public class CorrectOrder_CW : MonoBehaviour
                             SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PC_CORRECT, transform.position);
                             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BARONCLOSEUP);
                             GameTesting_CW.instance.arePuzzlesDone[8] = true;
-                            journal.AddJournalLog("This is too much, I need to finish this now.");
+                            journal.AddJournalLog("This is too much, I need to finish this now. I need 10 coins but I can't check how many I have until it's over...how many more do I need to get to blow out the candles and end this?");
                             journal.TickOffTask("Solve puzzle");
-                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            journal.ChangeTasks(new string[] { "Blow out candles" });
                         }
                         
                     }

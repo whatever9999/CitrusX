@@ -48,7 +48,7 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        journal = Journal_DR.instance;
+        journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         door = GetComponentInChildren<Door_DR>();
@@ -62,7 +62,6 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
         {
             if (!voiceovers[0])
             {
-                //subtitles.PlayAudio(Subtiles_HR.ID.P3_LINE2);
                 if(door.isOpen) door.ToggleOpen();
                 door.unlocked = false;
                 door.requiresKey = true;
