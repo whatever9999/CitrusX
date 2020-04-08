@@ -28,6 +28,9 @@
  * 
  * Chase (Changes) 11/2/2020
  * Moved original journal tasks to initiate puzzles script
+ * 
+ * Alex (changes) 08/04/2020
+ * Added to code to show cursor when the journal is opened
  */
 
 /**
@@ -47,6 +50,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Journal_DR : MonoBehaviour
 {
@@ -63,6 +67,8 @@ public class Journal_DR : MonoBehaviour
     private RectTransform journalLogContentBox;
     private RectTransform journalLogTextBox;
     private Text journalLogText;
+
+    private FirstPersonController firstPersonController;
 
     //This is an underestimate so that more space would be given as opposed to less (since this would mean the player couldn't read the entry)
     private const float numberOfCharactersPerLine = 14;
@@ -82,6 +88,8 @@ public class Journal_DR : MonoBehaviour
         GameObject journalLogGO = GameObject.Find("JournalLogs");
         journalLogTextBox = journalLogGO.GetComponent<RectTransform>();
         journalLogText = journalLogGO.GetComponent<Text>();
+
+        firstPersonController = gameObject.GetComponent<FirstPersonController>();
     }
 
     private void Start()
@@ -96,7 +104,8 @@ public class Journal_DR : MonoBehaviour
     {
         if (!journal.activeInHierarchy && Input.GetKeyDown(journalOpenKey) || Input.GetButtonDown("Journal"))
         {
-            journal.SetActive(true);
+            
+            JournalOpen();
         } 
         else if (journal.activeInHierarchy)
         {
@@ -104,7 +113,7 @@ public class Journal_DR : MonoBehaviour
             {
                 if (Input.GetKeyDown(journalCloseKeys[i]) || Input.GetButtonDown("Journal"))
                 {
-                    journal.SetActive(false);
+                    JournalClose();
                 }
             }
         }
@@ -193,5 +202,20 @@ public class Journal_DR : MonoBehaviour
         }
 
         return complete;
+    }
+    private void JournalOpen()
+    {
+        journal.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        firstPersonController.enabled = false;
+    }
+
+    private void JournalClose()
+    {
+        journal.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        firstPersonController.enabled = true;
     }
 }
