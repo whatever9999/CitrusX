@@ -31,6 +31,9 @@
  * 
  * Alex (changes) 08/04/2020
  * Added to code to show cursor when the journal is opened
+ * 
+ * Chase (Changes) 08/04/2020
+ * Fixed journal cursor issues
  */
 
 /**

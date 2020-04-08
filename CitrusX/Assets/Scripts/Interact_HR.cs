@@ -105,6 +105,10 @@
  * 
  * Dominique(Changes) 06/04/2020
  * Added inventory use
+ * 
+ * Chase (Changes) 07/04-08/04
+ * Made scales only accesible when needed and removed aura line on completion. Made books non accesible after the completion of the 
+ * hidden mech puzzle.
  */
 
 /**

@@ -24,7 +24,8 @@
  * Changed it from sprites to colours for completion
  * 
  * Chase (Changes) 7/4/2020
- * Added a bool to coroutine to stop spamming of power button.
+ * Added a bool to coroutine to stop spamming of power button and changed it so that it would not crash if close is triggered
+ * whilst it is checking pipes
 */
 
 /**

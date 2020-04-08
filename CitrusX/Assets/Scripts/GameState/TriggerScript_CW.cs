@@ -15,6 +15,9 @@
  * 
  * Chase (Changes) 3/4/2020
  * Added in baron appearances in relevant rooms
+ * 
+ * Chase (Changes) 7/4/2020
+ * Manipulated trigger script so that the appearances were definitely apparent at the right moments.
  */
 
 /**
@@ -99,7 +102,7 @@ public class TriggerScript_CW : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-            #region GAMESTATE_TRIGGERS
+        #region GAMESTATE_TRIGGERS
             if (type == TRIGGER_TYPE.GARDEN && allowedToBeUsed)
             {
                 DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOXFALL);
@@ -199,13 +202,16 @@ public class TriggerScript_CW : MonoBehaviour
         #endregion
         #region BARON_TRIGGERS
             else if (type == TRIGGER_TYPE.DINING_TO_GYM && entering)
+            //if exiting the room
             {
                 entering = false;
             }
             else if (type == TRIGGER_TYPE.DINING_TO_GYM && !entering)
             {
+           // if entering the room
                 if (!baron.gettingCoin)
                 {
+                //if baron isn't getting a coin, appear at designated location
                     baron.AppearStill(gymLocation.transform, baronTime);
                 }
                 entering = true;
