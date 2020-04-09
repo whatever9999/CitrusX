@@ -426,7 +426,6 @@ GameObject:
   - component: {fileID: 1101902551}
   - component: {fileID: 1101902550}
   - component: {fileID: 1101902552}
-  - component: {fileID: 1101902553}
   m_Layer: 0
   m_Name: ObjectPooler
   m_TagString: Untagged
@@ -477,63 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0d5d210ceac2f499ea849aee347ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1101902553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1101902549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2766891cf0000d4a87e5812e92beeea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEffects:
-  - name: 0
-    clip: {fileID: 8300000, guid: c3e861f658ef9ad4191f9f645a1201ef, type: 3}
-  - name: 1
-    clip: {fileID: 8300000, guid: e98ba0f47f3afe4489299a541e84d338, type: 3}
-  - name: 2
-    clip: {fileID: 8300000, guid: ef4c1318346f6f74890d50d1258843de, type: 3}
-  - name: 3
-    clip: {fileID: 8300000, guid: bce716b3475fcd04992831abc20381da, type: 3}
-  - name: 4
-    clip: {fileID: 8300000, guid: de3abb5b0b5c00b46bed14134fd8de08, type: 3}
-  - name: 5
-    clip: {fileID: 8300000, guid: d379afd843916c949885da2fcfbab257, type: 3}
-  - name: 6
-    clip: {fileID: 8300000, guid: 7ae7e6392e3645c47b05a87fa7b0d6fb, type: 3}
-  - name: 7
-    clip: {fileID: 8300000, guid: 94ddd2d162da7fe43ac27b8e46ed9a80, type: 3}
-  - name: 8
-    clip: {fileID: 8300000, guid: 009892f70120acc4c8d1fc8e1406a475, type: 3}
-  - name: 9
-    clip: {fileID: 8300000, guid: e07f9a9e594229648917e3562b9bf1e5, type: 3}
-  - name: 10
-    clip: {fileID: 8300000, guid: 707b46a898929b84ebd380ab7f96c4e8, type: 3}
-  - name: 11
-    clip: {fileID: 8300000, guid: 7eb8b8505e444cc4ba4646d94293179e, type: 3}
-  - name: 12
-    clip: {fileID: 8300000, guid: 32c2a9ee4e482714ba71f35e1430ad44, type: 3}
-  - name: 13
-    clip: {fileID: 8300000, guid: 15077318e0e3c2a4b9f586be6719274b, type: 3}
-  - name: 14
-    clip: {fileID: 8300000, guid: f0b7ff9957441dd4ea86d2727d52bb74, type: 3}
-  - name: 15
-    clip: {fileID: 8300000, guid: cd763785127dab447b141e8a0f12c8f3, type: 3}
-  - name: 16
-    clip: {fileID: 8300000, guid: 70dd0217bccafa74abfb0390aada54c2, type: 3}
-  - name: 17
-    clip: {fileID: 8300000, guid: ffe098b7c864f6a4893fb3c175a6f647, type: 3}
-  - name: 18
-    clip: {fileID: 8300000, guid: 8501cb2068a4d2944b7396427ac28e83, type: 3}
-  - name: 19
-    clip: {fileID: 8300000, guid: 3c596314531179e4983db46b2e6a612a, type: 3}
-  - name: 20
-    clip: {fileID: 8300000, guid: 4fa202ddc892a60468da390f445efbb1, type: 3}
-  - name: 21
-    clip: {fileID: 8300000, guid: 602244dad459be048929b164a46d5954, type: 3}
 --- !u!1 &1380352843
 GameObject:
   m_ObjectHideFlags: 0

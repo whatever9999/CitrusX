@@ -65,15 +65,8 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform bathroomKeyPartOne;
     internal Transform bathroomKeyPartTwo;
     internal Transform keypadNoteT;
-<<<<<<< Updated upstream
-    internal Transform laptopScreenT;
-=======
-<<<<<<< Updated upstream
-=======
     internal Transform laptopScreenT;
     internal GameObject pointerDot;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
     internal Transform crisps1T;
     internal Transform crisps2T;
@@ -217,7 +210,6 @@ public class SaveSystem_DR: MonoBehaviour
     internal ParticleSystem button3Aura;
     internal ParticleSystem scalesAura;
     internal ParticleSystem chessBookAura;
-    internal ParticleSystem hiddenMechAura;
     #endregion
 
     /// <summary>
@@ -254,15 +246,8 @@ public class SaveSystem_DR: MonoBehaviour
         bathroomKeyPartOne = GameObject.Find("Bathroom Key").GetComponent<Transform>();
         bathroomKeyPartTwo = GameObject.Find("Bathroom Key Part 2").GetComponent<Transform>();
         keypadNoteT = GameObject.Find("KeyPadDoc").GetComponent<Transform>();
-<<<<<<< Updated upstream
-        laptopScreenT = GameObject.Find("LaptopScreen").GetComponent<Transform>();
-=======
-<<<<<<< Updated upstream
-=======
         laptopScreenT = GameObject.Find("LaptopScreen").GetComponent<Transform>();
         pointerDot = GameObject.Find("CentreOfScreenMarker");
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -404,7 +389,6 @@ public class SaveSystem_DR: MonoBehaviour
         button3Aura = button3GO.GetComponentInChildren<ParticleSystem>();
         scalesAura = scalesPuzzleScript.GetComponentInChildren<ParticleSystem>();
         chessBookAura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
-        hiddenMechAura = GameObject.Find("Painting_AG").GetComponentInChildren<ParticleSystem>();
         #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
@@ -904,7 +888,6 @@ public class SaveSystem_DR: MonoBehaviour
         if (GD.button3AuraPlaying) button3Aura.Play();
         if (GD.scalesAuraPlaying) scalesAura.Play();
         if (GD.chessBookAuraPlaying) chessBookAura.Play();
-        if (GD.hiddenMechAuraPlaying) hiddenMechAura.Play();
     }
 }
 
@@ -960,8 +943,6 @@ public class GameData_DR
     internal bool bathroomKeyPartTwoActive;
     //Chess Note
     internal bool chessNoteActivated;
-    //Laptop
-    internal bool laptopScreenActivated;
     //Balls
     internal float[] ball1TPosition = new float[3];
     internal float[] ball1TRotation = new float[4];
@@ -1237,7 +1218,6 @@ public class GameData_DR
     internal bool button3AuraPlaying;
     internal bool scalesAuraPlaying;
     internal bool chessBookAuraPlaying;
-    internal bool hiddenMechAuraPlaying;
 
     //Pipes
     internal Pipes_CW.Directions pipe1CurrentPosition;
@@ -1350,9 +1330,6 @@ public class GameData_DR
 
         //ThrowingBox
         throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;
-
-        //Laptop
-        laptopScreenActivated = saveData.laptopScreenT.gameObject.activeInHierarchy;
 
         //Balls
         ball1TPosition[0] = saveData.ball1T.position.x;
@@ -1786,6 +1763,5 @@ public class GameData_DR
         button3AuraPlaying = saveData.button3Aura.isPlaying;
         scalesAuraPlaying = saveData.scalesAura.isPlaying;
         chessBookAuraPlaying = saveData.chessBookAura.isPlaying;
-        hiddenMechAuraPlaying = saveData.hiddenMechAura.isPlaying;
     }
 }
