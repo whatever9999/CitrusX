@@ -40,6 +40,7 @@ public class EventManager_CW : MonoBehaviour
     private GameObject chessNote;
     private GameObject keypadDoc;
     private GameObject baronRitualLocation;
+    private GameObject laptopScreen;
    
     #endregion
     #region DISTURBANCES
@@ -88,6 +89,7 @@ public class EventManager_CW : MonoBehaviour
         button2Effect = GameObject.Find("2Button").GetComponentInChildren<ParticleSystem>();
         button3Effect = GameObject.Find("3Button").GetComponentInChildren<ParticleSystem>();
         hiddenMechEffect = GameObject.Find("Painting_AG").GetComponentInChildren<ParticleSystem>();
+        laptopScreen = GameObject.Find("LaptopScreen");
         #endregion
 
         #region INITIATE_TRIGGERS
@@ -141,6 +143,7 @@ public class EventManager_CW : MonoBehaviour
         if(game.arePuzzlesDone[0] && !triggersSet[5])
         {
             gardenTrigger.allowedToBeUsed = true;
+            laptopScreen.SetActive(false);
             triggersSet[5] = true;
         }
         else if(game.arePuzzlesDone[0] && !game.arePuzzlesDone[1] && !itemsSet[4])
@@ -217,6 +220,7 @@ public class EventManager_CW : MonoBehaviour
         {
             hiddenMechEffect.Play();
             hiddenMechDoc.SetActive(true);
+            laptopScreen.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
             itemsSet[1] = true;
             triggersSet[3] = true;

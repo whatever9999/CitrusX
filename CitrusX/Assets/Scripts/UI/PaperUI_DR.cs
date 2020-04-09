@@ -18,17 +18,20 @@
 */
 
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PaperUI_DR : MonoBehaviour
 {
     public KeyCode keyToClose = KeyCode.Z;
     private Interact_HR interaction;
+    FirstPersonController fpc;
 
     /// <summary>
     /// Inititalise variables
     /// </summary>
     private void Awake()
     {
+        fpc = GameObject.Find("FPSController").GetComponent<FirstPersonController>();
         interaction = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
     }
 
@@ -46,9 +49,14 @@ public class PaperUI_DR : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(keyToClose))
+        if(!Input.GetKeyDown(keyToClose))
+        {
+            fpc.enabled = false;
+        }
+        else if (Input.GetKeyDown(keyToClose))
         {
             interaction.paperIsClosed = true;
+            fpc.enabled = true;
             gameObject.SetActive(false);
         }
     }

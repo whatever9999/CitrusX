@@ -162,6 +162,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                         voiceovers[3] = true;
                     }
                     journal.AddJournalLog("I need to keep the doors downstairs open otherwise the ritual ends, I can keep an eye on this room from my phone camera.");
+                    journal.AddJournalLog("I can press C to open my phone if I remember correctly");
                     journal.ChangeTasks(new string[] { "Check phone camera" });
                     ritualSteps[2] = true;
                 }
@@ -219,6 +220,8 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                             subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE7);
                             //allow ritual trigger to be active
                             gardenTrigger.allowedToBeUsed = true;
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            ritualTrigger.allowedToBeUsed = true;
                             GameTesting_CW.instance.arePuzzlesDone[0] = true;
                         }
                     }

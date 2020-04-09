@@ -117,6 +117,11 @@ public class TriggerScript_CW : MonoBehaviour
             }
             else if (type == TRIGGER_TYPE.RITUAL && allowedToBeUsed)
             {
+                if(GameTesting_CW.instance.arePuzzlesDone[0] && !GameTesting_CW.instance.arePuzzlesDone[1])
+                {
+                    journal.TickOffTask("Return to ritual");
+                    allowedToBeUsed = false;
+                }
                 if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
                 {
                     if (GameTesting_CW.instance.arePuzzlesDone[1] && !GameTesting_CW.instance.arePuzzlesDone[2])
@@ -148,7 +153,7 @@ public class TriggerScript_CW : MonoBehaviour
                 {
                     DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.PAWNFALL);
                     DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.BOOKTURNPAGE);
-                    journal.TickOffTask("Check out lounge");
+                    journal.TickOffTask("Check the lounge");
                     journal.AddJournalLog("This book might have some information");
                     journal.ChangeTasks(new string[] { "Read book" });
                     subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE2);
@@ -175,7 +180,7 @@ public class TriggerScript_CW : MonoBehaviour
                         relatedDoor.ToggleOpen();
                     }
                     relatedDoor.unlocked = false;
-                    journal.TickOffTask("Check out library");
+                    journal.TickOffTask("Check the study");
                     subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE2);
                     journal.AddJournalLog("The door locked on its own but there must be something somewhere that’ll tell me how to get out.");
                     journal.ChangeTasks(new string[] { "Find a clue" });
