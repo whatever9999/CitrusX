@@ -16,7 +16,6 @@ using UnityEngine;
 
 public class ScalePan_DR : MonoBehaviour
 {
-    ScalesPuzzleScript_AG scales;
     TextMesh text;
 
     /// <summary>
@@ -24,7 +23,6 @@ public class ScalePan_DR : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        scales = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
         text = GetComponentInChildren<TextMesh>();
     }
     /// <summary>
@@ -34,7 +32,7 @@ public class ScalePan_DR : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         collision.transform.parent = transform;
-        scales.ComparePans();
+        ScalesPuzzleScript_AG.instance.ComparePans();
 
     }
 
@@ -45,7 +43,7 @@ public class ScalePan_DR : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         if (collision.transform.parent == transform) collision.transform.parent = null;
-        scales.ComparePans();
+        ScalesPuzzleScript_AG.instance.ComparePans();
     }
 
     /// <summary>

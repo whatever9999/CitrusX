@@ -11,7 +11,7 @@ public class FadeToBlack : MonoBehaviour
         blackScreen = GameObject.Find("BlackScreen").GetComponent<Image>();
     }
 
-    private IEnumerator Fade()
+    public IEnumerator Fade()
     {
         //Fade to black
         while (blackScreen.color.a < 1f)

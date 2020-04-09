@@ -26,6 +26,7 @@ TagManager:
   - SymbolOfScarcity
   - Weight
   - StuckCan
+  - ScalesPan
   layers:
   - Default
   - TransparentFX

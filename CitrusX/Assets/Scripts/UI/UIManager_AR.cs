@@ -48,7 +48,7 @@ using UnityEngine.UI;
 
 public class UIManager_AR : MonoBehaviour
 {
-    private enum Scenes
+    internal enum Scenes
     {
         START,
         MENU,

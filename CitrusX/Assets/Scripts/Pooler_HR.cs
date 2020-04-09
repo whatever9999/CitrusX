@@ -17,7 +17,7 @@ using UnityEngine.SceneManagement;
 
 public class Pooler_HR : MonoBehaviour
 {
-    
+    private FadeToBlack fade;
     #region PoolClass
    
     [System.Serializable]
@@ -32,15 +32,16 @@ public class Pooler_HR : MonoBehaviour
     #endregion
 
     #region Singleton
-        public static Pooler_HR instance;
+    public static Pooler_HR instance;
 
-        private void Awake() 
-        {
+    private void Awake()
+    {
+        fade = GetComponent<FadeToBlack>();
         DontDestroyOnLoad(gameObject);
         instance = this;
         //WHEN TESTING THIS IS COMMENTED OUT TO AVOID THE ERROR - IT IS NECESSARY FOR THE START TO GO INTO THE MAIN MENU IN THE FINAL BUILD
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-         }
+        StartCoroutine(ToNextScene());
+    }
 
     #endregion 
     public enum Tags
@@ -92,5 +93,13 @@ public class Pooler_HR : MonoBehaviour
         yield return new WaitForSeconds(afterSeconds);
         poolDictionary[tag].Enqueue(spawnedObject);
         spawnedObject.SetActive(false);
+    }
+
+    private IEnumerator ToNextScene()
+    {
+        yield return new WaitForSeconds(2);
+        StartCoroutine(fade.Fade());
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene((int)UIManager_AR.Scenes.MENU);
     }
 }

@@ -34,6 +34,8 @@ using UnityEngine;
 
 public class ScalesPuzzleScript_AG : MonoBehaviour
 {
+    public static ScalesPuzzleScript_AG instance;
+
     // Each side of scales
     private Transform leftPan;
     private Transform rightPan;
@@ -54,6 +56,8 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        instance = this;
+
         leftPan = GameObject.Find("LeftPan").transform;
         rightPan = GameObject.Find("RightPan").transform;
         door = GameObject.Find("Kitchen Door").GetComponent<Door_DR>();

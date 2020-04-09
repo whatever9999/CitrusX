@@ -207,4 +207,22 @@ public class HoldandThrow_HR : MonoBehaviour
             transform.position = holdGuide.position;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.parent != null && collision.transform.parent.tag == "ScalesPan")
+        {
+            transform.parent = collision.transform.parent;
+            ScalesPuzzleScript_AG.instance.ComparePans();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.transform.parent != null && collision.transform.tag != "ScalesPan" &&  collision.transform.parent.tag == "ScalesPan")
+        {
+            transform.parent = null;
+            ScalesPuzzleScript_AG.instance.ComparePans();
+        }
+    }
 }
