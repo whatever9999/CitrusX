@@ -32,6 +32,8 @@ public class BallButtonLogic_HR : MonoBehaviour
     private Subtitles_HR subtitles;
     private Animator animator;
     private ParticleSystem aura;
+    private Baron_DR baron;
+    private bool baronMove = false;
     public void SetActive(bool value) { isActive = value; }
 
     /// <summary>
@@ -43,6 +45,7 @@ public class BallButtonLogic_HR : MonoBehaviour
         journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
         animator = GetComponentInParent<Animator>();
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
     }
 
     /// <summary>
@@ -80,7 +83,11 @@ public class BallButtonLogic_HR : MonoBehaviour
             #endregion
             collision.gameObject.SetActive(false);
             //SOUND HERE for BALL hitting
-
+            if(puzzleScript.ballCounter == 1 && !baronMove)
+            {
+                baron.GetCoin();
+                baronMove = true;
+            }
             if (puzzleScript.ballCounter == ballsRequired)
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE4);

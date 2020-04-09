@@ -42,6 +42,8 @@ public class KeypadUI_DR : MonoBehaviour
 {
     private string input = "";
     private Text inputText;
+    private Baron_DR baron;
+    private bool firstTime = true;
     #region REFERENCES
     private KeypadItem_DR keypadItem;
     private FirstPersonController firstPersonController;
@@ -69,6 +71,7 @@ public class KeypadUI_DR : MonoBehaviour
         inputText = GameObject.Find("InputText").GetComponent<Text>();
         journal = Journal_DR.instance;
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
+        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
     }
 
     /// <summary>
@@ -212,6 +215,12 @@ public class KeypadUI_DR : MonoBehaviour
 
         //Stop the player from moving while using the keypad
         firstPersonController.enabled = false;
+        if(firstTime)
+        {
+            StartCoroutine(BaronTimer());
+            firstTime = false;
+        }
+       
     }
 
     /// <summary>
@@ -235,4 +244,20 @@ public class KeypadUI_DR : MonoBehaviour
         //Let the player move again
         firstPersonController.enabled = true;
     }
+    private IEnumerator BaronTimer()
+    {
+        float i = 10.0f;
+        while(i > 0.0f)
+        {
+            yield return new WaitForSeconds(1.0f);
+            i--;
+            if (i == 1.0f)
+            {
+                baron.GetCoin();
+            }
+        }
+       
+        
+    }
+   
 }

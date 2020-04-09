@@ -341,6 +341,7 @@ public class Interact_HR : MonoBehaviour
                 {
                     //Get the keypad we're looking at
                     KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
+                 
                     //If the door isn't unlocked yet then open the keypad UI
                     if (!keypadItem.door.unlocked)
                     {
@@ -352,7 +353,7 @@ public class Interact_HR : MonoBehaviour
                             idleVos.interactedWith = false;
                             //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                             keypad.OpenKeypad(keypadItem);
-
+                        
                             //Hide the notification text when the keypad is open
                             notificationText.text = "";
                         }
@@ -714,6 +715,7 @@ public class Interact_HR : MonoBehaviour
                         journal.TickOffTask("Check the scales");
                         journal.AddJournalLog("I could use items from the pantry to balance the scales.");
                         journal.ChangeTasks(new string[] { "Balance scales" });
+                        baron.GetCoin();
                         interactedWith = true;
                     }
                 }
@@ -753,10 +755,14 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Box")
             {
-                notificationText.text = "Press E to look inside the Box";
                 bool hasBeenOpened = false;
+                if (!hasBeenOpened)
+                {
+                    notificationText.text = "Press E to look inside the Box";
+                }
+               
 
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact") && !hasBeenOpened)
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                 {
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
