@@ -42,12 +42,14 @@ public class Baron_DR : MonoBehaviour
     private Rigidbody rigidbody;
     private Animator animator;
     internal bool gameIsEnding = false;
+    private GameObject pauseMenu;
 
     /// <summary>
     /// Initialise variables
     /// </summary>
     private void Awake()
     {
+        pauseMenu = GameObject.Find("PauseMenu");
         startPosition = transform.position;
         waterBowl = FindObjectOfType<WaterBowl_DR>().transform;
         rigidbody = GetComponent<Rigidbody>();
@@ -78,7 +80,7 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if(gettingCoin)
+        if(gettingCoin && !pauseMenu.activeInHierarchy)
         {
             //Set target as water bowl
             transform.LookAt(waterBowl);
@@ -89,6 +91,9 @@ public class Baron_DR : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotation);
             //Move towards water bowl
             rigidbody.velocity = transform.forward * speed;
+        } else
+        {
+            rigidbody.velocity = Vector3.zero;
         }
     }
 
@@ -97,7 +102,7 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(!gettingCoin && !gameIsEnding)
+        if(!gettingCoin && !gameIsEnding && !pauseMenu.activeInHierarchy)
         {
             appearanceTimer += Time.deltaTime;
             if (appearanceTimer > currentAppearanceTimer)
@@ -105,7 +110,7 @@ public class Baron_DR : MonoBehaviour
                 appearanceTimer = 0;
                 gameObject.SetActive(false);
             }
-        } else
+        } else if (!pauseMenu.activeInHierarchy)
         {
             for (int i = 0; i < drips.Length; i++)
             {

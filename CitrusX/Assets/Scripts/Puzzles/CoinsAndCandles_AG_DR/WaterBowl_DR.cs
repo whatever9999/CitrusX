@@ -93,7 +93,7 @@ public class WaterBowl_DR : MonoBehaviour
         return coinWasRemoved;
     }
 
-    private IEnumerator CoinCollectUI()
+    public IEnumerator CoinCollectUI()
     {
         coinNotification.SetActive(true);
         yield return new WaitForSeconds(coinNotificationLength);

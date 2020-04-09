@@ -27,7 +27,6 @@ public class PauseMenu_AR : MonoBehaviour
 
     private FirstPersonController firstPersonController;
     private GameObject pauseMenu;
-    private Baron_DR baron;
 
     /// <summary>
     /// Initialise variables
@@ -36,7 +35,6 @@ public class PauseMenu_AR : MonoBehaviour
     {
         firstPersonController = gameObject.GetComponent<FirstPersonController>();
         pauseMenu = GameObject.Find("PauseMenu");
-        baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
     }
     
     /// <summary>
@@ -51,7 +49,6 @@ public class PauseMenu_AR : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             firstPersonController.enabled = false;
-            baron.enabled = false;
         }
     }
 
@@ -66,6 +63,5 @@ public class PauseMenu_AR : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         firstPersonController.enabled = true;
-        baron.enabled = true;
     }
 }
