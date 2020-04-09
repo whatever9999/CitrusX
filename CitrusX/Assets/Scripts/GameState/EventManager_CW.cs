@@ -116,6 +116,7 @@ public class EventManager_CW : MonoBehaviour
             balls3.SetActive(SaveSystem_DR.instance.loadedGD.ball3IsActive);
             chessNote.SetActive(SaveSystem_DR.instance.loadedGD.chessNoteActivated);
             keypadDoc.SetActive(SaveSystem_DR.instance.loadedGD.keypadNoteActive);
+            laptopScreen.SetActive(SaveSystem_DR.instance.loadedGD.laptopOn);
         }
         else
         {

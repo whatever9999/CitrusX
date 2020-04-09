@@ -74,7 +74,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         #region INITIALISATION
         journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         ritualSetUp = GetComponent<SetUpRitual_CW>();
-        hiddenMech = GetComponent<HiddenMech_CW>();
+        hiddenMech = GameObject.Find("Painting_AG").GetComponent<HiddenMech_CW>();
         colourMatch = GameObject.Find("Upstairs Bathroom Door").GetComponent<ColourMatchingPuzzle_CW>();
         fusebox = GameObject.Find("FuseboxUI").GetComponent<Fusebox_CW>();
         chessboard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();

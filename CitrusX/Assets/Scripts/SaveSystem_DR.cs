@@ -705,6 +705,7 @@ public class SaveSystem_DR: MonoBehaviour
         baron.appearanceTimer = GD.appearanceTimer;
         baron.gettingCoin = GD.baronGettingCoin;
         baron.currentAppearanceTimer = GD.currentAppearanceTimer;
+        baron.gameIsEnding = GD.gameIsEnding;
 
         //WaterBowl
         for (int i = waterBowl.numberOfCoins; i > GD.coinsLeft; i--)
@@ -943,6 +944,8 @@ public class GameData_DR
     internal bool bathroomKeyPartTwoActive;
     //Chess Note
     internal bool chessNoteActivated;
+    //Laptop
+    internal bool laptopOn;
     //Balls
     internal float[] ball1TPosition = new float[3];
     internal float[] ball1TRotation = new float[4];
@@ -1037,6 +1040,7 @@ public class GameData_DR
     internal float appearanceTimer;
     internal bool baronGettingCoin;
     internal float currentAppearanceTimer;
+    internal bool gameIsEnding;
     //Water Bowl
     internal int coinsLeft;
     internal bool playerHasLost;
@@ -1292,6 +1296,7 @@ public class GameData_DR
         baronGettingCoin = saveData.baron.gettingCoin;
         appearanceTimer = saveData.baron.appearanceTimer;
         currentAppearanceTimer = saveData.baron.currentAppearanceTimer;
+        gameIsEnding = saveData.baron.gameIsEnding;
 
         baronPosition[0] = saveData.baronT.position.x;
         baronPosition[1] = saveData.baronT.position.y;
@@ -1330,6 +1335,9 @@ public class GameData_DR
 
         //ThrowingBox
         throwingBoxActivated = saveData.throwingBoxT.gameObject.activeInHierarchy;
+
+        //Laptop
+        laptopOn = saveData.laptopScreenT.gameObject.activeInHierarchy;
 
         //Balls
         ball1TPosition[0] = saveData.ball1T.position.x;
@@ -1574,9 +1582,6 @@ public class GameData_DR
         cutscenes = saveData.gameTesting.cutscenes;
         cutscenesDone = saveData.gameTesting.cutscenesDone;
         controlsSeen = saveData.gameTesting.controlsSeen;
-
-        //Baron
-        appearanceTimer = saveData.baron.appearanceTimer;
 
         //WaterBowl
         coinsLeft = saveData.waterBowl.coins.Count;
