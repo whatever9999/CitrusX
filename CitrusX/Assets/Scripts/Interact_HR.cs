@@ -109,6 +109,9 @@
  * Chase (Changes) 07/04-08/04
  * Made scales only accesible when needed and removed aura line on completion. Made books non accesible after the completion of the 
  * hidden mech puzzle.
+ * 
+ * Adam (Changes) 09/04
+ * Edited door interaction to account for open/closed state
  */
 
 /**
@@ -367,7 +370,14 @@ public class Interact_HR : MonoBehaviour
 
                 if (door.unlocked)
                 {
-                    notificationText.text = "Press E to open the " + hit.transform.parent.name;
+                    if (!door.isOpen)
+                    {
+                        notificationText.text = "Press E to open the " + hit.transform.parent.name;
+                    }
+                    else
+                    {
+                        notificationText.text = "Press E to close the " + hit.transform.parent.name;
+                    }
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
