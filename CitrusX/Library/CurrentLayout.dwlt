@@ -114,7 +114,11 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
+<<<<<<< HEAD
   controlID: 2183
+=======
+  controlID: 10028
+>>>>>>> parent of 8a20d12... More fixes!
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +143,11 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
+<<<<<<< HEAD
   controlID: 2184
+=======
+  controlID: 10029
+>>>>>>> parent of 8a20d12... More fixes!
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +172,11 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
+<<<<<<< HEAD
   controlID: 2185
+=======
+  controlID: 10030
+>>>>>>> parent of 8a20d12... More fixes!
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -387,10 +399,17 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
+<<<<<<< HEAD
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 2e50fcff
       m_LastClickedID: -241618
       m_ExpandedIDs: 946dfcfff6c5feffaa0bffff000cffff5051ffff9a5cfffffcdcffff96e0ffff6afbffff505900007c640000e2650000847400004c7f00004c85000088db03005c1b070050250700b6260700d43a0700
+=======
+      scrollPos: {x: 0, y: 113}
+      m_SelectedIDs: 5e550200
+      m_LastClickedID: 152926
+      m_ExpandedIDs: 2251fdff926ffdffce51feffa46cfeffd8ddfeff5058ffffcca0ffff3eb5ffff8cfbffff5ea2000088ab0000acac0000a2ae000086b300001ab80000e2bd00006cbe000096ce0000204c0100588701007c880100728a0100ea930100b29901003c9a010064ec0100b8500200e45b02004a5d0200be5d0200ec6b0200b46c0200b4760200
+>>>>>>> parent of 8a20d12... More fixes!
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -483,11 +502,19 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.07467248, y: -0.9097081, z: 0.18706928, w: 0.3631289}
     speed: 2
+<<<<<<< HEAD
     m_Value: {x: -0.0746724, y: 0.9097071, z: -0.18706909, w: -0.3631285}
+=======
+    m_Value: {x: 0.21732055, y: -0.045374636, z: 0.0101138, w: 0.97499263}
+>>>>>>> parent of 8a20d12... More fixes!
   m_Size:
     m_Target: 4.076067
     speed: 2
+<<<<<<< HEAD
     m_Value: 4.076067
+=======
+    m_Value: 6.9140654
+>>>>>>> parent of 8a20d12... More fixes!
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -931,7 +958,6 @@ MonoBehaviour:
     - {fileID: -3848561474091361322, guid: f56513f9221515e49908b45903bd65fc, type: 2}
     - {fileID: 1109548816440787161, guid: d6c12a62b370abd4781d05e6f5f770c3, type: 2}
     - {fileID: -6885905828857271894, guid: 704e2c441c9e3ff48975a9b50acd296c, type: 2}
-    - {fileID: -3539626847323736313, guid: abee62cf6e228e043b1c545fd64ae330, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.18736842
       e01: 0
@@ -981,27 +1007,11 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: abee62cf6e228e043b1c545fd64ae330,
+  m_AnimatorController: {fileID: 9100000, guid: d6c12a62b370abd4781d05e6f5f770c3,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -3539626847323736313, guid: abee62cf6e228e043b1c545fd64ae330,
+  - m_Target: {fileID: 1109548816440787161, guid: d6c12a62b370abd4781d05e6f5f770c3,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -1063,10 +1073,17 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 211}
     m_SelectedIDs: 6a4a0000
     m_LastClickedID: 19050
     m_ExpandedIDs: 00000000382d0000fe2d0000b42f000034310000a43100000a3200005a390000f6390000263a0000303b0000563c0000043d00009a3d0000423e00006a4200002646000056460000564a0000ee4a0000284b00001ca200001ea2000020a2000022a2000024a2000026a2000028a200002aa200002ca200002ea2000030a2000032a2000034a2000036a2000038a200003aa200003ca200003ea2000040a2000042a2000044a2000046a2000048a200004aa200004ca200004ea2000000ca9a3b
+=======
+    scrollPos: {x: 0, y: 39}
+    m_SelectedIDs: e2420000
+    m_LastClickedID: 17122
+    m_ExpandedIDs: 00000000f62c0000bc2d0000722f0000f030000060310000c631000016390000b2390000e2390000ec3a0000123c0000c03c0000563d0000fe3d000026420000dc4500000c4600000e4a0000a64a0000e04a0000eea10000f0a10000f2a10000f4a10000f6a10000f8a10000faa10000fca10000fea1000000a2000002a2000004a2000006a2000008a200000aa200000ca200000ea2000010a2000012a2000014a2000016a2000018a200001aa200001ca200001ea2000020a2000000ca9a3b
+>>>>>>> parent of 8a20d12... More fixes!
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1094,7 +1111,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000382d0000fe2d0000b42f000034310000a43100000a3200005a390000f6390000263a0000303b0000563c0000043d00009a3d0000423e00006a4200002646000056460000564a0000ee4a0000284b00001ca200001ea2000020a2000022a2000024a2000026a2000028a200002aa200002ca200002ea2000030a2000032a2000034a2000036a2000038a200003aa200003ca200003ea2000040a2000042a2000044a2000046a2000048a200004aa200004ca200004ea2000000ca9a3b
+=======
+    m_ExpandedIDs: 00000000f62c0000bc2d0000722f0000603100006c310000c6310000f037000016390000b2390000e23900003e3a0000ec3a0000123c0000c03c0000563d0000fe3d000026420000dc4500000c4600000e4a0000a64a0000e04a0000f84e0000eea10000f0a10000f2a10000f4a10000f6a10000f8a10000faa10000fca10000fea1000000a2000002a2000004a2000006a2000008a200000aa200000ca200000ea2000010a2000012a2000014a2000016a2000018a200001aa200001ca200001ea2000020a2000000ca9a3b
+>>>>>>> parent of 8a20d12... More fixes!
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1321,7 +1342,11 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
+<<<<<<< HEAD
   m_LastSelectedObjectID: 30028
+=======
+  m_LastSelectedObjectID: 99102
+>>>>>>> parent of 8a20d12... More fixes!
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52

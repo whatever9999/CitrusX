@@ -691,7 +691,6 @@ public class Interact_HR : MonoBehaviour
                         }
                         else
                         {
-                            waterBowl.CoinCollectUI();
                             //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
                             if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_Without_Baron;
                             waterBowl.playerHasLost = true;
