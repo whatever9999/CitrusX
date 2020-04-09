@@ -74,7 +74,7 @@ public class Journal_DR : MonoBehaviour
     private FirstPersonController firstPersonController;
 
     //This is an underestimate so that more space would be given as opposed to less (since this would mean the player couldn't read the entry)
-    private const float numberOfCharactersPerLine = 14;
+    private const float numberOfCharactersPerLine = 11;
 
     /// <summary>
     /// Inititalise variables and ensure the journal GO is disabled
@@ -139,7 +139,7 @@ public class Journal_DR : MonoBehaviour
         journalLogContentBox.sizeDelta = journalLogSize;
 
         //Add the text to the text box
-        journalLogText.text = text + "\n\n" + journalLogText.text; ;
+        journalLogText.text = journalLogText.text + "\n\n" + text;
     }
 
 

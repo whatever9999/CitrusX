@@ -53,7 +53,6 @@ public class DisturbanceHandler_DR : MonoBehaviour
         boxFall = GameObject.Find("BoxFall").GetComponent<Animator>();
         slamBook = GameObject.Find("TurnPageBook").GetComponent<Animator>();
         baron = GameObject.Find("Baron");
-        boxMove = GameObject.Find("BoxMove").GetComponent<Animator>();
         bookFall = GameObject.Find("BookFall").GetComponent<Animator>();
         lampWobble = GameObject.Find("LampWobble").GetComponent<Animator>();
         #endregion

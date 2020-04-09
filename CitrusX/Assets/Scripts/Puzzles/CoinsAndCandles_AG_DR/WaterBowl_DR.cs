@@ -23,6 +23,7 @@
 * \date Last Modified: 21/03/2020
 */
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,9 @@ public class WaterBowl_DR : MonoBehaviour
 {
     public int numberOfCoins;
     public GameObject coinPrefab;
+
+    private GameObject coinNotification;
+    private const float coinNotificationLength = 1;
 
     internal enum ReasonForLosing
     {
@@ -48,6 +52,7 @@ public class WaterBowl_DR : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        coinNotification = GameObject.Find("CoinCollectNotification");
         coins = new List<GameObject>();
         for(int i = 0; i < numberOfCoins; i++)
         {
@@ -55,6 +60,7 @@ public class WaterBowl_DR : MonoBehaviour
             thisCoin.transform.localPosition = Vector3.zero;
             coins.Add(thisCoin);
         }
+        coinNotification.SetActive(false);
     }
 
     /// <summary>
@@ -65,7 +71,11 @@ public class WaterBowl_DR : MonoBehaviour
     public bool RemoveCoin()
     {
         bool coinWasRemoved = false;
-        if(!SaveSystem_DR.instance.startingGame) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
+        if (!SaveSystem_DR.instance.startingGame)
+        {
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
+            StartCoroutine(CoinCollectUI());
+        }
 
         if (coins.Count == 0)
         {
@@ -81,5 +91,12 @@ public class WaterBowl_DR : MonoBehaviour
         }
 
         return coinWasRemoved;
+    }
+
+    private IEnumerator CoinCollectUI()
+    {
+        coinNotification.SetActive(true);
+        yield return new WaitForSeconds(coinNotificationLength);
+        coinNotification.SetActive(false);
     }
 }

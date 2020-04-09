@@ -369,10 +369,10 @@ public class SaveSystem_DR: MonoBehaviour
         chessBoard = GameObject.Find("ChessBoard").GetComponent<ChessBoard_DR>();
         scalesPuzzleScript = GameObject.Find("Scales").GetComponent<ScalesPuzzleScript_AG>();
 
-        knight = GameObject.Find("BoardKnight").GetComponent<ChessPiece_DR>();
-        king = GameObject.Find("BoardKing").GetComponent<ChessPiece_DR>();
-        queen = GameObject.Find("BoardQueen").GetComponent<ChessPiece_DR>();
-        pawn = GameObject.Find("BoardPawn").GetComponent<ChessPiece_DR>();
+        knight = GameObject.Find("Board Knight").GetComponent<ChessPiece_DR>();
+        king = GameObject.Find("Board King").GetComponent<ChessPiece_DR>();
+        queen = GameObject.Find("Board Queen").GetComponent<ChessPiece_DR>();
+        pawn = GameObject.Find("Board Pawn").GetComponent<ChessPiece_DR>();
 
         button1Aura = button1.transform.parent.GetComponentInChildren<ParticleSystem>();
         button2Aura = button2.transform.parent.GetComponentInChildren<ParticleSystem>();

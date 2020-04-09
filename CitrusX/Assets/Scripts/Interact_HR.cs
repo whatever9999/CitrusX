@@ -650,7 +650,7 @@ public class Interact_HR : MonoBehaviour
             {
                 if(GameTesting_CW.instance.arePuzzlesDone[4])
                 {
-                    notificationText.text = "Press E to rotate the " + hit.transform.name;
+                    notificationText.text = "Press E to rotate the " + hit.transform.name.Split(' ')[1];
 
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {

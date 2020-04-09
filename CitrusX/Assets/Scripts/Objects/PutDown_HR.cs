@@ -44,7 +44,7 @@ public class PutDown_HR : MonoBehaviour
             PutItemsDown();
         } else if (name == "ChessBoard")
         {
-            GameObject.Find("BoardPawn").SetActive(false);
+            GameObject.Find("Board Pawn").SetActive(false);
         }
     }
 

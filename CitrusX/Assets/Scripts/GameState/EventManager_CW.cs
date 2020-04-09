@@ -51,6 +51,7 @@ public class EventManager_CW : MonoBehaviour
     ParticleSystem button1Effect;
     ParticleSystem button2Effect;
     ParticleSystem button3Effect;
+    ParticleSystem hiddenMechEffect;
     #endregion
     #region BOOLS
     internal bool[] triggersSet = { false, false, false, false, false, false };
@@ -86,10 +87,9 @@ public class EventManager_CW : MonoBehaviour
         button1Effect = GameObject.Find("1Button").GetComponentInChildren<ParticleSystem>();
         button2Effect = GameObject.Find("2Button").GetComponentInChildren<ParticleSystem>();
         button3Effect = GameObject.Find("3Button").GetComponentInChildren<ParticleSystem>();
-
-
-
+        hiddenMechEffect = GameObject.Find("Painting_AG").GetComponentInChildren<ParticleSystem>();
         #endregion
+
         #region INITIATE_TRIGGERS
         ritualTrigger = GameObject.Find("RitualTrigger").GetComponent<TriggerScript_CW>();
         chessTrigger = GameObject.Find("ChessboardTrigger").GetComponent<TriggerScript_CW>();
@@ -215,6 +215,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[7] && (!itemsSet[1] || !triggersSet[3]))
         {
+            hiddenMechEffect.Play();
             hiddenMechDoc.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
             itemsSet[1] = true;
@@ -222,6 +223,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
+            hiddenMechEffect.Stop();
             baron.gameIsEnding = true;
             baron.AppearStill(baronRitualLocation.transform, 0);
             ritualTrigger.allowedToBeUsed = true;
