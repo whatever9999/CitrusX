@@ -756,7 +756,7 @@ public class Interact_HR : MonoBehaviour
                 notificationText.text = "Press E to look inside the Box";
                 bool hasBeenOpened = false;
 
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact") && !hasBeenOpened)
                 {
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;

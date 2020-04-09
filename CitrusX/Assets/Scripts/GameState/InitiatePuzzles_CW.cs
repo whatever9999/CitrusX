@@ -129,8 +129,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
         else if (monitorInteractions[2] && !monitorInteractionsUsed[2])
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE3);
-            journal.AddJournalLog("That safe wasn't there before, I wonder what's in it...");
-            journal.ChangeTasks(new string[] { "Check safe" });
+            journal.AddJournalLog("That desk wasn't in the workshop before, I wonder what's in it...");
+            journal.ChangeTasks(new string[] { "Check the desk" });
             keypad.SetActive(true);
             idleVos.interactedWith = true;
             idleVos.interactedWith = false;
@@ -140,7 +140,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE1);
             journal.TickOffTask("Return to ritual");
-            journal.AddJournalLog("Those scales have some weird aura…are they haunted? God this ritual is getting to my head");
+            journal.AddJournalLog("Those scales have some weird aura…are they haunted? God this ritual is getting to my head.");
+            journal.AddJournalLog("I can use left click to pick things up and right click to throw.");
             journal.ChangeTasks(new string[] { "Check the scales " });
             scales.SetActive(true);
             idleVos.interactedWith = true;
@@ -151,8 +152,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE1);
             journal.TickOffTask("Return to ritual");
-            journal.AddJournalLog("How did the pieces blow off with the window closed?");
-            journal.ChangeTasks(new string[] {"Check the living room"});
+            journal.AddJournalLog("Is something wrong with the chess set in the lounge?");
+            journal.ChangeTasks(new string[] {"Check the lounge"});
             chessboard.SetActive(true);
             idleVos.interactedWith = true;
             idleVos.interactedWith = false;
@@ -164,6 +165,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
             journal.TickOffTask("Return to ritual");
             journal.AddJournalLog("How many coins am I at? I should be about half way…maybe?");
             journal.AddJournalLog("What's going on in the gym?");
+            journal.AddJournalLog("I can use left click to pick things up and right click to throw.");
             journal.ChangeTasks(new string[] { "Check the gym" });
             idleVos.interactedWith = true;
             idleVos.interactedWith = false;
@@ -173,7 +175,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         {
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE1);
             journal.TickOffTask("Return to ritual");
-            journal.ChangeTasks(new string[] { "Check out library" });
+            journal.ChangeTasks(new string[] { "Check the study" });
             hiddenMechTrigger.allowedToBeUsed = true;
             hiddenMech.SetActive(true);
             idleVos.interactedWith = true;

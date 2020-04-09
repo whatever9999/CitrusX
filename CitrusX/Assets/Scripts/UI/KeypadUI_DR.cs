@@ -90,7 +90,7 @@ public class KeypadUI_DR : MonoBehaviour
             if (!voiceovers[0])
             {
                 subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE4);
-                journal.TickOffTask("Check safe");
+                journal.TickOffTask("Check the desk");
                 journal.AddJournalLog("This safe needs a password, there’s got to be some clue somewhere…");
                 journal.ChangeTasks(new string[] {"Find clue"});
                 voiceovers[0] = true;
