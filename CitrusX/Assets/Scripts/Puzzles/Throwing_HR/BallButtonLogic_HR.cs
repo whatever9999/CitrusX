@@ -54,6 +54,7 @@ public class BallButtonLogic_HR : MonoBehaviour
     private void Start()
     {
         puzzleScript = InitiatePuzzles_CW.instance;
+        if (!aura.isPlaying) animator.SetTrigger("Hit");
     }
 
     /// <summary>

@@ -106,7 +106,7 @@ public class EventManager_CW : MonoBehaviour
         #region ACTIVATE_OBJECTS
         if (SaveSystem_DR.instance.loaded)
         {
-            throwingBox.SetActive(SaveSystem_DR.instance.loadedGD.throwingActivated);
+            throwingBox.SetActive(SaveSystem_DR.instance.loadedGD.throwingBoxActivated);
             hiddenMechDoc.SetActive(SaveSystem_DR.instance.loadedGD.hiddenMechNoteActivated);
             bathroomKeyPart1.SetActive(SaveSystem_DR.instance.loadedGD.bathroomKeyPartOneActive);
             bathroomKeyPart2.SetActive(SaveSystem_DR.instance.loadedGD.bathroomKeyPartTwoActive);
@@ -114,9 +114,6 @@ public class EventManager_CW : MonoBehaviour
             balls1.SetActive(SaveSystem_DR.instance.loadedGD.ball1IsActive);
             balls2.SetActive(SaveSystem_DR.instance.loadedGD.ball2IsActive);
             balls3.SetActive(SaveSystem_DR.instance.loadedGD.ball3IsActive);
-            buttons1.SetActive(SaveSystem_DR.instance.loadedGD.button1IsActive);
-            buttons2.SetActive(SaveSystem_DR.instance.loadedGD.button2IsActive);
-            buttons3.SetActive(SaveSystem_DR.instance.loadedGD.button3IsActive);
             chessNote.SetActive(SaveSystem_DR.instance.loadedGD.chessNoteActivated);
             keypadDoc.SetActive(SaveSystem_DR.instance.loadedGD.keypadNoteActive);
             laptopScreen.SetActive(SaveSystem_DR.instance.loadedGD.laptopScreenActivated);
@@ -213,13 +210,14 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[6] && !itemsSet[0])
         {
+            hiddenMechEffect.Play();
             throwingBox.SetActive(true);
             DisturbanceHandler_DR.instance.TriggerDisturbance(DisturbanceHandler_DR.DisturbanceName.LAMPWOBBLE);
             itemsSet[0] = true;
         }
         else if(game.arePuzzlesDone[7] && (!itemsSet[1] || !triggersSet[3]))
         {
-            hiddenMechEffect.Play();
+            hiddenMechEffect.Stop();
             hiddenMechDoc.SetActive(true);
             laptopScreen.SetActive(true);
             correctOrderTrigger.allowedToBeUsed = true;
@@ -228,7 +226,6 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
-            hiddenMechEffect.Stop();
             baron.gameIsEnding = true;
             baron.AppearStill(baronRitualLocation.transform, 0);
             ritualTrigger.allowedToBeUsed = true;

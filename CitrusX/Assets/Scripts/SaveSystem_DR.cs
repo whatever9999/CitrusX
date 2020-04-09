@@ -52,6 +52,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform candlesT;
     internal Transform coinsT;
     internal Transform saltT;
+    internal Transform waterJugT;
     internal Transform hiddenMechNoteT;
     internal Transform monitorT;
     internal Transform safeT;
@@ -64,7 +65,15 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform bathroomKeyPartOne;
     internal Transform bathroomKeyPartTwo;
     internal Transform keypadNoteT;
+<<<<<<< Updated upstream
     internal Transform laptopScreenT;
+=======
+<<<<<<< Updated upstream
+=======
+    internal Transform laptopScreenT;
+    internal GameObject pointerDot;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     internal Transform crisps1T;
     internal Transform crisps2T;
@@ -132,8 +141,10 @@ public class SaveSystem_DR: MonoBehaviour
     internal Table_CW gardenTable;
     internal Table_CW chessTable;
 
-    internal Paper_DR chessPaper;
+    internal Paper_DR chessBookPaper;
+    internal Paper_DR chessNotePaper;
     internal Paper_DR hiddenMechanismPaper;
+    internal Paper_DR hiddenMechanismPainting;
     internal Paper_DR keypadPaper;
     internal Paper_DR keysPaper;
 
@@ -148,7 +159,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal Door_DR safeDoor;
     internal Door_DR hiddenMechDoor;
     internal Door_DR chessDoor;
-    internal Door_DR scalesDoor;
+    internal Door_DR kitchenDoor;
 
     internal HoldandThrow_HR ball1;
     internal HoldandThrow_HR ball2;
@@ -184,9 +195,9 @@ public class SaveSystem_DR: MonoBehaviour
     internal HoldandThrow_HR keyBit1;
     internal HoldandThrow_HR keyBit2;
 
-    internal BallButtonLogic_HR button1;
-    internal BallButtonLogic_HR button2;
-    internal BallButtonLogic_HR button3;
+    internal GameObject button1GO;
+    internal GameObject button2GO;
+    internal GameObject button3GO;
 
     internal SetUpRitual_CW setUpRitual;
     internal HiddenMech_CW hiddenMech;
@@ -230,6 +241,7 @@ public class SaveSystem_DR: MonoBehaviour
         candlesT = GameObject.Find("Candles").GetComponent<Transform>();
         coinsT = GameObject.Find("Coins").GetComponent<Transform>();
         saltT = GameObject.Find("Salt").GetComponent<Transform>();
+        waterJugT = GameObject.Find("Water Jug").GetComponent<Transform>();
         hiddenMechNoteT = GameObject.Find("HiddenMechNote").GetComponent<Transform>();
         monitorT = GameObject.Find("Monitor").GetComponent<Transform>();
         safeT = GameObject.Find("Safe").GetComponent<Transform>();
@@ -242,7 +254,15 @@ public class SaveSystem_DR: MonoBehaviour
         bathroomKeyPartOne = GameObject.Find("Bathroom Key").GetComponent<Transform>();
         bathroomKeyPartTwo = GameObject.Find("Bathroom Key Part 2").GetComponent<Transform>();
         keypadNoteT = GameObject.Find("KeyPadDoc").GetComponent<Transform>();
+<<<<<<< Updated upstream
         laptopScreenT = GameObject.Find("LaptopScreen").GetComponent<Transform>();
+=======
+<<<<<<< Updated upstream
+=======
+        laptopScreenT = GameObject.Find("LaptopScreen").GetComponent<Transform>();
+        pointerDot = GameObject.Find("CentreOfScreenMarker");
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -308,8 +328,10 @@ public class SaveSystem_DR: MonoBehaviour
         gardenTable = GameObject.Find("GardenTable").GetComponent<Table_CW>();
         chessTable = GameObject.Find("ChessBoard").GetComponent<Table_CW>();
 
-        chessPaper = GameObject.Find("ChessBook").GetComponentInChildren<Paper_DR>();
+        chessBookPaper = GameObject.Find("ChessBook").GetComponentInChildren<Paper_DR>();
+        chessNotePaper = GameObject.Find("Chess Note").GetComponent<Paper_DR>();
         hiddenMechanismPaper = GameObject.Find("HiddenMechNote").GetComponent<Paper_DR>();
+        hiddenMechanismPainting = GameObject.Find("Painting_AG").GetComponent<Paper_DR>();
         keypadPaper = GameObject.Find("KeyPadDoc").GetComponent<Paper_DR>();
         keysPaper = GameObject.Find("KeysNote").GetComponent<Paper_DR>();
 
@@ -324,7 +346,7 @@ public class SaveSystem_DR: MonoBehaviour
         safeDoor = GameObject.Find("Safe Door").GetComponentInChildren<Door_DR>();
         hiddenMechDoor = GameObject.Find("Study Door").GetComponentInChildren<Door_DR>();
         chessDoor = GameObject.Find("Living Room Door").GetComponentInChildren<Door_DR>();
-        scalesDoor = GameObject.Find("Kitchen Door").GetComponentInChildren<Door_DR>();
+        kitchenDoor = GameObject.Find("Kitchen Door").GetComponentInChildren<Door_DR>();
 
         ball1 = GameObject.Find("1Ball").GetComponent<HoldandThrow_HR>();
         ball2 = GameObject.Find("2Ball").GetComponent<HoldandThrow_HR>();
@@ -359,12 +381,12 @@ public class SaveSystem_DR: MonoBehaviour
         keyBit1 = GameObject.Find("KeyBit1").GetComponent<HoldandThrow_HR>();
         keyBit2 = GameObject.Find("KeyBit2").GetComponent<HoldandThrow_HR>();
 
-        button1 = GameObject.Find("1Button").GetComponentInChildren<BallButtonLogic_HR>();
-        button2 = GameObject.Find("2Button").GetComponentInChildren<BallButtonLogic_HR>();
-        button3 = GameObject.Find("3Button").GetComponentInChildren<BallButtonLogic_HR>();
+        button1GO = GameObject.Find("1Button");
+        button2GO = GameObject.Find("2Button");
+        button3GO = GameObject.Find("3Button");
 
         setUpRitual = GameObject.Find("FPSController").GetComponentInChildren<SetUpRitual_CW>();
-        hiddenMech = GameObject.Find("FPSController").GetComponentInChildren<HiddenMech_CW>();
+        hiddenMech = GameObject.Find("Painting_AG").GetComponentInChildren<HiddenMech_CW>();
         GameObject fuseboxUI = GameObject.Find("FuseboxUI");
         fusebox = fuseboxUI.GetComponent<Fusebox_CW>();
         correctOrder = GameObject.Find("CorrectOrderUI").GetComponent<CorrectOrder_CW>();
@@ -377,9 +399,9 @@ public class SaveSystem_DR: MonoBehaviour
         queen = GameObject.Find("Board Queen").GetComponent<ChessPiece_DR>();
         pawn = GameObject.Find("Board Pawn").GetComponent<ChessPiece_DR>();
 
-        button1Aura = button1.transform.parent.GetComponentInChildren<ParticleSystem>();
-        button2Aura = button2.transform.parent.GetComponentInChildren<ParticleSystem>();
-        button3Aura = button3.transform.parent.GetComponentInChildren<ParticleSystem>();
+        button1Aura = button1GO.GetComponentInChildren<ParticleSystem>();
+        button2Aura = button2GO.GetComponentInChildren<ParticleSystem>();
+        button3Aura = button3GO.GetComponentInChildren<ParticleSystem>();
         scalesAura = scalesPuzzleScript.GetComponentInChildren<ParticleSystem>();
         chessBookAura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
         hiddenMechAura = GameObject.Find("Painting_AG").GetComponentInChildren<ParticleSystem>();
@@ -572,6 +594,10 @@ public class SaveSystem_DR: MonoBehaviour
         candlesT.gameObject.SetActive(GD.candlesNotPickedUp);
         coinsT.gameObject.SetActive(GD.coinsNotPickedUp);
         saltT.gameObject.SetActive(GD.saltNotPickedUp);
+        waterJugT.gameObject.SetActive(GD.waterJugNotPickedUp);
+
+        //Centre of Screen Marker
+        pointerDot.SetActive(GD.pointerDotActive);
 
         //Monitor
         if(GD.monitorOn)
@@ -741,14 +767,17 @@ public class SaveSystem_DR: MonoBehaviour
         chessTable.hasBeenPlaced = GD.chessTHasBeenPlaced;
 
         //Paper
-        chessPaper.hasBeenRead = GD.chessPHasBeenRead;
+        chessBookPaper.hasBeenRead = GD.chessBookPHasBeenRead;
+        chessNotePaper.hasBeenRead = GD.chessBookPHasBeenRead;
         hiddenMechanismPaper.hasBeenRead = GD.hiddenMechanismPHasBeenRead;
+        hiddenMechanismPainting.hasBeenRead = GD.hiddenMechanismPaintingHasBeenRead;
         keypadPaper.hasBeenRead = GD.keypadPHasBeenRead;
         keysPaper.hasBeenRead = GD.keysPHasBeenRead;
 
         //Door
         colourMatchingDoor.unlocked = GD.colourMatchingDoorUnlocked;
         colourMatchingDoor.isOpen = GD.colourMatchingDoorIsOpen;
+        colourMatchingDoor.requiresKey = GD.colourMatchingDoorRequiresKey;
         correctOrderDoor.unlocked = GD.correctOrderDoorUnlocked;
         correctOrderDoor.isOpen = GD.correctOrderDoorIsOpen;
         rightFrontDoor.unlocked = GD.rightFrontDoorUnlocked;
@@ -765,8 +794,8 @@ public class SaveSystem_DR: MonoBehaviour
         diningRoomDoor.isOpen = GD.diningRoomDoorIsOpen;
         safeDoor.unlocked = GD.safeDoorUnlocked;
         safeDoor.isOpen = GD.safeDoorIsOpen;
-        scalesDoor.unlocked = GD.scalesDoorUnlocked;
-        scalesDoor.isOpen = GD.scalesDoorIsOpen;
+        kitchenDoor.unlocked = GD.kitchenDoorUnlocked;
+        kitchenDoor.isOpen = GD.kitchenDoorIsOpen;
         hiddenMechDoor.unlocked = GD.hiddenMechDoorUnlocked;
         hiddenMechDoor.isOpen = GD.hiddenMechDoorIsOpen;
         chessDoor.unlocked = GD.chessDoorUnlocked;
@@ -864,6 +893,11 @@ public class SaveSystem_DR: MonoBehaviour
         scalesPuzzleScript.isActive = GD.scalesPuzzleIsActive;
         scalesPuzzleScript.isComplete = GD.scalesPuzzleIsComplete;
 
+        //Buttons
+        button1GO.SetActive(GD.button1GOActivated);
+        button2GO.SetActive(GD.button2GOActivated);
+        button3GO.SetActive(GD.button3GOActivated);
+
         //Auras
         if (GD.button1AuraPlaying) button1Aura.Play();
         if (GD.button2AuraPlaying) button2Aura.Play();
@@ -909,6 +943,9 @@ public class GameData_DR
     internal bool candlesNotPickedUp;
     internal bool coinsNotPickedUp;
     internal bool saltNotPickedUp;
+    internal bool waterJugNotPickedUp;
+    //Screen marker
+    internal bool pointerDotActive;
     //HiddenMechNote
     internal bool hiddenMechNoteActivated;
     //Monitor
@@ -1059,14 +1096,17 @@ public class GameData_DR
     internal bool chessTHasBeenPlaced;
 
     //Paper
-    internal bool chessPHasBeenRead;
+    internal bool chessNotePHasBeenRead;
+    internal bool chessBookPHasBeenRead;
     internal bool hiddenMechanismPHasBeenRead;
+    internal bool hiddenMechanismPaintingHasBeenRead;
     internal bool keypadPHasBeenRead;
     internal bool keysPHasBeenRead;
 
     //Door
     internal bool colourMatchingDoorUnlocked;
     internal bool colourMatchingDoorIsOpen;
+    internal bool colourMatchingDoorRequiresKey;
     internal bool correctOrderDoorUnlocked;
     internal bool correctOrderDoorIsOpen;
     internal bool rightFrontDoorUnlocked;
@@ -1083,8 +1123,8 @@ public class GameData_DR
     internal bool diningRoomDoorIsOpen;
     internal bool safeDoorUnlocked;
     internal bool safeDoorIsOpen;
-    internal bool scalesDoorUnlocked;
-    internal bool scalesDoorIsOpen;
+    internal bool kitchenDoorUnlocked;
+    internal bool kitchenDoorIsOpen;
     internal bool chessDoorUnlocked;
     internal bool chessDoorIsOpen;
     internal bool hiddenMechDoorUnlocked;
@@ -1153,9 +1193,9 @@ public class GameData_DR
     internal bool keyBit2IsFirstTime;
 
     //BallButtonLogic
-    internal bool button1IsActive;
-    internal bool button2IsActive;
-    internal bool button3IsActive;
+    internal bool button1GOActivated;
+    internal bool button2GOActivated;
+    internal bool button3GOActivated;
 
     //SetUpRitual
     internal bool[] ritualSteps;
@@ -1294,6 +1334,10 @@ public class GameData_DR
         candlesNotPickedUp = saveData.candlesT.gameObject.activeInHierarchy;
         coinsNotPickedUp = saveData.coinsT.gameObject.activeInHierarchy;
         saltNotPickedUp = saveData.saltT.gameObject.activeInHierarchy;
+        waterJugNotPickedUp = saveData.waterJugT.gameObject.activeInHierarchy;
+
+        //Centre of screen marker
+        pointerDotActive = saveData.pointerDot.activeInHierarchy;
 
         //HiddenMechNote
         hiddenMechNoteActivated = saveData.hiddenMechNoteT.gameObject.activeInHierarchy;
@@ -1597,16 +1641,20 @@ public class GameData_DR
         ritualTHasBeenPlaced = saveData.ritualTable.hasBeenPlaced;
         gardenTHasBeenPlaced = saveData.gardenTable.hasBeenPlaced;
         chessTHasBeenPlaced = saveData.chessTable.hasBeenPlaced;
+        chessNoteActivated = saveData.chessNoteT.gameObject.activeInHierarchy;
 
         //Paper
-        chessPHasBeenRead = saveData.chessPaper.hasBeenRead;
+        chessBookPHasBeenRead = saveData.chessBookPaper.hasBeenRead;
+        chessNotePHasBeenRead = saveData.chessNotePaper.hasBeenRead;
         hiddenMechanismPHasBeenRead = saveData.hiddenMechanismPaper.hasBeenRead;
+        hiddenMechanismPaintingHasBeenRead = saveData.hiddenMechanismPainting.hasBeenRead;
         keypadPHasBeenRead = saveData.keypadPaper.hasBeenRead;
         keysPHasBeenRead = saveData.keysPaper.hasBeenRead;
 
         //Door
         colourMatchingDoorUnlocked = saveData.colourMatchingDoor.unlocked;
         colourMatchingDoorIsOpen = saveData.colourMatchingDoor.isOpen;
+        colourMatchingDoorRequiresKey = saveData.colourMatchingDoor.requiresKey;
         correctOrderDoorUnlocked = saveData.correctOrderDoor.unlocked;
         correctOrderDoorIsOpen = saveData.correctOrderDoor.isOpen;
         rightFrontDoorUnlocked = saveData.rightFrontDoor.unlocked;
@@ -1623,8 +1671,8 @@ public class GameData_DR
         diningRoomDoorIsOpen = saveData.diningRoomDoor.isOpen;
         safeDoorUnlocked = saveData.safeDoor.unlocked;
         safeDoorIsOpen = saveData.safeDoor.isOpen;
-        scalesDoorUnlocked = saveData.scalesDoor.unlocked;
-        scalesDoorIsOpen = saveData.scalesDoor.isOpen;
+        kitchenDoorUnlocked = saveData.kitchenDoor.unlocked;
+        kitchenDoorIsOpen = saveData.kitchenDoor.isOpen;
         chessDoorUnlocked = saveData.chessDoor.unlocked;
         chessDoorIsOpen = saveData.chessDoor.isOpen;
         hiddenMechDoorUnlocked = saveData.hiddenMechDoor.unlocked;
@@ -1690,9 +1738,9 @@ public class GameData_DR
         keyBit2IsFirstTime = saveData.keyBit2.isFirstTime;
 
         //BallButtonLogic
-        button1IsActive = saveData.button1.isActive;
-        button2IsActive = saveData.button2.isActive;
-        button3IsActive = saveData.button3.isActive;
+        button1GOActivated = saveData.button1GO.activeInHierarchy;
+        button2GOActivated = saveData.button2GO.activeInHierarchy;
+        button3GOActivated = saveData.button3GO.activeInHierarchy;
 
         //SetUpRitual
         ritualSteps = saveData.setUpRitual.ritualSteps;

@@ -105,7 +105,13 @@ public class Cinematics_DR : MonoBehaviour
     private void Start()
     {
         pauseMenuUI.SetActive(false);
-        centreOfScreen.SetActive(false);
+        if (SaveSystem_DR.instance.loaded)
+        {
+            centreOfScreen.SetActive(SaveSystem_DR.instance.loadedGD.pointerDotActive);
+        } else
+        {
+            centreOfScreen.SetActive(false);
+        }
         if (playStartCinematic)
         {
             playerInteraction.enabled = false;

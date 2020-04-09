@@ -105,8 +105,6 @@ public class ScalesPuzzleScript_AG : MonoBehaviour
                 journal.ChangeTasks(new string[] { "Return to ritual" });
                 subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE3);
                 GameTesting_CW.instance.arePuzzlesDone[4] = true;
-
-                door.ToggleOpen();
             }
         }
     }

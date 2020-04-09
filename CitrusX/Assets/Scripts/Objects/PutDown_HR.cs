@@ -45,6 +45,9 @@ public class PutDown_HR : MonoBehaviour
         } else if (name == "ChessBoard")
         {
             GameObject.Find("Board Pawn").SetActive(false);
+        } else if (name == "RitualTable")
+        {
+            GameObject.Find("RitualBowl").SetActive(false);
         }
     }
 
@@ -60,7 +63,7 @@ public class PutDown_HR : MonoBehaviour
         }
         beenUsed = true;
 
-        if(name == "ChessBoard")
+        if(name == "ChessBoard" && SaveSystem_DR.instance.startingGame)
         {
             GetComponent<ChessBoard_DR>().CheckPieces();
         }
