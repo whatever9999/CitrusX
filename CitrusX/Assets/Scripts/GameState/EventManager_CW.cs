@@ -16,7 +16,6 @@ public class EventManager_CW : MonoBehaviour
     private Door_DR loungeDoor; //chessboard door
     private Door_DR masterBedroomDoor;
     private Door_DR[] otherDownstairsDoors;
-    public Door_DR workshopDoor;
     #endregion
     #region TRIGGER_REFERENCES
     private TriggerScript_CW ritualTrigger;
@@ -142,12 +141,7 @@ public class EventManager_CW : MonoBehaviour
         if(game.arePuzzlesDone[0] && !triggersSet[5])
         {
             gardenTrigger.allowedToBeUsed = true;
-            if(workshopDoor.isOpen)
-            {
-                workshopDoor.ToggleOpen();
-                workshopDoor.unlocked = false;
-                workshopDoor.requiresKey = true;
-            }
+            laptopScreen.SetActive(false);
             triggersSet[5] = true;
         }
         else if(game.arePuzzlesDone[0] && !game.arePuzzlesDone[1] && !itemsSet[4])
