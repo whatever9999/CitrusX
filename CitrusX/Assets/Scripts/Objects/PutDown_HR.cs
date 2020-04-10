@@ -63,7 +63,7 @@ public class PutDown_HR : Interactable_DR
         }
         beenUsed = true;
 
-        if (name == "ChessBoard" && SaveSystem_DR.instance.startingGame)
+        if (name == "ChessBoard" && !SaveSystem_DR.instance.startingGame)
         {
             GetComponent<ChessBoard_DR>().CheckPieces();
         } 

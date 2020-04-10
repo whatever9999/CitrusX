@@ -74,10 +74,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -240,63 +238,63 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10228}
     - Class: 114
-      Script: {instanceID: 10238}
+      Script: {instanceID: 10230}
     - Class: 114
-      Script: {instanceID: 10278}
+      Script: {instanceID: 10240}
     - Class: 114
-      Script: {instanceID: 10302}
+      Script: {instanceID: 10280}
     - Class: 114
-      Script: {instanceID: 10320}
+      Script: {instanceID: 10304}
     - Class: 114
-      Script: {instanceID: 10332}
+      Script: {instanceID: 10322}
     - Class: 114
-      Script: {instanceID: 10344}
+      Script: {instanceID: 10334}
     - Class: 114
-      Script: {instanceID: 10376}
+      Script: {instanceID: 10346}
     - Class: 114
-      Script: {instanceID: 10414}
+      Script: {instanceID: 10378}
     - Class: 114
-      Script: {instanceID: 10426}
+      Script: {instanceID: 10416}
     - Class: 114
-      Script: {instanceID: 10434}
+      Script: {instanceID: 10428}
     - Class: 114
-      Script: {instanceID: 10452}
+      Script: {instanceID: 10436}
     - Class: 114
-      Script: {instanceID: 10468}
+      Script: {instanceID: 10454}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10470}
     - Class: 114
-      Script: {instanceID: 10514}
+      Script: {instanceID: 10512}
     - Class: 114
       Script: {instanceID: 10516}
     - Class: 114
-      Script: {instanceID: 10578}
+      Script: {instanceID: 10518}
     - Class: 114
       Script: {instanceID: 10580}
     - Class: 114
-      Script: {instanceID: 10674}
+      Script: {instanceID: 10582}
     - Class: 114
-      Script: {instanceID: 10684}
+      Script: {instanceID: 10676}
     - Class: 114
-      Script: {instanceID: 10786}
+      Script: {instanceID: 10686}
     - Class: 114
-      Script: {instanceID: 10812}
+      Script: {instanceID: 10788}
     - Class: 114
-      Script: {instanceID: 10846}
+      Script: {instanceID: 10814}
     - Class: 114
-      Script: {instanceID: 10858}
+      Script: {instanceID: 10848}
     - Class: 114
-      Script: {instanceID: 10866}
+      Script: {instanceID: 10860}
     - Class: 114
-      Script: {instanceID: 10870}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 10920}
+      Script: {instanceID: 10872}
     - Class: 114
-      Script: {instanceID: 10930}
+      Script: {instanceID: 10922}
     - Class: 114
-      Script: {instanceID: 10958}
+      Script: {instanceID: 10932}
     - Class: 114
-      Script: {instanceID: 218724}
+      Script: {instanceID: 10960}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -399,9 +397,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9458}
     - Class: 114
-      Script: {instanceID: 10580}
+      Script: {instanceID: 10582}
     - Class: 114
-      Script: {instanceID: 10680}
+      Script: {instanceID: 10682}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1370,6 +1368,12 @@ ScriptsOnlyBuild:
     className: TriggerScript_CW
   - hash:
       serializedVersion: 2
+      Hash: 732c65e85785167f4783c5459063e497
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Interactable_DR
+  - hash:
+      serializedVersion: 2
       Hash: f66c5abb945dada48d2efafbec53efa6
     assemblyName: Assembly-CSharp.dll
     namespaceName: Cinemachine
@@ -1782,12 +1786,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: AutoMobileShaderSwitch
-  - hash:
-      serializedVersion: 2
-      Hash: 732c65e85785167f4783c5459063e497
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Interactable_DR
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game/Start_DR.unity
