@@ -126,7 +126,8 @@ public class Subtitles_HR : MonoBehaviour
         P8_LINE13,
         Too_Few_Coins,
         Took_Without_Baron,
-        Took_More_Than_There_Were
+        Took_More_Than_There_Were,
+        Baron_Got_Coin
     }
 
     //This array will show in the inspector for subtitle data to be passed in to
@@ -228,13 +229,16 @@ public class Subtitles_HR : MonoBehaviour
         switch (waterBowl.reasonForLosing)
         {
             case WaterBowl_DR.ReasonForLosing.Too_Few_Coins:
-                PlayAudio(Subtitles_HR.ID.Too_Few_Coins);
+                PlayAudio(ID.Too_Few_Coins);
                 break;
             case WaterBowl_DR.ReasonForLosing.Took_Without_Baron:
-                PlayAudio(Subtitles_HR.ID.Took_Without_Baron);
+                PlayAudio(ID.Took_Without_Baron);
                 break;
             case WaterBowl_DR.ReasonForLosing.Took_More_Than_There_Were:
-                PlayAudio(Subtitles_HR.ID.Took_More_Than_There_Were);
+                PlayAudio(ID.Took_More_Than_There_Were);
+                break;
+            case WaterBowl_DR.ReasonForLosing.Baron_Got_Coin:
+                PlayAudio(ID.Baron_Got_Coin);
                 break;
         }
     }

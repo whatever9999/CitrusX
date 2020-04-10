@@ -210,6 +210,7 @@ public class SaveSystem_DR: MonoBehaviour
     internal ParticleSystem button3Aura;
     internal ParticleSystem scalesAura;
     internal ParticleSystem chessBookAura;
+    internal ParticleSystem bathroomNoteAura;
     #endregion
 
     /// <summary>
@@ -389,6 +390,7 @@ public class SaveSystem_DR: MonoBehaviour
         button3Aura = button3GO.GetComponentInChildren<ParticleSystem>();
         scalesAura = scalesPuzzleScript.GetComponentInChildren<ParticleSystem>();
         chessBookAura = GameObject.Find("ChessBook").GetComponentInChildren<ParticleSystem>();
+        bathroomNoteAura = GameObject.Find("KeysNote").GetComponentInChildren<ParticleSystem>();
         #endregion
 
         //The character controller stops the player's position from being changed so it's temporarily disabled
@@ -710,10 +712,11 @@ public class SaveSystem_DR: MonoBehaviour
         //WaterBowl
         for (int i = waterBowl.numberOfCoins; i > GD.coinsLeft; i--)
         {
-            waterBowl.RemoveCoin();
+            waterBowl.RemoveCoin(false);
         }
         waterBowl.playerHasLost = GD.playerHasLost;
         waterBowl.reasonForLosing = GD.reasonForLosing;
+        print(GD.reasonForLosing);
 
         //KeypadUI
         keyPadUI.interactedWithSafe = GD.interactedWithSafe;
@@ -889,6 +892,7 @@ public class SaveSystem_DR: MonoBehaviour
         if (GD.button3AuraPlaying) button3Aura.Play();
         if (GD.scalesAuraPlaying) scalesAura.Play();
         if (GD.chessBookAuraPlaying) chessBookAura.Play();
+        if (GD.bathroomNoteAuraPlaying) bathroomNoteAura.Play();
     }
 }
 
@@ -1222,6 +1226,7 @@ public class GameData_DR
     internal bool button3AuraPlaying;
     internal bool scalesAuraPlaying;
     internal bool chessBookAuraPlaying;
+    internal bool bathroomNoteAuraPlaying;
 
     //Pipes
     internal Pipes_CW.Directions pipe1CurrentPosition;
@@ -1768,5 +1773,6 @@ public class GameData_DR
         button3AuraPlaying = saveData.button3Aura.isPlaying;
         scalesAuraPlaying = saveData.scalesAura.isPlaying;
         chessBookAuraPlaying = saveData.chessBookAura.isPlaying;
+        bathroomNoteAuraPlaying = saveData.bathroomNoteAura.isPlaying;
     }
 }

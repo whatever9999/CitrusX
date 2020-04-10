@@ -33,14 +33,15 @@ public class WaterBowl_DR : MonoBehaviour
     public GameObject coinPrefab;
 
     private GameObject coinNotification;
-    private const float coinNotificationLength = 1;
+    private const float coinNotificationLength = 0.5f;
 
     internal enum ReasonForLosing
     {
         None,
         Too_Few_Coins,
         Took_Without_Baron,
-        Took_More_Than_There_Were
+        Took_More_Than_There_Were,
+        Baron_Got_Coin
     }
 
     internal ReasonForLosing reasonForLosing = ReasonForLosing.None;
@@ -68,28 +69,37 @@ public class WaterBowl_DR : MonoBehaviour
     /// Otherwise a coin is removed
     /// </summary>
     /// <returns>a boolean to show if the coin was successfully removed or not</returns>
-    public bool RemoveCoin()
+    public bool RemoveCoin(bool isBaron)
     {
         bool coinWasRemoved = false;
-        if (!SaveSystem_DR.instance.startingGame)
+        if (isBaron)
         {
+            if (reasonForLosing == WaterBowl_DR.ReasonForLosing.None) reasonForLosing = WaterBowl_DR.ReasonForLosing.Baron_Got_Coin;
             SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
-            StartCoroutine(CoinCollectUI());
-        }
-
-        if (coins.Count == 0)
-        {
-            //Trying to take coin when there are none left
-            if (reasonForLosing == WaterBowl_DR.ReasonForLosing.None) reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_More_Than_There_Were;
+            coinWasRemoved = true;
             playerHasLost = true;
         } else
         {
-            //Remove a coin
-            coins[coins.Count - 1].SetActive(false);
-            coins.RemoveAt(coins.Count - 1);
-            coinWasRemoved = true;
-        }
+            if (!SaveSystem_DR.instance.startingGame)
+            {
+                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
+                StartCoroutine(CoinCollectUI());
+            }
 
+            if (coins.Count == 0)
+            {
+                //Trying to take coin when there are none left
+                if (reasonForLosing == WaterBowl_DR.ReasonForLosing.None) reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_More_Than_There_Were;
+                playerHasLost = true;
+            }
+            else
+            {
+                //Remove a coin
+                coins[coins.Count - 1].SetActive(false);
+                coins.RemoveAt(coins.Count - 1);
+                coinWasRemoved = true;
+            }
+        }
         return coinWasRemoved;
     }
 

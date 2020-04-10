@@ -97,6 +97,8 @@ public class Pooler_HR : MonoBehaviour
 
     private IEnumerator ToNextScene()
     {
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(fade.FadeFromBlack());
         yield return new WaitForSeconds(2);
         StartCoroutine(fade.Fade());
         yield return new WaitForSeconds(1);

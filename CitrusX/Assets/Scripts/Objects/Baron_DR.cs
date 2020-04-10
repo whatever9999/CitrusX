@@ -102,6 +102,14 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if(pauseMenu.activeInHierarchy && animator.GetCurrentAnimatorStateInfo(0).IsName("Walking"))
+        {
+            animator.SetBool("Paused", true);
+        } else if(!pauseMenu.activeInHierarchy && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            animator.SetBool("Paused", false);
+        }
+
         if(!gettingCoin && !gameIsEnding && !pauseMenu.activeInHierarchy)
         {
             appearanceTimer += Time.deltaTime;
@@ -146,10 +154,13 @@ public class Baron_DR : MonoBehaviour
     /// </summary>
     public void GetCoin()
     {
-        animator.SetBool("NotMoving", false);
-        gettingCoin = true;
-        transform.position = startPosition;
-        gameObject.SetActive(true);
+        if(!gettingCoin)
+        {
+            animator.SetBool("NotMoving", false);
+            gettingCoin = true;
+            transform.position = startPosition;
+            gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -184,7 +195,7 @@ public class Baron_DR : MonoBehaviour
         //Play the reach animation and pick up a coin then disappear
         animator.SetBool("ReachedBowl", true);
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        waterBowl.RemoveCoin();
+        waterBowl.RemoveCoin(true);
         Debug.Log("The baron has taken a coin");
         gameObject.SetActive(false);
     }

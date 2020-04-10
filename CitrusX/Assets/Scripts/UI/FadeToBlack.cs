@@ -23,4 +23,16 @@ public class FadeToBlack : MonoBehaviour
             blackScreen.color = newColor;
         }
     }
+
+    public IEnumerator FadeFromBlack()
+    {
+        while (blackScreen.color.a > 0)
+        {
+            Color newColor = blackScreen.color;
+            newColor.a -= Time.deltaTime * 2;
+            //Emphasise the fade
+            yield return new WaitForSeconds(Time.deltaTime);
+            blackScreen.color = newColor;
+        }
+    }
 }

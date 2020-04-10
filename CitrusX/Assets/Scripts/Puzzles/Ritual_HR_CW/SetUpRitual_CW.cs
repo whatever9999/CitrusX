@@ -66,6 +66,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         symbol2 = GameObject.Find("Dining Room Symbol of Scarcity");
         symbol3 = GameObject.Find("Living Room Symbol of Scarcity");
         symbol4 = GameObject.Find("Study Symbol of Scarcity");
+        laptopScreen = GameObject.Find("LaptopScreen");
         #endregion
     }
 

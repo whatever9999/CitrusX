@@ -53,6 +53,7 @@ public class EventManager_CW : MonoBehaviour
     ParticleSystem button2Effect;
     ParticleSystem button3Effect;
     ParticleSystem hiddenMechEffect;
+    ParticleSystem bathroomNoteEffect;
     #endregion
     #region BOOLS
     internal bool[] triggersSet = { false, false, false, false, false, false };
@@ -89,6 +90,7 @@ public class EventManager_CW : MonoBehaviour
         button2Effect = GameObject.Find("2Button").GetComponentInChildren<ParticleSystem>();
         button3Effect = GameObject.Find("3Button").GetComponentInChildren<ParticleSystem>();
         hiddenMechEffect = GameObject.Find("Painting_AG").GetComponentInChildren<ParticleSystem>();
+        bathroomNoteEffect = GameObject.Find("KeysNote").GetComponentInChildren<ParticleSystem>();
         laptopScreen = GameObject.Find("LaptopScreen");
         #endregion
 
@@ -157,16 +159,19 @@ public class EventManager_CW : MonoBehaviour
             bathroomKeyPart2.name = "Bathroom Key"; 
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[0] = true;
+            bathroomNoteEffect.Play();
         }
         else if(triggersSet[0] && !game.arePuzzlesDone[2])
         {
             if(!bathroomKeyPart2.activeInHierarchy)
             {
                 bathroomKeyPart1.name = "Bathroom Key Part 2";
+                bathroomNoteEffect.Stop();
             }
             else if(!bathroomKeyPart1.activeInHierarchy)
             {
                 bathroomKeyPart2.name = "Bathroom Key Part 2";
+                bathroomNoteEffect.Stop();
             }
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])

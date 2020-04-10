@@ -170,6 +170,9 @@ public class Interact_HR : MonoBehaviour
     private GameObject pawn;
     private IdleVoiceover_CW idleVos;
     private bool waterRippleLinePlayed = false;
+    private const float coinPickUpInterval = 0.5f;
+    private float currentCoinPickUpInterval;
+    private bool canPickUpCoin = true;
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
@@ -211,6 +214,16 @@ public class Interact_HR : MonoBehaviour
     ///</summary>
     void Update()
     {
+        if(!canPickUpCoin)
+        {
+            currentCoinPickUpInterval += Time.deltaTime;
+
+            if(currentCoinPickUpInterval > coinPickUpInterval)
+            {
+                canPickUpCoin = true;
+                currentCoinPickUpInterval = 0;
+            }
+        }
         //Reset text
         notificationText.text = "";
         //RayCast Forward see if the player is in range of anything
@@ -675,7 +688,7 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "WaterBowl")
             {
-                if(GameTesting_CW.instance.arePuzzlesDone[0])
+                if(GameTesting_CW.instance.arePuzzlesDone[0] && canPickUpCoin)
                 {
                     notificationText.text = "Press E to take a coin";
                     if (GameTesting_CW.instance.arePuzzlesDone[8] && !waterRippleLinePlayed)
@@ -690,7 +703,7 @@ public class Interact_HR : MonoBehaviour
 
                         if (baron.isActiveAndEnabled)
                         {
-                            if (waterBowl.RemoveCoin())
+                            if (waterBowl.RemoveCoin(false))
                             {
                                 numberCoinsCollected++;
                                 if(!baron.gameIsEnding)
@@ -703,11 +716,13 @@ public class Interact_HR : MonoBehaviour
                         else
                         {
                             waterBowl.CoinCollectUI();
+                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, waterBowl.transform.position);
                             //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
                             if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_Without_Baron;
                             waterBowl.playerHasLost = true;
                         }
 
+                        canPickUpCoin = false;
                     }
                 }
                 
