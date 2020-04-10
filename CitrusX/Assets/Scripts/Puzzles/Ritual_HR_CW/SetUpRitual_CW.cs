@@ -43,6 +43,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     private GameObject symbol2;
     private GameObject symbol3;
     private GameObject symbol4;
+    private GameObject laptopScreen;
     public Door_DR door1;
     public Door_DR door2;
     public Door_DR door3;
@@ -65,6 +66,8 @@ internal class SetUpRitual_CW : PuzzleBaseScript
         symbol2 = GameObject.Find("Dining Room Symbol of Scarcity");
         symbol3 = GameObject.Find("Living Room Symbol of Scarcity");
         symbol4 = GameObject.Find("Study Symbol of Scarcity");
+
+        laptopScreen = GameObject.Find("LaptopScreen");
         #endregion
     }
 
@@ -81,6 +84,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
             if (!voiceovers[0])
             {
                 #region ITEMS_TO_ACTIVATE
+
                 symbol1.SetActive(false);
                 symbol2.SetActive(false);
                 symbol3.SetActive(false);
@@ -145,6 +149,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                         symbol4.SetActive(true);
                         #endregion
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
+                        laptopScreen.SetActive(false);
                         voiceovers[2] = true;
                     }
                     journal.AddJournalLog("I’ve set that up and put the items of scarcity around to ward off the Baron, now I should check out the security system and see how it works.");

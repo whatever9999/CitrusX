@@ -48,12 +48,14 @@ public class CandleScript_AG : MonoBehaviour
     /// </summary>
     public void BlowOut()
     {
-        for(int i = 0; i < flames.Length; i++)
+        subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
+        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.CANDLE_BLOW, transform.position);
+
+        for (int i = 0; i < flames.Length; i++)
         {
             flames[i].Stop();
         }
-        subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.CANDLE_BLOW, transform.position);
+     
     }
   
 }

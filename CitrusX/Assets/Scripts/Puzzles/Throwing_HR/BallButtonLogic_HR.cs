@@ -82,9 +82,22 @@ public class BallButtonLogic_HR : MonoBehaviour
                 journal.TickOffTask("Button 3");
             }
             #endregion
+            
+            if(collision.gameObject.name == "1Ball")
+            {
+                journal.TickOffTask("Button 1");
+            }
+            else if(collision.gameObject.name == "2Ball")
+            {
+                journal.TickOffTask("Button 2");
+            }
+            else if(collision.gameObject.name == "3Ball")
+            {
+                journal.TickOffTask("Button 3");
+            }
             collision.gameObject.SetActive(false);
             //SOUND HERE for BALL hitting
-            if(puzzleScript.ballCounter == 1 && !baronMove)
+            if (puzzleScript.ballCounter == 1 && !baronMove)
             {
                 baron.GetCoin();
                 baronMove = true;

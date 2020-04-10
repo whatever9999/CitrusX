@@ -174,6 +174,7 @@ public class Interact_HR : MonoBehaviour
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
     private SetUpRitual_CW ritual;
+    private bool boxHasBeenOpened = false;
     #endregion
 
     ///<summary>
@@ -766,28 +767,22 @@ public class Interact_HR : MonoBehaviour
             }
             else if (hit.transform.tag == "Box")
             {
-                bool hasBeenOpened = false;
-                if (!hasBeenOpened)
+                
+                if (!boxHasBeenOpened)
                 {
                     notificationText.text = "Press E to look inside the Box";
                 }
-               
 
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact") && !boxHasBeenOpened)
                 {
                     idleVos.interactedWith = true;
                     idleVos.interactedWith = false;
-                    if (!hasBeenOpened)
+                    if (!boxHasBeenOpened)
                     {
                         //play box anim
                         subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
                         journal.ChangeTasks(new string[] { "Return to ritual" });
-                        hasBeenOpened = true;
-                    }
-                    else if (hasBeenOpened)
-                    {
-                        //box slam anim
-                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE6);
+                        boxHasBeenOpened = true;
                     }
 
                 }
