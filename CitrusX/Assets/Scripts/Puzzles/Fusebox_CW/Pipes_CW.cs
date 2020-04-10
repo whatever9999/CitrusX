@@ -118,45 +118,48 @@ public class Pipes_CW : MonoBehaviour
     /// </summary>
     public void Rotate()
     {
-        idleVos.interactedWith = true;
-        idleVos.interactedWith = false;
-        if(!beingReset) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PIPE, transform.position);
-        if (canBeRotated)
+        if(!fusebox.isFuseboxSolved)
         {
-            gameObject.transform.Rotate(0, 0, degreesToMove);
-
-            switch (currentPosition)
+            idleVos.interactedWith = true;
+            idleVos.interactedWith = false;
+            if (!beingReset) SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.ROTATE_PIPE, transform.position);
+            if (canBeRotated)
             {
-                case Directions.HORIZONTAL:
-                    {
-                        currentPosition = Directions.VERTICAL;
-                    }
-                    break;
-                case Directions.VERTICAL:
-                    {
-                        currentPosition = Directions.HORIZONTAL;
-                    }
-                    break;
-                case Directions.RIGHT_DOWN_BEND:
-                    {
-                        currentPosition = Directions.RIGHT_UP_BEND;
-                    }
-                    break;
-                case Directions.LEFT_DOWN_BEND:
-                    {
-                        currentPosition = Directions.RIGHT_DOWN_BEND;
-                    }
-                    break;
-                case Directions.RIGHT_UP_BEND:
-                    {
-                        currentPosition = Directions.LEFT_UP_BEND;
-                    }
-                    break;
-                case Directions.LEFT_UP_BEND:
-                    {
-                        currentPosition = Directions.LEFT_DOWN_BEND;
-                    }
-                    break;
+                gameObject.transform.Rotate(0, 0, degreesToMove);
+
+                switch (currentPosition)
+                {
+                    case Directions.HORIZONTAL:
+                        {
+                            currentPosition = Directions.VERTICAL;
+                        }
+                        break;
+                    case Directions.VERTICAL:
+                        {
+                            currentPosition = Directions.HORIZONTAL;
+                        }
+                        break;
+                    case Directions.RIGHT_DOWN_BEND:
+                        {
+                            currentPosition = Directions.RIGHT_UP_BEND;
+                        }
+                        break;
+                    case Directions.LEFT_DOWN_BEND:
+                        {
+                            currentPosition = Directions.RIGHT_DOWN_BEND;
+                        }
+                        break;
+                    case Directions.RIGHT_UP_BEND:
+                        {
+                            currentPosition = Directions.LEFT_UP_BEND;
+                        }
+                        break;
+                    case Directions.LEFT_UP_BEND:
+                        {
+                            currentPosition = Directions.LEFT_DOWN_BEND;
+                        }
+                        break;
+                }
             }
         }
     }

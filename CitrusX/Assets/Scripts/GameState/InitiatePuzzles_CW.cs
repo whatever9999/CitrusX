@@ -66,6 +66,11 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private IdleVoiceover_CW idleVos;
     #endregion
 
+    private GameObject laptopScreen;
+
+    private Interactable_DR fuseboxInteract;
+    private Interactable_DR throwingBoxInteract;
+
     /// <summary>
     /// Inititalise variables
     /// </summary>
@@ -87,8 +92,12 @@ public class InitiatePuzzles_CW : MonoBehaviour
         hiddenMechTrigger = GameObject.Find("HiddenMechTrigger").GetComponent<TriggerScript_CW>();
         hiddenMechDoor = GameObject.Find("Study Door").GetComponent<Door_DR>();
         idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
-        
+        laptopScreen = GameObject.Find("LaptopScreen");
+
         #endregion
+
+        fuseboxInteract = GameObject.Find("Fusebox").GetComponent<Interactable_DR>();
+        throwingBoxInteract = GameObject.Find("ThrowingBox").GetComponentInChildren<Interactable_DR>();
     }
  
     /// <summary>
@@ -100,6 +109,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         journal.ChangeTasks(new string[] { "Candles", "Salt", "Bowl", "Water jug", "Coins" });
         //this is here to stop the strings playing constantly as called from Game's update
         ritualSetUp.SetActive(true);
+        laptopScreen.SetActive(false);
     }
     /// <summary>
     /// Check the monitorInteractions array to check the status of a puzzle play subtitles, add journal logs, change tasks and set puzzles active accordingly
@@ -108,6 +118,8 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         if (monitorInteractions[0] && !monitorInteractionsUsed[0])
         {
+            fuseboxInteract.canInteractWith = true;
+
             if (workshopDoor.isOpen) workshopDoor.ToggleOpen();
             workshopDoor.unlocked = false;
             workshopDoor.requiresKey = true;
@@ -177,6 +189,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
         }
         else if (monitorInteractions[6] && !monitorInteractionsUsed[6])
         {
+            throwingBoxInteract.canInteractWith = false;
             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE1);
             journal.TickOffTask("Return to ritual");
             journal.ChangeTasks(new string[] { "Check the study" });

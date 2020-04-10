@@ -29,7 +29,7 @@
 
 using UnityEngine;
 
-public class Door_DR : MonoBehaviour
+public class Door_DR : Interactable_DR
 {
     public bool unlocked;
     public bool requiresKey;

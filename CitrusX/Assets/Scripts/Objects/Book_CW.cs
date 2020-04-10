@@ -16,7 +16,7 @@
 
 using UnityEngine;
 
-public class Book_CW : MonoBehaviour
+public class Book_CW : Interactable_DR
 {
     public enum BOOK_TYPE
     {
@@ -27,5 +27,4 @@ public class Book_CW : MonoBehaviour
         DEFAULT
     };
     public BOOK_TYPE type;
-    public bool canInteractWith = false;
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ChessPiece_DR : MonoBehaviour
+public class ChessPiece_DR : Interactable_DR
 {
     public ChessBoard_DR.POSITION currentPosition;
     public ChessBoard_DR.POSITION desiredPosition;

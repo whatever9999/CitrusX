@@ -29,7 +29,7 @@
 */
 using UnityEngine;
 
-public class PutDown_HR : MonoBehaviour
+public class PutDown_HR : Interactable_DR
 {
     private int tableChildren;
     private bool beenUsed;
@@ -63,10 +63,9 @@ public class PutDown_HR : MonoBehaviour
         }
         beenUsed = true;
 
-        if(name == "ChessBoard" && SaveSystem_DR.instance.startingGame)
+        if (name == "ChessBoard" && SaveSystem_DR.instance.startingGame)
         {
             GetComponent<ChessBoard_DR>().CheckPieces();
-        }
+        } 
     }
-
 }

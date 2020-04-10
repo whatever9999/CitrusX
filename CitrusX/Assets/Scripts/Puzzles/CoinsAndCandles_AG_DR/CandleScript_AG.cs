@@ -27,10 +27,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CandleScript_AG : MonoBehaviour
+public class CandleScript_AG : Interactable_DR
 {
     private ParticleSystem[] flames;
-    private Interact_HR player;
     private Subtitles_HR subtitles;
 
     /// <summary>
@@ -39,7 +38,6 @@ public class CandleScript_AG : MonoBehaviour
     private void Awake()
     {
         flames = GetComponentsInChildren<ParticleSystem>();
-        player = GameObject.Find("FirstPersonCharacter").GetComponent<Interact_HR>();
         subtitles = GameObject.Find("FirstPersonCharacter").GetComponent<Subtitles_HR>();
     }
 
@@ -53,7 +51,6 @@ public class CandleScript_AG : MonoBehaviour
             flames[i].Stop();
         }
         subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE3);
-        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.CANDLE_BLOW, transform.position);
     }
   
 }

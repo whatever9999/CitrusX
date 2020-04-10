@@ -57,7 +57,7 @@ public class Inventory_HR : MonoBehaviour
     private Dictionary<Names, Sprite> items = new Dictionary<Names, Sprite>();    
     private const int maxItems = 12;
     private GameObject inventory;
-    internal GameObject[] inventoryItems = new GameObject[maxItems];
+    public GameObject[] inventoryItems = new GameObject[maxItems];
 
     /// <summary>
     /// Initialise variables and the items dictionary (enum to sprite)
@@ -65,16 +65,9 @@ public class Inventory_HR : MonoBehaviour
     void Awake()
     {
         inventory = GameObject.Find("InventoryBg");
-        int i = 0;
-        //Get all slots from inventory
-        foreach (GameObject inventoryPanels in GameObject.FindGameObjectsWithTag("InventoryPanel"))
-        {
-            inventoryItems[i] = inventoryPanels;
-            i++;
-        }
 
         //get all items loaded into the dicitionary
-        for (i = 0; i < itemImages.Count; i++)
+        for (int i = 0; i < itemImages.Count; i++)
         {
             items.Add(itemNames[i], itemImages[i]);
         }

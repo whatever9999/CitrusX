@@ -27,6 +27,7 @@ TagManager:
   - Weight
   - StuckCan
   - ScalesPan
+  - FoodItem
   layers:
   - Default
   - TransparentFX

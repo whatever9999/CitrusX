@@ -59,6 +59,7 @@ internal class Fusebox_CW : MonoBehaviour
     internal bool[] voiceovers = { false, false, false };
     internal bool isActive = false;
     private bool coroutinePlaying = false;
+    private Interactable_DR fuseboxInteract;
     #endregion
     internal bool GetState() { return isFuseboxSolved; }
     internal void SetActive(bool value) { isActive = value; }
@@ -72,6 +73,7 @@ internal class Fusebox_CW : MonoBehaviour
         fusebox = GameObject.Find("Fusebox");
         journal = GameObject.Find("FirstPersonCharacter").GetComponent<Journal_DR>();
         game = GameObject.Find("FirstPersonCharacter").GetComponent<GameTesting_CW>();
+        fuseboxInteract = fusebox.GetComponent<Interactable_DR>();
     }
 
     private void Start()
@@ -136,6 +138,7 @@ internal class Fusebox_CW : MonoBehaviour
 
         if (complete)
         {
+            fuseboxInteract.canInteractWith = false;
             isFuseboxSolved = true;
             coroutinePlaying = false;
             journal.TickOffTask("Fix fusebox");
@@ -167,7 +170,7 @@ internal class Fusebox_CW : MonoBehaviour
     /// </summary>
     public void PowerButton()
     {
-        if(!coroutinePlaying)
+        if(!coroutinePlaying && !isFuseboxSolved)
         {
             StartCoroutine(CheckPipes());
         }

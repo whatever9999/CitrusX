@@ -95,11 +95,6 @@ public class CorrectOrder_CW : MonoBehaviour
     /// </summary>
     public void ClosePC()
     {
-        if(GameTesting_CW.instance.arePuzzlesDone[8])
-        {
-            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE6);
-        }
-       
         PC.tag = "PC";
 
         //Make the cursor invisible again
@@ -163,7 +158,6 @@ public class CorrectOrder_CW : MonoBehaviour
                             GameObject.Find("LaptopScreen").SetActive(false);
                             GameTesting_CW.instance.arePuzzlesDone[8] = true;
                         }
-                        
                     }
                     else
                     {

@@ -43,7 +43,6 @@ public class SaveSystem_DR: MonoBehaviour
     #region TransformsAndActiveStates
     internal Transform playerT;
     internal GameObject journalGO;
-    internal Transform fuseboxT;
     internal Transform baronT;
     internal Transform chessBoardT;
     internal Transform gardenTableT;
@@ -67,6 +66,13 @@ public class SaveSystem_DR: MonoBehaviour
     internal Transform keypadNoteT;
     internal Transform laptopScreenT;
     internal GameObject pointerDot;
+    internal GameObject ritualCandles;
+
+    internal Interactable_DR throwingBox;
+    internal Interactable_DR scalesInteract;
+    internal Interactable_DR keypad;
+    internal Interactable_DR candles;
+    internal Interactable_DR fuseboxInteract;
 
     internal Transform crisps1T;
     internal Transform crisps2T;
@@ -225,7 +231,6 @@ public class SaveSystem_DR: MonoBehaviour
         #region Initialisations
         playerT = GameObject.Find("FPSController").GetComponent<Transform>();
         journalGO = GameObject.Find("JournalBackground");
-        fuseboxT = GameObject.Find("Fusebox").GetComponent<Transform>();
         baronT = GameObject.Find("Baron").GetComponent<Transform>();
         chessBoardT = GameObject.Find("ChessBoard").GetComponent<Transform>();
         gardenTableT = GameObject.Find("GardenTable").GetComponent<Transform>();
@@ -249,6 +254,13 @@ public class SaveSystem_DR: MonoBehaviour
         keypadNoteT = GameObject.Find("KeyPadDoc").GetComponent<Transform>();
         laptopScreenT = GameObject.Find("LaptopScreen").GetComponent<Transform>();
         pointerDot = GameObject.Find("CentreOfScreenMarker");
+        ritualCandles = GameObject.Find("RitualCandles");
+
+        throwingBox = GameObject.Find("ThrowingBox").GetComponentInChildren<Interactable_DR>();
+        scalesInteract = GameObject.Find("ScalesInteract").GetComponent<Interactable_DR>();
+        keypad = GameObject.Find("KeypadItem").GetComponent<Interactable_DR>();
+        candles = ritualCandles.GetComponent<Interactable_DR>();
+        fuseboxInteract = GameObject.Find("Fusebox").GetComponent<Interactable_DR>();
 
         crisps1T = GameObject.Find("Crisp1").GetComponent<Transform>();
         crisps2T = GameObject.Find("Crisp2").GetComponent<Transform>();
@@ -274,7 +286,7 @@ public class SaveSystem_DR: MonoBehaviour
 
         scarcity1T = GameObject.Find("Bathroom Symbol of Scarcity").GetComponent<Transform>();
         scarcity2T = GameObject.Find("Dining Room Symbol of Scarcity").GetComponent<Transform>();
-        scarcity3T = GameObject.Find("Living Room Symbol of Scarcity").GetComponent<Transform>();
+        scarcity3T = GameObject.Find("Sitting Room Symbol of Scarcity").GetComponent<Transform>();
         scarcity4T = GameObject.Find("Study Symbol of Scarcity").GetComponent<Transform>();
 
         keyHandle1T = GameObject.Find("KeyHandle1").GetComponent<Transform>();
@@ -574,6 +586,10 @@ public class SaveSystem_DR: MonoBehaviour
             pawn.Rotate();
         }
         chessNoteT.gameObject.SetActive(GD.chessNoteActivated);
+        knight.canInteractWith = GD.chessPiecesActive;
+        king.canInteractWith = GD.chessPiecesActive;
+        queen.canInteractWith = GD.chessPiecesActive;
+        pawn.canInteractWith = GD.chessPiecesActive;
 
         //RitualItems
         bowlT.gameObject.SetActive(GD.bowlNotPickedUp);
@@ -584,6 +600,22 @@ public class SaveSystem_DR: MonoBehaviour
 
         //Centre of Screen Marker
         pointerDot.SetActive(GD.pointerDotActive);
+
+        //Ritual Candles
+        ritualCandles.SetActive(GD.ritualCandlesActive);
+        candles.canInteractWith = GD.canInteractWithCandles;
+
+        //Fusebox
+        fuseboxInteract.canInteractWith = GD.canInteractWithFusebox;
+
+        //Throwing Box
+        throwingBox.canInteractWith = GD.canInteractWithThrowingBox;
+
+        //Scales
+        scalesInteract.canInteractWith = GD.canInteractWithScales;
+
+        //Keypad
+        keypad.canInteractWith = GD.canInteractWithKeypad;
 
         //Monitor
         if(GD.monitorOn)
@@ -716,7 +748,7 @@ public class SaveSystem_DR: MonoBehaviour
         }
         waterBowl.playerHasLost = GD.playerHasLost;
         waterBowl.reasonForLosing = GD.reasonForLosing;
-        print(GD.reasonForLosing);
+        waterBowl.canInteractWith = GD.canInteractWithWaterBowl;
 
         //KeypadUI
         keyPadUI.interactedWithSafe = GD.interactedWithSafe;
@@ -748,6 +780,9 @@ public class SaveSystem_DR: MonoBehaviour
         ritualPutDown.SetBeenUsed(GD.ritualPDBeenUsed);
         gardenPutDown.SetBeenUsed(GD.gardenPDBeenUsed);
         chessPutDown.SetBeenUsed(GD.chessPDBeenUsed);
+        ritualPutDown.canInteractWith = GD.ritualTableInteractable;
+        gardenPutDown.canInteractWith = GD.gardenTableInteractable;
+        chessPutDown.canInteractWith = GD.chessTableInteractable;
 
         //Table
         ritualTable.hasBeenPlaced = GD.ritualTHasBeenPlaced;
@@ -833,6 +868,25 @@ public class SaveSystem_DR: MonoBehaviour
         cereal2.isFirstTime = GD.cereal2IsFirstTime;
         cereal3.isFirstTime = GD.cereal3IsFirstTime;
         cereal4.isFirstTime = GD.cereal4IsFirstTime;
+
+        crisps1.canHold = GD.canInteractWithFood;
+        crisps2.canHold = GD.canInteractWithFood;
+        crisps3.canHold = GD.canInteractWithFood;
+        crisps4.canHold = GD.canInteractWithFood;
+        crisps5.canHold = GD.canInteractWithFood;
+        crisps6.canHold = GD.canInteractWithFood;
+        crisps7.canHold = GD.canInteractWithFood;
+        crisps8.canHold = GD.canInteractWithFood;
+        peaches1.canHold = GD.canInteractWithFood;
+        peaches2.canHold = GD.canInteractWithFood;
+        peaches3.canHold = GD.canInteractWithFood;
+        beets1.canHold = GD.canInteractWithFood;
+        beets2.canHold = GD.canInteractWithFood;
+        beets3.canHold = GD.canInteractWithFood;
+        cereal1.canHold = GD.canInteractWithFood;
+        cereal2.canHold = GD.canInteractWithFood;
+        cereal3.canHold = GD.canInteractWithFood;
+        cereal4.canHold = GD.canInteractWithFood;
 
         keyHandle1.canHold = GD.canHoldKeyHandle1;
         keyHandle1.isFirstTime = GD.keyHandle1IsFirstTime;
@@ -934,6 +988,13 @@ public class GameData_DR
     internal bool waterJugNotPickedUp;
     //Screen marker
     internal bool pointerDotActive;
+    //Ritual Candles
+    internal bool ritualCandlesActive;
+    internal bool canInteractWithCandles;
+    //Fusebox
+    internal bool canInteractWithFusebox;
+    //Throwing Box
+    internal bool canInteractWithThrowingBox;
     //HiddenMechNote
     internal bool hiddenMechNoteActivated;
     //Monitor
@@ -943,6 +1004,12 @@ public class GameData_DR
     internal bool keypadNoteActive;
     //ThrowingBox
     internal bool throwingBoxActivated;
+    //Scales
+    internal bool canInteractWithScales;
+    //Keypad
+    internal bool canInteractWithKeypad;
+    //Food Items
+    internal bool canInteractWithFood;
     //Bathroom Keys
     internal bool bathroomKeyPartOneActive;
     internal bool bathroomKeyPartTwoActive;
@@ -1049,6 +1116,7 @@ public class GameData_DR
     internal int coinsLeft;
     internal bool playerHasLost;
     internal WaterBowl_DR.ReasonForLosing reasonForLosing;
+    internal bool canInteractWithWaterBowl;
     //KeypadUI
     internal bool interactedWithSafe;
     internal bool hasAlreadyInteractedWithSafe;
@@ -1078,6 +1146,9 @@ public class GameData_DR
     internal bool ritualPDBeenUsed;
     internal bool gardenPDBeenUsed;
     internal bool chessPDBeenUsed;
+    internal bool ritualTableInteractable;
+    internal bool chessTableInteractable;
+    internal bool gardenTableInteractable;
 
     //Table
     internal bool ritualTHasBeenPlaced;
@@ -1247,6 +1318,7 @@ public class GameData_DR
     internal ChessBoard_DR.POSITION kingCurrentPosition;
     internal ChessBoard_DR.POSITION queenCurrentPosition;
     internal ChessBoard_DR.POSITION pawnCurrentPosition;
+    internal bool chessPiecesActive;
     #endregion
 
     public GameData_DR(SaveSystem_DR saveData)
@@ -1329,6 +1401,22 @@ public class GameData_DR
         //Centre of screen marker
         pointerDotActive = saveData.pointerDot.activeInHierarchy;
 
+        //Ritual Candles
+        ritualCandlesActive = saveData.ritualCandles.activeInHierarchy;
+        canInteractWithCandles = saveData.candles.canInteractWith;
+
+        //Fusebox
+        canInteractWithFusebox = saveData.fuseboxInteract.canInteractWith;
+
+        //Throwing Box
+        canInteractWithThrowingBox = saveData.throwingBox.canInteractWith;
+
+        //Scales
+        canInteractWithScales = saveData.scalesInteract.canInteractWith;
+
+        //Keypad
+        canInteractWithKeypad = saveData.keypad.canInteractWith;
+
         //HiddenMechNote
         hiddenMechNoteActivated = saveData.hiddenMechNoteT.gameObject.activeInHierarchy;
 
@@ -1362,6 +1450,8 @@ public class GameData_DR
         ball3IsActive = saveData.ball3T.gameObject.activeInHierarchy;
 
         //FoodItems
+        canInteractWithFood = saveData.crisps1.canInteractWith;
+
         crisps1Position[0] = saveData.crisps1T.position.x;
         crisps1Position[1] = saveData.crisps1T.position.y;
         crisps1Position[2] = saveData.crisps1T.position.z;
@@ -1592,6 +1682,7 @@ public class GameData_DR
         coinsLeft = saveData.waterBowl.coins.Count;
         playerHasLost = saveData.waterBowl.playerHasLost;
         reasonForLosing = saveData.waterBowl.reasonForLosing;
+        canInteractWithWaterBowl = saveData.waterBowl.canInteractWith;
 
         //KeypadUI
         interactedWithSafe = saveData.keyPadUI.interactedWithSafe;
@@ -1623,6 +1714,9 @@ public class GameData_DR
         ritualPDBeenUsed = saveData.ritualPutDown.GetBeenUsed();
         gardenPDBeenUsed = saveData.gardenPutDown.GetBeenUsed();
         chessPDBeenUsed = saveData.chessPutDown.GetBeenUsed();
+        ritualTableInteractable = saveData.ritualPutDown.canInteractWith;
+        gardenTableInteractable = saveData.gardenPutDown.canInteractWith;
+        chessTableInteractable = saveData.chessPutDown.canInteractWith;
 
         //Table
         ritualTHasBeenPlaced = saveData.ritualTable.hasBeenPlaced;
@@ -1762,6 +1856,7 @@ public class GameData_DR
         scalesPuzzleIsComplete = saveData.scalesPuzzleScript.isComplete;
 
         //ChessPieces
+        chessPiecesActive = saveData.knight.canInteractWith;
         knightCurrentPosition = saveData.knight.currentPosition;
         kingCurrentPosition = saveData.king.currentPosition;
         queenCurrentPosition = saveData.queen.currentPosition;

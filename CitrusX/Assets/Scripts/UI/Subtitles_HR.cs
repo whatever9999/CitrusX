@@ -204,7 +204,11 @@ public class Subtitles_HR : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
         subtitleText.text = "";
         coroutineRunning = false;
-        if (endSubtitle) interact.EndGameCheck();
+        if (endSubtitle)
+        {
+            interact.EndGameCheck();
+            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.CANDLE_BLOW, transform.position);
+        }
     }
 
     //Set lines for cutscenes

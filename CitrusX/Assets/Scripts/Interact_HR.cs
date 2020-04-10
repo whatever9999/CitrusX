@@ -170,7 +170,7 @@ public class Interact_HR : MonoBehaviour
     private GameObject pawn;
     private IdleVoiceover_CW idleVos;
     private bool waterRippleLinePlayed = false;
-    private const float coinPickUpInterval = 0.5f;
+    private const float coinPickUpInterval = 1;
     private float currentCoinPickUpInterval;
     private bool canPickUpCoin = true;
     #endregion
@@ -180,6 +180,10 @@ public class Interact_HR : MonoBehaviour
     private bool hasBeenOpened = false;
     #endregion
 
+    private Interactable_DR scalesInteract;
+    private Interactable_DR chessTableInteract;
+
+    private int baronMask = ~(1 << 8 | 1 << 5 | 1 << 2);
     ///<summary>
     ///Initialisation of variables
     ///</summary>
@@ -207,6 +211,9 @@ public class Interact_HR : MonoBehaviour
         pawn = GameObject.Find("Pawn");
         idleVos = GameObject.Find("Managers").GetComponent<IdleVoiceover_CW>();
         #endregion
+
+        scalesInteract = GameObject.Find("ScalesInteract").GetComponent<Interactable_DR>();
+        chessTableInteract = GameObject.Find("ChessBoard").GetComponent<Interactable_DR>();
     }
 
     ///<summary>
@@ -214,7 +221,8 @@ public class Interact_HR : MonoBehaviour
     ///</summary>
     void Update()
     {
-        if(!canPickUpCoin)
+        #region Coin Timer
+        if (!canPickUpCoin)
         {
             currentCoinPickUpInterval += Time.deltaTime;
 
@@ -224,233 +232,263 @@ public class Interact_HR : MonoBehaviour
                 currentCoinPickUpInterval = 0;
             }
         }
+        #endregion
+
         //Reset text
         notificationText.text = "";
+
         //RayCast Forward see if the player is in range of anything
-        if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, rayRange, baronMask))
         {
-            //Get the current Renderer for the object
-            if (hit.transform.gameObject.GetComponent<MeshRenderer>())
+            bool canInteractWith = hit.transform.GetComponent<Interactable_DR>().canInteractWith;
+            if (canInteractWith)
             {
-                currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
-            }
-
-            //If the object is not the same as the previous object then revert to the original material
-            //and change the new object to the outline material
-            if (targetRenderer && currRenderer.materials != targetRenderer.materials && hit.transform.tag != "Keypad")
-            {
-
-                targetRenderer.materials = originalMaterials;
-                originalMaterials = currRenderer.materials;
-                matArray = new List<Material>(currRenderer.materials);
-                matArray.Add(outlineMaterial);
-                currRenderer.materials = matArray.ToArray();
-                targetRenderer = currRenderer;
-            }
-            else
-            {
-                originalMaterials = currRenderer.materials;
-                matArray = new List<Material>(currRenderer.materials);
-                matArray.Add(outlineMaterial);
-                currRenderer.materials = matArray.ToArray();
-                targetRenderer = currRenderer;
-            }
-
-            //Is in looking at an object?
-            if (hit.transform.tag == "Object")
-            {
-                GameObject item = hit.transform.gameObject;
-                notificationText.text = "Press E to pick up the " + item.name.ToLower();
-                //If he presses the key then pick up the object
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                #region Shader
+                //Get the current Renderer for the object
+                if (hit.transform.gameObject.GetComponent<MeshRenderer>())
                 {
-                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, hit.transform.position);
-                    idleVos.interactedWith = true;
-                    idleVos.interactedWith = false;
-                    inventoryManager.AddItem(hit.transform.GetComponent<Object_DR>().inventoryName);
-                    hit.transform.gameObject.SetActive(false);
-                    notificationText.text = "";
-                    Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
-                  
+                    currRenderer = hit.transform.gameObject.GetComponent<MeshRenderer>();
                 }
-            }
-            else if (hit.transform.tag == "Table")
-            {
-                zoomedIn = false;
-                playerCamera.fieldOfView = defaultFOV;
-                //Check if the table already has the items or not yet
-                PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
-                if (!putDownScript.GetBeenUsed())
+
+                //If the object is not the same as the previous object then revert to the original material
+                //and change the new object to the outline material
+                if (targetRenderer && currRenderer.materials != targetRenderer.materials)
                 {
-                    Table_CW table = hit.transform.gameObject.GetComponent<Table_CW>();
-                    //if its the ritual table...
-                    if (table.currentTable == Table_CW.TABLES.RITUAL_TABLE)
+                    targetRenderer.materials = originalMaterials;
+                    originalMaterials = currRenderer.materials;
+                    matArray = new List<Material>(currRenderer.materials);
+                    matArray.Add(outlineMaterial);
+                    currRenderer.materials = matArray.ToArray();
+                    targetRenderer = currRenderer;
+                }
+                else
+                {
+                    originalMaterials = currRenderer.materials;
+                    matArray = new List<Material>(currRenderer.materials);
+                    matArray.Add(outlineMaterial);
+                    currRenderer.materials = matArray.ToArray();
+                    targetRenderer = currRenderer;
+                }
+                #endregion
+                #region Raycast Tag Check
+                //Is in looking at an object?
+                if (hit.transform.tag == "Object")
+                {
+                    GameObject item = hit.transform.gameObject;
+                    notificationText.text = "Press E to pick up the " + item.name.ToLower();
+                    //If he presses the key then pick up the object
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
-                        //check to see if its been set up
-                        if (GetComponent<SetUpRitual_CW>().ritualSteps[0])
-                        {
-                            notificationText.text = "Press E to put down your items";
-                            //If he presses the key then pick up the object
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                            {
-                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_RITUAL, hit.transform.position);
-                                idleVos.interactedWith = true;
-                                idleVos.interactedWith = false;
-                                AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
-                                //let the table and journal know the items are put down
-                                table.hasBeenPlaced = true;
-                                Journal_DR.instance.TickOffTask("Place on table");
-                                notificationText.text = "";
-                                inventoryManager.RemoveRitualItems();
-                            }
-                        }
-                    }
-                    else if (table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
-                    {
-                        //check to see if its been set up
-                        if (GetComponent<SetUpRitual_CW>().ritualSteps[4])
-                        {
-                            notificationText.text = "Press E to put down your items";
-                            //If he presses the key then pick up the object
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                            {
-                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_JEWELLERY, hit.transform.position);
-                                idleVos.interactedWith = true;
-                                idleVos.interactedWith = false;
-                                AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
-                                //let the table and journal know the items are put down
-                                table.hasBeenPlaced = true;
-                                Journal_DR.instance.TickOffTask("Place in garden");
-                                notificationText.text = "";
-                                inventoryManager.RemoveJewelleryItems();
-                            }
-                        }
-                    }
-                    else if (table.currentTable == Table_CW.TABLES.CHESS_BOARD)
-                    {
-                        if (Journal_DR.instance.AreTasksComplete())
-                        {
-                            notificationText.text = "Press E to put down the pawn";
-                            //If he presses the key then pick up the object
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                            {
-                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_PAWN, hit.transform.position);
-                                idleVos.interactedWith = true;
-                                idleVos.interactedWith = false;
-                                putDownScript.PutItemsDown();
-                                //let the table and journal know the items are put down
-                                table.hasBeenPlaced = true;
-                                notificationText.text = "";
-                                journal.ChangeTasks(new string[] { "Solve Puzzle" });
-                                inventoryManager.RemovePawn();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        notificationText.text = "You don't have all the items";
+                        if (item.name == "Pawn") chessTableInteract.canInteractWith = true;
+
+                        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, hit.transform.position);
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
+                        inventoryManager.AddItem(hit.transform.GetComponent<Object_DR>().inventoryName);
+                        hit.transform.gameObject.SetActive(false);
+                        notificationText.text = "";
+                        Journal_DR.instance.TickOffTask(item.name); //Or Journal_DR.instance.TickOffTask("Pick up block"); Test for prototype
                     }
                 }
-            }
-            else if (hit.transform.tag == "Keypad")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[2])
+                else if (hit.transform.tag == "Table")
                 {
-                    //Get the keypad we're looking at
-                    KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
+                    zoomedIn = false;
+                    playerCamera.fieldOfView = defaultFOV;
+                    //Check if the table already has the items or not yet
+                    PutDown_HR putDownScript = hit.transform.gameObject.GetComponent<PutDown_HR>();
+                    if (!putDownScript.GetBeenUsed())
+                    {
+                        Table_CW table = hit.transform.gameObject.GetComponent<Table_CW>();
+                        //if its the ritual table...
+                        if (table.currentTable == Table_CW.TABLES.RITUAL_TABLE)
+                        {
+                            //check to see if its been set up
+                            if (GetComponent<SetUpRitual_CW>().ritualSteps[0])
+                            {
+                                notificationText.text = "Press E to put down your items";
+                                //If he presses the key then pick up the object
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_RITUAL, hit.transform.position);
+                                    idleVos.interactedWith = true;
+                                    idleVos.interactedWith = false;
+                                    AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACERITUALITEMS);
+                                    //let the table and journal know the items are put down
+                                    table.hasBeenPlaced = true;
+                                    Journal_DR.instance.TickOffTask("Place on table");
+                                    notificationText.text = "";
+                                    inventoryManager.RemoveRitualItems();
+                                }
+                            }
+                        }
+                        else if (table.currentTable == Table_CW.TABLES.GARDEN_TABLE)
+                        {
+                            //check to see if its been set up
+                            if (GetComponent<SetUpRitual_CW>().ritualSteps[4])
+                            {
+                                notificationText.text = "Press E to put down your items";
+                                //If he presses the key then pick up the object
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_JEWELLERY, hit.transform.position);
+                                    idleVos.interactedWith = true;
+                                    idleVos.interactedWith = false;
+                                    AnimationManager_DR.instance.TriggerAnimation(AnimationManager_DR.AnimationName.PLACEJEWELLERY);
+                                    //let the table and journal know the items are put down
+                                    table.hasBeenPlaced = true;
+                                    Journal_DR.instance.TickOffTask("Place in garden");
+                                    notificationText.text = "";
+                                    inventoryManager.RemoveJewelleryItems();
+                                }
+                            }
+                        }
+                        else if (table.currentTable == Table_CW.TABLES.CHESS_BOARD)
+                        {
+                            if (Journal_DR.instance.AreTasksComplete())
+                            {
+                                notificationText.text = "Press E to put down the pawn";
+                                //If he presses the key then pick up the object
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PUT_DOWN_PAWN, hit.transform.position);
+                                    idleVos.interactedWith = true;
+                                    idleVos.interactedWith = false;
+                                    putDownScript.PutItemsDown();
+                                    //let the table and journal know the items are put down
+                                    table.hasBeenPlaced = true;
+                                    notificationText.text = "";
+                                    journal.ChangeTasks(new string[] { "Solve Puzzle" });
+                                    inventoryManager.RemovePawn();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            notificationText.text = "You don't have all the items";
+                        }
+                    }
+                }
+                else if (hit.transform.tag == "Keypad")
+                {
+                    if(GameTesting_CW.instance.arePuzzlesDone[2])
+                    {
+                        //Get the keypad we're looking at
+                        KeypadItem_DR keypadItem = hit.transform.gameObject.GetComponent<KeypadItem_DR>();
                  
-                    //If the door isn't unlocked yet then open the keypad UI
-                    if (!keypadItem.door.unlocked)
+                        //If the door isn't unlocked yet then open the keypad UI
+                        if (!keypadItem.door.unlocked)
+                        {
+                            notificationText.text = "Press E to use the keypad";
+
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
+                                //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
+                                keypad.OpenKeypad(keypadItem);
+                        
+                                //Hide the notification text when the keypad is open
+                                notificationText.text = "";
+                            }
+                        }
+                    }
+
+                }
+                else if (hit.transform.tag == "Door")
+                {
+                    Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
+
+                    if (door.unlocked)
                     {
-                        notificationText.text = "Press E to use the keypad";
+                        if (!door.isOpen)
+                        {
+                            notificationText.text = "Press E to open the " + hit.transform.parent.name;
+                        }
+                        else
+                        {
+                            notificationText.text = "Press E to close the " + hit.transform.parent.name;
+                        }
 
                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
                             idleVos.interactedWith = true;
                             idleVos.interactedWith = false;
-                            //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
-                            keypad.OpenKeypad(keypadItem);
-                        
-                            //Hide the notification text when the keypad is open
                             notificationText.text = "";
+                            door.ToggleOpen();
                         }
                     }
-                }
-
-            }
-            else if (hit.transform.tag == "Door")
-            {
-                Door_DR door = hit.transform.gameObject.GetComponent<Door_DR>();
-
-                if (door.unlocked)
-                {
-                    if (!door.isOpen)
+                    else if (door.requiresKey)
                     {
-                        notificationText.text = "Press E to open the " + hit.transform.parent.name;
-                    }
-                    else
-                    {
-                        notificationText.text = "Press E to close the " + hit.transform.parent.name;
-                    }
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                    {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        notificationText.text = "";
-                        door.ToggleOpen();
-                    }
-                }
-                else if (door.requiresKey)
-                {
-                    notificationText.text = "It's locked. I should check my journal.";
-                    if(GameTesting_CW.instance.arePuzzlesDone[1])
-                    {
-                        if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
+                        notificationText.text = "It's locked. I should check my journal.";
+                        if(GameTesting_CW.instance.arePuzzlesDone[1])
                         {
-                            notificationText.text = "Press E to try handle";
-
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            if (door.type == Door_DR.DOOR_TYPE.COLOUR_MATCHING)
                             {
-                                idleVos.interactedWith = true;
-                                idleVos.interactedWith = false;
-                                if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
-                                {
-                                    colourMatch.isDoorInteractedWith[0] = true;
-                                    journal.TickOffTask("Check bathroom door");
-                                }
-                                else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
-                                {
-                                    notificationText.text = "Press E to open door";
-                                    colourMatch.isDoorInteractedWith[1] = true;
-                                    door.unlocked = true;
-                                    inventoryManager.RemoveKey();
-                                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                                    {
-                                        idleVos.interactedWith = true;
-                                        idleVos.interactedWith = false;
-                                        notificationText.text = "";
+                                notificationText.text = "Press E to try handle";
 
-                                        journal.AddJournalLog("What was that on my screen? That couldn’t have been what I thought it was…could it?");
-                                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                                        door.ToggleOpen();
-                                        door.tag = "Untagged";
+                                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                {
+                                    idleVos.interactedWith = true;
+                                    idleVos.interactedWith = false;
+                                    if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
+                                    {
+                                        colourMatch.isDoorInteractedWith[0] = true;
+                                        journal.TickOffTask("Check bathroom door");
+                                    }
+                                    else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
+                                    {
+                                        notificationText.text = "Press E to open door";
+                                        colourMatch.isDoorInteractedWith[1] = true;
+                                        door.unlocked = true;
+                                        inventoryManager.RemoveKey();
+                                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                        {
+                                            idleVos.interactedWith = true;
+                                            idleVos.interactedWith = false;
+                                            notificationText.text = "";
+
+                                            journal.AddJournalLog("What was that on my screen? That couldn’t have been what I thought it was…could it?");
+                                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                                            door.ToggleOpen();
+                                            door.tag = "Untagged";
+                                        }
                                     }
                                 }
                             }
-                        }
-                    if(GameTesting_CW.instance.arePuzzlesDone[6])
-                        {
-                            if (door.type == Door_DR.DOOR_TYPE.HIDDEN_MECH)
+                        if(GameTesting_CW.instance.arePuzzlesDone[6])
                             {
-                                notificationText.text = "It's locked. I should check my journal.";
-
-                                if (GameTesting_CW.instance.arePuzzlesDone[7])
+                                if (door.type == Door_DR.DOOR_TYPE.HIDDEN_MECH)
                                 {
-                                    notificationText.text = "Press E to open";
+                                    notificationText.text = "It's locked. I should check my journal.";
 
-                                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                    if (GameTesting_CW.instance.arePuzzlesDone[7])
                                     {
+                                        notificationText.text = "Press E to open";
+
+                                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                        {
+                                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                                            {
+                                                idleVos.interactedWith = true;
+                                                idleVos.interactedWith = false;
+                                                notificationText.text = "";
+                                                door.ToggleOpen();
+                                                door.tag = "Untagged";
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                            if(GameTesting_CW.instance.arePuzzlesDone[7])
+                            {
+                                if (door.type == Door_DR.DOOR_TYPE.CORRECT_ORDER)
+                                {
+                                    notificationText.text = "It's locked. I should check my journal.";
+
+                                    if (GameTesting_CW.instance.arePuzzlesDone[8])
+                                    {
+                                        notificationText.text = "Press E to open";
                                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                                         {
                                             idleVos.interactedWith = true;
@@ -459,441 +497,419 @@ public class Interact_HR : MonoBehaviour
                                             door.ToggleOpen();
                                             door.tag = "Untagged";
                                         }
-                                    }
-                                }
 
-                            }
-                        }
-                        if(GameTesting_CW.instance.arePuzzlesDone[7])
-                        {
-                            if (door.type == Door_DR.DOOR_TYPE.CORRECT_ORDER)
-                            {
-                                notificationText.text = "It's locked. I should check my journal.";
-
-                                if (GameTesting_CW.instance.arePuzzlesDone[8])
-                                {
-                                    notificationText.text = "Press E to open";
-                                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                                    {
-                                        idleVos.interactedWith = true;
-                                        idleVos.interactedWith = false;
-                                        notificationText.text = "";
-                                        door.ToggleOpen();
-                                        door.tag = "Untagged";
                                     }
 
                                 }
-
                             }
-                        }
                        
+                        }
+                    }
+                    else
+                    {
+                        notificationText.text = "Locked.";
                     }
                 }
-                else
+                else if (hit.transform.tag == "Paper")
                 {
-                    notificationText.text = "Locked.";
-                }
-            }
-            else if (hit.transform.tag == "Paper")
-            {
-                notificationText.text = "Press E to read";
+                    notificationText.text = "Press E to read";
 
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                {
-                    idleVos.interactedWith = true;
-                    idleVos.interactedWith = false;
-                    Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
-                    notificationText.text = "";
-                    //Set paper text and background according to the object
-                    paperText.text = paperItem.text;
-                    paperText.fontSize = paperItem.textSize;
-                    paperBackground.sprite = paperItem.background;
-                    paper.SetActive(true);
-                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.NOTE, hit.transform.position);
-                    //if note is in the safe, let safe know
-                    #region PAPER_TYPES_VOICEOVERS
-                    if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
-                        journal.TickOffTask("Read note");
-                        journal.AddJournalLog("This baron seems like he was quite the character…weird though, why would this be locked away?");
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                        paperItem.hasBeenRead = true;
-                    }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
-                    {
-                        if(GameTesting_CW.instance.arePuzzlesDone[4])
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
+                        Paper_DR paperItem = hit.transform.GetComponent<Paper_DR>();
+                        notificationText.text = "";
+                        //Set paper text and background according to the object
+                        paperText.text = paperItem.text;
+                        paperText.fontSize = paperItem.textSize;
+                        paperBackground.sprite = paperItem.background;
+                        paper.SetActive(true);
+                        SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.NOTE, hit.transform.position);
+                        //if note is in the safe, let safe know
+                        #region PAPER_TYPES_VOICEOVERS
+                        if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )
                         {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
-                            journal.TickOffTask("Read book");
-                            journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
-                            journal.ChangeTasks(new string[] { "Pawn" });
-                            pawn.SetActive(true);
+                            subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
+                            journal.TickOffTask("Read note");
+                            journal.AddJournalLog("This baron seems like he was quite the character…weird though, why would this be locked away?");
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
                             paperItem.hasBeenRead = true;
                         }
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
+                        {
+                            if(GameTesting_CW.instance.arePuzzlesDone[4])
+                            {
+                                subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
+                                journal.TickOffTask("Read book");
+                                journal.AddJournalLog("The pawn? The Queen? This looks like a complex riddle.");
+                                journal.ChangeTasks(new string[] { "Pawn" });
+                                pawn.SetActive(true);
+                                paperItem.hasBeenRead = true;
+                            }
                         
-                    }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
-                        journal.AddJournalLog("The Baron seems to have ruined a lot of people’s lives…");
-                        journal.TickOffTask("Read note");
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                        paperItem.hasBeenRead = true;
-                    }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
-                        journal.AddJournalLog("A photograph of a family…the Baron’s family.");
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                        paperItem.hasBeenRead = true;
-                    }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
-                        journal.AddJournalLog("The baron reached a grizzly death it appears.");
-                        journal.TickOffTask("Read note");
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                        paperItem.hasBeenRead = true;
-                    }
+                        }
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE6);
+                            journal.AddJournalLog("The Baron seems to have ruined a lot of people’s lives…");
+                            journal.TickOffTask("Read note");
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            paperItem.hasBeenRead = true;
+                        }
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.PHOTOGRAPH_REVERSE && !paperItem.hasBeenRead)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                            journal.AddJournalLog("A photograph of a family…the Baron’s family.");
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            paperItem.hasBeenRead = true;
+                        }
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.DEATH_CERTIFICATE && !paperItem.hasBeenRead)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE7);
+                            journal.AddJournalLog("The baron reached a grizzly death it appears.");
+                            journal.TickOffTask("Read note");
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            paperItem.hasBeenRead = true;
+                        }
          
-                    else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
-                    {
-                        journal.TickOffTask("Find clue");
-                        journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
-                        journal.ChangeTasks(new string[] { "Solve the password" });
-;                   }
-                    else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
-                        journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
-                        journal.TickOffTask("Find a clue");
-                        journal.ChangeTasks(new string[] { "Solve riddle" });
-                        hiddenMech.clueRead = true;
-                        GameObject.Find("BlueBook").GetComponent<Book_CW>().canInteractWith = true;
-                        paperItem.hasBeenRead = true;
+                        else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
+                        {
+                            journal.TickOffTask("Find clue");
+                            journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
+                            journal.ChangeTasks(new string[] { "Solve the password" });
+    ;                   }
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
+                            journal.AddJournalLog("Another riddle, I best follow it and proceed in the correct order.");
+                            journal.TickOffTask("Find a clue");
+                            journal.ChangeTasks(new string[] { "Solve riddle" });
+                            hiddenMech.clueRead = true;
+                            GameObject.Find("BlueBook").GetComponent<Book_CW>().canInteractWith = true;
+                            paperItem.hasBeenRead = true;
                         
-                    }
+                        }
 
 
-                    #endregion
-                }
-            }
-            else if (hit.transform.tag == "Fusebox")
-            {
-                if(InitiatePuzzles_CW.instance.monitorInteractionsUsed[0])
-                {
-                    notificationText.text = "Press E to open the fuse box";
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                    {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
-                    }
-                }
-               
-            }
-            else if (hit.transform.tag == "Monitor")
-            {
-                if (!zoomedIn)
-                {
-                    notificationText.text = "Press E to zoom in";
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                    {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        playerCamera.transform.LookAt(hit.transform);
-                        playerCamera.fieldOfView = zoomedFOV;
-                        zoomedIn = true;
-                        #region MONITOR_INTERACTION_IFS
-                        if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && ritual.ritualSteps[1])
-                        {
-                            journal.TickOffTask("Check the monitor");
-                            journal.AddJournalLog("The cameras seem to link to every room…this could be useful.");
-                            InitiatePuzzles_CW.instance.monitorInteractions[9] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[2] && GameTesting_CW.instance.arePuzzlesDone[2])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[2] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[3] && GameTesting_CW.instance.arePuzzlesDone[3])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[3] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[4] && GameTesting_CW.instance.arePuzzlesDone[4])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[4] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[5] && GameTesting_CW.instance.arePuzzlesDone[5])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[5] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[6] && GameTesting_CW.instance.arePuzzlesDone[6])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[6] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[7] && GameTesting_CW.instance.arePuzzlesDone[7])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[7] = true;
-                        }
-                        else if (!InitiatePuzzles_CW.instance.monitorInteractions[8] && GameTesting_CW.instance.arePuzzlesDone[8])
-                        {
-                            InitiatePuzzles_CW.instance.monitorInteractions[8] = true;
-                        }
                         #endregion
                     }
-
                 }
-                else
+                else if (hit.transform.tag == "Fusebox")
                 {
-                    notificationText.text = "Press E to zoom out";
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                    if(InitiatePuzzles_CW.instance.monitorInteractionsUsed[0])
                     {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        if (!ritual.ritualSteps[1] && ritual.ritualSteps[0])
+                        notificationText.text = "Press E to open the fuse box";
+
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
-                            subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                         }
-                        zoomedIn = false;
-                        playerCamera.fieldOfView = defaultFOV;
                     }
+               
                 }
-
-            }           
-            else if (hit.transform.tag == "ChessPiece")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[4])
+                else if (hit.transform.tag == "Monitor")
                 {
-                    notificationText.text = "Press E to rotate the " + hit.transform.name.Split(' ')[1];
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                    if (!zoomedIn)
                     {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        hit.transform.GetComponent<ChessPiece_DR>().Rotate();
-                    }
-                }
-                
-            }
-            else if (hit.transform.tag == "WaterBowl")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[0] && canPickUpCoin)
-                {
-                    notificationText.text = "Press E to take a coin";
-                    if (GameTesting_CW.instance.arePuzzlesDone[8] && !waterRippleLinePlayed)
-                    {
-                        subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
-                        waterRippleLinePlayed = true;
-                    }
-
-                    if (Input.GetKeyDown(InteractKey))
-                    {
-                        WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
-
-                        if (baron.isActiveAndEnabled)
+                        notificationText.text = "Press E to zoom in";
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
-                            if (waterBowl.RemoveCoin(false))
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            playerCamera.transform.LookAt(hit.transform);
+                            playerCamera.fieldOfView = zoomedFOV;
+                            zoomedIn = true;
+                            #region MONITOR_INTERACTION_IFS
+                            if(!InitiatePuzzles_CW.instance.monitorInteractions[9] && ritual.ritualSteps[1])
                             {
-                                numberCoinsCollected++;
-                                if(!baron.gameIsEnding)
-                                {
-                                    baron.gameObject.SetActive(false);
-                                }
-                                Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
+                                journal.TickOffTask("Check the monitor");
+                                journal.AddJournalLog("The cameras seem to link to every room…this could be useful.");
+                                InitiatePuzzles_CW.instance.monitorInteractions[9] = true;
                             }
-                        }
-                        else
-                        {
-                            waterBowl.CoinCollectUI();
-                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, waterBowl.transform.position);
-                            //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
-                            if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_Without_Baron;
-                            waterBowl.playerHasLost = true;
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[0] && GameTesting_CW.instance.arePuzzlesDone[0])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[0] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[1] && GameTesting_CW.instance.arePuzzlesDone[1])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[1] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[2] && GameTesting_CW.instance.arePuzzlesDone[2])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[2] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[3] && GameTesting_CW.instance.arePuzzlesDone[3])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[3] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[4] && GameTesting_CW.instance.arePuzzlesDone[4])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[4] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[5] && GameTesting_CW.instance.arePuzzlesDone[5])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[5] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[6] && GameTesting_CW.instance.arePuzzlesDone[6])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[6] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[7] && GameTesting_CW.instance.arePuzzlesDone[7])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[7] = true;
+                            }
+                            else if (!InitiatePuzzles_CW.instance.monitorInteractions[8] && GameTesting_CW.instance.arePuzzlesDone[8])
+                            {
+                                InitiatePuzzles_CW.instance.monitorInteractions[8] = true;
+                            }
+                            #endregion
                         }
 
-                        canPickUpCoin = false;
                     }
-                }
-                
-            }
-            else if (hit.transform.tag == "Scales")
-            {
-                if(!GameTesting_CW.instance.arePuzzlesDone[4] && GameTesting_CW.instance.arePuzzlesDone[3])
-                {
-                    notificationText.text = "Press E to observe scales";
-                    bool interactedWith = false;
-                    
-                    if (Input.GetKeyDown(InteractKey) && !interactedWith)
+                    else
                     {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
-                        journal.TickOffTask("Check the scales");
-                        journal.AddJournalLog("I could use items from the pantry to balance the scales.");
-                        journal.ChangeTasks(new string[] { "Balance scales" });
-                        baron.GetCoin();
-                        interactedWith = true;
+                        notificationText.text = "Press E to zoom out";
+
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        {
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            if (!ritual.ritualSteps[1] && ritual.ritualSteps[0])
+                            {
+                                subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE9);
+                            }
+                            zoomedIn = false;
+                            playerCamera.fieldOfView = defaultFOV;
+                        }
                     }
-                }
+
+                }           
+                else if (hit.transform.tag == "ChessPiece")
+                {
+                    if(GameTesting_CW.instance.arePuzzlesDone[4])
+                    {
+                        notificationText.text = "Press E to rotate the " + hit.transform.name.Split(' ')[1];
+
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        {
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            hit.transform.GetComponent<ChessPiece_DR>().Rotate();
+                        }
+                    }
                 
-            }
-            else if (hit.transform.tag == "Candles")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[8])
+                }
+                else if (hit.transform.tag == "WaterBowl")
+                {
+                    if(GameTesting_CW.instance.arePuzzlesDone[0] && canPickUpCoin)
+                    {
+                        notificationText.text = "Press E to take a coin";
+                        if (GameTesting_CW.instance.arePuzzlesDone[8] && !waterRippleLinePlayed)
+                        {
+                            subtitles.PlayAudio(Subtitles_HR.ID.P10_LINE2);
+                            waterRippleLinePlayed = true;
+                        }
+
+                        if (Input.GetKeyDown(InteractKey))
+                        {
+                            WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
+
+                            SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_COIN, transform.position);
+                            StartCoroutine(waterBowl.CoinCollectUI());
+
+                            if (baron.isActiveAndEnabled)
+                            {
+                                if (waterBowl.RemoveCoin(false))
+                                {
+                                    numberCoinsCollected++;
+                                    if(!baron.gameIsEnding)
+                                    {
+                                        baron.gameObject.SetActive(false);
+                                    }
+                                    Debug.Log("The player took a coin. They now have " + numberCoinsCollected + " coins");
+                                }
+                            }
+                            else
+                            {
+                                //Player tried to take a coin when water wasn't moving (baron wasn't present) so they lose the game
+                                if (waterBowl.reasonForLosing == WaterBowl_DR.ReasonForLosing.None) waterBowl.reasonForLosing = WaterBowl_DR.ReasonForLosing.Took_Without_Baron;
+                                waterBowl.playerHasLost = true;
+                            }
+
+                            canPickUpCoin = false;
+                        }
+                    }
+                
+                }
+                else if (hit.transform.tag == "Scales")
+                {
+                    if(!GameTesting_CW.instance.arePuzzlesDone[4] && GameTesting_CW.instance.arePuzzlesDone[3])
+                    {
+                        notificationText.text = "Press E to observe scales";
+                        bool interactedWith = false;
+                    
+                        if (Input.GetKeyDown(InteractKey) && !interactedWith)
+                        {
+                            scalesInteract.canInteractWith = false;
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            subtitles.PlayAudio(Subtitles_HR.ID.P5_LINE2);
+                            journal.TickOffTask("Check the scales");
+                            journal.AddJournalLog("I could use items from the pantry to balance the scales.");
+                            journal.ChangeTasks(new string[] { "Balance scales" });
+                            baron.GetCoin();
+                            interactedWith = true;
+                        }
+                    }
+                
+                }
+                else if (hit.transform.tag == "Candles")
                 {
                     notificationText.text = "Press " + InteractKey.ToString() + " to blow out";
                     if (Input.GetKeyDown(InteractKey))
                     {
                         idleVos.interactedWith = true;
                         idleVos.interactedWith = false;
-                        hit.transform.parent.GetComponent<CandleScript_AG>().BlowOut();
+                        hit.transform.GetComponent<CandleScript_AG>().BlowOut();
                     }
                 }
-               
-            }
-            else if (hit.transform.tag == "PC")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[7])
+                else if (hit.transform.tag == "PC")
                 {
-                    notificationText.text = "Press E to open the PC";
-
-                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                    if(GameTesting_CW.instance.arePuzzlesDone[7])
                     {
-                        idleVos.interactedWith = true;
-                        idleVos.interactedWith = false;
-                        subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
-                        journal.TickOffTask("Find a way out");
-                        journal.ChangeTasks(new string[] { "Solve puzzle" });
-                        correctOrderUI.OpenPC(); 
-                    }
-                }
-              
-            }
-            else if (hit.transform.tag == "Box")
-            {
-                
-                if (!hasBeenOpened)
-                {
-                    notificationText.text = "Press E to look inside the Box";
-                }
-               
-
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact") && !hasBeenOpened)
-                {
-                    idleVos.interactedWith = true;
-                    idleVos.interactedWith = false;
-                    if (!hasBeenOpened)
-                    {
-                        //play box anim
-                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
-                        journal.ChangeTasks(new string[] { "Return to ritual" });
-                        hasBeenOpened = true;
-                    }
-                    else if (hasBeenOpened)
-                    {
-                        //box slam anim
-                        subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE6);
-                    }
-
-                }
-
-            }
-            else if (hit.transform.tag == "Book")
-            {
-                if(GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
-                {
-                    Book_CW book = hit.transform.GetComponent<Book_CW>();
-                    
-                    if(book.canInteractWith)
-                    {
-                        notificationText.text = "Press E to interact with the book";
+                        notificationText.text = "Press E to open the PC";
 
                         if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
                             idleVos.interactedWith = true;
                             idleVos.interactedWith = false;
-
-                            if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK && hiddenMech.steps[2])
-                            {
-                                SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, book.transform.position);
-                                journal.TickOffTask("Solve riddle");
-                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
-                                journal.ChangeTasks(new string[] { "Read note" });
-                                hiddenMech.complete = true;
-                                GameTesting_CW.instance.arePuzzlesDone[7] = true;
-                            }
-                            else if (book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
-                            {
-                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE10);
-                                hiddenMech.steps[0] = true;
-                            }
-                            else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
-                            {
-                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE11);
-                                hiddenMech.steps[1] = true;
-                            }
-                            else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
-                            {
-                                subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE12);
-                                hiddenMech.steps[2] = true;
-                            }
+                            subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
+                            journal.TickOffTask("Find a way out");
+                            journal.ChangeTasks(new string[] { "Solve puzzle" });
+                            correctOrderUI.OpenPC(); 
                         }
                     }
-                    else
-                    {
-                        playerCamera.fieldOfView = defaultFOV;
-                        zoomedIn = false;
-                    }
+              
                 }
+                else if (hit.transform.tag == "Box")
+                {
+                
+                    if (!hasBeenOpened)
+                    {
+                        notificationText.text = "Press E to look inside the Box";
+                    }
+               
+
+                    if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact") && !hasBeenOpened)
+                    {
+                        idleVos.interactedWith = true;
+                        idleVos.interactedWith = false;
+                        if (!hasBeenOpened)
+                        {
+                            //play box anim
+                            subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE5);
+                            journal.ChangeTasks(new string[] { "Return to ritual" });
+                            hasBeenOpened = true;
+                        }
+                        else if (hasBeenOpened)
+                        {
+                            //box slam anim
+                            subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE6);
+                        }
+
+                    }
+
+                }
+                else if (hit.transform.tag == "Book")
+                {
+                    if(GameTesting_CW.instance.arePuzzlesDone[6] && !GameTesting_CW.instance.arePuzzlesDone[7])
+                    {
+                        Book_CW book = hit.transform.GetComponent<Book_CW>();
+                    
+                        if(book.canInteractWith)
+                        {
+                            notificationText.text = "Press E to interact with the book";
+
+                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            {
+                                idleVos.interactedWith = true;
+                                idleVos.interactedWith = false;
+
+                                if (book.type == Book_CW.BOOK_TYPE.HIDDEN_MECH_BOOK && hiddenMech.steps[2])
+                                {
+                                    SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.PICK_UP_OBJECT, book.transform.position);
+                                    journal.TickOffTask("Solve riddle");
+                                    subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE6);
+                                    journal.ChangeTasks(new string[] { "Read note" });
+                                    hiddenMech.complete = true;
+                                    GameTesting_CW.instance.arePuzzlesDone[7] = true;
+                                }
+                                else if (book.type == Book_CW.BOOK_TYPE.BLUE_BOOK && !hiddenMech.steps[0] && hiddenMech.clueRead)
+                                {
+                                    subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE10);
+                                    hiddenMech.steps[0] = true;
+                                }
+                                else if (book.type == Book_CW.BOOK_TYPE.FOURTH_EAST && !hiddenMech.steps[1] && hiddenMech.clueRead)
+                                {
+                                    subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE11);
+                                    hiddenMech.steps[1] = true;
+                                }
+                                else if (book.type == Book_CW.BOOK_TYPE.TWO_NW && !hiddenMech.steps[2] && hiddenMech.clueRead)
+                                {
+                                    subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE12);
+                                    hiddenMech.steps[2] = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            playerCamera.fieldOfView = defaultFOV;
+                            zoomedIn = false;
+                        }
+                    }
             
 
-            }
-            else if(hit.transform.tag == "Pawn")
-            {
-                if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
-                {
-                    idleVos.interactedWith = true;
-                    idleVos.interactedWith = false;
-                    hit.transform.gameObject.SetActive(false);
-                    notificationText.text = "";
-                    journal.TickOffTask("Find the Pawn");
-                    journal.ChangeTasks(new string[] { "Solve the puzzle" });
                 }
-            }
-            else if (hit.transform.tag == "SymbolOfScarcity")
-            {
-                notificationText.text = "Press E to interact with the " + hit.transform.name;
-                if(!GameTesting_CW.instance.arePuzzlesDone[4])
+                else if(hit.transform.tag == "Pawn")
                 {
                     if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                     {
                         idleVos.interactedWith = true;
                         idleVos.interactedWith = false;
-                        subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                        hit.transform.gameObject.SetActive(false);
+                        notificationText.text = "";
+                        journal.TickOffTask("Find the Pawn");
+                        journal.ChangeTasks(new string[] { "Solve the puzzle" });
                     }
                 }
+                else if (hit.transform.tag == "SymbolOfScarcity")
+                {
+                    notificationText.text = "Press E to interact with the " + hit.transform.name;
+                    if(!GameTesting_CW.instance.arePuzzlesDone[4])
+                    {
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        {
+                            idleVos.interactedWith = true;
+                            idleVos.interactedWith = false;
+                            subtitles.PlayAudio(Subtitles_HR.ID.A_LINE6);
+                        }
+                    }
                
-            }
-            else if(hit.transform.tag == "StuckCan")
-            {
-                notificationText.text = "What the..? It's stuck";
-            }
-            else
-            {
-                zoomedIn = false;
-                playerCamera.fieldOfView = defaultFOV;
-                notificationText.text = "";
+                }
+                else if(hit.transform.tag == "StuckCan")
+                {
+                    notificationText.text = "What the..? It's stuck";
+                }
+                else
+                {
+                    zoomedIn = false;
+                    playerCamera.fieldOfView = defaultFOV;
+                    notificationText.text = "";
+                }
+                #endregion
             }
         }
         else if (targetRenderer)

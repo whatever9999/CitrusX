@@ -27,7 +27,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterBowl_DR : MonoBehaviour
+public class WaterBowl_DR : Interactable_DR
 {
     public int numberOfCoins;
     public GameObject coinPrefab;

@@ -63,6 +63,22 @@ public class EventManager_CW : MonoBehaviour
     private GameTesting_CW game;
     private Cinematics_DR cinematics;
 
+    #region Interacts
+    private Interactable_DR ritualTable;
+    private Interactable_DR gardenTable;
+    private Interactable_DR chessTable;
+
+    private Interactable_DR[] foodItems;
+
+    private Interactable_DR[] chessPieces;
+
+    private Interactable_DR scales;
+
+    private Interactable_DR keypad;
+
+    private Interactable_DR candles;
+    #endregion
+
     private void Awake()
     {
         baron = GameObject.Find("Baron").GetComponent<Baron_DR>();
@@ -101,6 +117,28 @@ public class EventManager_CW : MonoBehaviour
         correctOrderTrigger = GameObject.Find("CorrectOrderTrigger").GetComponent<TriggerScript_CW>();
         gardenTrigger = GameObject.Find("GardenTrigger").GetComponent<TriggerScript_CW>();
         #endregion
+
+        #region Initiate Interacts
+        GameObject[] foodItemGOs = GameObject.FindGameObjectsWithTag("FoodItem");
+        foodItems = new Interactable_DR[foodItemGOs.Length];
+        for(int i = 0; i < foodItemGOs.Length; i++)
+        {
+            foodItems[i] = foodItemGOs[i].GetComponent<Interactable_DR>();
+        }
+
+        GameObject[] chessPieceGOs = GameObject.FindGameObjectsWithTag("ChessPiece");
+        chessPieces = new Interactable_DR[chessPieceGOs.Length];
+        for (int i = 0; i < chessPieceGOs.Length; i++)
+        {
+            chessPieces[i] = chessPieceGOs[i].GetComponent<Interactable_DR>();
+        }
+
+        scales = GameObject.Find("ScalesInteract").GetComponent<Interactable_DR>();
+
+        keypad = GameObject.FindGameObjectWithTag("Keypad").GetComponent<Interactable_DR>();
+
+        candles = GameObject.Find("RitualCandles").GetComponent<Interactable_DR>();
+        #endregion
     }
     private void Start()
     {
@@ -135,6 +173,7 @@ public class EventManager_CW : MonoBehaviour
             buttons3.SetActive(false);
             chessNote.SetActive(false);
             keypadDoc.SetActive(false);
+            candles.gameObject.SetActive(false);
         }
         #endregion
     }
@@ -143,7 +182,6 @@ public class EventManager_CW : MonoBehaviour
         if(game.arePuzzlesDone[0] && !triggersSet[5])
         {
             gardenTrigger.allowedToBeUsed = true;
-            laptopScreen.SetActive(false);
             triggersSet[5] = true;
         }
         else if(game.arePuzzlesDone[0] && !game.arePuzzlesDone[1] && !itemsSet[4])
@@ -176,12 +214,21 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[2] && !itemsSet[2])
         {
+            keypad.canInteractWith = true;
+
             baron.GetCoin();
             safe.SetActive(true);
             itemsSet[2] = true;
         }
         else if(game.arePuzzlesDone[3] && !itemsSet[3])
         {
+            keypad.canInteractWith = false;
+            for(int i = 0; i < foodItems.Length; i++)
+            {
+                foodItems[i].canInteractWith = true;
+            }
+            scales.canInteractWith = true;
+
             baron.GetCoin();
             keypadDoc.SetActive(true);
             scalesEffect.Play();
@@ -189,6 +236,15 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[4] && !triggersSet[1])
         {
+            for (int i = 0; i < foodItems.Length; i++)
+            {
+                foodItems[i].canInteractWith = false;
+            }
+            for (int i = 0; i < chessPieces.Length; i++)
+            {
+                chessPieces[i].canInteractWith = true;
+            }
+
             baron.GetCoin();
             chessBookEffect.Play();
             chessTrigger.allowedToBeUsed = true;
@@ -196,6 +252,10 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[5] && !triggersSet[2])
         {
+            for (int i = 0; i < chessPieces.Length; i++)
+            {
+                chessPieces[i].canInteractWith = false;
+            }
             baron.GetCoin();
             chessNote.SetActive(true);
             chessTrigger.allowedToBeUsed = true;
@@ -231,6 +291,7 @@ public class EventManager_CW : MonoBehaviour
         }
         else if(game.arePuzzlesDone[8] && !triggersSet[4])
         {
+            candles.canInteractWith = true;
             baron.gameIsEnding = true;
             baron.AppearStill(baronRitualLocation.transform, 0);
             ritualTrigger.allowedToBeUsed = true;

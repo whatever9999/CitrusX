@@ -50,6 +50,10 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     public Door_DR door5;
     private GameObject laptopScreen;
     #endregion
+
+    private Interactable_DR ritualInteract;
+    private Interactable_DR gardenInteract;
+    private Interactable_DR waterBowlInteract;
     /// <summary>
     /// Inititalise variables
     /// </summary>
@@ -64,10 +68,14 @@ internal class SetUpRitual_CW : PuzzleBaseScript
 
         symbol1 = GameObject.Find("Bathroom Symbol of Scarcity");
         symbol2 = GameObject.Find("Dining Room Symbol of Scarcity");
-        symbol3 = GameObject.Find("Living Room Symbol of Scarcity");
+        symbol3 = GameObject.Find("Sitting Room Symbol of Scarcity");
         symbol4 = GameObject.Find("Study Symbol of Scarcity");
         laptopScreen = GameObject.Find("LaptopScreen");
         #endregion
+
+        ritualInteract = GameObject.Find("RitualTable").GetComponent<Interactable_DR>();
+        gardenInteract = GameObject.Find("GardenTable").GetComponent<Interactable_DR>();
+        waterBowlInteract = GameObject.Find("Water").GetComponent<Interactable_DR>();
     }
 
     /// <summary>
@@ -111,6 +119,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                     journal.ChangeTasks(new string[] { "Place on table" });
                     //mark step as complete
                     ritualSteps[0] = true;
+                    ritualInteract.canInteractWith = true;
                 }
 
             }
@@ -118,7 +127,8 @@ internal class SetUpRitual_CW : PuzzleBaseScript
             {
                 if (journal.AreTasksComplete())
                 {
-                   if(!voiceovers[2])
+                    ritualInteract.canInteractWith = false;
+                    if (!voiceovers[2])
                     {
                         #region RITUAL_SETUP
                         if (!door1.GetState())
@@ -198,6 +208,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
             {
                 if (journal.AreTasksComplete())
                 {
+                    gardenInteract.canInteractWith = true;
                     if (!voiceovers[5])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE5);
@@ -214,6 +225,8 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                 //if these final tasks are done
                 if (journal.AreTasksComplete())
                 {//tell the game the puzzle is complete
+                    gardenInteract.canInteractWith = false;
+                    waterBowlInteract.canInteractWith = true;
                     if (!voiceovers[6])
                     {
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE6);
@@ -228,8 +241,6 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                             GameTesting_CW.instance.arePuzzlesDone[0] = true;
                         }
                     }
-
-
                 }
             }
 

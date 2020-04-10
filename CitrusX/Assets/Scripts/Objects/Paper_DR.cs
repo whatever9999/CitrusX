@@ -24,7 +24,7 @@
 */
 using UnityEngine;
 
-public class Paper_DR : MonoBehaviour
+public class Paper_DR : Interactable_DR
 {
     public string text;
     public int textSize;

@@ -43,7 +43,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoldandThrow_HR : MonoBehaviour
+public class HoldandThrow_HR : Interactable_DR
 {
     #region PHYS_VARS
     public float minDistanceToPickup = 5;
