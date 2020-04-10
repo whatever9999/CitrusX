@@ -69,15 +69,15 @@ public class BallButtonLogic_HR : MonoBehaviour
             animator.SetTrigger("Hit");
             puzzleScript.ballCounter++;
             #region CHECK_WHICH_BUTTON_FOR_JOURNAL
-            if (gameObject.name == "1Button")
+            if (collision.gameObject.name == "1Ball")
             {
                 journal.TickOffTask("Button 1");
             }
-            else if(gameObject.name == "2Button")
+            else if (collision.gameObject.name == "2Ball")
             {
                 journal.TickOffTask("Button 2");
             }
-            else if (gameObject.name == "3Button")
+            else if (collision.gameObject.name == "3Ball")
             {
                 journal.TickOffTask("Button 3");
             }

@@ -48,6 +48,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
     public Door_DR door3;
     public Door_DR door4;
     public Door_DR door5;
+    private GameObject laptopScreen;
     #endregion
     /// <summary>
     /// Inititalise variables
@@ -143,6 +144,7 @@ internal class SetUpRitual_CW : PuzzleBaseScript
                         symbol2.SetActive(true);
                         symbol3.SetActive(true);
                         symbol4.SetActive(true);
+                        laptopScreen.SetActive(false);
                         #endregion
                         subtitles.PlayAudio(Subtitles_HR.ID.P1_LINE8);
                         voiceovers[2] = true;

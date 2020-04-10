@@ -52,6 +52,7 @@ public class InitiatePuzzles_CW : MonoBehaviour
     private ScalesPuzzleScript_AG scales;
     private CorrectOrder_CW correctOrder;
     internal int ballCounter = 0;
+    public Door_DR workshopDoor;
     #endregion
     #region VOICEOVER_BOOLS
     internal bool[] voiceovers = { false, false, false, false, false };
@@ -107,6 +108,9 @@ public class InitiatePuzzles_CW : MonoBehaviour
     {
         if (monitorInteractions[0] && !monitorInteractionsUsed[0])
         {
+            if (workshopDoor.isOpen) workshopDoor.ToggleOpen();
+            workshopDoor.unlocked = false;
+            workshopDoor.requiresKey = true;
             subtitles.PlayAudio(Subtitles_HR.ID.P2_LINE2);
             journal.AddJournalLog("The camera has gone out, I should check that fuse box.");
             journal.ChangeTasks(new string[] { "Check fusebox" });

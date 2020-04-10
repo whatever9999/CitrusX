@@ -40,6 +40,7 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
     internal Subtitles_HR subtitles;
     internal bool[] voiceovers = { false, false, false, false, false };
     internal TriggerScript_CW ritualTrigger;
+    public Door_DR workshopDoor;
 
     internal void SetActive(bool value) { isActive = value; }
     #endregion
@@ -65,6 +66,9 @@ internal class ColourMatchingPuzzle_CW : MonoBehaviour
                 if(door.isOpen) door.ToggleOpen();
                 door.unlocked = false;
                 door.requiresKey = true;
+                if (!workshopDoor.isOpen) workshopDoor.ToggleOpen();
+                workshopDoor.unlocked = true;
+                workshopDoor.requiresKey = false;
                 voiceovers[0] = true;
             }
             else if (isDoorInteractedWith[0] && !voiceovers[1])
