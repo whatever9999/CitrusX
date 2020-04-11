@@ -4159,6 +4159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightningTimerRange: {x: 10, y: 30}
   lightningLightIntensity: {x: 0.5, y: 5, z: 10}
+  optionsFirstSelected: {fileID: 2005280010}
+  mainFirstSelected: {fileID: 1914584686}
 --- !u!1001 &522868943
 PrefabInstance:
   m_ObjectHideFlags: 0

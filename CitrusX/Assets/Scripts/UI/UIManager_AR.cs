@@ -23,6 +23,9 @@
  * 
  * Dominique 02/04/2020
  * Added loading text animation (only shows in builds), start game animation, lightning effect and added settings to same scene as main
+ * 
+ * Hugo 11/04/2020
+ * Adding controller navigation
  */
 
 /**
@@ -45,6 +48,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIManager_AR : MonoBehaviour
 {
@@ -70,6 +74,9 @@ public class UIManager_AR : MonoBehaviour
 
     private GameObject menuUI;
     private GameObject optionsUI;
+
+    public GameObject optionsFirstSelected;
+    public GameObject mainFirstSelected;
 
     private void Awake()
     {
@@ -129,13 +136,21 @@ public class UIManager_AR : MonoBehaviour
     public void OptionsButton()
     {
         menuUI.SetActive(false);
+        //Clear current selection
+        EventSystem.current.SetSelectedGameObject(null);
         optionsUI.SetActive(true);
+        //Set new selection
+        EventSystem.current.SetSelectedGameObject(optionsFirstSelected);
     }
 
     public void BackButton()
     {
         optionsUI.SetActive(false);
+        //Clear current selection
+        EventSystem.current.SetSelectedGameObject(null);
         menuUI.SetActive(true);
+        //Set new selection
+        EventSystem.current.SetSelectedGameObject(mainFirstSelected);
     }
 
     public void QuitButton()
