@@ -80,7 +80,7 @@ public class Inventory_HR : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (!inventory.activeInHierarchy && Input.GetKeyDown(inventoryOpenKey))
+        if (!inventory.activeInHierarchy && Input.GetKeyDown(inventoryOpenKey) || Input.GetButtonDown("Inventory"))
         {
             inventory.SetActive(true);
         }
@@ -88,7 +88,7 @@ public class Inventory_HR : MonoBehaviour
         {
             for (int i = 0; i < inventoryCloseKeys.Length; i++)
             {
-                if (Input.GetKeyDown(inventoryCloseKeys[i]))
+                if (Input.GetKeyDown(inventoryCloseKeys[i]) || Input.GetButtonDown("Cancel"))
                 {
                     inventory.SetActive(false);
                 }

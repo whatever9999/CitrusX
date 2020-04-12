@@ -57,7 +57,7 @@ public class CellPhone_HR : MonoBehaviour
         {
             for (int i = 0; i < cellphoneCloseKeys.Length; i++)
             {
-                if (Input.GetKeyDown(cellphoneCloseKeys[i]) || Input.GetButtonDown("Phone"))
+                if (Input.GetKeyDown(cellphoneCloseKeys[i]) || Input.GetButtonDown("Cancel"))
                 {
                     cellPhone.SetActive(false);
                 }

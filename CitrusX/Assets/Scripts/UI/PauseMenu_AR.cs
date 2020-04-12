@@ -6,6 +6,10 @@
  * Made open and close menu key the same
  * Made script work on FPSController instead of itself as then it won't run update
  * When the player presses the pause button the baron timer is disabled so nothing happens while they're paused and they lose the ability to move and their mouse appears
+ * 
+ * Hugo
+ * 
+ *12/04 Corona virus is upon us but I made controller work for the pause menu.
  */
 
 /**
@@ -20,11 +24,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.EventSystems;
 
 public class PauseMenu_AR : MonoBehaviour
 {
     public KeyCode openPause = KeyCode.Escape;
-
+    public GameObject pauseFirstSelected;
     private FirstPersonController firstPersonController;
     private GameObject pauseMenu;
 
@@ -45,9 +50,20 @@ public class PauseMenu_AR : MonoBehaviour
     {
         if (Input.GetKeyDown(openPause))
         {
-            pauseMenu.SetActive(true);
+            
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            firstPersonController.enabled = false;
+        }
+
+        if (Input.GetButtonDown("Pause"))
+        {
+            //Clear current selection
+            EventSystem.current.SetSelectedGameObject(null);
+            //Set new selection
+            EventSystem.current.SetSelectedGameObject(pauseFirstSelected);
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             firstPersonController.enabled = false;
         }
     }

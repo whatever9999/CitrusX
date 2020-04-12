@@ -113,7 +113,7 @@ public class Journal_DR : MonoBehaviour
         {
             for(int i = 0; i < journalCloseKeys.Length; i++)
             {
-                if (Input.GetKeyDown(journalCloseKeys[i]) || Input.GetButtonDown("Journal"))
+                if (Input.GetKeyDown(journalCloseKeys[i]) || Input.GetButtonDown("Cancel"))
                 {
                     JournalClose();
                 }

@@ -49,11 +49,11 @@ public class PaperUI_DR : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(!Input.GetKeyDown(keyToClose))
+        if(!Input.GetKeyDown(keyToClose) || Input.GetButtonDown("Cancel"))
         {
             fpc.enabled = false;
         }
-        else if (Input.GetKeyDown(keyToClose))
+        else if (Input.GetKeyDown(keyToClose) || Input.GetButtonDown("Cancel"))
         {
             interaction.paperIsClosed = true;
             fpc.enabled = true;
