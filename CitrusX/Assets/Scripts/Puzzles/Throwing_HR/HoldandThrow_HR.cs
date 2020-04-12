@@ -88,6 +88,26 @@ public class HoldandThrow_HR : Interactable_DR
     /// </summary>
     void Update()
     {
+
+        //if (Input.GetButtonDown("PickUp"))
+        //{
+        //    float distance = Vector3.Distance(transform.position, holdGuide.position);
+        //    //if the player is near the object
+        //    if (distance <= minDistanceToPickup)
+        //    {
+        //        if (!isFirstTime)
+        //        {
+        //            //subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE3);
+        //            isFirstTime = true;
+        //        }
+        //        Hold();
+        //    }
+        //}
+        //else
+        //{
+        //    Drop();
+        //}
+
         if (beingHeld)
         {
             //Make sure the object stays in the centre of the players vision
@@ -100,7 +120,7 @@ public class HoldandThrow_HR : Interactable_DR
                 Drop();
             }
             //if right click then throw object
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("Throw"))
             {
                 RB.AddForce(player.forward * throwForce);
                 Drop();
