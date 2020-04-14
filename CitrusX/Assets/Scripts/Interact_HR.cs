@@ -130,6 +130,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class Interact_HR : MonoBehaviour
 {
@@ -139,8 +140,12 @@ public class Interact_HR : MonoBehaviour
     public int rayRange = 6;
     public KeyCode InteractKey = KeyCode.E;
     public Material outlineMaterial;
-    private Cinematics_DR cinematics;
 
+    public GameObject keyPadFirstSelected;
+    public GameObject fuzeBoxFirstSelected;
+    public GameObject correctOrderFirstSelected;
+
+    private Cinematics_DR cinematics;
     private List<Material> matArray;
     private Material[] originalMaterials;
     private MeshRenderer targetRenderer;
@@ -385,6 +390,11 @@ public class Interact_HR : MonoBehaviour
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
+                                //Clear current selection
+                                EventSystem.current.SetSelectedGameObject(null);
+                                //Set new selection
+                                EventSystem.current.SetSelectedGameObject(keyPadFirstSelected);
+
                                 keypad.OpenKeypad(keypadItem);
                         
                                 //Hide the notification text when the keypad is open
@@ -605,6 +615,10 @@ public class Interact_HR : MonoBehaviour
                         {
                             idleVos.interactedWith = true;
                             idleVos.interactedWith = false;
+                            //Clear current selection
+                            EventSystem.current.SetSelectedGameObject(null);
+                            //Set new selection
+                            EventSystem.current.SetSelectedGameObject(fuzeBoxFirstSelected);
                             fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
                         }
                     }
@@ -789,6 +803,10 @@ public class Interact_HR : MonoBehaviour
                             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                             journal.TickOffTask("Find a way out");
                             journal.ChangeTasks(new string[] { "Solve puzzle" });
+                            //Clear current selection
+                            EventSystem.current.SetSelectedGameObject(null);
+                            //Set new selection
+                            EventSystem.current.SetSelectedGameObject(correctOrderFirstSelected);
                             correctOrderUI.OpenPC(); 
                         }
                     }
