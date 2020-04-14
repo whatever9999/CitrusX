@@ -50,7 +50,7 @@ public class PauseMenu_AR : MonoBehaviour
     {
         if (Input.GetKeyDown(openPause))
         {
-            
+            pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             firstPersonController.enabled = false;
