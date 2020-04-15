@@ -86,7 +86,7 @@ internal class Fusebox_CW : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (Input.GetKeyDown(closeFuseboxKey) && !coroutinePlaying)
+        if ((Input.GetKeyDown(closeFuseboxKey) || Input.GetButtonDown("Cancel")) && !coroutinePlaying)
         {
             CloseFusebox();
         }
@@ -95,11 +95,14 @@ internal class Fusebox_CW : MonoBehaviour
     /// <summary>
     /// reused and tweaked some of Dominique's code for Keypad_DR to open/close the fusebox to lock the cursor etc as will only have one fusebox in game
     /// </summary>
-    public void OpenFusebox()
+    public void OpenFusebox(bool controller = false)
     {
-        //Make the cursor useable for solving the puzzle
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (!controller)
+        {
+            //Make the cursor useable for solving the puzzle
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }   
 
         gameObject.SetActive(true);
         journal.AddJournalLog("It’s disconnected? I’m sure I can sort this out.");

@@ -199,7 +199,7 @@ public class KeypadUI_DR : MonoBehaviour
     /// Set the UI's keypadItem and ensure the player can use the mouse and can't move
     /// </summary>
     /// <param name="newKeypadItem - the keypadItem that the player clicked on (means that different keypads can have different passcodes)"></param>
-    public void OpenKeypad(KeypadItem_DR newKeypadItem)
+    public void OpenKeypad(KeypadItem_DR newKeypadItem,bool controller = false)
     {
         //Make sure the UI is for the keypad used (not another one in the scene)
         keypadItem = newKeypadItem;
@@ -208,8 +208,12 @@ public class KeypadUI_DR : MonoBehaviour
         keypadItem.tag = "Untagged";
 
         //Make the cursor useable for entering the code
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (!controller)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
         
         gameObject.SetActive(true);
 

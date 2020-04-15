@@ -385,20 +385,22 @@ public class Interact_HR : MonoBehaviour
                         {
                             notificationText.text = "Press E to use the keypad";
 
-                            if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                            if (Input.GetKeyDown(InteractKey) )
                             {
                                 idleVos.interactedWith = true;
                                 idleVos.interactedWith = false;
                                 //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
+                                //Hide the notification text when the keypad is open
+                                notificationText.text = "";
+                            }
+                            if (Input.GetButtonDown("Interact"))
+                            {
                                 //Clear current selection
                                 EventSystem.current.SetSelectedGameObject(null);
                                 //Set new selection
                                 EventSystem.current.SetSelectedGameObject(keyPadFirstSelected);
 
                                 keypad.OpenKeypad(keypadItem);
-                        
-                                //Hide the notification text when the keypad is open
-                                notificationText.text = "";
                             }
                         }
                     }
@@ -611,15 +613,20 @@ public class Interact_HR : MonoBehaviour
                     {
                         notificationText.text = "Press E to open the fuse box";
 
-                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        if (Input.GetKeyDown(InteractKey) )
                         {
                             idleVos.interactedWith = true;
                             idleVos.interactedWith = false;
+                            fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
+                        }
+
+                        if (Input.GetButtonDown("Interact"))
+                        {
                             //Clear current selection
                             EventSystem.current.SetSelectedGameObject(null);
                             //Set new selection
                             EventSystem.current.SetSelectedGameObject(fuzeBoxFirstSelected);
-                            fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox();
+                            fuseboxUI.GetComponent<Fusebox_CW>().OpenFusebox(true);
                         }
                     }
                
@@ -727,7 +734,7 @@ public class Interact_HR : MonoBehaviour
                             waterRippleLinePlayed = true;
                         }
 
-                        if (Input.GetKeyDown(InteractKey))
+                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
                         {
                             WaterBowl_DR waterBowl = hit.transform.GetComponent<WaterBowl_DR>();
 
@@ -796,18 +803,23 @@ public class Interact_HR : MonoBehaviour
                     {
                         notificationText.text = "Press E to open the PC";
 
-                        if (Input.GetKeyDown(InteractKey) || Input.GetButtonDown("Interact"))
+                        if (Input.GetKeyDown(InteractKey))
                         {
                             idleVos.interactedWith = true;
                             idleVos.interactedWith = false;
                             subtitles.PlayAudio(Subtitles_HR.ID.P9_LINE3);
                             journal.TickOffTask("Find a way out");
                             journal.ChangeTasks(new string[] { "Solve puzzle" });
+                            correctOrderUI.OpenPC();
+                        }
+
+                        if (Input.GetButtonDown("Interact"))
+                        {
                             //Clear current selection
                             EventSystem.current.SetSelectedGameObject(null);
                             //Set new selection
                             EventSystem.current.SetSelectedGameObject(correctOrderFirstSelected);
-                            correctOrderUI.OpenPC(); 
+                            correctOrderUI.OpenPC(true);
                         }
                     }
               

@@ -89,24 +89,24 @@ public class HoldandThrow_HR : Interactable_DR
     void Update()
     {
 
-        //if (Input.GetButtonDown("PickUp"))
-        //{
-        //    float distance = Vector3.Distance(transform.position, holdGuide.position);
-        //    //if the player is near the object
-        //    if (distance <= minDistanceToPickup)
-        //    {
-        //        if (!isFirstTime)
-        //        {
-        //            //subtitles.PlayAudio(Subtitles_HR.ID.P7_LINE3);
-        //            isFirstTime = true;
-        //        }
-        //        Hold();
-        //    }
-        //}
-        //else
-        //{
-        //    Drop();
-        //}
+        if (Input.GetButtonDown("PickUp"))
+        {
+            float distance = Vector3.Distance(transform.position, holdGuide.position);
+            //if the player is near the object
+            if (distance <= minDistanceToPickup)
+            {
+                if (!isFirstTime)
+                {
+                    isFirstTime = true;
+                }
+                Hold();
+            }
+        }
+
+        if (Input.GetButtonUp("PickUp"))
+        {
+            Drop();
+        }
 
         if (beingHeld)
         {

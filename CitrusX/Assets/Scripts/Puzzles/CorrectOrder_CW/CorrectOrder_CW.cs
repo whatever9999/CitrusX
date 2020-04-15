@@ -70,12 +70,15 @@ public class CorrectOrder_CW : MonoBehaviour
     /// <summary>
     /// Let the player use the cursor but don't let them move and activate the UI
     /// </summary>
-    public void OpenPC()
+    public void OpenPC(bool controller = false)
     {
+        if (!controller)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
         SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.COMPUTER_ON_OFF, transform.position);
         //Make the cursor useable for solving the puzzle
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         correctOrderScreen.SetActive(true);
         fpsController.enabled = false;
     }
@@ -84,7 +87,7 @@ public class CorrectOrder_CW : MonoBehaviour
     /// </summary>
     private void CheckForClose()
     {
-        if (Input.GetKeyDown(closePCKey))
+        if (Input.GetKeyDown(closePCKey) || Input.GetButtonDown("Cancel"))
         {
             ClosePC();
         }
