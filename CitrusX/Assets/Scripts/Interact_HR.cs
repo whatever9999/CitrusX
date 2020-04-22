@@ -394,6 +394,7 @@ public class Interact_HR : MonoBehaviour
                                 //Open the keypad UI using this keypad (makes sure the password can be changed between different keypads)
                                 //Hide the notification text when the keypad is open
                                 notificationText.text = "";
+                                keypad.OpenKeypad(keypadItem);
                             }
                             if (Input.GetButtonDown("Interact"))
                             {
@@ -401,7 +402,7 @@ public class Interact_HR : MonoBehaviour
                                 EventSystem.current.SetSelectedGameObject(null);
                                 //Set new selection
                                 EventSystem.current.SetSelectedGameObject(keyPadFirstSelected);
-
+                                notificationText.text = "";
                                 keypad.OpenKeypad(keypadItem);
                             }
                         }

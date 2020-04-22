@@ -63,7 +63,6 @@ public class PauseMenu_AR : MonoBehaviour
             //Set new selection
             EventSystem.current.SetSelectedGameObject(pauseFirstSelected);
             pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
             firstPersonController.enabled = false;
         }
     }
