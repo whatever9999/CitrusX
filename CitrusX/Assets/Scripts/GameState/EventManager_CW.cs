@@ -29,6 +29,8 @@ public class EventManager_CW : MonoBehaviour
     private GameObject hiddenMechDoc;
     private GameObject bathroomKeyPart1;
     private GameObject bathroomKeyPart2;
+    private GameObject keypile1;
+    private GameObject keypile2;
     private GameObject safe;
     private GameObject balls1;
     private GameObject balls2;
@@ -57,7 +59,7 @@ public class EventManager_CW : MonoBehaviour
     #endregion
     #region BOOLS
     internal bool[] triggersSet = { false, false, false, false, false, false };
-    internal bool[] itemsSet = { false, false, false, false, false };
+    internal bool[] itemsSet = { false, false, false, false, false, false, false };
     internal bool[] disturbancesSet = { false, false };
     #endregion
     private GameTesting_CW game;
@@ -192,14 +194,19 @@ public class EventManager_CW : MonoBehaviour
         else if(game.arePuzzlesDone[1] && !triggersSet[0])
         {
             cinematics.ToggleMonitor();
-            bathroomKeyPart1.SetActive(true);
-            bathroomKeyPart2.SetActive(true);
-            bathroomKeyPart2.name = "Bathroom Key"; 
             ritualTrigger.allowedToBeUsed = true;
             triggersSet[0] = true;
             bathroomNoteEffect.Play();
         }
-        else if(triggersSet[0] && !game.arePuzzlesDone[2])
+        else if(game.arePuzzlesDone[1] && itemsSet[5] && !itemsSet[6])
+        {
+            bathroomKeyPart1.SetActive(true);
+            bathroomKeyPart2.SetActive(true);
+            bathroomKeyPart2.name = "Bathroom Key";
+           
+            itemsSet[6] = true;
+        }
+        else if(triggersSet[0] && !game.arePuzzlesDone[2] && itemsSet[6])
         {
             if(!bathroomKeyPart2.activeInHierarchy)
             {

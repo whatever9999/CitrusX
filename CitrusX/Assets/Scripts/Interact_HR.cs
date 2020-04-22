@@ -181,6 +181,7 @@ public class Interact_HR : MonoBehaviour
     #endregion
     #region VARS_FOR_PUZZLES
     private ColourMatchingPuzzle_CW colourMatch;
+    private EventManager_CW eventManager;
     private SetUpRitual_CW ritual;
     private bool hasBeenOpened = false;
     #endregion
@@ -219,6 +220,7 @@ public class Interact_HR : MonoBehaviour
 
         scalesInteract = GameObject.Find("ScalesInteract").GetComponent<Interactable_DR>();
         chessTableInteract = GameObject.Find("ChessBoard").GetComponent<Interactable_DR>();
+        eventManager = GameObject.Find("Managers").GetComponent<EventManager_CW>();
     }
 
     ///<summary>
@@ -445,6 +447,7 @@ public class Interact_HR : MonoBehaviour
                                     if (colourMatch.isActive && !colourMatch.isDoorInteractedWith[0])
                                     {
                                         colourMatch.isDoorInteractedWith[0] = true;
+                                        eventManager.itemsSet[5] = true;
                                         journal.TickOffTask("Check bathroom door");
                                     }
                                     else if (!colourMatch.isDoorInteractedWith[1] && colourMatch.hasKeyPart2)
@@ -540,7 +543,7 @@ public class Interact_HR : MonoBehaviour
                         SFX_Manager_HR.instance.PlaySFX(SFX_Manager_HR.SoundEffectNames.NOTE, hit.transform.position);
                         //if note is in the safe, let safe know
                         #region PAPER_TYPES_VOICEOVERS
-                        if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead )
+                        if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_DOCUMENT && !paperItem.hasBeenRead)
                         {
                             subtitles.PlayAudio(Subtitles_HR.ID.P4_LINE7);
                             journal.TickOffTask("Read note");
@@ -550,7 +553,7 @@ public class Interact_HR : MonoBehaviour
                         }
                         else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_INSTRUCT && !paperItem.hasBeenRead)
                         {
-                            if(GameTesting_CW.instance.arePuzzlesDone[4])
+                            if (GameTesting_CW.instance.arePuzzlesDone[4])
                             {
                                 subtitles.PlayAudio(Subtitles_HR.ID.P6_LINE3);
                                 journal.TickOffTask("Read book");
@@ -559,7 +562,7 @@ public class Interact_HR : MonoBehaviour
                                 pawn.SetActive(true);
                                 paperItem.hasBeenRead = true;
                             }
-                        
+
                         }
                         else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.CHESSBOARD_DOC && !paperItem.hasBeenRead)
                         {
@@ -584,13 +587,14 @@ public class Interact_HR : MonoBehaviour
                             journal.ChangeTasks(new string[] { "Return to ritual" });
                             paperItem.hasBeenRead = true;
                         }
-         
-                        else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
+
+                        else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.KEY_PAD_NOTE && !paperItem.hasBeenRead && !paperIsClosed)
                         {
                             journal.TickOffTask("Find clue");
                             journal.AddJournalLog("Maths, birthdays and items – there must be something real important in this safe.");
                             journal.ChangeTasks(new string[] { "Solve the password" });
-    ;                   }
+                            ;
+                        }
                         else if (paperItem.nameOfNote == Paper_DR.NOTE_NAME.HIDDEN_MECH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[6])
                         {
                             subtitles.PlayAudio(Subtitles_HR.ID.P8_LINE9);
@@ -600,7 +604,14 @@ public class Interact_HR : MonoBehaviour
                             hiddenMech.clueRead = true;
                             GameObject.Find("BlueBook").GetComponent<Book_CW>().canInteractWith = true;
                             paperItem.hasBeenRead = true;
-                        
+
+                        }
+                        else if(paperItem.nameOfNote == Paper_DR.NOTE_NAME.COLOUR_MATCH_CLUE && !paperItem.hasBeenRead && GameTesting_CW.instance.arePuzzlesDone[1])
+                        {
+                            eventManager.itemsSet[5] = true;
+                            colourMatch.isDoorInteractedWith[0] = true;
+                            journal.TickOffTask("Check bathroom door");
+                            paperItem.hasBeenRead = true;
                         }
 
 
